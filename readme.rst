@@ -14,10 +14,10 @@
 aws-mobile-developer-guide
 ##########################
 
-This repository contains source content for the official `AWS Mobile Developer Guide`_. The
+This repository contains source content for the official `AWS Mobile Developer Guide <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/what-is-aws-mobile.html`_. The
 source code for the AWS Mobile SDKs is available at:
 
-* Android: https://github.com/aws/aws-sdk-ios
+* Android: https://github.com/aws/aws-sdk-android
 
 * iOS: https://github.com/aws/aws-sdk-ios
 
