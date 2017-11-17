@@ -38,7 +38,7 @@ Set Up Your Backend
    Facebook
       #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the feature's tile.
 
-      #. **Configure Facebook sign-in**: Choose the feature, type your Facebook App ID and then choose :guilabel:`Enable Facebook login`. To retrieve or create your Facebook App ID, see `Setting Up Facebook Authentication <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-facebook-setup.html>`.
+      #. **Configure Facebook sign-in**: Choose the feature, type your Facebook App ID and then choose :guilabel:`Enable Facebook login`. To retrieve or create your Facebook App ID, see `Setting Up Facebook Authentication <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-facebook-setup.html>`_.
 
          .. image:: images/add-aws-mobile-sdk-facebook.png
 
