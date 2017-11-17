@@ -1,9 +1,9 @@
 .. _auth-facebook-setup:
 
 
-##################################
-Setting Up Facebook Authentication
-##################################
+##############################
+Set Up Facebook Authentication
+##############################
 
 To use the following Facebook service configuration steps to federate Facebook as a user sign-in
 provider for AWS services called in your app, try the |AMHlong|  :ref:`User Sign-in feature
@@ -18,9 +18,7 @@ mobile app users. This topic explains how to set up Facebook as an identity prov
 If you already have a Facebook app ID, copy and paste it into the :guilabel:`Facebook App ID` field
 in the |AMH| console, and choose :guilabel:`Save changes`.
 
-To get a Facebook app ID
-========================
-
+**To get a Facebook app ID**
 
 #. In the `Facebook Developers portal <https://developers.facebook.com/>`_, sign in with your
    Facebook credentials.

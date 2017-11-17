@@ -6,14 +6,13 @@ Add Conversational Bots to Your Mobile App
 
 
 .. meta::
-   :description: Add |AMH| Conversational Bots to Your Mobile App
-
+   :description:
+       Add |AMH| Conversational Bots to Your Mobile App
 
 .. _add-aws-conversational-bots-overview:
 
 Conversational Bots
 ===================
-
 
 Add the natural language understanding that powers Amazon Alexa to your mobile app. The |AMH|
 :ref:`conversational-bots` feature provides ready-made bot templates using the `Amazon Lex service
@@ -23,54 +22,28 @@ Add the natural language understanding that powers Amazon Alexa to your mobile a
 .. _add-aws-conversational-bots-backend-setup:
 
 Set Up Your Backend
-===========================
+===================
 
+#. Complete the :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` steps before using the integration steps on this page.
 
-#. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the integration steps on this page.
-
-#. Use |AMHlong| to deploy your backend in minutes.
-
+#. Use |AMHlong| to deploy your backend.
 
    #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
 
-   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create
-      project`.
+   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create project` or you can select a previously created project.
 
-      Or select an existing project.
+
 
    #. Choose the :guilabel:`Conversational Bots` tile to enable the feature.
 
-   #. Choose one of the sample Bots or import one that you have created in the `Amazon Lex console
-      <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_.
+   #. Choose one of the sample Bots or import one that you have created in the `Amazon Lex console <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_.
 
-   #. Download your |AMH| project configuration file.
-
-        #. In the |AMH| console, choose your project, and then choose the :guilabel:`Integrate` icon on the left.
-
-        #. Choose :guilabel:`Download Configuration File` to get the :file:`awsconfiguration.json` file that connects your app to your backend.
-
-         .. image:: images/add-aws-mobile-sdk-download-configuration-file.png
-            :scale: 100 %
-            :alt: Image of the Mobile Hub console when choosing Download Configuration File.
-
-         .. only:: pdf
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-               :scale: 50
-
-         .. only:: kindle
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-               :scale: 75
-
-         *Remember:*
-
-         Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app. If NoSQL Database or Cloud Logic are changed, also download and use updated files for those features.
+   #. Download your updated |AMH| project configuration file and replace it in your project (see :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` for more information).  Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app.
 
 .. _add-aws-mobile-conversational-bots-app:
 
-Set Up the SDK for Your App
-===========================
+Add the SDK to Your App
+=======================
 
 **To add AWS Mobile Conversational Bots to your app**
 
@@ -79,65 +52,38 @@ Set Up the SDK for Your App
    Android - Java
       #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.
 
-         #. :file:`AndroidManifest.xml` must contain:
+         #. Add the following permissions to your :file:`AndroidManifest.xml`:
 
             .. code-block:: xml
-               :emphasize-lines: 0
+               :emphasize-lines: 1-2
 
-                <uses-permission android:name="android.permission.INTERNET" />
-                <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
                 <uses-permission android:name="android.permission.RECORD_AUDIO" />
                 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-         #. :file:`app/build.gradle` must contain:
+         #. Add the following to your :file:`app/build.gradle`:
 
             .. code-block:: none
                :emphasize-lines: 2
 
                 dependencies{
-                    compile ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar)' {transitive = true;}
+                    compile ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar') {transitive = true;}
                 }
 
          #. For each Activity where you make calls to |LEXlong|, import the following APIs.
 
             .. code-block:: none
-               :emphasize-lines: 0
+               :emphasize-lines: 1-3
 
                 import com.amazonaws.mobileconnectors.lex.interactionkit.Response;
                 import com.amazonaws.mobileconnectors.lex.interactionkit.config.InteractionConfig;
                 import com.amazonaws.mobileconnectors.lex.interactionkit.ui.InteractiveVoiceView;
 
-      #. Add the backend service configuration file to your app.
-
-
-         #. Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android
-            Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown
-            menu.
-
-            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-                  :scale: 100
-                  :alt: Image of selecting a Raw Android Resource Directory in Android Studio.
-
-            .. only:: pdf
-
-               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-                  :scale: 50
-
-            .. only:: kindle
-
-               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-                  :scale: 75
-
-         #. From the location where configuration files were downloaded in a previous step, drag
-            :file:`awsconfiguration.json` into the :file:`res/raw` folder.
-
       #. Add a voice button to an activity or fragment layout
-
 
          #. Add a :code:`voice_component` to your layout file.
 
             .. code-block:: xml
-               :emphasize-lines: 0
+               :emphasize-lines: 1-5
 
                 <com.amazonaws.mobileconnectors.lex.interactionkit.ui.InteractiveVoiceView
                 android:id="@+id/voiceInterface"
@@ -149,6 +95,7 @@ Set Up the SDK for Your App
             only supported in US Virginia East (us-east-1).`
 
             .. code-block:: xml
+               :emphasize-lines: 1
 
                 <string name="aws_region">us-east-1</string>
 
@@ -158,6 +105,7 @@ Set Up the SDK for Your App
             :code:`init()`.
 
             .. code-block:: java
+               :emphasize-lines: 1-39
 
                 public void init(){
                         InteractiveVoiceView voiceView =
@@ -186,11 +134,7 @@ Set Up the SDK for Your App
                             }
                         });
 
-                        CognitoCredentialsProvider credentialsProvider =
-                            IdentityManager.getDefaultIdentityManager()
-                                           .getUnderlyingProvider();
-
-                        voiceView.getViewAdapter().setCredentialProvider(credentialsProvider);
+                        voiceView.getViewAdapter().setCredentialProvider(AWSMobileClient.getInstance().getCredentialsProvider());
 
                         //replace parameters with your botname, bot-alias
                         voiceView.getViewAdapter()
@@ -216,7 +160,7 @@ Set Up the SDK for Your App
                 target :'YOUR-APP-NAME`' do
                   use_frameworks!
 
-                     pod 'AWSLex', '~> 2.6.5'
+                     pod 'AWSLex', '~> 2.6.6'
                      # other pods
 
                end
@@ -238,7 +182,7 @@ Set Up the SDK for Your App
                 <dict>
                    <!-- . . . -->
                    <key>NSMicrophoneUsageDescription</key>
-                   <string>For Demonstration of Conversational Bots    </string>
+                   <string>For demonstration of conversational bots</string>
                    <!-- . . . -->
                 </dict>
 
@@ -298,7 +242,7 @@ Set Up the SDK for Your App
                      let botAlias = "$LATEST"
 
                      // set up the configuration for AWS Voice Button
-                     let configuration = AWSServiceConfiguration(region: botRegion, credentialsProvider: AWSIdentityManager.default().credentialsProvider)
+                     let configuration = AWSServiceConfiguration(region: botRegion, credentialsProvider: AWSMobileClient.sharedInstance().getCredentialsProvider())
                      let botConfig = AWSLexInteractionKitConfig.defaultInteractionKitConfig(withBotName: YOUR-BOT-NAME, botAlias: :YOUR-BOT-ALIAS)
 
                      // register the interaction kit client for the voice button using the AWSLexVoiceButtonKey constant defined in SDK

@@ -1,8 +1,8 @@
 .. _auth-google-setup:
 
-################################
-Setting Up Google Authentication
-################################
+############################
+Set Up Google Authentication
+############################
 
 
 .. meta::

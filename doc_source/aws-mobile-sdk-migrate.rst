@@ -212,17 +212,17 @@ Add the SDK to Your App
 
                      use_frameworks!
 
-                         pod 'AWSS3', '~> 2.6.5'              // User Data Storage & Hosting and Streaming features
-                         pod 'AWSAPIGateway', '~> 2.6.5'      // Cloud Logic feature
-                         pod 'AWSDynamoDB', '~> 2.6.5'        // NoSQL Database feature
-                         pod 'AWSPinpoint', '~> 2.6.5'        // Messaging and Analytics (and Push Notification) features
-                         pod 'AWSLex', '~> 2.6.5'             // Conversational Bots feature
-                         pod 'AWSCognito', '~> 2.6.5'         // User Data Storage feature
-                         pod 'AWSAuthUI', '~> 2.6.5'          // Sign-in UI feature
-                         pod 'AWSGoogleSignIn', '~> 2.6.5'    // Google identity provider feature
-                         pod 'AWSFacebookSignIn', '~> 2.6.5'  // Facebook identity provider feature
-                         pod 'AWSUserPoolsSignIn', '~> 2.6.5' // Email and Password identity provider feature
-                         pod 'AWSAuthCore', '~> 2.6.5'        // User Sign-in
+                         pod 'AWSS3', '~> 2.6.6'              // User Data Storage & Hosting and Streaming features
+                         pod 'AWSAPIGateway', '~> 2.6.6'      // Cloud Logic feature
+                         pod 'AWSDynamoDB', '~> 2.6.6'        // NoSQL Database feature
+                         pod 'AWSPinpoint', '~> 2.6.6'        // Messaging and Analytics (and Push Notification) features
+                         pod 'AWSLex', '~> 2.6.6'             // Conversational Bots feature
+                         pod 'AWSCognito', '~> 2.6.6'         // User Data Storage feature
+                         pod 'AWSAuthUI', '~> 2.6.6'          // Sign-in UI feature
+                         pod 'AWSGoogleSignIn', '~> 2.6.6'    // Google identity provider feature
+                         pod 'AWSFacebookSignIn', '~> 2.6.6'  // Facebook identity provider feature
+                         pod 'AWSUserPoolsSignIn', '~> 2.6.6' // Email and Password identity provider feature
+                         pod 'AWSAuthCore', '~> 2.6.6'        // User Sign-in
                          pod 'GoogleSignIn', '~> 4.0.0'       // Google sign-in SDK
 
                    end

@@ -99,9 +99,9 @@ User Sign-in Feature At a Glance
 
        :guilabel:`Sign-in Providers` (users gain greater access when they sign in)
 
-       - via :guilabel:`Google` authentication (see :ref:`auth-google-setup`)
+       - via :guilabel:`Google` authentication (see :ref:`auth-setup`)
 
-       - via :guilabel:`Facebook` authentication (see :ref:`auth-facebook-setup`)
+       - via :guilabel:`Facebook` authentication (see :ref:`auth-setup`)
 
        - via :guilabel:`Email and Password` authentication (see :ref:`user-sign-in-provider`)
 
@@ -144,7 +144,7 @@ Facebook
 
     If you do not have a Facebook App ID yet, you'll need to create one before you can integrate Facebook in your mobile app. The Facebook Developers portal takes you through the process of setting up your Facebook application.
 
-    For full instructions on integrating your application with Facebook, see :ref:`Setting Up Facebook Authentication <auth-facebook-setup>`.
+    For full instructions on integrating your application with Facebook, see :ref:`Setting Up Facebook Authentication <auth-setup>`.
 
 
 

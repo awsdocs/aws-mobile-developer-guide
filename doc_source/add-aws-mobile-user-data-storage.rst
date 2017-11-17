@@ -19,7 +19,7 @@ Enable your app to store and retrieve user files from cloud storage with the per
 suits your purpose. |AMH|  :ref:`user-data-storage` deploys and configures cloud storage buckets
 using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`_ (|S3|).
 
-The User Data Storage feature also uses `Amazon Cognito Sync <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/add-aws-mobile-user-data-storage.html>`_. THis service enables your app to sync key/name
+The User Data Storage feature also uses `Amazon Cognito Sync <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/add-aws-mobile-user-data-storage.html>`_. This service enables your app to sync key/name
 pair app data, like user profiles, to the cloud and other devices.
 
 
@@ -32,40 +32,16 @@ Set Up Your Backend
 #. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the
    integration steps on this page.
 
-#. Use |AMHlong| to deploy your backend in minutes.
+#. Use |AMHlong| to deploy your backend.
 
 
    #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
 
-   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create project`.
-
-      Or select an existing project.
+   #. Choose :guilabel:`Create a new project`, type a project name, and then choose :guilabel:`Create project` or select a previously created project.
 
    #. Choose the :guilabel:`User Data Storage` tile to enable the feature.
 
-#. Download your |AMH| project configuration file.
-
-    #. In the |AMH| console, choose your project, and then choose the :guilabel:`Integrate` icon on the left.
-
-    #. Choose :guilabel:`Download Configuration File` to get the :file:`awsconfiguration.json` file that connects your app to your backend.
-
-      .. image:: images/add-aws-mobile-sdk-download-configuration-file.png
-         :scale: 100 %
-         :alt: Image of the Mobile Hub console when choosing Download Configuration File.
-
-      .. only:: pdf
-
-         .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-           :scale: 50
-
-      .. only:: kindle
-
-         .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-           :scale: 75
-
-      *Remember:*
-
-      Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app. If NoSQL Database or Cloud Logic are changed, also download and use updated files for those features.
+#. Download your updated |AMH| project configuration file and replace it in your project (see :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` for more information).  Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app.
 
 .. _add-aws-mobile-user-data-storage-app:
 
@@ -87,10 +63,8 @@ using the integration steps on this page.
          #. :file:`AndroidManifest.xml` must contain:
 
             .. code-block:: xml
-               :emphasize-lines: 0
+               :emphasize-lines: 1,7
 
-               <uses-permission android:name="android.permission.INTERNET" />
-               <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
                <application ... >
@@ -106,7 +80,7 @@ using the integration steps on this page.
          #. :file:`app/build.gradle` must contain:
 
             .. code-block:: none
-               :emphasize-lines: 2
+               :emphasize-lines: 2-3
 
                dependencies{
                   compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
@@ -117,35 +91,10 @@ using the integration steps on this page.
             following APIs.
 
             .. code-block:: none
-               :emphasize-lines: 0
+               :emphasize-lines: 1-2
 
                import com.amazonaws.mobile.config.AWSConfiguration;
                import com.amazonaws.mobileconnectors.s3.transferutility.*;
-
-      #. Add the backend service configuration file to your app.
-
-
-         #. Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android
-            Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown
-            menu.
-
-
-         .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-            :scale: 100
-            :alt: Image of selecting a Raw Android Resource Directory in Android Studio.
-
-         .. only:: pdf
-
-            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-               :scale: 50
-
-         .. only:: kindle
-
-            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-               :scale: 75
-
-       #. From the location where configuration files were downloaded in a previous step, copy
-          :file:`awsconfiguration.json` into the :file:`res/raw` folder.
 
 
    iOS - Swift
@@ -162,8 +111,8 @@ using the integration steps on this page.
                   target :'YOUR-APP-NAME' do
                      use_frameworks!
 
-                     pod 'AWSS3', '~> 2.6.5'   # For file transfers
-                     pod 'AWSCognito', '~> 2.6.5'   #For data sync
+                     pod 'AWSS3', '~> 2.6.6'   # For file transfers
+                     pod 'AWSCognito', '~> 2.6.6'   #For data sync
                      # other pods
 
                   end
@@ -196,25 +145,20 @@ Upload a File to User Store
 .. container:: option
 
    Android - Java
-      The following example shows how to upload a file to an |S3| bucket.
+     The following example shows how to upload a file to an |S3| bucket.
 
-         .. code-block:: java
+       .. code-block:: java
+         :emphasize-lines: 1-6, 9-53
 
-            package com.YOUR-PACKAGE-NAME
+            import java.io.File;
 
-            import com.amazonaws.mobile.config.AWSConfiguration;
             import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
             import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
             import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
             import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 
-            import java.io.File;
-
             public class YourActivity extends Activity {
-                 public void uploadData() {
-
-                AWSConfiguration awsConfig =
-                   new AWSConfiguration(getApplicationContext());
+                public void uploadData() {
 
                 TransferUtility transferUtility =
                       TransferUtility.builder()
@@ -234,21 +178,20 @@ Upload a File to User Store
                       if (TransferState.COMPLETED == state) {
                          // Handle a completed upload.
                       }
-
                    }
 
                    @Override
                    public void onProgressChanged(
                       int id, long bytesCurrent, long bytesTotal) {
+                         float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
+                         int percentDone = (int)percentDonef;
 
-                      // TODO Auto-generated method stub
-
+                         Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
                    }
 
                    @Override
                    public void onError(int id, Exception ex) {
-                      // TODO Auto-generated method stub
-
+                      // Handle errors
                    }
 
                 });
@@ -270,7 +213,7 @@ Upload a File to User Store
 
           func uploadData() {
 
-             let data = "{path/to/file}"   // Data to be uploaded
+             let data : Data  // Data to be uploaded
 
              let expression = AWSS3TransferUtilityUploadExpression()
                 expression.progressBlock = {(task, progress) in
@@ -287,10 +230,11 @@ Upload a File to User Store
                 })
              }
 
-             let  transferUtility = AWSS3TransferUtility.default()
+             let transferUtility = AWSS3TransferUtility.default()
 
              transferUtility.uploadData(data,
-                  key: S3UploadKeyName,
+                  bucket: "YourBucket",
+                  key: "YourFileName",
                   contentType: "text/plain",
                   expression: expression,
                   completionHandler: completionHandler).continueWith {
@@ -320,26 +264,22 @@ Download a File from User Store
      The following example shows how to download a file from an |S3| bucket.
 
        .. code-block:: java
+         :emphasize-lines: 1-6, 9-44
 
-          com.YOUR-PACKAGE-NAME
+          import java.io.File;
 
-          import com.amazonaws.mobile.config.AWSConfiguration;
           import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
           import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
           import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
           import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
 
-          import java.io.File;
-
           public class YourActivity extends Activity {
                public void downloadData() {
-
-                AWSConfiguration awsConfig = new AWSConfiguration(getApplicationContext());
 
                 TransferUtility transferUtility =
                       TransferUtility.builder()
                             .context(getApplicationContext())
-                            .awsConfiguration(awsConfig)
+                            .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
                             .build();
 
                 TransferObserver downloadObserver =
@@ -353,19 +293,19 @@ Download a File from User Store
                       if (TransferState.COMPLETED == state) {
                          // Handle a completed upload.
                       }
-
                    }
 
                    @Override
                    public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                      // TODO Auto-generated method stub
+                         float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
+                         int percentDone = (int)percentDonef;
 
+                         Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
                    }
 
                    @Override
                    public void onError(int id, Exception ex) {
-                      // TODO Auto-generated method stub
-
+                      // Handle errors
                    }
 
                 });
@@ -393,14 +333,12 @@ Download a File from User Store
                 })
              }
 
-             let fileURL = "{path/to/file}" // The file URL of the download destination.
-
-             let  transferUtility = AWSS3TransferUtility.default()
-             transferUtility.download(
-                   to: fileURL,
-                   key: S3DownloadKeyName,
+             let transferUtility = AWSS3TransferUtility.default()
+             transferUtility.downloadData(
+                   fromBucket: "YourBucket",
+                   key: "YourFileName",
                    expression: expression,
-                   completionHander: completionHandler
+                   completionHandler: completionHandler
                    ).continueWith {
                       (task) -> AnyObject! in if let error = task.error {
                          print("Error: \(error.localizedDescription)")
@@ -428,30 +366,22 @@ The following shows how to load user settings and access those settings using |C
 
    Android - Java
      .. code-block:: java
+       :emphasize-lines: 1-42
 
-        com.YOUR-PACKAGE-NAME
+        import java.util.List;
 
         import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-
-        import com.amazonaws.mobile.config.AWSConfiguration;
 
         import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
         import com.amazonaws.mobileconnectors.cognito.Dataset;
         import com.amazonaws.mobileconnectors.cognito.exceptions.DataStorageException;
-        import com.amazonaws.mobileconnectors.cognito.Record;
-        import com.amazonaws.mobileconnectors.cognito.SyncConflict;
-
-        import java.util.List;
-
+        import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 
         public void saveProfileData() {
 
-           AWSConfiguration awsConfig =
-                 new AWSConfiguration(getApplicationContext());
-
            CognitoSyncManager manager =
-              new CognitoSyncManager(getApplicationContext(),  IdentityManager.getDefaultIdentityManager().getUnderlyingProvider(),
-              awsConfig);
+              new CognitoSyncManager(getApplicationContext(), (CognitoCachingCredentialsProvider)AWSMobileClient.getInstance().getCredentialsProvider(),
+                        AWSMobileClient.getInstance().getConfiguration());
 
            Dataset dataset = manager.openOrCreateDataset("myDataset");
            dataset.put("myKey", "myValue");

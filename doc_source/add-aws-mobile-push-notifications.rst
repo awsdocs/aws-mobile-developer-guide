@@ -23,7 +23,6 @@ create Amazon Pinpoint campaigns that tie user behavior to push or other forms o
 Set Up Your Backend
 ===================
 
-
 #. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the
    integration steps on this page.
 
@@ -49,29 +48,7 @@ Set Up Your Backend
 
             Choose :guilabel:`iOS` and provide your Apple app P12 Certificate and, optionally, Certificate password. To retrieve or create these items, see `Setting Up iOS Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`_.
 
-   #. Download your |AMH| project configuration file.
-
-      #. In the |AMH| console, choose your project, and then choose the :guilabel:`Integrate` icon from the left.
-
-      #. Choose :guilabel:`Download Configuration File` to get the :file:`awsconfiguration.json` file that connects your app to your backend.
-
-         .. image:: images/add-aws-mobile-sdk-download-configuration-file.png
-            :scale: 100 %
-            :alt: Image of the Mobile Hub console when choosing Download Configuration File.
-
-         .. only:: pdf
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-              :scale: 50
-
-         .. only:: kindle
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-              :scale: 75
-
-         *Remember:*
-
-         Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app. If NoSQL Database or Cloud Logic are changed, also download and use updated files for those features.
+   #. Download your updated |AMH| project configuration file and replace it in your project (see :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` for more information).  Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app.
 
 .. _add-aws-mobile-push-notifications-app:
 
@@ -92,14 +69,6 @@ Add the SDK to Your App
 
             .. code-block:: xml
 
-                <?xml version="1.0" encoding="utf-8"?>
-                <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-                          package="com.YOUR-PACKAGE-NAME`">
-
-                    <!-- Add this block asks for permissions for the app the function-->
-                    <uses-permission android:name="android.permission.INTERNET" />
-                    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-                    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
                     <uses-permission android:name="android.permission.WAKE_LOCK"/>
                     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
                     <permission android:name="com.mysampleapp.permission.C2D_MESSAGE"
@@ -107,19 +76,6 @@ Add the SDK to Your App
                     <uses-permission android:name="com.mysampleapp.permission.C2D_MESSAGE" />
 
                     <application
-                        android:allowBackup="true"
-                        android:icon="@mipmap/ic_launcher"
-                        android:label="@string/app_name"
-                        android:roundIcon="@mipmap/ic_launcher_round"
-                        android:supportsRtl="true"
-                        android:theme="@style/AppTheme">
-                        <activity android:name=".MainActivity">
-                            <intent-filter>
-                                <action android:name="android.intent.action.MAIN"/>
-
-                                <category android:name="android.intent.category.LAUNCHER"/>
-                            </intent-filter>
-                        </activity>
 
                         <!--Add these to your Application declaration
                         to filter for the notification intent-->
@@ -140,51 +96,46 @@ Add the SDK to Your App
                                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                             </intent-filter>
                         </service>
+
                     </application>
 
-                </manifest>
-
-         #. :file:`app/build.gradle` must contain:
+         #. Add the following to your :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 2
+               :emphasize-lines: 0
 
                 dependencies{
                     compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
                     compile ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
+
+                    compile 'com.google.android.gms:play-services-iid:11.6.0'
+                    compile 'com.google.android.gms:play-services-gcm:11.6.0'
                 }
 
-      #. Add the backend service configuration file to your app.
+         #. Add the following to your project level :file:`build.gradle`:
 
-         #. Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android
-            Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown
-            menu.
+            .. code-block:: none
+               :emphasize-lines: 0
 
-            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-              :scale: 100
-              :alt: Image of selecting a Raw Android Resource Directory in Android Studio.
+                buildscript {
+                    dependencies {
+                        classpath 'com.google.gms:google-services:3.1.1'
+                    }
+                }
 
-            .. only:: pdf
-
-               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-                  :scale: 50
-
-            .. only:: kindle
-
-               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-                  :scale: 75
-
-         #. From the location where configuration files were downloaded in a previous step, drag
-            :file:`awsconfiguration.json` into the :file:`res/raw` folder.
+                allprojects {
+                    repositories {
+                        maven {
+                            url "https://maven.google.com"
+                        }
+                    }
+                }
 
       #. Create an Amazon Pinpoint client in the location of your push notification code.
 
          .. code-block:: java
-            :emphasize-lines: 0, 22, 36
+            :emphasize-lines: 0
 
-            import com.amazonaws.auth.AWSCredentialsProvider;
-            import com.amazonaws.mobile.auth.core.IdentityManager;
-            import com.amazonaws.mobile.config.AWSConfiguration;
             import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
             import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
             import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -200,31 +151,20 @@ Add the SDK to Your App
                      super.onCreate(savedInstanceState);
                      setContentView(R.layout.activity_main);
 
-                     AWSConfiguration awsConfig = new AWSConfiguration(getApplicationContext());
-
-                     if (IdentityManager.getDefaultIdentityManager() == null) {
-                         IdentityManager identityManager = new IdentityManager(this, awsConfig);
-                         IdentityManager.setDefaultIdentityManager(identityManager);
-                     }
-
-                     final AWSCredentialsProvider credentialsProvider =
-                             IdentityManager.getDefaultIdentityManager().getCredentialsProvider();
-
                      if (pinpointManager == null) {
                          PinpointConfiguration pinpointConfig = new PinpointConfiguration(
                                  getApplicationContext(),
-                                 credentialsProvider,
-                                 awsConfig);
+                                 AWSMobileClient.getInstance().getCredentialsProvider(),
+                                 AWSMobileClient.getInstance().getConfiguration());
 
                          pinpointManager = new PinpointManager(pinpointConfig);
-                         final Activity self = this;
 
                          new Thread(new Runnable() {
                              @Override
                              public void run() {
                                try {
                                    String deviceToken =
-                                     InstanceID.getInstance(self).getToken(
+                                     InstanceID.getInstance(MainActivity.this).getToken(
                                          "123456789Your_GCM_Sender_Id",
                                          GoogleCloudMessaging.INSTANCE_ID_SCOPE);
                                    Log.e("NotError", deviceToken);
@@ -254,7 +194,7 @@ Add the SDK to Your App
                 target :'YOUR-APP-NAME' do
                   use_frameworks!
 
-                    pod  'AWSSPinpoint', '~> 2.6.5'
+                    pod  'AWSSPinpoint', '~> 2.6.6'
                     # other pods
 
                 end
@@ -287,9 +227,6 @@ Add the SDK to Your App
 
              func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
                  [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                     // Override point for customization after application launch.
-                     AWSDDLog.sharedInstance.logLevel = .verbose
-                     AWSDDLog.add(AWSDDTTYLogger.sharedInstance) // TTY = Xcode console
 
                  pinpoint =
                      AWSPinpoint(configuration:
@@ -401,7 +338,7 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
             The following code can be placed where your app will react to incoming notifications.
 
             .. code-block:: java
-               :emphasize-lines: 0, 38, 54
+               :emphasize-lines: 0
 
                 import android.app.Activity;
                 import android.app.AlertDialog;
@@ -458,7 +395,7 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
          listening code exists in the following functions.
 
          .. code-block:: swift
-            :emphasize-lines: 12, 32
+            :emphasize-lines: 0
 
              // . . .
 
