@@ -34,7 +34,7 @@ Set Up Your Backend
 
 #. Enable by agreeing to have AWS services created and managed for your when you use the console.
 
-#. `Create a |AMH| project <https://console.aws.amazon.com/mobilehub/home?>`_ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
+#. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/home?>`_ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
 
 #. |AMH| generates a cloud configuration file that contains information about your resource identifiers that are required by the Mobile SDK. Choose :guilabel:`Integrate` on the left, and then choose the :guilabel:`Download` link in the first step of the page. Add the downloaded the configuration file to your app:
 
@@ -97,7 +97,7 @@ Connect to Your Backend
 
 
    iOS - Swift
-      #. Pre-requisites
+      #. Prerequisites
 
          Install Xcode version 8.0 or later.
 
@@ -107,7 +107,7 @@ Connect to Your Backend
 
             sudo gem install cocoapods
 
-      #. Create :file:`Podfile`. From a terminal window, navigate to the directory that contains your project's :file:`.xcodeproj` file and run: :code: `pod init`.
+      #. Create :file:`Podfile`. From a terminal window, navigate to the directory that contains your project's :file:`.xcodeproj` file and run: :code:`pod init`.
 
 
       #. Add core AWS Mobile SDK components to your build.
