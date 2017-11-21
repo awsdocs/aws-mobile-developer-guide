@@ -1,4 +1,4 @@
-.. _index:
+.. _top:
 
 #########
 |AMHlong|
@@ -11,13 +11,13 @@
         integrated with AWS services.
 
 .. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :includehidden:
+    :titlesonly:
+    :maxdepth: 1
+    :includehidden:
 
-   What is AWS Mobile? <what-is-aws-mobile>
-   Get Started <getting-started>
-   Tutorials <tutorials-native-aws-mobile>
-   How Tos <aws-mobile-native-how-tos>
-   Reference <Reference>
 
+
+    What is AWS Mobile? <what-is-aws-mobile>
+    Android and iOS <aws-mobile-android-and-iOS>
+    Web <aws-mobile-web>
+    React Native <aws-mobile-react-native>

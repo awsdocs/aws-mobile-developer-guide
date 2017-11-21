@@ -280,13 +280,13 @@ for iterating over data sets returned from databases).
 
             DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
             MatrixCursor cursor = new MatrixCursor(NotesContentContract.Notes.PROJECTION_ALL);
+            String userId = AWSProvider.getInstance().getIdentityManager().getCachedUserID();
 
             switch (uriType) {
                 case ALL_ITEMS:
                     // In this (simplified) version of a content provider, we only allow searching
                     // for all records that the user owns.  The first step to this is establishing
                     // a template record that has the partition key pre-populated.
-                    String userId = AWSProvider.getInstance().getIdentityManager().getCachedUserID();
                     NotesDO template = new NotesDO();
                     template.setUserId(userId);
                     // Now create a query expression that is based on the template record.
@@ -306,7 +306,7 @@ for iterating over data sets returned from databases).
                 case ONE_ITEM:
                     // In this (simplified) version of a content provider, we only allow searching
                     // for the specific record that was requested
-                    final NotesDO note = dbMapper.load(NotesDO.class, uri.getLastPathSegment());
+                    final NotesDO note = dbMapper.load(NotesDO.class, userId, uri.getLastPathSegment());
                     if (note != null) {
                         Object[] columnValues = fromNotesDO(note);
                         cursor.addRow(columnValues);
@@ -363,8 +363,48 @@ load the data from the server, as that operation is already asynchronous.
 
 Inserts and updates are done in the :code:`NoteDetailFragment.java` class.
 Deletes are done in the :code:`NoteListActivity.java` class. Start with the
-:code:`NoteDetailFragment.java` class. Adjust the :code:`saveData()` method as
-follows:
+:code:`NoteDetailFragment.java` class.
+
+In the :code:`OnCreate()` method add:.
+
+.. code-block:: java
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Get the ContentResolver
+        contentResolver = getContext().getContentResolver();
+
+        // Unbundle the arguments if any.  If there is an argument, load the data from
+        // the content resolver aka the content provider.
+        Bundle arguments = getArguments();
+        mItem = new Note();
+        if (arguments != null && arguments.containsKey(ARG_ITEM_ID)) {
+            String itemId = getArguments().getString(ARG_ITEM_ID);
+            itemUri = NotesContentContract.Notes.uriBuilder(itemId);
+            AsyncQueryHandler queryHandler = new AsyncQueryHandler(contentResolver) {
+                @Override
+                protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+                    super.onQueryComplete(token, cookie, cursor);
+                    cursor.moveToFirst();
+                    mItem = Note.fromCursor(cursor);
+                    isUpdate = true;
+
+                    editTitle.setText(mItem.getTitle());
+                    editContent.setText(mItem.getContent());
+                }
+            };
+            queryHandler.startQuery(QUERY_TOKEN, null, itemUri, NotesContentContract.Notes.PROJECTION_ALL, null, null, null);
+        } else {
+            isUpdate = false;
+        }
+
+        // Start the timer for the delayed start
+        timer.postDelayed(timerTask, 5000);
+    }
+
+Adjust the :code:`saveData()` method as follows:
 
 .. code-block:: java
    :emphasize-lines: 18-29,30,32,34

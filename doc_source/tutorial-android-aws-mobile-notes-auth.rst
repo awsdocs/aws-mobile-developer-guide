@@ -126,7 +126,7 @@ Edit the :code:`onCreate()` method of :file:`AuthenticatorActivity.java` as foll
       @Override
       protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
-          setContentView(R.layout.activity_login);
+          setContentView(R.layout.activity_authenticator);
 
           final IdentityManager identityManager = AWSProvider.getInstance().getIdentityManager();
           // Set up the callbacks to handle the authentication response

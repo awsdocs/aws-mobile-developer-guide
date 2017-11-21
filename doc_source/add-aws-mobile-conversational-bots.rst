@@ -9,40 +9,42 @@ Add Conversational Bots to Your Mobile App
    :description:
        Add |AMH| Conversational Bots to Your Mobile App
 
-.. _add-aws-conversational-bots-overview:
+.. _overview:
 
-Conversational Bots
-===================
+Overview
+==============
 
 Add the natural language understanding that powers Amazon Alexa to your mobile app. The |AMH|
 :ref:`conversational-bots` feature provides ready-made bot templates using the `Amazon Lex service
 <http://docs.aws.amazon.com/lex/latest/dg/>`_.
 
 
-.. _add-aws-conversational-bots-backend-setup:
+.. _setup-your-backend:
 
 Set Up Your Backend
 ===================
 
-#. Complete the :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` steps before using the integration steps on this page.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
 
-#. Use |AMHlong| to deploy your backend.
+#. Enable :guilabel:`Conversational Bots`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`Conversational Bots` tile to enable the feature.
 
-   #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+   #. Choose one of the sample Bots or import one that you have created in the `Amazon Lex console
+      <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_.
 
-   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create project` or you can select a previously created project.
+#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
 
+   .. image:: images/updated-cloud-config.png
 
+#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
 
-   #. Choose the :guilabel:`Conversational Bots` tile to enable the feature.
+   .. image:: images/updated-cloud-config2.png
+      :scale: 25
 
-   #. Choose one of the sample Bots or import one that you have created in the `Amazon Lex console <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_.
-
-   #. Download your updated |AMH| project configuration file and replace it in your project (see :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` for more information).  Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app.
+#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the Cloud API documentation below to connect to your backend.
 
 .. _add-aws-mobile-conversational-bots-app:
 
-Add the SDK to Your App
+Connect to your backend
 =======================
 
 **To add AWS Mobile Conversational Bots to your app**

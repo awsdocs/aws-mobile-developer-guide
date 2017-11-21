@@ -9,9 +9,9 @@ Add NoSQL Database to Your Mobile App
    :description: Integrating nosql database
 
 
-.. _add-aws-mobile-nosql-database-overview:
+.. _overview:
 
-NoSQL Database
+Overview
 ==============
 
 
@@ -19,49 +19,34 @@ The AWS Mobile Hub :ref:`nosqldb` feature uses `Amazon DynamoDB <http://docs.aws
 that can store and retrieve data for use by your apps.
 
 
-.. _add-aws-mobile-nosql-database-backend-setup:
+.. _setup-your-backend:
 
 Set Up Your Backend
 ===================
 
 
-#. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the
-   integration steps on this page.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
 
-#. Use |AMHlong| to deploy and configure your AWS services in minutes.
+#. Enable :guilabel:`NoSQL Database`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`NoSQL Database` tile to enable the feature.
 
+#. Follow the console work flow to define the tables you need. See :ref:`config-nosqldb` for details.
 
-   #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
 
-   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create project` or you can select a previously created project.
+   .. image:: images/updated-cloud-config.png
 
-   #. Choose the :guilabel:`NoSQL Database` tile to enable the feature.
+#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
 
-   #. Follow the console work flow to define the tables you need. See :ref:`config-nosqldb` for
-      details.
+   .. image:: images/updated-cloud-config2.png
+      :scale: 25
 
-   #. Download your NoSQL class files, if you make any changes to your NoSQL Database configuration then you will need to repeat this step.  If you changed any settings in your |AMH| project then you will also need to download your Mobile Hub project configuration file and replace it in your project (see :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` for more information).
+#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the NoSQL Database documentation below to connect to your backend.
 
-      #. Under :guilabel:`NoSQL / Cloud Logic` at the bottom of the page, choose the
-         :guilabel:`Downloads` menu, and then choose your platform.
-
-         .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-            :scale: 100
-            :alt: Image of the Download Configuration Files button in the |AMH| console.
-
-         .. only:: pdf
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-               :scale: 50
-
-         .. only:: kindle
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-               :scale: 75
+#. Download the models required for your app. The data models provide set and get methods for each attribute of a |DDB| table.
 
 .. _add-aws-mobile-nosql-database-app:
 
-Add the SDK to Your App
+Connect to your backend
 =======================
 
 
@@ -121,7 +106,6 @@ Add the SDK to Your App
             :file:`./YOUR-PROJECT-NAME-integration-lib-aws-my-sample-app-android/src/main/java/com/amazonaws/models/nosqlYOUR-TABLE-NAMEDO.java`
             into the folder that contains your main activity.
 
-
       .. list-table::
          :widths: 1
 
@@ -169,23 +153,7 @@ Add the SDK to Your App
                 import AWSCore
                 import AWSDynamoDB
 
-      #. Add the backend service configuration and data model files you downloaded from the |AMH|
-         console, The data object files provide set and get methods for each attribute of a |DDB|
-         table they model.
-
-
-         #. From the location where your |AMH| configuration file was downloaded in a previous step,
-            drag :file:`awsconfiguration.json` into the folder containing your :file:`info.plist`
-            file in your Xcode project.
-
-            Select :guilabel:`Copy items if needed` and :guilabel:`Create groups`, if these options are offered.
-
-         #. From the location where you downloaded the data model file(s), drag and drop each file
-            with the form of :file:`{your-table-name}.swift` into the folder that contains your
-            :file:`AppDelegate.swift`.
-
-            Select :guilabel:`Copy items if needed` and :guilabel:`Create groups`, if these options are offered.
-
+      #. From the location where you downloaded the data model file(s), drag and drop each file with the form of :file:`{your-table-name}.swift` into the folder that contains your :file:`AppDelegate.swift`. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups`, if these options are offered.
 
 
 .. _add-aws-mobile-nosql-database-crud:

@@ -1,8 +1,8 @@
 .. _add-aws-mobile-sdk:
 
-##################################
+###########
 Get Started
-##################################
+###########
 
 .. meta::
    :description: Integrate |AMHlong| features into your existing mobile app. Quickly add a powerful
@@ -25,28 +25,78 @@ Get Started
     Add Hosting and Streaming <add-aws-mobile-hosting-and-streaming>
     Upgrade to the New SDK <aws-mobile-sdk-migrate>
 
+
+.. _getting-started:
+
+Overview
+========
+
+The AWS Mobile Android and iOS SDKs help you build high quality mobile apps quickly and easily. They provide easy access to a range of AWS services, including Amazon Cognito, AWS Lambda, Amazon S3, Amazon Kinesis, Amazon DynamoDB, Amazon Pinpoint and many more.
+
 .. _add-aws-mobile-sdk-basic-setup:
 
 Set Up Your Backend
-==================
+===================
 
 #. `Sign up for the AWS Free Tier. <https://aws.amazon.com/free/>`_
 
-#. Enable by agreeing to have AWS services created and managed for your when you use the console.
+#. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/>`_ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
 
-#. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/home?>`_ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
-
-#. |AMH| generates a cloud configuration file that contains information about your resource identifiers that are required by the Mobile SDK. Choose :guilabel:`Integrate` on the left, and then choose the :guilabel:`Download` link in the first step of the page. Add the downloaded the configuration file to your app:
+#. Name your project, check the box to allow Mobile Hub to administer resources for you and then choose :guilabel:`Next`.
 
 .. container:: option
 
-  Android - Java
-       From your download, drag the :file:`awsconfiguration.json` file into the :file:`raw` folder in :file:`./app/src/main/res/raw` of your Android Studio project.
+    Android - Java
+      #. Choose :guilabel:`Android` as your platform and then choose Next.
 
-  iOS - Swift
-       From your download, drag the :file:`awsconfiguration.json` file into the folder containing your :file:`info.plist` file in your Xcode project.
+         .. image:: images/wizard-createproject-platform-android.png
+            :scale: 75
 
-       Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
+      #. Choose the :guilabel:`Download Cloud Config` and then choose :guilabel:`Next`.
+
+         The :file:`awsconfiguration.json` file you download contains the configuration of backend resources that |AMH| enabled in your project. Analytics cloud services are enabled for your app by default.
+
+         .. image:: images/wizard-createproject-backendsetup-android.png
+            :scale: 75
+
+      #. Add awsconfiguration.json to your app.
+
+         From your download location, place :file:`awsconfiguration.json` into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`_ in your Android project. Choose :guilabel:`Next`.
+
+      #. You are now ready to connect your app to your newly setup backend. Choose :guilabel:`Add the AWS Mobile SDK` to connect to your backend.
+
+         .. image:: images/wizard-createproject-backendconnect.png
+            :scale: 75
+
+    iOS - Swift
+      #. Pick :guilabel:`iOS` as your platform and choose Next.
+
+         .. image:: images/wizard-createproject-platform-ios.png
+            :scale: 75
+
+      #. Choose the :guilabel:`Download Cloud Config` and then choose :guilabel:`Next`.
+
+         The :file:`awsconfiguration.json` file you download contains the configuration of backend resources that |AMH| enabled in your project. Analytics cloud services are enabled for your app by default.
+
+         .. image:: images/wizard-createproject-backendsetup-ios.png
+            :scale: 75
+
+      #. Add awsconfiguration.json file to your app.
+
+         From your download location, place :file:`awsconfiguration.json` into the folder containing your :file:`info.plist` file in your Xcode project. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog. Choose :guilabel:`Next`.
+
+         .. list-table::
+            :widths: 1 6
+
+            * - **Remember**
+
+              - Every time you create or update a feature in your |AMH| project, download and integrate a new version of your :file:`awsconfiguration.json` into each app in the project that will use the update.
+
+      #. You are now ready to connect your app to your newly setup backend. Choose :guilabel:`Add the AWS Mobile SDK to your app`.
+
+         .. image:: images/wizard-createproject-backendconnect.png
+            :scale: 75
+
 
 Connect to Your Backend
 ====================
@@ -55,18 +105,19 @@ Connect to Your Backend
 
    Android - Java
       #. Prerequisites
+
          Install Android Studio version 2.33 or higher.
+
          Install Android SDK v7.11 (Nougat), API level 25.
 
-      #. Your AndroidManifest.xml must contain:
+      #. Your :file:`AndroidManifest.xml` must contain:
 
          .. code-block:: xml
 
              <uses-permission android:name="android.permission.INTERNET"/>
              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      #. Add dependencies to your :file:`app/build.gradle`. These libraries enable basic
-         AWS functions, like credentials, and analytics.
+      #. Add dependencies to your :file:`app/build.gradle`. These libraries enable basic AWS functions, like credentials, and analytics.
 
          .. code-block:: java
 
@@ -74,9 +125,7 @@ Connect to Your Backend
                  compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.7@aar') { transitive = true; }
              }
 
-      #. Add the following code to the :code:`onCreate` method of your main or startup activity to
-         establish a connection with AWS Mobile. AWSMobileClient is a singleton that will be your
-         interface between all the AWS services.
+      #. Add the following code to the :code:`onCreate` method of your main or startup activity. This will establish a connection with AWS Mobile. :code:`AWSMobileClient` is a singleton that will be an interface for your AWS services.
 
          .. code-block:: java
 
@@ -91,9 +140,10 @@ Connect to Your Backend
                  }
               }
 
-         Choose the Run icon in Android Studio to build your app and run it on your device/emulator.
-         Your app is now set up to interact with the AWS services you configured in your Mobile Hub
-         project! You should see a log in your Android logcat saying "**Welcome to AWS!**".
+         Your app is now set up to interact with the AWS services you configured in your Mobile Hub project!
+
+
+         Choose the Run icon in Android Studio to build your app and run it on your device/emulator.You should see a log in your Android logcat saying "**Welcome to AWS!**".
 
 
    iOS - Swift
@@ -108,7 +158,6 @@ Connect to Your Backend
             sudo gem install cocoapods
 
       #. Create :file:`Podfile`. From a terminal window, navigate to the directory that contains your project's :file:`.xcodeproj` file and run: :code:`pod init`.
-
 
       #. Add core AWS Mobile SDK components to your build.
 
@@ -142,6 +191,7 @@ Connect to Your Backend
 
               func application(_ application: UIApplication,
                     didFinishLaunchingWithOptions launchOptions:
+
                     [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
                         return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
               }
@@ -179,10 +229,9 @@ Next Steps
 
   * :ref:`Add Conversational Bots <add-aws-mobile-conversational-bots-app>`
 
-  * :ref:`Add Hosting and Streaming <add-aws-mobile-hosting-and-streaming-app>`
+  * :ref:`Add Hosting and Sreaming <add-aws-mobile-hosting-and-streaming-app>`
 
-  * :ref:`Upgrade to the New SDK <aws-mobile-sdk-migrate>`
-
+  * :ref:`Upgrade to the New SDK <aws-mobile-sdk-migrate>`\
 
 
 

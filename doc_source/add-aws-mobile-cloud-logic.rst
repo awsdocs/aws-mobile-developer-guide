@@ -1,19 +1,18 @@
 .. _add-aws-mobile-cloud-logic:
 
-##################################
-Add Cloud Logic to Your Mobile App
-##################################
+#################################
+Add Cloud APIs to Your Mobile App
+#################################
 
 
 .. meta::
-   :description: Integrating Cloud Logic into your mobile app
+   :description: Integrate Cloud Logic into your mobile app to create and call APIs that are handled by serverless Lambda functions.
 
 
 .. _add-aws-cloud-logic-backend-overview:
 
-Cloud Logic
-===========
-
+Cloud Logic Overview
+====================
 
 Add RESTful APIs handled by your serverless |LAM| functions to extend your mobile app to the range
 of AWS services and beyond. In |AMH|, enabling the :ref:`cloud-logic` feature uses `Amazon API
@@ -25,62 +24,36 @@ Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`_ and `AW
 Set Up Your Backend
 ===================
 
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
 
-#. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the integration steps on this page.
+#. Enable :guilabel:`Cloud Logic`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`Cloud Logic` tile to enable the feature.
 
-#. Use |AMHlong| to deploy your back end.
+#. Create a new API or import one that you created in the `API Gateway console <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`_.
 
+   #. To create a new API choose :guilabel:`Create an API`.
 
-   #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+   #. Type an :guilabel:`API Name` and :guilabel:`Description`.
 
-   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create
-      project` or you can select a previously created project.
+   #. Configure your :guilabel:`Paths`. Paths are locations to the serverless |LAMlong| functions that handle requests to your API.
 
+      Choose :guilabel:`Create API` to deploy a default API and its associated handler function. The default handler is a Node.js function that echoes JSON input that it receives. For more information, see `Using AWS Lambda with Amazon API Gateway <with-on-demand-https.html>`_.
 
+#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
 
-   #. Choose the :guilabel:`Cloud Logic` tile to enable the feature.
+   .. image:: images/updated-cloud-config.png
 
-   #. Create a new API or import one that you created in the `API Gateway console <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`_.
+#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
 
+   .. image:: images/updated-cloud-config2.png
+      :scale: 25
 
-      #. To create a new API choose :guilabel:`Create an API`.
+#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend.
 
-      #. Type an :guilabel:`API Name` and :guilabel:`Description`.
+#. Under :guilabel:`NoSQL / Cloud Logic` at the bottom of the page, download the models required for your API Gateway APIs. The API model files provide access to the API request surface for each API Gateway API they model. Choose Next and follow the Cloud API documentation below to connect to your backend.
 
-      #. Configure your :guilabel:`Paths`. Paths are locations to the serverless |LAMlong| functions
-         that handle requests to your API.
+.. _connect-to-your-backend:
 
-         Choose :guilabel:`Create API` to deploy a default API and its associated handler function.
-         The default handler is a Node.js function that echoes JSON input that it receives. For more
-         information, see `Using AWS Lambda with Amazon API Gateway <with-on-demand-https.html>`_.
-
-   #. Download your API model files and replace them in your project.
-
-      #. Under :guilabel:`NoSQL / Cloud Logic` at the bottom of the page, choose
-         :guilabel:`Downloads`, and then choose your platform to get model files for your |ABP|
-         APIs.
-
-
-         .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-            :scale: 100
-            :alt: Image of the Download Configuration Files button in the |AMH| console.
-
-         .. only:: pdf
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-               :scale: 50
-
-         .. only:: kindle
-
-            .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
-               :scale: 75
-
-   #. Download your updated |AMH| project configuration file and replace it in your project (see :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` for more information).  Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app.
-
-
-.. _add-aws-mobile-cloud-logic-app:
-
-Add the SDK to Your App
+Connect to your backend
 =======================
 
 
@@ -128,7 +101,7 @@ Use the following steps to add AWS Cloud Logic to your app.
 
             #. Copy the package name at the top of the file with the form: :code:`com.amazonaws.mobile.api.{api-class-id}`.
 
-            #. In Android Studio, right-click on :file:`app/java`, and then choose :guilabel:`New > Package`.
+            #. In Android Studio, right-choose :file:`app/java`, and then choose :guilabel:`New > Package`.
 
             #. Paste the package name you copied in a previous step and choose :guilabel:`OK`.
 
@@ -266,13 +239,6 @@ Use the following steps to add AWS Cloud Logic to your app.
 
          #. Add the backend service configuration and API model files that you downloaded from the |AMH|
             console, The API model files provide an API calling surface for each |ABP| API they model.
-
-
-            #. From the location where your |AMH| configuration file was downloaded in a previous
-               step, drag :file:`awsconfiguration.json` into the folder containing your
-               :file:`info.plist` file in your Xcode project.
-
-               Select :guilabel:`Copy items if needed` and :guilabel:`Create groups`, if these options are offered.
 
             #. From the location where you downloaded the data model file(s), drag and drop the
                :file:`./AmazonAws/API` folder into the Xcode project folder that contains

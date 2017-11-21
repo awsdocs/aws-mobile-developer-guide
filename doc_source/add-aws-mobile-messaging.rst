@@ -9,10 +9,10 @@ Add Messaging to Your Mobile App
    :description: Integrate AWS Mobile analytics into your existing mobile app.
 
 
-.. _add-aws-mobile-messaging-overview:
+.. _overview:
 
-Messaging
-=========
+Overview
+========
 
 
 Engage your users more deeply by tying their app usage behavior to messaging campaigns.
@@ -31,7 +31,7 @@ mail to frequent users, or send a push notification that initiates a data sync f
 selected a certain category in a feature of your app.
 
 
-.. _add-aws-mobile-messaging-backend-setup:
+.. _add-aws-mobile-messaging:
 
 Set Up Your Backend
 ===================
@@ -42,20 +42,9 @@ To set up email or SMS as part of a Amazon Pinpoint campaign take the following 
 To setup your app to receive Push Notifications from Amazon Pinpoint, see
 :ref:`add-aws-mobile-push-notifications`
 
-#. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the
-   integration steps on this page.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
 
-#. Use AWS Mobile Hub to deploy and configure your AWS services in minutes.
-
-
-   #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
-
-   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create
-      project`.
-
-      Or select an existing project.
-
-   #. **For Email**: Choose the :guilabel:`Messaging and Analytics` tile to enable the
+#. **For Email**: Choose the :guilabel:`Messaging and Analytics` tile to enable the
       feature.
 
 
@@ -106,9 +95,9 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
          <messages.html#messages-sms>`_.
 
 
-.. _add-aws-mobile-messaging-app:
+.. _connect-to-your-backend:
 
-Add the SDK to Your App
+Connect to your backend
 =======================
 
 

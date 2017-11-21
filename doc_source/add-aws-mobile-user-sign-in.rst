@@ -23,61 +23,70 @@ Set Up Your Backend
    Email & Password
       #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the feature's tile.
 
-      #. **Configure Email and Password sign-in**: Choose the feature and then select sign-in policies including: allowed login methods; multi-factor authentication; and password requirements. Then choose :guilabel:`Create user pool`.
+      #. **Configure Email and Password sign-in**: Choose the feature and then select sign-in policies including: allowed login methods; multi-factor authentication; and password requirements and then choose :guilabel:`Create user pool`.
 
          .. image:: images/add-aws-mobile-sdk-email-and-password.png
 
-      #. **Update your cloud configuration**: Mobile Hub generates a cloud configuration file that contains information about your resource identifiers that are required by the Mobile SDK. In the console, choose the :guilabel:`Integrate` icon on the left, and choose the :guilabel:`Download` link near the top.
+      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner.
 
-         **Android** - From your download, drag the :file:`awsconfiguration.json` file into the :file:`raw` folder in :file:`./app/src/main/res/raw` of your Android Studio project.
+          .. image:: images/updated-cloud-config.png
 
-         **iOS** - From your download, drag the :file:`awsconfiguration.json` file into the folder containing your :file:`info.plist` file in your Xcode project.Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
+      #. On the project detail page, for each app that will use the updates to your backend configuration, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend. If any apps in the project have not completed those steps the reminder banner and flashing button for those apps will remain in place.
+
+          .. image:: images/updated-cloud-config2.png
+             :scale: 25
 
       #. Follow the :ref:`next steps <set-up-email-and-password>` to connect to your backend from your app.
 
    Facebook
       #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the feature's tile.
 
-      #. **Configure Facebook sign-in**: Choose the feature, type your Facebook App ID and then choose :guilabel:`Enable Facebook login`. To retrieve or create your Facebook App ID, see `Setting Up Facebook Authentication <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-facebook-setup.html>`_.
+      #. **Configure Facebook sign-in**: Choose the feature and then type your Facebook App ID and then choose :guilabel:`Enable Facebook login`. To retrieve or create your Facebook App ID, see `Setting Up Facebook Authentication. <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-facebook-setup.html>`__.
 
          .. image:: images/add-aws-mobile-sdk-facebook.png
 
-      #. **Update your cloud configuration**: Mobile Hub generates a cloud configuration file that contains information about your resource identifiers that are required by the Mobile SDK. In the console, choose the :guilabel:`Integrate` icon on the left, and choose the :guilabel:`Download` link near the top.
+      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner.
 
-         **Android** - From your download, drag the :file:`awsconfiguration.json` file into the :file:`raw` folder in :file:`./app/src/main/res/raw` of your Android Studio project.
+          .. image:: images/updated-cloud-config.png
 
-         **iOS** - From your download, drag the :file:`awsconfiguration.json` file into the folder containing your :file:`info.plist` file in your Xcode project. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
+      #. On the project detail page, for each app that will use the updates to your backend configuration, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend. If any apps in the project have not completed those steps the reminder banner and flashing button for those apps will remain in place.
 
-      #. Follow the :ref:`next steps <set-up-facebook>` to connect to your backend from your app.
+          .. image:: images/updated-cloud-config2.png
+             :scale: 25
+
+      #. Follow the :ref:`next steps <set-up-facebook>` to connect to your backend from your app..
 
 
    Google
       #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the feature's tile.
 
-      #. **Configure Google sign-in**: Choose the feature, type in your Google Web App Client ID, type the Google Android or iOS Client ID (or both), and then choose :guilabel:`Enable Google Sign-In`. To retrieve or create your Google Client IDs, see `Setting Up Google Authentication <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-google-setup.html>`_.
+      #. **Configure Google sign-in**: Choose the feature and then type in your Google Web App Client ID, and the Google Android or iOS Client ID (or both), and then choose Enable Google Sign-In. To retrieve or create your Google Client IDs, see `Setting Up Google Authentication <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-google-setup.html>`__.
 
          .. image:: images/add-aws-mobile-sdk-google.png
 
-      #. **Update your cloud configuration**: Mobile Hub generates a cloud configuration file that contains information about your resource identifiers that are required by the Mobile SDK. In the console, choose the :guilabel:`Integrate` icon on the left, choose the :guilabel:`Download` link near the top.
+      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner.
 
-         **Android** - From your download, drag the :file:`awsconfiguration.json` file into the :file:`raw` folder in :file:`./app/src/main/res/raw` of your Android Studio project.
+          .. image:: images/updated-cloud-config.png
 
-         **iOS** - From your download, drag the :file:`awsconfiguration.json` file into the folder containing your :file:`info.plist` file in your Xcode project.Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
+      #. On the project detail page, for each app that will use the updates to your backend configuration, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend. If any apps in the project have not completed those steps the reminder banner and flashing button for those apps will remain in place.
 
-      #. Follow the :ref:`next steps <set-up-google>` to connect to your backend from your app.
+          .. image:: images/updated-cloud-config2.png
+             :scale: 25
+
+      #. Follow the :ref:`next steps <set-up-google>` to connect to your backend from your app..
 
 
 .. _set-up-email-and-password:
 
-Setup Email and Password Login in Your Mobile App
-=================================================
+Setup Email & Password Login in your Mobile App
+================================================
 
 :subscript:`Choose your platform:`
 
 .. container:: option
 
    Android-Java
-      #. Add these permissions to the :file:`AndroidManifest.xml` file:
+      #. Add these permisions to the :file:`AndroidManifest.xml` file:
 
          .. code-block:: xml
 
@@ -101,7 +110,7 @@ Setup Email and Password Login in Your Mobile App
                   compile ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true; }
              }
 
-      #. Create an activity that will present your sign-in screen, called :code:`AuthenticatorActivity`. If you want to make the :code:`AuthenticatorActivity` your starting activity, copy the intent filter to the activity block in your app's :file:`AndroidManifest.xml`.
+      #. Create an activity that will present your sign-in screen, called :code:`AuthenticatorActivity` in the following fragments. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity`  in your app's :file:`AndroidManifest.xml`.
 
          .. code-block:: xml
 
@@ -112,9 +121,12 @@ Setup Email and Password Login in Your Mobile App
                 </intent-filter>
             </activity>
 
-      #. Update your `AuthenticatorActivity` to call `AWSMobileClient`. `AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign in operation. If the user is signed in, go to the `NextActivity`. Otherwise, present the user with the AWS Mobile pre-built sign-in UI.
+      #. Update your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. :code:`AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign-in operation. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
 
          .. code-block:: java
+
+              import android.app.Activity;
+              import android.os.Bundle;
 
               import com.amazonaws.mobile.auth.ui.SignInUI;
               import com.amazonaws.mobile.client.AWSMobileClient;
@@ -124,6 +136,9 @@ Setup Email and Password Login in Your Mobile App
               public class AuthenticatorActivity extends Activity {
                   @Override
                   protected void onCreate(Bundle savedInstanceState) {
+                      super.onCreate(savedInstanceState);
+                      setContentView(R.layout.activity_authenticator);
+
                       AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
                           @Override
                           public void onComplete(AWSStartupResult awsStartupResult) {
@@ -134,8 +149,7 @@ Setup Email and Password Login in Your Mobile App
                   }
               }
 
-        Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our pre-built sign-in UI for your app. see the next steps to learn how to
-        :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
    iOS - Swift
       #. Add the following dependencies in your project's :file:`Podfile` and then run :code:`pod install --repo-update`.
@@ -151,9 +165,9 @@ Setup Email and Password Login in Your Mobile App
                 # other pods
             end
 
-      #. Create a AWSMobileClient and initialize the SDK.
+      #. Create a :code:`AWSMobileClient` and initialize the SDK.
 
-         In :file:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign-in providers and fetch the |COG| user identity.
+         In :file:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Amazon Cognito user identity.
 
          .. code-block:: swift
 
@@ -214,7 +228,7 @@ Setup Email and Password Login in Your Mobile App
                  }
              }
 
-        Choose the run icon in the top left of the Xcode window or type Command-R to build and run your app. You should see our pre-built sign-in UI for your app. See the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the Run icon in the top left of the Xcode window or type Command-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
 .. _set-up-facebook:
 
@@ -276,7 +290,7 @@ Setup Facebook Login in your Mobile App
             <string name="facebook_app_id">1231231231232123123</string>
             <string name="fb_login_protocol_scheme">fb1231231231232123123</string>
 
-      #. Create an activity that will present your sign-in screen, called :code:`AuthenticatorActivity`. If you want to make the :code:`AuthenticatorActivity` your starting activity, copy the intent filter to the activity block in your app's :file:`AndroidManifest.xml`.
+      #. Create an activity that will present your sign-in screen, called :code:`AuthenticatorActivity` in the following fragments. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity`  in your app's :file:`AndroidManifest.xml`.
 
          .. code-block:: xml
 
@@ -287,9 +301,12 @@ Setup Facebook Login in your Mobile App
                 </intent-filter>
             </activity>
 
-         Update your `AuthenticatorActivity` to call `AWSMobileClient`. `AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign in operation. If the user is signed in, go to the `NextActivity`. Otherwise, present the user with our pre-built sign-in UI.
+      #. Update your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. :code:`AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign-in operation. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
 
          .. code-block:: java
+
+            import android.app.Activity;
+            import android.os.Bundle;
 
             import com.amazonaws.mobile.auth.ui.SignInUI;
             import com.amazonaws.mobile.client.AWSMobileClient;
@@ -299,6 +316,9 @@ Setup Facebook Login in your Mobile App
             public class AuthenticatorActivity extends Activity {
                 @Override
                 protected void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_authenticator);
+
                     AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
                         @Override
                         public void onComplete(AWSStartupResult awsStartupResult) {
@@ -309,7 +329,7 @@ Setup Facebook Login in your Mobile App
                 }
             }
 
-        Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
    iOS - Swift
       #. Add the following dependencies in your project's :file:`Podfile` and run :code:`pod install --repo-update`.
@@ -325,9 +345,9 @@ Setup Facebook Login in your Mobile App
                 # other pods
               end
 
-      #. Add Facebook metadata to Info.plist.
+      #. Add Facebook meta data to :file:`Info.plist`.
 
-         To configure your Xcode project to use Facebook Login, right-click :file:`Info.plist` and then choose :guilabel:`Open As > Source Code`.
+         To configure your Xcode project to use Facebook Login, right-choose :file:`Info.plist` and then choose :guilabel:`Open As > Source Code`.
 
          Add the following entry, using your project name, Facebook ID and login scheme ID.
 
@@ -359,9 +379,9 @@ Setup Facebook Login in your Mobile App
             </dict>
             <!-- ... -->
 
-      #. Create an AWSMobileClient and initialize the SDK.
+      #. Create a AWSMobileClient and initialize the SDK.
 
-         In :file:`AppDelegate.swift`, create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the |COG| Identity.
+         In :file:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Amazon Cognito Identity.
 
          .. code-block:: swift
 
@@ -422,11 +442,11 @@ Setup Facebook Login in your Mobile App
                  }
              }
 
-        Choose the Run icon in the top left of the Xcode window or type Command-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the Run icon in the top left of the Xcode window or type Command-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
 .. _set-up-google:
 
-Set Up Google Login in Your Mobile App
+Setup Google Login in your Mobile App
 =====================================
 
 .. container:: option
@@ -457,7 +477,7 @@ Set Up Google Login in Your Mobile App
               }
 
 
-      #. Create an activity that will present your sign-in screen, called :code:`AuthenticatorActivity`. If you want to make the :code:`AuthenticatorActivity` your starting activity, copy the intent filter to the activity block in your app's :file:`AndroidManifest.xml`.
+      #. Create an activity that will present your sign-in screen, called :code:`AuthenticatorActivity` in the following fragments. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity`  in your app's :file:`AndroidManifest.xml`.
 
          .. code-block:: xml
 
@@ -468,9 +488,12 @@ Set Up Google Login in Your Mobile App
                     </intent-filter>
                 </activity>
 
-         Update your `AuthenticatorActivity` to call `AWSMobileClient`. `AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign in operation. If the user is signed in, go to the `NextActivity`. Otherwise, present the user with our pre-built sign-in UI.
+      #. Update your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. :code:`AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign-in operation. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
 
          .. code-block:: java
+
+            import android.app.Activity;
+            import android.os.Bundle;
 
             import com.amazonaws.mobile.auth.ui.SignInUI;
             import com.amazonaws.mobile.client.AWSMobileClient;
@@ -481,6 +504,9 @@ Set Up Google Login in Your Mobile App
                 @Override
                 protected void onCreate(Bundle savedInstanceState) {
                     AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_authenticator);
+
                         @Override
                         public void onComplete(AWSStartupResult awsStartupResult) {
                             SignInUI signin = (SignInUI) AWSMobileClient.getInstance().getClient(AuthenticatorActivity.this, SignInUI.class);
@@ -490,7 +516,7 @@ Set Up Google Login in Your Mobile App
                 }
             }
 
-        Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
    iOS - Swift
       #. Add the following dependencies in the Podfile and run **pod install --repo-update**
@@ -528,7 +554,7 @@ Set Up Google Login in Your Mobile App
 
       #. Create a AWSMobileClient and initialize the SDK.
 
-         In :code:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign-in providers and fetch the Cognito Identity.
+         In :code:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Cognito Identity.
 
          .. code-block:: swift
 
@@ -589,7 +615,7 @@ Set Up Google Login in Your Mobile App
                  }
              }
 
-        Choose the Run icon in the top left of the Xcode window or type Command-R to build and run your app. You should see our pre-built sign-in UI for your app. See the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the Run icon in the top left of the Xcode window or type Command-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
 .. _auth-next-steps:
 

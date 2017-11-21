@@ -8,52 +8,47 @@ Add Push Notifications to Your Mobile App
 .. meta::
    :description: Integrate AWS Push Notifications into your mobile app.
 
-.. _add-aws-mobile-push-notifications-overview:
+.. _overview:
 
-Push Notifications
-==================
+Overview
+==========================
 
 |AMH| deploys your Push Notifications backend services when you enable the
 :ref:`messaging-and-analytics` feature using the `Amazon Pinpoint service <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`_. Amazon Pinpoint enables apps to
 receive mobile push messages sent from the Apple (APNs) and Google (FCM/GCM) platforms. You can also
 create Amazon Pinpoint campaigns that tie user behavior to push or other forms of messaging.
 
-.. _add-aws-push-notifications-backend-setup:
+.. _setup-your-backend:
 
 Set Up Your Backend
 ===================
 
-#. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the
-   integration steps on this page.
 
-#. Use |AMHlong| to deploy and configure your AWS services in minutes.
+#. Complete the :ref:`Get Started <getting-started>` steps before your proceed.
 
+#. Choose the :guilabel:`Messaging and Analytics` tile
 
-   #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Choose :guilabel:`Mobile push`.
 
-   #. Choose :guilabel:`Create a new project`, type a name for it, and then choose :guilabel:`Create
-      project`.
+   **For Android - Firebase/Google Cloud Messaging (FCM/GCM):** Choose :guilabel:`Android` and provide your Firebase/Google application API key and Sender ID. To retrieve or create these values, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`_ .
 
-      Or select an existing project.
+   **For iOS - Apple Push Notification Service (APNs):** Choose :guilabel:`iOS` and provide your Apple app P12 Certificate and, optionally, Certificate password. To retrieve or create these items, see `Setting Up iOS Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`_.
 
-   #. Choose the :guilabel:`Messaging and Analytics` tile
+#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done with configuring the feature, choose the banner to return to the project details page.
 
-   #. Choose :guilabel:`Mobile push`.
+   .. image:: images/updated-cloud-config.png
 
-      For Android - Firebase/Google Cloud Messaging (FCM/GCM):
+#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
 
-            Choose :guilabel:`Android` and provide your Firebase/Google application API key and Sender ID. To retrieve or create these values, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`_ .
+   .. image:: images/updated-cloud-config2.png
+      :scale: 25
 
-      For iOS - Apple Push Notification Service (APNs):
-
-            Choose :guilabel:`iOS` and provide your Apple app P12 Certificate and, optionally, Certificate password. To retrieve or create these items, see `Setting Up iOS Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`_.
-
-   #. Download your updated |AMH| project configuration file and replace it in your project (see :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` for more information).  Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app.
+#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the Push Notification documentation below to connect to your backend.
 
 .. _add-aws-mobile-push-notifications-app:
 
-Add the SDK to Your App
-=================================
+Connect to your backend
+=======================
 
 
 **To add push notification to your app**
@@ -208,14 +203,6 @@ Add the SDK to Your App
                 import AWSCore
                 import AWSPinpoint
 
-      #. Add your backend service configuration to the app.
-
-         From the location where your |AMH| configuration file was downloaded in a previous step,
-         drag :file:`awsconfiguration.json` into the folder containing your :file:`info.plist` file
-         in your Xcode project.
-
-         Select :guilabel:`Copy items if needed` and :guilabel:`Create groups`, if these options are offered.
-
       #. Create an Amazon Pinpoint client by using the following code into the
          :code:`didFinishLaunchwithOptions` method of your app's :file:`AppDelegate.swift`. This
          will also register your device token with Amazon Pinpoint.
@@ -240,8 +227,7 @@ Add the SDK to Your App
 .. _add-aws-mobile-push-notifications-targeting:
 
 Add Amazon Pinpoint Targeted and Campaign Push Messaging
-========================================================
-
+===========================
 
 `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_ enables you to target your app users with push messaging. You can send individual messages or configure campaigns that target a group of users that match a profile that you define. For instance, you could email users that have not used the app in 30 days, or send an SMS to those that frequently use a given feature of your app.
 
@@ -250,7 +236,7 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
    Android - Java
       The following 2 steps show how to receive push notifications targeted for your app.
 
-      * Add a Push Listener Service to Your App.
+      #. Add a Push Listener Service to Your App.
 
          The name of the class must match the push listener service name used in the app manifest.
          :code:`pinpointManager` is a reference to the static PinpointManager variable declared in
