@@ -30,7 +30,7 @@ In the following examples you will create an API that is part of a cloud-enabled
 
    .. code:: bash
 
-        awsmobile cloud-api prompt
+        awsmobile cloud-api --prompt
 
 
 #. When prompted, name the API :userinput:`Guesses`.

@@ -10,7 +10,7 @@ Access Your APIs
 
    * - **BEFORE YOU BEGIN**
 
-     - The steps on this page assume you have already completed the steps on :ref:`Get Started <react-getting-started>`.
+     - The steps on this page assume you have already completed the steps on :ref:`Get Started <react-native-getting-started>`.
 
 
 Set Up Your Backend
@@ -26,7 +26,7 @@ The AWS Mobile :ref:`Cloud Logic <cloud-logic>` feature lets you call APIs in th
 
    awsmobile push
 
-Enabling Cloud Logic in your app adds a sample API, :code:`SampleCloudLogicAPI` to your project that can be used for testing.
+Enabling Cloud Logic in your app adds a sample API, :code:`sampleCloudApi` to your project that can be used for testing.
 
 You can find the sample handler function for the API by running :code:`awsmobile console` in your app root folder, and then choosing the :guilabel:`Cloud Logic` feature in your |AMH| project.
 
@@ -37,19 +37,19 @@ You can find the sample handler function for the API by running :code:`awsmobile
 Quickly Test Your API From the CLI
 ----------------------------------
 
-The :code:`SampleCloudLogicAPI` and its handler function allow you to make end to end API calls.
+The :code:`sampleCloudApi` and its handler function allow you to make end to end API calls.
 
 **To test invocation of your unsigned APIs in the development environment**
 
 .. code-block:: bash
 
-   awsmobile cloud-api invoke <apiname> <method> <path> [body]
+   awsmobile cloud-api invoke <apiname> <method> <path> [init]
 
-For the :code:`SampleCloudLogicAPI` you may use the following examples to test the :code:`post` method
+For the :code:`sampleCloudApi` you may use the following examples to test the :code:`post` method
 
 .. code-block:: bash
 
-   awsmobile cloud-api invoke SampleCloudLogicAPI post /items '{"testKey":"testValue"}'
+   awsmobile cloud-api invoke sampleCloudApi post /items '{"testKey":"testValue"}'
 
 This call will return a response similar to the following.
 
@@ -63,7 +63,7 @@ This call will return a response similar to the following.
 
 .. code-block:: bash
 
-   awsmobile cloud-api invoke SampleCloudLogicAPI get /items
+   awsmobile cloud-api invoke sampleCloudApi get /items
 
 
 This will return a response as follows.
@@ -84,17 +84,21 @@ In :file:`App.js` (or  other code that runs at launch-time), add the following i
 
 .. code-block:: java
 
-   import { API } from 'aws-amplify-react-native';
+    import Amplify, { API } from 'aws-amplify-react-native';
+    import aws_exports from './aws-exports';
+    Amplify.configure(aws_exports);
 
 Then add this to the component that calls your API.
 
 .. code-block:: java
 
+    state = { apiResponse: null };
+
     async getSample() {
-      const path = "/items"; // you can specify the path
-      const response = await API.get("SampleCloudLogicAPI" , path); //replace the API name
-      console.log('response:' + response);
-      this.setState({ response });
+     const path = "/items"; // you can specify the path
+      const apiResponse = await API.get("sampleCloudApi" , path); //replace the API name
+      console.log('response:' + apiResponse);
+      this.setState({ apiResponse });
     }
 
 
@@ -102,10 +106,10 @@ To invoke your API from a UI element, add an API call from within your component
 
 .. code-block:: html
 
-   <View>
-      <Button title="Send Request" onPress={this.fetch.bind(this)} />
-      <Text>Response: {this.state.apiResponse && JSON.stringify(this.state.apiResponse)}</Text>
-   </View>
+      <View>
+         <Button title="Send Request" onPress={this.getSample.bind(this)} />
+         <Text>Response: {this.state.apiResponse && JSON.stringify(this.state.apiResponse)}</Text>
+      </View>
 
 To test, save the changes, run :code:`npm run android` or :code:`npm run ios`` to launch your app. Then try the UI element that calls your API.
 

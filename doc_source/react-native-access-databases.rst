@@ -89,11 +89,9 @@ AWS Mobile will create a custom API for your app to perform create, read, update
 
 **To create a CRUD API for your table**
 
-#. Run the following code:
+#. In the root folder of your app, run:
 
    .. code-block:: bash
-
-       cd YOUR-APP-ROOT-FOLDER
 
        awsmobile cloud-api enable --prompt
 
@@ -101,7 +99,33 @@ AWS Mobile will create a custom API for your app to perform create, read, update
 
    .. code-block:: bash
 
-      This feature will create an API using Amazon API Gateway and AWS Lambda. You can optionally have the lambda function perform CRUD operations against your Amazon DynamoDB table.
+      ? Select from one of the choices below.
+        Create a new API
+      ❯ Create CRUD API for an existing Amazon DynamoDB table
+
+    The prompt response will be:
+
+   .. code-block:: bash
+
+        Path to be used on API for get and remove an object should be like:
+        /Notes/object/:NoteId
+
+        Path to be used on API for list objects on get method should be like:
+        /Notes/:NoteId
+
+        JSON to be used as data on put request should be like:
+        {
+          "NoteTitle": "INSERT VALUE HERE",
+          "NoteContent": "INSERT VALUE HERE",
+          "NoteId": "INSERT VALUE HERE"
+        }
+        To test the api from the command line (after awsmobile push) use this commands
+        awsmobile cloud-api invoke NotesCRUD <method> <path> [init]
+        Api NotesCRUD saved
+
+     Copy and keep the path of your API and the JSON for use in your app code.
+
+   This feature will create an API using Amazon API Gateway and AWS Lambda. You can optionally have the lambda function perform CRUD operations against your Amazon DynamoDB table.
 
 #. Update your backend.
 
@@ -125,11 +149,27 @@ Connect to Your Backend
 
 **To access to database tables from your app**
 
-In :file:`App.js` import the following.
+#. In :file:`App.js` import the following.
 
-.. code-block:: java
+    .. code-block:: java
 
-    import { API } from 'aws-amplify-react-native';
+          import Amplify, { API } from 'aws-amplify-react-native';
+          import aws_exports from 'path_to_your_aws-exports';
+          Amplify.configure(aws_exports);
+
+#. Add the following :code:`state` to your component.
+
+    .. code-block:: java
+
+          state = {
+            apiResponse: null,
+            noteId: ''
+               };
+
+            handleChangeNoteId = (event) => {
+                  this.setState({noteId: event});
+          }
+
 
 
 Save an item (create or update)
@@ -137,31 +177,37 @@ Save an item (create or update)
 
 **To save an item**
 
-In the part of your app that you want to access the database, such as an event handler in your React component, call the :code:`put` method.
+In the part of your app where you access the database, such as an event handler in your React component, call the :code:`put` method. Use the JSON and the root path (:code:`/Notes`) of your API that you copied from the CLI prompt response earlier.
 
 .. code-block:: java
     :emphasize-lines: 2,5
 
       // Create a new Note according to the columns we defined earlier
-      async saveNote() {
-        let newNote = {
-          "NoteTitle": "My first note!",
-          "NoteContent": "This is so cool!",
-          "NoteId": "abc123"
+        async saveNote() {
+          let newNote = {
+            body: {
+              "NoteTitle": "My first note!",
+              "NoteContent": "This is so cool!",
+              "NoteId": this.state.noteId
+            }
+          }
+          const path = "/Notes";
+
+          // Use the API module to save the note to the database
+          try {
+            const apiResponse = await API.put("NotesCRUD", path, newNote)
+            console.log("response from saving note: " + apiResponse);
+            this.setState({apiResponse});
+          } catch (e) {
+            console.log(e);
+          }
         }
-
-        const path = "/Notes";
-
-        // Use the API module to save the note to the database
-        const response = await API.put("NotesCRUDAPI", path, newNote)
-        console.log(response)
-      }
 
 To use the command line to see your saved items in the database run:
 
 .. code-block:: none
 
-   awsmobile cloud-api invoke NotesCRUDAPI GET /Notes
+   awsmobile cloud-api invoke NotesCRUD GET /Notes/object/${noteId}
 
 
 Get a specific item
@@ -169,33 +215,22 @@ Get a specific item
 
 **To query for a specific item**
 
-Call the :code:`get` method using the API path to the item you are querying for.
+Call the :code:`get` method using the API path (copied earlier) to the item you are querying for.
 
 .. code-block:: java
     :emphasize-lines: 3,4
 
-        //noteId is the primary key of the particular record you want to fetch
-        async get(noteId) {
-          const path = "/Notes/object/" + noteId;
-          const response = await API.get("NotesCRUDAPI", path);
-          console.log(response);
-        }
-
-
-Get all items
--------------
-
-**To query for all items for a given user**
-
-Call the :code:`get` method and pass an API path that contains the user's userId.
-
-.. code-block:: javascript
-
-    async getAll(userId) {
-      const path = "/Notes/" + userId; // userId is your partition key
-      const response = await API.get("NotesCRUDAPI", path);
-      console.log(response);
-    }
+      // noteId is the primary key of the particular record you want to fetch
+          async getNote() {
+            const path = "/Notes/object/" + this.state.noteId;
+            try {
+              const apiResponse = await API.get("NotesCRUD", path);
+              console.log("response from getting note: " + apiResponse);
+              this.setState({apiResponse});
+            } catch (e) {
+              console.log(e);
+            }
+          }
 
 
 Delete an item
@@ -203,18 +238,56 @@ Delete an item
 
 **To delete an item**
 
-Add this method to your component. Remember to substitute the PATH and JSON from the CLI on the highlighted lines below
+Add this method to your component. Use your API path (copied earlier).
 
-.. code-block:: java
+.. code-block:: javascript
     :emphasize-lines: 2,3
 
-        //dbNoteId is the NoteId of the particular record you want to fetch
-        async delete(noteId) {
-          const path = "/Notes/object" + noteId;
-          const response = await API.del("NotesCRUDAPI", path);
-          console.log(response);
-        }
+      // noteId is the NoteId of the particular record you want to delete
+          async deleteNote() {
+            const path = "/Notes/object/" + this.state.noteId;
+            try {
+              const apiResponse = await API.del("NotesCRUD", path);
+              console.log("response from deleteing note: " + apiResponse);
+              this.setState({apiResponse});
+            } catch (e) {
+              console.log(e);
+            }
+          }
 
+
+UI to exercise CRUD calls
+-------------------------
+
+The following is and example of how you might construct UI to excercise these operations.
+
+.. code-block:: javascript
+
+    <View style={styles.container}>
+            <Text>Response: {this.state.apiResponse && JSON.stringify(this.state.apiResponse)}</Text>
+            <Button title="Save Note" onPress={this.saveNote.bind(this)} />
+            <Button title="Get Note" onPress={this.getNote.bind(this)} />
+            <Button title="Delete Note" onPress={this.deleteNote.bind(this)} />
+            <TextInput style={styles.textInput} autoCapitalize='none' onChangeText={this.handleChangeNoteId}/>
+    </View>
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      textInput: {
+          margin: 15,
+          height: 30,
+          width: 200,
+          borderWidth: 1,
+          color: 'green',
+          fontSize: 20,
+          backgroundColor: 'black'
+       }
+    });
 
 Next Steps
 ==========

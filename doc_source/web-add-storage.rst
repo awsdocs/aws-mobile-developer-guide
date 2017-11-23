@@ -44,23 +44,22 @@ The following simple component could be added to a :code:`create-react-app` proj
    * - .. code:: javascript
 
           // Image upload and download for display example component
-
           // src/ImageViewer.js
 
-           import React, { Component } from 'react';
+          import React, { Component } from 'react';
 
-            class ImageViewer extends Component {
-              render() {
-                return (
-                  <div>
-                    <p>Pick a file</p>
-                    <input type="file" />
-                  </div>
-                )
-              }
+          class ImageViewer extends Component {
+            render() {
+              return (
+                <div>
+                  <p>Pick a file</p>
+                  <input type="file" />
+                </div>
+              );
             }
+          }
 
-            export default ImageViewer;
+          export default ImageViewer;
 
 Upload a file
 ~~~~~~~~~~~~~
@@ -71,7 +70,7 @@ Import the :code:`Storage` module in your component file.
 
 .. code:: javascript
 
-    # ./src/ImageViewer.js
+    // ./src/ImageViewer.js
 
     import { Storage } from 'aws-amplify';
 
@@ -80,8 +79,8 @@ Add the following function to use the :code:`put` function on the :code:`Storage
 .. code:: javascript
 
     uploadFile(event) {
-      const file = event.target.files[0]
-      const name = file.name
+      const file = event.target.files[0];
+      const name = file.name;
 
       Storage.put(key, file).then(() => {
         this.setState({ file: name });
@@ -98,7 +97,7 @@ Place a call to the :code:`uploadFile` function in the :code:`input` element of 
             <p>Pick a file</p>
             <input type="file" onChange={this.uploadFile.bind(this)} />
           </div>
-        )
+        );
       }
 
 Display an image
@@ -129,7 +128,7 @@ Use the S3Image component in the render function. Update your render function to
            <input type="file" onChange={this.handleUpload.bind(this)} />
            { this.state && <S3Image path={this.state.path} /> }
          </div>
-      )
+      );
     }
 
 
@@ -141,32 +140,32 @@ Use the S3Image component in the render function. Update your render function to
 
        .. code:: javascript
 
-	        // Image upload and download for display example component
+          // Image upload and download for display example component
 
           import React, { Component } from 'react';
-	        import { Storage } from 'aws-amplify';
-	        import { S3Image } from 'aws-amplify-react';
+          import { Storage } from 'aws-amplify';
+          import { S3Image } from 'aws-amplify-react';
 
-	        class ImageViewer extends Component {
+          class ImageViewer extends Component {
 
-	          handleUpload(event) {
-	            const file = event.target.files[0]
-	            const path = file.name
-	            Storage.put(path, file).then(() => this.setState({ path }) )
-	          }
+            handleUpload(event) {
+              const file = event.target.files[0];
+              const path = file.name;
+              Storage.put(path, file).then(() => this.setState({ path }) );
+            }
 
-	          render() {
-	            return (
-	              <div>
-	                <p>Pick a file</p>
-	                <input type="file" onChange={this.handleUpload.bind(this)} />
-	                { this.state && <S3Image path={this.state.path} /> }
-	              </div>
-	            )
-	          }
-	        }
+            render() {
+              return (
+                <div>
+                  <p>Pick a file</p>
+                  <input type="file" onChange={this.handleUpload.bind(this)} />
+                  { this.state && <S3Image path={this.state.path} /> }
+                </div>
+              );
+            }
+          }
 
-	        export default ImageViewer;
+          export default ImageViewer;
 
 
 Next Steps

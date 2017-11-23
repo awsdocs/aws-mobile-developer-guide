@@ -128,14 +128,14 @@ There are two usages of the :code:`awsmobile init` command
 
    .. code-block:: bash
 
+      Please tell us about your project:
       ? Where is your project's source directory:  src
-      ? Where is your project's distribution directory to store build artifacts:  dist
+      ? Where is your project's distribution directory that stores build artifacts:  build
       ? What is your project's build command:  npm run-script build
       ? What is your project's start command for local test run:  npm run-script start
-      ? Do you want to test your application in awsmobile DeviceFarm on publish:  Yes
 
+      ? What awsmobile project name would you like to use:  my-mobile-project
 
-      ? What awsmobile project name would you like to use:  myapp-2017-11-14-13-26-23
 
    The source directory is where the the AWS Mobile CLI copies the latest :code:`aws-exports.js` to be easily available for your front-end code. This file is automatically updated everytime features are added or removed. Specifying a wrong / unavailable folder will not copy the file over.
 
@@ -145,7 +145,7 @@ There are two usages of the :code:`awsmobile init` command
 
    The awsmobile project name is the name of the backend project created in the Mobile hub.
 
-   You can alter any of the above values by using the :ref:`awsmobile configure project <aws-mobile-cli-reference-configure>` command.
+   Y“You can alter the settings about your project by using the :ref:`awsmobile configure project <aws-mobile-cli-reference-configure>` command.
 
 
 #. Initialize and link to an existing awsmobile project as backend
@@ -154,7 +154,7 @@ There are two usages of the :code:`awsmobile init` command
 
       awsmobile init <awsmobile-project-id>
 
-   The awsmobile-project-id is the name of the existing backend project in the Mobile Hub. This command helps attach an existing backend project to your app.
+   The awsmobile-project-id is the id of the existing backend project in the Mobile Hub. This command helps attach an existing backend project to your app.
 
 #. Remove the attached awsmobile project from the backend.
 
@@ -245,7 +245,7 @@ Use :code:`awsmobile push` after using :code:`awsmobile features`, :code:`awsmob
 publish
 =======
 
-The :code:`awsmobile publish` builds and pushes client-side code to S3 and Cloud Front, also does awsmobile push. This command publishes the client application to s3 bucket for hosting and then opens the browser to show the index page. It checks the timestamps to automatically build the app if necessary before deployment. It checks if the client has selected hosting in their backend project features, and if not, it’ll prompt the client to update the backend with hosting feature.
+The :code:`awsmobile publish` command first executes the awsmobile :code:`push` command, then builds and publishes client-side code to Amazon S3 hosting bucket. This command publishes the client application to s3 bucket for hosting and then opens the browser to show the index page. It checks the timestamps to automatically build the app if necessary before deployment. It checks if the client has selected hosting in their backend project features, and if not, it’ll prompt the client to update the backend with hosting feature.
 
 .. code-block:: bash
 
@@ -274,8 +274,6 @@ The publish command has a number of options to be used.
    .. code-block:: bash
 
       awsmobile publish -n
-      or
-      awsmobile publish --notest
 
 #. Publish the front end only without updating the backend
 
@@ -290,7 +288,7 @@ The publish command has a number of options to be used.
 run
 ===
 
-The :code:`awsmobile run` command is the same as publish but also opens the S3 URL in the user’s default browser. It starts all components of the project. This can can be used after some local development to immediately see the result. It updates the backend, updates the mobile hub project, publish, and then start a local server to let the developer see the result of his development on a browser or simulator
+The :code:`awsmobile run` command first executes the :code:`awsmobile push` command, then executes the start command you set in the project configuration, such as :code:`npm run start` or :code:`npm run ios`. This can be used to conveniently test run your application locally with the latest backend development pushed to the cloud.
 
 .. code-block:: bash
 
@@ -313,7 +311,7 @@ The :code:`awsmobile console` command opens the web console of the awsmobile Mob
 features
 ========
 
-The :code:`features` command shows available and enabled features. This can be used to select or deselect the desired the AWS features to your app. Using the command below gives the list of supported AWS features. Use space key to turn on/off a feature, hit return when ready.
+The :code:`awsmobile features` command displays all the available awsmobile  features, and allows you to individually enable/disable them locally. Use the arrow key to scroll up and down, and use the space key to enable/disable each feature. Please note that the changes are only made locally, execute awsmobile push to update the awsmobile project in the cloud.
 
 .. code-block:: bash
 
@@ -353,7 +351,7 @@ Use :code:`awsmobile push` after using :code:`awsmobile <feature> disable` to up
 enable
 ======
 
-The :code:`awsmobile <feature> enable` enables the feature with the default. This command basically enables the feature and creates sample artifacts for the database and cloud-api features.
+The :code:`awsmobile <feature> enable` enables the specified feature with the default settings. Please note that the changes are only made locally, execute :code:`awsmobile` push to update the AWS Mobile project in the cloud.
 
 .. code-block:: bash
 
@@ -374,7 +372,7 @@ The features supported by the AWS Mobile CLI are:
 * hosting (|S3| and |CF|)
 
 
-The :code:`awsmobile <feature> enable --prompt` subcommand allows user to specify the details of mobile hub features instead of creating a default artifact. It prompts the user to answer a list of questions to specify the feature in detail. The behavior of this subcommand varies depending on the template being used for the project
+The :code:`awsmobile <feature> enable --prompt` subcommand allows user to specify the details of the mobile hub feature to be enabled, instead of using the default settings. It prompts the user to answer a list of questions to specify the feature in detail.
 
 .. code-block:: bash
 
@@ -435,7 +433,7 @@ Enabling the :code:`hosting` feature with the :code:`--prompt` will prompt you t
     ? Do you want to host your web app including a global CDN? (y/N)
 
 
-Use :code:`awsmobile push` after using :code:`awsmobile <feature> enable` to update the backend project on the AWS Mobile Hub project with the enabled features.
+Execute :code:`awsmobile push` after using :code:`awsmobile <feature> enable` to to update the awsmobile project in the cloud.
 
 .. _aws-mobile-cli-reference-disable:
 
@@ -561,11 +559,11 @@ The :code:`awsmobile cloud-api invoke` invokes the API for testing locally. This
 
    awsmobile cloud-api invoke <apiname> <method> <path> [init]
 
-For example you could invoke the SampleCloudLogicAPI post method as shown below
+For example you could invoke the sampleCloudApi post method as shown below
 
 .. code-block:: bash
 
-   awsmobile cloud-api invoke SampleCloudLogicAPI post /items '{"body":{"test-key":"test-value"}}'
+   awsmobile cloud-api invoke sampleCloudApi post /items '{"body":{"test-key":"test-value"}}'
 
 The above test will return a value that looks like
 
@@ -576,11 +574,11 @@ The above test will return a value that looks like
       body: { 'test-key': 'test-value' } }
 
 
-Similarly, you could invoke the SampleCloudLogicAPI get method as shown below
+Similarly, you could invoke the sampleCloudApi get method as shown below
 
 .. code-block:: bash
 
-   awsmobile cloud-api invoke SampleCloudLogicAPI get /items
+   awsmobile cloud-api invoke sampleCloudApi get /items
 
 The above test will return a value that looks like
 

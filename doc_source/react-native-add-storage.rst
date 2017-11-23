@@ -26,13 +26,14 @@ Set Up Your Backend
 
 **To configure your app's cloud storage location**
 
-.. code-block:: shell
+In your app root folder, run:
 
-      cd YOUR-APP-ROOT-FOLDER
+.. code-block:: shell
 
       awsmobile user-files enable
 
       awsmobile push
+
 
 .. _react-native-add-storage-connect:
 
@@ -63,10 +64,11 @@ Add the following methods to the component where you handle file uploads.
 
 .. code-block:: javascript
 
-    async uploadFile(event) => {
-      let file = event.target.files[0];
+    async uploadFile() {
+      let file = 'My upload text';
+      let name = 'myFile.txt';
       const access = { level: "public" }; // note the access path
-      Storage.put(file.name, file, access);
+      Storage.put(name, file, access);
     }
 
 Call a file upload from your React Component as follows.
@@ -83,8 +85,8 @@ Call a file upload from your React Component as follows.
 
 .. _react-native-add-storage-get:
 
-Get an object
--------------
+Get a specific file
+-------------------
 
 **To download a file from cloud storage**
 
@@ -92,10 +94,11 @@ Add the following code to a component where you display files.
 
 .. code-block:: javascript
 
-    async getFile(key) {
+    async getFile() {
+      let name = 'myFile.txt';
       const access = { level: "public" };
-      let imageUrl = Storage.get(key, access);
-      this.setState({ image: imageUrl });
+      let fileUrl = async Storage.get(name, access);
+      // use fileUrl to get the file
     }
 
 .. _react-native-add-storage-list:
@@ -109,13 +112,12 @@ Add the following code to a component where you list a collection of files.
 
 .. code-block:: javascript
 
-  async componentDidMount() {
-    const path = this.props.path;
-    const access = { level: "public" };
-    let files = await Storage.list(path, access);
-    this.setState({ files });
-  }
-
+    async componentDidMount() {
+      const path = this.props.path;
+      const access = { level: "public" };
+      let files = await Storage.list(path, access);
+       // use file list to get single files
+    }
 
 Use the following code to fetch file attributes such as the size or time of last file change.
 
@@ -134,7 +136,7 @@ Add the following state to the element where you handle file transfers.
 
 .. code-block:: javascript
 
-    async deleteFile(key) => {
+    async deleteFile(key) {
       const access = { level: "public" };
       Storage.remove(key, access);
     }
@@ -143,14 +145,14 @@ The UI code below will add a button that deletes a file.
 
 .. code-block:: javascript
 
-  render() {
-    return (
-      <View>
-        <Image source={{uri: this.props.imageUrl}} />
-        <Button title="Delete" onPress={this.deleteFile.bind(null, this.props.imageUrl} />
-      </View>
-    );
-  }
+    render() {
+      return (
+        <View>
+          <Image source={{uri: this.props.imageUrl}} />
+          <Button title="Delete" onPress={this.deleteFile.bind(null, this.props.imageUrl)} />
+        </View>
+      );
+    }
 
 
 Next Steps

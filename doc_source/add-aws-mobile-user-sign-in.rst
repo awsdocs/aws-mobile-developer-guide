@@ -503,10 +503,10 @@ Setup Google Login in your Mobile App
             public class AuthenticatorActivity extends Activity {
                 @Override
                 protected void onCreate(Bundle savedInstanceState) {
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
                     super.onCreate(savedInstanceState);
                     setContentView(R.layout.activity_authenticator);
 
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
                         @Override
                         public void onComplete(AWSStartupResult awsStartupResult) {
                             SignInUI signin = (SignInUI) AWSMobileClient.getInstance().getClient(AuthenticatorActivity.this, SignInUI.class);
