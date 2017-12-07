@@ -26,7 +26,7 @@ When you complete the AWS Mobile CLI setup and launch your app, anonymized sessi
 
 **To send basic app usage analytics to AWS**
 
-Launch your app locally by running:
+Launch your app locally, for instance, if you created your app using :code:`create-react-native-app`, by running:
 
 .. code-block:: bash
 
@@ -40,7 +40,7 @@ When you use your app the `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/
 
 **To view the analytics using the Amazon Pinpoint console**
 
-#. Run :code:`npm start` or :code:`awsmobile run` at least once.
+#. Launch your app at least once.
 
 #. Open your project in the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`_.
 
@@ -84,11 +84,11 @@ Or to relevant page elements:
          Analytics.record('SECOND-EVENT-NAME');
     }
 
-    <button onClick={this.handleClick}>Call request</button>
+    <Button title="Record event" onPress={this.handleClick}/>
 
 To test:
 
-#. Save the changes and run :code:`npm start` or :code:`awsmobile run` to launch your app. Use your app so that tracked events are triggered.
+#. Save the changes and launch your app. Use your app so that tracked events are triggered.
 
 #. In the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_, choose :guilabel:`Events` near the top.
 

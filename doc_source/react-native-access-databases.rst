@@ -103,7 +103,7 @@ AWS Mobile will create a custom API for your app to perform create, read, update
         Create a new API
       ❯ Create CRUD API for an existing Amazon DynamoDB table
 
-    The prompt response will be:
+   The prompt response will be:
 
    .. code-block:: bash
 
@@ -123,7 +123,7 @@ AWS Mobile will create a custom API for your app to perform create, read, update
         awsmobile cloud-api invoke NotesCRUD <method> <path> [init]
         Api NotesCRUD saved
 
-     Copy and keep the path of your API and the JSON for use in your app code.
+   Copy and keep the path of your API and the JSON for use in your app code.
 
    This feature will create an API using Amazon API Gateway and AWS Lambda. You can optionally have the lambda function perform CRUD operations against your Amazon DynamoDB table.
 

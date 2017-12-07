@@ -49,7 +49,7 @@ For the :code:`sampleCloudApi` you may use the following examples to test the :c
 
 .. code-block:: bash
 
-   awsmobile cloud-api invoke sampleCloudApi post /items '{"testKey":"testValue"}'
+   awsmobile cloud-api invoke sampleCloudApi post /items '{"body": {"testKey":"testValue"}}'
 
 This call will return a response similar to the following.
 

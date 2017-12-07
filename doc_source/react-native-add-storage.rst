@@ -71,17 +71,6 @@ Add the following methods to the component where you handle file uploads.
       Storage.put(name, file, access);
     }
 
-Call a file upload from your React Component as follows.
-
-.. code-block:: html
-
-    render() {
-      return (
-        <View>
-          <Button title="Upload" onPress={this.uploadFile} />
-        </View>
-      );
-    }
 
 .. _react-native-add-storage-get:
 
@@ -97,7 +86,7 @@ Add the following code to a component where you display files.
     async getFile() {
       let name = 'myFile.txt';
       const access = { level: "public" };
-      let fileUrl = async Storage.get(name, access);
+      let fileUrl = await Storage.get(name, access);
       // use fileUrl to get the file
     }
 
@@ -139,19 +128,6 @@ Add the following state to the element where you handle file transfers.
     async deleteFile(key) {
       const access = { level: "public" };
       Storage.remove(key, access);
-    }
-
-The UI code below will add a button that deletes a file.
-
-.. code-block:: javascript
-
-    render() {
-      return (
-        <View>
-          <Image source={{uri: this.props.imageUrl}} />
-          <Button title="Delete" onPress={this.deleteFile.bind(null, this.props.imageUrl)} />
-        </View>
-      );
     }
 
 

@@ -79,17 +79,18 @@ Set Up Your Backend
 
    .. code-block:: bash
 
-      ? Where is your projects's source directory:  src
+      ? Where is your projects's source directory:  /
 
 
    Then respond to further prompts with the following values.
 
    .. code-block:: bash
 
-      ? Where is your project's distribution directory to store build artifacts:  dist
+      Please tell us about your project:
+      ? Where is your project's source directory:  /
+      ? Where is your project's distribution directory that stores build artifacts:  build
       ? What is your project's build command:  npm run-script build
       ? What is your project's start command for local test run:  npm run-script start
-      ? What awsmobile project name would you like to use:  YOUR-APP-NAME-2017-11-10-15-17-48
 
  .. _react-native-getting-started-configure-aws-amplify:
 

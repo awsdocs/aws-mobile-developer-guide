@@ -591,7 +591,7 @@ The above test will return a value that looks like
 delete
 ======
 
-The :code:`awsmobile delete` removes the Mobile hub project and associated artifacts attached to your app. It does not alter the other any other behaviour of the app. The backend project is not deleted from the Mobile Hub. It is only detached from your app.
+The :code:`awsmobile delete` command deletes the Mobile hub project in the cloud. Use extra caution when you decide to execute this command, as it can irrevocably affect your team’s work, the mobile hub project will be delete and cannot be recovered once this command is executed.
 
 .. code-block:: bash
 
