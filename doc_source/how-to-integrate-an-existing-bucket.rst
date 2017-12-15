@@ -1,60 +1,125 @@
-.. _add-aws-mobile-user-data-storage:
+.. _how-to-integrate-an-existing-bucket:
 
-########################################
-Add User Data Storage to Your Mobile App
-########################################
+#####################################
+How to Integrate Your Existing Bucket
+#####################################
 
+.. _native-integrate-exisitng-bucket:
 
-.. meta::
-   :description: Integrating user data storage
+If you already have configured an `Amazon S3 Bucket <http://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`_, use the following steps to integrate that into your mobile app. These include:
 
+    * Set up short-lived credentials for accessing your AWS resources using a `Cognito Identity Pool <http://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`_.
 
-.. _overview:
+    * Create an AWS Mobile configuration file that ties your app code to your bucket.
 
-Overview
-==============
-
-
-Enable your app to store and retrieve user files from cloud storage with the permissions model that
-suits your purpose. |AMH|  :ref:`user-data-storage` deploys and configures cloud storage buckets
-using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`_ (|S3|).
-
-The User Data Storage feature also uses `Amazon Cognito Sync <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/add-aws-mobile-user-data-storage.html>`_. This service enables your app to sync key/name
-pair app data, like user profiles, to the cloud and other devices.
-
-
-.. _setup-your-backend:
+To configure a new S3 bucket, see :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`.
 
 Set Up Your Backend
 ===================
 
+If you already have a Cognito Identity Pool and have its unauthenticated IAM role set up with read/write permissions on the S3 bucket, you can skip to :ref:`get-your-bucket-name`.
 
-#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
+Create or Import the Amazon Cognito Identity Pool
+--------------------------------------------------
 
-   If you want to integrate an |S3| bucket that you have already configured, go to :ref:`Integrate an Existing Bucket <how-to-integrate-an-existing-bucket>`.
+#. Go to `Amazon Cognito Console <https://console.aws.amazon.com/cognito>`_ and choose :guilabel:`Manage Federated Identities`.
 
-#. Enable :guilabel:`User Data Storage`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`User Data Storage` tile to enable the feature.
+#. Choose :guilabel:`Create new Identity pool` on the top left of the console.
 
-#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
+#. Type a name for the Identity pool, select :guilabel:`Enable access to unauthenticated identities` under the :guilabel:`Unauthenticated Identities` section, and then choose :guilabel:`Create pool` on the bottom right.
 
-   .. image:: images/updated-cloud-config.png
+#. Expand the :guilabel:`View Details` section to see the two roles that are to be created to enable access to your bucket. Copy and keep the Unauthenticated role name, in the form of :code:`Cognito_<IdentityPoolName>Unauth_Role`, for use in a following configuration step. Choose  :guilabel:`Allow` on the bottom right.
 
-#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
+#. In the code snippet labeled :guilabel:`Get AWSCredentials` displayed by the console, copy the Identity Pool ID and the Region for use in a following configuration step.
 
-   .. image:: images/updated-cloud-config2.png
-      :scale: 25
+Set up the required Amazon IAM permissions
+-------------------------------------------
 
-#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the User Data Storage documentation below to connect to your backend.
+#. Go to `Amazon IAM Console <https://console.aws.amazon.com/iam/home>`_ and choose :guilabel:`Roles`.
 
-.. _add-aws-mobile-user-data-storage-app:
+#. Choose the unauthenticated role whose name you copied in a previous step.
 
-Connect to your backend
+#. Choose :guilabel:`Attach Policy`, select the :code:`AmazonS3FullAccess` policy, and then choose :guilabel:`Attach Policy` to attach it to the role.
+
+.. list-table::
+   :widths: 1 6
+
+   * - **Note**
+
+     - The :code:`AmazonS3FullAccess` policy will grant users in the identity pool full access to all buckets and operations in |S3|. In a real app, you should restrict users to only have access to the specific resources they need. For more information, see :ref:`Amazon S3 Security Considerations <s3-security>`.
+
+.. _get-your-bucket-name:
+
+Get Your Bucket Name and ID
+---------------------------
+
+#. Go to `Amazon S3 Console <https://console.aws.amazon.com/s3/home>`_ and select the bucket you want to integrate.
+
+#. Copy and keep the bucket name value from the breadcrumb at the top of the console, for use in a following step.
+
+#. Copy and keep the bucket's region, for use in a following step.
+
+.. _how-to-storage-connect-to-your-backend:
+
+Connect to Your Backend
 =======================
 
-Make sure to complete the :ref:`add-aws-mobile-user-sign-in-backend-setup` steps before
-using the integration steps on this page.
+Create the awsconfiguration.json file
+-------------------------------------
 
-**To add User Data Storage to your app**
+#. Create a file with name :file:`awsconfiguration.json` with the following contents:
+
+	.. code-block:: json
+
+		{
+		    "UserAgent": "MobileHub\/1.0",
+		    "Version": "1.0",
+		    "CredentialsProvider": {
+		        "CognitoIdentity": {
+		            "Default": {
+		                "PoolId": "COGNITO-IDENTITY-POOL-ID",
+		                "Region": "COGNITO-IDENTITY-POOL-REGION"
+		            }
+		        }
+		    },
+		    "IdentityManager" : {
+		    	"Default" : {
+
+		    	}
+		    }
+		    "S3TransferUtility": {
+		        "Default": {
+		            "Bucket": "S3-BUCKET-NAME",
+		            "Region": "S3-REGION"
+		        }
+		    }
+		}
+
+#. Make the following changes to the configuration file.
+
+    * Replace the :code:`COGNITO-IDENTITY-POOL-ID` with the identity pool ID.
+
+    * Replace the :code:`COGNITO-IDENTITY-POOL-REGION` with the region the identity pool was created in.
+
+    * Replace the :code:`S3-BUCKET-NAME` with the name of you| bucket.
+
+    * Replace the :code:`S3-REGION` with the region your bucket was created in.
+
+
+Add the awsconfiguration.json file to your app
+-----------------------------------------------
+
+.. container:: option
+
+    Android-Java
+    	Place the :file:`awsconfiguration.json` file you created in the previous step into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`_ in your Android project.
+
+    iOS-Swift
+    	Place the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
+
+
+Add the SDK to your App
+-----------------------
 
 .. container:: option
 
@@ -64,9 +129,10 @@ using the integration steps on this page.
          #. Add the following to :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 2-3
+               :emphasize-lines: 1-3
 
                dependencies {
+                  compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true; }
                   compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
                   compile 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
                }
@@ -90,7 +156,7 @@ using the integration steps on this page.
 
                </application>
 
-         #. For each Activity where you make calls to perform user data storage operations, import the
+         #. For each Activity where you make calls to perform data storage operations, import the
             following packages.
 
             .. code-block:: none
@@ -103,16 +169,16 @@ using the integration steps on this page.
 
             .. code-block:: java
 
-               import com.amazonaws.mobile.client.AWSMobileClient;
+              import com.amazonaws.mobile.client.AWSMobileClient;
 
-                 public class YourMainActivity extends Activity {
-                   @Override
-                   protected void onCreate(Bundle savedInstanceState) {
-                       super.onCreate(savedInstanceState);
+              public class YourMainActivity extends Activity {
+               @Override
+               protected void onCreate(Bundle savedInstanceState) {
+                   super.onCreate(savedInstanceState);
 
-                       AWSMobileClient.getInstance().initialize(this).execute();
-                    }
-                 }
+                   AWSMobileClient.getInstance().initialize(this).execute();
+                }
+              }
 
 
    iOS - Swift
@@ -127,15 +193,17 @@ using the integration steps on this page.
                   target :'YOUR-APP-NAME' do
                      use_frameworks!
 
-                     pod 'AWSS3', '~> 2.6.6'   # For file transfers
-                     pod 'AWSCognito', '~> 2.6.6'   #For data sync
+                     pod 'AWSMobileClient', '~> 2.6.6'  # For AWSMobileClient
+                     pod 'AWSS3', '~> 2.6.6'            # For file transfers
+                     pod 'AWSCognito', '~> 2.6.6'       # For data sync
+
                      # other pods
 
                   end
 
                Run :code:`pod install --repo-update` before you continue.
 
-         #. Add the following imports to the classes that perform user data storage operations:
+         #. Add the following imports to the classes that perform data storage operations:
 
             .. code-block:: none
 
@@ -162,10 +230,15 @@ using the integration steps on this page.
 
 
 
-.. _add-aws-user-data-storage-upload:
+Implement Storage Operations
+============================
+
+Once your backend is setup and connected to your app, use the following steps to upload and download a file using the SDK's transfer utility.
+
+.. _native-how-to-integrate-add-aws-user-data-storage-upload:
 
 Upload a File
-=============
+-------------
 
 .. container:: option
 
@@ -284,10 +357,10 @@ Upload a File
                  }
           }
 
-.. _add-aws-user-data-storage-download:
+.. _native-how-to-integrate-add-aws-user-data-storage-download:
 
 Download a File
-===============
+---------------
 
 .. container:: option
 
@@ -393,92 +466,9 @@ Download a File
           }
 
 
-.. _add-aws-user-data-storage-sync:
-
-Save User Profile Data
-======================
-
-
-The following shows how to load user settings and access those settings using |COG| Sync.
-
-.. container:: option
-
-   Android - Java
-     .. code-block:: java
-       :emphasize-lines: 1-42
-
-        import java.util.List;
-
-        import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-
-        import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
-        import com.amazonaws.mobileconnectors.cognito.Dataset;
-        import com.amazonaws.mobileconnectors.cognito.exceptions.DataStorageException;
-        import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-
-        public void saveProfileData() {
-
-           CognitoSyncManager manager =
-              new CognitoSyncManager(getApplicationContext(), (CognitoCachingCredentialsProvider)AWSMobileClient.getInstance().getCredentialsProvider(),
-                        AWSMobileClient.getInstance().getConfiguration());
-
-           Dataset dataset = manager.openOrCreateDataset("myDataset");
-           dataset.put("myKey", "myValue");
-
-           // synchronize dataset with the Cloud
-           dataset.synchronize(new Dataset.SyncCallback() {
-              public void onSuccess(Dataset dataset, List list) {
-
-              }
-
-              public boolean onConflict(Dataset dataset, List list) {
-                 return false;
-              }
-
-              public boolean onDatasetDeleted(Dataset dataset, String list) {
-                 return true;
-              }
-
-              public boolean onDatasetsMerged(Dataset dataset, List list) {
-                 return true;
-              }
-
-              public void onFailure(DataStorageException exception) {
-
-              }
-           });
-        }
-
-
-   iOS - Swift
-     .. code-block:: swift
-       :emphasize-lines: 0
-
-        import AWSCore
-        import AWSCognito
-
-
-        func loadSettings() {
-           let syncClient: AWSCognito = AWSCognito.default()
-           let userSettings: AWSCognitoDataset = syncClient.openOrCreateDataset("user_settings")
-
-           userSettings.synchronize().continueWith { (task: AWSTask<AnyObject>) -> Any? in
-              if let error = task.error as NSError? {
-                 print("loadSettings error: \(error.localizedDescription)")
-                 return nil;
-              }
-              let titleTextColorString = userSettings.string(forKey: "titleTextColorStringKey")
-              let titleBarColorString = userSettings.string(forKey: "titleBarColorStringKey")
-              let backgroundColorString = userSettings.string(forKey: "backgroundColorStringKey")
-              return nil;
-           }
-        }
-
-
 Next Steps
 ==========
 
 * For further information about TransferUtility capabilities, see :ref:`how-to-transfer-files-with-transfer-utility`.
 
 * For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`_ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`_.
-
