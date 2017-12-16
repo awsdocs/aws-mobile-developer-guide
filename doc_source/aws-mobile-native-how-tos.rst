@@ -1,7 +1,7 @@
 .. _index:
 
 #################################
-|AMHlong| Android and iOS How Tos
+AWS Mobile Android and iOS How Tos
 #################################
 
 
@@ -15,5 +15,5 @@ This section provides information on the steps for achieving specific tasks for 
    :titlesonly:
    :maxdepth: 1
 
-   User SignIn <how-to-user-sign-in>
+   User Sign-in <how-to-user-sign-in>
    Data Storage <how-to-storage>
