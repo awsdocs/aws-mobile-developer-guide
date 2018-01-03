@@ -273,7 +273,8 @@ Use the following steps to add AWS Cloud Logic to your app.
             func doInvokeAPI() {
                  // change the method name, or path or the query string parameters here as desired
                  let httpMethodName = "POST"
-                 let URLString = "{/items}"
+                 // change to any valid path you configured in the API
+                 let URLString = "/items"
                  let queryStringParameters = ["key1":"{value1}"]
                  let headerParameters = [
                      "Content-Type": "application/json",
