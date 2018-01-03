@@ -1,4 +1,5 @@
-.. _add-aws-mobile-cloud-logic:
+
+.. _add-aws-mobile-cloud-logic-top:
 
 #################################
 Add Cloud APIs to Your Mobile App
@@ -19,7 +20,7 @@ of AWS services and beyond. In |AMH|, enabling the :ref:`cloud-logic` feature us
 Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`_ and `AWS Lambda <http://docs.aws.amazon.com/lambda/latest/dg/>`_ services to provide these capabilities.
 
 
-.. _add-aws-cloud-logic-backend-setup:
+.. _cloud-backend:
 
 Set Up Your Backend
 ===================
@@ -51,7 +52,7 @@ Set Up Your Backend
 
 #. Under :guilabel:`NoSQL / Cloud Logic` at the bottom of the page, download the models required for your API Gateway APIs. The API model files provide access to the API request surface for each API Gateway API they model. Choose Next and follow the Cloud API documentation below to connect to your backend.
 
-.. _connect-to-your-backend:
+.. _cloud-logic-connect-to-your-backend:
 
 Connect to your backend
 =======================
@@ -324,7 +325,3 @@ Use the following steps to add AWS Cloud Logic to your app.
                          return nil
                      }
                  }
-
-
-
-

@@ -9,7 +9,7 @@ Add Messaging to Your Mobile App
    :description: Integrate AWS Mobile analytics into your existing mobile app.
 
 
-.. _overview:
+.. _add-aws-mobile-messaging-overview:
 
 Overview
 ========
@@ -31,7 +31,7 @@ mail to frequent users, or send a push notification that initiates a data sync f
 selected a certain category in a feature of your app.
 
 
-.. _add-aws-mobile-messaging:
+.. _add-aws-mobile-messaging-set-up-backend:
 
 Set Up Your Backend
 ===================

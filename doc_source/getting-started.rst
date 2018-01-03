@@ -8,7 +8,6 @@ Get Started
    :description: Integrate |AMHlong| features into your existing mobile app. Quickly add a powerful
       cloud backend that scales in capacity and cost.
 
-
 .. toctree::
     :titlesonly:
     :maxdepth: 1
@@ -24,7 +23,6 @@ Get Started
     Add Conversational Bots <add-aws-mobile-conversational-bots>
     Add Hosting and Streaming <add-aws-mobile-hosting-and-streaming>
     Upgrade to the New SDK <aws-mobile-sdk-migrate>
-
 
 .. _getting-started:
 
@@ -217,21 +215,21 @@ Next Steps
 
   * :ref:`Add User Sign-in <add-aws-mobile-user-sign-in>`
 
-  * :ref:`Add Push Notification <add-aws-mobile-push-notifications-app>`
+  * :ref:`Add Push Notification <add-aws-mobile-push-notifications>`
 
-  * :ref:`Add NoSQL Database <add-aws-mobile-nosql-database-app>`
+  * :ref:`Add NoSQL Database <add-aws-mobile-nosql-database>`
 
-  * :ref:`Add User Data Storage <add-aws-mobile-user-data-storage-app>`
+  * :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`
 
-  * :ref:`Add Cloud logic <add-aws-mobile-cloud-logic-app>`
+  * :ref:`Add Cloud logic <cloud-backend>`
 
   * :ref:`Add Messaging <add-aws-mobile-messaging>`
 
-  * :ref:`Add Conversational Bots <add-aws-mobile-conversational-bots-app>`
+  * :ref:`Add Conversational Bots <add-aws-mobile-conversational-bots>`
 
-  * :ref:`Add Hosting and Sreaming <add-aws-mobile-hosting-and-streaming-app>`
+  * :ref:`Add Hosting and Sreaming <add-aws-mobile-hosting-and-streaming>`
 
-  * :ref:`Upgrade to the New SDK <aws-mobile-sdk-migrate>`\
+  * :ref:`Upgrade to the New SDK <aws-mobile-sdk-migrate>`
 
 
 
