@@ -1,8 +1,18 @@
+.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+   International License (the "License"). You may not use this file except in compliance with the
+   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+   either express or implied. See the License for the specific language governing permissions and
+   limitations under the License.
+
 .. _add-aws-mobile-push-notifications:
 
-#########################################
-Add Push Notifications to Your Mobile App
-#########################################
+##############################################################
+Add Push Notifications to Your Mobile App with Amazon Pinpoint
+##############################################################
 
 
 .. meta::
@@ -189,7 +199,7 @@ Connect to your backend
                 target :'YOUR-APP-NAME' do
                   use_frameworks!
 
-                    pod  'AWSSPinpoint', '~> 2.6.6'
+                    pod  'AWSPinpoint', '~> 2.6.6'
                     # other pods
 
                 end

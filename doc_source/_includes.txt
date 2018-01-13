@@ -1,0 +1,14 @@
+.. project-specific includes for this project.
+
+.. |LEX| replace:: Amazon Lex
+.. |POL| replace:: Amazon Polly
+.. |POLong| replace:: Amazon Polly
+
+.. _PPT: :doc:`polly`
+.. _LEX: http://docs.aws.amazon.com/lex
+.. _LEXlong: LEX_
+.. _LEX-dg: http://docs.aws.amazon.com/lex/latest/dg/
+.. _POL: http://docs.aws.amazon.com/polly
+.. _POL-dg: http://docs.aws.amazon.com/polly/latest/dg/
+.. _POLlong: POL_
+.. _sdk-lex-dl: http://x.zip

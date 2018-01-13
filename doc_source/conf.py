@@ -98,6 +98,21 @@ extra_navlinks = [
         ('GitHub', 'https://github.com/awsdocs/aws-mobile-developer-guide'),
          ]
 
+# Extra navlinks. You can specify additional links to appear in the top bar here
+# as navlink name / url pairs. If extra_navlinks is not set, then no extra
+# navlinks will be generated.
+# THIS DOESN'T CURRENTLY WORK IN Sphinx to Zonbook - kept for reference and perhaps future use
+extra_navlinks = [
+        ('Android API Reference', 'http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/'),
+        ('GitHub (Android)', 'https://github.com/aws/aws-sdk-android'),
+        ('Samples (Android)', 'https://github.com/awslabs/aws-sdk-android-samples'),
+        ('Download SDK(Android)', 'http://sdk-for-android.amazonwebservices.com/latest/aws-android-sdk.zip'),
+        ('iOS API Reference', 'http://docs.aws.amazon.com/AWSiOSSDK/latest/'),
+        ('GitHub (iOS)', 'https://github.com/aws/aws-sdk-ios'),
+        ('Samples (iOS)', 'https://github.com/awslabs/aws-sdk-ios-samples')
+    ]
+
+
 build_html = True
 build_pdf = True # Or False if you don't build a pdf
 build_mobi = False # Or the Kindle ASIN if you need a Kindle build

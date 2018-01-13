@@ -1,8 +1,30 @@
+.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+   International License (the "License"). You may not use this file except in compliance with the
+   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+   either express or implied. See the License for the specific language governing permissions and
+   limitations under the License.
+
 .. _how-to-transfer-files-with-transfer-utility:
 
 ######################################################
 Transfer Files and Data Using TransferUtility and |S3|
 ######################################################
+
+.. list-table::
+   :widths: 1 6
+
+   * - **Just Getting Started?**
+
+     - :ref:`Use streamlined steps <add-aws-mobile-user-data-storage>` to install the SDK and integrate Amazon S3.
+
+*Or, use the contents of this page if your app will integrate existing AWS services.*
+
+
+
 
 This page explains how to implement upload and download functionality and a number of additional storage use cases.
 
@@ -568,7 +590,7 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
             }
 
 
-.. _native-advanced-transfers
+.. _native-advanced-transfers:
 
 Advanced Transfer Methods
 =========================

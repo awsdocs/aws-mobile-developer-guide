@@ -1,3 +1,13 @@
+.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+   International License (the "License"). You may not use this file except in compliance with the
+   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+   either express or implied. See the License for the specific language governing permissions and
+   limitations under the License.
+
 .. _add-aws-mobile-sdk:
 
 ###########
@@ -17,12 +27,11 @@ Get Started
     Add User Sign-in <add-aws-mobile-user-sign-in>
     Add Push Notifications <add-aws-mobile-push-notifications>
     Add NoSQL Database <add-aws-mobile-nosql-database>
-    Add User Data Storage <add-aws-mobile-user-data-storage>
+    Add Data Storage <add-aws-mobile-user-data-storage>
     Add Cloud Logic <add-aws-mobile-cloud-logic>
     Add Messaging <add-aws-mobile-messaging>
     Add Conversational Bots <add-aws-mobile-conversational-bots>
     Add Hosting and Streaming <add-aws-mobile-hosting-and-streaming>
-    Upgrade to the New SDK <aws-mobile-sdk-migrate>
 
 .. _getting-started:
 
@@ -39,6 +48,8 @@ Set Up Your Backend
 #. `Sign up for the AWS Free Tier. <https://aws.amazon.com/free/>`_
 
 #. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/>`_ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
+
+   To integrate existing AWS resources using the SDK directly, without Mobile Hub, see :doc:`Setup  Options for Android <how-to-android-sdk-setup>` or :doc:`Setup  Options for iOS <how-to-ios-sdk-setup>`.
 
 #. Name your project, check the box to allow Mobile Hub to administer resources for you and then choose :guilabel:`Next`.
 
@@ -227,9 +238,7 @@ Next Steps
 
   * :ref:`Add Conversational Bots <add-aws-mobile-conversational-bots>`
 
-  * :ref:`Add Hosting and Sreaming <add-aws-mobile-hosting-and-streaming>`
-
-  * :ref:`Upgrade to the New SDK <aws-mobile-sdk-migrate>`
+  * :ref:`Add Hosting and Streaming <add-aws-mobile-hosting-and-streaming>`
 
 
 

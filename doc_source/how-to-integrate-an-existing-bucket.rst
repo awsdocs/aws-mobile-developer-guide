@@ -1,3 +1,13 @@
+.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+   International License (the "License"). You may not use this file except in compliance with the
+   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+   either express or implied. See the License for the specific language governing permissions and
+   limitations under the License.
+
 .. _how-to-integrate-an-existing-bucket:
 
 #####################################
@@ -6,13 +16,24 @@ How to Integrate Your Existing Bucket
 
 .. _native-integrate-exisitng-bucket:
 
-If you already have configured an `Amazon S3 Bucket <http://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`_, use the following steps to integrate that into your mobile app. These include:
+.. list-table::
+   :widths: 1 6
+
+   * - **Just Getting Started?**
+
+     - :ref:`Use streamlined steps <add-aws-mobile-user-data-storage>` to install the SDK and integrate Amazon S3.
+
+*Or, use the contents of this page if your app will integrate existing AWS services.*
+
+
+
+The following steps  include:
 
     * Set up short-lived credentials for accessing your AWS resources using a `Cognito Identity Pool <http://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`_.
 
     * Create an AWS Mobile configuration file that ties your app code to your bucket.
 
-To configure a new S3 bucket, see :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`.
+To configure a new S3 bucket, see .
 
 Set Up Your Backend
 ===================
@@ -69,31 +90,30 @@ Create the awsconfiguration.json file
 
 #. Create a file with name :file:`awsconfiguration.json` with the following contents:
 
-	.. code-block:: json
+  .. code-block:: json
 
-		{
-		    "UserAgent": "MobileHub\/1.0",
-		    "Version": "1.0",
-		    "CredentialsProvider": {
-		        "CognitoIdentity": {
-		            "Default": {
-		                "PoolId": "COGNITO-IDENTITY-POOL-ID",
-		                "Region": "COGNITO-IDENTITY-POOL-REGION"
-		            }
-		        }
-		    },
-		    "IdentityManager" : {
-		    	"Default" : {
+    {
+        "Version": "1.0",
+        "CredentialsProvider": {
+            "CognitoIdentity": {
+                "Default": {
+                    "PoolId": "COGNITO-IDENTITY-POOL-ID",
+                    "Region": "COGNITO-IDENTITY-POOL-REGION"
+                }
+            }
+        },
+        "IdentityManager" : {
+          "Default" : {
 
-		    	}
-		    }
-		    "S3TransferUtility": {
-		        "Default": {
-		            "Bucket": "S3-BUCKET-NAME",
-		            "Region": "S3-REGION"
-		        }
-		    }
-		}
+          }
+        }
+        "S3TransferUtility": {
+            "Default": {
+                "Bucket": "S3-BUCKET-NAME",
+                "Region": "S3-REGION"
+            }
+        }
+    }
 
 #. Make the following changes to the configuration file.
 
@@ -111,11 +131,11 @@ Add the awsconfiguration.json file to your app
 
 .. container:: option
 
-    Android-Java
-    	Place the :file:`awsconfiguration.json` file you created in the previous step into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`_ in your Android project.
+    Android - Java
+      Place the :file:`awsconfiguration.json` file you created in the previous step into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`_ in your Android project.
 
-    iOS-Swift
-    	Place the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
+    iOS - Swift
+      Place the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
 
 
 Add the SDK to your App
