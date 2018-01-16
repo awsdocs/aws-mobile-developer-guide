@@ -633,8 +633,8 @@ Setup Google Login in your Mobile App
 Next Steps
 ========
 
-  * :ref:`Customize the UI <add-aws-mobile-analytics-app>`
+  * :ref:`Customize the UI <add-aws-mobile-user-sign-in-customize>`
 
-  * :ref:`Cognito Developer Guide <add-aws-mobile-user-sign-in>`
+  * `Amazon Cognito Developer Guide <http://docs.aws.amazon.com/cognito/latest/developerguide/>`_
 
 

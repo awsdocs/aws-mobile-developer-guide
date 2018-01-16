@@ -26,7 +26,7 @@ For information on Amazon Polly concepts and service configuration, see `How it 
 
 **ANDROID**
 
-* For sample Android ntegration code, see the `Android Amazon Poly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-android.html>`_.
+* For sample Android integration code, see the `Android Amazon Poly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-android.html>`_.
 
 * For end to end sample apps using Amazon Polly see the `AWS SDK for Android samples <https://github.com/awslabs/aws-sdk-android-samples/>`_.
 

@@ -106,7 +106,7 @@ Create the awsconfiguration.json file
           "Default" : {
 
           }
-        }
+        },
         "S3TransferUtility": {
             "Default": {
                 "Bucket": "S3-BUCKET-NAME",

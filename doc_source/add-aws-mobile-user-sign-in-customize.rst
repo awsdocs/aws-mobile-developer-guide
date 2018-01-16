@@ -29,7 +29,7 @@ To override the defaults, and modify the behavior, look, and feel of the sign-in
 
             * To present the Email and Password user :code:`SignInUI`, set :code:`userPools` to :code:`true`.
 
-            * To present Facebook or Google  user :code:`SignInUI`, add :code:`signInButton(FacebookButton.class)` or :code:`signInButton(FacebookButton.class)`.
+            * To present Facebook or Google  user :code:`SignInUI`, add :code:`signInButton(FacebookButton.class)` or :code:`signInButton(GoogleButton.class)`.
 
             * To change the logo, use the :code:`logoResId`.
 
