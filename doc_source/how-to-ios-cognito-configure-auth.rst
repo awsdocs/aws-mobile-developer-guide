@@ -15,7 +15,7 @@ iOS: Get User Credentials with Amazon Cognito Manually
 ######################################################
 
 
-... list-table::
+.. list-table::
    :widths: 1 6
 
    * - **Just Getting Started?**
@@ -45,7 +45,7 @@ In this section:
    :local:
    :depth: 1
 
-#. Create an identity pool and roles
+1. Create an identity pool and roles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    Take the following steps to create a new identity pool with `Auth` and `Unauth` roles.
@@ -73,12 +73,12 @@ In this section:
 
    For more information, see :ref:`create-identity-pool`.
 
-#. Add the AWS SDK for iOS to your project
+2. Add the AWS SDK for iOS to your project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Follow the steps in :doc:`how-to-ios-sdk-setup`.
 
-#. Import `AWScore` and Amazon Cognito APIs
+3. Import `AWScore` and Amazon Cognito APIs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Add the following imports to your project.
@@ -100,7 +100,7 @@ Add the following imports to your project.
 Connect Your Backend
 --------------------
 
-#. Initialize the Amazon Cognito Credentials Provider
+1. Initialize the Amazon Cognito Credentials Provider
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the following code, replacing the value of `YourIdentityPoolId` with the
@@ -130,7 +130,7 @@ Use the following code, replacing the value of `YourIdentityPoolId` with the
       If you created your identity pool before February 2015, you must reassociate your roles with your identity pool to use this constructor. To do so, open the `Amazon Cognito console <https://console.aws.amazon.com/cognito/>`_, select your identity pool, choose :guilabel:`Edit Identity Pool`, specify your authenticated and unauthenticated roles, and save the changes
 
 
-#. Retrieve Amazon Cognito IDs and AWS Credentials
+2. Retrieve Amazon Cognito IDs and AWS Credentials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After   the login tokens are set in the credentials provider, you can retrieve a unique
