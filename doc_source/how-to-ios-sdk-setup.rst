@@ -177,7 +177,7 @@ The samples included with the SDK are standalone projects that are already set u
 
         #. Under the **Build Phases** tab in your **Target**, choose the **+** button on the top left and then select **New Run Script Phase**.
 
-        # Setup the build phase as follows. Make sure this phase is below the **Embed Frameworks** phase.
+        #. Setup the build phase as follows. Make sure this phase is below the **Embed Frameworks** phase.
 
             .. code-block:: bash
 
