@@ -55,18 +55,13 @@ The samples included with the SDK are standalone projects that are already set u
 .. container:: option
 
     CocoaPods
-       .. list-table::
-           :widths: 1 6
-
-           * - Installation and integration instructions for each service
-
-             - You can add the SDK and get integration instructions for a specific AWS service `using the latest SDK docs   <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`_.
-
         #. The AWS Mobile SDK for iOS is available through `CocoaPods <http://cocoapods.org/>`_. Install CocoaPods by running the following commands from the folder containing your projects :file:`*.xcodeproj` file.
 
             $ :command:`gem install cocoapods`
 
-           ..note:: Depending on your system settings, you may need to run the command as administrator using `sudo`, as follows:
+            .. note::
+
+               Depending on your system settings, you may need to run the command as administrator using `sudo`, as follows:
 
             $ :command:`sudo gem install cocoapods`
 
@@ -245,7 +240,7 @@ The samples included with the SDK are standalone projects that are already set u
             * :code:`AWSSimpleDB`
             * :code:`AWSUserPoolsSignIn`
 
-        4. Under the **Build Phases** tab in your **Target**, click the **+** button on the top left and then select **New Run Script Phase**.
+        #. Under the **Build Phases** tab in your **Target**, click the **+** button on the top left and then select **New Run Script Phase**.
 
         #. Setup the build phase as follows. Make sure this phase is below the `Embed Frameworks` phase.
 
