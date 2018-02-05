@@ -121,7 +121,7 @@ Amazon Pinpoint enables you to capture data for custom events specific to your a
 
        import { Analytics } from 'aws-amplify-react-native';
 
-*. Add the following call to :code:`Analytics.record` in the :code:`onAddNote()` method, to gather metrics each time a note is created.
+#. Add the following call to :code:`Analytics.record` in the :code:`onAddNote()` method, to gather metrics each time a note is created.
 
     .. code-block:: javascript
 
@@ -133,7 +133,7 @@ Amazon Pinpoint enables you to capture data for custom events specific to your a
 
         }
 
-*. Add the following call to :code:`Analytics.record` in the :code:`onDeleteNote()` event handler, to gather metrics each time a note is deleted`.
+#. Add the following call to :code:`Analytics.record` in the :code:`onDeleteNote()` event handler, to gather metrics each time a note is deleted`.
 
     .. code-block:: javascript
 
@@ -146,6 +146,7 @@ Amazon Pinpoint enables you to capture data for custom events specific to your a
         }
 
 Run and Validate Custom Analytics
+---------------------------------
 
 Run and exercise your app by adding and deleting notes, unloading and reloading your app. Then, in the Amazon Pinpoint console for your app:
 

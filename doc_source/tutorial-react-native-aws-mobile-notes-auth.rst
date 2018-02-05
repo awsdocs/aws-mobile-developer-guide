@@ -65,9 +65,9 @@ Update Your Client AWS Configuration
 
    #. edit the import for :code:`aws-amplify-react-native` to the following.
 
-   .. code-block:: bash
+       .. code-block:: bash
 
-      import Amplify, { withAuthenticator } from 'aws-amplify-react-native';
+          import Amplify, { withAuthenticator } from 'aws-amplify-react-native';
 
    #. Adjust the last line of the file to use withAuthenticator() as follows.
 
