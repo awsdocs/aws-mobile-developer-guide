@@ -178,7 +178,7 @@ Setup Email & Password Login in your Mobile App
 
       #. Create a :code:`AWSMobileClient` and initialize the SDK.
 
-         In :file:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Amazon Cognito user identity.
+         Add the following imports and a function that creates an instance of :code:`AWSMobileClient` into the :code:`AppDelegate` class of :file:`AppDelegate.swift`.
 
          .. code-block:: swift
 
@@ -198,6 +198,10 @@ Setup Email & Password Login in your Mobile App
                          annotation: annotation)
 
                  }
+
+         In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Amazon Cognito user identity.
+
+         .. code-block:: swift
 
                  func application(
                      _ application: UIApplication,

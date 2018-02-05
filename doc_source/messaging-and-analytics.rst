@@ -118,9 +118,9 @@ Messaging and Analytics At a Glance
 
          - Communicate to app users using push notifications through APNs, GCM, and FCM.
 
-           - via :guilabel:`Firebase or Google Cloud Messaging (FCM/GCM)` (see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`_)
+           - via :guilabel:`Firebase or Google Cloud Messaging (FCM/GCM)` (see `Setting Up Android Push Notifications <https://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`_)
 
-           - via :guilabel:`Apple Push Notification service (APNs)` (see `Setting Up iOS Push Notifications <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/push-notifications-details.html#config-push-notifications>`_)
+           - via :guilabel:`Apple Push Notification service (APNs)` (see `Setting Up iOS Push Notifications <https://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`_)
 
            For more information, see `Configuring Push Notification <https://alpha-docs-aws.amazon.com/pinpoint/latest/developerguide/mobile-push.html>`_.
 

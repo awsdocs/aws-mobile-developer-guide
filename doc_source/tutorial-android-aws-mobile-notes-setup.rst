@@ -23,7 +23,7 @@ A Simple Note-taking App
    Authentication <tutorial-android-aws-mobile-notes-auth>
    NoSQL Data <tutorial-android-aws-mobile-notes-data>
 
-Start with a working app and then add cloud enable features. In this tutorial you will take a working app, driven from locally stored data, and then:
+Start with a working app and then add cloud enabled features. In this tutorial you will take a working app, driven from locally stored data, and then:
 
 - :ref:`Add analytics to your app <tutorial-android-aws-mobile-notes-analytics>` so you can view demographic information about your users.
 
@@ -74,36 +74,12 @@ Mac Specific Instructions
 Download the Source code
 ------------------------
 
-You can download the source code as a `ZIP
-file <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip>`_,
-or you can download the source code directly from GitHub.
+1. Get the tutorial source code using one of the following choices:
 
-1. Log in to `GitHub <https://github.com/>`_. If you do not have a GitHub account, `sign up for
-   GitHub <https://github.com/join?source=header-home>`_ first.
-2. Browse to  https://github.com/aws-samples/aws-mobile-android-notes-tutorial
-3. Choose :guilabel:`Fork`.
-4. Choose your GitHub account.
+   * Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip>`_.
 
-This will create a copy of the Android Tutorials in your GitHub account.
-To create a copy on your local system, open a terminal window and type:
+   * Browse to  `https://github.com/aws-samples/aws-mobile-android-notes-tutorial/ <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/>`_ and clone or fork the repository (`sign up for GitHub account <https://github.com/join?source=header-home>`_, if you do not have one).
 
-.. code-block:: bash
-
-    git clone  https://github.com/aws-samples/aws-mobile-android-notes-tutorial
-
-This will copy the files within the project to your local system. The
-directory :file:`aws-mobile-android-notes-tutorials` will be created for you.
-
-.. list-table::
-   :widths: 2 6
-
-   * - **Note**
-
-     - Git is required
-
-       This step will fail if you have not properly installed Git for your
-       platform. If this happens, download and unpack the
-       `ZIP file <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip>`_ instead.
 
 Compile the Source Code
 -----------------------

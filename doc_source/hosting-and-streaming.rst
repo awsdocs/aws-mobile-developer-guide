@@ -83,7 +83,7 @@ Hosting and Streaming At a Glance
 
          `Concepts <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowCloudFrontWorks.html>`_ | `Console <https://console.aws.amazon.com/cloudfront/>`_ | `Pricing <https://aws.amazon.com/cloudfront/pricing/>`_
 
-       - :guilabel:`Amazon S3 Bucket` (see `:title:`Amazon S3 Getting Started Guide` <https://aws.amazon.com/cloudfront/pricing/>`_)
+       - :guilabel:`Amazon S3 Bucket` (see `Amazon S3 Getting Started Guide` <https://aws.amazon.com/cloudfront/pricing/>`_)
 
          `Concepts <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`_ | `Console <https://console.aws.amazon.com/s3/>`_ | `Pricing <https://aws.amazon.com/s3/pricing/>`_
 

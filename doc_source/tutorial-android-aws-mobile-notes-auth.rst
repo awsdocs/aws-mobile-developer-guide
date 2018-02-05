@@ -19,30 +19,47 @@ the beginning <tutorial-android-aws-mobile-notes-setup>`. In this tutorial, we w
 
 You should be able to complete this section of the tutorial in 20-30 minutes.
 
-Add User Sign-in to the AWS Mobile Hub project
-----------------------------------------------
+Set Up Your Backend
+-------------------
 
 Before we work on the client-side code, we need to add User Sign-in to
 the backend project:
 
-1. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
-2. Select  your project.
-3. Choose the :guilabel:`User Sign-in` tile.
-4. Choose :guilabel:`Email and Password`.
-5. Scroll to the bottom of the page, then Choose :guilabel:`Create user pool`.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Select your project.
+#. Scroll down to the :guilabel:`Add More Backend Features` section.
+#. Choose the :guilabel:`User Sign-in` tile.
+#. Choose :guilabel:`Email and Password`.
+#. Scroll to the bottom and then Choose :guilabel:`Create user pool`.
 
-Download the updated AWS configuration file.
---------------------------------------------
+.. list-table::
+   :widths: 1 6
 
-Whenever you update the AWS Mobile Hub project, a new AWS configuration
-file for your app is generated. To download:
+   * - What does this do?
 
-1. Choose :guilabel:`Integrate` in the left hand menu.
-2. Choose :guilabel:`Download` in step 1.
+     - You have just created your own user pool in the `Amazon Cognito <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`_ service. When used in conjunction with the AWS Mobile sign-in process, the user pool enforces the password requirement rules you chose. It also supports sign-up and forgot my password user flows.
 
-If you previously downloaded this file, it may be named differently to
-avoid filename conflicts. Update the :file:`awsconfiguration.json` file you
-previously copied to the :file:`app/src/main/res/raw` directory of your project.
+#. Choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
+#. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
+
+.. list-table::
+   :widths: 1 6
+
+   * - **Remember**
+
+     - Whenever you update the AWS Mobile Hub project, a new AWS configuration file for your app is generated.
+
+Connect to Your Backend
+-----------------------
+
+Replace the :file:`awsconfiguration.json` file in :file:`app/src/main/res/raw` directory with the updated version.
+
+.. list-table::
+   :widths: 1 6
+
+   * - **Note**
+
+     - Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Xcode project is named :file:`awsconfiguration.json`.
 
 Add the Authentication UI library to your project.
 --------------------------------------------------
@@ -168,12 +185,12 @@ Edit the :code:`onCreate()` method of :file:`AuthenticatorActivity.java` as foll
       }
 
 
-  .. list-table::
-     :widths: 1
+ .. list-table::
+   :widths: 1 6
 
-     * - **What does this do?**
+   * - What does this do?
 
-         The AWS SDK for Android contains an in-built activity for handling the authentication UI.  This Activity sets up the authentication UI to work for just email and password, then sets up an activity listener to handle the response.  In this case, we transition to the :code:`NoteListActivity` when a successful sign-in occurs, and stay on this activity when it fails. Finally, we transition to the Sign-In activity from the AWS SDK for Android library.
+     - The AWS SDK for Android contains an in-built activity for handling the authentication UI.  This Activity sets up the authentication UI to work for just email and password, then sets up an activity listener to handle the response.  In this case, we transition to the :code:`NoteListActivity` when a successful sign-in occurs, and stay on this activity when it fails. Finally, we transition to the Sign-In activity from the AWS SDK for Android library.
 
 Update the AndroidManifest.xml
 ------------------------------
@@ -227,20 +244,6 @@ sign-in with your new account.
 .. image:: images/tutorial-notes-authentication-anim.gif
    :scale: 75
    :alt: Demo of Notes tutorial app with user sign-in added.
-
-Check in Your Code
-------------------
-
-If you forked the GitHub repository, check in your code:
-
-.. code-block:: bash
-
-  $ git add -A
-  $ git commit -m "suitable commit message"
-  $ git push
-
-If you downloaded the ZIP file instead, you should skip this step.
-
 
 Next steps
 ----------

@@ -33,40 +33,38 @@ Add a NoSQL database to the AWS Mobile Hub project
 Before we work on the client-side code, we need to add a NoSQL database
 and table to the backend project:
 
-1. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
-2. Select  your project.
-3. Choose the :guilabel:`NoSQL Database` tile.
-4. Choose :guilabel:`Enable NoSQL`.
-5. Choose :guilabel:`Add Table`.
-6. Choose :guilabel:`Example` to start with an example schema.
-7. Choose :guilabel:`Notes`, which most closely matches the model we wish to use.
-8. Choose :guilabel:`Add attribute`, then fill in the details of the new attribute:
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Select  your project.
+#. Scroll down to the :guilabel:`Add More Backend Features` section and then choose the :guilabel:`NoSQL Database` tile.
+#. Choose :guilabel:`Enable NoSQL`, choose :guilabel:`Add Table`, and then choose :guilabel:`Example` to start with an example schema.
+#. Choose :guilabel:`Notes`, which most closely matches the model we wish to use.
+#. Choose :guilabel:`Add attribute`, then fill in the details of the new attribute:
 
     -  :guilabel:`Attribute name`: :userinput:`updatedDate`
     -  :guilabel:`Type`: :userinput:`number`
 
-9.  Choose :guilabel:`Add index` then fill in the details of the new index:
+#.  Choose :guilabel:`Add index` then fill in the details of the new index:
 
     -  :guilabel:`Index name`: :userinput:`LastUpdated`
     -  :guilabel:`Partition key`: :userinput:`userId`
     -  :guilabel:`Sort key`: :userinput:`updatedDate`
 
-10. Choose :guilabel:`Create table`
-11. Choose :guilabel:`Create table` in the modal dialog.
+#. Choose :guilabel:`Create table`
+#. Choose :guilabel:`Create table` in the modal dialog.
 
-Download the updated AWS configuration file.
---------------------------------------------
+    You have just created a NoSQL table in the `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`_ service.
 
-Whenever you update the AWS Mobile Hub project, a new AWS configuration
-file for your app is generated. To download:
+# s. Choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
+#. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
 
-1. Choose :guilabel:`Integrate` in the left hand menu.
-2. Choose :guilabel:`Download` in step 1.
+   Whenever you update the AWS Mobile Hub project, a new AWS configuration file for your app is generated. To download:
 
-If you previously downloaded this file, it may be named differently to
-avoid filename conflicts. Add this file to your Android project by
-replacing the :file:`awsconfiguration.json` file in the
-:file:`app/src/main/res/raw` directory.
+Connect to Your Backend
+-----------------------
+
+Replace the :file:`awsconfiguration.json` file in :file:`app/src/main/res/raw` directory with the updated version.
+
+Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Xcode project is named :file:`awsconfiguration.json`.
 
 Download the Models
 -------------------
@@ -203,7 +201,7 @@ This converts the :code:`ContentValues` object which is passed into the
 ContentProvider with a :code:`NotesDO` object, required by the DynamoDB
 service.
 
-Mutation events handle the create, update, and delete methods:
+Mutation events handle the :code:`insert`, :code:`update`, and :code:`delete` methods:
 
 .. code-block:: java
    :emphasize-lines: 5-15,26-34,49-55
@@ -522,8 +520,7 @@ then view the records within the AWS Console:
 4. Choose the link for your DynamoDB table.
 5. Choose the **Items** tab.
 
-You should be able to insert, edit and delete notes. The data on the
-server will be reflected almost immediately.
+When you  insert, edit or delete notes in the app, you should be able to see the data on the server reflect your actions almost immediately.
 
 Next Steps
 ----------

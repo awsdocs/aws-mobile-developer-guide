@@ -23,19 +23,26 @@ demographic information about the application usage.
 
 You should be able to complete this section in 10-15 minutes.
 
-Create an AWS Mobile Hub project
---------------------------------
+Set Up Your Back End
+--------------------
 
 To start, set up the mobile backend resources in AWS:
 
-1. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
 
    -  If you do not have an AWS account, `sign up for the AWS
       Free Tier <https://aws.amazon.com/free/>`_.
 
-2. Choose :guilabel:`Create a new project`.
-3. Type :userinput:`android-notes-app` for the name of the Mobile Hub project.
-4. Choose :guilabel:`Create project`.
+#. Choose :guilabel:`Create` on the upper left, and the type :userinput:`android-notes-app` for the name of the Mobile Hub project.
+#. Choose :guilabel:`Next`, choose :guilabel:`Android`, and then choose :guilabel:`Add`.
+#. Choose :guilabel:`Download Cloud Config`, and save :file:`awsconfiguration.json`. This file the configuration to connect your app to your backend.
+
+.. list-table::
+   :widths: 1 6
+
+   * - Used in this section
+
+     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`_: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
 
 Add permissions to the AndroidManifest.xml
 ------------------------------------------
@@ -94,25 +101,17 @@ Edit the :file:`app/build.gradle` file. Add the following lines to the
       compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
    }
 
-Download the AWS configuration file
------------------------------------
+Integrate the AWS configuration file
+------------------------------------
 
 First, create a :file:`raw` resource folder to store the AWS configuration file:
 
-1. Expand the :file:`app` folder.
-2. Right-click the :file:`res` folder.
-3. Choose :guilabel:`New > Android resource directory`.
-4. Choose the :guilabel:`Resource type` dropdown menu and select :guilabel:`raw`.
-5. choose :guilabel:`OK`.
-
-Then download the AWS configuration file from AWS Mobile Hub and place
-it in the :file:`res/raw` folder:
-
-1. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
-2. Select your project.
-3. Choose :guilabel:`Integrate` in the left hand menu bar.
-4. Choose :guilabel:`Download Configuration File` in step 1.
-5. Copy the :file:`awsconfiguration.json` file to the
+#. Expand the :file:`app` folder.
+#. Right-click the :file:`res` folder.
+#. Choose :guilabel:`New > Android resource directory`.
+#. Choose the :guilabel:`Resource type` dropdown menu and select :guilabel:`raw`.
+#. choose :guilabel:`OK`.
+#. Copy the :file:`awsconfiguration.json` file from its download location to the
    :file:`app/src/main/res/raw` directory.
 
 
@@ -210,13 +209,13 @@ The following is the initial code in this class:
 
 
 .. list-table::
-   :widths: 1
+   :widths: 1 6
 
    * - What does this do?
 
-       The AWSProvider provides a central place
+     - The AWSProvider provides a central place
        to add code that accesses AWS resources. The constructor will load the
-       AWS Configuration (a JSON file that we downloaded earlier) and create an
+       AWS Configuration (a JSON file that you downloaded earlier) and create an
        IdentityManager object that is used to authenticate the device and/or
        user to AWS for accessing resources. The :code:`getPinpointManager()` method
        will create a connection to Amazon Pinpoint if it doesn't exist.
@@ -423,7 +422,7 @@ To view the demographics and custom events:
 
 #. Choose :guilabel:`Events`.
 
-#. Use the Event drop down to show only the :guilabel:AddNote` event.
+#. Use the Event drop down to show only the :guilabel:`AddNote` event.
 
    .. image:: images/pinpoint-addnote.png
       :scale: 100 %
@@ -443,19 +442,6 @@ To view the demographics and custom events:
 If you see data within each page, you have successfully added analytics
 to your app. Should you release your app on the App Store, you can come
 back here to see more details about your users.
-
-Check in Your Code
-------------------
-
-If you forked the GitHub repository, check in your code:
-
-.. code-block:: bash
-
-    $ git add -A
-    $ git commit -m "suitable commit message"
-    $ git push
-
-If you downloaded the ZIP file instead, you should skip this step.
 
 Next steps
 ----------

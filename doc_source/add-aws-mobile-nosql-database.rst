@@ -35,7 +35,7 @@ Set Up Your Backend
 ===================
 
 
-#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before you proceed.
 
 #. Enable :guilabel:`NoSQL Database`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`NoSQL Database` tile to enable the feature.
 
