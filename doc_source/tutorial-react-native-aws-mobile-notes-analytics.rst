@@ -36,14 +36,14 @@ To start, set up the mobile backend resources in AWS:
 
    .. code-block:: bash
 
-      yarn add aws-amplify-react-native
+      yarn add aws-amplify
       react-native link amazon-cognito-identity-js
 
 #. Add the following to the bottom of your :code:`import` list in :file:`App.js`.
 
    .. code-block:: bash
 
-      import Amplify from 'aws-amplify-react-native';
+      import Amplify from 'aws-amplify';
       import awsconfig from './src/aws-exports';
 
       Amplify.configure(awsconfig);
@@ -119,7 +119,7 @@ Amazon Pinpoint enables you to capture data for custom events specific to your a
 
     .. code-block:: javascript
 
-       import { Analytics } from 'aws-amplify-react-native';
+       import { Analytics } from 'aws-amplify';
 
 #. Add the following call to :code:`Analytics.record` in the :code:`onAddNote()` method, to gather metrics each time a note is created.
 

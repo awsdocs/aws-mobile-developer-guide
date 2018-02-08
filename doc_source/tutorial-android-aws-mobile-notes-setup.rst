@@ -43,9 +43,9 @@ Getting Started
 
 Before beginning, you must:
 
--  Download and install `Android Studio <https://developer.android.com/studio/index.html>`_ version 2.33 or later.
+-  Download and install `Android Studio <https://developer.android.com/studio/index.html>`_ version 3.0.1 or later.
 
--  Download an install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`_ version 7.11 (Nougat), API level 25.
+-  Download an install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`_ version 8.0 (Oreo), API level 26..
 
 -  Install an `Android Emulator <https://developer.android.com/studio/run/managing-avds.html>`_ - the app works with both phone and tablet emulators (for example, the Nexus 5X or Pixel C).
 
@@ -89,8 +89,7 @@ To compile the source code:
 1. Start :guilabel:`Android Studio`.
 2. If you have a project open already, choose :guilabel:`File > Close Project`.
 3. Choose :guilabel:`Open an existing Android Studio project`.
-4. Find and choose the :guilabel:`MyNotes` project in your file system, then
-   choose :guilabel:`OK`.
+4. Find and choose the :guilabel:`aws-mobile-android-notes-tutorial-master` project in your file system, then choose :guilabel:`OK`.
 
    .. image:: images/open-project.png
       :scale: 100
@@ -107,27 +106,28 @@ Run the Project in an Emulator
 
 Create a new emulator if you have not done so already:
 
-1. Select :guilabel:`Tools > Android > AVD Manager`.
-2. Choose :guilabel:`Create Virtual Device....`
-3. Select :guilabel:`Phone`  > Nexus 5X`, then choose :guilabel:`Next`.
-4. Select the :guilabel:`x86 Images` tab, then select :guilabel:`Android 7.1.1 (Google APIs)`.
+#. Select :guilabel:`Tools > Android > AVD Manager`.
+#. Choose :guilabel:`Create Virtual Device....`
+#. Select :guilabel:`Phone  > Nexus 5X`, then choose :guilabel:`Next`.
+#. Select the :guilabel:`x86 Images` tab, then select :guilabel:`Android 8.0 (Google APIs)`.
 
    -  If you have not previously downloaded the image, you can download
       it from this screen.
 
-5. Choose :guilabel:`Next`.
-6. Choose :guilabel:`Finish`.
+#. Choose :guilabel:`Next`.
+#. Choose :guilabel:`Finish`.
+#. Close the AVD Manager.
 
 Run the project in an emulator.
 
-1. Select :guilabel:`Run` > :guilabel:`Run app`.
-2. Select the :guilabel:`Nexus 5X API 25` virtual device.
-3. Choose :guilabel:`OK`.
+#. Select :guilabel:`Run` > :guilabel:`Run 'app'`.
+#. Select the :guilabel:`Nexus 5X API 26` virtual device.
+#. Choose :guilabel:`OK`.
 
 The Android emulator will boot (if it is not already started) and the
 application will run. You should be able to interact with the
-application as you would any other mobile app. Try choosing on the :guilabel:`+` at
-the bottom to create a note, or choose on a note to show the editor
+application as you would any other mobile app. Try pressing on the :guilabel:`+` at
+the bottom to create a note, or choose a note to show the editor
 screen. A unique ID for each note is displayed in
 the list view underneath the note's title.
 

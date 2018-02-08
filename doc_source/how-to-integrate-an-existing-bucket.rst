@@ -33,7 +33,7 @@ The following steps  include:
 
     * Create an AWS Mobile configuration file that ties your app code to your bucket.
 
-To configure a new S3 bucket, see .
+To configure a new Amazon S3 bucket, see .
 
 Set Up Your Backend
 ===================

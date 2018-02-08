@@ -58,7 +58,7 @@ Import the :code:`Storage` module from aws-amplify and configure it to communica
 
 .. code-block:: javacript
 
-    import { Storage } from 'aws-amplify-react-native';
+    import { Storage } from 'aws-amplify';
 
 
 Now that the Storage module is imported and ready to communicate with your backend, implement common file transfer actions using the code below.

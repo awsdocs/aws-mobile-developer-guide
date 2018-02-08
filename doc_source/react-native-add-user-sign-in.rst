@@ -55,19 +55,22 @@ The AWS Mobile CLI enables you to integrate ready-made sign-up/sign-in/sign-out 
 
    .. code-block:: bash
 
-       npm install --save aws-amplify-react-native
+      npm install --save aws-amplify
+      npm install --save aws-amplify-react-native
 
-#. If you used :code:`create-react-native-app` to create your app, eject your React Native app, using the command:
+.. list-table::
+   :widths: 1 6
 
-   .. code-block:: bash
+   * - **Note**
 
-      npm run eject
+     - If your react-native app was not created using :code:`create-react-native-app` or using a version of Expo lower than v25.0.0 (the engine behind  :code:`create-react-native-app`), you will need to link libraries in your project for the Auth module on React Native,  :code:`amazon-cognito-identity-js`.
 
-#. Create a native bridge to the Amazon Cognito identity library with the following command:
+       To link to the module, you must first eject the project:
 
-   .. code-block:: bash
+       .. code-block:: bash
 
-      react-native link amazon-cognito-identity-js
+            npm run eject
+            react-native link amazon-cognito-identity-js
 
 
 #. Add the following import in :file:`App.js` (or other file that runs upon app startup):

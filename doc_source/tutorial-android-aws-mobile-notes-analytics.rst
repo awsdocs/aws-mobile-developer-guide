@@ -36,6 +36,7 @@ To start, set up the mobile backend resources in AWS:
 #. Choose :guilabel:`Create` on the upper left, and the type :userinput:`android-notes-app` for the name of the Mobile Hub project.
 #. Choose :guilabel:`Next`, choose :guilabel:`Android`, and then choose :guilabel:`Add`.
 #. Choose :guilabel:`Download Cloud Config`, and save :file:`awsconfiguration.json`. This file the configuration to connect your app to your backend.
+#. Choose :guilabel:`Next` and then choose :guilabel:`Done` to create the project.
 
 .. list-table::
    :widths: 1 6
@@ -44,13 +45,12 @@ To start, set up the mobile backend resources in AWS:
 
      - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`_: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
 
-Add permissions to the AndroidManifest.xml
+Add Permissions to the AndroidManifest.xml
 ------------------------------------------
 
-1. Open the project in Android Studio.
-2. Choose :guilabel:`Project` on the left side of the project if you cannot see
-   the project browser.
-3. Add the :code:`INTERNET`, :code:`ACCESS_NETWORK_STATE`, and
+#. Open the project in Android Studio.
+#. Choose :guilabel:`Project` on the left side of the project to open the project browser. Find the app manifest by changing the project browser view menu at the top to :guilabel:`Android`, and opening the :file:`app/manifests` folder.
+#. Add the :code:`INTERNET`, :code:`ACCESS_NETWORK_STATE`, and
    :code:`ACCESS_WIFI_STATE`: permissions to your project's :file:`AndroidManifest.xml` file.
 
 .. code-block:: xml
@@ -76,32 +76,35 @@ Add permissions to the AndroidManifest.xml
         </application>
     </manifest>
 
-Add AWS SDK for Android library to the project
-----------------------------------------------
+Add AWS SDK for Android library
+-------------------------------
 
-Edit the :file:`app/build.gradle` file. Add the following lines to the
-:code:`dependencies` section:
+#. Edit the :file:`app/build.gradle` file. Add the following lines to the
+    :code:`dependencies` section:
 
-.. code-block:: xml
-   :emphasize-lines: 11-14
+    .. code-block:: xml
+       :emphasize-lines: 11-14
 
-   dependencies {
-      compile fileTree(dir: 'libs', include: ['*.jar'])
-      compile 'com.android.support:appcompat-v7:25.3.1'
-      compile 'com.android.support:support-v4:25.3.1'
-      compile 'com.android.support:cardview-v7:25.3.1'
-      compile 'com.android.support:recyclerview-v7:25.3.1'
-      compile 'com.android.support.constraint:constraint-layout:1.0.2'
-      compile 'com.android.support:design:25.3.1'
-      compile 'com.android.support:multidex:1.0.1'
-      compile 'joda-time:joda-time:2.9.9'
-      # AWS SDK for Android
-      compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
-      compile 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
-      compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-   }
+       dependencies {
+          compile fileTree(dir: 'libs', include: ['*.jar'])
+          compile 'com.android.support:appcompat-v7:26.1.0'
+          compile 'com.android.support:support-v4:26.1.0'
+          compile 'com.android.support:cardview-v7:26.1.0'
+          compile 'com.android.support:recyclerview-v7:26.1.0'
+          compile 'com.android.support.constraint:constraint-layout:1.0.2'
+          compile 'com.android.support:design:26.1.0'
+          compile 'com.android.support:multidex:1.0.1'
+          compile 'joda-time:joda-time:2.9.9'
 
-Integrate the AWS configuration file
+          // AWS Mobile SDK for Android
+          compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
+          compile 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
+          compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+       }
+
+#. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.
+
+Integrate the AWS Configuration File
 ------------------------------------
 
 First, create a :file:`raw` resource folder to store the AWS configuration file:
@@ -128,7 +131,7 @@ First, create a :file:`raw` resource folder to store the AWS configuration file:
 
 
 
-Create an AWSProvider.java singleton class
+Create an AWSProvider.java Singleton Class
 ------------------------------------------
 
 In our sample, all access to AWS is consolidated into a singleton class
@@ -220,7 +223,7 @@ The following is the initial code in this class:
        user to AWS for accessing resources. The :code:`getPinpointManager()` method
        will create a connection to Amazon Pinpoint if it doesn't exist.
 
-Update the Application class
+Update the Application Class
 ----------------------------
 
 All Android applications that include the AWS SDK for Android must
@@ -247,7 +250,7 @@ we previously added:
    }
 
 
-Update the ActivityLifeCycle class
+Update the ActivityLifeCycle Class
 ----------------------------------
 
 We use an
@@ -282,14 +285,13 @@ methods as follows:
     }
 
 
-Monitor, add, and delete notes in Amazon Pinpoint
--------------------------------------------------
+Monitor Add and Delete Events in Amazon Pinpoint
+------------------------------------------------
 
 We can also monitor feature usage within our app. In this example, we
 will monitor how often users add and delete notes. We will record a
 custom event for each operation. The Delete Note operation occurs in the
-:file:`NoteListActivity.java` class. Review the :code:`onSwiped` method at line
-142, and add the following code:
+:file:`NoteListActivity.java` class. Review the :code:`onSwiped` method, and add the following code:
 
 .. code-block:: java
    :emphasize-lines: 6-13
@@ -373,10 +375,10 @@ default. Use Alt-Return to import the missing classes.
        imports on the fly` option.
 
 
-Run the project and validate results
+Run the Project and Validate Results
 ------------------------------------
 
-Re-build the application and run the application within the emulator. It
+Run the application in the emulator using :guilabel:`Run` > :guilabel:`Run 'app'`. It
 should work as before. Ensure you try to add and delete some notes to
 generate some traffic that can be shown in the Pinpoint console.
 
@@ -384,7 +386,7 @@ To view the demographics and custom events:
 
 #. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`_.
 #. Choose your project.
-#. Choose the :guilabel:`Engage` icon on the left, to navigate to your project in the `AWS Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_.
+#. Choose the :guilabel:`Analytics` icon on the left, to navigate to your project in the `AWS Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_.
 #. Choose :guilabel:`Analytics` on the left.
 #. You should see an up-tick in several graphs:
 

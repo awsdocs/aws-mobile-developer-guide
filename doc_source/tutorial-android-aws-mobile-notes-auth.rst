@@ -32,15 +32,16 @@ the backend project:
 #. Choose :guilabel:`Email and Password`.
 #. Scroll to the bottom and then Choose :guilabel:`Create user pool`.
 
-.. list-table::
-   :widths: 1 6
+    .. list-table::
+       :widths: 1 6
 
-   * - What does this do?
+       * - What does this do?
 
-     - You have just created your own user pool in the `Amazon Cognito <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`_ service. When used in conjunction with the AWS Mobile sign-in process, the user pool enforces the password requirement rules you chose. It also supports sign-up and forgot my password user flows.
+         - You have just created your own user pool in the `Amazon Cognito <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`_ service. When used in conjunction with the AWS Mobile sign-in process, the user pool enforces the password requirement rules you chose. It also supports sign-up and forgot my password user flows.
 
 #. Choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
 #. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
+#. Choose :guilabel:`Next` and then choose :guilabel:`Done`.
 
 .. list-table::
    :widths: 1 6
@@ -61,32 +62,35 @@ Replace the :file:`awsconfiguration.json` file in :file:`app/src/main/res/raw` d
 
      - Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Xcode project is named :file:`awsconfiguration.json`.
 
-Add the Authentication UI library to your project.
---------------------------------------------------
+Add the Authentication UI Library
+---------------------------------
 
-Open the :file:`app/build.gradle` file and add the following lines to the
-:code:`dependencies` section:
+#. Open the :file:`app/build.gradle` file and add the following lines to the :code:`dependencies` section:
 
-.. code-block:: java
-   :emphasize-lines: 13-15
+    .. code-block:: java
+       :emphasize-lines: 13-15
 
-   dependencies {
-      compile fileTree(dir: 'libs', include: ['*.jar'])
-      compile 'com.android.support:appcompat-v7:25.3.1'
-      compile 'com.android.support:support-v4:25.3.1'
-      compile 'com.android.support:cardview-v7:25.3.1'
-      compile 'com.android.support:recyclerview-v7:25.3.1'
-      compile 'com.android.support.constraint:constraint-layout:1.0.2'
-      compile 'com.android.support:design:25.3.1'
-      compile 'com.android.support:multidex:1.0.1'
-      compile 'joda-time:joda-time:2.9.9'
-      compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
-      compile 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
-      compile 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
-      compile 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
-      compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
-      compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-    }
+       dependencies {
+          compile fileTree(dir: 'libs', include: ['*.jar'])
+          compile 'com.android.support:appcompat-v7:26.1.0'
+          compile 'com.android.support:support-v4:26.1.0'
+          compile 'com.android.support:cardview-v7:26.1.0'
+          compile 'com.android.support:recyclerview-v7:26.1.0'
+          compile 'com.android.support.constraint:constraint-layout:1.0.2'
+          compile 'com.android.support:design:26.1.0'
+          compile 'com.android.support:multidex:1.0.1'
+          compile 'joda-time:joda-time:2.9.9'
+
+          //AWS Mobile SDK for Android
+          compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
+          compile 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
+          compile 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
+          compile 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
+          compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
+          compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+        }
+
+#. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.
 
 Register the Email and Password Sign-in Provider
 ------------------------------------------------
@@ -136,14 +140,8 @@ backend will be authenticated.
 
 1. Right-click the :file:`com.amazonaws.mobile.samples.mynotes` folder.
 2. Choose :guilabel:`New > Activity > Empty Activity`.
-3. Type the :guilabel:`Activity Name` as :userinput:`AuthenticatorActivity`.
+3. Type :userinput:`AuthenticatorActivity` as the :guilabel:`Activity Name`.
 4. Choose :guilabel:`Finish`.
-5. Choose :guilabel:`OK`.
-6. In the created :file:`AuthenticatorActivity.java` file, find and delete the following default import statement.
-
-.. code-block:: java
-
-   import com.amazonaws.mobile.samples.notes.R;
 
 Edit the :code:`onCreate()` method of :file:`AuthenticatorActivity.java` as follows:
 
@@ -225,7 +223,7 @@ duplicated. You will see build errors if the section is duplicated.
 Run the project and validate results
 ------------------------------------
 
-Rebuild the project and run in the emulator. You should see a sign-in
+Run in the emulator using :guilabel:`Run` > :guilabel:`Run 'app'`. You should see a sign-in
 screen. Choose the :guilabel:`Create new account` button to create a new account.
 Once the information is submitted, you will be sent a confirmation code
 via email. Enter the confirmation code to complete registration, then

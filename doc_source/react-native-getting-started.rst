@@ -116,14 +116,14 @@ AWS Mobile uses the open source `AWS Amplify library <https://github.com/aws/aws
 
    .. code-block:: bash
 
-       npm install --save aws-amplify-react-native
+       npm install --save aws-amplify
 
 
 #. In :file:`App.js` (or in other code that runs at launch-time), add the following imports.
 
    .. code-block:: javascript
 
-        import Amplify from 'aws-amplify-react-native';
+        import Amplify from 'aws-amplify';
 
         import aws_exports from './YOUR-PATH-TO/aws-exports';
 

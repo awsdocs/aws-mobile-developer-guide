@@ -61,13 +61,21 @@ Update Your Client AWS Configuration
 
       awsmobile pull
 
+#. Pull in the AWS Amplify React Native high level libraries which include user authentication and sign-in UI components.
+
+   .. code-block:: bash
+
+      yarn add aws-amplify
+      yarn add aws-amplify-react-native
+
 #. In your app's :file:`App.js` file:
 
    #. edit the import for :code:`aws-amplify-react-native` to the following.
 
        .. code-block:: bash
 
-          import Amplify, { withAuthenticator } from 'aws-amplify-react-native';
+          import Amplify from 'aws-amplify';
+          import { withAuthenticator } from 'aws-amplify-react-native';
 
    #. Adjust the last line of the file to use withAuthenticator() as follows.
 

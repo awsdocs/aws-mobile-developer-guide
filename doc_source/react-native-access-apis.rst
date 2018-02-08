@@ -94,7 +94,7 @@ In :file:`App.js` (or  other code that runs at launch-time), add the following i
 
 .. code-block:: java
 
-    import Amplify, { API } from 'aws-amplify-react-native';
+    import Amplify, { API } from 'aws-amplify';
     import aws_exports from './aws-exports';
     Amplify.configure(aws_exports);
 

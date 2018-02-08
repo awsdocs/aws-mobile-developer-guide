@@ -76,7 +76,7 @@ In the file containing the event you want to track, add the following import:
 
 .. code-block:: java
 
-    import { Analytics } from 'aws-amplify-react-native';
+    import { Analytics } from 'aws-amplify';
 
 Add the a call like the following to the spot in your JavaScript where the tracked event should be fired:
 

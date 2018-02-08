@@ -50,40 +50,37 @@ and table to the backend project:
     -  :guilabel:`Sort key`: :userinput:`updatedDate`
 
 #. Choose :guilabel:`Create table`
-#. Choose :guilabel:`Create table` in the modal dialog.
+#. Choose :guilabel:`Create table` in the modal dialog. It will take a few moments for AWS to create the table.
 
     You have just created a NoSQL table in the `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`_ service.
 
-# s. Choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
+#. When the table is ready, choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
 #. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
+#. Choose :guilabel:`Next` and then choose :guilabel:`Done`.
 
-   Whenever you update the AWS Mobile Hub project, a new AWS configuration file for your app is generated. To download:
+.. list-table::
+   :widths: 1 6
+
+   * - **Remember**
+
+     - Whenever you update the AWS Mobile Hub project, a new AWS configuration file for your app is generated.
 
 Connect to Your Backend
 -----------------------
 
 Replace the :file:`awsconfiguration.json` file in :file:`app/src/main/res/raw` directory with the updated version.
 
-Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Xcode project is named :file:`awsconfiguration.json`.
+Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Android Studio project is named :file:`awsconfiguration.json`.
 
 Download the Models
 -------------------
 
-To aid in implementing a provider for the DynamoDB table, AWS Mobile Hub
-generates POCO models for each table. Download these and copy them to
-your project:
+To aid in implementing a provider for the table you created, |AMH| generated a data model descriptor file. To add the data model to your project:
 
-1. Choose :guilabel:`Integrate` in the left hand menu.
-2. Choose :guilabel:`Download` under the **NoSQL / Cloud Logic** heading, then
-   select :guilabel:`Android`.
-3. Unpack the downloaded ZIP file.
-4. Copy the files under :file:`src/main/java/com/amazonaws/models/nosql` to
-   your Android Studio project in
-   :file:`app/src/main/java/com/amazonaws/mobile/samples/mynotes/data`. One
-   file (:file:`NotesDO.java`) should be copied.
-
-Once copied, edit the :file:`data/NotesDO.java` file and change the package
-setting:
+#. Choose your project name in the upper left and then choose :guilabel:`Integrate` on the iOS app card.
+#. Choose :guilabel:`Android Models` under :guilabel:`Download Models`.
+#. Unpack the downloaded ZIP file and copy the files under :file:`src/main/java/com/amazonaws/models/nosql` to your Android Studio project in :file:`app/src/main/java/com/amazonaws/mobile/samples/mynotes/data`. One file (:file:`NotesDO.java`) should be copied.
+#. Edit the :file:`data/NotesDO.java` file and change the package setting:
 
 .. code-block:: java
 
@@ -99,16 +96,22 @@ dependencies:
    :emphasize-lines: 8,9
 
    dependencies {
-        # Other libraries are here
+
+        // . . .
+
         compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
         compile 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
         compile 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
         compile 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
         compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
+        compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+
+        // Amazon DynamoDB for NoSQL tables
         compile 'com.amazonaws:aws-android-sdk-ddb:2.6.+'
         compile 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
-        compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
     }
+
+#. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.
 
 Add Data access methods to the AWSProvider class
 ------------------------------------------------
@@ -132,7 +135,7 @@ server.
        import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
        import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
 
-       // Import DynamoDBMapper and AmazonDynamoDBClient to support data access methods
+       // Add DynamoDBMapper and AmazonDynamoDBClient to support data access methods
        import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
        import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
@@ -182,7 +185,7 @@ is the basic interface that Android uses to communicate with databases
 on Android. It uses four methods that match the basic CRUD (create, read,
 update, delete) methods.
 
-Add the following method to the ``NotesContentProvider`` class:
+Add the following methods to the ``NotesContentProvider`` class:
 
 .. code-block:: java
 
@@ -197,9 +200,28 @@ Add the following method to the ``NotesContentProvider`` class:
             return note;
         }
 
-This converts the :code:`ContentValues` object which is passed into the
-ContentProvider with a :code:`NotesDO` object, required by the DynamoDB
-service.
+        private Object[] fromNotesDO(NotesDO note) {
+            String[] fields = NotesContentContract.Notes.PROJECTION_ALL;
+            Object[] r = new Object[fields.length];
+            for (int i = 0 ; i < fields.length ; i++) {
+                if (fields[i].equals(NotesContentContract.Notes.CONTENT)) {
+                    r[i] = note.getContent();
+                } else if (fields[i].equals(NotesContentContract.Notes.CREATED)) {
+                    r[i] = note.getCreationDate();
+                } else if (fields[i].equals(NotesContentContract.Notes.NOTEID)) {
+                    r[i] = note.getNoteId();
+                } else if (fields[i].equals(NotesContentContract.Notes.TITLE)) {
+                    r[i] = note.getTitle();
+                } else if (fields[i].equals(NotesContentContract.Notes.UPDATED)) {
+                    r[i] = note.getUpdatedDate();
+                } else {
+                    r[i] = new Integer(0);
+                }
+            }
+            return r;
+        }
+
+These functions convert object attributes when they are passed between :code:`ContentValues` of the app and the :code:`NotesDO` object, which required by the Amazon DynamoDB service.
 
 Mutation events handle the :code:`insert`, :code:`update`, and :code:`delete` methods:
 
@@ -281,71 +303,56 @@ for iterating over data sets returned from databases).
 
 .. code-block:: java
 
-   @Nullable
-        @Override
-        public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-            int uriType = sUriMatcher.match(uri);
+    @Nullable
+    @Override
+    public Cursor query(
+                  @NonNull Uri uri,
+                  @Nullable String[] projection,
+                  @Nullable String selection,
+                  @Nullable String[] selectionArgs,
+                  @Nullable String sortOrder) {
+        int uriType = sUriMatcher.match(uri);
 
-            DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
-            MatrixCursor cursor = new MatrixCursor(NotesContentContract.Notes.PROJECTION_ALL);
-            String userId = AWSProvider.getInstance().getIdentityManager().getCachedUserID();
+        DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
+        MatrixCursor cursor = new MatrixCursor(NotesContentContract.Notes.PROJECTION_ALL);
+        String userId = AWSProvider.getInstance().getIdentityManager().getCachedUserID();
 
-            switch (uriType) {
-                case ALL_ITEMS:
-                    // In this (simplified) version of a content provider, we only allow searching
-                    // for all records that the user owns.  The first step to this is establishing
-                    // a template record that has the partition key pre-populated.
-                    NotesDO template = new NotesDO();
-                    template.setUserId(userId);
-                    // Now create a query expression that is based on the template record.
-                    DynamoDBQueryExpression<NotesDO> queryExpression;
-                    queryExpression = new DynamoDBQueryExpression<NotesDO>()
-                            .withHashKeyValues(template);
-                    // Finally, do the query with that query expression.
-                    List<NotesDO> result = dbMapper.query(NotesDO.class, queryExpression);
-                    Iterator<NotesDO> iterator = result.iterator();
-                    while (iterator.hasNext()) {
-                        final NotesDO note = iterator.next();
-                        Object[] columnValues = fromNotesDO(note);
-                        cursor.addRow(columnValues);
-                    }
-
-                    break;
-                case ONE_ITEM:
-                    // In this (simplified) version of a content provider, we only allow searching
-                    // for the specific record that was requested
-                    final NotesDO note = dbMapper.load(NotesDO.class, userId, uri.getLastPathSegment());
-                    if (note != null) {
-                        Object[] columnValues = fromNotesDO(note);
-                        cursor.addRow(columnValues);
-                    }
-                    break;
-            }
-
-            cursor.setNotificationUri(getContext().getContentResolver(), uri);
-            return cursor;
-        }
-
-        private Object[] fromNotesDO(NotesDO note) {
-            String[] fields = NotesContentContract.Notes.PROJECTION_ALL;
-            Object[] r = new Object[fields.length];
-            for (int i = 0 ; i < fields.length ; i++) {
-                if (fields[i].equals(NotesContentContract.Notes.CONTENT)) {
-                    r[i] = note.getContent();
-                } else if (fields[i].equals(NotesContentContract.Notes.CREATED)) {
-                    r[i] = note.getCreationDate();
-                } else if (fields[i].equals(NotesContentContract.Notes.NOTEID)) {
-                    r[i] = note.getNoteId();
-                } else if (fields[i].equals(NotesContentContract.Notes.TITLE)) {
-                    r[i] = note.getTitle();
-                } else if (fields[i].equals(NotesContentContract.Notes.UPDATED)) {
-                    r[i] = note.getUpdatedDate();
-                } else {
-                    r[i] = new Integer(0);
+        switch (uriType) {
+            case ALL_ITEMS:
+                // In this (simplified) version of a content provider, we only allow searching
+                // for all records that the user owns.  The first step to this is establishing
+                // a template record that has the partition key pre-populated.
+                NotesDO template = new NotesDO();
+                template.setUserId(userId);
+                // Now create a query expression that is based on the template record.
+                DynamoDBQueryExpression<NotesDO> queryExpression;
+                queryExpression = new DynamoDBQueryExpression<NotesDO>()
+                        .withHashKeyValues(template);
+                // Finally, do the query with that query expression.
+                List<NotesDO> result = dbMapper.query(NotesDO.class, queryExpression);
+                Iterator<NotesDO> iterator = result.iterator();
+                while (iterator.hasNext()) {
+                    final NotesDO note = iterator.next();
+                    Object[] columnValues = fromNotesDO(note);
+                    cursor.addRow(columnValues);
                 }
-            }
-            return r;
+
+                break;
+            case ONE_ITEM:
+                // In this (simplified) version of a content provider, we only allow searching
+                // for the specific record that was requested
+                final NotesDO note = dbMapper.load(NotesDO.class, userId, uri.getLastPathSegment());
+                if (note != null) {
+                    Object[] columnValues = fromNotesDO(note);
+                    cursor.addRow(columnValues);
+                }
+                break;
         }
+
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursor;
+    }
+
 
 .. list-table::
    :widths: 1 6
@@ -370,12 +377,34 @@ affects the create, update, and delete operations. There is no need to add code 
 load the data from the server, as that operation is already asynchronous.
 
 Inserts and updates are done in the :code:`NoteDetailFragment.java` class.
-Deletes are done in the :code:`NoteListActivity.java` class. Start with the
-:code:`NoteDetailFragment.java` class.
+Deletes are done in the :code:`NoteListActivity.java` class.
 
-In the :code:`OnCreate()` method add:.
+In the :code:`OnCreate()` method of the :code:`NoteDetailFragment.java` class, replace the following :code:`if` statement that calls local cursor functions:
 
 .. code-block:: java
+
+        if (arguments != null && arguments.containsKey(ARG_ITEM_ID)) {
+            String itemId = getArguments().getString(ARG_ITEM_ID);
+            itemUri = NotesContentContract.Notes.uriBuilder(itemId);
+            Cursor data = contentResolver.query(itemUri, NotesContentContract.Notes.PROJECTION_ALL, null, null, null);
+            if (data != null) {
+                data.moveToFirst();
+                mItem = Note.fromCursor(data);
+                isUpdate = true;
+            }
+        } else {
+            mItem = new Note();
+            isUpdate = false;
+        }
+
+With the following constnts and statement that establishes an :code:`AsyncQueryHandler`, which provides a wrapper to make the calls run on a non-UI thread asynchronously. :
+
+.. code-block:: java
+
+    // Constants used for async data operations
+    private static final int QUERY_TOKEN = 1001;
+    private static final int UPDATE_TOKEN = 1002;
+    private static final int INSERT_TOKEN = 1003;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -391,6 +420,9 @@ In the :code:`OnCreate()` method add:.
         if (arguments != null && arguments.containsKey(ARG_ITEM_ID)) {
             String itemId = getArguments().getString(ARG_ITEM_ID);
             itemUri = NotesContentContract.Notes.uriBuilder(itemId);
+
+
+            // Replace local cursor methods with async query handling
             AsyncQueryHandler queryHandler = new AsyncQueryHandler(contentResolver) {
                 @Override
                 protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
@@ -404,6 +436,8 @@ In the :code:`OnCreate()` method add:.
                 }
             };
             queryHandler.startQuery(QUERY_TOKEN, null, itemUri, NotesContentContract.Notes.PROJECTION_ALL, null, null, null);
+
+
         } else {
             isUpdate = false;
         }
@@ -412,7 +446,25 @@ In the :code:`OnCreate()` method add:.
         timer.postDelayed(timerTask, 5000);
     }
 
-Adjust the :code:`saveData()` method as follows:
+In the :code:`saveData()` method, replace the following local cursor methods:
+
+.. code-block:: java
+
+      if (arguments != null && arguments.containsKey(ARG_ITEM_ID)) {
+          String itemId = getArguments().getString(ARG_ITEM_ID);
+          itemUri = NotesContentContract.Notes.uriBuilder(itemId);
+          Cursor data = contentResolver.query(itemUri, NotesContentContract.Notes.PROJECTION_ALL, null, null, null);
+          if (data != null) {
+              data.moveToFirst();
+              mItem = Note.fromCursor(data);
+              isUpdate = true;
+          }
+      } else {
+          mItem = new Note();
+          isUpdate = false;
+      }
+
+ with an :code:`AsyncQueryHandler`:
 
 .. code-block:: java
    :emphasize-lines: 18-29,30,32,34
@@ -431,9 +483,11 @@ Adjust the :code:`saveData()` method as follows:
             isUpdated = true;
         }
 
+        // Replace local cursor methods with an async query handler
         // Convert to ContentValues and store in the database.
         if (isUpdated) {
             ContentValues values = mItem.toContentValues();
+
             AsyncQueryHandler queryHandler = new AsyncQueryHandler(contentResolver) {
                 @Override
                 protected void onInsertComplete(int token, Object cookie, Uri uri) {
@@ -448,9 +502,9 @@ Adjust the :code:`saveData()` method as follows:
                 }
             };
             if (isUpdate) {
-                queryHandler.startUpdate(1, null, itemUri, values, null, null);
+                queryHandler.startUpdate(UPDATE_TOKEN, null, itemUri, values, null, null);
             } else {
-                queryHandler.startInsert(1, null, NotesContentContract.Notes.CONTENT_URI, values);
+                queryHandler.startInsert(INSERT_TOKEN, null, NotesContentContract.Notes.CONTENT_URI, values);
                 isUpdate = true;    // Anything from now on is an update
 
                 // Send Custom Event to Amazon Pinpoint
@@ -462,21 +516,23 @@ Adjust the :code:`saveData()` method as follows:
                 mgr.recordEvent(evt);
                 mgr.submitEvents();
             }
+
+
         }
     }
 
 
-The :code:`AsyncQueryHandler` provides a wrapper to make the calls run on a
-non-UI thread asynchronously. Adjust the :code:`remove()` method in
-:file:`NoteListActivity.java` similarly as follows:
+Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the following.
 
 .. code-block:: java
    :emphasize-lines: 15-25
 
+    private static final int DELETE_TOKEN = 1004;
+
     void remove(final NoteViewHolder holder) {
-        if (mTwoPane) {
+        if (mTwoPane ){
             // Check to see if the current fragment is the record we are deleting
-            Fragment currentFragment = NoteListActivity.this.getSupportFragmentManager().findFragmentById(R.id.note_detail_container);
+            // Fragment currentFragment = NoteListActivity.this.getSupportFragmentManager().findFragmentById(R.id.note_detail_container);
             if (currentFragment instanceof NoteDetailFragment) {
                 String deletedNote = holder.getNote().getNoteId();
                 String displayedNote = ((NoteDetailFragment) currentFragment).getNote().getNoteId();
@@ -486,8 +542,7 @@ non-UI thread asynchronously. Adjust the :code:`remove()` method in
             }
         }
 
-        // Remove the item from the database
-        final int position = holder.getAdapterPosition();
+        // Remove the item from the database final int position = holder.getAdapterPosition();
         AsyncQueryHandler queryHandler = new AsyncQueryHandler(getContentResolver()) {
             @Override
             protected void onDeleteComplete(int token, Object cookie, int result) {
@@ -496,10 +551,7 @@ non-UI thread asynchronously. Adjust the :code:`remove()` method in
                 Log.d("NoteListActivity", "delete completed");
             }
         };
-        Uri itemUri = ContentUris.withAppendedId(NotesContentContract.Notes.CONTENT_URI, holder.getNote().getId());
-        queryHandler.startDelete(1, null, itemUri, null, null);
     }
-
 
 If you need to do a query (for example, to respond to a search request),
 then you can use a similar technique to wrap the :code:`query()` method.

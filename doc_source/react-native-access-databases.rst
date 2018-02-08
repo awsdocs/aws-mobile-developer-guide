@@ -163,7 +163,7 @@ Connect to Your Backend
 
     .. code-block:: java
 
-          import Amplify, { API } from 'aws-amplify-react-native';
+          import Amplify, { API } from 'aws-amplify';
           import aws_exports from 'path_to_your_aws-exports';
           Amplify.configure(aws_exports);
 
