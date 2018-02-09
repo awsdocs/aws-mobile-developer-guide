@@ -77,7 +77,7 @@ Download the Models
 
 To aid in implementing a provider for the table you created, |AMH| generated a data model descriptor file. To add the data model to your project:
 
-#. Choose your project name in the upper left and then choose :guilabel:`Integrate` on the iOS app card.
+#. Choose your project name in the upper left and then choose :guilabel:`Integrate` on the Android app card.
 #. Choose :guilabel:`Android Models` under :guilabel:`Download Models`.
 #. Unpack the downloaded ZIP file and copy the files under :file:`src/main/java/com/amazonaws/models/nosql` to your Android Studio project in :file:`app/src/main/java/com/amazonaws/mobile/samples/mynotes/data`. One file (:file:`NotesDO.java`) should be copied.
 #. Edit the :file:`data/NotesDO.java` file and change the package setting:
