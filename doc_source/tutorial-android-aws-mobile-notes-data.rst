@@ -464,7 +464,7 @@ In the :code:`saveData()` method, replace the following local cursor methods:
           isUpdate = false;
       }
 
- with an :code:`AsyncQueryHandler`:
+with an :code:`AsyncQueryHandler`:
 
 .. code-block:: java
    :emphasize-lines: 18-29,30,32,34
