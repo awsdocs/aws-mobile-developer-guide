@@ -397,7 +397,7 @@ In the :code:`OnCreate()` method of the :code:`NoteDetailFragment.java` class, r
             isUpdate = false;
         }
 
-With the following constnts and statement that establishes an :code:`AsyncQueryHandler`, which provides a wrapper to make the calls run on a non-UI thread asynchronously. :
+With the following constants and statement that establishes an :code:`AsyncQueryHandler`, which provides a wrapper to make the calls run on a non-UI thread asynchronously:
 
 .. code-block:: java
 
@@ -450,21 +450,19 @@ In the :code:`saveData()` method, replace the following local cursor methods:
 
 .. code-block:: java
 
-      if (arguments != null && arguments.containsKey(ARG_ITEM_ID)) {
-          String itemId = getArguments().getString(ARG_ITEM_ID);
-          itemUri = NotesContentContract.Notes.uriBuilder(itemId);
-          Cursor data = contentResolver.query(itemUri, NotesContentContract.Notes.PROJECTION_ALL, null, null, null);
-          if (data != null) {
-              data.moveToFirst();
-              mItem = Note.fromCursor(data);
-              isUpdate = true;
-          }
-      } else {
-          mItem = new Note();
-          isUpdate = false;
-      }
+    // Convert to ContentValues and store in the database.
+    if (isUpdated) {
+        ContentValues values = mItem.toContentValues();
+        if (isUpdate) {
+            contentResolver.update(itemUri, values, null, null);
+        } else {
+            itemUri = contentResolver.insert(NotesContentContract.Notes.CONTENT_URI, values);
+            isUpdate = true;    // Anything from now on is an update
+            itemUri = NotesContentContract.Notes.uriBuilder(mItem.getNoteId());
+        }
+    }
 
- with an :code:`AsyncQueryHandler`:
+with an :code:`AsyncQueryHandler`:
 
 .. code-block:: java
    :emphasize-lines: 18-29,30,32,34
@@ -542,7 +540,8 @@ Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the fo
             }
         }
 
-        // Remove the item from the database final int position = holder.getAdapterPosition();
+        // Remove the item from the database
+        final int position = holder.getAdapterPosition();
         AsyncQueryHandler queryHandler = new AsyncQueryHandler(getContentResolver()) {
             @Override
             protected void onDeleteComplete(int token, Object cookie, int result) {
