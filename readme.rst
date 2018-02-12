@@ -70,18 +70,13 @@ build the docs into a single HTML page, you can use the ``htmlsingle`` target, l
  python build_docs.py htmlsingle
 
 
-Copyright and license
-=====================
+License Summary
+===============
 
-All content in this repository, unless otherwise stated, is Copyright © 2010-2016, Amazon Web
-Services, Inc. or its affiliates. All rights reserved.
+The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the LICENSE file.
 
-Except where otherwise noted, this work is licensed under a `Creative Commons
-Attribution-NonCommercial-ShareAlike 4.0 International License
-<http://creativecommons.org/licenses/by-nc-sa/4.0/>`_ (the "License"). Use the preceding link for a
-human-readable summary of the license terms. The full license text is available at:
-http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode and in the LICENSE file accompanying this
-repository.
+The sample code within this documentation is made available under a modified MIT license. See the LICENSE-SAMPLECODE file.
+
 
 .. =================================================================================
 .. Links used in the README. For sanity's sake, keep this list sorted alphabetically
