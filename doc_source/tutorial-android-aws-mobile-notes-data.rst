@@ -530,7 +530,9 @@ Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the fo
     void remove(final NoteViewHolder holder) {
         if (mTwoPane ){
             // Check to see if the current fragment is the record we are deleting
-            // Fragment currentFragment = NoteListActivity.this.getSupportFragmentManager().findFragmentById(R.id.note_detail_container);
+            Fragment currentFragment = NoteListActivity.this
+                        .getSupportFragmentManager()
+                        .findFragmentById(R.id.note_detail_container);
             if (currentFragment instanceof NoteDetailFragment) {
                 String deletedNote = holder.getNote().getNoteId();
                 String displayedNote = ((NoteDetailFragment) currentFragment).getNote().getNoteId();
