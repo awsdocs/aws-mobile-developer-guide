@@ -1,0 +1,14 @@
+*.brazilcli
+*.running.properties.txt
+*\~
+*.mobi
+**/*.DS_Store
+AWSDocsSphinxTheme/
+AwsSphinxSharedContent/
+aws-doc-shared-content/
+mobile-hub/
+build/
+
+#awsmobilejs
+awsmobilejs/.awsmobile/backend-build
+awsmobilejs/\#current-backend-info
