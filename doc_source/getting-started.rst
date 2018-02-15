@@ -170,7 +170,7 @@ Connect to Your Backend
 
         .. code-block:: bash
 
-           :code:`pod init`.
+           pod init
 
       #. Add core AWS Mobile SDK components to your build.
 
