@@ -65,7 +65,7 @@ To set your project up to use the ``TransferManager`` class, take the steps belo
 1. Setup the SDK, Credentials and Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Follow the steps in `How to Integrate Your Existing Bucket <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/how-to-integrate-an-existing-bucket.html`_ to install the AWS Mobile SDK for iOS and configure
+    Follow the steps in `How to Integrate Your Existing Bucket <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/how-to-integrate-an-existing-bucket.html>`_ to install the AWS Mobile SDK for iOS and configure
     AWS credentials and permissions.
 
 2. Import the SDK Amazon S3 APIs

@@ -28,7 +28,7 @@ Access Your APIs
 About Hosting and Streaming
 ===========================
 
-The AWS Mobile :ref:`Hosting and Streaming <hosting-and-streaming>`feature is especially useful to web dvelopers. It uses the ability of `|S3| <>`_ buckets to statically host content and the `|CF| <>`_ content distribution network (CDN) to host on an endpoint close to every user globally. Amazon CLoudFront endpoints can also stream media content.
+The AWS Mobile :ref:`Hosting and Streaming <hosting-and-streaming>` feature is especially useful to web developers. It uses the ability of `Amazon S3 <https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html>`_ buckets to statically host content and the `Amazon CloudFront <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>`_ content distribution network (CDN) to host on an endpoint close to every user globally. Amazon CloudFront endpoints can also stream media content.
 
 **About the Hosting and Streaming Sample App**
 

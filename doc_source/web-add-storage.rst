@@ -181,13 +181,13 @@ Use the S3Image component in the render function. Update your render function to
 Next Steps
 ==========
 
-  -  Learn how to do private file storage and more with the `Storage module in AWS Amplify
-     <https://aws.github.io/aws-amplify/media/developer_guide.html >`_.
+-  Learn how to do private file storage and more with the
+   `Storage module in AWS Amplify <https://aws.github.io/aws-amplify/media/developer_guide.html>`_.
 
-  -  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`_.
+-  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`_.
 
-  -  Learn how to use those features in your app with the `AWS Amplify library <https://aws.github.io/aws-amplify>`_.
+-  Learn how to use those features in your app with the `AWS Amplify library <https://aws.github.io/aws-amplify>`_.
 
-  -  Learn more about the `analytics for the User File Storage feature <https://alpha-docs-aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`_.
+-  Learn more about the `analytics for the User File Storage feature <https://alpha-docs-aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`_.
 
-  -  Learn more about how your files are stored on `Amazon Simple Storage Service <https://aws.amazon.com/documentation/s3/>`_.
+-  Learn more about how your files are stored on `Amazon Simple Storage Service <https://aws.amazon.com/documentation/s3/>`_.

@@ -68,14 +68,14 @@ Set Permissions in Your Android Manifest
 Declare |LEX| as a Gradle dependency
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Make sure the following  Gradle build dependency is declared in the :file:`app/build.gradle` file.
+  Make sure the following Gradle build dependency is declared in the :file:`app/build.gradle` file.
 
   .. code-block:: sh
 
     compile 'com.amazonaws:aws-android-sdk-lex:2.3.8@aar'
 
 Set IAM Permissions for |LEX|
---------------------------------------------
+-----------------------------
 
 To use |LEX| in an application, create a role and attach policies as described in Step 1 of
 `Getting Started <http://docs.aws.amazon.com/lex/latest/dg/gs-bp-prep.html>`_ in the *Lex Developer Guide*.
@@ -85,10 +85,9 @@ To learn more about IAM policies, see `Using IAM <http://docs.aws.amazon.com/IAM
 Configure a Bot
 ---------------
 
- Use the `Amazon Lex console <https://console.aws.amazon.com/lex/>`_ console to configure a bot that interacts with your mobile app features. To learn more, see `Amazon Lex Developer Guide <https://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_. For a quickstart, see `Getting Started <https://alpha-docs-aws.amazon.com/lex/latest/dg/getting-started.html>`_ .
+Use the `Amazon Lex console <https://console.aws.amazon.com/lex/>`_ console to configure a bot that interacts with your mobile app features. To learn more, see `Amazon Lex Developer Guide <https://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_. For a quickstart, see `Getting Started <https://alpha-docs-aws.amazon.com/lex/latest/dg/getting-started.html>`_ .
 
-|LEX| also supports model building APIs, which allow creation of bots, intents, and slots at runtime. This SDK does not
-currently offer additional support for interacting with |LEX| model building APIs.
+|LEX| also supports model building APIs, which allow creation of bots, intents, and slots at runtime. This SDK does not currently offer additional support for interacting with |LEX| model building APIs.
 
 Implement Text and Voice Interaction with |LEX|
 ===============================================

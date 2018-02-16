@@ -11,7 +11,7 @@
 .. highlight:: java
 
 #########################################
-    iOS: Use Natural Language with Amazon Lex
+iOS: Use Natural Language with Amazon Lex
 #########################################
 
 .. list-table::
@@ -41,7 +41,7 @@ the Amazon Lex service prefers.
 into your |LEX| processing flow, including all of the extension to other services that Lambda makes possible.
 
 For information on |LEX| concepts and service configuration, see
-`How it Works <http://docs.aws.amazon.com/lex/latest/dg/how-it-works.html>`_ in the |LEX-dg|.
+`How it Works <http://docs.aws.amazon.com/lex/latest/dg/how-it-works.html>`_ in the Amazon Lex Developer Guide.
 
 To get started using the Amazon Lex mobile client for iOS, you'll need to integrate the SDK for iOS
 into your app, set the appropriate permissions, and import the necessary libraries.
@@ -59,20 +59,16 @@ Set IAM Permissions for Amazon Lex
 ----------------------------------
 
 To use |LEX| in an application, create a role and attach policies as described in Step 1 of
-`Getting Started <http://docs.aws.amazon.com/lex/latest/dg/gs-bp-prep.html>`_ in the |LEX-dg|.
+`Getting Started <http://docs.aws.amazon.com/lex/latest/dg/gs-bp-prep.html>`_ in the Amazon Lex Developer Guide.
 
 To learn more about IAM policies, see `Using IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`_.
 
 Configure a Bot
 ---------------
 
-To set up interaction between your mobile app and |LEX|, use the |LEX| console to configure a bot that fulfills
-your requirements. To learn more see |LEX-dg|_.
-For a quickstart, see Step 2 of `Getting Started <http://docs.aws.amazon.com/lex/latest/dg/gs-bp-prep.html>`_ in the
-|LEX-dg|.
+Use the `Amazon Lex console <https://console.aws.amazon.com/lex/>`_ console to configure a bot that interacts with your mobile app features. To learn more, see `Amazon Lex Developer Guide <https://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_. For a quickstart, see `Getting Started <https://alpha-docs-aws.amazon.com/lex/latest/dg/getting-started.html>`_ .
 
-|LEX| also supports model building APIs, which allow creation of bots, intents, and slots at runtime. This SDK does not
-currently offer additional support for interacting with |LEX| model building APIs.
+|LEX| also supports model building APIs, which allow creation of bots, intents, and slots at runtime. This SDK does not currently offer additional support for interacting with |LEX| model building APIs.
 
 Implement Text and Voice Interaction with Amazon Lex
 ====================================================
@@ -85,7 +81,7 @@ Take the following steps to allow your app to access device resources and AWS se
 Add permission to use the microphone
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To add permission to use the microphone to enable users to speak to Amazon Lex through your app, open your project's Info.plist file using :guilabel:`Right-click > Open As > Source Code`, and then add the following entry.
+To add permission to use the microphone to enable users to speak to Amazon Lex through your app, open your project's :file:`Info.plist` file using :guilabel:`Right-click > Open As > Source Code`, and then add the following entry.
 
     .. code-block:: xml
 

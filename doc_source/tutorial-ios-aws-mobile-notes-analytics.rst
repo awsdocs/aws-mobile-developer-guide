@@ -36,6 +36,7 @@ To start, set up the mobile backend resources in AWS:
 #. Choose :guilabel:`Create` on the upper left, and the type :userinput:`ios-notes-app` for the name of the Mobile Hub project.
 #. Choose :guilabel:`Next`, choose :guilabel:`iOS`, and then choose :guilabel:`Add`.
 #. Choose :guilabel:`Download Cloud Config`, and save :file:`awsconfiguration.json`. This file the configuration to connect your app to your backend.
+#. Choose :guilabel:`Next` and then choose :guilabel:`Done` to create the project.
 
 .. list-table::
    :widths: 1 6
@@ -286,7 +287,7 @@ To capture note deletions, place the following :code:`sendNoteEvent` function ca
 View Your Custom Analytics
 --------------------------
 
-To view the :code:`AddNote and :code:`DeleteNote custom analytics events, rebuild and run your app in the Simulator, add and delete notes, then return to the Amazon Pinpoint console for your project.
+To view the :code:`AddNote` and :code:`DeleteNote` custom analytics events, rebuild and run your app in the Simulator, add and delete notes, then return to the Amazon Pinpoint console for your project.
 
 #. Choose :guilabel:`Events`.
 

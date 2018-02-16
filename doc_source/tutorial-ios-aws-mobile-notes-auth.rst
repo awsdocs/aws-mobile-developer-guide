@@ -161,7 +161,7 @@ In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register your 
 
    * - What did this do?
 
-     - This will register your sign in providers and fetch the user pool you created and fetch an identity that enables a user to access your app's AWS resources. In this case, the provider is an `Amazon Cognito user pool<https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`_, but federating Facebook, Google, SAML and other identity providers is also supported.
+     - This will register your sign in providers and fetch the user pool you created and fetch an identity that enables a user to access your app's AWS resources. In this case, the provider is an `Amazon Cognito user pool <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`_, but federating Facebook, Google, SAML and other identity providers is also supported.
 
 
 Implement Your Sign-in UI
