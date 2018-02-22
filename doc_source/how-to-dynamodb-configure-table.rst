@@ -8,6 +8,8 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
+.. _how-to-dynamodb-configure-table:
+
 ###########################################
 Manually Configure an Amazon DynamoDB Table
 ###########################################
@@ -32,7 +34,7 @@ This tutorial is based on a simple bookstore app. The app tracks the books that 
 
 To create the Books table:
 
-#. Sign in to the `Amazon DynamoDB Console <https://console.aws.amazon.com/dynamodb/home>`_.
+#. Sign in to the `Amazon DynamoDB Console <https://console.aws.amazon.com/dynamodb/home>`__.
 #. Choose :guilabel:`Create Table`.
 #. Type :command:`Books` as the name of the table.
 #. Enter :command:`ISBN` in the :guilabel:`Partition key` field of the :guilabel:`Primary key` with :guilabel:`String` as their type.
@@ -48,7 +50,7 @@ To create the Books table:
 Set Permissions
 ~~~~~~~~~~~~~~~
 
-To use Amazon DynamoDB in your mobile app, you must set the correct permissions. The following IAM policy allows the user to perform the actions shown in this tutorial on two resources (a table and an index) identified by an `ARN <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`_.
+To use Amazon DynamoDB in your mobile app, you must set the correct permissions. The following IAM policy allows the user to perform the actions shown in this tutorial on two resources (a table and an index) identified by an `ARN <http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html>`__.
 
     .. code-block:: json
 
@@ -73,11 +75,11 @@ To use Amazon DynamoDB in your mobile app, you must set the correct permissions.
 
 Apply this policy to the unauthenticated role assigned to your Amazon Cognito identity pool, replacing the `Resource` values with the correct ARN for the Amazon DynamoDB table:
 
-#. Sign in to the `IAM console <https://console.aws.amazon.com/iam>`_.
+#. Sign in to the `IAM console <https://console.aws.amazon.com/iam>`__.
 #. Choose :guilabel:`Roles` and then choose the "Unauth" role that Amazon Cognito created for you.
 #. Choose :guilabel:`Attach Role Policy`.
 #. Choose :guilabel:`Custom Policy` and then Choose :guilabel:`Select`.
 #. Type a name for your policy and paste in the policy document shown above, replacing the `Resource` values with the ARNs for your table and index. (You can retrieve the table ARN from the :guilabel:`Details` tab of the database; then append :file:`/index/*` to obtain the value for the index ARN.
 #. Choose :guilabel:`Apply Policy`.
 
-To learn more about IAM policies, see `Using IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`_. To learn more about creating fine-grained access policies for Amazon DynamoDB, see `DynamoDB on Mobile – Part 5: Fine-Grained Access Control <https://aws.amazon.com/blogs/mobile/dynamodb-on-mobile-part-5-fine-grained-access-control/>`_.
+To learn more about IAM policies, see `Using IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`__. To learn more about creating fine-grained access policies for Amazon DynamoDB, see `DynamoDB on Mobile – Part 5: Fine-Grained Access Control <https://aws.amazon.com/blogs/mobile/dynamodb-on-mobile-part-5-fine-grained-access-control/>`__.

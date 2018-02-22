@@ -30,7 +30,7 @@ Choose the |AMHlong| Messaging and Analytics feature to:
   and SMS
 
 `Create a free Mobile Hub project and add the Messaging and
-Analytics feature. <https://console.aws.amazon.com/mobilehub/home#/>`_
+Analytics feature. <https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _messaging-and-analytics-details:
 
@@ -43,7 +43,7 @@ your app. It enables you to engage them through push notification, e-mail, or SM
 analytics to your messaging so that what you communicate flows from users' behavior.
 
 The following image shows Messaging and Analytics using `Amazon Pinpoint
-<http://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html>`_ to collect usage data from a mobile app. Amazon Pinpoint then
+<http://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html>`__ to collect usage data from a mobile app. Amazon Pinpoint then
 sends messaging to selected app users based on the campaign logic designed for the app.
 
 .. image:: images/diagram-abstract-messaging-and-analytics.png
@@ -64,16 +64,16 @@ app usage and campaign data:
 
 * If you add custom analytics to your app, you can configure Amazon Pinpoint to visualize those metrics
   and use the data as a factor in your campaign behavior. To learn more about integrating custom
-  analytics, see `Integrating Amazon Pinpoint With Your App <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-sdk.html>`_ in the
+  analytics, see `Integrating Amazon Pinpoint With Your App <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-sdk.html>`__ in the
   :title:`Amazon Pinpoint User Guide`.
 
-* Amazon Pinpoint enables you to construct `funnel analytics <http://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-funnels.html>`_, which visualize
+* Amazon Pinpoint enables you to construct `funnel analytics <http://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-funnels.html>`__, which visualize
   how many users complete each of a series of step you intend them to take in your app.
 
 * To perform more complex analytics tasks, such as merging data from more than one app or making
   flexible queries, you can configure Amazon Pinpoint to stream your data to |AK|. To learn more about
   using Amazon Pinpoint and |AK| together, see `Streaming Amazon Pinpoint Events to Amazon Kinesis
-  <http://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-streaming-kinesis.html>`_.
+  <http://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-streaming-kinesis.html>`__.
 
 When you choose :guilabel:`Messaging` you can configure your project to enable Amazon Pinpoint to send:
 
@@ -86,7 +86,7 @@ When you choose :guilabel:`Messaging` you can configure your project to enable A
 * SMS messages
 
 Once you have enabled Messaging and Analytics options in your |AMH| project, use the `Amazon
-Pinpoint console <https://console.aws.amazon.com/pinpoint/home>`_ to view visualizations of your analytics or configure your user
+Pinpoint console <https://console.aws.amazon.com/pinpoint/home>`__ to view visualizations of your analytics or configure your user
 segments and campaigns. You can also import user segment data into Amazon Pinpoint to use campaigns for
 any group of users.
 
@@ -102,9 +102,9 @@ Messaging and Analytics At a Glance
 
    * - **AWS services and resources configured**
 
-     - - **Amazon Pinpoint** (see `Amazon Pinpoint Developer Guide <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`_)
+     - - **Amazon Pinpoint** (see `Amazon Pinpoint Developer Guide <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__)
 
-         `Concepts <http://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html>`_ | `Console <https://console.aws.amazon.com/pinpoint/home>`_
+         `Concepts <http://docs.aws.amazon.com/pinpoint/latest/userguide/welcome.html>`__ | `Console <https://console.aws.amazon.com/pinpoint/home>`__
 
        |AMH|-enabled features use |COG| for authentication and |IAM| for authorization. For more information, see :ref:`User Sign-in <user-sign-in>`.
 
@@ -118,11 +118,11 @@ Messaging and Analytics At a Glance
 
          - Communicate to app users using push notifications through APNs, GCM, and FCM.
 
-           - via :guilabel:`Firebase or Google Cloud Messaging (FCM/GCM)` (see `Setting Up Android Push Notifications <https://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`_)
+           - via :guilabel:`Firebase or Google Cloud Messaging (FCM/GCM)` (see `Setting Up Android Push Notifications <https://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__)
 
-           - via :guilabel:`Apple Push Notification service (APNs)` (see `Setting Up iOS Push Notifications <https://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`_)
+           - via :guilabel:`Apple Push Notification service (APNs)` (see `Setting Up iOS Push Notifications <https://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`__)
 
-           For more information, see `Configuring Push Notification <https://alpha-docs-aws.amazon.com/pinpoint/latest/developerguide/mobile-push.html>`_.
+           For more information, see `Configuring Push Notification <https://alpha-docs-aws.amazon.com/pinpoint/latest/developerguide/mobile-push.html>`__.
 
          - Communicate to app users through e-mail.
 

@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _add-aws-mobile-sdk:
+.. _getting-started:
 
 ###########
 Get Started
@@ -33,7 +33,7 @@ Get Started
     Add Conversational Bots <add-aws-mobile-conversational-bots>
     Add Hosting and Streaming <add-aws-mobile-hosting-and-streaming>
 
-.. _getting-started:
+.. _add-aws-mobile-sdk:
 
 Overview
 ========
@@ -45,9 +45,9 @@ The AWS Mobile Android and iOS SDKs help you build high quality mobile apps quic
 Set Up Your Backend
 ===================
 
-#. `Sign up for the AWS Free Tier. <https://aws.amazon.com/free/>`_
+#. `Sign up for the AWS Free Tier. <https://aws.amazon.com/free/>`__
 
-#. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/>`_ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
+#. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/>`__ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
 
    To integrate existing AWS resources using the SDK directly, without Mobile Hub, see :doc:`Setup  Options for Android <how-to-android-sdk-setup>` or :doc:`Setup  Options for iOS <how-to-ios-sdk-setup>`.
 
@@ -70,7 +70,7 @@ Set Up Your Backend
 
       #. Add awsconfiguration.json to your app.
 
-         From your download location, place :file:`awsconfiguration.json` into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`_ in your Android project. Choose :guilabel:`Next`.
+         From your download location, place :file:`awsconfiguration.json` into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`__ in your Android project. Choose :guilabel:`Next`.
 
       #. You are now ready to connect your app to your newly setup backend. Choose :guilabel:`Add the AWS Mobile SDK` to connect to your backend.
 
@@ -126,7 +126,7 @@ Connect to Your Backend
              <uses-permission android:name="android.permission.INTERNET"/>
              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      #. Add dependencies to your :file:`app/build.gradle`. These libraries enable basic AWS functions, like credentials, and analytics.
+      #. Add dependencies to your :file:`app/build.gradle`, then choose :guilabel:`Sync Now` in the upper right of Android Studio. This libraries enable basic AWS functions, like credentials, and analytics.
 
          .. code-block:: java
 
@@ -152,7 +152,7 @@ Connect to Your Backend
          Your app is now set up to interact with the AWS services you configured in your Mobile Hub project!
 
 
-         Choose the Run icon in Android Studio to build your app and run it on your device/emulator.You should see a log in your Android logcat saying "**Welcome to AWS!**".
+         Choose the Run icon in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
 
 
    iOS - Swift
@@ -168,16 +168,16 @@ Connect to Your Backend
 
       #. Create :file:`Podfile`. From a terminal window, navigate to the directory that contains your project's :file:`.xcodeproj` file and run:
 
-        .. code-block:: bash
+          .. code-block:: bash
 
-           :code:`pod init`.
+              pod init
 
       #. Add core AWS Mobile SDK components to your build.
 
          .. code-block:: none
 
               platform :ios, '9.0'
-              target :'YourAppTarget' do
+              target :'YOUR-APP-NAME' do
                   use_frameworks!
                   pod 'AWSMobileClient', '~> 2.6.6'
                   # other pods
@@ -206,24 +206,29 @@ Connect to Your Backend
             @UIApplicationMain
             class AppDelegate: UIResponder, UIApplicationDelegate {
 
-              func application(_ application: UIApplication,
-                    didFinishLaunchingWithOptions launchOptions:
+            func application(_ application: UIApplication,
+                             didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                // Override point for customization after application launch.
 
-                    [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                        return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
-              }
+                // Create AWSMobileClient to connect with AWS
+                return AWSMobileClient.sharedInstance().interceptApplication(
+                    application,
+                    didFinishLaunchingWithOptions: launchOptions)
+
             }
 
-      #. `Optional`: If you want to make sure you're connected to AWS, add the following code to your AppDelegate.
+      #. `Optional`: If you want to make sure you're connected to AWS, import :code:`AWSCore` and add the following code to :code:`didFinishLaunchingWithOptions` before you return :code:`AWSMobileClient`.
 
          .. code-block:: swift
 
             import AWSCore
 
+            //. . .
+
             AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
             AWSDDLog.sharedInstance.logLevel = .info
 
-        Your app is now set up to interact with the AWS services you configured in your |AMH| project! Choose the run icon in the top left of the Xcode window or type Command-R to build and run your app. You should see a log in your output saying "**Welcome to AWS!**".
+        Your app is now set up to interact with the AWS services you configured in your |AMH| project! Choose the run icon in the top left of the Xcode window or type Command-R to build and run your app. Look for  :code:`Welcome to AWS!` in the log output.
 
 .. _add-aws-mobile-sdk-next-steps:
 

@@ -19,7 +19,7 @@ the beginning <tutorial-android-aws-mobile-notes-setup>`. In this tutorial, we w
 database to our mobile backend, then configure a basic data access service to the note-taking app.
 
 The Notes sample app uses a
-`ContentProvider <https://developer.android.com/guide/topics/providers/content-providers.html>`_
+`ContentProvider <https://developer.android.com/guide/topics/providers/content-providers.html>`__
 (called :code:`NotesContentProvider`) to provide access to a local SQLite
 database that is used to store the notes that you enter into the app. We
 will replace the code within the :code:`ContentProvider` with code that uses
@@ -33,7 +33,7 @@ Add a NoSQL database to the AWS Mobile Hub project
 Before we work on the client-side code, we need to add a NoSQL database
 and table to the backend project:
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 #. Select  your project.
 #. Scroll down to the :guilabel:`Add More Backend Features` section and then choose the :guilabel:`NoSQL Database` tile.
 #. Choose :guilabel:`Enable NoSQL`, choose :guilabel:`Add Table`, and then choose :guilabel:`Example` to start with an example schema.
@@ -52,7 +52,7 @@ and table to the backend project:
 #. Choose :guilabel:`Create table`
 #. Choose :guilabel:`Create table` in the modal dialog. It will take a few moments for AWS to create the table.
 
-    You have just created a NoSQL table in the `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`_ service.
+    You have just created a NoSQL table in the `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`__ service.
 
 #. When the table is ready, choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
 #. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
@@ -180,7 +180,7 @@ server.
 Implement Mutation Methods
 --------------------------
 
-The `ContentProvider <https://developer.android.com/guide/topics/providers/content-providers.html>`_
+The `ContentProvider <https://developer.android.com/guide/topics/providers/content-providers.html>`__
 is the basic interface that Android uses to communicate with databases
 on Android. It uses four methods that match the basic CRUD (create, read,
 update, delete) methods.
@@ -530,9 +530,7 @@ Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the fo
     void remove(final NoteViewHolder holder) {
         if (mTwoPane ){
             // Check to see if the current fragment is the record we are deleting
-            Fragment currentFragment = NoteListActivity.this
-                        .getSupportFragmentManager()
-                        .findFragmentById(R.id.note_detail_container);
+            Fragment currentFragment = NoteListActivity.this.getSupportFragmentManager().findFragmentById(R.id.note_detail_container);
             if (currentFragment instanceof NoteDetailFragment) {
                 String deletedNote = holder.getNote().getNoteId();
                 String displayedNote = ((NoteDetailFragment) currentFragment).getNote().getNoteId();
@@ -567,7 +565,7 @@ slightly longer (due to reading the data from the remote database).
 Data is available immediately in the mobile backend. Create a few notes,
 then view the records within the AWS Console:
 
-1. Open the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+1. Open the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 2. Choose your project.
 3. Choose **Resources** in the left hand menu.
 4. Choose the link for your DynamoDB table.
@@ -579,7 +577,7 @@ Next Steps
 ----------
 
 -  Learn about data synchronization by reading about the Android `Sync
-   Framework <https://developer.android.com/training/sync-adapters/index.html>`_.
--  Learn about `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`_.
+   Framework <https://developer.android.com/training/sync-adapters/index.html>`__.
+-  Learn about `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`__.
 
 

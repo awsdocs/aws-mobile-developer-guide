@@ -29,7 +29,7 @@ Choose the |AMHlong| conversational bots mobile backend service feature to:
 * Use natural language voice and text to interact with your business logic in the cloud
 
 `Create a free Mobile Hub project and add the Conversational Bots
-feature. <https://console.aws.amazon.com/mobilehub/home#/>`_
+feature. <https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _conversational-bots-details:
 
@@ -68,9 +68,9 @@ Conversational Bots At a Glance
 
    * - **AWS services and resources configured**
 
-     - - Amazon Lex (see `Amazon Lex Developer Guide <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_)
+     - - Amazon Lex (see `Amazon Lex Developer Guide <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`__)
 
-         `Concepts <http://docs.aws.amazon.com/lex/latest/dg/how-it-works.html>`_ | `Console <https://console.aws.amazon.com/lex/home>`_
+         `Concepts <http://docs.aws.amazon.com/lex/latest/dg/how-it-works.html>`__ | `Console <https://console.aws.amazon.com/lex/home>`__
 
        |AMH|-enabled features use |COG| for authentication and |IAM| for authorization. For more information, see :ref:`User Sign-in <user-sign-in>`.
 

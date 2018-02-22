@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _nosqldb:
+.. _NoSQL-Database:
 
 ##############
 NoSQL Database
@@ -26,7 +26,7 @@ Choose the |AMH| NoSQL Database mobile backend feature to:
 * Add easy to develop database capabilities with scalable performance and cost
 
 `Create a free Mobile Hub project and add the NoSQL DB feature in
-minutes. <https://console.aws.amazon.com/mobilehub/home#/>`_
+minutes. <https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _nosql-details:
 
@@ -39,12 +39,12 @@ pattern.
 
 .. image:: images/diagram-abstract-nosqldb.png
 
-The NoSQL Database feature uses `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`_ to enable you to create database
+The NoSQL Database feature uses `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`__ to enable you to create database
 tables that can store and retrieve data for use by your apps.
 
 NoSQL databases are widely recognized as the method of choice for many mobile backend solutions due
 to their ease of development, scalable performance, high availability, and resilience. For more
-information, see `From SQL to NoSQL <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.html>`_ in the :title:`Amazon DynamoDB Developer Guide`.
+information, see `From SQL to NoSQL <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.html>`__ in the :title:`Amazon DynamoDB Developer Guide`.
 
 
 .. _nosqldb-ataglance:
@@ -57,9 +57,9 @@ NoSQL Database At a Glance
 
    * - **AWS services and resources configured**
 
-     - - **Amazon DynamoDB Tables** (see `Working with Tables in DynamoDB <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html>`_)
+     - - **Amazon DynamoDB Tables** (see `Working with Tables in DynamoDB <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html>`__)
 
-         `Concepts <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`_ | `Console <https://console.aws.amazon.com/dynamodb/home>`_ | `Pricing <https://aws.amazon.com/dynamodb/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`__ | `Console <https://console.aws.amazon.com/dynamodb/home>`__ | `Pricing <https://aws.amazon.com/dynamodb/pricing/>`__
 
        |AMH|-enabled features use |COG| for authentication and |IAM| for authorization. For more information, see :ref:`User Sign-in <user-sign-in>`. For more information, see :ref:`resources-nosqldb`.
 
@@ -310,7 +310,7 @@ The operations you can use to retrieve data from your NoSQL database include the
 * :code:`Scan with Filters`, which performs a :code:`Scan` but returns results that are filtered
   based on a filter expression you create.
 
-For more information, see `Query and Scan Operations in DynamoDB <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html>`_.
+For more information, see `Query and Scan Operations in DynamoDB <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html>`__.
 
 
 .. _resources-nosqldb:

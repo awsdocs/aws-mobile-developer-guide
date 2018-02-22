@@ -126,10 +126,10 @@ To test, save the changes, run :code:`npm run android` or :code:`npm run ios`` t
 Next Steps
 ==========
 
-Learn more about the AWS Mobile :ref:`Cloud Logic <cloud-logic>` feature which uses `|ABP| <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`_ and `|LAM| <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>`_.
+Learn more about the AWS Mobile :ref:`Cloud Logic <cloud-logic>` feature which uses `|ABP| <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`__ and `|LAM| <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>`__.
 
 To be guided through creation of an API and it's handler, run :code:`awsmobile console` to open your app in the |AMH| console, and choose :guilabel:`Cloud Logic`.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 
-Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify/>`_.
+Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify/>`__.

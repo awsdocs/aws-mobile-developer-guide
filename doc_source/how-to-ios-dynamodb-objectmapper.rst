@@ -8,6 +8,8 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
+.. _how-to-ios-dynamodb-objectmapper:
+
 #################################
 Amazon DynamoDB Object Mapper API
 #################################
@@ -19,7 +21,7 @@ Amazon DynamoDB Object Mapper API
 Overview
 --------
 
-`Amazon DynamoDB <http://aws.amazon.com/dynamodb/>`_ is a fast, highly scalable,
+`Amazon DynamoDB <http://aws.amazon.com/dynamodb/>`__ is a fast, highly scalable,
 highly available, cost-effective, non-relational database service. Amazon DynamoDB removes traditional
 scalability limitations on data storage while maintaining low latency and predictable
 performance.
@@ -40,7 +42,7 @@ To set your project up to use the AWS SDK for iOS :code:`dynamoDBObjectMapper`, 
 Setup the SDK, Credentials, and Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To integrate :code:`dynamoDBObjectMapper` into a new app, follow the steps described in `Get Started <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`_ to install the AWS Mobile SDK for iOS.
+To integrate :code:`dynamoDBObjectMapper` into a new app, follow the steps described in `Get Started <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`__ to install the AWS Mobile SDK for iOS.
 
 For apps that use an SDK version prior to 2.6.0, follow the steps on :doc:`setup-options-for-aws-sdk-for-ios` to install the AWS Mobile SDK for iOS. Then use the steps on :doc:`cognito-auth-identity-for-ios-legacy` to configure user credentials, and permissions.
 
@@ -74,7 +76,7 @@ Add the following import statement to your project.
 Create Amazon DynamoDB Object Mapper Client
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Use the `AWSDynamoDBObjectMapper <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBObjectMapper.html>`_ to map a client-side class to your database. The object mapper supports high-level operations like creating, getting, querying, updating, and deleting records. Create an object mapper as follows.
+Use the `AWSDynamoDBObjectMapper <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBObjectMapper.html>`__ to map a client-side class to your database. The object mapper supports high-level operations like creating, getting, querying, updating, and deleting records. Create an object mapper as follows.
 
     .. container:: option
 
@@ -180,7 +182,7 @@ The Amazon DynamoDB table, mapping class, and object mapper client enable your a
 Save an Item
 ~~~~~~~~~~~~
 
-The `save: <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBObjectMapper.html#//api/name/save:>`_ method saves an object to Amazon DynamoDB, using the default configuration. As a parameter, ``save:`` takes a an object that inherits from ``AWSDynamoDBObjectModel`` and conforms to the ``AWSDynamoDBModeling`` protocol. The properties of this object will be mapped to attributes in Amazon DynamoDB table.
+The `save: <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBObjectMapper.html#//api/name/save:>`__ method saves an object to Amazon DynamoDB, using the default configuration. As a parameter, ``save:`` takes a an object that inherits from ``AWSDynamoDBObjectModel`` and conforms to the ``AWSDynamoDBModeling`` protocol. The properties of this object will be mapped to attributes in Amazon DynamoDB table.
 
 To create the object to be saved take the following steps.
 
@@ -273,7 +275,7 @@ The following code provides an example of setting a default save behavior on the
                 AWSDynamoDBObjectMapperConfiguration *updateMapperConfig = [AWSDynamoDBObjectMapperConfiguration new];
                 updateMapperConfig.saveBehavior = AWSDynamoDBObjectMapperSaveBehaviorUpdateSkipNullAttributes;
 
-Use ``updateMapperConfig`` as an argument when calling `save:configuration: <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBObjectMapper.html#//api/name/save:configuration:>`_.
+Use ``updateMapperConfig`` as an argument when calling `save:configuration: <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBObjectMapper.html#//api/name/save:configuration:>`__.
 
 Retrieve an Item
 ~~~~~~~~~~~~~~~~
@@ -415,7 +417,7 @@ The output of a scan is returned as an ``AWSDynamoDBPaginatedOutput`` object. Th
 The ``scanExpression` method provides several optional parameters. Use ``filterExpression``
 and ``expressionAttributeValues`` to specify a scan result for the attribute names and conditions
 you define. For more information about the parameters and the API, see
-`AWSDynamoDBScanExpression <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBScanExpression.html>`_.
+`AWSDynamoDBScanExpression <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBScanExpression.html>`__.
 
 The following code scans the Books table to find books with a price less than 50.
 
@@ -525,7 +527,7 @@ expression using ``expressionAttributeValues``.
 
 You can also provide ``filterExpression`` and ``projectionExpression`` in ``AWSDynamoDBQueryExpression``. The syntax is the same as that used in a scan operation.
 
-For more information, see `AWSDynamoDBQueryExpression <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBQueryExpression.html>`_.
+For more information, see `AWSDynamoDBQueryExpression <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBQueryExpression.html>`__.
 
 .. _awsdynamodb-model:
 
@@ -542,6 +544,6 @@ using ``NSArray``.
 Additional Resources
 --------------------
 
-* `Amazon DynamoDB Developer Guide <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`_
-* `Amazon DynamoDB API Reference <http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/>`_
+* `Amazon DynamoDB Developer Guide <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`__
+* `Amazon DynamoDB API Reference <http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/>`__
 

@@ -10,6 +10,8 @@
 
 .. highlight:: java
 
+.. _how-to-android-lambda:
+
 ###############################################
 Android: Execute Code On Demand with AWS Lambda
 ###############################################
@@ -51,7 +53,7 @@ Create a Lambda Function in the AWS Console
 
 For this tutorial, let's use a simple "echo" function that returns the input. Follow the steps
 described at `Amazon Lambda Getting Started
-<http://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`_, replacing the function code
+<http://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`__, replacing the function code
 with the code below::
 
  exports.
@@ -110,7 +112,7 @@ To set IAM Permissions for AWS Lambda:
 7. Click the :guilabel:`Apply Policy` button.
 
 To learn more about IAM policies, see `IAM documentation
-<http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`_.
+<http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`__.
 
 
 Set Permissions in Your Android Manifest

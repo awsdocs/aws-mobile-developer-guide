@@ -10,6 +10,7 @@
 
 .. highlight:: java
 
+.. _how-to-android-machine-learning:
 
 ################################
 Android: Amazon Machine Learning
@@ -31,7 +32,7 @@ Prerequisites
 -------------
 
 You must complete all of the instructions on the `Set Up the SDK for Android
-<http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/setup.html>`_ page before beginning
+<http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/setup.html>`__ page before beginning
 this tutorial.
 
 
@@ -58,9 +59,9 @@ by ARN
 
 This policy should be applied to roles assigned to the Amazon Cognito identity pool, but you will
 need to replace the Resource value with the correct account ID and ML Model ID. You can apply
-policies at the `IAM console <https://console.aws.amazon.com/iam/home>`_. To learn more about IAM
+policies at the `IAM console <https://console.aws.amazon.com/iam/home>`__. To learn more about IAM
 policies, see `Introduction to IAM
-<http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`_.
+<http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`__.
 
 
 Add Import Statements
@@ -91,7 +92,7 @@ Making a Predict Request
 Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created
 real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have
 to use the Machine Learning Console or an alternate `SDK
-<http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`_. To validate that
+<http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that
 this ML can be used for real-time Predictions::
 
 	// Use a created model that has a created real-time endpoint
@@ -138,5 +139,5 @@ real-time endpoint through the PredictRequest.
 
 Additional Resources
 
-- `Developer Guide <http://docs.aws.amazon.com/machine-learning/latest/dg>`_
-- `Service API Reference <http://docs.aws.amazon.com/machine-learning/latest/APIReference>`_
+- `Developer Guide <http://docs.aws.amazon.com/machine-learning/latest/dg>`__
+- `Service API Reference <http://docs.aws.amazon.com/machine-learning/latest/APIReference>`__

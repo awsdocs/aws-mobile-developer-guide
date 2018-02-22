@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _api-reference:
+.. _reference-api-refs:
 
 ##############################
 Android and iOS API References
@@ -21,15 +21,15 @@ Android and iOS API References
 
 **Android**
 
-* `AWS Mobile SDK for Android API Reference <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/>`_
-* `Latest AWS Mobile SDK for Android Download <http://sdk-for-android.amazonwebservices.com/latest/aws-android-sdk.zip>`_
-* `AWS Mobile SDK for Android on GitHub <https://github.com/aws/aws-sdk-android>`_
-* `AWS Mobile SDK for Android Samples <https://github.com/awslabs/aws-sdk-android-samples>`_
+* `AWS Mobile SDK for Android API Reference <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/>`__
+* `Latest AWS Mobile SDK for Android Download <http://sdk-for-android.amazonwebservices.com/latest/aws-android-sdk.zip>`__
+* `AWS Mobile SDK for Android on GitHub <https://github.com/aws/aws-sdk-android>`__
+* `AWS Mobile SDK for Android Samples <https://github.com/awslabs/aws-sdk-android-samples>`__
 
 
 **iOS**
 
-* `AWS Mobile SDK for iOS API Reference <http://docs.aws.amazon.com/AWSiOSSDK/latest/>`_
-* `AWS Mobile SDK for iOS on GitHub <https://github.com/aws/aws-sdk-ios>`_
-* `AWS Mobile SDK for iOS Samples <https://github.com/awslabs/aws-sdk-ios-samples>`_
+* `AWS Mobile SDK for iOS API Reference <http://docs.aws.amazon.com/AWSiOSSDK/latest/>`__
+* `AWS Mobile SDK for iOS on GitHub <https://github.com/aws/aws-sdk-ios>`__
+* `AWS Mobile SDK for iOS Samples <https://github.com/awslabs/aws-sdk-ios-samples>`__
 

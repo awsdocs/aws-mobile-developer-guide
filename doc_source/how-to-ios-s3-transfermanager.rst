@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _s3transfermanager:
+.. _how-to-ios-s3-transfermanager:
 
 ######################################
 iOS: Amazon S3 TransferManager for iOS
@@ -31,10 +31,10 @@ iOS: Amazon S3 TransferManager for iOS
 
 :guilabel:`Amazon Simple Storage Service (S3)`
 
-`Amazon Simple Storage Service (S3) <http://aws.amazon.com/s3/>`_ provides secure,
+`Amazon Simple Storage Service (S3) <http://aws.amazon.com/s3/>`__ provides secure,
 durable, highly-scalable object storage in the cloud. Using the AWS Mobile SDK for iOS, you can
 directly access Amazon S3 from your mobile app. For information about Amazon S3 regional availability,
-see  `AWS Service Region Availability <http://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/>`_.
+see  `AWS Service Region Availability <http://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/>`__.
 
 :guilabel:`TransferManager Features`
 
@@ -50,7 +50,7 @@ entire transfer. ``TransferManager`` provides simple APIs to pause, resume, and 
 The following sections provide a step-by-step guide for getting started with Amazon S3 using the ``TransferManager``.
 
 You can also try out the
-`Amazon S3 sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferManager-Sample>`_ available in the AWSLabs GitHub repository.
+`Amazon S3 sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferManager-Sample>`__ available in the AWSLabs GitHub repository.
 
 .. admonition:: Should I Use ``TransferManager`` or ``TransferUtility``?
 
@@ -65,8 +65,7 @@ To set your project up to use the ``TransferManager`` class, take the steps belo
 1. Setup the SDK, Credentials and Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Follow the steps in `How to Integrate Your Existing Bucket <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/how-to-integrate-an-existing-bucket.html>`_ to install the AWS Mobile SDK for iOS and configure
-    AWS credentials and permissions.
+   Follow the steps in :ref:`how-to-integrate-an-existing-bucket` to install the AWS Mobile SDK for iOS and configure AWS credentials and permissions.
 
 2. Import the SDK Amazon S3 APIs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -579,9 +578,9 @@ minimum part size for a multipart upload is 5MB.
 Additional Resources
 --------------------
 
-* `Amazon Simple Storage Service Getting Started Guide <http://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html>`_
-* `Amazon Simple Storage Service API Reference <http://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html>`_
-* `Amazon Simple Storage Service Developer Guide <http://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html>`_
+* `Amazon Simple Storage Service Getting Started Guide <http://docs.aws.amazon.com/AmazonS3/latest/gsg/GetStartedWithS3.html>`__
+* `Amazon Simple Storage Service API Reference <http://docs.aws.amazon.com/AmazonS3/latest/API/Welcome.html>`__
+* `Amazon Simple Storage Service Developer Guide <http://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html>`__
 
 .. _Identity and Access Management Console: https://console.aws.amazon.com/iam/home
 .. _Granting Access to an Amazon S3 Bucket: http://blogs.aws.amazon.com/security/post/Tx3VRSWZ6B3SHAV/Writing-IAM-Policies-How-to-grant-access-to-an-Amazon-S3-bucket

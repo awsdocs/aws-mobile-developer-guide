@@ -38,6 +38,8 @@ Start with a working app and then add cloud enable features. In this tutorial, y
 You should be able to complete the setup section of this tutorial within 10-15 minutes after
 you have installed all required software. Once you complete the instructions on this page, you can run the project on your local system.
 
+.. _ios-tutorial-notes-getting-started:
+
 Getting Started
 ---------------
 
@@ -65,9 +67,9 @@ Download the Source code
 
 1. Get the tutorial source code using one of the following choices:
 
-* Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/archive/master.zip>`_.
+* Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/archive/master.zip>`__.
 
-* Browse to  `https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/ <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/>`_ and clone or fork the repository (`sign up for GitHub account <https://github.com/join?source=header-home>`_, if you do not have one).
+* Browse to  `https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/ <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/>`__ and clone or fork the repository (`sign up for GitHub account <https://github.com/join?source=header-home>`__, if you do not have one).
 
 
 Compile and Run the Project

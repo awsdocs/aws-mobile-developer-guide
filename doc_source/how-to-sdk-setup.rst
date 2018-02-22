@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _how-to-storage:
+.. _how-to-sdk-setup:
 
 ####################################
 How To: AWS Mobile SDK Setup Options
@@ -24,9 +24,9 @@ How To: AWS Mobile SDK Setup Options
 
    * - **Just Getting Started?**
 
-       - :ref:`Use streamlined steps <getting-started>` to install the SDK and integrate AWS services.
+     - :ref:`Use streamlined steps <getting-started>` to install the SDK and integrate AWS services.
 
-*Or, use the contents of this page if your app will integrate existing AWS services.*
+        *Or, use the contents of this page if your app will integrate existing AWS services.*
 
 
 

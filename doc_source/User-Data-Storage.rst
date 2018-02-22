@@ -34,7 +34,7 @@ Choose |AMHlong| User Data Storage to:
 * Implement sync and caching of your app's data between devices using a simple programming model
 
 `Create a free Mobile Hub project and add the User Data Storage
-feature. <https://console.aws.amazon.com/mobilehub/home#/>`_
+feature. <https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _user-data-storage-details:
 
@@ -105,10 +105,10 @@ across devices.
 
 The User Data Storage feature enables you to store user files such as photos or documents in the
 cloud, and it also allows you to save user profile data in key/value pairs, such as app settings or
-game state. When you select this feature, an `Amazon S3 <http://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html>`_ bucket is created as
+game state. When you select this feature, an `Amazon S3 <http://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html>`__ bucket is created as
 the place your app will store user files.
 
-|AMH| will also configure `Amazon Cognito Sync <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sync.html>`_ so you can save user profile
+|AMH| will also configure `Amazon Cognito Sync <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sync.html>`__ so you can save user profile
 data in key/value pairs and synchronize that data across a user's authenticated devices.
 
 
@@ -125,13 +125,13 @@ User Data Storage At a Glance
    * - **AWS services and resources configured**
 
      - - **Amazon S3 bucket**
-         (see `Amazon S3 Getting Started Guide <http://docs.aws.amazon.com/AmazonS3/latest/gsg/>`_)
+         (see `Amazon S3 Getting Started Guide <http://docs.aws.amazon.com/AmazonS3/latest/gsg/>`__)
 
-         `Concepts <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`_ | `Console <https://console.aws.amazon.com/s3/>`_ | `Pricing <https://aws.amazon.com/s3/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ | `Console <https://console.aws.amazon.com/s3/>`__ | `Pricing <https://aws.amazon.com/s3/pricing/>`__
 
-       - **Amazon Cognito Sync** (:emphasis:`see` `Amazon Cognito Sync <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sync.html>`_)
+       - **Amazon Cognito Sync** (:emphasis:`see` `Amazon Cognito Sync <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sync.html>`__)
 
-         `Concepts <http://docs.aws.amazon.com/cognito/latest/developerguide/synchronizing-data.html>`_ | `Console <https://console.aws.amazon.com/cognito/>`_ | `Pricing <https://aws.amazon.com/cognito/pricing/#Cognito_Sync%C2%A0>`_
+         `Concepts <http://docs.aws.amazon.com/cognito/latest/developerguide/synchronizing-data.html>`__ | `Console <https://console.aws.amazon.com/cognito/>`__ | `Pricing <https://aws.amazon.com/cognito/pricing/#Cognito_Sync%C2%A0>`__
 
        |AMH|-enabled features use |COG| for authentication and |IAM| for authorization. For more information, see :ref:`User Sign-in <user-sign-in>`. For more information, see :ref:`resources-user-data-storage`.
 

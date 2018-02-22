@@ -34,7 +34,7 @@ Choose the |AMHlong| User Sign-in mobile backend feature to:
   user directory.
 
 `Create a free Mobile Hub project and add the User Sign-in feature.
-<https://console.aws.amazon.com/mobilehub/home#/>`_
+<https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _user-sign-in-details:
 
@@ -53,8 +53,8 @@ The following image shows a resource access policy being enforced for an authent
 This feature enables you to configure how your users gain access to AWS resources and services used
 by your app, either with no sign in process or through authentication provided by one or more
 identity providers. In both cases, AWS identity creation and credentials are provided by `Amazon
-Cognito Identity <https://aws.amazon.com/cognito/dev-resources/>`_, and access authorization comes through `AWS Identity
-and Access Management (IAM) <https://aws.amazon.com/iam/details/>`_.
+Cognito Identity <https://aws.amazon.com/cognito/dev-resources/>`__, and access authorization comes through `AWS Identity
+and Access Management (IAM) <https://aws.amazon.com/iam/details/>`__.
 
 When you create a project, |AMH| provisions the AWS identity, user role, and access policy
 configuration required to allow all users access to unrestricted resources. When you add the User
@@ -83,23 +83,23 @@ User Sign-in Feature At a Glance
 
      - - **Amazon Cognito**
 
-         `Concepts <http://docs.aws.amazon.com/cognito/latest/developerguide/concepts.html>`_ | `Console <https://console.aws.amazon.com/cognito/federated/>`_ | `Pricing <https://aws.amazon.com/cognito/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/cognito/latest/developerguide/concepts.html>`__ | `Console <https://console.aws.amazon.com/cognito/federated/>`__ | `Pricing <https://aws.amazon.com/cognito/pricing/>`__
 
          - :guilabel:`Amazon Cognito Identity Pool`
 
-           (see `Using Federated Identities <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`_)
+           (see `Using Federated Identities <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__)
 
          - :guilabel:`Amazon Cognito Your User Pools`
 
-           (see `Creating and Managing User Pools <http://docs.aws.amazon.com/cognito/latest/developerguide//cognito-user-identity-pools.html>`_)
+           (see `Creating and Managing User Pools <http://docs.aws.amazon.com/cognito/latest/developerguide//cognito-user-identity-pools.html>`__)
 
          - :guilabel:`Amazon Cognito SAML Federation`
 
-           (see `Overview of Configuring SAML 2.0-Based Federation <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html#CreatingSAML-configuring-IdP>`_)
+           (see `Overview of Configuring SAML 2.0-Based Federation <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html#CreatingSAML-configuring-IdP>`__)
 
        - **IAM role and security policies** (see :ref:`reference-mobile-hub-iam-managed-policies`)
 
-         `Concepts <http://docs.aws.amazon.com/IAM/latest/UserGuide/>`_ | `Console <https://console.aws.amazon.com/iam/home#roles>`_ | `Pricing <http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html#intro-features>`_
+         `Concepts <http://docs.aws.amazon.com/IAM/latest/UserGuide/>`__ | `Console <https://console.aws.amazon.com/iam/home#roles>`__ | `Pricing <http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html#intro-features>`__
 
        For more information, see :ref:`resources-user-sign-in`.
 
@@ -190,11 +190,11 @@ SAML Federation
 
   - SAML Federation enables users with credentials in your existing identity store to sign in to your mobile app using their familiar username and password. A user signs into to your identity provider (IdP) which is configured to return a validating SAML assertion. Your app then uses Amazon Cognito Federated Identities to exchange the SAML assertion for typical temporary, limited privilege credentials to access your AWS backend services.
 
-    SAML 2.0 (Security Assertion Markup Language 2.0) is an open standard used by many IdPs, including Microsoft Active Directory Federation Service and Shibboleth. Your IdP must be SAML 2.0 compatible to use this Mobile Hub option. To establish federation between AWS and your IdP the two systems must exchange SAML federation metadata. AWS federation metadata can be found at `https://signin.aws.amazon.com/static/saml-metadata.xml <https://signin.aws.amazon.com/static/saml-metadata.xml>`_. This xml file demonstrates the form that your IdP's metadata should take. For more information on SAML federation metadata for your IdP, see `Integrating Third-Party SAML Solution Providers with AWS <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml_3rd-party.html>`_.
+    SAML 2.0 (Security Assertion Markup Language 2.0) is an open standard used by many IdPs, including Microsoft Active Directory Federation Service and Shibboleth. Your IdP must be SAML 2.0 compatible to use this Mobile Hub option. To establish federation between AWS and your IdP the two systems must exchange SAML federation metadata. AWS federation metadata can be found at `https://signin.aws.amazon.com/static/saml-metadata.xml <https://signin.aws.amazon.com/static/saml-metadata.xml>`__. This xml file demonstrates the form that your IdP's metadata should take. For more information on SAML federation metadata for your IdP, see `Integrating Third-Party SAML Solution Providers with AWS <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml_3rd-party.html>`__.
 
     To implement this exchange, view your IdP's documentation to understand how to use the AWS federation metadata file to register AWS as a service provider. Then provide upload your IdP's federation metadata file using SAML Federation page of the Mobile Hub console.
 
-    To learn more about how AWS supports SAML federation, see `Overview of Configuring SAML 2.0-Based Federation <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`_.
+    To learn more about how AWS supports SAML federation, see `Overview of Configuring SAML 2.0-Based Federation <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__.
 
 
 .. _user-sign-in-requirement:

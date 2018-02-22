@@ -43,7 +43,7 @@ Enable the User File Storage feature by running the following comands in the roo
 Connect to the Backend
 ----------------------
 
-The examples in this section show how you would integrate AWS Amplify library calls using React (see the `AWS Amplify documentation <https://aws.github.io/aws-amplify>`_ to use other flavors of Javascript).
+The examples in this section show how you would integrate AWS Amplify library calls using React (see the `AWS Amplify documentation <https://aws.github.io/aws-amplify>`__ to use other flavors of Javascript).
 
 The following simple component could be added to a :code:`create-react-app` project to present an interface that uploads images and download them for display.
 
@@ -182,12 +182,12 @@ Next Steps
 ==========
 
 -  Learn how to do private file storage and more with the
-   `Storage module in AWS Amplify <https://aws.github.io/aws-amplify/media/developer_guide.html>`_.
+   `Storage module in AWS Amplify <https://aws.github.io/aws-amplify/media/developer_guide.html>`__.
 
--  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`_.
+-  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`__.
 
--  Learn how to use those features in your app with the `AWS Amplify library <https://aws.github.io/aws-amplify>`_.
+-  Learn how to use those features in your app with the `AWS Amplify library <https://aws.github.io/aws-amplify>`__.
 
--  Learn more about the `analytics for the User File Storage feature <https://alpha-docs-aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`_.
+-  Learn more about the `analytics for the User File Storage feature <https://alpha-docs-aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__.
 
--  Learn more about how your files are stored on `Amazon Simple Storage Service <https://aws.amazon.com/documentation/s3/>`_.
+-  Learn more about how your files are stored on `Amazon Simple Storage Service <https://aws.amazon.com/documentation/s3/>`__.

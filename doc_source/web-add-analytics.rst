@@ -41,19 +41,19 @@ Launch your app locally by running:
 
    npm start
 
-When you use your app the `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`_  service gathers and visualizes analytics data.
+When you use your app the `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`__  service gathers and visualizes analytics data.
 
 **To view the analytics using the Amazon Pinpoint console**
 
 #. Run :code:`npm start`, :code:`awsmobile run`, or :code:`awsmobile publish --test` at least once.
 
-#. Open your project in the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`_.
+#. Open your project in the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`__.
 
    .. code-block:: bash
 
       awsmobile console
 
-#. Choose the :guilabel:`Analytics` icon on the left, to navigate to your project in the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_.
+#. Choose the :guilabel:`Analytics` icon on the left, to navigate to your project in the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
 
 #. Choose :guilabel:`Analytics` on the left.
 
@@ -63,7 +63,7 @@ You should see an up-tick in several graphs.
 Add Custom Analytics to Your App
 ================================
 
-You can configure your app so that `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`_ gathers data for custom events that you register within the flow of your code.
+You can configure your app so that `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`__ gathers data for custom events that you register within the flow of your code.
 
 **To instrument custom analytics in your app**
 
@@ -95,7 +95,7 @@ To test:
 
 #. Save the changes and run :code:`npm start`, :code:`awsmobile run`, or :code:`awsmobile publish --test` to launch your app. Use your app so that tracked events are triggered.
 
-#. In the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_, choose :guilabel:`Events` near the top.
+#. In the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__, choose :guilabel:`Events` near the top.
 
 #. Select an event in the :guilabel:`Event` dropdown menu on the left.
 
@@ -104,8 +104,8 @@ Custom event data may take a few minutes to become visible in the console.
 Next Steps
 ==========
 
-Learn more about the analytics in AWS Mobile which are part of the :ref:`Messaging and Analytics <messaging-and-analytics>` feature. THis feature uses `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`_.
+Learn more about the analytics in AWS Mobile which are part of the :ref:`Messaging and Analytics <messaging-and-analytics>` feature. THis feature uses `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 
-Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`_.
+Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`__.

@@ -18,7 +18,7 @@ Add User Sign-in to Your Mobile App with Amazon Cognito
    :description: Integrating user sign-in
 
 
-Enable your users to sign-in using credentials from Facebook, Google, or your own custom user directory. The AWS Mobile Hub :ref:`user-sign-in` feature is powered by `Amazon Cognito <http://docs.aws.amazon.com/cognito/latest/developerguide/>`_, and the SDK provides a pre-built, :ref:`configurable <add-aws-mobile-user-sign-in-customize>` Sign-in UI based on the identity provider(s) you configure.
+Enable your users to sign-in using credentials from Facebook, Google, or your own custom user directory. The AWS Mobile Hub :ref:`user-sign-in` feature is powered by `Amazon Cognito <http://docs.aws.amazon.com/cognito/latest/developerguide/>`__, and the SDK provides a pre-built, :ref:`configurable <add-aws-mobile-user-sign-in-customize>` Sign-in UI based on the identity provider(s) you configure.
 
 
 .. _auth-setup:
@@ -32,7 +32,7 @@ Set Up Your Backend
 .. container:: option
 
    Email & Password
-      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the feature's tile.
+      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the feature's tile.
 
       #. **Configure Email and Password sign-in**: Choose the feature and then select sign-in policies including: allowed login methods; multi-factor authentication; and password requirements and then choose :guilabel:`Create user pool`.
 
@@ -50,7 +50,7 @@ Set Up Your Backend
       #. Follow the :ref:`next steps <set-up-email-and-password>` to connect to your backend from your app.
 
    Facebook
-      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the feature's tile.
+      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the feature's tile.
 
       #. **Configure Facebook sign-in**: Choose the feature and then type your Facebook App ID and then choose :guilabel:`Enable Facebook login`. To retrieve or create your Facebook App ID, see `Setting Up Facebook Authentication. <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-facebook-setup.html>`__.
 
@@ -69,7 +69,7 @@ Set Up Your Backend
 
 
    Google
-      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the feature's tile.
+      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the feature's tile.
 
       #. **Configure Google sign-in**: Choose the feature and then type in your Google Web App Client ID, and the Google Android or iOS Client ID (or both), and then choose Enable Google Sign-In. To retrieve or create your Google Client IDs, see `Setting Up Google Authentication <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-google-setup.html>`__.
 
@@ -168,7 +168,7 @@ Setup Email & Password Login in your Mobile App
          .. code-block:: bash
 
             platform :ios, '9.0'
-            target :'YourAppTarget' do
+            target :'YOUR-APP-NAME' do
                 use_frameworks!
                 pod 'AWSUserPoolsSignIn', '~> 2.6.6'
                 pod 'AWSAuthUI', '~> 2.6.6'
@@ -203,15 +203,14 @@ Setup Email & Password Login in your Mobile App
 
          .. code-block:: swift
 
-                 func application(
-                     _ application: UIApplication,
-                         didFinishLaunchingWithOptions launchOptions:
-                             [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+             func application(
+                 _ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions:
+                         [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-                      return AWSMobileClient.sharedInstance().interceptApplication(
-                          application, didFinishLaunchingWithOptions:
-                          launchOptions)
-                 }
+                  return AWSMobileClient.sharedInstance().interceptApplication(
+                      application, didFinishLaunchingWithOptions:
+                      launchOptions)
              }
 
       #. Implement your sign-in UI by calling the library provided in the SDK.
@@ -352,7 +351,7 @@ Setup Facebook Login in your Mobile App
          .. code-block:: bash
 
             platform :ios, '9.0'
-              target :'YourAppTarget' do
+              target :'YOUR-APP-NAME' do
                 use_frameworks!
                 pod 'AWSMobileClient', '~> 2.6.6'
                 pod 'AWSFacebookSignIn', '~> 2.6.6'
@@ -539,7 +538,7 @@ Setup Google Login in your Mobile App
          .. code-block:: bash
 
               platform :ios, '9.0'
-                target :'YourAppTarget' do
+                target :'YOUR-APP-NAME' do
                   use_frameworks!
                   pod 'AWSMobileClient', '~> 2.6.6'
                   pod 'AWSGoogleSignIn', '~> 2.6.6'
@@ -639,6 +638,6 @@ Next Steps
 
   * :ref:`Customize the UI <add-aws-mobile-user-sign-in-customize>`
 
-  * `Amazon Cognito Developer Guide <http://docs.aws.amazon.com/cognito/latest/developerguide/>`_
+  * `Amazon Cognito Developer Guide <http://docs.aws.amazon.com/cognito/latest/developerguide/>`__
 
 

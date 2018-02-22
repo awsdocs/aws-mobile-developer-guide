@@ -19,7 +19,7 @@ The configuration settings of your Mobile Hub project are stored in the AWS US E
 
 The AWS services you configure are hosted in the region you select for your project, if they are available in that region. If services are not available in that region, then Mobile hub will host the services in another region.
 
-For more details about regional endpoints, see `AWS Regions and Endpoints <https://docs.aws.amazon.com/general/latest/gr/rande.html>`_.
+For more details about regional endpoints, see `AWS Regions and Endpoints <https://docs.aws.amazon.com/general/latest/gr/rande.html>`__.
 
 To understand where services for your project will be hosted, find the region for your project in the following tables.
 
@@ -209,7 +209,7 @@ Asia Pacific (Sydney)
 South America (São Paulo)
 -------------------------
 
-.. csv-table:: If you selected Asia Pacific (Sydney) as the preferred region for your project:
+.. csv-table:: If you selected South America (São Paulo) as the preferred region for your project:
    :header: "Hosting for these services:", "Is located in:"
    :widths: 1, 4
 

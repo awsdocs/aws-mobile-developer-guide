@@ -29,10 +29,10 @@ The Hosting and Streaming feature enables you to host code and content in the cl
 native mobile, or hybrid app. A simple sample web app that accesses AWS services is deployed when you
 enable this feature.
 
-|AMH| creates a container for your content using an `Amazon S3 <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`_ bucket. The content is available publicly on the Internet and you can preview the content directly using a testing URL.
+|AMH| creates a container for your content using an `Amazon S3 <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ bucket. The content is available publicly on the Internet and you can preview the content directly using a testing URL.
 
 Your content is automatically distributed to a global content delivery network (CDN). `Amazon
-CloudFront <https://aws.amazon.com/cloudfront/>`_ also supports media file streaming. To learn more, see `CloudFront Streaming Tutorials <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/url-cf-dev;Tutorials.html>`_.
+CloudFront <https://aws.amazon.com/cloudfront/>`__ also supports media file streaming. To learn more, see `CloudFront Streaming Tutorials <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/url-cf-dev;Tutorials.html>`__.
 
 
 .. _add-aws-mobile-hosting-and-streaming-back-end-setup:
@@ -49,7 +49,7 @@ Set Up Your Backend
       #. Use |AMHlong| to deploy your backend in minutes.
 
 
-         #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+         #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 
          #. Choose :guilabel:`Create a new project`, type a name for it, and then choose
             :guilabel:`Create project`.
@@ -123,7 +123,7 @@ Set Up Your Backend
       #. Deploy your AWS services in minutes using |AMHlong|.
 
 
-         #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+         #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 
          #. Choose :guilabel:`Create a new project`, type a name for it, and then choose
             :guilabel:`Create project`.
@@ -204,7 +204,7 @@ Set Up Your Backend
          static web content for public access.
 
 
-         #. In the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_, open your project and then choose the Hosting and Streaming tile.
+         #. In the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__, open your project and then choose the Hosting and Streaming tile.
 
          #. Choose :guilabel:`View from S3`.
 
@@ -247,7 +247,7 @@ Set Up Your Backend
          distribution is created and associated with your bucket. When |AMH| propagates the sample
          web app content to the bucket, the content is then propagated to the CDN and becomes
          available from local endpoints around the globe. If you configure `CloudFront streaming
-         <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Tutorials.html>`_, then media content you upload to your |S3| bucket can be streamed from
+         <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Tutorials.html>`__, then media content you upload to your |S3| bucket can be streamed from
          those endpoints.
 
 
@@ -360,7 +360,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
 
          #. Use the |S3| console to manage your web assets
 
-            #. In the `Mobile Hub console <https://console.aws.amazon.com/mobilehub>`_, open your project and choose the Hosting and Streaming tile.
+            #. In the `Mobile Hub console <https://console.aws.amazon.com/mobilehub>`__, open your project and choose the Hosting and Streaming tile.
 
             #. Choose :guilabel:`Manage files`.
 
@@ -400,7 +400,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
             using the command line.
 
             To install and configure the |CLI| client, see `Getting Set Up with the AWS Command Line
-            Interface <http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-get-set-up.html>`_
+            Interface <http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-get-set-up.html>`__
 
             As an example, the sync command enables transfer of files to and from your local folder
             and your bucket.
@@ -417,7 +417,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
                 $  aws s3 sync . s3://my-web-app-bucket/path
 
             To learn more about using |CLI| to manage |S3|, see `Using Amazon S3 with the AWS
-            Command Line Interface. <http://docs.aws.amazon.com/cli/latest/userguide/cli-s3.html>`_
+            Command Line Interface. <http://docs.aws.amazon.com/cli/latest/userguide/cli-s3.html>`__
 
       .. _configure-custom-domain:
 
@@ -427,10 +427,10 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
          routing.
 
          For a web app hosted in a single location, see `Routing Traffic to a Website that Is Hosted in
-         an Amazon S3 Bucket <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/RoutingToS3Bucket.html>`_.
+         an Amazon S3 Bucket <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/RoutingToS3Bucket.html>`__.
 
          For a web app distributed through a global CDN, see `Routing Traffic to an Amazon CloudFront
-         Web Distribution by Using Your Domain Name <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloud-fron-distribution.html>`_
+         Web Distribution by Using Your Domain Name <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloud-fron-distribution.html>`__
 
 
 

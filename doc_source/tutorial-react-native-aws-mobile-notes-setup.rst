@@ -38,6 +38,8 @@ Start with a working app and then add cloud enabled features. In this tutorial y
 You should be able to complete the setup section of this tutorial within 10-15 minutes after
 you have installed all required software. Once you complete the instructions on this page, you can run the project on your local system.
 
+.. _react-native-tutorial-notes-getting-started:
+
 Getting Started
 ---------------
 
@@ -47,11 +49,11 @@ Before beginning:
 
    **For Android**
 
-   -  Download and install `Android Studio <https://developer.android.com/studio/index.html>`_ version 2.33 or later.
+   -  Download and install `Android Studio <https://developer.android.com/studio/index.html>`__ version 2.33 or later.
 
-   -  Download an install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`_ version 7.11 (Nougat), API level 25.
+   -  Download an install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`__ version 7.11 (Nougat), API level 25.
 
-   -  Install an `Android Emulator <https://developer.android.com/studio/run/managing-avds.html>`_ - the app works with both phone and tablet emulators (for example, the Nexus 5X or Pixel C).
+   -  Install an `Android Emulator <https://developer.android.com/studio/run/managing-avds.html>`__ - the app works with both phone and tablet emulators (for example, the Nexus 5X or Pixel C).
 
    **For iOS**
 
@@ -65,9 +67,9 @@ Before beginning:
 
    -  Configure an iOS Simulator.
 
-#. `Sign up for the AWS Free Tier <https://aws.amazon.com/free/>`_.
+#. `Sign up for the AWS Free Tier <https://aws.amazon.com/free/>`__.
 
-#. Install `Node.js <https://nodejs.org/en/download/>`_ with NPM.
+#. Install `Node.js <https://nodejs.org/en/download/>`__ with NPM.
 
 #. Install AWS Mobile CLI
 
@@ -91,9 +93,9 @@ Download the Source code
 
 1. Get the tutorial source code using one of the following choices:
 
-* Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-react-native-notes-tutorial/archive/master.zip>`_.
+* Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-react-native-notes-tutorial/archive/master.zip>`__.
 
-* Browse to  `https://github.com/aws-samples/aws-mobile-react-native-notes-tutorial <https://github.com/aws-samples/aws-mobile-react-native-notes-tutorial/>`_ and clone or fork the repository. (If you do not have one, `sign up for GitHub account <https://github.com/join?source=header-home>`_).
+* Browse to  `https://github.com/aws-samples/aws-mobile-react-native-notes-tutorial <https://github.com/aws-samples/aws-mobile-react-native-notes-tutorial/>`__ and clone or fork the repository. (If you do not have one, `sign up for GitHub account <https://github.com/join?source=header-home>`__).
 
 
 Compile and run the Source Code
@@ -114,7 +116,7 @@ Running into Problems
 
 The most common problems at this stage involve issues with the
 installation of Java, Android Studio, the Android SDK or the Android
-Emulator. Google provides detailed instructions on `Android Studio <https://developer.android.com/studio/index.html>`_ and
+Emulator. Google provides detailed instructions on `Android Studio <https://developer.android.com/studio/index.html>`__ and
 dependent features.
 
 Next Steps

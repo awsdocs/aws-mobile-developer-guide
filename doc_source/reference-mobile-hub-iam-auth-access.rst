@@ -57,28 +57,28 @@ those resources and services). You can access AWS as any of the following types 
   .. important:: For security reasons, we recommend that you use the root credentials only to create an
      administrator user, which is an |IAM| user with full permissions to your AWS account. Then, you
      can use this administrator user to create other |IAM| users and roles with limited permissions.
-     For more information, see `IAM Best Practices <http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users>`_ and
-     `Creating an Admin User and Group <http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html>`_ in the
+     For more information, see `IAM Best Practices <http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users>`__ and
+     `Creating an Admin User and Group <http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html>`__ in the
      :title:`IAM User Guide`.
 
 * **IAM user**
 
-  An `IAM user <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html>`_ is simply an identity within your AWS account that has specific
+  An `IAM user <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html>`__ is simply an identity within your AWS account that has specific
   custom permissions (for example, read-only permissions to access your |AMH| project). You can use
   an |IAM| user name and password to sign in to secure AWS webpages like the `AWS Management Console
-  <https://console.aws.amazon.com/>`_, `AWS Discussion Forums <http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html>`_, or the `AWS Support
-  Center <https://console.aws.amazon.com/support/home#/>`_.
+  <https://console.aws.amazon.com/>`__, `AWS Discussion Forums <http://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html>`__, or the `AWS Support
+  Center <https://console.aws.amazon.com/support/home#/>`__.
 
   In addition to a user name and password, you can also generate `access keys
-  <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html>`_ for each user. You can use these keys when you access AWS
-  services programmatically, either through `one of the several SDKs <https://aws.amazon.com/tools/>`_ or by using the `AWS
-  Command Line Interface (CLI) <https://aws.amazon.com/cli/>`_. The SDK and CLI tools use the access keys to
+  <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html>`__ for each user. You can use these keys when you access AWS
+  services programmatically, either through `one of the several SDKs <https://aws.amazon.com/tools/>`__ or by using the `AWS
+  Command Line Interface (CLI) <https://aws.amazon.com/cli/>`__. The SDK and CLI tools use the access keys to
   cryptographically sign your request. If you don't use the AWS tools, you must sign the request
   yourself.
 
 * **IAM role**
 
-  An `IAM role <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>`_ is another |IAM| identity you can create in your account that has
+  An `IAM role <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>`__ is another |IAM| identity you can create in your account that has
   specific permissions. It is similar to an |IAM| user, but it is not associated with a specific
   person. An |IAM| role enables you to obtain temporary access keys that can be used to access AWS
   services and resources. |IAM| roles with temporary credentials are useful in the following
@@ -90,15 +90,15 @@ those resources and services). You can access AWS as any of the following types 
     Instead of creating an |IAM| user, you can use preexisting user identities from your enterprise
     user directory or a web identity provider. These are known as federated users. AWS assigns a
     role to a federated user when access is requested through an `identity provider
-    <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>`_. For more information about federated users, see `Federated Users
-    and Roles <http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html#intro-access-roles>`_ in the
+    <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html>`__. For more information about federated users, see `Federated Users
+    and Roles <http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_access-management.html#intro-access-roles>`__ in the
     :title:`IAM User Guide`.
 
   * **Cross-account access**
 
     You can use an |IAM| role in your account to grant another AWS account permissions to access
     your account's resources. For an example, see `Tutorial: Delegate Access Across AWS Accounts
-    Using IAM Roles <http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html>`_ in the :title:`IAM User Guide`.
+    Using IAM Roles <http://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html>`__ in the :title:`IAM User Guide`.
 
   * **AWS service access**
 
@@ -106,7 +106,7 @@ those resources and services). You can access AWS as any of the following types 
     account's resources. For example, you can create a role that allows |RSlong| to access an |S3|
     bucket on your behalf and then load data stored in the bucket into an |RS| cluster. For more
     information, see `Creating a Role to Delegate Permissions to an AWS Service
-    <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html>`_ in the :title:`IAM User Guide`.
+    <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html>`__ in the :title:`IAM User Guide`.
 
   * **Applications running on Amazon EC2**
 
@@ -116,7 +116,7 @@ those resources and services). You can access AWS as any of the following types 
     its applications, you can create an instance profile that is attached to the instance. An
     instance profile contains the role and enables programs running on the EC2 instance to get
     temporary credentials. For more information, see `Using Roles for Applications on Amazon EC2
-    <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html>`_ in the :title:`IAM User Guide`.
+    <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html>`__ in the :title:`IAM User Guide`.
 
 Access Control
 ~~~~~~~~~~~~~~

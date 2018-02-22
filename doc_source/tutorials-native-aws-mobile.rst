@@ -35,5 +35,6 @@ Notes App Tutorial
 Build a simple note taking application. Start with an offline version of our data-driven app. Cloud-enable the app, adding app analytics, authentication and cloud data storage through AWS services.
 
    * :ref:`Android Notes Tutorial <tutorial-android-aws-mobile-notes-setup>`
+   * :ref:`iOS Notes Tutorial <tutorial-ios-aws-mobile-notes-setup>`
 
 

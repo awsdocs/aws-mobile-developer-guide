@@ -27,7 +27,7 @@ Cloud Logic Overview
 
 Add RESTful APIs handled by your serverless |LAM| functions to extend your mobile app to the range
 of AWS services and beyond. In |AMH|, enabling the :ref:`cloud-logic` feature uses `Amazon API
-Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`_ and `AWS Lambda <http://docs.aws.amazon.com/lambda/latest/dg/>`_ services to provide these capabilities.
+Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`__ and `AWS Lambda <http://docs.aws.amazon.com/lambda/latest/dg/>`__ services to provide these capabilities.
 
 
 .. _cloud-backend:
@@ -37,9 +37,9 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
 
-#. Enable :guilabel:`Cloud Logic`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`Cloud Logic` tile to enable the feature.
+#. Enable :guilabel:`Cloud Logic`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`Cloud Logic` tile to enable the feature.
 
-#. Create a new API or import one that you created in the `API Gateway console <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`_.
+#. Create a new API or import one that you created in the `API Gateway console <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`__.
 
    #. To create a new API choose :guilabel:`Create an API`.
 
@@ -47,7 +47,7 @@ Set Up Your Backend
 
    #. Configure your :guilabel:`Paths`. Paths are locations to the serverless |LAMlong| functions that handle requests to your API.
 
-      Choose :guilabel:`Create API` to deploy a default API and its associated handler function. The default handler is a Node.js function that echoes JSON input that it receives. For more information, see `Using AWS Lambda with Amazon API Gateway <with-on-demand-https.html>`_.
+      Choose :guilabel:`Create API` to deploy a default API and its associated handler function. The default handler is a Node.js function that echoes JSON input that it receives. For more information, see `Using AWS Lambda with Amazon API Gateway <with-on-demand-https.html>`__.
 
 #. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
 
@@ -228,7 +228,7 @@ Use the following steps to add AWS Cloud Logic to your app.
 
                platform :ios, '9.0'
 
-               target :'YourAppTarget' do
+               target :'YOUR-APP-NAME' do
                   use_frameworks!
 
                      pod 'AWSAuthCore', '~> 2.6.6'

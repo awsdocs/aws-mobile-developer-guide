@@ -10,16 +10,18 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
+.. _readme:
+
 ##########################
 aws-mobile-developer-guide
 ##########################
 
-This repository contains source content for the official `AWS Mobile Developer Guide <https://docs.aws.amazon.com/aws-mobile/latest/developerguide/what-is-aws-mobile.html`_. The
+This repository contains source content for the official :ref:`what-is-aws-mobile`. The
 source code for the AWS Mobile SDKs is available at:
 
-* Android: https://github.com/aws/aws-sdk-android
+* Android: `https://github.com/aws/aws-sdk-android <https://github.com/aws/aws-sdk-android>`__
 
-* iOS: https://github.com/aws/aws-sdk-ios
+* iOS: `https://github.com/aws/aws-sdk-ios <https://github.com/aws/aws-sdk-ios>`__
 
 The guide content is written in reStructuredText_ and built using Sphinx_. It relies upon content
 which is provided in the AWS documentation team's `shared content`_ repository.
@@ -31,9 +33,9 @@ Reporting issues
 You can use the Issues_ section of this repository to report problems in the documentation. *When
 submitting an issue, please indicate*:
 
-* what page (a URL or filename is best) the issue occurs on.
+* What page (a URL or filename is best) the issue occurs on.
 
-* what the issue is, using as much detail as you can provide. For many issues, this might be as
+* What the issue is, using as much detail as you can provide. For many issues, this might be as
   simple as "The page has a typo; the word 'complie' in the third paragraph shoud be 'compile'." If
   the issue is more complex, please describe it with enough detail that it's clear to the AWS
   documentation team what the problem is.
@@ -78,7 +80,7 @@ Services, Inc. or its affiliates. All rights reserved.
 
 Except where otherwise noted, this work is licensed under a `Creative Commons
 Attribution-NonCommercial-ShareAlike 4.0 International License
-<http://creativecommons.org/licenses/by-nc-sa/4.0/>`_ (the "License"). Use the preceding link for a
+<http://creativecommons.org/licenses/by-nc-sa/4.0/>`__ (the "License"). Use the preceding link for a
 human-readable summary of the license terms. The full license text is available at:
 http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode and in the LICENSE file accompanying this
 repository.

@@ -84,7 +84,7 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
       #. Choose :guilabel:`Save`.
 
       #. For information about sending mail from Amazon Pinpoint, see `Sending an Email Message
-         <messages.html#messages-email>`_.
+         <messages.html#messages-email>`__.
 
    #. **For SMS**: Choose the :guilabel:`Messaging and Analytics` tile to enable the
       feature.
@@ -99,10 +99,10 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
 
       #. Adjust the options for :guilabel:`Default message type`, :guilabel:`Account spend limit`,
          and :guilabel:`Default sender ID`. For more information on these options, see `Updating SMS
-         Settings <channels-sms-manage.html#channels-sms-manage-settings>`_.
+         Settings <channels-sms-manage.html#channels-sms-manage-settings>`__.
 
       #. For information about sending SMS messages from Amazon Pinpoint, see `Sending an SMS Message
-         <messages.html#messages-sms>`_.
+         <messages.html#messages-sms>`__.
 
 
 .. _connect-to-your-backend:

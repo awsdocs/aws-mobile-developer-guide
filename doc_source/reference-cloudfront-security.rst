@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _cloudfront-security:
+.. _reference-cloudfront-security:
 
 ################################################
 |CFlong| Security Considerations for |AMH| Users
@@ -19,7 +19,7 @@
    :description: Describes |CFlong| security considerations for |AMHlong| users.
 
 
-When you enable the AWS Mobile Hub :ref:`hosting-and-streaming` feature, an `Amazon CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/>`_
+When you enable the AWS Mobile Hub :ref:`hosting-and-streaming` feature, an `Amazon CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/>`__
 distribution is created in your account. The distribution caches the web assets you store within an
 associated Amazon S3 bucket throughout a global network of Amazon edge servers. This provides your
 customers with fast local access to the web assets.
@@ -46,7 +46,7 @@ add this restriction to your |AMH| project by enabling the :ref:`user-sign-in` f
 sign-in required option.
 
 For more information, see `Authentication and Access Control for CloudFront
-<http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/auth-and-access-control.html>`_ in the :title:`Amazon CloudFront Developer Guide`.
+<http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/auth-and-access-control.html>`__ in the :title:`Amazon CloudFront Developer Guide`.
 
 
 .. _cloudfront-security-https:
@@ -61,7 +61,7 @@ HTTPS both between customers and your distribution endpoints, and |CF| between y
 caches and the source bucket where your assets originate. Global redirection of HTTP traffic to
 HTTPS, use of HTTPS for custom domains and other options are also supported.
 
-For more information, see `Using HTTPS with CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https.html>`_ in the
+For more information, see `Using HTTPS with CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https.html>`__ in the
 :title:`Amazon CloudFront Developer Guide`.
 
 
@@ -78,7 +78,7 @@ users.
 A best practice is to use techniques like these on both the connection between the user and the
 distribution endpoint and between the distribution and the content |S3| source bucket.
 
-For more information, see the `Serving Private Content through CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html>`_
+For more information, see the `Serving Private Content through CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html>`__
 section in the :emphasis:`Amazon CloudFront Developer Guide`.
 
 
@@ -94,7 +94,7 @@ details about a single access request, such as the requester, distribution name,
 request action, response status, and error code, if any. You can store logs in an |S3| bucket. To
 help manage your costs, you can delete logs that you no longer need, or you can suspend logging.
 
-For more information, see `Access Logs for CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html>`_ in the
+For more information, see `Access Logs for CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html>`__ in the
 :title:`Amazon CloudFront Developer Guide`.
 
 

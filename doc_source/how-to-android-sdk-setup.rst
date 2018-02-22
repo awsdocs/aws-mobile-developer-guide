@@ -10,6 +10,8 @@
 
 .. highlight:: java
 
+.. _how-to-android-setup-sdk:
+
 ##################################
 Android: Setup Options for the SDK
 ##################################
@@ -25,20 +27,20 @@ Android: Setup Options for the SDK
 
 To get started with the |sdk-android|, you can set up the SDK and start building a new project, or
 you can integrate the SDK with an existing project. You can also clone and run the `samples
-<https://github.com/awslabs/aws-sdk-android-samples>`_ to get a sense of how the SDK works.
+<https://github.com/awslabs/aws-sdk-android-samples>`__ to get a sense of how the SDK works.
 
 Prerequisites
 =============
 
 Before you can use the |sdk-android|, you will need the following:
 
-- An `AWS Account <http://aws.amazon.com>`_
+- An `AWS Account <http://aws.amazon.com>`__
 
 - Android 2.3.3 (API Level 10) or higher (for more information about the Android platform, see
-  `Android Developers <http://developer.android.com/index.html>`_)
+  `Android Developers <http://developer.android.com/index.html>`__)
 
-- `Android Studio <https://developer.android.com/sdk/index.html>`_ or `Android Development Tools for
-  Eclipse <http://developer.android.com/sdk/eclipse-adt.html>`_
+- `Android Studio <https://developer.android.com/sdk/index.html>`__ or `Android Development Tools for
+  Eclipse <http://developer.android.com/sdk/eclipse-adt.html>`__
 
 After completing the prerequisites, you will need to do the following to get started:
 
@@ -119,7 +121,7 @@ Option 2: Import the JAR Files
 
 To obtain the JAR files, download the SDK from http://aws.amazon.com/mobile/sdk. The SDK is stored
 in a compressed file named :file:`aws-android-sdk-#-#-#`, where #-#-# represents the version number.
-Source code is available on `GitHub <https://github.com/aws/aws-sdk-android>`_.
+Source code is available on `GitHub <https://github.com/aws/aws-sdk-android>`__.
 
 **If using Android Studio:**
 
@@ -143,15 +145,15 @@ download the entire AWS Mobile SDK and manually include JAR files.
 
 Maven is supported in |sdk-android| v. 2.1.3 and onward. Older versions of the SDK are not available
 via Maven. If you're new to Maven and you'd like to learn more about it, see the `Maven
-documentation <http://maven.apache.org/what-is-maven.html>`_.
+documentation <http://maven.apache.org/what-is-maven.html>`__.
 
 
 pom.xml Example
 ~~~~~~~~~~~~~~~
 
-Here's an example of how you can add `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`_,
-`Amazon S3 <http://aws.amazon.com/s3/>`_, and `Amazon Mobile Analytics
-<http://aws.amazon.com/mobileanalytics/>`_ to your project:
+Here's an example of how you can add `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__,
+`Amazon S3 <http://aws.amazon.com/s3/>`__, and `Amazon Mobile Analytics
+<http://aws.amazon.com/mobileanalytics/>`__ to your project:
 
 .. code-block:: xml
 
@@ -178,7 +180,7 @@ include a ``<dependency>`` element following the model above, and use the approp
 from the table below. The ``<version>`` element specifies the version of the |sdk-android|. The
 example above demonstrate's Maven's ability to use a range of acceptable versions for a given
 dependency. To review available versions of the SDK for Android, see the `Release Notes
-<https://aws.amazon.com/releasenotes/Android>`_.
+<https://aws.amazon.com/releasenotes/Android>`__.
 
 The AWS Mobile :code:`artifactId` values are as follows:
 
@@ -245,11 +247,11 @@ To get started with Amazon Cognito, you must create an identity pool. An identit
 user identity data specific to your account. Every identity pool has configurable IAM roles that
 allow you to specify which AWS services your application's users can access. Typically, a developer
 will use one identity pool per application. For more information on identity pools, see the `Amazon
-Cognito Developer Guide <http://docs.aws.amazon.com/cognito/devguide/identity/identity-pools/>`_.
+Cognito Developer Guide <http://docs.aws.amazon.com/cognito/devguide/identity/identity-pools/>`__.
 
 To create an identity pool for your application:
 
-#. Log in to the `Amazon Cognito Console <https://console.aws.amazon.com/cognito/home>`_ and click
+#. Log in to the `Amazon Cognito Console <https://console.aws.amazon.com/cognito/home>`__ and click
    :guilabel:`Manage Federated Identities`, then :guilabel:`Create new identity pool`.
 
 #. Enter a name for your Identity Pool and check the checkbox to enable access to unauthenticated
@@ -273,12 +275,12 @@ Next Steps
 ==========
 
 - **Run the demos**: View our `sample Android apps
-  <https://github.com/awslabs/aws-sdk-android-samples>`_ that demonstrate common use cases. To run
+  <https://github.com/awslabs/aws-sdk-android-samples>`__ that demonstrate common use cases. To run
   the sample apps, set up the SDK for Android as described above, and then follow the instructions
   contained in the README files of the individual samples.
 
 - **Read the API Reference**: View the `API Reference
-  <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/>`_ for the AWS Mobile SDK for Android.
+  <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/>`__ for the AWS Mobile SDK for Android.
 
 - **Try AWS Mobile Hub**: Quickly configure and provision an AWS cloud backend for many common mobile
   app features, and download end to end working Android demonstration projects, SDK, and helper code, all

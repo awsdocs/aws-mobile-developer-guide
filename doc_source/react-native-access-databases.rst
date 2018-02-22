@@ -70,7 +70,7 @@ Create a table
       ? Choose the data type string
       ? Would you like to add another column No
 
-   Choose a `Primary Key <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey>`_ that will uniquely identify each item. Optionally, choose a column to be a Sort Key when you will commonly use those values in combination with the Primary Key for sorting or searching your data. You can additional sort keys by adding a `Secondary Index <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.SecondaryIndexes>`_ for each column you will want to sort by.
+   Choose a `Primary Key <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.PrimaryKey>`__ that will uniquely identify each item. Optionally, choose a column to be a Sort Key when you will commonly use those values in combination with the Primary Key for sorting or searching your data. You can additional sort keys by adding a `Secondary Index <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html#HowItWorks.CoreComponents.SecondaryIndexes>`__ for each column you will want to sort by.
 
    .. code-block:: none
 
@@ -302,9 +302,9 @@ The following is and example of how you might construct UI to excercise these op
 Next Steps
 ==========
 
-Learn more about the AWS Mobile :ref:`NoSQL Database <NoSQL-Database>` feature, which uses `Amazon DynamoDB <http://docs.aws.amazon.com/dynamodb/latest/developerguide/welcome.html>`_.
+Learn more about the AWS Mobile :ref:`NoSQL Database <NoSQL-Database>` feature, which uses `Amazon DynamoDB <http://docs.aws.amazon.com/dynamodb/latest/developerguide/welcome.html>`__.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 
-Learn about `AWS Mobile Amplify <https://github.com/aws/aws-amplify/tree/master/packages/aws-amplify-react-native>`_.
+Learn about `AWS Mobile Amplify <https://github.com/aws/aws-amplify/tree/master/packages/aws-amplify-react-native>`__.
 

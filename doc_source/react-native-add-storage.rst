@@ -10,7 +10,6 @@
 
 .. _react-native-add-storage:
 
-
 ###########
 Add Storage
 ###########
@@ -18,6 +17,7 @@ Add Storage
 
 .. meta::
    :description:
+
    Learn how to use |AMHlong| to create, build, test and monitor mobile apps that are integrated with AWS services.
 
 .. list-table::
@@ -144,8 +144,8 @@ Add the following state to the element where you handle file transfers.
 Next Steps
 ==========
 
-Learn more about the analytics in AWS Mobile which are part of the :ref:`User Data Storage <user-data-storage>` feature. This feature uses `Amazon Simple Storage Service (S3) <http://docs.aws.amazon.com/s3/latest/developerguide/welcome.html>`_.
+Learn more about the analytics in AWS Mobile which are part of the :ref:`User Data Storage <user-data-storage>` feature. This feature uses `Amazon Simple Storage Service (S3) <http://docs.aws.amazon.com/s3/latest/developerguide/welcome.html>`__.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 
-Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`_.
+Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`__.

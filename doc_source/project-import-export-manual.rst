@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _import-export-manual:
+.. _project-import-export-manual:
 
 ####################################
 Manually Exported Project Components
@@ -180,7 +180,7 @@ handler function code as part of the project import when the following condition
   services, such as |S3|, is not currently supported.
 
 
-* Your handler code is factored to use `Lambda environmental variables <http://docs.aws.amazon.com/lambda/latest/dg/tutorial-env_cli.html>`_ to
+* Your handler code is factored to use `Lambda environmental variables <http://docs.aws.amazon.com/lambda/latest/dg/tutorial-env_cli.html>`__ to
   refer to those |DDB| tables.
 
   When |AMH| imports API handler code, it uses environmental variables to map data operations to the
@@ -214,7 +214,7 @@ handler function code as part of the project import when the following condition
 
      This method does not require additional manual configuration of the project definition YAML.
 
-The `AWS Mobile React sample app <https://github.com/awslabs/aws-mobile-react-sample>`_ provides an
+The `AWS Mobile React sample app <https://github.com/awslabs/aws-mobile-react-sample>`__ provides an
 end to end example of using environmental variables to access data tables through an API and its
 handler. Take the following steps for each API handler whose code you want to import. Examples from
 the sample app are given in line.
@@ -227,7 +227,7 @@ the sample app are given in line.
 #. Copy your |LAM| function(s) into the uncompressed file.
 
 
-   #. Go to the `Amazon S3 console <https://console.aws.amazon.com/s3/>`_ and search for your |AMH| project name.
+   #. Go to the `Amazon S3 console <https://console.aws.amazon.com/s3/>`__ and search for your |AMH| project name.
 
    #. Choose the bucket with the name containing :code:`-deployments-`, then choose the
       :file:`uploads` folder.
@@ -334,7 +334,7 @@ the sample app are given in line.
    imported the project. For such a case, we recommend you provide both your policy JSON and step by
    step instructions (console or |CLI|) on how and where to attach it. For more information on those
    steps, see `Authentication and Access Control for Amazon DynamoDB
-   <http://docs.aws.amazon.com/lambda/latest/dg/authentication-and-access-control.html>`_.
+   <http://docs.aws.amazon.com/lambda/latest/dg/authentication-and-access-control.html>`__.
 
 
 .. _import-export-cors:

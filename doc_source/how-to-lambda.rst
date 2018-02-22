@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _how-to-storage:
+.. _how-to-lambda:
 
 #######################################
 How To: Serverless Code with AWS Lambda

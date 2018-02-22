@@ -26,7 +26,7 @@ Overview
 
 Add the natural language understanding that powers Amazon Alexa to your mobile app. The |AMH|
 :ref:`conversational-bots` feature provides ready-made bot templates using the `Amazon Lex service
-<http://docs.aws.amazon.com/lex/latest/dg/>`_.
+<http://docs.aws.amazon.com/lex/latest/dg/>`__.
 
 
 .. _setup-your-backend:
@@ -36,10 +36,10 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
 
-#. Enable :guilabel:`Conversational Bots`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`Conversational Bots` tile to enable the feature.
+#. Enable :guilabel:`Conversational Bots`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`Conversational Bots` tile to enable the feature.
 
    #. Choose one of the sample Bots or import one that you have created in the `Amazon Lex console
-      <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_.
+      <http://docs.aws.amazon.com/lex/latest/dg/what-is.html>`__.
 
 #. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
 

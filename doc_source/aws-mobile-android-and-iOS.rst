@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _top:
+.. _auth-mobile-android-and-ios:
 
 ##############################
 AWS Mobile for Android and iOS
@@ -20,7 +20,7 @@ AWS Mobile for Android and iOS
         Use JavaScript to create, build, test and monitor mobile apps that are
         integrated with AWS services.
 
-The AWS Mobile SDKs for Android and iOS, in combination with the `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home>`_, allow you to quickly and easily integrate robust cloud backends into your existing mobile apps. No AWS expertise is required to configure and begin to use features like user sign-in, database, push notifications and more.
+The AWS Mobile SDKs for Android and iOS, in combination with the `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home>`__, allow you to quickly and easily integrate robust cloud backends into your existing mobile apps. No AWS expertise is required to configure and begin to use features like user sign-in, database, push notifications and more.
 
 .. toctree::
     :titlesonly:

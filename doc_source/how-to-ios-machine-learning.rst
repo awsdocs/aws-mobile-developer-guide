@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _machine-learning-for-ios:
+.. _how-to-ios-machine-learning:
 
 ############################
 iOS: Amazon Machine Learning
@@ -23,7 +23,7 @@ Integrate Amazon Machine Learning
 To use the Amazon Machine Learning mobile client, you’ll need to integrate the SDK for iOS into your app and import the necessary libraries. To do so, follow these steps:
 
 #. Download the SDK and unzip it as described in
-`Setup the SDK for iOS <http://docs.aws.amazon.com/mobile/sdkforios/developerguide/setup-aws-sdk-for-ios.html>`_
+`Setup the SDK for iOS <http://docs.aws.amazon.com/mobile/sdkforios/developerguide/setup-aws-sdk-for-ios.html>`__
 #. The instructions direct you to import the headers for the services you’ll be using. For Amazon Machine
 Learning, you need the following import.
 
@@ -42,7 +42,7 @@ Learning, you need the following import.
 Configure Credentials
 ^^^^^^^^^^^^^^^^^^^^^
 
-You can use Amazon Cognito to provide temporary AWS credentials to your application. These credentials let the app access your AWS resources. To create a credentials provider, follow the instructions at `Providing AWS Credentials <http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth-aws-identity-for-ios.html#providing-aws-credsentials>`_.
+You can use Amazon Cognito to provide temporary AWS credentials to your application. These credentials let the app access your AWS resources. To create a credentials provider, follow the instructions at `Providing AWS Credentials <http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth-aws-identity-for-ios.html#providing-aws-credsentials>`__.
 
 To use Amazon Machine Learning in an application, you must set the proper permissions. The following IAM policy allows the user to perform the actions shown in this tutorial on two actions identified by ARN.
 
@@ -59,7 +59,7 @@ To use Amazon Machine Learning in an application, you must set the proper permis
             }]
         }
 
-This policy should be applied to roles assigned to the Amazon Cognito identity pool, but you will need to replace the Resource value with the correct account ID and ML Model ID. You can apply policies at the `IAM console <https://console.aws.amazon.com/iam/home>`_. To learn more about IAM policies, see `Introduction to IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`_.
+This policy should be applied to roles assigned to the Amazon Cognito identity pool, but you will need to replace the Resource value with the correct account ID and ML Model ID. You can apply policies at the `IAM console <https://console.aws.amazon.com/iam/home>`__. To learn more about IAM policies, see `Introduction to IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`__.
 
 Create an Amazon Machine Learning Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -81,7 +81,7 @@ Once you've imported the necessary libraries and have your credentials object, y
 Making a Predict Request
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have to use the `Machine Learning Console <https://console.aws.amazon.com/machinelearning>`_ or an alternate `SDK <http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`_. To validate that this ML can be used for real-time Predictions.
+Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have to use the `Machine Learning Console <https://console.aws.amazon.com/machinelearning>`__ or an alternate `SDK <http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that this ML can be used for real-time Predictions.
 
     .. container:: option
 
@@ -167,5 +167,5 @@ Once the real-time endpoint is ready, we can begin calling Predict. Note that yo
 
 Additional Resources
 
-- `Developer Guide <http://docs.aws.amazon.com/machine-learning/latest/dg>`_
-- `API Reference <http://docs.aws.amazon.com/machine-learning/latest/APIReference>`_
+- `Developer Guide <http://docs.aws.amazon.com/machine-learning/latest/dg>`__
+- `API Reference <http://docs.aws.amazon.com/machine-learning/latest/APIReference>`__

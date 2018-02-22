@@ -29,7 +29,7 @@ How to Integrate Your Existing Bucket
 
 The following steps  include:
 
-    * Set up short-lived credentials for accessing your AWS resources using a `Cognito Identity Pool <http://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`_.
+    * Set up short-lived credentials for accessing your AWS resources using a `Cognito Identity Pool <http://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`__.
 
     * Create an AWS Mobile configuration file that ties your app code to your bucket.
 
@@ -43,7 +43,7 @@ If you already have a Cognito Identity Pool and have its unauthenticated IAM rol
 Create or Import the Amazon Cognito Identity Pool
 --------------------------------------------------
 
-#. Go to `Amazon Cognito Console <https://console.aws.amazon.com/cognito>`_ and choose :guilabel:`Manage Federated Identities`.
+#. Go to `Amazon Cognito Console <https://console.aws.amazon.com/cognito>`__ and choose :guilabel:`Manage Federated Identities`.
 
 #. Choose :guilabel:`Create new Identity pool` on the top left of the console.
 
@@ -56,7 +56,7 @@ Create or Import the Amazon Cognito Identity Pool
 Set up the required Amazon IAM permissions
 -------------------------------------------
 
-#. Go to `Amazon IAM Console <https://console.aws.amazon.com/iam/home>`_ and choose :guilabel:`Roles`.
+#. Go to `Amazon IAM Console <https://console.aws.amazon.com/iam/home>`__ and choose :guilabel:`Roles`.
 
 #. Choose the unauthenticated role whose name you copied in a previous step.
 
@@ -74,7 +74,7 @@ Set up the required Amazon IAM permissions
 Get Your Bucket Name and ID
 ---------------------------
 
-#. Go to `Amazon S3 Console <https://console.aws.amazon.com/s3/home>`_ and select the bucket you want to integrate.
+#. Go to `Amazon S3 Console <https://console.aws.amazon.com/s3/home>`__ and select the bucket you want to integrate.
 
 #. Copy and keep the bucket name value from the breadcrumb at the top of the console, for use in a following step.
 
@@ -121,7 +121,7 @@ Create the awsconfiguration.json file
 
     * Replace the :code:`COGNITO-IDENTITY-POOL-REGION` with the region the identity pool was created in.
 
-    * Replace the :code:`S3-BUCKET-NAME` with the name of you| bucket.
+    * Replace the :code:`S3-BUCKET-NAME` with the name of your bucket.
 
     * Replace the :code:`S3-REGION` with the region your bucket was created in.
 
@@ -132,7 +132,7 @@ Add the awsconfiguration.json file to your app
 .. container:: option
 
     Android - Java
-      Place the :file:`awsconfiguration.json` file you created in the previous step into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`_ in your Android project.
+      Place the :file:`awsconfiguration.json` file you created in the previous step into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`__ in your Android project.
 
     iOS - Swift
       Place the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
@@ -234,19 +234,24 @@ Add the SDK to your App
 
             .. code-block:: swift
 
-               import UIKit
-               import AWSMobileClient
+                import UIKit
+                import AWSCore
+                import AWSMobileClient
 
-               @UIApplicationMain
-               class AppDelegate: UIResponder, UIApplicationDelegate {
+                @UIApplicationMain
+                class AppDelegate: UIResponder, UIApplicationDelegate {
 
-                 func application(_ application: UIApplication,
-                       didFinishLaunchingWithOptions launchOptions:
 
-                       [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                           return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
-                 }
-               }
+                    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+
+                        //Instantiate AWSMobileClient to establish AWS user credentials
+                        return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
+
+
+
+                    }
+                }
 
 
 
@@ -491,4 +496,4 @@ Next Steps
 
 * For further information about TransferUtility capabilities, see :ref:`how-to-transfer-files-with-transfer-utility`.
 
-* For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`_ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`_.
+* For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`__.

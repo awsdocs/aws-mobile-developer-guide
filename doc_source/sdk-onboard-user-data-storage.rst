@@ -27,7 +27,7 @@ If you already have a Cognito Identity Pool and have set up its unauthenticated 
 Create or import the Amazon Cognito Identity Pool
 --------------------------------------------------
 
-* Go to `Amazon Cognito Console <https://console.aws.amazon.com/cognito>`_ and choose **Manage Federated Identities**.
+* Go to `Amazon Cognito Console <https://console.aws.amazon.com/cognito>`__ and choose **Manage Federated Identities**.
 
 * Click **Create new Identity pool** button on the top left of the console.
 
@@ -40,7 +40,7 @@ Create or import the Amazon Cognito Identity Pool
 Set up the required Amazon IAM permissions
 -------------------------------------------
 
-* Go to `Amazon IAM Console <https://console.aws.amazon.com/iam/home>`_ and select **Roles**.
+* Go to `Amazon IAM Console <https://console.aws.amazon.com/iam/home>`__ and select **Roles**.
 
 * Select the **unauth** role you just created in the previous step, which is of the form **Cognito_<IdentityPoolName>Unauth_Role**.
 
@@ -51,13 +51,13 @@ Set up the required Amazon IAM permissions
 Create or import your existing Amazon S3 bucket
 ------------------------------------------------
 
-* Go to `Amazon S3 Console <https://console.aws.amazon.com/s3/home>`_ and click **Create bucket**.
+* Go to `Amazon S3 Console <https://console.aws.amazon.com/s3/home>`__ and click **Create bucket**.
 
-* Enter a name for the bucket that is DNS-compliant, for example `com.amazon.mybucket`. See `Bucket Restrictions and Limitations <hhttp://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules>`_ for more information on how to name buckets.
+* Enter a name for the bucket that is DNS-compliant, for example `com.amazon.mybucket`. See `Bucket Restrictions and Limitations <hhttp://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules>`__ for more information on how to name buckets.
 
 * Choose the region that you want the bucket to be created.
 
-* Click **Create** to create the bucket. Note the name of the bucket and the region that it was created in. The region typically would be of the form `US East (N. Virginia)`. Use the information on `AWS Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>`_ to map that to a string of the form `us-east-1`. Note down this region string. You will need it later.
+* Click **Create** to create the bucket. Note the name of the bucket and the region that it was created in. The region typically would be of the form `US East (N. Virginia)`. Use the information on `AWS Regions and Endpoints <http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>`__ to map that to a string of the form `us-east-1`. Note down this region string. You will need it later.
 
 .. _create-aws-configuration:
 
@@ -105,7 +105,7 @@ Add the awsconfiguration.json file to your app
 .. container:: option
 
     Android-Java
-    	Place the `awsconfiguration.json` file you created in the previous step into a `res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`_ in your Android project.
+    	Place the `awsconfiguration.json` file you created in the previous step into a `res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`__ in your Android project.
 
     iOS-Swift
     	Place the `awsconfiguration.json` into the folder containing your `Info.plist` file in your Xcode project. Select `Copy items` if needed and `Create groups` in the options dialog to make sure the file is actually copied into the Xcode project.

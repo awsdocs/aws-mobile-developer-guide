@@ -22,7 +22,7 @@ AWS Mobile CLI Reference
         integrated with AWS services.
 
 
-The AWS Mobile CLI provides a command line interface for frontend JavaScript developers to seamlessly enable AWS services and configure into their apps. With minimal configuration, you can start using all of the functionality provided by the the `AWS Mobile Hub <http://console.aws.amazon.com/mobile>`_ from your favorite terminal program.
+The AWS Mobile CLI provides a command line interface for frontend JavaScript developers to seamlessly enable AWS services and configure into their apps. With minimal configuration, you can start using all of the functionality provided by the the `AWS Mobile Hub <http://console.aws.amazon.com/mobile>`__ from your favorite terminal program.
 
 Summary of CLI Commands
 =======================

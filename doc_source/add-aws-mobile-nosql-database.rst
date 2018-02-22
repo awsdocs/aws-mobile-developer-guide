@@ -25,7 +25,7 @@ Overview
 ==============
 
 
-The AWS Mobile Hub :ref:`nosqldb` feature uses `Amazon DynamoDB <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`_ to enable you to create database tables
+The AWS Mobile Hub :ref:`nosqldb` feature uses `Amazon DynamoDB <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`__ to enable you to create database tables
 that can store and retrieve data for use by your apps.
 
 
@@ -37,7 +37,7 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before you proceed.
 
-#. Enable :guilabel:`NoSQL Database`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`_ and choose the :guilabel:`NoSQL Database` tile to enable the feature.
+#. Enable :guilabel:`NoSQL Database`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`NoSQL Database` tile to enable the feature.
 
 #. Follow the console work flow to define the tables you need. See :ref:`config-nosqldb` for details.
 
@@ -91,7 +91,12 @@ Connect to your backend
          .. code-block:: java
             :emphasize-lines: 2, 9-13
 
+             // import DynamoDBMapper
+             import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+
              public class MainActivity extends AppCompatActivity {
+
+                 // Declare a DynamoDBMapper object
                  DynamoDBMapper dynamoDBMapper;
 
                  @Override
@@ -99,6 +104,7 @@ Connect to your backend
                      super.onCreate(savedInstanceState);
                      setContentView(R.layout.activity_main);
 
+                     // Instantiate a AmazonDynamoDBMapperClient
                      AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(AWSMobileClient.getInstance().getCredentialsProvider());
                      this.dynamoDBMapper = DynamoDBMapper.builder()
                             .dynamoDBClient(dynamoDBClient)
@@ -111,10 +117,8 @@ Connect to your backend
          |AMH| console. The data models provide set and get methods for each attribute of a |DDB|
          table they model.
 
-         #. From the location where you downloaded the data model file(s), drag and drop each file
-            with the form of
-            :file:`./YOUR-PROJECT-NAME-integration-lib-aws-my-sample-app-android/src/main/java/com/amazonaws/models/nosqlYOUR-TABLE-NAMEDO.java`
-            into the folder that contains your main activity.
+         #. Copy the data model file(s) you downloaded,
+            :file:`./YOUR-PROJECT-NAME-integration-lib-aws-my-sample-app-android/src/main/java/com/amazonaws/models/nosqlYOUR-TABLE-NAMEDO.java` into the Android Studio folder that contains your main activity.
 
       .. list-table::
          :widths: 1

@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _tutorial-android-aws-mobile-notes-data:
+.. _tutorial-react-native-aws-mobile-notes-data:
 
 #######################################
 Add Online Data Access to the Notes App
@@ -23,15 +23,13 @@ database to our mobile backend, then configure a basic data access service to th
 
    * - **Used in this Section**
 
-     - `AWS AppSync <https://aws.amazon.com/appsync/>`_ allows you to expose data within `Amazon DynamoDB <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html>` _, `Amazon ElasticSearch Service <https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/what-is-amazon-elasticsearch-service.html>`_, or other data sources so that it can be accessed using `GraphQL <https://docs.aws.amazon.com/appsync/latest/devguide/designing-a-graphql-api.html>`_.
+     - `AWS AppSync <https://aws.amazon.com/appsync/>`__ allows you to expose data within `Amazon DynamoDB <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html>` _, `Amazon ElasticSearch Service <https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/what-is-amazon-elasticsearch-service.html>`__, or other data sources so that it can be accessed using `GraphQL <https://docs.aws.amazon.com/appsync/latest/devguide/designing-a-graphql-api.html>`__.
 
-     **Sign Up for the AWS AppSync Preview**
-     Since AWS AppSync is still in preview, `sign up <https://pages.awscloud.com/awsappsyncpreview.html>`_ to access the service. When you receive your acceptance mail, you can proceed with the steps in this section.
 
 Setup Your Data Backend
 -----------------------
 
-#. Open the `AWS AppSync console <https://console.aws.amazon.com/appsync/home>`_.
+#. Open the `AWS AppSync console <https://console.aws.amazon.com/appsync/home>`__.
 #. Choose :guilabel:`Create API` and type :userinput:`NotesApp` or other suitabe name.
 #. Choose Custom Schema.
 #. Choose :guilabel:`Create`.
@@ -304,7 +302,7 @@ You can move from online access to offline access by changing the fetchPolicy wi
     * ‘network-only’ ignores the cache.
     * ‘cache-only’ ignores the network.
 
-The most reasonable option is ‘cache-and-network’ for this use case. For more details on using AWS AppSync in an offline mode, see the `AWS AppSync documentation <https://docs.aws.amazon.com/appsync/latest/devguide/building-a-client-app-reactnative.html#offline-settings>`_.
+The most reasonable option is ‘cache-and-network’ for this use case. For more details on using AWS AppSync in an offline mode, see the `AWS AppSync documentation <https://docs.aws.amazon.com/appsync/latest/devguide/building-a-client-app-reactnative.html#offline-settings>`__.
 
 
 

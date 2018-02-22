@@ -38,21 +38,23 @@ Start with a working app and then add cloud enabled features. In this tutorial y
 You should be able to complete the setup section of this tutorial within 10-15 minutes after
 you have installed all required software. Once you complete the instructions on this page, you can run the project on your local system.
 
+.. _android-tutorial-notes-getting-started:
+
 Getting Started
 ---------------
 
 Before beginning, you must:
 
--  Download and install `Android Studio <https://developer.android.com/studio/index.html>`_ version 3.0.1 or later.
+-  Download and install `Android Studio <https://developer.android.com/studio/index.html>`__ version 3.0.1 or later.
 
--  Download an install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`_ version 8.0 (Oreo), API level 26..
+-  Download an install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`__ version 8.0 (Oreo), API level 26.
 
--  Install an `Android Emulator <https://developer.android.com/studio/run/managing-avds.html>`_ - the app works with both phone and tablet emulators (for example, the Nexus 5X or Pixel C).
+-  Install an `Android Emulator <https://developer.android.com/studio/run/managing-avds.html>`__ - the app works with both phone and tablet emulators (for example, the Nexus 5X or Pixel C).
 
 Windows Specific Instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
--  Install `Git for Windows <https://git-scm.com/download/win>`_.
+-  Install `Git for Windows <https://git-scm.com/download/win>`__.
 
 Mac Specific Instructions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,9 +78,9 @@ Download the Source code
 
 1. Get the tutorial source code using one of the following choices:
 
-   * Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip>`_.
+   * Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip>`__.
 
-   * Browse to  `https://github.com/aws-samples/aws-mobile-android-notes-tutorial/ <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/>`_ and clone or fork the repository (`sign up for GitHub account <https://github.com/join?source=header-home>`_, if you do not have one).
+   * Browse to  `https://github.com/aws-samples/aws-mobile-android-notes-tutorial/ <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/>`__ and clone or fork the repository (`sign up for GitHub account <https://github.com/join?source=header-home>`__, if you do not have one).
 
 
 Compile the Source Code
@@ -136,7 +138,7 @@ Running into Problems
 
 The most common problems at this stage involve issues with the
 installation of Java, Android Studio, the Android SDK or the Android
-Emulator. Google provides detailed instructions on `Android Studio <https://developer.android.com/studio/index.html>`_ and
+Emulator. Google provides detailed instructions on `Android Studio <https://developer.android.com/studio/index.html>`__ and
 dependent features.
 
 Next Steps

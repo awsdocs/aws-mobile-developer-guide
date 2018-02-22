@@ -38,12 +38,12 @@ AWS Mobile gives you the tools to rapidly configure and integrate the cloud back
         :ref:`Push Notification <add-aws-mobile-push-notifications-app>` -
         :ref:`NoSQL Database <add-aws-mobile-nosql-database-app>` -
         :ref:`User Data Storage <add-aws-mobile-user-data-storage-app>` -
-        `Cloud Logic <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/add-aws-mobile-cloud-logic.html#connect-to-your-backend>`_ -
-        `Messaging <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/add-aws-mobile-messaging.html#connect-to-your-backend>`_ -
+        `Cloud Logic <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/add-aws-mobile-cloud-logic.html#connect-to-your-backend>`__ -
+        `Messaging <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/add-aws-mobile-messaging.html#connect-to-your-backend>`__ -
         :ref:`Conversational Bots <add-aws-mobile-conversational-bots-app>` -
         :ref:`Hosting and Streaming <add-aws-mobile-hosting-and-streaming-app>`
 
-          `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/>`_ lets you configure powerful backend services using a console.
+          `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/>`__ lets you configure powerful backend services using a console.
 
 **Web and React Native**
 
@@ -67,7 +67,7 @@ Get started with :ref:`Web <web-getting-started>` or :ref:`React Native <react-n
         :ref:`User Data Storage <react-native-add-storage>` -
         :ref:`Cloud Logic <react-native-access-apis>`
 
-        Behind the scenes `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/>`_ lets you configure powerful backend services from the command line with no AWS expertise needed.
+        Behind the scenes `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/>`__ lets you configure powerful backend services from the command line with no AWS expertise needed.
 
 **Learn**  how its easy integrate your services by trying an :ref:`AWS Mobile tutorial <tutorials-native-aws-mobile>`.
 

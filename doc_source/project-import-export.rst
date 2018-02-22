@@ -90,7 +90,7 @@ form of the link should be:
 For example, the following HTML creates a link that provides instant configuration of an app's AWS
 backend services, based on |AMH| features defined in :file:`react-sample.zip`. To see this code in
 action, see :file:`README.md` for the `AWS Mobile React Sample
-<https://github.com/awslabs/aws-mobile-react-sample>`_.
+<https://github.com/awslabs/aws-mobile-react-sample>`__.
 
 .. code-block:: html
 
@@ -249,7 +249,7 @@ The following items are not supported by the |AMH| import/export feature:
   are not included in the project export. To enable your custom policy in an imported project, the
   importer must manually configure those policies in the imported project. In addition to your
   project export file, we recommend you provide both your policy JSON and step by step instructions
-  for importers. These instructions should describe how to use AWS consoles or the `AWS CLI <http://docs.aws.amazon.com/cli/latest/userguide/>`_ to
+  for importers. These instructions should describe how to use AWS consoles or the `AWS CLI <http://docs.aws.amazon.com/cli/latest/userguide/>`__ to
   implement your customizations.
 
 

@@ -18,7 +18,7 @@ In the :ref:`previous section <tutorial-ios-aws-mobile-notes-auth>` of this tuto
 the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we will add a NoSQL
 database to our mobile backend, then configure a basic data access service to the note-taking app.
 
-The notes app uses iOS `Core Data <https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreData/index.html>`_ as a persistence framework. :code:`NotesContentProvider.swift` is custom content provider used as a clean interface for managing your application content locally. In the following steps, you will modify the content provider code to use DynamoDB and sync with the local Core data.
+The notes app uses iOS `Core Data <https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreData/index.html>`__ as a persistence framework. :code:`NotesContentProvider.swift` is custom content provider used as a clean interface for managing your application content locally. In the following steps, you will modify the content provider code to use DynamoDB and sync with the local Core data.
 
 You should be able to complete this section of the tutorial in about 30-45 minutes.
 
@@ -34,7 +34,7 @@ Before we work on the client-side code, we need to add a NoSQL database
 and table to the backend project:
 
 #. Right-click :file:`awsconfiguration.json` in your Xcode Project Navigator, choose :guilabel:`Delete`, and then choose :guilabel:`Move to trash`.
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 #. Select  your project.
 #. Scroll down to the :guilabel:`Add More Backend Features` section and then choose the :guilabel:`NoSQL Database` tile.
 #. Choose :guilabel:`Enable NoSQL`, choose :guilabel:`Add Table`, and then choose :guilabel:`Example` to start with an example schema.
@@ -354,7 +354,7 @@ slightly longer (due to reading the data from the remote database).
 Data is available immediately in the mobile backend. Create a few notes,
 then view the records within the AWS Console:
 
-1. Open the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+1. Open the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 2. Choose your project.
 3. Choose **Resources** on the upper right.
 4. Choose the link for your Amazon DynamoDB table.
@@ -365,6 +365,6 @@ When you  insert, edit or delete notes in the app, you should be able to see the
 Next Steps
 ----------
 
--  Learn about `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`_.
+-  Learn about `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`__.
 
 

@@ -10,6 +10,8 @@
 
 .. highlight:: java
 
+.. _how-to-android-lex:
+
 #############################################
 Android: Use Natural Language with Amazon Lex
 #############################################
@@ -36,9 +38,9 @@ which support both voice and text input and can return either voice or text. |LE
 integration with AWS Lambda to allow insertion of custom business logic into your |LEX| processing flow, including all of the extension to other services that Lambda makes possible.
 
 For information on |LEX| concepts and service configuration, see
-`How it Works <http://docs.aws.amazon.com/lex/latest/dg/how-it-works.html>`_ in the *Lex Developer Guide*.
+`How it Works <http://docs.aws.amazon.com/lex/latest/dg/how-it-works.html>`__ in the *Lex Developer Guide*.
 
-For information about |LEX| Region availability, see `AWS Service Region Availability <http://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/>`_.
+For information about |LEX| Region availability, see `AWS Service Region Availability <http://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/>`__.
 
 To get started using the |LEX| mobile client, integrate the SDK for Android
 into your app, set the appropriate permissions, and import the necessary libraries.
@@ -78,14 +80,14 @@ Set IAM Permissions for |LEX|
 -----------------------------
 
 To use |LEX| in an application, create a role and attach policies as described in Step 1 of
-`Getting Started <http://docs.aws.amazon.com/lex/latest/dg/gs-bp-prep.html>`_ in the *Lex Developer Guide*.
+`Getting Started <http://docs.aws.amazon.com/lex/latest/dg/gs-bp-prep.html>`__ in the *Lex Developer Guide*.
 
-To learn more about IAM policies, see `Using IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`_.
+To learn more about IAM policies, see `Using IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`__.
 
 Configure a Bot
 ---------------
 
-Use the `Amazon Lex console <https://console.aws.amazon.com/lex/>`_ console to configure a bot that interacts with your mobile app features. To learn more, see `Amazon Lex Developer Guide <https://docs.aws.amazon.com/lex/latest/dg/what-is.html>`_. For a quickstart, see `Getting Started <https://alpha-docs-aws.amazon.com/lex/latest/dg/getting-started.html>`_ .
+Use the `Amazon Lex console <https://console.aws.amazon.com/lex/>`__ console to configure a bot that interacts with your mobile app features. To learn more, see `Amazon Lex Developer Guide <https://docs.aws.amazon.com/lex/latest/dg/what-is.html>`__. For a quickstart, see `Getting Started <https://alpha-docs-aws.amazon.com/lex/latest/dg/getting-started.html>`__ .
 
 |LEX| also supports model building APIs, which allow creation of bots, intents, and slots at runtime. This SDK does not currently offer additional support for interacting with |LEX| model building APIs.
 

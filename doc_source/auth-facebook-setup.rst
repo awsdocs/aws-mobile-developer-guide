@@ -20,7 +20,7 @@ provider for AWS services called in your app, try the |AMHlong|  :ref:`User Sign
 <user-sign-in>`.
 
 You must first register your application with Facebook by using the `Facebook Developers portal
-<https://developers.facebook.com/>`_.
+<https://developers.facebook.com/>`__.
 
 |AMH| generates code that enables you to use Facebook to provide federated authentication for your
 mobile app users. This topic explains how to set up Facebook as an identity provider for your app.
@@ -30,7 +30,7 @@ in the |AMH| console, and choose :guilabel:`Save changes`.
 
 **To get a Facebook app ID**
 
-#. In the `Facebook Developers portal <https://developers.facebook.com/>`_, sign in with your
+#. In the `Facebook Developers portal <https://developers.facebook.com/>`__, sign in with your
    Facebook credentials.
 
 #. From :guilabel:`Create App`, choose :guilabel:`Add a New App` (note: this menu label will be
@@ -220,4 +220,4 @@ in the |AMH| console, and choose :guilabel:`Save changes`.
 #. In the |AMH| console, choose :guilabel:`Save changes`.
 
 For more information about integrating with Facebook Login, see the `Facebook Getting Started Guide
-<https://developers.facebook.com/docs/facebook-login>`_.
+<https://developers.facebook.com/docs/facebook-login>`__.

@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _cloud-logic:
+.. _Cloud-Logic:
 
 ###########
 Cloud Logic
@@ -30,7 +30,7 @@ Choose the |AMHlong| Cloud Logic mobile backend service feature to:
 * Extend your app to other services within AWS and beyond
 
 `Create a free Mobile Hub project and add the Cloud Logic feature.
-<https://console.aws.amazon.com/mobilehub/home#/>`_
+<https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _cloud-logic-details:
 
@@ -44,7 +44,7 @@ serverless business logic and extension to other services.
 .. image:: images/diagram-abstract-cloud-logic.png
 
 The Cloud Logic feature lets you build backend services using `AWS Lambda
-<https://aws.amazon.com/lambda/getting-started/>`_ functions that you can call from your mobile app. Using Cloud Logic, you
+<https://aws.amazon.com/lambda/getting-started/>`__ functions that you can call from your mobile app. Using Cloud Logic, you
 can run code in the cloud to process business logic for your apps and share the same code for both
 iOS and Android apps. The Cloud logic feature is powered by |LAMlong| functions, which allow you to
 write code without worrying about managing frameworks and scaling backend infrastructure. You can
@@ -65,21 +65,21 @@ Cloud Logic At a Glance
 
    * - **AWS services and resources configured**
 
-     - - :guilabel:`Amazon API Gateway` (see `Amazon API Gateway Developer Guide <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`_)
+     - - :guilabel:`Amazon API Gateway` (see `Amazon API Gateway Developer Guide <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`__)
 
-         `Concepts <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-basic-concept.html>`_ | `Console <https://console.aws.amazon.com/apigateway/>`_ | `Pricing <https://aws.amazon.com/api-gateway/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-basic-concept.html>`__ | `Console <https://console.aws.amazon.com/apigateway/>`__ | `Pricing <https://aws.amazon.com/api-gateway/pricing/>`__
 
-       - :guilabel:`AWS Lambda` (see `AWS Lambda Developer Guide <http://docs.aws.amazon.com/lambda/latest/dg/>`_)
+       - :guilabel:`AWS Lambda` (see `AWS Lambda Developer Guide <http://docs.aws.amazon.com/lambda/latest/dg/>`__)
 
-         `Concepts <http://docs.aws.amazon.com/lambda/latest/dg/>`_ | `Console <https://console.aws.amazon.com/lambda/>`_ | `Pricing <https://aws.amazon.com/lambda/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/lambda/latest/dg/>`__ | `Console <https://console.aws.amazon.com/lambda/>`__ | `Pricing <https://aws.amazon.com/lambda/pricing/>`__
 
-       - :guilabel:`Amazon Virtual Private Cloud` (see `Amazon VPC User Guide <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/>`_)
+       - :guilabel:`Amazon Virtual Private Cloud` (see `Amazon VPC User Guide <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/>`__)
 
-         `Concepts <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html#Overview>`_ | `Console <https://console.aws.amazon.com/vpc/>`_ | `Pricing <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html#Paying>`_
+         `Concepts <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html#Overview>`__ | `Console <https://console.aws.amazon.com/vpc/>`__ | `Pricing <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Introduction.html#Paying>`__
 
-       - :guilabel:`AWS CloudFormation` (see `AWS CloudFormation User Guide <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/>`_)
+       - :guilabel:`AWS CloudFormation` (see `AWS CloudFormation User Guide <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/>`__)
 
-         `Concepts <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html>`_ | `Console <https://console.aws.amazon.com/cloudformation/home>`_ | `Pricing <https://aws.amazon.com/cloudformation/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-whatis-concepts.html>`__ | `Console <https://console.aws.amazon.com/cloudformation/home>`__ | `Pricing <https://aws.amazon.com/cloudformation/pricing/>`__
 
        |AMH|-enabled features use |COG| for authentication and |IAM| for authorization. For more information, see :ref:`User Sign-in <user-sign-in>`. For more information, see :ref:`resources-cloud-logic`.
 

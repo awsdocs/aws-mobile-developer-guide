@@ -33,7 +33,7 @@ Choose |AMHlong| Hosting and Streaming to:
 * Stream your media
 
 `Create a free Mobile Hub project with Hosting and Streaming. Get a
-custom sample app and SDK. <https://console.aws.amazon.com/mobilehub/home#/>`_
+custom sample app and SDK. <https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _hosting-and-streaming-details:
 
@@ -42,12 +42,12 @@ Feature Details
 
 
 The Hosting and Streaming feature delivers content through a global network of endpoints using
-`Amazon Simple Storage Service (Amazon S3) <https://aws.amazon.com/s3/>`_ and `Amazon CloudFront <https://aws.amazon.com/cloudfront/>`_.
+`Amazon Simple Storage Service (Amazon S3) <https://aws.amazon.com/s3/>`__ and `Amazon CloudFront <https://aws.amazon.com/cloudfront/>`__.
 
 The following image shows how website assets and streaming media are distributed to a mobile web app
 or browser. The web app is shown requesting AWS credentials and accessing AWS services through the
 `AWS SDK for JavaScript
-<http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html>`_.
+<http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html>`__.
 
 .. image:: images/diagram-abstract-hosting-and-streaming.png
 
@@ -58,14 +58,14 @@ from a CDN edge location.
 
 The Hosting and Streaming feature enables you to host website and app assets in the cloud, such as
 HTML, JavaScript, image, or media files. Mobile Hub creates a content source storage location
-(origin) using an `Amazon S3 <https://aws.amazon.com/documentation/s3/>`_ bucket. The bucket is made
+(origin) using an `Amazon S3 <https://aws.amazon.com/documentation/s3/>`__ bucket. The bucket is made
 accessible to the internet through the |S3| ability to statically host web content with no web
 server.
 
 Low latency access to your content is provided to users in all regions by caching your source
 content on a global network of edge locations. This Content Distribution network (CDN) is provided
-through an `Amazon CloudFront <https://aws.amazon.com/cloudfront/>`_ distribution which also supports media file streaming
-(see `Amazon CloudFront streaming <https://aws.amazon.com/cloudfront/streaming/>`_).
+through an `Amazon CloudFront <https://aws.amazon.com/cloudfront/>`__ distribution which also supports media file streaming
+(see `Amazon CloudFront streaming <https://aws.amazon.com/cloudfront/streaming/>`__).
 
 
 .. _hosting-and-streaming-ataglance:
@@ -79,13 +79,13 @@ Hosting and Streaming At a Glance
 
    * - **AWS services and resources configured**
 
-     - - :guilabel:`Amazon CloudFront - Content Delivery Network` (see `Amazon CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/>`_)
+     - - :guilabel:`Amazon CloudFront - Content Delivery Network` (see `Amazon CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/>`__)
 
-         `Concepts <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowCloudFrontWorks.html>`_ | `Console <https://console.aws.amazon.com/cloudfront/>`_ | `Pricing <https://aws.amazon.com/cloudfront/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowCloudFrontWorks.html>`__ | `Console <https://console.aws.amazon.com/cloudfront/>`__ | `Pricing <https://aws.amazon.com/cloudfront/pricing/>`__
 
-       - :guilabel:`Amazon S3 Bucket` (see `Amazon S3 Getting Started Guide` <https://aws.amazon.com/cloudfront/pricing/>`_)
+       - :guilabel:`Amazon S3 Bucket` (see `Amazon S3 Getting Started Guide` <https://aws.amazon.com/cloudfront/pricing/>`__)
 
-         `Concepts <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`_ | `Console <https://console.aws.amazon.com/s3/>`_ | `Pricing <https://aws.amazon.com/s3/pricing/>`_
+         `Concepts <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ | `Console <https://console.aws.amazon.com/s3/>`__ | `Pricing <https://aws.amazon.com/s3/pricing/>`__
 
        |AMH|-enabled features use |COG| for authentication and |IAM| for authorization. For more information, see :ref:`User Sign-in <user-sign-in>`.
 
@@ -121,7 +121,7 @@ Web App Support
 
 
 When you enable Hosting and Streaming, Mobile Hub provisions a local copy of the `AWS SDK for
-JavaScript <http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html>`_ in the
+JavaScript <http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html>`__ in the
 root of your bucket.
 
 Mobile Hub also generates the project configuration files :code:`aws-config.js` and
@@ -191,7 +191,7 @@ Using the Amazon S3 Console
 
 
 To use the |S3| console to review, upload, move or delete your files stored in your bucket, navigate
-to the `Amazon S3 console <https://console.aws.amazon.com/s3/home>`_ and choose the bucket whose
+to the `Amazon S3 console <https://console.aws.amazon.com/s3/home>`__ and choose the bucket whose
 name contains your project name. Your web app content will reside in the root folder.
 
 
@@ -205,7 +205,7 @@ AWS CLI allows you to review, upload, move or delete your files stored in your b
 command line.
 
 To install and configure the AWS CLI client, see `Getting Set Up with the AWS Command Line Interface
-<https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html>`_.
+<https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html>`__.
 
 As an example, the sync command enables transfer of files to and from your local folder
 (:code:`source`) and your bucket (:code:`destination`).
@@ -218,7 +218,7 @@ bucket defined by :code:`path`.
 :code:`$ aws s3 sync . s3://my-web-app-bucket/path`
 
 To learn more about using AWS CLI to manage Amazon S3, see `Using Amazon S3 with the AWS Command
-Line Interface <https://docs.aws.amazon.com/cli/latest/userguide/cli-s3.html>`_
+Line Interface <https://docs.aws.amazon.com/cli/latest/userguide/cli-s3.html>`__
 
 
 
@@ -230,7 +230,7 @@ Using a Custom Domain for Your Web App
 
 To configure your Hosting and Streaming CDN as the destination of your custom domain, see `Routing
 Traffic to an Amazon CloudFront Web Distribution by Using Your Domain Name
-<http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html>`_.
+<http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html>`__.
 
 
 

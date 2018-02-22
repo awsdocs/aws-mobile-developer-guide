@@ -61,7 +61,7 @@ Set Up Your Backend
 Add columns and queries
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-You are creating a table in a `NoSQL database <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.html>`_ and adding an initial set of columns, each of which has a name and a data type. NoSQL lets you add a column any time you store data that contains a new column. NoSQL tables must have one column defined as the Primary Key, which is a unique identifier for each row.
+You are creating a table in a `NoSQL database <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SQLtoNoSQL.html>`__ and adding an initial set of columns, each of which has a name and a data type. NoSQL lets you add a column any time you store data that contains a new column. NoSQL tables must have one column defined as the Primary Key, which is a unique identifier for each row.
 
 #. For this example, follow the prompts to add three columns: :userinput:`team` (string), :userinput:`todoId` (number), and :userinput:`text` (string).
 
@@ -112,7 +112,7 @@ To access your NoSQL database, you will create an API that can be called from yo
 
    * - Why an API?
 
-     - Using an API to access your database provides a simple coding interface on the frontend and robust flexibility on the backend. Behind the scenes, a call to an `Amazon API Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`_ API end point in the cloud is handled by a serverless `Lambda <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>`_ function.
+     - Using an API to access your database provides a simple coding interface on the frontend and robust flexibility on the backend. Behind the scenes, a call to an `Amazon API Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`__ API end point in the cloud is handled by a serverless `Lambda <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>`__ function.
 
 **To create a CRUD API**
 
@@ -159,7 +159,7 @@ Run the following command to create your first todo.
 Connect to Your Backend
 =======================
 
-The examples in this section show how you would integrate AWS Amplify library calls using React (see the `AWS Amplify documentation <https://aws.github.io/aws-amplify/>`_ to use other flavors of Javascript).
+The examples in this section show how you would integrate AWS Amplify library calls using React (see the `AWS Amplify documentation <https://aws.github.io/aws-amplify/>`__ to use other flavors of Javascript).
 
 The following component is a simple Todo list that you might add to a :code:`create-react-app` project. The Todos component currently adds and displays :code:`todos` to and from an in memory array.
 
@@ -321,7 +321,7 @@ Your entire component should look like the following:
 Next Steps
 ----------
 
--  Learn how to retrieve specific items and more with the `API module in AWS Amplify <https://aws.github.io/aws-amplify/media/developer_guide.html>`_.
+-  Learn how to retrieve specific items and more with the `API module in AWS Amplify <https://aws.github.io/aws-amplify/media/developer_guide.html>`__.
 
--  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`_.
+-  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`__.
 

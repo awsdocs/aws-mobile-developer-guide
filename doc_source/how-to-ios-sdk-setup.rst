@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _setup-ios:
+.. _how-to-ios-sdk-setup:
 
 ##############################
 iOS: Setup Options for the SDK
@@ -35,7 +35,7 @@ To add the SDK, install the following on your development machine:
 
 - iOS 8 or later
 
-You can view the source code in the `AWS Mobile SDK for iOS GitHub repository <https://github.com/aws/aws-sdk-ios>`_.
+You can view the source code in the `AWS Mobile SDK for iOS GitHub repository <https://github.com/aws/aws-sdk-ios>`__.
 
 .. _include_sdk_ios:
 
@@ -55,7 +55,7 @@ The samples included with the SDK are standalone projects that are already set u
 .. container:: option
 
     CocoaPods
-        #. The AWS Mobile SDK for iOS is available through `CocoaPods <http://cocoapods.org/>`_. Install CocoaPods by running the following commands from the folder containing your projects :file:`*.xcodeproj` file.
+        #. The AWS Mobile SDK for iOS is available through `CocoaPods <http://cocoapods.org/>`__. Install CocoaPods by running the following commands from the folder containing your projects :file:`*.xcodeproj` file.
 
             $ :command:`gem install cocoapods`
 
@@ -78,7 +78,7 @@ The samples included with the SDK are standalone projects that are already set u
                 platform :ios, '8.0'
                 use_frameworks!
 
-                target :'myAppName' do
+                target :'YOUR-APP-NAME' do
                     pod 'AWSAuth'
                     pod 'AWSAuthCore'
                     pod 'AWSAuthUI'
@@ -126,7 +126,7 @@ The samples included with the SDK are standalone projects that are already set u
                 Do not open :file:`*.xcodeproj`. Opening this project file instead of a workspace results in an error.
 
     Carthage
-        #. Install the latest version of `Carthage <https://github.com/Carthage/Carthage#installing-carthage>`_.
+        #. Install the latest version of `Carthage <https://github.com/Carthage/Carthage#installing-carthage>`__.
 
         #. Add the following to your `Cartfile`::
 
@@ -177,7 +177,7 @@ The samples included with the SDK are standalone projects that are already set u
 
         #. Under the **Build Phases** tab in your **Target**, choose the **+** button on the top left and then select **New Run Script Phase**.
 
-        #. Setup the build phase as follows. Make sure this phase is below the **Embed Frameworks** phase.
+        # Setup the build phase as follows. Make sure this phase is below the **Embed Frameworks** phase.
 
             .. code-block:: bash
 
@@ -323,9 +323,9 @@ This section describes how to pick up changes when a new SDK is released.
 Logging
 =======
 
-As of version 2.5.4 of this SDK, logging utilizes `CocoaLumberjack SDK <https://github.com/CocoaLumberjack/CocoaLumberjack>`_, a flexible, fast, open source logging framework. It supports many capabilities including the ability to set logging level per output target, for instance, concise messages logged to the console and verbose messages to a log file.
+As of version 2.5.4 of this SDK, logging utilizes `CocoaLumberjack SDK <https://github.com/CocoaLumberjack/CocoaLumberjack>`__, a flexible, fast, open source logging framework. It supports many capabilities including the ability to set logging level per output target, for instance, concise messages logged to the console and verbose messages to a log file.
 
-CocoaLumberjack logging levels are additive such that when the level is set to verbose, all messages from the levels below verbose are logged. It is also possible to set custom logging to meet your needs. For more information, see `CocoaLumberjack Logging Levels <https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/Documentation/CustomLogLevels.md>`_
+CocoaLumberjack logging levels are additive such that when the level is set to verbose, all messages from the levels below verbose are logged. It is also possible to set custom logging to meet your needs. For more information, see `CocoaLumberjack Logging Levels <https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/Documentation/CustomLogLevels.md>`__
 
 Changing Logging Level
 ----------------------
@@ -402,7 +402,7 @@ To initialize logging to your Xcode console, use the following code:
 
                 [AWSDDLog addLogger:[AWSDDTTYLogger sharedInstance]]; // TTY = Xcode console
 
-To learn more, see `CocoaLumberjack <https://github.com/CocoaLumberjack/CocoaLumberjack>`_ on GitHub.
+To learn more, see `CocoaLumberjack <https://github.com/CocoaLumberjack/CocoaLumberjack>`__ on GitHub.
 
 Sample Apps
 ===========
@@ -415,8 +415,8 @@ The AWS Mobile SDK for iOS includes sample apps that demonstrate common use case
 
     AWS services demonstrated:
 
-    - `Amazon Cognito Pools <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`_
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`_
+    - `Amazon Cognito Pools <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`__
+    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 **Amazon Cognito Sync Sample**
 (`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/CognitoSync-Sample/Swift/>`__,
@@ -426,8 +426,8 @@ The AWS Mobile SDK for iOS includes sample apps that demonstrate common use case
 
     AWS services demonstrated:
 
-    - `Amazon Cognito Sync <http://aws.amazon.com/cognito/>`_
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`_
+    - `Amazon Cognito Sync <http://aws.amazon.com/cognito/>`__
+    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 **Amazon DynamoDB Object Mapper Sample**
 (`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/DynamoDBObjectMapper-Sample/Swift>`__, `Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/DynamoDBObjectMapper-Sample/Objective-C/>`__)
@@ -436,8 +436,8 @@ The AWS Mobile SDK for iOS includes sample apps that demonstrate common use case
 
     AWS services demonstrated:
 
-    - `Amazon DynamoDB <http://aws.amazon.com/dynamodb/>`_
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`_
+    - `Amazon DynamoDB <http://aws.amazon.com/dynamodb/>`__
+    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 **Amazon S3 Transfer Utility Sample**
 (`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample/Swift/>`__, `Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample/Objective-C/>`__)
@@ -446,19 +446,19 @@ The AWS Mobile SDK for iOS includes sample apps that demonstrate common use case
 
     AWS services demonstrated:
 
-    - `Amazon S3 <http://aws.amazon.com/s3/>`_
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`_
+    - `Amazon S3 <http://aws.amazon.com/s3/>`__
+    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 **Amazon SNS Mobile Push and Mobile Analytics Sample**
-(`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/SNS-MobileAnalytics-Sample/Swift/>`__, `Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/SNS-MobileAnalytics-Sample/Objective-C/>`_)
+(`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/SNS-MobileAnalytics-Sample/Swift/>`__, `Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/SNS-MobileAnalytics-Sample/Objective-C/>`__)
 
     This sample demonstrates how to set up Amazon SNS mobile push notifications and to record events using Amazon Mobile Analytics.
 
     AWS services demonstrated:
 
-    - `Amazon SNS (mobile push notification) <http://aws.amazon.com/sns/>`_
-    - `Amazon Mobile Analytics <http://aws.amazon.com/mobileanalytics/>`_
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`_
+    - `Amazon SNS (mobile push notification) <http://aws.amazon.com/sns/>`__
+    - `Amazon Mobile Analytics <http://aws.amazon.com/mobileanalytics/>`__
+    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 Install the Reference Documentation in Xcode
 ============================================
@@ -499,12 +499,12 @@ Next Steps
 ==========
 
 - **Run the demos**: View our `sample iOS apps
-  <https://github.com/awslabs/aws-sdk-iOS-samples>`_ that demonstrate common use cases. To run
+  <https://github.com/awslabs/aws-sdk-iOS-samples>`__ that demonstrate common use cases. To run
   the sample apps, set up the SDK for iOS as described above, and then follow the instructions
   contained in the README files of the individual samples.
 
 - **Read the API Reference**: View the `API Reference
-  <https://docs.aws.amazon.com/AWSiOSSDK/latest/>`_ for the AWS Mobile SDK for Android.
+  <https://docs.aws.amazon.com/AWSiOSSDK/latest/>`__ for the AWS Mobile SDK for Android.
 
 - **Try AWS Mobile Hub**: Quickly configure and provision an AWS cloud backend for many common mobile
   app features, and download end to end working iOS demonstration projects, SDK, and helper code, all

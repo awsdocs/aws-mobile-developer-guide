@@ -1,3 +1,13 @@
+.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+   International License (the "License"). You may not use this file except in compliance with the
+   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
+
+   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+   either express or implied. See the License for the specific language governing permissions and
+   limitations under the License.
+
 .. _web-access-apis:
 
 ################
@@ -30,7 +40,7 @@ In the following examples you will create an API that is part of a cloud-enabled
 
    .. code:: bash
 
-        awsmobile cloud-api prompt
+        awsmobile cloud-api enable --prompt
 
 
 #. When prompted, name the API :userinput:`Guesses`.
@@ -113,7 +123,7 @@ The :code:`Guesses` API handler logic that implements your new number guessing f
 Connect to Your Backend
 =======================
 
-The examples in this section show how you would integrate AWS Amplify library calls using React (see the `AWS Amplify documentation <https://aws.github.io/aws-amplify/>`_ to use other flavors of Javascript).
+The examples in this section show how you would integrate AWS Amplify library calls using React (see the `AWS Amplify documentation <https://aws.github.io/aws-amplify/>`__ to use other flavors of Javascript).
 
 The following simple component could be added to a :code:`create-react-app` project to present the number guessing game.
 
@@ -264,8 +274,8 @@ Next Steps
 ----------
 
 -  Learn how to retrieve specific items and more with the `API module in AWS
-   Amplify <https://aws.github.io/aws-amplify/media/developer_guide.html>`_.
+   Amplify <https://aws.github.io/aws-amplify/media/developer_guide.html>`__.
 
--  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`_.
+-  Learn how to enable more features for your app with the `AWS Mobile CLI <https://aws.github.io/aws-amplify>`__.
 
--  Learn more about what happens behind the scenes, see `Set up Lambda and API Gateway <https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html>`_.
+-  Learn more about what happens behind the scenes, see `Set up Lambda and API Gateway <https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html>`__.

@@ -34,7 +34,7 @@ Create an IAM User for Better AWS Account Security
 To provide better security, we recommend that you do not use your AWS root account to access |AMH|.
 Instead, create an |IAMlong| (|IAM|) user, or use an existing |IAM| user, in your AWS account and
 then access |AMH| with that user. For more information, see `AWS Security Credentials
-<http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html>`_ in the AWS General Reference.
+<http://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html>`__ in the AWS General Reference.
 
 If you signed up for AWS but have not created an |IAM| user for yourself, you can create one by
 using the |IAM| console. First, create an |IAM| administrator group, then create and assign a new
@@ -42,7 +42,7 @@ using the |IAM| console. First, create an |IAM| administrator group, then create
 
 .. note:: Before any |IAM| user within an account can create a mobile Hub project, a user with
    administrative privileges for the account must navigate to the `Mobile Hub console
-   <https://console.aws.amazon.com/mobilehub/>`_ and create an initial project. This step provides
+   <https://console.aws.amazon.com/mobilehub/>`__ and create an initial project. This step provides
    confirmation that |AMH| can manage AWS services on your behalf.
 
    To learn more about assigning access rights to |IAM| users or groups, see
@@ -52,7 +52,7 @@ using the |IAM| console. First, create an |IAM| administrator group, then create
 **To create an |IAM| administrators group**
 
 #. Sign in to the AWS Management Console and open the |IAM| console at
-   `http://console.aws.amazon.com/iam/ <https://console.aws.amazon.com/iam/>`_
+   `http://console.aws.amazon.com/iam/ <https://console.aws.amazon.com/iam/>`__
 
 #. In the navigation pane, choose :guilabel:`Groups`, and then choose :guilabel:`Create New Group`.
 
@@ -111,7 +111,7 @@ user, role, or group.
   this policy and the IAM identities that are attached to it.
 
   `http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_FullAccess
-  <http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_FullAccess>`_
+  <http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_FullAccess>`__
 
 * **AWSMobileHub_ReadOnly**
 
@@ -124,7 +124,7 @@ user, role, or group.
   use the following link to view this policy and the IAM identities that are attached to it.
 
   `http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_ReadOnly
-  <http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_ReadOnly>`_
+  <http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_ReadOnly>`__
 
 
 .. _console-readonly:
@@ -155,9 +155,9 @@ user, role or group in the |IAMlong| console.
 #. Choose the link for the managed policy you want to attach.
 
    * `http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_FullAccess
-     <https://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_FullAccess>`_
+     <https://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_FullAccess>`__
    * `http://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_ReadOnly
-     <https://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_ReadOnly>`_
+     <https://console.aws.amazon.com/iam/home?region=us-east-1#policies/arn:aws:iam::aws:policy/AWSMobileHub_ReadOnly>`__
 
 #. Choose :guilabel:`Attached Entities`.
 

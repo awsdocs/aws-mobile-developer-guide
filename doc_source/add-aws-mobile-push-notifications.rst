@@ -24,7 +24,7 @@ Overview
 ==========================
 
 |AMH| deploys your Push Notifications backend services when you enable the
-:ref:`messaging-and-analytics` feature using the `Amazon Pinpoint service <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`_. Amazon Pinpoint enables apps to
+:ref:`messaging-and-analytics` feature using the `Amazon Pinpoint service <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`__. Amazon Pinpoint enables apps to
 receive mobile push messages sent from the Apple (APNs) and Google (FCM/GCM) platforms. You can also
 create Amazon Pinpoint campaigns that tie user behavior to push or other forms of messaging.
 
@@ -40,9 +40,9 @@ Set Up Your Backend
 
 #. Choose :guilabel:`Mobile push`.
 
-   **For Android - Firebase/Google Cloud Messaging (FCM/GCM):** Choose :guilabel:`Android` and provide your Firebase/Google application API key and Sender ID. To retrieve or create these values, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`_ .
+   **For Android - Firebase/Google Cloud Messaging (FCM/GCM):** Choose :guilabel:`Android` and provide your Firebase/Google application API key and Sender ID. To retrieve or create these values, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__ .
 
-   **For iOS - Apple Push Notification Service (APNs):** Choose :guilabel:`iOS` and provide your Apple app P12 Certificate and, optionally, Certificate password. To retrieve or create these items, see `Setting Up iOS Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`_.
+   **For iOS - Apple Push Notification Service (APNs):** Choose :guilabel:`iOS` and provide your Apple app P12 Certificate and, optionally, Certificate password. To retrieve or create these items, see `Setting Up iOS Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`__.
 
 #. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done with configuring the feature, choose the banner to return to the project details page.
 
@@ -239,7 +239,7 @@ Connect to your backend
 Add Amazon Pinpoint Targeted and Campaign Push Messaging
 ===========================
 
-`Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_ enables you to target your app users with push messaging. You can send individual messages or configure campaigns that target a group of users that match a profile that you define. For instance, you could email users that have not used the app in 30 days, or send an SMS to those that frequently use a given feature of your app.
+`Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enables you to target your app users with push messaging. You can send individual messages or configure campaigns that target a group of users that match a profile that you define. For instance, you could email users that have not used the app in 30 days, or send an SMS to those that frequently use a given feature of your app.
 
 .. container:: option
 
@@ -454,7 +454,7 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
                :scale: 75
 
       #. Build and run your app using information at `Building the Sample iOS App From AWS Mobile
-         Hub <http://docs.aws.amazon.com/pinpoint/latest/developerguide/getting-started-ios-sampleapp.html>`_.
+         Hub <http://docs.aws.amazon.com/pinpoint/latest/developerguide/getting-started-ios-sampleapp.html>`__.
 
 
 

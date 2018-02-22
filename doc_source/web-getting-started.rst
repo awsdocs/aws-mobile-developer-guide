@@ -44,9 +44,9 @@ The AWS Mobile CLI provides a command line experience that allows frontend JavaS
 Prerequisites
 =============
 
-#. `Sign up for the AWS Free Tier <https://aws.amazon.com/free/>`_.
+#. `Sign up for the AWS Free Tier <https://aws.amazon.com/free/>`__.
 
-#. Install `Node.js <https://nodejs.org/en/download/>`_ with NPM.
+#. Install `Node.js <https://nodejs.org/en/download/>`__ with NPM.
 
 #. Install AWS Mobile CLI
 
@@ -73,7 +73,7 @@ Set Up Your Backend
 .. list-table::
    :widths: 1
 
-   * - Need to create a quick sample React app? See `Create a React App <https://reactjs.org/blog/2016/07/22/create-apps-with-no-configuration.html>`_.
+   * - Need to create a quick sample React app? See `Create a React App <https://reactjs.org/blog/2016/07/22/create-apps-with-no-configuration.html>`__.
 
 
 **To configure backend features for your app**
@@ -119,7 +119,7 @@ Your project is now initialized.
 Connect to Your Backend
 =======================
 
-AWS Mobile uses the open source `AWS Amplify library <https://aws.github.io/aws-amplify>`_ to link your code to the AWS features configured for your app.
+AWS Mobile uses the open source `AWS Amplify library <https://aws.github.io/aws-amplify>`__ to link your code to the AWS features configured for your app.
 
 
 This section of the guide shows examples using a React application of the kind output by :code:`create-react-app` or a similar tool.
@@ -162,7 +162,7 @@ Anytime you launch your app, :ref:`app analytics are gathered and can be visuali
 
    * - AWS Free Tier
 
-     - Initializing your app or adding features through the CLI will cause AWS services to be configured on your behalf. The `pricing for AWS Mobile services <http://aws.amazon.com/mobile/pricing>`_ enables you to learn and prototype at little or no cost using the `AWS Free Tier <http://aws.amazon.com/free>`_.
+     - Initializing your app or adding features through the CLI will cause AWS services to be configured on your behalf. The `pricing for AWS Mobile services <http://aws.amazon.com/mobile/pricing>`__ enables you to learn and prototype at little or no cost using the `AWS Free Tier <http://aws.amazon.com/free>`__.
 
 
 .. _web-getting-started-deploying-and-testing:
@@ -189,7 +189,7 @@ In the root folder of your app, run:
 
 To push any backend configuration changes to AWS and view content locally, run :code:`awsmobile run`. In both cases, any pending changes you made to your backend configuration are made to your backend resources.
 
-By default, the CLI configures AWS Mobile :ref:`Hosting and Streaming <hosting-and-streaming>` feature, that hosts your app on `Amazon CloudFront <https://aws.amazon.com/cloudfront/>`_ CDN endpoints. These locations make your app highly available to the public on the Internet and support `media file streaming <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/url-cf-dev;Tutorials.html>`_
+By default, the CLI configures AWS Mobile :ref:`Hosting and Streaming <hosting-and-streaming>` feature, that hosts your app on `Amazon CloudFront <https://aws.amazon.com/cloudfront/>`__ CDN endpoints. These locations make your app highly available to the public on the Internet and support `media file streaming <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/url-cf-dev;Tutorials.html>`__
 
 You can also :ref:`use a custom domain <web-host-frontend>` for your hosting location.
 
@@ -206,7 +206,7 @@ In the root folder of your app, run:
 
     awsmobile publish --test
 
-The CLI will open the reporting page for your app in the |AMH| console to show the metrics gathered from the test devices. The device that runs the remote test you invoke resides in `AWS Device Farm <https://aws.amazon.com/device-farm/>`_ which provides flexible configuration of tests and reporting.
+The CLI will open the reporting page for your app in the |AMH| console to show the metrics gathered from the test devices. The device that runs the remote test you invoke resides in `AWS Device Farm <https://aws.amazon.com/device-farm/>`__ which provides flexible configuration of tests and reporting.
 
 .. image:: images/web-performance-testing.png
 
@@ -233,5 +233,5 @@ Learn more
 
 To learn more about the commands and usage of the AWS Mobile CLI, see the :ref:`AWS Mobile CLI reference<aws-mobile-cli-reference>`.
 
-Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`_.
+Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`__.
 

@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. highlight:: java
+.. _how-to-android-data-sync:
 
 ###########################################
 Android: Sync Data with Amazon Cognito Sync
@@ -24,7 +24,7 @@ across devices and across login providers |mdash| Amazon, Facebook, Twitter/Digi
 own custom identity provider.
 
 For instructions on how to integrate Amazon Cognito Sync in your application, see  `Amazon Cognito
-Sync Developer Guide <http://docs.aws.amazon.com/cognito/devguide/sync/>`_.
+Sync Developer Guide <http://docs.aws.amazon.com/cognito/devguide/sync/>`__.
 
 
 Set Up the SDK
@@ -37,13 +37,14 @@ this tutorial.
 Initialize the CognitoSyncManager
 ---------------------------------
 
-Pass your initialized Amazon Cognito credentials provider to the :code:`CognitoSyncManager`
-constructor::
+Pass your initialized Amazon Cognito credentials provider to the :code:`CognitoSyncManager` constructor.
 
-  CognitoSyncManager client = new CognitoSyncManager(
-      getApplicationContext(),
-      Regions.YOUR_REGION,
-      credentialsProvider);
+.. code-block:: java
+
+    CognitoSyncManager client = new CognitoSyncManager(
+        getApplicationContext(),
+        Regions.YOUR_REGION,
+        credentialsProvider);
 
 For more information about Cognito Identity, see :doc:`cognito-auth-legacy`.
 
@@ -64,22 +65,28 @@ Create an instance of :code:`Dataset`. User data is added in the form of key/val
 objects are created with the :code:`CognitoSyncManager` class which functions as a Cognito client
 object. Use the defaultCognito method to get a reference to the instance of CognitoSyncManager. The
 openOrCreateDataset method is used to create a new dataset or open an existing instance of a dataset
-stored locally on the device::
+stored locally on the device.
 
-  Dataset dataset = client.openOrCreateDataset("datasetname");
+.. code-block:: java
+
+    Dataset dataset = client.openOrCreateDataset("datasetname");
 
 Cognito datasets function as dictionaries, with values accessible by key::
 
-  String value = dataset.get("myKey");
-  dataset.put("myKey", "my value");
+.. code-block:: java
+
+    String value = dataset.get("myKey");
+    dataset.put("myKey", "my value");
 
 
 Synchronize Dataset with the Cloud
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To synchronize a dataset, call its synchronize method::
+To synchronize a dataset, call its synchronize method.
 
-  dataset.synchronize();
+.. code-block:: java
+
+    dataset.synchronize();
 
 All data written to datasets will be stored locally until the dataset is synced. The code in this
 section assumes you are using an unauthenticated Cognito identity, so when the user data is synced
@@ -87,6 +94,6 @@ with the cloud it will be stored per device. The device has a device ID associat
 user data is synced to the cloud, it will be associated with that device ID.
 
 To sync user data across devices (using an authenticated identity), see `Amazon Cognito Sync
-<http://docs.aws.amazon.com/cognito/devguide/sync/>`_.
+<http://docs.aws.amazon.com/cognito/devguide/sync/>`__.
 
 .. _Cognito Console: https://console.aws.amazon.com/cognito

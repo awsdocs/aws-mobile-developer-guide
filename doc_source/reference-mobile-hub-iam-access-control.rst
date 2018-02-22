@@ -31,7 +31,7 @@ groups, and roles), and some services (such as |LAMlong|) also support attaching
 policies to resources.
 
 .. note:: An :emphasis:`account administrator` (or administrator user) is a user with administrator
-   privileges. For more information, see `IAM Best Practices <http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html>`_ in the
+   privileges. For more information, see `IAM Best Practices <http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html>`__ in the
    :title:`IAM User Guide`.
 
    When granting permissions, you decide who is getting the permissions, the resources they get
@@ -80,10 +80,10 @@ the available options for creating permissions policies.
 
    This section discusses using |IAM| in the context of |AMHlong|. It doesn't provide
    detailed information about the |IAM| service. For complete |IAM| documentation, see
-   `What Is IAM? <http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html>`_
+   `What Is IAM? <http://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html>`__
    in the :title:`IAM User Guide`. For information about |IAM|
    policy syntax and descriptions, see `AWS Identity and Access Management Policy Reference
-   <http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html>`_ in the :title:`IAM User Guide`.
+   <http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html>`__ in the :title:`IAM User Guide`.
 
 Policies attached to an |IAM| identity are referred to as identity-based policies (|IAM| polices)
 and policies attached to a resource are referred to as resource-based policies.
@@ -116,7 +116,7 @@ You can attach policies to |IAM| identities. For example, you can do the followi
   ability to grant permissions for services and resources used by your project.
 
   For more information about using |IAM| to delegate permissions, see `Access Management
-  <http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html>`_ in the :title:`IAM User Guide`.
+  <http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html>`__ in the :title:`IAM User Guide`.
 
 As an example of using an identity-based policy, the following policy grants permissions to a user
 to create an |S3| bucket. A user with these permissions can create a storage location using the |S3|
@@ -139,7 +139,7 @@ For more information about using identity-based policies with |AMH| , see :ref:`
 and :ref:`reference-mobile-hub-iam-service-role`.
 
 For more information about users, groups, roles, and permissions, see `Identities (Users, Groups,
-and Roles) <http://docs.aws.amazon.com/IAM/latest/UserGuide/id.html>`_ in the :title:`IAM User Guide`.
+and Roles) <http://docs.aws.amazon.com/IAM/latest/UserGuide/id.html>`__ in the :title:`IAM User Guide`.
 
 
 .. _resource-based-policies:

@@ -28,7 +28,7 @@ Access Your APIs
 About Hosting and Streaming
 ===========================
 
-The AWS Mobile :ref:`Hosting and Streaming <hosting-and-streaming>` feature is especially useful to web developers. It uses the ability of `Amazon S3 <https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html>`_ buckets to statically host content and the `Amazon CloudFront <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>`_ content distribution network (CDN) to host on an endpoint close to every user globally. Amazon CloudFront endpoints can also stream media content.
+The AWS Mobile :ref:`Hosting and Streaming <hosting-and-streaming>` feature is especially useful to web developers. It uses the ability of `Amazon S3 <https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html>`__ buckets to statically host content and the `Amazon CloudFront <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>`__ content distribution network (CDN) to host on an endpoint close to every user globally. Amazon CloudFront endpoints can also stream media content.
 
 **About the Hosting and Streaming Sample App**
 
@@ -47,7 +47,7 @@ When you enable Hosting and Streaming an |CFlong| global content delivery networ
 distribution is created and associated with your bucket. When |AMH| propagates the sample
 web app content to the bucket, the content is then propagated to the CDN and becomes
 available from local endpoints around the globe. If you configure `CloudFront streaming
-<http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Tutorials.html>`_, then media content you upload to your |S3| bucket can be streamed from
+<http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Tutorials.html>`__, then media content you upload to your |S3| bucket can be streamed from
 those endpoints.
 
 ** To view the Hosting and Streaming Sample App
@@ -59,7 +59,7 @@ The sample app web assets are deployed to an |S3| bucket. The bucket is configur
 static web content for public access.
 
 
-#. In the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_, open your project and then choose the Hosting and Streaming tile.
+#. In the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__, open your project and then choose the Hosting and Streaming tile.
 
 #. Choose :guilabel:`View from S3`.
 
@@ -87,7 +87,7 @@ Configure a Custom Domain for Your Web App
  routing.
 
  For a web app hosted in a single location, see `Routing Traffic to a Website that Is Hosted in
- an Amazon S3 Bucket <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/RoutingToS3Bucket.html>`_.
+ an Amazon S3 Bucket <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/RoutingToS3Bucket.html>`__.
 
  For a web app distributed through a global CDN, see `Routing Traffic to an Amazon CloudFront
- Web Distribution by Using Your Domain Name <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloud-fron-distribution.html>`_
+ Web Distribution by Using Your Domain Name <http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloud-fron-distribution.html>`__

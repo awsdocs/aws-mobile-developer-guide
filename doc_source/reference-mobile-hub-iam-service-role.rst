@@ -45,7 +45,7 @@ allow it to create a pre-defined |IAM| administrative service role, called
 
 After this service role is created, you can see it at
 `http://console.aws.amazon.com/iam/home?region=us-east-1#roles/MobileHub_Service_Role
-<https://console.aws.amazon.com/iam/home?region=us-east-1#roles/MobileHub_Service_Role>`_.
+<https://console.aws.amazon.com/iam/home?region=us-east-1#roles/MobileHub_Service_Role>`__.
 
 
 .. _service-role-trust-relationship:
@@ -56,7 +56,7 @@ Trust Relationship
 
 In the |IAM| console at
 `http://console.aws.amazon.com/iam/home?region=us-east-1#roles/MobileHub_Service_Role
-<https://console.aws.amazon.com/iam/home?region=us-east-1#roles/MobileHub_Service_Role>`_, there is a section for the trust
+<https://console.aws.amazon.com/iam/home?region=us-east-1#roles/MobileHub_Service_Role>`__, there is a section for the trust
 relationship. The trust relationship dictates which entities can assume this role and make use of
 its permissions. The trust relationship for this service role has an access control policy that
 looks like this:
@@ -120,7 +120,7 @@ The service policy states which operations an entity that assumes the :code:`Mob
 role can perform. The role is created for your account when you agree to allow |AMH| to manage
 permissions on your behalf. The following JSON is a reproduction of the policy. You can also view
 the source at `http://console.aws.amazon.com/iam/home?region=us-east-1#roles/MobileHub_Service_Role
-<https://console.aws.amazon.com/iam/home?region=us-east-1#/policies/arn:aws:iam::aws:policy/service-role/AWSMobileHub_ServiceUseOnly$jsonEditor>`_.
+<https://console.aws.amazon.com/iam/home?region=us-east-1#/policies/arn:aws:iam::aws:policy/service-role/AWSMobileHub_ServiceUseOnly$jsonEditor>`__.
 
 .. code-block:: json
 

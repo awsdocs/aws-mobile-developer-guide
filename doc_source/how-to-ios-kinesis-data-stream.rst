@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _kinesis-data-stream-processing-for-ios:
+.. _how-to-ios-kinesis-data-stream:
 
 #############################################
 ios: Process Data Streams with Amazon Kinesis
@@ -17,9 +17,9 @@ ios: Process Data Streams with Amazon Kinesis
 Overview
 ========
 
-`Amazon Kinesis <http://aws.amazon.com/kinesis/>`_ is a fully managed service for real-time
+`Amazon Kinesis <http://aws.amazon.com/kinesis/>`__ is a fully managed service for real-time
 processing of streaming data at massive scale. `Amazon Kinesis Firehose
-<http://aws.amazon.com/kinesis/firehose/>`_ is a fully managed service for delivering real-time
+<http://aws.amazon.com/kinesis/firehose/>`__ is a fully managed service for delivering real-time
 streaming data to destinations such as Amazon Simple Storage Service (Amazon S3) and Amazon
 Redshift. With Firehose, you do not need to write any applications or manage any resources. You
 configure your data producers to send data to Firehose and it automatically delivers the data to the
@@ -34,7 +34,7 @@ Prerequisites
 -------------
 
 You must complete all of the instructions on the `Set Up the SDK for Android
-<http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/setup.html>`_ page before beginning
+<http://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/setup.html>`__ page before beginning
 this tutorial.
 
 
@@ -101,7 +101,7 @@ Identity Pool access to your Kinesis stream. To set this policy:
    :guilabel:`Apply Policy` button.
 
 To learn more about Kinesis-specific policies, see `Controlling Access to Amazon Kinesis Resources
-with IAM <http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-iam.html>`_.
+with IAM <http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-iam.html>`__.
 
 
 Grant Role Access to Your Kinesis Firehose Delivery Stream
@@ -136,7 +136,7 @@ Cognito Identity Pool access to your Kinesis Firehose delivery stream. To set th
    :guilabel:`Apply Policy` button.
 
 To learn more about Kinesis Firehose-specific policies, see `Controlling Access to Amazon Kinesis
-Firehose <http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html>`_.
+Firehose <http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html>`__.
 
 
 Configure the Kinesis Service Client
@@ -178,13 +178,13 @@ all locally saved records to your Kinesis stream.
        recorder.submitAllRecords();
 
 To learn more about working with Amazon Kinesis, see the `Amazon Kinesis Developer Resources
-<http://aws.amazon.com/kinesis/developer-resources/>`_.
+<http://aws.amazon.com/kinesis/developer-resources/>`__.
 
 To learn more about working with Amazon Kinesis Firehose, see the `Amazon Kinesis Firehose
-Documentation <http://aws.amazon.com/documentation/firehose/>`_.
+Documentation <http://aws.amazon.com/documentation/firehose/>`__.
 
 To learn more about the Kinesis classes, see the `class reference for AWSKinesisRecorder
-<http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/kinesis/kinesisrecorder/KinesisRecorder.html>`_.
+<http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/kinesis/kinesisrecorder/KinesisRecorder.html>`__.
 
 .. _Cognito Console: https://console.aws.amazon.com/cognito/home
 .. _Kinesis Console: https://console.aws.amazon.com/kinesis/home

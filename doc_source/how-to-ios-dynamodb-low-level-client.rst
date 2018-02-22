@@ -8,6 +8,8 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
+.. _how-to-ios-dynamodb-low-level-client:
+
 #####################################
 iOS: Amazon DynamoDB Low-level Client
 #####################################
@@ -19,7 +21,7 @@ iOS: Amazon DynamoDB Low-level Client
 Overview
 --------
 
-`Amazon DynamoDB <http://aws.amazon.com/dynamodb/>`_ is a fast, highly scalable,
+`Amazon DynamoDB <http://aws.amazon.com/dynamodb/>`__ is a fast, highly scalable,
 highly available, cost-effective, nonrelational database service. Amazon DynamoDB removes traditional
 scalability limitations on data storage while maintaining low latency and predictable
 performance.
@@ -38,7 +40,7 @@ To set your project up to use the AWS SDK for iOS TransferUtility, take the foll
 1. Setup the SDK, Credentials, and Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To use the low-level DynamoDB mobile client in a new app, follow the steps described in `Get Started <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`_ to install the AWS Mobile SDK for iOS.
+To use the low-level DynamoDB mobile client in a new app, follow the steps described in `Get Started <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`__ to install the AWS Mobile SDK for iOS.
 
 For apps that use an SDK version prior to 2.6.0, follow the steps on :doc:`setup-options-for-aws-sdk-for-ios` to install the AWS Mobile SDK for iOS. Then use the steps on :doc:`cognito-auth-identity-for-ios-legacy` to configure user credentials, and permissions.
 
@@ -254,6 +256,6 @@ The following example shows a batch write operation.
 Additional Resources
 --------------------
 
-* `Amazon DynamoDB Developer Guide <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`_
-* `Amazon DynamoDB API Reference <http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/>`_
+* `Amazon DynamoDB Developer Guide <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`__
+* `Amazon DynamoDB API Reference <http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/>`__
 

@@ -25,7 +25,7 @@ Set Up Your Backend
 Before we work on the client-side code, we need to add User Sign-in to
 the backend project:
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 #. Select your project.
 #. Scroll down to the :guilabel:`Add More Backend Features` section.
 #. Choose the :guilabel:`User Sign-in` tile.
@@ -37,7 +37,7 @@ the backend project:
 
        * - What does this do?
 
-         - You have just created your own user pool in the `Amazon Cognito <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`_ service. When used in conjunction with the AWS Mobile sign-in process, the user pool enforces the password requirement rules you chose. It also supports sign-up and forgot my password user flows.
+         - You have just created your own user pool in the `Amazon Cognito <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`__ service. When used in conjunction with the AWS Mobile sign-in process, the user pool enforces the password requirement rules you chose. It also supports sign-up and forgot my password user flows.
 
 #. Choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
 #. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
@@ -237,7 +237,7 @@ sign-in with your new account.
      - Use Amazon WorkMail as a test email account
 
        If you do not want to use your own email account as a test account, create an
-       `Amazon WorkMail <https://aws.amazon.com/workmail/>`_ service within AWS for test accounts. You can get started for free with a 30-day trial for up to 25 accounts.
+       `Amazon WorkMail <https://aws.amazon.com/workmail/>`__ service within AWS for test accounts. You can get started for free with a 30-day trial for up to 25 accounts.
 
 .. image:: images/tutorial-notes-authentication-anim.gif
    :scale: 75
@@ -248,4 +248,4 @@ Next steps
 
 -  Continue by integrating :ref:`NoSQL Data <tutorial-android-aws-mobile-notes-data>`.
 
--  Learn more about `Amazon Cognito <https://aws.amazon.com/cognito/>`_.
+-  Learn more about `Amazon Cognito <https://aws.amazon.com/cognito/>`__.

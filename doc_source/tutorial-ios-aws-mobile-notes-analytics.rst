@@ -28,10 +28,10 @@ Set Up Your Back End
 
 To start, set up the mobile backend resources in AWS:
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 
    -  If you do not have an AWS account, `sign up for the AWS
-      Free Tier <https://aws.amazon.com/free/>`_.
+      Free Tier <https://aws.amazon.com/free/>`__.
 
 #. Choose :guilabel:`Create` on the upper left, and the type :userinput:`ios-notes-app` for the name of the Mobile Hub project.
 #. Choose :guilabel:`Next`, choose :guilabel:`iOS`, and then choose :guilabel:`Add`.
@@ -43,7 +43,7 @@ To start, set up the mobile backend resources in AWS:
 
    * - Used in this section
 
-     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`_: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
+     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`__: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
 
 Connect to Your Backend
 -----------------------
@@ -312,4 +312,4 @@ Next steps
 
 *  Continue by adding :ref:`Authentication <tutorial-ios-aws-mobile-notes-auth>`.
 
-*  Learn more about `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`_.
+*  Learn more about `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`__.

@@ -28,10 +28,10 @@ Set Up Your Back End
 
 To start, set up the mobile backend resources in AWS:
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`_.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
 
    -  If you do not have an AWS account, `sign up for the AWS
-      Free Tier <https://aws.amazon.com/free/>`_.
+      Free Tier <https://aws.amazon.com/free/>`__.
 
 #. Choose :guilabel:`Create` on the upper left, and the type :userinput:`android-notes-app` for the name of the Mobile Hub project.
 #. Choose :guilabel:`Next`, choose :guilabel:`Android`, and then choose :guilabel:`Add`.
@@ -43,7 +43,7 @@ To start, set up the mobile backend resources in AWS:
 
    * - Used in this section
 
-     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`_: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
+     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`__: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
 
 Add Permissions to the AndroidManifest.xml
 ------------------------------------------
@@ -228,7 +228,7 @@ Update the Application Class
 
 All Android applications that include the AWS SDK for Android must
 inherit from
-`MultiDexApplication <https://developer.android.com/studio/build/multidex.html>`_.
+`MultiDexApplication <https://developer.android.com/studio/build/multidex.html>`__.
 This has been done for you in this project. Open the
 :file:`Application.java` file. In the :code:`onCreate()` method of the
 :code:`Application` class, add code to initialize the :code:`AWSProvider` object
@@ -254,7 +254,7 @@ Update the ActivityLifeCycle Class
 ----------------------------------
 
 We use an
-`ActivityLifeCycle <https://developer.android.com/guide/components/activities/activity-lifecycle.html>`_
+`ActivityLifeCycle <https://developer.android.com/guide/components/activities/activity-lifecycle.html>`__
 to monitor for activity events like start, stop, pause and resume. We
 need to determine when the user starts the application so that we can
 send a :code:`startSession` event and :code:`stopSession` event to Amazon
@@ -384,9 +384,9 @@ generate some traffic that can be shown in the Pinpoint console.
 
 To view the demographics and custom events:
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`_.
+#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`__.
 #. Choose your project.
-#. Choose the :guilabel:`Analytics` icon on the left, to navigate to your project in the `AWS Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_.
+#. Choose the :guilabel:`Analytics` icon on the left, to navigate to your project in the `AWS Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
 #. Choose :guilabel:`Analytics` on the left.
 #. You should see an up-tick in several graphs:
 
@@ -450,6 +450,6 @@ Next steps
 
 *  Continue by adding :ref:`Authentication <tutorial-android-aws-mobile-notes-auth>`.
 
-*  Learn more about `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`_.
+*  Learn more about `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`__.
 
 

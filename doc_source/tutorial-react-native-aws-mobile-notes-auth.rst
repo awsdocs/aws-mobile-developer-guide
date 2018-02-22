@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _tutorial-android-aws-mobile-notes-auth:
+.. _tutorial-react-native-aws-mobile-notes-auth:
 
 ###################################
 Add Authentication to the Notes App
@@ -40,7 +40,7 @@ Add User Analytics
 
    * - **Used in this section**
 
-     - `Amazon Cognito <https://aws.amazon.com/pinpoint/>`_ service, which provides user credentials and provides identity authentication from AWS and in federation with Facebook, Google and other identity providers.
+     - `Amazon Cognito <https://aws.amazon.com/pinpoint/>`__ service, which provides user credentials and provides identity authentication from AWS and in federation with Facebook, Google and other identity providers.
 
 #. In the |AMH| console, choose :guilabel:`Resources` on the top right.
 #. Choose the :guilabel:`Amazon Cognito User Pools` entry to open the Amazon Cognito console.
@@ -100,7 +100,7 @@ Run the app and validate results
          - Use Amazon WorkMail as a test email account
 
            If you do not want to use your own email account as a test account, create an
-           `Amazon WorkMail <https://aws.amazon.com/workmail/>`_ service within AWS for test accounts. You can get started for free with a 30-day trial for up to 25 accounts.
+           `Amazon WorkMail <https://aws.amazon.com/workmail/>`__ service within AWS for test accounts. You can get started for free with a 30-day trial for up to 25 accounts.
 
 .. image:: images/tutorial-react-native-notes-authentication-anim.gif
    :scale: 75
@@ -112,4 +112,4 @@ Next steps
 
 -  Continue by integrating :ref:`NoSQL Data <tutorial-android-aws-mobile-notes-data>`.
 
--  Learn more about `Amazon Cognito <https://aws.amazon.com/cognito/>`_.
+-  Learn more about `Amazon Cognito <https://aws.amazon.com/cognito/>`__.

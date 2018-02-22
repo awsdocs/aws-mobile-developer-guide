@@ -26,8 +26,7 @@ How To: User Sign-in with Amazon Cognito
 
      - :ref:`Use streamlined steps <add-aws-mobile-user-sign-in>` to install the SDK and integrate Amazon Cognito.
 
-*Or, use the contents of this page if your app will integrate existing AWS services.*
-
+       :superscript:`*Or, use the contents of this page if your app will integrate existing AWS services.`
 
 
 

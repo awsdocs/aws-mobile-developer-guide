@@ -26,7 +26,7 @@ Overview
 
 Gather the data that helps improve your app's usability, monetization, and engagement with your
 users. |AMH| deploys your analytics backend when you enable the :ref:`messaging-and-analytics`
-feature, which uses the `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`_ service.
+feature, which uses the `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__ service.
 
 .. _setup-your-backend:
 
@@ -60,7 +60,7 @@ Use the following steps to add analytics to your mobile app through AWS Pinpoint
                         compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
                      }
 
-            #. Instrument your app to provide basic session data for Amazon Pinpoint analytics. The Amazon Pinpoint SDK gives you full control of when your sessions are started and stopped. Your app must explicitly start and stop the sessions. The following example shows one way to handle this by instrumenting a public class that extends `MultidexApplication <https://developer.android.com/studio/build/multidex.html>`_. :code:`StartSession()` is called during the :code:`OnCreate` event.
+            #. Instrument your app to provide basic session data for Amazon Pinpoint analytics. The Amazon Pinpoint SDK gives you full control of when your sessions are started and stopped. Your app must explicitly start and stop the sessions. The following example shows one way to handle this by instrumenting a public class that extends `MultidexApplication <https://developer.android.com/studio/build/multidex.html>`__. :code:`StartSession()` is called during the :code:`OnCreate` event.
 
                #. Add the following to :file:`app/build.gradle`:
 
@@ -182,9 +182,9 @@ Use the following steps to add analytics to your mobile app through AWS Pinpoint
 
 Build and run your app to see usage metrics in Amazon Pinpoint.
 
-#. To see visualizations of the analytics coming from your app, open your project in the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`_.
+#. To see visualizations of the analytics coming from your app, open your project in the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`__.
 
-#. Choose :guilabel:`Analytics` on the upper right to open the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`_.
+#. Choose :guilabel:`Analytics` on the upper right to open the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
 
   .. image:: images/analytics-link-mhconsole.png
      :alt: |AMH| console link to your project in the Amazon Pinpoint console.
@@ -193,14 +193,14 @@ Build and run your app to see usage metrics in Amazon Pinpoint.
 
   .. image:: images/getting-started-analytics.png
 
-  `Learn more about Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`_.
+  `Learn more about Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__.
 
 .. _add-aws-mobile-analytics-enable-custom-data:
 
 Enable Custom App Analytics
 ---------------------------
 
-Instrument your code to capture app usage event information, including attributes you define.  Use graphs of your custom usage event data  in the Amazon Pinpoint console. Visualize how your users' behavior aligns with a model you design using `Amazon Pinpoint Funnel Analytics <analytics-funnels.html>`_, Or use `stream the data <analytics-streaming.html>`_ for deeper analysis.
+Instrument your code to capture app usage event information, including attributes you define.  Use graphs of your custom usage event data  in the Amazon Pinpoint console. Visualize how your users' behavior aligns with a model you design using `Amazon Pinpoint Funnel Analytics <analytics-funnels.html>`__, Or use `stream the data <analytics-streaming.html>`__ for deeper analysis.
 
 Use the following steps to implement Amazon Pinpoint custom analytics for your app.
 

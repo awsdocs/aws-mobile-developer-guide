@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _aws-aysnchronous-tasks-for-ios:
+.. _how-to-ios-asynchronous-tasks:
 
 ####################################
 iOS: Working with Asynchronous Tasks
@@ -24,7 +24,7 @@ and
       gives advantages for more complex operations like chaining asynchronous requests.
 
       For complete documentation on Bolts, see the
-      `Bolts-ObjC repo <https://github.com/BoltsFramework/Bolts-ObjC>`_.
+      `Bolts-ObjC repo <https://github.com/BoltsFramework/Bolts-ObjC>`__.
 
 .. _completionHandler:
 

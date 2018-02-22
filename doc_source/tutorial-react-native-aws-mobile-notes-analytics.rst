@@ -53,9 +53,9 @@ To start, set up the mobile backend resources in AWS:
 
    * - **Used in this section**
 
-     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`_: Behind the scenes, configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
+     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`__: Behind the scenes, configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
 
-       `AWS Amplify library <https://github.com/aws/aws-amplify>`_: Link your JavaScript to the AWS features you configure for your app, using this open source code.
+       `AWS Amplify library <https://github.com/aws/aws-amplify>`__: Link your JavaScript to the AWS features you configure for your app, using this open source code.
 
 Run the app and validate results
 ------------------------------------
@@ -65,7 +65,7 @@ Run the app and validate results
 
    * - **Used in this section**
 
-     - `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`_ service, which enacts your analytics.
+     - `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`__ service, which enacts your analytics.
 
 #. Run the application using :code:`yarn run ios` or :code:`yarn run android`.
 
@@ -175,6 +175,6 @@ Next steps
 
 *  Continue by adding :ref:`Authentication <tutorial-react-native-aws-mobile-notes-auth>`.
 
-*  Learn more about `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`_.
+*  Learn more about `Amazon Pinpoint <https://aws.amazon.com/pinpoint/>`__.
 
 

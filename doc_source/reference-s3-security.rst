@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _s3-security:
+.. _reference-s3-security:
 
 ############################################
 |S3| Security Considerations for |AMH| Users
@@ -43,7 +43,7 @@ criteria, that developers also add the :ref:`user-sign-in` feature so that only 
 have access to an app's AWS resources like buckets and database.
 
 For more information, see `Managing Access Permissions to Your Amazon S3 Resources
-<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html>`_ in the :title:`Amazon S3 Developer Guide`.
+<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html>`__ in the :title:`Amazon S3 Developer Guide`.
 
 
 .. _s3-security-lifecycle:
@@ -59,7 +59,7 @@ that file or move it to |GLlong|. You might want to do this to reduce the amount
 that other mobile app users can potentially access. You might also want to manage your costs by
 deleting or archiving files that you know you or mobile app users no longer need.
 
-For more information, see `Object Lifecycle Management <http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html>`_ in the
+For more information, see `Object Lifecycle Management <http://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html>`__ in the
 :title:`Amazon S3 Developer Guide`.
 
 
@@ -74,7 +74,7 @@ from a bucket as well as while they are in a bucket. You can use |S3| to encrypt
 can encrypt the files yourself. Files can be encrypted with an |S3|-managed encryption key, a key
 managed by |KMSlong| (|KMS|), or your own key.
 
-For more information, see the `Protecting Data Using Encryption <http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html>`_ section in
+For more information, see the `Protecting Data Using Encryption <http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html>`__ section in
 the :title:`Amazon S3 Developer Guide`.
 
 
@@ -90,7 +90,7 @@ a bucket. You can uniquely access each version by its related file name and vers
 manage your costs, you can delete or archive older versions that you no longer need, or you can
 suspend versioning.
 
-For more information, see the `Using Versioning <http://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html>`_ section in the
+For more information, see the `Using Versioning <http://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html>`__ section in the
 :title:`Amazon S3 Developer Guide`.
 
 
@@ -107,7 +107,7 @@ response status, and error code, if any. You can store logs in the same bucket o
 one. To help manage your costs, you can delete logs that you no longer need, or you can suspend
 logging.
 
-For more information, see `Managing Bucket Logging <http://docs.aws.amazon.com/AmazonS3/latest/user-guide/ManagingBucketLogging.html>`_ in the
+For more information, see `Managing Bucket Logging <http://docs.aws.amazon.com/AmazonS3/latest/user-guide/ManagingBucketLogging.html>`__ in the
 :title:`Amazon S3 User Guide`.
 
 

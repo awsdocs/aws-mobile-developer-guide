@@ -99,7 +99,7 @@ To create an OAuth Android client ID
 
 #. In :guilabel:`Signing-certificate fingerprint`, enter the SHA-1 fingerprint. For more information
    about Google's process for obtaining your SHA-1 fingerprint, see `this Google support article
-   <https://support.google.com/cloud/answer/6158849?hl=en#android>`_.
+   <https://support.google.com/cloud/answer/6158849?hl=en#android>`__.
 
    .. image:: images/create-android-client-id.png
       :scale: 100
@@ -118,7 +118,7 @@ To create an OAuth Android client ID
 
 #. Use your your SHA-1 fingerprint to ensure that your apps APK are associated with your Google app.
    See instructions at `Generate a key and keystore
-   <https://developer.android.com/studio/publish/app-signing.html#generate-key>`_.
+   <https://developer.android.com/studio/publish/app-signing.html#generate-key>`__.
 
 #. In :guilabel:`Package name`, enter the package name in the format
    :code:`com.amazon.YOUR-PACKAGE-NAME`.

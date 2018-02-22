@@ -8,6 +8,8 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
+.. _how-to-ios-lambda:
+
 ###########################################
 iOS: Execute Code On Demand with AWS Lambda
 ###########################################
@@ -29,11 +31,11 @@ iOS: Execute Code On Demand with AWS Lambda
 Overview
 ========
 
-The `AWS Lambda <http://aws.amazon.com/lambda/>`_ service makes it easy to create scalable, secure, and highly available backends for your mobile apps without the need to provision or manage infrastructure.
+The `AWS Lambda <http://aws.amazon.com/lambda/>`__ service makes it easy to create scalable, secure, and highly available backends for your mobile apps without the need to provision or manage infrastructure.
 
 You can create secure logical functions in the cloud that can be called directly from your iOS app. Your AWS Lambda code, written in C#, Node.js, Python, or Java, can implement standalone logic, extend your app to a range of AWS services, and/or connect to services and applications external to AWS.
 
-The availability and cost of a AWS Lambda function automatically scales to amount of traffic it receives. Functions can also be accessed from an iOS app through `Amazon API Gateway <http://aws.amazon.com/lambda/>`_, giving features like global provisioning, enterprise grade monitoring, throttling and control of access.
+The availability and cost of a AWS Lambda function automatically scales to amount of traffic it receives. Functions can also be accessed from an iOS app through `Amazon API Gateway <http://aws.amazon.com/lambda/>`__, giving features like global provisioning, enterprise grade monitoring, throttling and control of access.
 
 Setup
 =====
@@ -51,7 +53,7 @@ This section provides a step-by-step guide for getting started with AWS Lambda u
 
 #. Create and Configure a Lamda Function
 
-    #. Sign in to the `AWS Lambda console <https://console.aws.amazon.com/lambda/>`_.
+    #. Sign in to the `AWS Lambda console <https://console.aws.amazon.com/lambda/>`__.
 
     #. Choose :guilabel:`Create a Lamda function`.
 
@@ -77,7 +79,7 @@ Invoking an AWS Lambda Function
 =================================
 
 The SDK enables you to call AWS Lambda functions from your iOS mobile apps,
-using the `AWSLambdaInvoker <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSLambdaInvoker.html>`_ class. When invoked from this SDK, AWS Lambda functions receive
+using the `AWSLambdaInvoker <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSLambdaInvoker.html>`__ class. When invoked from this SDK, AWS Lambda functions receive
 data about the device and the end user identity through client and identity context objects.
 To learn more about using these contexts to create rich, and personalized app experiences,
 see :ref:`clientContext` and :ref:`identityContext`.
@@ -320,31 +322,31 @@ client.installation_id
         Auto-generated UUID that is created the first time the app is launched. This is stored in the keychain on the device. In case the keychain is wiped a new installation ID will be generated.
 
 client.app_version_code
-        `CFBundleShortVersionString <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-111349>`_
+        `CFBundleShortVersionString <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-111349>`__
 
 client.app_version_name
-        `CFBundleVersion <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364>`_
+        `CFBundleVersion <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102364>`__
 
 client.app_package_name
-        `CFBundleIdentifier <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102070>`_
+        `CFBundleIdentifier <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102070>`__
 
 client.app_title
-        `CFBundleDisplayName <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-110725>`_
+        `CFBundleDisplayName <https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-110725>`__
 
 env.platform_version
-        `systemVersion <https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/systemVersion>`_
+        `systemVersion <https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/systemVersion>`__
 
 env.platform
-        `systemName <https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/systemName>`_
+        `systemName <https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/systemName>`__
 
 env.make
         Hardcoded as "apple"
 
 env.model
-        `Model of the device <https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/model>`_
+        `Model of the device <https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/model>`__
 
 env.locale
-        `localeIdentifier <https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSLocale_Class/index.html#//apple_ref/occ/instp/NSLocale/localeIdentifier>`_ from `autoupdatingCurrentLocale <https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSLocale_Class/index.html#//apple_ref/occ/clm/NSLocale/autoupdatingCurrentLocale>`_
+        `localeIdentifier <https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSLocale_Class/index.html#//apple_ref/occ/instp/NSLocale/localeIdentifier>`__ from `autoupdatingCurrentLocale <https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSLocale_Class/index.html#//apple_ref/occ/clm/NSLocale/autoupdatingCurrentLocale>`__
 
 .. _identityContext:
 

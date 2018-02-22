@@ -8,7 +8,7 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _how-to-storage:
+.. _how-to-nosql:
 
 ###########################################
 How To: NoSQL Database with Amazon DynamoDB
@@ -25,8 +25,6 @@ How To: NoSQL Database with Amazon DynamoDB
    * - **Just Getting Started?**
 
      - :ref:`Use streamlined steps <add-aws-mobile-nosql-database>` to install the SDK and integrate Amazon DynamoDB.
-
-*Or, use the contents of this page if your app will integrate existing AWS services.*
 
 
 

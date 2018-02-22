@@ -91,9 +91,9 @@ To test, run :code:`npm start` or :code:`awsmobile run`.
 Next Steps
 ==========
 
-Learn more about the AWS Mobile :ref:`User Sign-in <user-sign-in>` feature, which uses `Amazon Cognito <http://docs.aws.amazon.com/cognito/latest/developerguide/welcome.html>`_.
+Learn more about the AWS Mobile :ref:`User Sign-in <user-sign-in>` feature, which uses `Amazon Cognito <http://docs.aws.amazon.com/cognito/latest/developerguide/welcome.html>`__.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 
-Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`_.
+Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`__.
 

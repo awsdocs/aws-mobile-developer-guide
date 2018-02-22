@@ -9,7 +9,7 @@
    limitations under the License.
 
 
-.. _polly-convert-text-to-speech-for-ios:
+.. _how-to-polly:
 
 ########################################
 Convert Text to Speech with Amazon Polly
@@ -22,16 +22,16 @@ Amazon Polly is a service that turns text into lifelike speech, making it easy t
 
 Using the following resources, you can integrate Amazon Polly with your iOS app to add text to speech transformation. No deep knowledge of either AWS services or natural language computing is needed.
 
-For information on Amazon Polly concepts and service configuration, see `How it Works <http://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html>`_ in the Amazon Polly Developer Guide.
+For information on Amazon Polly concepts and service configuration, see `How it Works <http://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html>`__ in the Amazon Polly Developer Guide.
 
 **ANDROID**
 
-* For sample Android integration code, see the `Android Amazon Polly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-android.html>`_.
+* For sample Android integration code, see the `Android Amazon Polly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-android.html>`__.
 
-* For end to end sample apps using Amazon Polly see the `AWS SDK for Android samples <https://github.com/awslabs/aws-sdk-android-samples/>`_.
+* For end to end sample apps using Amazon Polly see the `AWS SDK for Android samples <https://github.com/awslabs/aws-sdk-android-samples/>`__.
 
 **iOS**
 
-* For sample iOS ntegration code, see the `iOS Amazon Polly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-ios.html>`_.
+* For sample iOS ntegration code, see the `iOS Amazon Polly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-ios.html>`__.
 
-* For more end to end sample apps using Amazon Polly see the `AWS SDK for iOS samples <https://github.com/awslabs/aws-sdk-ios-samples/>`_.
+* For more end to end sample apps using Amazon Polly see the `AWS SDK for iOS samples <https://github.com/awslabs/aws-sdk-ios-samples/>`__.

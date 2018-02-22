@@ -44,9 +44,9 @@ The AWS Mobile CLI provides a command line experience that allows frontend JavaS
 Prerequisites
 =============
 
-#. `Sign up for the AWS Free Tier <https://aws.amazon.com/free/>`_ to learn and prototype at little or no cost.
+#. `Sign up for the AWS Free Tier <https://aws.amazon.com/free/>`__ to learn and prototype at little or no cost.
 
-#. Install `Node.js <https://nodejs.org/en/download/>`_ with NPM.
+#. Install `Node.js <https://nodejs.org/en/download/>`__ with NPM.
 
 #. Install the AWS Mobile CLI
 
@@ -73,7 +73,7 @@ Set Up Your Backend
 .. list-table::
    :widths: 1
 
-   * - Need to create a quick sample React Native app? See `Create a React Native App <https://facebook.github.io/react-native/docs/getting-started.html>`_.
+   * - Need to create a quick sample React Native app? See `Create a React Native App <https://facebook.github.io/react-native/docs/getting-started.html>`__.
 
 **To configure backend features for your app**
 
@@ -108,7 +108,7 @@ Connect to Your Backend
 =======================
 
 
-AWS Mobile uses the open source `AWS Amplify library <https://github.com/aws/aws-amplify>`_ to link your code to the AWS features configured for your app.
+AWS Mobile uses the open source `AWS Amplify library <https://github.com/aws/aws-amplify>`__ to link your code to the AWS features configured for your app.
 
 **To connect the app to your configured AWS services**
 
@@ -158,7 +158,7 @@ Anytime you launch your app, :ref:`app usage analytics are gathered and can be v
 
    * - AWS Free Tier
 
-     - Initializing your app or adding features through the CLI will cause AWS services to be configured on your behalf. The `pricing for AWS Mobile services <http://aws.amazon.com/mobile/pricing>`_ enables you to learn and prototype at little or no cost using the `AWS Free Tier <http://aws.amazon.com/free>`_.
+     - Initializing your app or adding features through the CLI will cause AWS services to be configured on your behalf. The `pricing for AWS Mobile services <http://aws.amazon.com/mobile/pricing>`__ enables you to learn and prototype at little or no cost using the `AWS Free Tier <http://aws.amazon.com/free>`__.
 
 
 .. _react-native-getting-started-deploying-and-testing:
@@ -188,6 +188,6 @@ Learn more
 
 To learn more about the commands and usage of the AWS Mobile CLI, see the :ref:`AWS Mobile CLI reference<aws-mobile-cli-reference>`.
 
-Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`_.
+Learn about `AWS Mobile Amplify <https://aws.github.io/aws-amplify>`__.
 
 

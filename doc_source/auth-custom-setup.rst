@@ -26,17 +26,17 @@ information, see the following blog entries:
 
 
 * `Understanding Amazon Cognito Authentication
-  <http://mobile.awsblog.com/post/Tx2UQN4KWI6GDJL/Understanding-Amazon-Cognito-Authentication>`_
+  <http://mobile.awsblog.com/post/Tx2UQN4KWI6GDJL/Understanding-Amazon-Cognito-Authentication>`__
 
 * `Understanding Amazon Cognito Authentication Part 2: Developer-Authenticated Identities
-  <http://mobile.awsblog.com/post/Tx2FL1QAPDE0UAH/Understanding-Amazon-Cognito-Authentication-Part-2-Developer-Authenticated-Ident>`_
+  <http://mobile.awsblog.com/post/Tx2FL1QAPDE0UAH/Understanding-Amazon-Cognito-Authentication-Part-2-Developer-Authenticated-Ident>`__
 
 
 
 To use your own authentication system, you must implement an identity provider by extending the
 :code:`AWSAbstractCognitoIdentityProvider` class and associating your provider with an |COG|
 identity pool. For more information, see `Developer Authenticated Identities
-<http://docs.aws.amazon.com/cognito/devguide/identity/developer-authenticated-identities/>`_ in the
+<http://docs.aws.amazon.com/cognito/devguide/identity/developer-authenticated-identities/>`__ in the
 |COG| Developer Guide.
 
 
