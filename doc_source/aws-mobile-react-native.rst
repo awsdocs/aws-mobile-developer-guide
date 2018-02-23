@@ -30,5 +30,4 @@ The AWS Mobile CLI, built on AWS Mobile Hub, provides a command line interface f
 
 
     Get Started <react-native-getting-started>
-    Tutorials <tutorials-react-native-aws-mobile>
     Reference <react-native-aws-mobile-reference>
