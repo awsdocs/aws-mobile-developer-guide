@@ -35,21 +35,14 @@ The :ref:`Get Started <add-aws-mobile-user-sign-in>` section of this guide allow
 Set Up Your Backend
 ===================
 
-.. _import-an-existing-identity-pool:
-
-
 .. _create-a-new-identity-pool:
 
-Create a New Identity Pool
---------------------------
+Import or Create a New Identity Pool
+------------------------------------
 
-.. list-table::
-   :widths: 1 6
+* If you already have an Amazon Cognito Identity Pool and know its ID and region, you can skip to :ref:`how-to-auth-connect-to-your-backend`.
 
-   * - **Or Import an Existing Identity Pool**
-
-     - If you already have an Amazon Cognito Identity Pool and know its ID and region, you can skip to :ref:`how-to-auth-connect-to-your-backend`.
-
+To create a new identity pool:
 
 #. Go to `Amazon Cognito Console <https://console.aws.amazon.com/cognito>`__ and choose :guilabel:`Manage Federated Identities`.
 
@@ -68,6 +61,13 @@ Create a New Identity Pool
 
 Connect to Your Backend
 =======================
+
+Take the following steps to connect your app to its backedn.
+
+.. contents::
+   :local:
+   :depth: 1
+
 
 Create the awsconfiguration.json file
 -------------------------------------

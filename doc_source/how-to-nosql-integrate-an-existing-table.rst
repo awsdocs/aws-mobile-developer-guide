@@ -31,15 +31,14 @@ Set up Your Backend
 
 To manually configure an Amazon DynamoDB table that you can integrate into your mobile app, use the following steps.
 
+.. contents::
+   :local:
+   :depth: 1
+
 Create an New Table and Index
 -----------------------------
 
-.. list-table::
-   :widths: 1 6
-
-   * - **Or Import Your Existing Table**
-
-     - If you already have an Amazon DynamoDB table and know its region, you can skip to :ref:`how-to-integrate-nosql-connect-to-your-backend`.
+* If you already have an Amazon DynamoDB table and know its region, you can skip to :ref:`how-to-nosql-integrate-an-existing-table-identity-pool`.
 
 To create the Books table:
 
@@ -57,6 +56,8 @@ To create the Books table:
 #. Refresh the console and choose your Books table from the list of tables.
 #. Open the :guilabel:`Overview` tab and copy or note the Amazon Resource Name (ARN). You need this for the next procedure.
 
+
+.. _how-to-nosql-integrate-an-existing-table-identity-pool:
 
 Set Up an Identity Pool
 -----------------------
@@ -108,10 +109,14 @@ Apply this policy to the unauthenticated role assigned to your Amazon Cognito id
 Connect to Your Backend
 =======================
 
-Your app is connected to your AWS resources using an :file:`awsconfiguration.json` file which contains the endpoints for the services you use.
+.. contents::
+   :local:
+   :depth: 1
 
 Create Your AWS Configuration File
 ----------------------------------
+
+Your app is connected to your AWS resources using an :file:`awsconfiguration.json` file which contains the endpoints for the services you use.
 
 #. Create a file with name :file:`awsconfiguration.json` with the following contents:
 
@@ -445,7 +450,7 @@ Perform CRUD Operations
 
 The fragments below consume the :code:`BooksDO` data model class created in a previous step.
 
-.. contents:: **In this section:**
+.. contents::
    :local:
    :depth: 1
 
