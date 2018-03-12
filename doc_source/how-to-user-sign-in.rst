@@ -29,15 +29,14 @@ How To: User Sign-in with Amazon Cognito
        :superscript:`*Or, use the contents of this page if your app will integrate existing AWS services.`
 
 
-
 This section provides information on the steps for achieving specific tasks for integrating User SignIn features into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:
    :maxdepth: 1
 
+   Integrate an Existing Identity Pool <how-to-cognito-integrate-an-existing-identity-pool>
    Set Up Facebook Sign-in <auth-facebook-setup>
    Set Up Google Sign-in <auth-google-setup>
    Set Up Your Custom Sign-in <auth-custom-setup>
    Customize Your Sign-in UI <add-aws-mobile-user-sign-in-customize>
-   how-to-ios-cognito-configure-auth

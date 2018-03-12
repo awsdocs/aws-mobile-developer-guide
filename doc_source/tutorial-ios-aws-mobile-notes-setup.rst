@@ -38,6 +38,7 @@ Start with a working app and then add cloud enable features. In this tutorial, y
 You should be able to complete the setup section of this tutorial within 10-15 minutes after
 you have installed all required software. Once you complete the instructions on this page, you can run the project on your local system.
 
+
 .. _ios-tutorial-notes-getting-started:
 
 Getting Started

@@ -302,7 +302,7 @@ The following is and example of how you might construct UI to excercise these op
 Next Steps
 ==========
 
-Learn more about the AWS Mobile :ref:`NoSQL Database <NoSQL-Database>` feature, which uses `Amazon DynamoDB <http://docs.aws.amazon.com/dynamodb/latest/developerguide/welcome.html>`__.
+Learn more about the AWS Mobile :ref:`NoSQL Database <NoSQL-Database>` feature, which uses `Amazon DynamoDB <https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html>`__.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 

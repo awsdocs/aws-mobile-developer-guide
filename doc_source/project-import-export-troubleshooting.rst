@@ -10,9 +10,9 @@
 
 .. _project-import-export-troubleshooting:
 
-#########################################
-Troubleshooting Project Import and Export
-#########################################
+###################################################
+Troubleshooting Project Creation, Import and Export
+###################################################
 
 
 .. meta::
@@ -20,7 +20,7 @@ Troubleshooting Project Import and Export
       projects.
 
 
-The following sections describe issues you might encounter and their remedies.
+The following sections describe issues you might encounter when setting  up, importing or exporting |AMH| projects,  and their remedies.
 
 
 .. contents::
@@ -31,7 +31,6 @@ The following sections describe issues you might encounter and their remedies.
 
 Cannot Import an API
 ====================
-
 
 Error Message
 
@@ -200,69 +199,66 @@ Remedy
       * A missing Lambda file in a project definition file containing a YAML file that specifies a path for :code:`uploads: fileName`.
 
 
-.. _import-export-troubleshooting-bad-path:
+.. _import-export-troubleshooting-s3-configuration:
 
-Build Artifacts Can't be Found
-==============================
+
+Unable to Configure S3 Bucket During
+====================================
 
 
 Error Message
 
+  - It looks like there was a problem creating or configuring your S3 bucket.
 
 Description
 
+  - Mobile Hub was unable to create a S3 bucket for your project's deployment artifacts during |AMH| project import.
+
 Remedy
 
+  * **To remedy this condition, try the following steps**
 
-    .. code-block:: yaml
+    Check that you are not at maximum bucket capacity using the `Amazon S3 console <https://console.aws.amazon.com/s3/>`__.
 
-        --- !com.amazonaws.mobilehub.v0.Project
-        features:
-          cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic
-            components:
-              api-name: !com.amazonaws.mobilehub.v0.API
-                attributes:
-                  name: api-name
-                  requires-signin: true
-                  sdk-generation-stage-name: Development
-                paths:
-                  /items: !com.amazonaws.mobilehub.v0.Function
-                    codeFilename: {uploads/lambda-archive.zip}
-                    description: "Handler for calls to resource path : /items"
-                    enableCORS: true
-                    handler: lambda.handler
-                    memorySize: "128"
-                    name: handler-name
-                    runtime: nodejs6.10
-                    timeout: "3"
-                  "/items/{proxy+}": !com.amazonaws.mobilehub.v0.Function
-                    codeFilename: {uploads/lambda-archive.zip}
-                    description: "Handler for calls to resource path : /items/{proxy+}"
-                    enableCORS: true
-                    handler: lambda.handler
-                    memorySize: "128"
-                    name: handler-name
-                    runtime: nodejs6.10
-                    timeout: "3"
-         . . .
+.. _import-export-troubleshooting-adminstrator-required:
+
+Administrator Required Error During Setup
+=========================================
 
 
+Error Message
 
-    * A typo in the path value of the :code:`uploads: fileName` key in the YAML.
+  - It looks like you do not have permission for this operation.
 
-    * A path error caused during manual modifications to a project definition :file:`.zip` file.
+Description
 
-      To make a project's Cloud Logic API handler |LAM| functions available for import, an author
-      must unzip, modify, and rezip the exported project file. If the uncompressed project
-      definition file folder is rezipped, rather than zipping the contents within that folder, the
-      path is changed so that the original archive is inside of a new archive folder. If the path to
-      an original export named :file:`your-project.zip` was :code:`lambda-archive.zip`, then the
-      path would change to :code:`your-project/lambda-archive.zip`. You can remedy this by modifying
-      the :code:`uploads: fileName` value or rezipping the project export file contents without the
-      including the folder.
+  - The user does not have permission to create the required Mobile Hub Service Role during configuration of a |AMH| project.
 
-    * A missing |LAM| file in a project definition file containing a :file:`.yml` that specifies a
-      path for :code:`uploads: fileName`.
+Remedy
+
+  * **To remedy this condition, try the following steps**
+
+    Contact an administrator for your AWS account and ask them to create the service role at the following location: `https://console.aws.amazon.com/mobilehub/home#/activaterole/ <https://console.aws.amazon.com/mobilehub/home#/activaterole/>`__.
+
+.. _import-export-troubleshooting-incomplete-setup:
+
+Account Setup Incomplete
+========================
+
+Error Message
+
+  - It looks like your AWS account is not fully set up.
+
+Description
+
+  - This error can occur for a range of reasons during |AMH| project configuration.
+
+Remedy
+
+  * **To remedy this condition, try the following steps**
+
+    * Sign out of the AWS console and lose down all browser windows. Then try to log in to the `AWS Mobile console <>`__ and attempt the operation that initially caused the er.
+    * If the issue persists, post to the `AWS Mobile Development forum<https://forums.aws.amazon.com/forum.jspa?forumID=88>`__ for support.
 
 
 .. _import-export-troubleshooting-file-size:

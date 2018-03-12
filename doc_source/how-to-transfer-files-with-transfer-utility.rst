@@ -23,12 +23,16 @@ Transfer Files and Data Using TransferUtility and |S3|
 
 *Or, use the contents of this page if your app will integrate existing AWS services.*
 
-
-
-
 This page explains how to implement upload and download functionality and a number of additional storage use cases.
 
-The examples on this page assume you have added the the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`.
+The examples on this page assume you have added the the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`__.
+
+.. list-table::
+   :widths: 1 6
+
+   * - **Best practice**
+
+     -  If you use the transfer utility multipart upload feature, take advantage of automatic cleanup features by seting up the `AbortIncompleteMultipartUpload <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html >`__ action in your Amazon S3 bucket life cycle configuration.
 
 
 .. _how-to-transfer-utility-add-aws-user-data-storage-upload:
@@ -41,7 +45,10 @@ Upload a File
    Android - Java
      The following example shows how to upload a file to an |S3| bucket.
 
-     Use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`, then create the :code:`TransferUtility` object.
+     Use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`, then create the :code:`TransferUtility` object. AWSMobileClient expects an activity context for resuming an authenticated session and creating the credentials provider.
+
+     The following example shows using the transfer utility in the context of an Activity. If you are creating transfer utility from an application context, you can construct the CredentialsProvider and
+     AWSConfiguration object and pass it into TransferUtility. The TransferUtility will check the size of file being uploaded and will automatically switch over to using multi part uploads if the file size exceeds 5 MB.
 
        .. code-block:: java
 
@@ -60,56 +67,71 @@ Upload a File
             public class YourActivity extends Activity {
 
                 public void uploadData() {
-
-                  // Initialize AWSMobileClient if not initialized upon the app startup.
-                  // AWSMobileClient.getInstance().initialize(this).execute();
-
-                  TransferUtility transferUtility =
-                        TransferUtility.builder()
-                              .context(getApplicationContext())
-                              .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                              .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
-                              .build();
-
-                  TransferObserver uploadObserver =
-                        transferUtility.upload(
-                              "s3Folder/s3Key.txt",
-                              new File("/path/to/file/localFile.txt"));
-
-                  uploadObserver.setTransferListener(new TransferListener() {
-
-                     @Override
-                     public void onStateChanged(int id, TransferState state) {
-                        if (TransferState.COMPLETED == state) {
-                           // Handle a completed upload.
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                        @Override
+                        public void onComplete() {
+                            uploadWithTransferUtility();
                         }
-                     }
+                    }).execute();
+                }
 
-                     @Override
-                     public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                           float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
-                           int percentDone = (int)percentDonef;
+                public void uploadWithTransferUtility() {
 
-                           Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
-                     }
+                    TransferUtility transferUtility =
+                        TransferUtility.builder()
+                            .context(getApplicationContext())
+                            .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                            .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
+                            .build();
 
-                     @Override
-                     public void onError(int id, Exception ex) {
-                        // Handle errors
-                     }
+                    TransferObserver uploadObserver =
+                        transferUtility.upload(
+                            "s3Folder/s3Key.txt",
+                            new File("/path/to/file/localFile.txt"));
 
-                  });
+                    // Attach a listener to the observer to get notified of the
+                    // updates in the state and the progress
+                    uploadObserver.setTransferListener(new TransferListener() {
 
-                  // If your upload does not trigger the onStateChanged method inside your
-                  // TransferListener, you can directly check the transfer state as shown here.
-                  if (TransferState.COMPLETED == uploadObserver.getState()) {
-                     // Handle a completed upload.
-                  }
+                        @Override
+                        public void onStateChanged(int id, TransferState state) {
+                            if (TransferState.COMPLETED == state) {
+                                // Handle a completed upload.
+                            }
+                        }
+
+                        @Override
+                        public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+                            float percentDonef = ((float) bytesCurrent / (float) bytesTotal) * 100;
+                            int percentDone = (int)percentDonef;
+
+                            Log.d("YourActivity", "ID:" + id + " bytesCurrent: " + bytesCurrent
+                                    + " bytesTotal: " + bytesTotal + " " + percentDone + "%");
+                        }
+
+                        @Override
+                        public void onError(int id, Exception ex) {
+                            // Handle errors
+                        }
+
+                    });
+
+                    // If you do not want to attach a listener and poll for the data
+                    // from the observer, you can check for the state and the progress
+                    // in the observer.
+                    if (TransferState.COMPLETED == uploadObserver.getState()) {
+                        // Handle a completed upload.
+                    }
+
+                    Log.d("YourActivity", "Bytes Transferrred: " + uploadObserver.getBytesTransferred());
+                    Log.d("YourActivity", "Bytes Total: " + uploadObserver.getBytesTotal());
               }
           }
 
 
    iOS - Swift
+     The transfer utility provides methods for both single-part and multipart uploads. When a transfer uses multipart upload, the data is chunked into a number of 5 MB parts which are transferred in parallel for increased speed.
+
      The following example shows how to upload a file to an |S3| bucket.
 
        .. code-block:: swift
@@ -153,6 +175,49 @@ Upload a File
                  }
           }
 
+    The following example shows how to upload a file to an |S3| bucket using multipart uploads.
+
+        .. code-block:: swift
+
+          func uploadData() {
+
+             let data: Data = Data() // Data to be uploaded
+
+             let expression = AWSS3TransferUtilityMultiPartUploadExpression()
+                expression.progressBlock = {(task, progress) in
+                   DispatchQueue.main.async(execute: {
+                     // Do something e.g. Update a progress bar.
+                  })
+             }
+
+             var completionHandler: AWSS3TransferUtilityMultiPartUploadCompletionHandlerBlock
+             completionHandler = { (task, error) -> Void in
+                DispatchQueue.main.async(execute: {
+                   // Do something e.g. Alert a user for transfer completion.
+                   // On failed uploads, `error` contains the error object.
+                })
+             }
+
+             let transferUtility = AWSS3TransferUtility.default()
+
+             transferUtility.uploadUsingMultiPart(data:data,
+                  bucket: "YourBucket",
+                  key: "YourFileName",
+                  contentType: "text/plain",
+                  expression: expression,
+                  completionHandler: completionHandler).continueWith {
+                     (task) -> AnyObject! in
+                         if let error = task.error {
+                            print("Error: \(error.localizedDescription)")
+                         }
+
+                         if let _ = task.result {
+                            // Do something with uploadTask.
+                         }
+                         return nil;
+                 }
+          }
+
 .. _how-to-transfer-utility-add-aws-user-data-storage-download:
 
 Download a File
@@ -161,7 +226,10 @@ Download a File
 .. container:: option
 
    Android - Java
-     The following example shows how to download a file from an |S3| bucket. We use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
+     The following example shows how to download a file from an |S3| bucket. We use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object. AWSMobileClient expects an activity context for resuming an authenticated session and creating the credentials provider.
+
+     This example shows using the transfer utility in the context of an Activity. If you are creating transfer utility from an application context, you can construct the CredentialsProvider and
+     AWSConfiguration object and pass it into TransferUtility.
 
        .. code-block:: java
 
@@ -179,45 +247,64 @@ Download a File
 
           public class YourActivity extends Activity {
 
-               public void downloadData() {
-
-                  // Initialize AWSMobileClient if not initialized upon the app startup.
-                  // AWSMobileClient.getInstance().initialize(this).execute();
-
-                  TransferUtility transferUtility =
-                        TransferUtility.builder()
-                              .context(getApplicationContext())
-                              .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                              .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
-                              .build();
-
-                  TransferObserver downloadObserver =
-                        transferUtility.download(
-                              "s3Folder/s3Key.txt",
-                              new File("/path/to/file/localFile.txt"));
-                  downloadObserver.setTransferListener(new TransferListener() {
-
-                     @Override
-                     public void onStateChanged(int id, TransferState state) {
-                        if (TransferState.COMPLETED == state) {
-                           // Handle a completed upload.
+              public void dowloadData() {
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                        @Override
+                        public void onComplete() {
+                            downloadWithTransferUtility();
                         }
-                     }
+                    }).execute();
+              }
 
-                     @Override
-                     public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                           float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
-                           int percentDone = (int)percentDonef;
+             public void downloadWithTransferUtility() {
 
-                           Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
-                     }
+                TransferUtility transferUtility =
+                      TransferUtility.builder()
+                            .context(getApplicationContext())
+                            .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                            .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
+                            .build();
 
-                     @Override
-                     public void onError(int id, Exception ex) {
-                        // Handle errors
-                     }
+                TransferObserver downloadObserver =
+                      transferUtility.download(
+                            "s3Folder/s3Key.txt",
+                            new File("/path/to/file/localFile.txt"));
 
-                  });
+                // Attach a listener to the observer to get notified of the
+                // updates in the state and the progress
+                downloadObserver.setTransferListener(new TransferListener() {
+
+                   @Override
+                   public void onStateChanged(int id, TransferState state) {
+                      if (TransferState.COMPLETED == state) {
+                         // Handle a completed upload.
+                      }
+                   }
+
+                   @Override
+                   public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+                         float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
+                         int percentDone = (int)percentDonef;
+
+                         Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
+                   }
+
+                   @Override
+                   public void onError(int id, Exception ex) {
+                      // Handle errors
+                   }
+
+                });
+
+                // If you do not want to attach a listener and poll for the data
+                // from the observer, you can check for the state and the progress
+                // in the observer.
+                if (TransferState.COMPLETED == downloadObserver.getState()) {
+                    // Handle a completed upload.
+                }
+
+                Log.d("YourActivity", "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
+                Log.d("YourActivity", "Bytes Total: " + downloadObserver.getBytesTotal());
              }
           }
 
@@ -269,7 +356,7 @@ Track Transfer Progress
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         With the :code:`TransferUtility`, the download() and upload() methods return a :code:`TransferObserver` object. This object gives access to:
 
         #.  The state, as an :code:`enum`
@@ -315,7 +402,7 @@ Track Transfer Progress
     iOS - Swift
         Implement progress and completion actions for transfers by passing a :code:`progressBlock` and :code:`completionHandler` blocks to the call to :code:`AWSS3TransferUtility` that initiates the transfer.
 
-        The following example of initiating a data upload, shows how progress and completion handling is typically done for all transfers. The :code:`AWSS3TransferUtilityUploadExpression` and :code:`AWSS3TransferUtilityDownloadExpression` contains the :code:`progressBlock` that gives you the progress of the transfer which you can use to update the progress bar.
+        The following example of initiating a data upload, shows how progress and completion handling is typically done for all transfers. The :code:`AWSS3TransferUtilityUploadExpression`, :code:`AWSS3TransferUtilityMultiPartUploadExpression` and :code:`AWSS3TransferUtilityDownloadExpression` contains the :code:`progressBlock` that gives you the progress of the transfer which you can use to update the progress bar.
 
         .. code-block:: swift
 
@@ -372,7 +459,7 @@ Pause a Transfer
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         Transfers can be paused using the :code:`pause(transferId)` method. If your app is terminated, crashes, or loses Internet connectivity, transfers are automatically paused.
 
         The :code:`transferId` can be retrieved from the :code:`TransferObserver` object as described in :ref:`native-track-progress-and-completion-of-a-transfer`.
@@ -402,9 +489,9 @@ Pause a Transfer
             transferUtility.pauseAllWithType(TransferType.ANY);
 
     iOS - Swift
-        To pause or suspend a transfer, retain references to :code:`AWSS3TransferUtilityUploadTask` or :code:`AWSS3TransferUtilityDownloadTask` .
+        To pause or suspend a transfer, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` or :code:`AWSS3TransferUtilityDownloadTask` .
 
-        As described in the previous section :ref:`native-track-progress-and-completion-of-a-transfer`, the variable :code:`refUploadTask` is a reference to the :code:`UploadTask` object that is retrieved from the :code:`continueWith` block of an upload operation that is invoked through :code:`transferUtiity.uploadData`.
+        As described in the previous section :ref:`native-track-progress-and-completion-of-a-transfer`, the variable :code:`refUploadTask` is a reference to the :code:`UploadTask` object that is retrieved from the :code:`continueWith` block of an upload operation that is invoked through :code:`transferUtility.uploadData`.
 
         To pause a transfer, use the :code:`suspend` method:
 
@@ -419,7 +506,7 @@ Resume a Transfer
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         In the case of a loss in network connectivity, transfers will automatically resume when network connectivity is restored. If the app crashed or was terminated by the operating system, transfers can be resumed with the :code:`resume(transferId)` method.
 
         The :code:`transferId` can be retrieved from the :code:`TransferObserver` object as described in :ref:`native-track-progress-and-completion-of-a-transfer`.
@@ -430,10 +517,28 @@ Resume a Transfer
 
             transferUtility.resume(idOfTransferToBeResumed);
 
-    iOS - Swift
-        To resume an upload or a download operation, retain references to :code:`AWSS3TransferUtilityUploadTask` or :code:`AWSS3TransferUtilityDownloadTask`.
+        To resume all uploads:
 
-        As described in the previous section :ref:`native-track-progress-and-completion-of-a-transfer`, the variable :code:`refUploadTask` is a reference to the :code:`UploadTask` object that is retrieved from the :code:`continueWith` block of an upload operation that is invoked through :code:`transferUtiity.uploadData`.
+        .. code-block:: java
+
+            transferUtility.resumeAllWithType(TransferType.UPLOAD);
+
+        To resume all downloads:
+
+        .. code-block:: java
+
+            transferUtility.resumeAllWithType(TransferType.DOWNLOAD);
+
+        To resume all transfers of any type:
+
+        .. code-block:: java
+
+            transferUtility.resumeAllWithType(TransferType.ANY);
+
+    iOS - Swift
+        To resume an upload or a download operation, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` or :code:`AWSS3TransferUtilityDownloadTask`.
+
+        As described in the previous section :ref:`native-track-progress-and-completion-of-a-transfer`, the variable :code:`refUploadTask` is a reference to the :code:`UploadTask` object that is retrieved from the :code:`continueWith` block of an upload operation that is invoked through :code:`transferUtility.uploadData`.
 
         To resume a transfer, use the :code:`resume` method:
 
@@ -448,7 +553,7 @@ Cancel a Transfer
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         To cancel an upload, call cancel() or cancelAllWithType() on the :code:`TransferUtility` object.
 
         The :code:`transferId` can be retrieved from the :code:`TransferObserver` object as described in :ref:`native-track-progress-and-completion-of-a-transfer`.
@@ -466,9 +571,9 @@ Cancel a Transfer
             transferUtility.cancelAllWithType(TransferType.DOWNLOAD);
 
     iOS - Swift
-        To cancel an upload or a download operation, retain references to :code:`AWSS3TransferUtilityUploadTask` (for upload oepration) and :code:`AWSS3TransferUtilityDownloadTask` (for download operation).
+        To cancel an upload or a download operation, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask`.
 
-        As described in the previous section :ref:`native-track-progress-and-completion-of-a-transfer`, the variable :code:`refUploadTask` is a reference to the :code:`UploadTask` object that is retrieved from the :code:`continueWith` block of an upload operation that is invoked through :code:`transferUtiity.uploadData`.
+        As described in the previous section :ref:`native-track-progress-and-completion-of-a-transfer`, the variable :code:`refUploadTask` is a reference to the :code:`UploadTask` object that is retrieved from the :code:`continueWith` block of an upload operation that is invoked through :code:`transferUtility.uploadData`.
 
         To cancel a transfer, use the :code:`cancel` method:
 
@@ -486,13 +591,13 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
 
 .. container:: option
 
-    Android-Java
+    Android - Java
        No additional work is needed to use this feature. As long as your app is present in the background a transfer that is in progress will continue.
 
     iOS - Swift
         **Configure the Application Delegate**
 
-        The :code:`TransferUtility` for iOS uses the iOS background transfer feature to continue data transfers even when your app moves to the background. Call the following method in the :code:`- application:handleEventsForBackgroundURLSession: completionHandler:` of your application delegate.
+        The :code:`TransferUtility` for iOS uses NSURLSession background transfers to continue data transfers even when your app moves to the background. Call the following method in the :code:`- application:handleEventsForBackgroundURLSession: completionHandler:` of your application delegate.
         When the app moves the foreground, the delegate enables iOS to notify TransferUtility that a transfer has completed.
 
         .. code-block:: swift
@@ -504,7 +609,7 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
 
         **Manage a Transfer with the App in the Foreground**
 
-        To manage transfers for an app that has moved from the background to the foregroud, retain references to :code:`AWSS3TransferUtilityUploadTask` and :code:`AWSS3TransferUtilityDownloadTask`. Call suspend, resume, or cancel methods on those task references. The following example shows how to suspend a transfer when the app is about to be terminated.
+        To manage transfers for an app that has moved from the background to the foregroud, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask`. Call suspend, resume, or cancel methods on those task references. The following example shows how to suspend a transfer when the app is about to be terminated.
 
         .. code-block:: swift
 
@@ -531,7 +636,7 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
 
         This code example is for downloading a file but the same pattern can be used for upload:
 
-        You can get a reference to the :code:`AWSS3TransferUtilityUploadTask` and :code:`AWSS3TransferUtilityDownloadTask` objects from the task.result in continueWith block when you initiate the upload and download respectively. These tasks have a property called taskIdentifier, which uniquely identifies the transfer task object within the :code:`AWSS3TransferUtility`. Your app should persist the identifier through closure and relaunch, so that you can uniquely identify the task objects when the app comes back into the foreground.
+        You can get a reference to the :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask` objects from the task.result in continueWith block when you initiate the upload and download respectively. These tasks have a property called taskIdentifier, which uniquely identifies the transfer task object within the :code:`AWSS3TransferUtility`. Your app should persist the identifier through closure and relaunch, so that you can uniquely identify the task objects when the app comes back into the foreground.
 
         .. code-block:: swift
 
@@ -542,6 +647,8 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
                     // Handle progress feedback, e.g. update progress bar
                 }
             }
+
+
             var downloadProgressBlock: AWSS3TransferUtilityProgressBlock? = {
                 (task: AWSS3TransferUtilityTask, progress: Progress) in DispatchQueue.main.async {
                     // Handle progress feedback, e.g. update progress bar
@@ -557,6 +664,8 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
                     // perform some action on completed download operation
                 }
             }
+
+
 
             transferUtility.enumerateToAssignBlocks(forUploadTask: {
                 (task, progress, completion) -> Void in
@@ -606,7 +715,7 @@ Transfer with Object Metadata
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         To upload a file with metadata, use the :code:`ObjectMetadata` object. Create a :code:`ObjectMetadata` object and add in the metadata headers and pass it to the upload function.
 
         .. code-block:: java
@@ -636,14 +745,14 @@ Transfer with Object Metadata
         To download the meta, use the S3 :code:`getObjectMetadata` method. For more information, see the `API Reference <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html#getObjectMetadata%28com.amazonaws.services.s3.model.GetObjectMetadataRequest%29>`__.
 
     iOS - Swift
-        :code:`AWSS3TransferUtilityUploadExpression` contains the method `setValue:forRequestHeader <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSS3TransferUtilityExpression.html#//api/name/setValue:forRequestParameter:>`__ where you can pass in metadata to Amazon S3.
-        This example demonstrates passing in the Server-side Encryption Algorithm as a request header in uploading data to S3.
+        :code:`AWSS3TransferUtilityUploadExpression` and :code:`AWSS3TransferUtilityMultiPartUploadExpression` contain the method `setValue:forRequestHeader` where you can pass in metadata to Amazon S3.
+        This example demonstrates passing in the Server-side Encryption Algorithm as a request header in uploading data to S3 using MultiPart.
 
         .. code-block:: swift
 
             let data: Data = Data() // The data to upload
 
-            let uploadExpression = AWSS3TransferUtilityUploadExpression()
+            let uploadExpression = AWSS3TransferUtilityMultiPartUploadExpression()
             uploadExpression.setValue("AES256", forRequestHeader: "x-amz-server-side-encryption-customer-algorithm")
             uploadExpression.progressBlock = {(task, progress) in DispatchQueue.main.async(execute: {
                     // Do something e.g. Update a progress bar.
@@ -652,7 +761,7 @@ Transfer with Object Metadata
 
             let transferUtility = AWSS3TransferUtility.default()
 
-            transferUtility.uploadData(data,
+            transferUtility.uploadUsingMultiPart(data:data,
                         bucket: "S3BucketName",
                         key: "S3UploadKeyName",
                         contentType: "text/plain",
@@ -672,7 +781,7 @@ Transfer with Access Control List
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         To upload a file with Access Control List, use the :code:`CannedAccessControlList` object. The `CannedAccessControlList <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/model/CannedAccessControlList.html>`__ specifies the constants defining a canned access control list. For example, if you use `CannedAccessControlList.PublicRead <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/model/CannedAccessControlList.html#PublicRead>`__ , this specifies the owner is granted :code:`Permission.FullControl` and the :code:`GroupGrantee.AllUsers` group grantee is granted Permission.Read access.
 
         Then, upload an object along with its ACL:
@@ -715,6 +824,92 @@ Transfer with Access Control List
                 }
             })
 
+.. _native-transfer-utility-options:
+
+Transfer Utility Options
+-------------------------
+
+.. container:: option
+
+    Android - Java
+      You can use the :code:`TransferUtilityOptions` object to customize the operations of the :code:`TransferUtility`.
+
+      **TransferThreadPoolSize**
+      This parameter will let you specify the number of threads in the thread pool for transfers. By increasing the number of threads, you will be able to increase the number of parts of a mulit-part upload that will be uploaded in parallel. By default, this is set to 2 * (N + 1), where N is the number of available processors on the mobile device. The minimum allowed value is 2.
+
+      .. code-block:: Java
+
+        TransferUtilityOptions options = new TransferUtilityOptions();
+        options.setTransferThreadPoolSize(8);
+
+        TransferUtility transferUtility = TransferUtility.builder()
+            // Pass-in S3Client, Context, AWSConfiguration/DefaultBucket Name
+            .transferUtilityOptions(options)
+            .build();
+
+      **TransferServiceCheckTimeInterval**
+      The :code:`TransferUtility` monitors each on-going transfer by checking its status periodically. If a stalled transfer is detected, it will be automatically resumed by the :code:`TransferUtility`. The TransferServiceCheckTimeInterval option allows you to set the time interval
+      between the status checks. It is specified in milliseconds and set to 60,000 by default.
+
+      .. code-block:: Java
+
+        TransferUtilityOptions options = new TransferUtilityOptions();
+        options.setTransferServiceCheckTimeInterval(2 * 60 * 1000); // 2-minutes
+
+        TransferUtility transferUtility = TransferUtility.builder()
+            // Pass-in S3Client, Context, AWSConfiguration/DefaultBucket Name
+            .transferUtilityOptions(options)
+            .build();
+
+    iOS - Swift
+        You can use the :code:`AWSS3TransferUtilityConfiguration` object to configure the operations of the :code:`TransferUtility`.
+
+        **isAccelerateModeEnabled**
+        The isAccelerateModeEnabled option lets you to upload and download content from a bucket that has Transfer Acceleration enabled on it. See https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html for information on how to enable transfer acceleration for your bucket.
+
+        This option is set to false by default.
+
+        .. code-block:: Swift
+
+          //Setup credentials
+          let credentialProvider = AWSCognitoCredentialsProvider(regionType: YOUR-IDENTITY-POOL-REGION, identityPoolId: "YOUR-IDENTITY-POOL-ID")
+
+          //Setup the service configuration
+          let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialProvider)
+
+          //Setup the transfer utility configuration
+          let tuConf = AWSS3TransferUtilityConfiguration()
+          tuConf.isAccelerateModeEnabled = true
+
+
+          //Register a transfer utility object
+          AWSS3TransferUtility.register(
+              with: configuration!,
+              transferUtilityConfiguration: tuConf,
+              forKey: "transfer-utility-with-advanced-options"
+          )
+
+
+          //Look up the transfer utility object from the registry to use for your transfers.
+          let transferUtility = AWSS3TransferUtility.s3TransferUtility(forKey: "transfer-utility-with-advanced-options")
+
+        * :code:`YOUR-IDENTITY-POOL-REGION` should be in the form of :code:`.USEast1`
+
+        * :code:`YOUR-IDENTITY-POOL-ID` should be in the form of :code:`us-east-1:01234567-yyyy-0123-xxxx-012345678901`
+
+        **retryLimit**
+        The retryLimit option allows you to specify the number of times the TransferUtility will retry a transfer when it encounters an error during the transfer. By default, it is set to 0, which means that there will be no retries.
+
+        .. code-block:: Swift
+
+          tuConf.retryLimit = 5
+
+        **multiPartConcurrencyLimit**
+        The multiPartConcurrencyLimit option allows you to specify the number of parts that will be uploaded in parallel for a MultiPart upload request. By default, this is set to 5.
+
+        .. code-block:: Swift
+
+          tuConf.multiPartConcurrencyLimit = 3
 
 .. _native-more-transfer-examples:
 
@@ -734,7 +929,7 @@ The following code shows how to download an |S3| Object to a local file.
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         .. code-block:: java
 
             TransferObserver downloadObserver =
@@ -766,7 +961,7 @@ The following code shows how to download an |S3| Object to a local file.
 
             });
 
-    iOS-Swift
+    iOS - Swift
         .. code-block:: swift
 
             let fileURL = // The file URL of the download destination.
@@ -789,11 +984,11 @@ The following code shows how to download an |S3| Object to a local file.
                     }
 
 Uploading Binary Data to a File
--------------------------------
+--------------------------------
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         Use the following code to upload binary data to a file in |S3|.
 
         .. code-block:: java
@@ -827,7 +1022,7 @@ Uploading Binary Data to a File
 
             });
 
-    iOS-Swift
+    iOS - Swift
         To upload a binary data to a file, you have to make sure to set the appropriate content type in the uploadData method of the TransferUtility. In the example below, we are uploading a PNG image to S3.
 
         .. code-block:: swift
@@ -859,7 +1054,7 @@ The following code shows how to download a binary file.
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         .. code-block:: java
 
             TransferObserver downloadObserver =
@@ -890,7 +1085,7 @@ The following code shows how to download a binary file.
 
             });
 
-    iOS-Swift
+    iOS - Swift
         .. code-block:: swift
 
             let fileURL = // The file URL of the download destination
@@ -916,12 +1111,12 @@ Limitations
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         If you expect your app to perform transfers that take longer than 50 minutes, use `AmazonS3Client <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html>`__ instead of `TransferUtility <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/s3/transferutility/TransferUtility.html>`__.
 
         :code:`TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using |COG| Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. Generated |S3| pre-signed URLs cannot last longer than that time. Because of this limitation, the Amazon S3 Transfer Utility enforces 50 minute transfer timeouts, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After **50 minutes**, you receive a transfer failure.
 
-    iOS-Swift
+    iOS - Swift
         If you expect your app to perform transfers that take longer than 50 minutes, use `AWSS3 <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSS3.html>`__ instead of `AWSS3TransferUtility <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSS3TransferUtility.html>`__.
 
         :code:`AWSS3TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using Amazon Cognito Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. At the same time, generated S3 pre-signed URLs cannot last longer than that time. Because of this limitation, the AWSS3TransferUtility enforces **50 minutes** transfer timeout, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After 50 minutes, you receive a transfer failure.

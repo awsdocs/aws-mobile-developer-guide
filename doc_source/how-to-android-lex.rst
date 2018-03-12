@@ -194,7 +194,7 @@ Microphone Events
 Audio Playback Events
 ~~~~~~~~~~~~~~~~~~~~~
 
-  :code:`AudioPlaybackListener` captures a set of events relatedto |LEX| voice responses that include:
+  :code:`AudioPlaybackListener` captures a set of events related to |LEX| voice responses that include:
 
   - :code:`onAudioPlaybackStarted()`
 

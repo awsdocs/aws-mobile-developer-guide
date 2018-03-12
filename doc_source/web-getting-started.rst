@@ -90,7 +90,7 @@ Set Up Your Backend
 
    .. code-block:: bash
 
-      ? Where is your projects's source directory:  src
+      ? Where is your project's source directory:  src
 
 #. Respond to further prompts with the following values.
 

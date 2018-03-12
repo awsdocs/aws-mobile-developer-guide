@@ -449,16 +449,6 @@ The AWS Mobile SDK for iOS includes sample apps that demonstrate common use case
     - `Amazon S3 <http://aws.amazon.com/s3/>`__
     - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
-**Amazon SNS Mobile Push and Mobile Analytics Sample**
-(`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/SNS-MobileAnalytics-Sample/Swift/>`__, `Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/SNS-MobileAnalytics-Sample/Objective-C/>`__)
-
-    This sample demonstrates how to set up Amazon SNS mobile push notifications and to record events using Amazon Mobile Analytics.
-
-    AWS services demonstrated:
-
-    - `Amazon SNS (mobile push notification) <http://aws.amazon.com/sns/>`__
-    - `Amazon Mobile Analytics <http://aws.amazon.com/mobileanalytics/>`__
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 Install the Reference Documentation in Xcode
 ============================================

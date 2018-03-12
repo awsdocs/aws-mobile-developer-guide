@@ -58,7 +58,7 @@ Set Up Your Backend
 
 .. _add-aws-mobile-user-data-storage-app:
 
-Connect to your backend
+Connect to Your Backend
 =======================
 
 Make sure to complete the :ref:`add-aws-mobile-user-sign-in-backend-setup` steps before
@@ -74,7 +74,6 @@ using the integration steps on this page.
          #. Add the following to :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 2-3
 
                dependencies {
                   compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
@@ -92,11 +91,10 @@ using the integration steps on this page.
 
                <application ... >
 
-                  <!- . . . ->
+                  <!- Other manifest / application items . . . ->
 
                   <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
 
-                  <!- . . . ->
 
                </application>
 
@@ -104,7 +102,6 @@ using the integration steps on this page.
             following packages.
 
             .. code-block:: none
-               :emphasize-lines: 1-2
 
                import com.amazonaws.mobile.config.AWSConfiguration;
                import com.amazonaws.mobileconnectors.s3.transferutility.*;
@@ -137,9 +134,10 @@ using the integration steps on this page.
                   target :'YOUR-APP-NAME' do
                      use_frameworks!
 
-                     pod 'AWSS3', '~> 2.6.6'   # For file transfers
-                     pod 'AWSCognito', '~> 2.6.6'   #For data sync
-                     # other pods
+                     pod 'AWSS3', '~> 2.6.13'   # For file transfers
+                     pod 'AWSCognito', '~> 2.6.13'   #For data sync
+
+                     # other pods . . .
 
                   end
 

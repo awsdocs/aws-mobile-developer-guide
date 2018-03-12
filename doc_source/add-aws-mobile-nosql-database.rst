@@ -154,7 +154,7 @@ Connect to your backend
                 target :'YOUR-APP-NAME' do
                   use_frameworks!
 
-                    pod 'AWSDynamoDB', '~> 2.6.6'
+                    pod 'AWSDynamoDB', '~> 2.6.13'
                     # other pods
                 end
 
@@ -444,14 +444,14 @@ The following example code shows querying for news submitted with :CODE:`userId`
       .. code-block:: java
          :emphasize-lines: 1-38
 
-         public void queryNote() {
+         public void queryNews() {
 
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    NewsDO note = new NewsDO();
-                    note.setUserId(identityManager.getCachedUserID());
-                    note.setArticleId("Article1");
+                    NewsDO news = new NewsDO();
+                    news.setUserId(identityManager.getCachedUserID());
+                    news.setArticleId("Article1");
 
                     Condition rangeKeyCondition = new Condition()
                             .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
@@ -474,7 +474,7 @@ The following example code shows querying for news submitted with :CODE:`userId`
                     }
 
                     // Add your code here to deal with the data result
-                    updateOutput(stringBuilder.toString());
+                    Log.d("Query result: ", stringBuilder.toString());
 
                     if (result.isEmpty()) {
                         // There were no items matching your query.

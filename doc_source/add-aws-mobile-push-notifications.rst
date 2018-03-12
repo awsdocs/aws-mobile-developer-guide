@@ -199,7 +199,7 @@ Connect to your backend
                 target :'YOUR-APP-NAME' do
                   use_frameworks!
 
-                    pod  'AWSPinpoint', '~> 2.6.6'
+                    pod  'AWSPinpoint', '~> 2.6.13'
                     # other pods
 
                 end

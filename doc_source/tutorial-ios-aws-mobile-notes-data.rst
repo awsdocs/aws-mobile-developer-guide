@@ -265,7 +265,7 @@ Calls to insert, update, delete, and query data stored in Amazon DynamoDB are ma
 
        noteContentProvider?.insertNoteDDB(noteId: noteId!, noteTitle: "", noteContent: "")
 
-#. To update a note from Amazon DynamoDB , add the following line in to the *upate* portion of the :code:`autoSave()` function of :code:`DetailViewController`.
+#. To update a note from Amazon DynamoDB , add the following line in to the *update* portion of the :code:`autoSave()` function of :code:`DetailViewController`.
 
     .. code-block:: javascript
 

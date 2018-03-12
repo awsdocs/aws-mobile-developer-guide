@@ -22,12 +22,37 @@ AWS Mobile CLI Reference
         integrated with AWS services.
 
 
-The AWS Mobile CLI provides a command line interface for frontend JavaScript developers to seamlessly enable AWS services and configure into their apps. With minimal configuration, you can start using all of the functionality provided by the the `AWS Mobile Hub <http://console.aws.amazon.com/mobile>`__ from your favorite terminal program.
+The AWS Mobile CLI provides a command line interface for frontend JavaScript developers to seamlessly enable AWS services and configure into their apps. With minimal configuration, you can start using all of the functionality provided by the the `AWS Mobile Hub <http://console.aws.amazon.com/mobilehub>`__ from your favorite terminal program.
 
-Summary of CLI Commands
-=======================
+Installation and Usage
+======================
 
 This section details the usage and the core commands of the :code:`awsmobile CLI` for JavaScript.
+
+Install AWS Mobile CLI
+-----------------------
+
+#. `Sign up for the AWS Free Tier <https://aws.amazon.com/free/>`__.
+
+#. Install `Node.js <https://nodejs.org/en/download/>`__ with NPM.
+
+#. Install AWS Mobile CLI
+
+   .. code-block:: bash
+
+       npm install -g awsmobile-cli
+
+#. Configure the CLI with your AWS credentials
+
+   To setup permissions for the toolchain used by the CLI, run:
+
+   .. code-block:: bash
+
+      awsmobile configure
+
+   If prompted for credentials, follow the steps provided by the CLI. For more information, see :ref:`provide IAM credentials to AWS Mobile CLI <aws-mobile-cli-credentials>`.
+
+
 
 Usage
 -----
@@ -53,8 +78,8 @@ For example:
     or
     awsmobile init --help
 
-Summary of Commands
--------------------
+Summary of CLI Commands
+=======================
 
 The current set of commands supported by the :code:`awsmobile CLI` are listed below.
 
@@ -155,7 +180,7 @@ There are two usages of the :code:`awsmobile init` command
 
    The awsmobile project name is the name of the backend project created in the Mobile hub.
 
-   Y“You can alter the settings about your project by using the :ref:`awsmobile configure project <aws-mobile-cli-reference-configure>` command.
+   You can alter the settings about your project by using the :ref:`awsmobile configure project <aws-mobile-cli-reference-configure>` command.
 
 
 #. Initialize and link to an existing awsmobile project as backend

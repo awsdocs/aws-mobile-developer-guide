@@ -213,9 +213,9 @@ Add the SDK to your App
                   target :'YOUR-APP-NAME' do
                      use_frameworks!
 
-                     pod 'AWSMobileClient', '~> 2.6.6'  # For AWSMobileClient
-                     pod 'AWSS3', '~> 2.6.6'            # For file transfers
-                     pod 'AWSCognito', '~> 2.6.6'       # For data sync
+                     pod 'AWSMobileClient', '~> 2.6.13'  # For AWSMobileClient
+                     pod 'AWSS3', '~> 2.6.13'            # For file transfers
+                     pod 'AWSCognito', '~> 2.6.13'       # For data sync
 
                      # other pods
 

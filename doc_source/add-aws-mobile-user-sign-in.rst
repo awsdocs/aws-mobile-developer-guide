@@ -132,7 +132,7 @@ Setup Email & Password Login in your Mobile App
                 </intent-filter>
             </activity>
 
-      #. Update your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. :code:`AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign-in operation. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session and to register a callback for credentials that allow users to access your AWS resources. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
 
          .. code-block:: java
 
@@ -150,6 +150,7 @@ Setup Email & Password Login in your Mobile App
                       super.onCreate(savedInstanceState);
                       setContentView(R.layout.activity_authenticator);
 
+                      // Add a call to initialize AWSMobileClient
                       AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
                           @Override
                           public void onComplete(AWSStartupResult awsStartupResult) {
@@ -170,25 +171,30 @@ Setup Email & Password Login in your Mobile App
             platform :ios, '9.0'
             target :'YOUR-APP-NAME' do
                 use_frameworks!
-                pod 'AWSUserPoolsSignIn', '~> 2.6.6'
-                pod 'AWSAuthUI', '~> 2.6.6'
-                pod 'AWSMobileClient', '~> 2.6.6'
+                pod 'AWSUserPoolsSignIn', '~> 2.6.13'
+                pod 'AWSAuthUI', '~> 2.6.13'
+                pod 'AWSMobileClient', '~> 2.6.13'
                 # other pods
             end
 
-      #. Create a :code:`AWSMobileClient` and initialize the SDK.
+      #. Create a AWSMobileClient and initialize the SDK.
 
-         Add the following imports and a function that creates an instance of :code:`AWSMobileClient` into the :code:`AppDelegate` class of :file:`AppDelegate.swift`.
+         Add code to create an instance of :code:`AWSMobileClient` in the :code:`application:open url` function  of your :code:`AppDelegate.swift`, to resume a previously signed-in authenticated session.
+
+         Then add another instance of :code:`AWSMobileClient` in the :code:`didFinishLaunching` function to register the sign in providers, and to fetch an Amazon Cognito credentials that AWS will use to authorize access once the user signs in.
 
          .. code-block:: swift
 
              import UIKit
+
+             //import AWSMobileClient
              import AWSMobileClient
 
              @UIApplicationMain
 
              class AppDelegate: UIResponder, UIApplicationDelegate {
 
+                 // Add a AWSMobileClient call in application:open url
                  func application(_ application: UIApplication, open url: URL,
                      sourceApplication: String?, annotation: Any) -> Bool {
 
@@ -199,19 +205,20 @@ Setup Email & Password Login in your Mobile App
 
                  }
 
-         In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Amazon Cognito user identity.
+                 // Add a AWSMobileClient call in application:didFinishLaunching
+                  func application(
+                     _ application: UIApplication,
+                         didFinishLaunchingWithOptions launchOptions:
+                             [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-         .. code-block:: swift
+                      return AWSMobileClient.sharedInstance().interceptApplication(
+                          application, didFinishLaunchingWithOptions:
+                          launchOptions)
+                 }
 
-             func application(
-                 _ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions:
-                         [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                 // Other functions in AppDelegate . . .
 
-                  return AWSMobileClient.sharedInstance().interceptApplication(
-                      application, didFinishLaunchingWithOptions:
-                      launchOptions)
-             }
+               }
 
       #. Implement your sign-in UI by calling the library provided in the SDK.
 
@@ -297,7 +304,7 @@ Setup Facebook Login in your Mobile App
               compile ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true; }
             }
 
-      #. In :file:`strings.xml`, add string definitions for your Facebook App ID and login protocol scheme.The value should contain your Facebook AppID in both cases, the login protcol value is always prefaced with :code:`fb`.
+      #. In :file:`strings.xml`, add string definitions for your Facebook App ID and login protocol scheme.The value should contain your Facebook AppID in both cases, the login protocol value is always prefaced with :code:`fb`.
 
          .. code-block:: xml
 
@@ -315,7 +322,7 @@ Setup Facebook Login in your Mobile App
                 </intent-filter>
             </activity>
 
-      #. Update your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. :code:`AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign-in operation. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session and to register a callback for credentials that allow users to access your AWS resources. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
 
          .. code-block:: java
 
@@ -333,6 +340,7 @@ Setup Facebook Login in your Mobile App
                     super.onCreate(savedInstanceState);
                     setContentView(R.layout.activity_authenticator);
 
+                    // Add a call to initialize AWSMobileClient
                     AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
                         @Override
                         public void onComplete(AWSStartupResult awsStartupResult) {
@@ -353,9 +361,9 @@ Setup Facebook Login in your Mobile App
             platform :ios, '9.0'
               target :'YOUR-APP-NAME' do
                 use_frameworks!
-                pod 'AWSMobileClient', '~> 2.6.6'
-                pod 'AWSFacebookSignIn', '~> 2.6.6'
-                pod 'AWSAuthUI', '~> 2.6.6'
+                pod 'AWSMobileClient', '~> 2.6.13'
+                pod 'AWSFacebookSignIn', '~> 2.6.13'
+                pod 'AWSAuthUI', '~> 2.6.13'
                 # other pods
               end
 
@@ -395,17 +403,22 @@ Setup Facebook Login in your Mobile App
 
       #. Create a AWSMobileClient and initialize the SDK.
 
-         In :file:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Amazon Cognito Identity.
+         Add code to create an instance of :code:`AWSMobileClient` in the :code:`application:open url` function  of your :code:`AppDelegate.swift`, to resume a previously signed-in authenticated session.
+
+         Then add another instance of :code:`AWSMobileClient` in the :code:`didFinishLaunching` function to register the sign in providers, and to fetch an Amazon Cognito credentials that AWS will use to authorize access once the user signs in.
 
          .. code-block:: swift
 
              import UIKit
+
+             //import AWSMobileClient
              import AWSMobileClient
 
              @UIApplicationMain
 
              class AppDelegate: UIResponder, UIApplicationDelegate {
 
+                 // Add a AWSMobileClient call in application:open url
                  func application(_ application: UIApplication, open url: URL,
                      sourceApplication: String?, annotation: Any) -> Bool {
 
@@ -416,7 +429,8 @@ Setup Facebook Login in your Mobile App
 
                  }
 
-                 func application(
+                 // Add a AWSMobileClient call in application:didFinishLaunching
+                  func application(
                      _ application: UIApplication,
                          didFinishLaunchingWithOptions launchOptions:
                              [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -425,7 +439,11 @@ Setup Facebook Login in your Mobile App
                           application, didFinishLaunchingWithOptions:
                           launchOptions)
                  }
-             }
+
+                 // Other functions in AppDelegate . . .
+
+               }
+
 
       #. Implement your sign-in UI by calling the library provided by the SDK.
 
@@ -502,7 +520,7 @@ Setup Google Login in your Mobile App
                     </intent-filter>
                 </activity>
 
-      #. Update your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. :code:`AWSMobileClient` provides the functionality to resume a signed-in authentication session and register the callback for a sign-in operation. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session and to register a callback for credentials that allow users to access your AWS resources. If the user is signed in, the app goes to the :code:`NextActivity`, otherwise it presents the user with the AWS Mobile ready made, configurable sign-in UI.
 
          .. code-block:: java
 
@@ -520,6 +538,7 @@ Setup Google Login in your Mobile App
                     super.onCreate(savedInstanceState);
                     setContentView(R.layout.activity_authenticator);
 
+                    // Add a call to initialize AWSMobileClient
                     AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
                         @Override
                         public void onComplete(AWSStartupResult awsStartupResult) {
@@ -540,9 +559,9 @@ Setup Google Login in your Mobile App
               platform :ios, '9.0'
                 target :'YOUR-APP-NAME' do
                   use_frameworks!
-                  pod 'AWSMobileClient', '~> 2.6.6'
-                  pod 'AWSGoogleSignIn', '~> 2.6.6'
-                  pod 'AWSAuthUI', '~> 2.6.6'
+                  pod 'AWSMobileClient', '~> 2.6.13'
+                  pod 'AWSGoogleSignIn', '~> 2.6.13'
+                  pod 'AWSAuthUI', '~> 2.6.13'
                   pod 'GoogleSignIn', '~> 4.0'
                   # other pods
                 end
@@ -568,17 +587,22 @@ Setup Google Login in your Mobile App
 
       #. Create a AWSMobileClient and initialize the SDK.
 
-         In :code:`AppDelegate.swift` create an instance of :code:`AWSMobileClient` in the :code:`withApplication` function. In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register the sign in providers and fetch the Cognito Identity.
+         Add code to create an instance of :code:`AWSMobileClient` in the :code:`application:open url` function  of your :code:`AppDelegate.swift`, to resume a previously signed-in authenticated session.
+
+         Then add another instance of :code:`AWSMobileClient` in the :code:`didFinishLaunching` function to register the sign in providers, and to fetch an Amazon Cognito credentials that AWS will use to authorize access once the user signs in.
 
          .. code-block:: swift
 
              import UIKit
+
+             //import AWSMobileClient
              import AWSMobileClient
 
              @UIApplicationMain
 
              class AppDelegate: UIResponder, UIApplicationDelegate {
 
+                 // Add a AWSMobileClient call in application:open url
                  func application(_ application: UIApplication, open url: URL,
                      sourceApplication: String?, annotation: Any) -> Bool {
 
@@ -589,16 +613,20 @@ Setup Google Login in your Mobile App
 
                  }
 
+                 // Add a AWSMobileClient call in application:didFinishLaunching
                  func application(
                      _ application: UIApplication,
                          didFinishLaunchingWithOptions launchOptions:
                              [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
                       return AWSMobileClient.sharedInstance().interceptApplication(
-                          application,
-                          didFinishLaunchingWithOptions: launchOptions)
+                          application, didFinishLaunchingWithOptions:
+                          launchOptions)
                  }
-             }
+
+                 // Other functions in AppDelegate . . .
+
+               }
 
       #. Implement your sign-in UI by calling the library provided by the SDK.
 

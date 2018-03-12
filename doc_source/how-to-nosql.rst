@@ -35,6 +35,6 @@ This section provides information on the steps for achieving specific tasks for 
    :titlesonly:
    :maxdepth: 1
 
-   how-to-dynamodb-configure-table
+   how-to-nosql-integrate-an-existing-table
    how-to-ios-dynamodb-objectmapper
    how-to-ios-dynamodb-low-level-client

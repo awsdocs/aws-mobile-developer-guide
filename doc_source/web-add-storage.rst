@@ -32,7 +32,7 @@ The AWS Mobile CLI and AWS Amplify library make it easy to store and manage file
 Set Up the Backend
 ------------------
 
-Enable the User File Storage feature by running the following comands in the root folder of your app.
+Enable the User File Storage feature by running the following commands in the root folder of your app.
 
 .. code:: bash
 

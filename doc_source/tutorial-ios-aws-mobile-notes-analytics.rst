@@ -14,7 +14,7 @@
 Add Analytics to the Notes App
 ##############################
 
-In the :ref:`previous section <tutorial-android-aws-mobile-notes-setup>` of this tutorial, we installed Android Studio,
+In the :ref:`previous section <tutorial-android-aws-mobile-notes-setup>` of this tutorial, we installed Xcode,
 downloaded a sample note-taking app from GitHub, then compiled and ran
 it in the Android Emulator. This tutorial assumes you have completed the
 those steps. In this section, we will extend the notes app to

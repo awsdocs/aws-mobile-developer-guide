@@ -142,7 +142,7 @@ Use the following steps to add analytics to your mobile app through AWS Pinpoint
                        target :'YourAppName' do
                          use_frameworks!
 
-                           pod 'AWSPinpoint', '~> 2.6.6'
+                           pod 'AWSPinpoint', '~> 2.6.13'
 
                            # other pods
 
@@ -200,7 +200,7 @@ Build and run your app to see usage metrics in Amazon Pinpoint.
 Enable Custom App Analytics
 ---------------------------
 
-Instrument your code to capture app usage event information, including attributes you define.  Use graphs of your custom usage event data  in the Amazon Pinpoint console. Visualize how your users' behavior aligns with a model you design using `Amazon Pinpoint Funnel Analytics <analytics-funnels.html>`__, Or use `stream the data <analytics-streaming.html>`__ for deeper analysis.
+Instrument your code to capture app usage event information, including attributes you define.  Use graphs of your custom usage event data  in the Amazon Pinpoint console. Visualize how your users' behavior aligns with a model you design using `Amazon Pinpoint Funnel Analytics <https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-funnels.html>`__, or use `stream the data <https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-streaming.html>`__ for deeper analysis.
 
 Use the following steps to implement Amazon Pinpoint custom analytics for your app.
 

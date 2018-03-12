@@ -155,7 +155,7 @@ Edit the :code:`onCreate()` method of :file:`AuthenticatorActivity.java` as foll
 
           final IdentityManager identityManager = AWSProvider.getInstance().getIdentityManager();
           // Set up the callbacks to handle the authentication response
-          identityManager.setUpToAuthenticate(this, new DefaultSignInResultHandler() {
+          identityManager.login(this, new DefaultSignInResultHandler() {
               @Override
               public void onSuccess(Activity activity, IdentityProvider identityProvider) {
                   Toast.makeText(AuthenticatorActivity.this,

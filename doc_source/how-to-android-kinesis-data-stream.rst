@@ -258,7 +258,7 @@ Use KinesisFirehoseRecorder
 ===========================
 
 To use :code:`KinesisFirehoseRecorder`, you need to pass the object in a directory where streaming
-data is saved. Itâ€™s recommended to use an app private directory because the data isnâ€™t encrypted.
+data is saved. We recommend you use an app private directory because the data is not encrypted.
 
 .. code-block:: java
 

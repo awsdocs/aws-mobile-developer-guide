@@ -49,24 +49,25 @@ Set Up Your Backend
 
       Choose :guilabel:`Create API` to deploy a default API and its associated handler function. The default handler is a Node.js function that echoes JSON input that it receives. For more information, see `Using AWS Lambda with Amazon API Gateway <with-on-demand-https.html>`__.
 
-#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
+#. When you are done configuring the feature and the last operation is complete, choose your project name in the upper left to go the project details page. The banner that appears also links there.
 
    .. image:: images/updated-cloud-config.png
 
-#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
+#. Choose :guilabel:`Integrate` on the app card.
 
    .. image:: images/updated-cloud-config2.png
       :scale: 25
 
-#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend.
+   If you have created apps for more than one platform, the :guilabel:`Integrate` button of each that is affected by your project changes will flash, indicating that there is an updated configuration file available for each of those versions.
 
-#. Under :guilabel:`NoSQL / Cloud Logic` at the bottom of the page, download the models required for your API Gateway APIs. The API model files provide access to the API request surface for each API Gateway API they model. Choose Next and follow the Cloud API documentation below to connect to your backend.
+#. Choose :guilabel:`Download Cloud Config` and replace the old the version of :code:`awsconfiguration.json` with the new download. Your app now references the latest version of your backend.
+
+#. Choose  :guilabel:`Swift Models` to download API models that were generated for your app. These files provide access to the request surface for the API Gateway API you just created. Choose :guilabel:`Next` and follow the Cloud API documentation below to connect to your backend.
 
 .. _cloud-logic-connect-to-your-backend:
 
-Connect to your backend
+Connect to Your Backend
 =======================
-
 
 Use the following steps to add AWS Cloud Logic to your app.
 
@@ -78,12 +79,13 @@ Use the following steps to add AWS Cloud Logic to your app.
          #. Add the following to your :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 3
 
                 dependencies{
-                    // . . .
+
+                    // other dependencies . . .
+
                     compile 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
-                    // . . .
+
                 }
 
          #. For each Activity where you make calls to |ABP|, declare the following imports. Replace the portion of the first declaration, denoted here as   :code:`idABCD012345.NAME-OF-YOUR-API-MODEL-CLASS`, with class id and name of the API model that you downloaded from your |AMH| project.
@@ -91,7 +93,6 @@ Use the following steps to add AWS Cloud Logic to your app.
             You can find these values at the top of the :file:`./src/main/java/com/amazonaws/mobile/api/API-CLASS-ID/TestMobileHubClient.java` file of the download.
 
             .. code-block:: java
-               :emphasize-lines: 0
 
                 // This statement imports the model class you download from |AMH|.
                 import com.amazonaws.mobile.api.idABCD012345.NAME-OF-YOUR-API-MODEL-CLASSMobileHubClient;
@@ -231,8 +232,8 @@ Use the following steps to add AWS Cloud Logic to your app.
                target :'YOUR-APP-NAME' do
                   use_frameworks!
 
-                     pod 'AWSAuthCore', '~> 2.6.6'
-                     pod 'AWSAPIGateway', '~> 2.6.6'
+                     pod 'AWSAuthCore', '~> 2.6.13'
+                     pod 'AWSAPIGateway', '~> 2.6.13'
                      # other pods
 
                end
@@ -242,7 +243,6 @@ Use the following steps to add AWS Cloud Logic to your app.
          #. Classes that call |ABP| APIs must use the following import statements:
 
             .. code-block:: none
-               :emphasize-lines: 0
 
                 import AWSAuthCore
                 import AWSCore
