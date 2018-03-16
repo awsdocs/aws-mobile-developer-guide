@@ -666,6 +666,8 @@ Next Steps
 
   * :ref:`Customize the UI <add-aws-mobile-user-sign-in-customize>`
 
+  * :ref:`Import Your Exisiting Amazon Cognito Identity Pool <how-to-cognito-integrate-an-existing-identity-pool>`
+
   * `Amazon Cognito Developer Guide <http://docs.aws.amazon.com/cognito/latest/developerguide/>`__
 
 

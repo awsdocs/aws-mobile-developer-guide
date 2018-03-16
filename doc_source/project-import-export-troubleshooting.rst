@@ -10,10 +10,9 @@
 
 .. _project-import-export-troubleshooting:
 
-###################################################
-Troubleshooting Project Creation, Import and Export
-###################################################
-
+##################################
+Mobile Hub Project Troubleshooting
+##################################
 
 .. meta::
    :description: Troubleshooting for issues encountered when using the |AMHlong| console to import

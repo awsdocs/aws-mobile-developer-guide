@@ -25,14 +25,14 @@ Transfer Files and Data Using TransferUtility and |S3|
 
 This page explains how to implement upload and download functionality and a number of additional storage use cases.
 
-The examples on this page assume you have added the the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`__.
+The examples on this page assume you have added the the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`.
 
 .. list-table::
    :widths: 1 6
 
    * - **Best practice**
 
-     -  If you use the transfer utility multipart upload feature, take advantage of automatic cleanup features by seting up the `AbortIncompleteMultipartUpload <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html >`__ action in your Amazon S3 bucket life cycle configuration.
+     -  If you use the transfer utility multipart upload feature, take advantage of automatic cleanup features by seting up the `AbortIncompleteMultipartUpload <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html>`__ action in your Amazon S3 bucket life cycle configuration.
 
 
 .. _how-to-transfer-utility-add-aws-user-data-storage-upload:

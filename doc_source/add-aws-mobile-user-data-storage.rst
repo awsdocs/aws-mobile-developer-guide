@@ -95,7 +95,6 @@ using the integration steps on this page.
 
                   <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
 
-
                </application>
 
          #. For each Activity where you make calls to perform user data storage operations, import the
@@ -103,24 +102,7 @@ using the integration steps on this page.
 
             .. code-block:: none
 
-               import com.amazonaws.mobile.config.AWSConfiguration;
                import com.amazonaws.mobileconnectors.s3.transferutility.*;
-
-         #. Add the following code to the :code:`onCreate` method of your main or startup activity. This will establish a connection with AWS Mobile. :code:`AWSMobileClient` is a singleton that will be an interface for your AWS services.
-
-            .. code-block:: java
-
-               import com.amazonaws.mobile.client.AWSMobileClient;
-
-                 public class YourMainActivity extends Activity {
-                   @Override
-                   protected void onCreate(Bundle savedInstanceState) {
-                       super.onCreate(savedInstanceState);
-
-                       AWSMobileClient.getInstance().initialize(this).execute();
-                    }
-                 }
-
 
    iOS - Swift
       Set up AWS Mobile SDK components as follows:
@@ -160,12 +142,10 @@ using the integration steps on this page.
                @UIApplicationMain
                class AppDelegate: UIResponder, UIApplicationDelegate {
 
-                 func application(_ application: UIApplication,
-                       didFinishLaunchingWithOptions launchOptions:
-
-                       [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                           return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
-                 }
+                func application(_ application: UIApplication,
+                    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                        return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
+                }
                }
 
 
@@ -178,9 +158,11 @@ Upload a File
 .. container:: option
 
    Android - Java
-     The following example shows how to upload a file to an |S3| bucket.
+    To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`,
+    then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
 
-     Use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`, then create the :code:`TransferUtility` object.
+    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object. :code:`TransferUtility` will check the size of file being uploaded and will automatically switch over to using multi-part uploads if the file size exceeds 5 MB.
 
        .. code-block:: java
 
@@ -199,51 +181,62 @@ Upload a File
             public class YourActivity extends Activity {
 
                 public void uploadData() {
-
-                  // Initialize AWSMobileClient if not initialized upon the app startup.
-                  // AWSMobileClient.getInstance().initialize(this).execute();
-
-                  TransferUtility transferUtility =
-                        TransferUtility.builder()
-                              .context(getApplicationContext())
-                              .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                              .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
-                              .build();
-
-                  TransferObserver uploadObserver =
-                        transferUtility.upload(
-                              "s3Folder/s3Key.txt",
-                              new File("/path/to/file/localFile.txt"));
-
-                  uploadObserver.setTransferListener(new TransferListener() {
-
-                     @Override
-                     public void onStateChanged(int id, TransferState state) {
-                        if (TransferState.COMPLETED == state) {
-                           // Handle a completed upload.
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                        @Override
+                        public void onComplete() {
+                            uploadWithTransferUtility();
                         }
-                     }
+                    }).execute();
+                }
 
-                     @Override
-                     public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                           float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
-                           int percentDone = (int)percentDonef;
+                public void uploadWithTransferUtility() {
 
-                           Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
-                     }
+                    TransferUtility transferUtility =
+                        TransferUtility.builder()
+                            .context(getApplicationContext())
+                            .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                            .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
+                            .build();
 
-                     @Override
-                     public void onError(int id, Exception ex) {
-                        // Handle errors
-                     }
+                    TransferObserver uploadObserver =
+                        transferUtility.upload(
+                            "s3Folder/s3Key.txt",
+                            new File("/path/to/file/localFile.txt"));
 
-                  });
+                    // Attach a listener to the observer to get state update and progress notifications
+                    uploadObserver.setTransferListener(new TransferListener() {
 
-                  // If your upload does not trigger the onStateChanged method inside your
-                  // TransferListener, you can directly check the transfer state as shown here.
-                  if (TransferState.COMPLETED == uploadObserver.getState()) {
-                     // Handle a completed upload.
-                  }
+                        @Override
+                        public void onStateChanged(int id, TransferState state) {
+                            if (TransferState.COMPLETED == state) {
+                                // Handle a completed upload.
+                            }
+                        }
+
+                        @Override
+                        public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+                            float percentDonef = ((float) bytesCurrent / (float) bytesTotal) * 100;
+                            int percentDone = (int)percentDonef;
+
+                            Log.d("YourActivity", "ID:" + id + " bytesCurrent: " + bytesCurrent
+                                    + " bytesTotal: " + bytesTotal + " " + percentDone + "%");
+                        }
+
+                        @Override
+                        public void onError(int id, Exception ex) {
+                            // Handle errors
+                        }
+
+                    });
+
+                    // If you prefer to poll for the data, instead of attaching a
+                    // listener, check for the state and progress in the observer.
+                    if (TransferState.COMPLETED == uploadObserver.getState()) {
+                        // Handle a completed upload.
+                    }
+
+                    Log.d("YourActivity", "Bytes Transferrred: " + uploadObserver.getBytesTransferred());
+                    Log.d("YourActivity", "Bytes Total: " + uploadObserver.getBytesTotal());
               }
           }
 
@@ -300,65 +293,89 @@ Download a File
 .. container:: option
 
    Android - Java
-     The following example shows how to download a file from an |S3| bucket. We use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
+    To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
+    to get the :code:`AWSConfigurationand` :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
+    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :cdoe:`AWSCredentialsProvider`.
 
-       .. code-block:: java
+    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
+    pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.
 
-          import android.app.Activity;
-          import android.util.Log;
+      .. code-block:: java
 
-          import com.amazonaws.mobile.client.AWSMobileClient;
-          import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-          import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
-          import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
-          import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
-          import com.amazonaws.services.s3.AmazonS3Client;
+            import android.app.Activity;
+            import android.util.Log;
 
-          import java.io.File;
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+            import com.amazonaws.services.s3.AmazonS3Client;
 
-          public class YourActivity extends Activity {
+            import java.io.File;
 
-               public void downloadData() {
+            public class YourActivity extends Activity {
 
-                  // Initialize AWSMobileClient if not initialized upon the app startup.
-                  // AWSMobileClient.getInstance().initialize(this).execute();
-
-                  TransferUtility transferUtility =
-                        TransferUtility.builder()
-                              .context(getApplicationContext())
-                              .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                              .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
-                              .build();
-
-                  TransferObserver downloadObserver =
-                        transferUtility.download(
-                              "s3Folder/s3Key.txt",
-                              new File("/path/to/file/localFile.txt"));
-                  downloadObserver.setTransferListener(new TransferListener() {
-
-                     @Override
-                     public void onStateChanged(int id, TransferState state) {
-                        if (TransferState.COMPLETED == state) {
-                           // Handle a completed upload.
+                public void dowloadData() {
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                        @Override
+                        public void onComplete() {
+                            downloadWithTransferUtility();
                         }
-                     }
+                    }).execute();
+                }
 
-                     @Override
-                     public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                           float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
-                           int percentDone = (int)percentDonef;
+                public void downloadWithTransferUtility() {
 
-                           Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
-                     }
+                    TransferUtility transferUtility =
+                        TransferUtility.builder()
+                                .context(getApplicationContext())
+                                .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                                .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
+                                .build();
 
-                     @Override
-                     public void onError(int id, Exception ex) {
-                        // Handle errors
-                     }
+                    TransferObserver downloadObserver =
+                        transferUtility.download(
+                                "s3Folder/s3Key.txt",
+                                new File("/path/to/file/localFile.txt"));
 
-                  });
-             }
-          }
+                    // Attach a listener to the observer to get state update and progress notifications
+                    downloadObserver.setTransferListener(new TransferListener() {
+
+                        @Override
+                        public void onStateChanged(int id, TransferState state) {
+                            if (TransferState.COMPLETED == state) {
+                                // Handle a completed upload.
+                            }
+                        }
+
+                        @Override
+                        public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+                                float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
+                                int percentDone = (int)percentDonef;
+
+                                Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
+                        }
+
+                        @Override
+                        public void onError(int id, Exception ex) {
+                            // Handle errors
+                        }
+
+                    });
+
+                    // If you prefer to poll for the data, instead of attaching a
+                    // listener, check for the state and progress in the observer.
+                    if (TransferState.COMPLETED == downloadObserver.getState()) {
+                        // Handle a completed upload.
+                    }
+
+                    Log.d("YourActivity", "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
+                    Log.d("YourActivity", "Bytes Total: " + downloadObserver.getBytesTotal());
+                }
+            }
+
 
 
    iOS - Swift
@@ -369,15 +386,15 @@ Download a File
           func downloadData() {
              let expression = AWSS3TransferUtilityDownloadExpression()
              expression.progressBlock = {(task, progress) in DispatchQueue.main.async(execute: {
-                // Do something e.g. Update a progress bar.
+                  // Do something e.g. Update a progress bar.
                 })
              }
 
              var completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock?
              completionHandler = { (task, URL, data, error) -> Void in
                 DispatchQueue.main.async(execute: {
-                // Do something e.g. Alert a user for transfer completion.
-                // On failed downloads, `error` contains the error object.
+                  // Do something e.g. Alert a user for transfer completion.
+                  // On failed downloads, `error` contains the error object.
                 })
              }
 
@@ -389,7 +406,7 @@ Download a File
                    completionHandler: completionHandler
                    ).continueWith {
                       (task) -> AnyObject! in if let error = task.error {
-                         print("Error: \(error.localizedDescription)")
+                        print("Error: \(error.localizedDescription)")
                       }
 
                       if let _ = task.result {
@@ -406,14 +423,12 @@ Download a File
 Save User Profile Data
 ======================
 
-
 The following shows how to load user settings and access those settings using |COG| Sync.
 
 .. container:: option
 
    Android - Java
      .. code-block:: java
-       :emphasize-lines: 1-42
 
         import java.util.List;
 
@@ -464,7 +479,6 @@ The following shows how to load user settings and access those settings using |C
 
         import AWSCore
         import AWSCognito
-
 
         func loadSettings() {
            let syncClient: AWSCognito = AWSCognito.default()

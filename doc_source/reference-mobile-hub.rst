@@ -23,10 +23,11 @@ AWS Mobile Reference
    :titlesonly:
    :maxdepth: 1
 
-   Mobile Hub: IAM Usage  <reference-mobile-hub-iam>
-   Mobile Hub: Exporting and Importing Projects <project-import-export>
-   Mobile Hub Features <mobile-hub-features>
-   Mobile Hub Project Service Region Hosting <reference-mobile-hub-region-overrides>
+   IAM Usage <reference-mobile-hub-iam>
+   Exporting and Importing Projects <project-import-export>
+   Mobile App Features <mobile-hub-features>
+   Project Service Region Hosting <reference-mobile-hub-region-overrides>
+   Troubleshooting Projects <project-import-export-troubleshooting>
 
 
 

@@ -24,7 +24,6 @@ Exporting and Importing |AMHlong| Projects
    :maxdepth: 1
    :hidden:
 
-    Import /Export Troubleshooting <project-import-export-troubleshooting>
     Project Export Format <project-import-export-yaml>
     Manually Exported Components <project-import-export-manual>
 
