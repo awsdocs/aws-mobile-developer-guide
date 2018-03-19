@@ -24,40 +24,21 @@
    :maxdepth: 1
    :hidden:
 
+   Mobile Hub Permissions Model <reference-mobile-hub-project-permissions-model>
    Control Access to Mobile Hub Projects <reference-mobile-hub-iam-managed-policies>
-   Mobile Hub Service Role and Policies <reference-mobile-hub-iam-service-role>
    Authentication and Access Control Basics <reference-mobile-hub-iam-auth-access>
    Overview of Access Permissions Management <reference-mobile-hub-iam-access-control>
 
 
-.. note:: In depth understanding of |IAM| and AWS authentication and access controls is not required to build a mobile app using |AMHlong|.
+.. note:: *In depth understanding of AWS IAM, authentication, and access controls are not required to configure a backend for your mobile app using Mobile Hub.*
 
 .. _project-access:
 
-Controlling Access to Your |AMH| Project
-----------------------------------------
+* :ref:`reference-mobile-hub-iam-managed-policies` - learn how to grant permissions for configuration of your |AMH| project.
 
 
-To learn how to grant permissions for configuration of your |AMH| project, see
-:ref:`reference-mobile-hub-iam-managed-policies`.
+* :ref:`Mobile Hub Project Permissions Model <reference-mobile-hub-project-permissions-model>` - learn more about permissions you give |AMH| to configure AWS resources and services, see .
 
-
-
-Understanding |AMH| Permissions
--------------------------------
-
-
-To learn more about permissions you give |AMH| to configure AWS resources and services, see
-:ref:`reference-mobile-hub-iam-service-role`
-
-
-.. _understand-iam:
-
-Understanding |IAMlong|
------------------------
-
-
-To learn about the details of |IAM| and AWS authentication and access controls, see
-:ref:`reference-mobile-hub-iam-auth-access`.
+* :ref:`reference-mobile-hub-iam-auth-access` - learn details of |IAM| and AWS authentication and access controls.
 
 

@@ -14,17 +14,10 @@
 Overview of Access Permissions Management for |AMH| Projects
 ############################################################
 
-In depth understanding of AWS authentication and access controls is not required to build a mobile
-app using |AMHlong|.
-
-Every AWS resource is owned by an AWS account, and permissions to create or access the resources are
-governed by permissions policies. This includes:
+.. note:: *In depth understanding of AWS IAM, authentication, and access controls are not required to configure a backend for your mobile app using Mobile Hub.*
 
 
-* Policies for :ref:`reference-mobile-hub-iam-managed-policies`.
-
-* AWS :ref:`reference-mobile-hub-iam-service-role` to create and configure the back-end features you select for
-  your mobile app.
+Every AWS resource is owned by an AWS account. :ref:`Permissions to view, create, and/or access the resources <reference-mobile-hub-iam-managed-policies>` are governed by policies.
 
 An account administrator can attach permissions policies to |IAM| identities (that is, users,
 groups, and roles), and some services (such as |LAMlong|) also support attaching permissions
@@ -135,8 +128,7 @@ service.
            ]
         }
 
-For more information about using identity-based policies with |AMH| , see :ref:`reference-mobile-hub-iam-managed-policies`
-and :ref:`reference-mobile-hub-iam-service-role`.
+For more information about using identity-based policies with |AMH| , see :ref: reference-mobile-hub-project-permissions-model`.
 
 For more information about users, groups, roles, and permissions, see `Identities (Users, Groups,
 and Roles) <http://docs.aws.amazon.com/IAM/latest/UserGuide/id.html>`__ in the :title:`IAM User Guide`.

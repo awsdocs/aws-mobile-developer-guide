@@ -15,16 +15,10 @@
 #################################################
 
 
-In depth understanding of AWS authentication and access controls is not required to build a mobile
-app using |AMHlong|.
-
-|AMH| uses AWS credentials and permissions policies in two ways:
+.. note:: *In depth understanding of AWS IAM, authentication, and access controls are not required to configure a backend for your mobile app using Mobile Hub.*
 
 
-* :ref:`reference-mobile-hub-iam-managed-policies`.
-
-* Providing :ref:`reference-mobile-hub-iam-service-role` to create and configure the back-end features you select
-  for your mobile app.
+|AMH| uses AWS credentials and permissions policies to allow a user to view and/or create and configure the back-end features the user selects for their mobile app.
 
 The following sections provide details on how |IAM| works, how you can use |IAM| to securely control
 access to your projects, and what |IAM| roles and policies |AMH| configures on your behalf.
@@ -131,7 +125,6 @@ managed on your behalf by |AMH|.
 
    * :ref:`reference-mobile-hub-iam-managed-policies`
 
-   * :ref:`reference-mobile-hub-iam-service-role`
 
 
 
