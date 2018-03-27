@@ -99,7 +99,7 @@ Add Auth Dependencies
 Create an AWSMobileClient and Initialize the SDK
 ------------------------------------------------
 
-Import :code:`AWSMobileClient` and add the following function into the :code:`AppDelegate` class of :file:`AppDelegate.swift`. This will that an instance of :code:`AWSMobileClient`.
+Import :code:`AWSMobileClient` and add the following function into the :code:`AppDelegate` class of :file:`AppDelegate.swift`. This will create an instance of :code:`AWSMobileClient`.
 
 .. code-block:: swift
 
