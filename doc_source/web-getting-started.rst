@@ -131,13 +131,13 @@ In :file:`index.js` (or in other code that runs at launch-time), add the followi
 .. code-block:: javascript
 
     import Amplify from 'aws-amplify';
-    import aws_exports from './YOUR-PATH-TO/aws-exports';
+    import awsmobile from './YOUR-PATH-TO/aws-exports';
 
 Then add the following code.
 
 .. code-block:: javascript
 
-    Amplify.configure(aws_exports);
+    Amplify.configure(awsmobile);
 
 
 Run Your App Locally
