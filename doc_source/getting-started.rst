@@ -56,7 +56,7 @@ Set Up Your Backend
 .. container:: option
 
     Android - Java
-      #. Choose :guilabel:`Android` as your platform and then choose Next.
+      #. Choose :guilabel:`Android` as your platform and then choose Add.
 
          .. image:: images/wizard-createproject-platform-android.png
             :scale: 75
