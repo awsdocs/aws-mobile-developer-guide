@@ -74,7 +74,7 @@ Declare |LEX| as a Gradle dependency
 
   .. code-block:: sh
 
-    compile 'com.amazonaws:aws-android-sdk-lex:2.3.8@aar'
+    implementation 'com.amazonaws:aws-android-sdk-lex:2.3.8@aar'
 
 Set IAM Permissions for |LEX|
 -----------------------------

@@ -99,16 +99,16 @@ dependencies:
 
         // . . .
 
-        compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
-        compile 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
-        compile 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
-        compile 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
-        compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
-        compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
+        implementation 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
+        implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
+        implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
 
         // Amazon DynamoDB for NoSQL tables
-        compile 'com.amazonaws:aws-android-sdk-ddb:2.6.+'
-        compile 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-ddb:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
     }
 
 #. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.
@@ -237,10 +237,7 @@ Mutation events handle the :code:`insert`, :code:`update`, and :code:`delete` me
                 DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
                 final NotesDO newNote = toNotesDO(values);
                 dbMapper.save(newNote);
-                Uri item = new Uri.Builder()
-                        .appendPath(NotesContentContract.CONTENT_URI.toString())
-                        .appendPath(newNote.getNoteId())
-                        .build();
+                Uri item = NotesContentContract.Notes.uriBuilder(newNote.getNoteId());
                 notifyAllListeners(item);
                 return item;
             default:

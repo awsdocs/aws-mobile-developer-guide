@@ -63,16 +63,16 @@ that your project will use, as shown below.
 .. code-block:: groovy
 
     dependencies {
-        compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
-        compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-        compile 'com.amazonaws:aws-android-sdk-ddb:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-ddb:2.6.+'
     }
 
 A full list of dependencies are listed below. For dependencies ending in ":code:`@aar`" use a compile statement in the following form.
 
 .. code-block:: groovy
 
-      compile ('com.amazonaws:aws-android-sdk-cognitoauth:2.6.+@aar') { transitive = true; }
+      implementation ('com.amazonaws:aws-android-sdk-cognitoauth:2.6.+@aar') { transitive = true }
 
 
 .. csv-table::

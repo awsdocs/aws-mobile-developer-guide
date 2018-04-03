@@ -152,9 +152,9 @@ Add the SDK to your App
                :emphasize-lines: 1-3
 
                dependencies {
-                  compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true; }
-                  compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  compile 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
@@ -266,9 +266,9 @@ Upload a File
     To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`,
     then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
 
-    The following example shows using the :code:`TransferUtility `in the context of an Activity. 
-    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and 
-    pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.. The :code:`TransferUtility` will check 
+    The following example shows using the :code:`TransferUtility `in the context of an Activity.
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
+    pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.. The :code:`TransferUtility` will check
     the size of file being uploaded and will automatically switch over to using multi-part uploads if the file size exceeds 5 MB.
 
        .. code-block:: java
@@ -287,16 +287,13 @@ Upload a File
 
             public class YourActivity extends Activity {
 
-                public void uploadData() {
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-                        @Override
-                        public void onComplete() {
-                            uploadWithTransferUtility();
-                        }
-                    }).execute();
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    AWSMobileClient.getInstance().initialize(this).execute();
+                    uploadWithTransferUtility();
                 }
 
-                public void uploadWithTransferUtility() {
+                private void uploadWithTransferUtility() {
 
                     TransferUtility transferUtility =
                         TransferUtility.builder()
@@ -344,8 +341,8 @@ Upload a File
 
                     Log.d("YourActivity", "Bytes Transferrred: " + uploadObserver.getBytesTransferred());
                     Log.d("YourActivity", "Bytes Total: " + uploadObserver.getBytesTotal());
-              }
-          }
+                }
+            }
 
 
    iOS - Swift
@@ -401,11 +398,11 @@ Download a File
 
    Android - Java
     To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
-    to get the :code:`AWSConfigurationand` :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object. 
+    to get the :code:`AWSConfigurationand` :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
     :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :cdoe:`AWSCredentialsProvider`.
 
-    The following example shows using the :code:`TransferUtility` in the context of an Activity. 
-    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and 
+    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
     pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.
 
       .. code-block:: java

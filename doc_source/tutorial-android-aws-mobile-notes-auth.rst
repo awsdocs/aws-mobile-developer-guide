@@ -72,22 +72,22 @@ Add the Authentication UI Library
 
        dependencies {
           compile fileTree(dir: 'libs', include: ['*.jar'])
-          compile 'com.android.support:appcompat-v7:26.1.0'
-          compile 'com.android.support:support-v4:26.1.0'
-          compile 'com.android.support:cardview-v7:26.1.0'
-          compile 'com.android.support:recyclerview-v7:26.1.0'
-          compile 'com.android.support.constraint:constraint-layout:1.0.2'
-          compile 'com.android.support:design:26.1.0'
-          compile 'com.android.support:multidex:1.0.1'
-          compile 'joda-time:joda-time:2.9.9'
+          implementation 'com.android.support:appcompat-v7:26.1.0'
+          implementation 'com.android.support:support-v4:26.1.0'
+          implementation 'com.android.support:cardview-v7:26.1.0'
+          implementation 'com.android.support:recyclerview-v7:26.1.0'
+          implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+          implementation 'com.android.support:design:26.1.0'
+          implementation 'com.android.support:multidex:1.0.1'
+          implementation 'joda-time:joda-time:2.9.9'
 
           //AWS Mobile SDK for Android
-          compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
-          compile 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
-          compile 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
-          compile 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
-          compile 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
-          compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+          implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
+          implementation 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
+          implementation 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
+          implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
+          implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
+          implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
         }
 
 #. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.

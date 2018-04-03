@@ -76,8 +76,8 @@ using the integration steps on this page.
             .. code-block:: none
 
                dependencies {
-                  compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  compile 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
@@ -180,13 +180,10 @@ Upload a File
 
             public class YourActivity extends Activity {
 
-                public void uploadData() {
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-                        @Override
-                        public void onComplete() {
-                            uploadWithTransferUtility();
-                        }
-                    }).execute();
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    AWSMobileClient.getInstance().initialize(this).execute();
+                    uploadWithTransferUtility();
                 }
 
                 public void uploadWithTransferUtility() {
@@ -317,16 +314,13 @@ Download a File
 
             public class YourActivity extends Activity {
 
-                public void dowloadData() {
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-                        @Override
-                        public void onComplete() {
-                            downloadWithTransferUtility();
-                        }
-                    }).execute();
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    AWSMobileClient.getInstance().initialize(this).execute();
+                    downloadWithTransferUtility();
                 }
 
-                public void downloadWithTransferUtility() {
+                private void downloadWithTransferUtility() {
 
                     TransferUtility transferUtility =
                         TransferUtility.builder()

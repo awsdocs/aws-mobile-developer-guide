@@ -248,7 +248,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
                :emphasize-lines: 2
 
                 dependencies{
-                    compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+                    implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
                 }
 
       #. Add the backend service configuration file to your app.

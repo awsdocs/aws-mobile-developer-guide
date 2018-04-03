@@ -165,10 +165,10 @@ Add the SDK to Your App
             .. code-block:: none
                :emphasize-lines: 0, 2, 4, 6
 
-                compile ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar')  {transitive = true;} // optional
-                compile ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar')  {transitive = true;}  // optional
-                compile ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar')  {transitive = true;}   // optional
-                compile ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar')  {transitive = true;}    // required for auth in 2.6.+
+                implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar')  {transitive = true;} // optional
+                implementation ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar')  {transitive = true;}  // optional
+                implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar')  {transitive = true;}   // optional
+                implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar')  {transitive = true;}    // required for auth in 2.6.+
 
             If you encounter more than one version of a library, choose the one that begins with
             :code:`com.amazonaws.mobile.auth`.
@@ -177,13 +177,13 @@ Add the SDK to Your App
 
             .. code-block:: none
 
-                compile 'com.amazonaws:aws-android-sdk-s3:2.4.7'
+                implementation 'com.amazonaws:aws-android-sdk-s3:2.4.7'
 
             To the followin:
 
             .. code-block:: none
 
-                compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+                implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
 
          #. Use the new SDK-provided sign-in UI.
 

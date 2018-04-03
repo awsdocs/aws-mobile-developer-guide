@@ -119,11 +119,14 @@ The samples included with the SDK are standalone projects that are already set u
 
             $ :command:`pod install`
 
-        #. Open :file:`*.xcworkspace` with Xcode and start using the SDK.
+        #. Open :file:`*.xcworkspace` with Xcode, rebuild your app, and start using the SDK.
 
-            .. note::
+           .. note::
 
-                Do not open :file:`*.xcodeproj`. Opening this project file instead of a workspace results in an error.
+              Once you have created a workspace, always use `*.xcworkspace` to open the project instead of :file:`*.xcodeproj`.
+
+        #. Rebuild your app after reopening it in the workspace to resolve APIs from new libraries called in your code. This is a good practice any time you add import statements.
+
 
     Carthage
         #. Install the latest version of `Carthage <https://github.com/Carthage/Carthage#installing-carthage>`__.

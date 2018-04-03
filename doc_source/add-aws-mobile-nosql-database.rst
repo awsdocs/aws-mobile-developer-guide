@@ -74,7 +74,7 @@ Connect to your backend
                :emphasize-lines: 2
 
                 dependencies{
-                    compile 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
+                    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
                 }
 
          #. For each Activity where you make calls to perform database operations, import the

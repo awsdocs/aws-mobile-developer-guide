@@ -57,7 +57,7 @@ Use the following steps to add analytics to your mobile app through AWS Pinpoint
                      :emphasize-lines: 2
 
                      dependencies{
-                        compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+                        implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
                      }
 
             #. Instrument your app to provide basic session data for Amazon Pinpoint analytics. The Amazon Pinpoint SDK gives you full control of when your sessions are started and stopped. Your app must explicitly start and stop the sessions. The following example shows one way to handle this by instrumenting a public class that extends `MultidexApplication <https://developer.android.com/studio/build/multidex.html>`__. :code:`StartSession()` is called during the :code:`OnCreate` event.
@@ -79,7 +79,7 @@ Use the following steps to add analytics to your mobile app through AWS Pinpoint
                   .. code-block:: none
                      :emphasize-lines: 1
 
-                       compile 'com.android.support:multidex:1.0.+'
+                       implementation 'com.android.support:multidex:1.0.+'
 
                #. Add the following to :file:`AndroidManifest.xml`:
 

@@ -66,16 +66,13 @@ Upload a File
 
             public class YourActivity extends Activity {
 
-                public void uploadData() {
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-                        @Override
-                        public void onComplete() {
-                            uploadWithTransferUtility();
-                        }
-                    }).execute();
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    AWSMobileClient.getInstance().initialize(this).execute();
+                    uploadWithTransferUtility();
                 }
 
-                public void uploadWithTransferUtility() {
+                private void uploadWithTransferUtility() {
 
                     TransferUtility transferUtility =
                         TransferUtility.builder()
@@ -89,8 +86,7 @@ Upload a File
                             "s3Folder/s3Key.txt",
                             new File("/path/to/file/localFile.txt"));
 
-                    // Attach a listener to the observer to get notified of the
-                    // updates in the state and the progress
+                    // Attach a listener to the observer to get state update and progress notifications
                     uploadObserver.setTransferListener(new TransferListener() {
 
                         @Override
@@ -116,17 +112,16 @@ Upload a File
 
                     });
 
-                    // If you do not want to attach a listener and poll for the data
-                    // from the observer, you can check for the state and the progress
-                    // in the observer.
+                    // If you prefer to poll for the data, instead of attaching a
+                    // listener, check for the state and progress in the observer.
                     if (TransferState.COMPLETED == uploadObserver.getState()) {
                         // Handle a completed upload.
                     }
 
                     Log.d("YourActivity", "Bytes Transferrred: " + uploadObserver.getBytesTransferred());
                     Log.d("YourActivity", "Bytes Total: " + uploadObserver.getBytesTotal());
-              }
-          }
+                }
+            }
 
 
    iOS - Swift
@@ -247,65 +242,62 @@ Download a File
 
           public class YourActivity extends Activity {
 
-              public void dowloadData() {
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-                        @Override
-                        public void onComplete() {
-                            downloadWithTransferUtility();
-                        }
-                    }).execute();
+              @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    AWSMobileClient.getInstance().initialize(this).execute();
+                    downloadWithTransferUtility();
               }
 
-             public void downloadWithTransferUtility() {
+              public void downloadWithTransferUtility() {
 
-                TransferUtility transferUtility =
-                      TransferUtility.builder()
-                            .context(getApplicationContext())
-                            .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                            .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
-                            .build();
+                  TransferUtility transferUtility =
+                        TransferUtility.builder()
+                              .context(getApplicationContext())
+                              .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                              .s3Client(new AmazonS3Client(AWSMobileClient.getInstance().getCredentialsProvider()))
+                              .build();
 
-                TransferObserver downloadObserver =
-                      transferUtility.download(
-                            "s3Folder/s3Key.txt",
-                            new File("/path/to/file/localFile.txt"));
+                  TransferObserver downloadObserver =
+                        transferUtility.download(
+                              "s3Folder/s3Key.txt",
+                              new File("/path/to/file/localFile.txt"));
 
-                // Attach a listener to the observer to get notified of the
-                // updates in the state and the progress
-                downloadObserver.setTransferListener(new TransferListener() {
+                  // Attach a listener to the observer to get notified of the
+                  // updates in the state and the progress
+                  downloadObserver.setTransferListener(new TransferListener() {
 
-                   @Override
-                   public void onStateChanged(int id, TransferState state) {
-                      if (TransferState.COMPLETED == state) {
-                         // Handle a completed upload.
-                      }
-                   }
+                     @Override
+                     public void onStateChanged(int id, TransferState state) {
+                        if (TransferState.COMPLETED == state) {
+                           // Handle a completed upload.
+                        }
+                     }
 
-                   @Override
-                   public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                         float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
-                         int percentDone = (int)percentDonef;
+                     @Override
+                     public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+                           float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
+                           int percentDone = (int)percentDonef;
 
-                         Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
-                   }
+                           Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
+                     }
 
-                   @Override
-                   public void onError(int id, Exception ex) {
-                      // Handle errors
-                   }
+                     @Override
+                     public void onError(int id, Exception ex) {
+                        // Handle errors
+                     }
 
-                });
+                  });
 
-                // If you do not want to attach a listener and poll for the data
-                // from the observer, you can check for the state and the progress
-                // in the observer.
-                if (TransferState.COMPLETED == downloadObserver.getState()) {
-                    // Handle a completed upload.
-                }
+                  // If you do not want to attach a listener and poll for the data
+                  // from the observer, you can check for the state and the progress
+                  // in the observer.
+                  if (TransferState.COMPLETED == downloadObserver.getState()) {
+                      // Handle a completed upload.
+                  }
 
-                Log.d("YourActivity", "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
-                Log.d("YourActivity", "Bytes Total: " + downloadObserver.getBytesTotal());
-             }
+                  Log.d("YourActivity", "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
+                  Log.d("YourActivity", "Bytes Total: " + downloadObserver.getBytesTotal());
+              }
           }
 
 

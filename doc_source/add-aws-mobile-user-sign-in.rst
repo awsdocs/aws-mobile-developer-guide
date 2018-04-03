@@ -32,59 +32,65 @@ Set Up Your Backend
 .. container:: option
 
    Email & Password
-      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the feature's tile.
+      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub console <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`User Sign-in` tile.
 
-      #. **Configure Email and Password sign-in**: Choose the feature and then select sign-in policies including: allowed login methods; multi-factor authentication; and password requirements and then choose :guilabel:`Create user pool`.
+      #. Configure **Email and Password sign-in**: Choose the feature and then select sign-in policies including: allowed login methods; multi-factor authentication; and password requirements and then choose :guilabel:`Create user pool`.
 
          .. image:: images/add-aws-mobile-sdk-email-and-password.png
 
-      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner.
+      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner at the top.
 
           .. image:: images/updated-cloud-config.png
 
-      #. On the project detail page, for each app that will use the updates to your backend configuration, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend. If any apps in the project have not completed those steps the reminder banner and flashing button for those apps will remain in place.
+      #. On the project detail page, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend.
+
+         If your project contains apps for more than one platform, any that need to complete those steps will also display a flashing :guilabel:`Integrate` button. The reminder banner will remain in place until you have taken steps to update the configuration of each app in the project.
 
           .. image:: images/updated-cloud-config2.png
              :scale: 25
 
-      #. Follow the :ref:`next steps <set-up-email-and-password>` to connect to your backend from your app.
+      #. Follow the :ref:`Set up Email & Password Login <set-up-email-and-password>` steps to connect to your backend from your app.
 
    Facebook
-      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the feature's tile.
+      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub console <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`User Sign-in` tile.
 
       #. **Configure Facebook sign-in**: Choose the feature and then type your Facebook App ID and then choose :guilabel:`Enable Facebook login`. To retrieve or create your Facebook App ID, see `Setting Up Facebook Authentication. <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-facebook-setup.html>`__.
 
          .. image:: images/add-aws-mobile-sdk-facebook.png
 
-      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner.
+      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner at the top.
 
           .. image:: images/updated-cloud-config.png
 
-      #. On the project detail page, for each app that will use the updates to your backend configuration, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend. If any apps in the project have not completed those steps the reminder banner and flashing button for those apps will remain in place.
+      #. On the project detail page, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend.
+
+         If your project contains apps for more than one platform, any that need to complete those steps will also display a flashing :guilabel:`Integrate` button. The reminder banner will remain in place until you have taken steps to update the configuration of each app in the project.
 
           .. image:: images/updated-cloud-config2.png
              :scale: 25
 
-      #. Follow the :ref:`next steps <set-up-facebook>` to connect to your backend from your app..
+      #. Follow the :ref:`Set Up Facebook Login <set-up-facebook>` steps to connect to your backend from your app..
 
 
    Google
-      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the feature's tile.
+      #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub console <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`User Sign-in` tile.
 
-      #. **Configure Google sign-in**: Choose the feature and then type in your Google Web App Client ID, and the Google Android or iOS Client ID (or both), and then choose Enable Google Sign-In. To retrieve or create your Google Client IDs, see `Setting Up Google Authentication <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-google-setup.html>`__.
+      #. Configure **Google sign-in**: Choose the feature and then type in your Google Web App Client ID, and the Google Android or iOS Client ID (or both), and then choose Enable Google Sign-In. To retrieve or create your Google Client IDs, see `Setting Up Google Authentication <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/auth-google-setup.html>`__.
 
          .. image:: images/add-aws-mobile-sdk-google.png
 
-      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner.
+      #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner at the top.
 
           .. image:: images/updated-cloud-config.png
 
-      #. On the project detail page, for each app that will use the updates to your backend configuration, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend. If any apps in the project have not completed those steps the reminder banner and flashing button for those apps will remain in place.
+      #. On the project detail page, choose the flashing :guilabel:`Integrate` button, and then complete the steps that guide you to connect your backend.
+
+         If your project contains apps for more than one platform, any that need to complete those steps will also display a flashing :guilabel:`Integrate` button. The reminder banner will remain in place until you have taken steps to update the configuration of each app in the project.
 
           .. image:: images/updated-cloud-config2.png
              :scale: 25
 
-      #. Follow the :ref:`next steps <set-up-google>` to connect to your backend from your app..
+      #. Follow the :ref:`Set Up Google Login <set-up-google>` steps to connect to your backend from your app..
 
 
 .. _set-up-email-and-password:
@@ -110,15 +116,15 @@ Setup Email & Password Login in your Mobile App
 
              dependencies {
                   // Mobile Client for initializing the SDK
-                  compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true; }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
 
                   // Cognito UserPools for SignIn
-                  compile 'com.android.support:support-v4:24.+'
-                  compile ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true; }
+                  implementation 'com.android.support:support-v4:24.+'
+                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
 
                   // Sign in UI Library
-                  compile 'com.android.support:appcompat-v7:24.+'
-                  compile ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true; }
+                  implementation 'com.android.support:appcompat-v7:24.+'
+                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
              }
 
       #. Create an activity that will present your sign-in screen, called :code:`AuthenticatorActivity` in the following fragments. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity`  in your app's :file:`AndroidManifest.xml`.
@@ -293,15 +299,15 @@ Setup Facebook Login in your Mobile App
 
             dependencies {
               // Mobile Client for initializing the SDK
-              compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true; }
+              implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
 
               // Facebook SignIn
-              compile 'com.android.support:support-v4:24.+'
-              compile ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar') { transitive = true; }
+              implementation 'com.android.support:support-v4:24.+'
+              implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar') { transitive = true }
 
               // Sign in UI
-              compile 'com.android.support:appcompat-v7:24.+'
-              compile ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true; }
+              implementation 'com.android.support:appcompat-v7:24.+'
+              implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
             }
 
       #. In :file:`strings.xml`, add string definitions for your Facebook App ID and login protocol scheme.The value should contain your Facebook AppID in both cases, the login protocol value is always prefaced with :code:`fb`.
@@ -497,15 +503,15 @@ Setup Google Login in your Mobile App
 
               dependencies {
                   // Mobile Client for initializing the SDK
-                  compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true; }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
 
                   // Google SignIn
-                  compile 'com.android.support:support-v4:24.+'
-                  compile ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar') { transitive = true; }
+                  implementation 'com.android.support:support-v4:24.+'
+                  implementation ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar') { transitive = true }
 
                   // Sign in UI Library
-                  compile 'com.android.support:appcompat-v7:24.+'
-                  compile ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true; }
+                  implementation 'com.android.support:appcompat-v7:24.+'
+                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
               }
 
 

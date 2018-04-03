@@ -110,11 +110,11 @@ Connect to your backend
                :emphasize-lines: 0
 
                 dependencies{
-                    compile 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                    compile ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
+                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+                    implementation ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
 
-                    compile 'com.google.android.gms:play-services-iid:11.6.0'
-                    compile 'com.google.android.gms:play-services-gcm:11.6.0'
+                    implementation 'com.google.android.gms:play-services-iid:11.6.0'
+                    implementation 'com.google.android.gms:play-services-gcm:11.6.0'
                 }
 
          #. Add the following to your project level :file:`build.gradle`:

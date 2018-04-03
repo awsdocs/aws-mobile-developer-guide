@@ -16,7 +16,7 @@ Mobile Hub Project Permissions Model
 
 
 .. meta::
-   :description: This section describes the new permissios model for administrators and users of |AMH| accoutns.
+   :description: This section describes the new permissios model for administrators and users of |AMH| accounts.
 
 
 .. list-table::
@@ -27,6 +27,9 @@ Mobile Hub Project Permissions Model
      - **The permissions model for AWS Mobile Hub is changing.**
 
        This impacts users who have been granted permissions to modify |AMH| projects in an account, but are not an administrator for the account. These users must now be :ref:`granted administrative permissions <reference-mobile-hub-iam-managed-policies-how-to>` to continue to be able to modify the projects in the future. Read this section for more information.
+
+       If you are a user who needs additional permissions for a project, contact an administrator for the AWS account. For help with any issues related to the new permissions model, contact `aws-mobilehub-customer@amazon.com <mailto:aws-mobilehub-customer@amazon.com?subject=Mobile%20Hub%20project%20permissions>`__.
+
 
 .. contents::
    :local:
@@ -49,8 +52,8 @@ With the new model, in addition to permissions to call Mobile Hub’s APIs, user
 
 .. _reference-mobile-hub-project-permissions-model-users:
 
-What does this mean to my users?
-================================
+What does this mean to users?
+=============================
 
 The impacts of the new permissions model for users include:
 
@@ -59,6 +62,7 @@ The impacts of the new permissions model for users include:
 #. In order for IAM users, groups, or roles to be able to perform mutating operations using Mobile Hub, they must have the appropriate permissions. The only way to ensure an administrator's users have permission to invoke all available operations in Mobile Hub, is to grant them the :code:`AdministratorAccess` policy.
 
 #. If you don't want to grant your users AdministratorAccess individually, then you could create an organization in `AWS Organizations <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html>`__, and then create a sub-account for each user or group of users, which you can grant :code:`AdministratorAccess` or other permissions.
+
 
 .. _reference-mobile-hub-project-permissions-model-why:
 

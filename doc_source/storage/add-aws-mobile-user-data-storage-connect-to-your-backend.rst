@@ -11,8 +11,8 @@
                :emphasize-lines: 2-3
 
                dependencies {
-                  compile 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  compile 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app

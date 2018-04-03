@@ -131,7 +131,7 @@ Connect to Your Backend
          .. code-block:: java
 
              dependencies {
-                 compile ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true; }
+                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
              }
 
       #. Add the following code to the :code:`onCreate` method of your main or startup activity. This will establish a connection with AWS Mobile. :code:`AWSMobileClient` is a singleton that will be an interface for your AWS services.
@@ -189,16 +189,18 @@ Connect to Your Backend
 
              pod install --repo-update
 
-      #. The command :code:`pod install` creates a new workspace file. Close your Xcode project and reopen it using :file:`./YOUR-PROJECT-NAME .xcworkspace`.
+      #. The command :code:`pod install` creates a new workspace file. Close your Xcode project and reopen it using :file:`./YOUR-PROJECT-NAME.xcworkspace`.
 
          .. list-table::
              :widths: 1 6
 
              * - Use **ONLY** your .xcworkspace
 
-               - Remember to always use :file:`./YOUR-PROJECT-NAME .xcworkspace` to open your Xcode project from now on.
+               - Remember to always use :file:`./YOUR-PROJECT-NAME.xcworkspace` to open your Xcode project from now on.
 
-      #. Replace the :code: `return true` statement in :code`didFinishLaunching` with the following code in your AppDelegate to establish a run-time connection with AWS Mobile.
+      #. Rebuild your app after reopening it in the workspace to resolve APIs from new libraries called in your code. This is a good practice any time you add import statements.
+
+      #. Replace the :code:`return true` statement in :code`didFinishLaunching` with the following code in your AppDelegate to establish a run-time connection with AWS Mobile.
 
          .. code-block:: swift
 

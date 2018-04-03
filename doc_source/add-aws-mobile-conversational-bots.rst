@@ -78,7 +78,7 @@ Connect to your backend
                :emphasize-lines: 2
 
                 dependencies{
-                    compile ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar') {transitive = true;}
+                    implementation ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar') {transitive = true;}
                 }
 
          #. For each Activity where you make calls to |LEXlong|, import the following APIs.
