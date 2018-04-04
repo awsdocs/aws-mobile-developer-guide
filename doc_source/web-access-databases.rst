@@ -116,7 +116,7 @@ To access your NoSQL database, you will create an API that can be called from yo
 
 **To create a CRUD API**
 
-#. Enable and configure the CLoud Logic featue**
+#. Enable and configure the Cloud Logic feature**
 
    .. code:: bash
 
