@@ -96,7 +96,7 @@ Set Up Your Backend
 
    .. code-block:: bash
 
-      ? Where is your project's distribution directory to store build artifacts:  dist
+      ? Where is your project's distribution directory to store build artifacts:  build
       ? What is your project's build command:  npm run-script build
       ? What is your project's start command for local test run:  npm run-script start
       ? What awsmobile project name would you like to use:  YOUR-APP-NAME-2017-11-10-15-17-48
