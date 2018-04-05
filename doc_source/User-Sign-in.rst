@@ -192,7 +192,13 @@ SAML Federation
 
     SAML 2.0 (Security Assertion Markup Language 2.0) is an open standard used by many IdPs, including Microsoft Active Directory Federation Service and Shibboleth. Your IdP must be SAML 2.0 compatible to use this Mobile Hub option. To establish federation between AWS and your IdP the two systems must exchange SAML federation metadata. AWS federation metadata can be found at `https://signin.aws.amazon.com/static/saml-metadata.xml <https://signin.aws.amazon.com/static/saml-metadata.xml>`__. This xml file demonstrates the form that your IdP's metadata should take. For more information on SAML federation metadata for your IdP, see `Integrating Third-Party SAML Solution Providers with AWS <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml_3rd-party.html>`__.
 
-    To implement this exchange, view your IdP's documentation to understand how to use the AWS federation metadata file to register AWS as a service provider. Then provide upload your IdP's federation metadata file using SAML Federation page of the Mobile Hub console.
+    To implement this exchange:
+
+    #. View your IdP's documentation to understand how to use the AWS federation metadata file to register AWS as a service provider.
+
+    #. Ensure that your |AMH| project is configured to use Email & Password sign-in to create an Amazon Cognito User Pool.
+
+    #. Configure your IdP as an Identity Provider for your user pool using the steps on `Creating SAML Identity Providers for Your User Pool <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-saml-idp.html>`__.
 
     To learn more about how AWS supports SAML federation, see `Overview of Configuring SAML 2.0-Based Federation <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__.
 
