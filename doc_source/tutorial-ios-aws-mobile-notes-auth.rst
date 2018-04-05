@@ -136,25 +136,23 @@ In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register your 
 
 .. code-block:: swift
 
-       func application(
-           _ application: UIApplication,
-               didFinishLaunchingWithOptions launchOptions:
-                   [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-                   // . . .
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions:
+        [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // Initialize AWSMobileClient
-        return AWSMobileClient.sharedInstance().interceptApplication(
+        let didFinishLaunching = AWSMobileClient.sharedInstance().interceptApplication(
             application, didFinishLaunchingWithOptions:
             launchOptions)
 
         // Initialize Pinpoint to enable session analytics
-        pinpoint = AWSPinpoint(configuration:
+        let pinpoint = AWSPinpoint(configuration:
             AWSPinpointConfiguration.defaultPinpointConfiguration(
                 launchOptions: launchOptions))
 
-        return true
-    }
+        return didFinishLaunching
+   }
 
 .. list-table::
    :widths: 1 6

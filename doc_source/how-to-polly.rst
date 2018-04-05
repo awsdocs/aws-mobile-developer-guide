@@ -32,6 +32,6 @@ For information on Amazon Polly concepts and service configuration, see `How it 
 
 **iOS**
 
-* For sample iOS ntegration code, see the `iOS Amazon Polly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-ios.html>`__.
+* For sample iOS integration code, see the `iOS Amazon Polly Example <https://docs.aws.amazon.com/polly/latest/dg/examples-ios.html>`__.
 
 * For more end to end sample apps using Amazon Polly see the `AWS SDK for iOS samples <https://github.com/awslabs/aws-sdk-ios-samples/>`__.

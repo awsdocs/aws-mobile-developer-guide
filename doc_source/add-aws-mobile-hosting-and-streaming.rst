@@ -272,7 +272,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
                   :scale: 75
 
          #. From the location where configuration files were downloaded in a previous step, drag
-            :file:`awsconfiguration.json` into the :file:`res/raw` folder.
+            :file:`awsconfiguration.json` into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
 
 
    iOS - Swift

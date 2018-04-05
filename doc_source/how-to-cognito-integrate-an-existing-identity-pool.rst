@@ -126,7 +126,23 @@ Add the awsconfiguration.json file to your app
 .. container:: option
 
     Android - Java
-      Place the :file:`awsconfiguration.json` file you created in the previous step into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`__ in your Android project.
+      Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown menu.
+
+          .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+             :scale: 100
+             :alt: Image of selecting a Raw Android Resource Directory in Android Studio.
+
+          .. only:: pdf
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 50
+
+          .. only:: kindle
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 75
+
+      Drag the :file:`awsconfiguration.json` you created into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
 
     iOS - Swift
       Drag the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.

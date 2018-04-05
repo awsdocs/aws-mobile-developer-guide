@@ -24,7 +24,7 @@ To override the defaults, and modify the behavior, look, and feel of the sign-in
 
 .. container:: option
 
-    Android-Java
+    Android - Java
         Create and configure an :code:`AuthUIConfiguration` object and set its properties.
 
             * To present the Email and Password user :code:`SignInUI`, set :code:`userPools` to :code:`true`.

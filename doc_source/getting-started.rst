@@ -51,12 +51,12 @@ Set Up Your Backend
 
    To integrate existing AWS resources using the SDK directly, without Mobile Hub, see :doc:`Setup  Options for Android <how-to-android-sdk-setup>` or :doc:`Setup  Options for iOS <how-to-ios-sdk-setup>`.
 
-#. Name your project, check the box to allow Mobile Hub to administer resources for you and then choose :guilabel:`Next`.
+#. Name your project, check the box to allow Mobile Hub to administer resources for you and then choose :guilabel:`Add`.
 
 .. container:: option
 
     Android - Java
-      #. Choose :guilabel:`Android` as your platform and then choose Add.
+      #. Choose :guilabel:`Android` as your platform and then choose Next.
 
          .. image:: images/wizard-createproject-platform-android.png
             :scale: 75
@@ -68,14 +68,36 @@ Set Up Your Backend
          .. image:: images/wizard-createproject-backendsetup-android.png
             :scale: 75
 
-      #. Add awsconfiguration.json to your app.
 
-         From your download location, place :file:`awsconfiguration.json` into a :file:`res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`__ in your Android project. Choose :guilabel:`Next`.
+      #. Add the backend service configuration file to your app.
 
-      #. You are now ready to connect your app to your newly setup backend. Choose :guilabel:`Add the AWS Mobile SDK` to connect to your backend.
+         Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown menu.
 
-         .. image:: images/wizard-createproject-backendconnect.png
-            :scale: 75
+            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+               :scale: 100
+               :alt: Image of selecting a Raw Android Resource Directory in Android Studio.
+
+            .. only:: pdf
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 50
+
+            .. only:: kindle
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 75
+
+         From the location where configuration file, :file:`awsconfiguration.json`, was downloaded in a previous step, drag it into the :file:`res/raw` folder.  Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
+
+         .. list-table::
+            :widths: 1 6
+
+            * - **Remember**
+
+              - Every time you create or update a feature in your |AMH| project, download and integrate a new version of your :file:`awsconfiguration.json` into each app in the project that will use the update.
+
+      Your backend is now configured. Follow the next steps at :ref:`Connect to Your Backend <add-aws-mobile-sdk-connect-to-your-backend>`.
+
 
     iOS - Swift
       #. Pick :guilabel:`iOS` as your platform and choose Next.
@@ -90,7 +112,9 @@ Set Up Your Backend
          .. image:: images/wizard-createproject-backendsetup-ios.png
             :scale: 75
 
-      #. Add awsconfiguration.json file to your app.
+         .. _ios-add-backend-configuration:
+
+      #. Add the backend service configuration file to your app.
 
          From your download location, place :file:`awsconfiguration.json` into the folder containing your :file:`info.plist` file in your Xcode project. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog. Choose :guilabel:`Next`.
 
@@ -101,23 +125,22 @@ Set Up Your Backend
 
               - Every time you create or update a feature in your |AMH| project, download and integrate a new version of your :file:`awsconfiguration.json` into each app in the project that will use the update.
 
-      #. You are now ready to connect your app to your newly setup backend. Choose :guilabel:`Add the AWS Mobile SDK to your app`.
+      Your backend is now configured. Follow the next steps at :ref:`Connect to Your Backend <add-aws-mobile-sdk-connect-to-your-backend>`.
 
-         .. image:: images/wizard-createproject-backendconnect.png
-            :scale: 75
 
+.. _add-aws-mobile-sdk-connect-to-your-backend:
 
 Connect to Your Backend
-====================
+=======================
 
 .. container:: option
 
    Android - Java
       #. Prerequisites
 
-         Install Android Studio version 2.33 or higher.
+         * `Install Android Studio <https://developer.android.com/studio/index.html#downloads>`__ version 2.33 or higher.
 
-         Install Android SDK v7.11 (Nougat), API level 25.
+         * Install Android SDK v7.11 (Nougat), API level 25.
 
       #. Your :file:`AndroidManifest.xml` must contain:
 
@@ -134,7 +157,7 @@ Connect to Your Backend
                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
              }
 
-      #. Add the following code to the :code:`onCreate` method of your main or startup activity. This will establish a connection with AWS Mobile. :code:`AWSMobileClient` is a singleton that will be an interface for your AWS services.
+      #. Add the following code to the :code:`onCreate` method of your main or startup activity. :code:`AWSMobileClient` is a singleton that establishes your connection to |AWS| and acts as an interface for your services.
 
          .. code-block:: java
 
@@ -145,20 +168,88 @@ Connect to Your Backend
                 protected void onCreate(Bundle savedInstanceState) {
                     super.onCreate(savedInstanceState);
 
-                    AWSMobileClient.getInstance().initialize(this).execute();
-                 }
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                        @Override
+                        public void onComplete(AWSStartupResult awsStartupResult) {
+                            Log.d("YourMainActivity", "AWSMobileClient is instantiated and you are connected to AWS!");
+                        }
+                    }).execute();
+
+                    // More onCreate code ...
+                }
               }
 
-         Your app is now set up to interact with the AWS services you configured in your Mobile Hub project!
+         .. list-table::
+            :widths: 1 6
 
+            * - What does this do?
 
-         Choose the Run icon in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
+              - When :code:`AWSMobileClient` is initialized, it constructs the :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects which, in turn, are used when creating other SDK clients. The client then makes a `Sigv4 signed <https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`__ network call to `Amazon Cognito Federated Identities <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__ to retrieve AWS credentials that provide the user access to your backend resources. When the network interaction succeeds, the :code:`onComplete` method of the :code:`AWSStartUpHandler` is called.
 
+      Your app is now set up to interact with the AWS services you configured in your Mobile Hub project!
+
+      Choose the Run icon in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
+
+      .. list-table::
+         :widths: 1
+
+         * - **Optional:** The following example shows how to retrieve the reference to :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects which can be used to instantiate other SDK clients. You can use the :code:`IdentityManager` to fetch the user's AWS identity id either directly from Amazon Cognito or from the locally cached identity id value.
+
+             .. code-block:: java
+
+                import com.amazonaws.auth.AWSCredentialsProvider;
+                import com.amazonaws.mobile.auth.core.IdentityHandler;
+                import com.amazonaws.mobile.auth.core.IdentityManager;
+                import com.amazonaws.mobile.client.AWSMobileClient;
+                import com.amazonaws.mobile.client.AWSStartupHandler;
+                import com.amazonaws.mobile.client.AWSStartupResult;
+                import com.amazonaws.mobile.config.AWSConfiguration;
+
+                public class YourMainActivity extends Activity {
+
+                    private AWSCredentialsProvider awsCredentialsProvider;
+                    private AWSConfiguration awsConfiguration;
+
+                    @Override
+                    protected void onCreate(Bundle savedInstanceState) {
+                        super.onCreate(savedInstanceState);
+
+                        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                            @Override
+                            public void onComplete(AWSStartupResult awsStartupResult) {
+
+                                // Obtain the reference to the AWSCredentialsProvider and AWSConfiguration objects
+                                credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
+                                configuration = AWSMobileClient.getInstance().getConfiguration();
+
+                                // Use IdentityManager#getUserID to fetch the identity id.
+                                IdentityManager.getDefaultIdentityManager().getUserID(new IdentityHandler() {
+                                    @Override
+                                    public void onIdentityId(String identityId) {
+                                        Log.d("YourMainActivity", "Identity ID = " + identityId);
+
+                                        // Use IdentityManager#getCachedUserID to
+                                        //  fetch the locally cached identity id.
+                                        final String cachedIdentityId =
+                                            IdentityManager.getDefaultIdentityManager().getCachedUserID();
+                                    }
+
+                                    @Override
+                                    public void handleError(Exception exception) {
+                                        Log.d("YourMainActivity", "Error in retrieving the identity" + exception);
+                                    }
+                                });
+                            }
+                        }).execute();
+
+                        // .. more code
+                    }
+                }
 
    iOS - Swift
       #. Prerequisites
 
-         Install Xcode version 8.0 or later.
+         * `Install Xcode <https://developer.apple.com/xcode/downloads/>`__ version 8.0 or later.
 
       #. Install Cocoapods. From a terminal window run:
 
@@ -200,7 +291,7 @@ Connect to Your Backend
 
       #. Rebuild your app after reopening it in the workspace to resolve APIs from new libraries called in your code. This is a good practice any time you add import statements.
 
-      #. Replace the :code:`return true` statement in :code`didFinishLaunching` with the following code in your AppDelegate to establish a run-time connection with AWS Mobile.
+      #. Replace the :code:`return true` statement in :code:`didFinishLaunching` with the following code in your AppDelegate to establish a run-time connection with AWS Mobile.
 
          .. code-block:: swift
 
@@ -221,18 +312,54 @@ Connect to Your Backend
 
             }
 
-      #. `Optional`: If you want to make sure you're connected to AWS, import :code:`AWSCore` and add the following code to :code:`didFinishLaunchingWithOptions` before you return :code:`AWSMobileClient`.
 
-         .. code-block:: swift
+         .. list-table::
+            :widths: 1 6
 
-            import AWSCore
+            * - What does this do?
 
-            //. . .
+              - When :code:`AWSMobileClient` is initialized, it makes a `Sigv4 signed <https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`__ network call to `Amazon Cognito Federated Identities <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__ to retrieve AWS credentials that provide the user access to your backend resources. When the network interaction succeeds, the :code:`onComplete` method of the :code:`AWSStartUpHandler` is called.
 
-            AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
-            AWSDDLog.sharedInstance.logLevel = .info
+      Your app is now set up to interact with the AWS services you configured in your |AMH| project!
 
-        Your app is now set up to interact with the AWS services you configured in your |AMH| project! Choose the run icon in the top left of the Xcode window or type Command-R to build and run your app. Look for  :code:`Welcome to AWS!` in the log output.
+      Choose the run icon in the top left of the Xcode window or type Command-R to build and run your app. Look for  :code:`Welcome to AWS!` in the log output.
+
+      .. list-table::
+         :widths: 1
+
+         * - **Optional:** If you want to make sure you're connected to AWS, import :code:`AWSCore` and add the following code to :code:`didFinishLaunchingWithOptions` before you return :code:`AWSMobileClient`.
+
+             .. code-block:: swift
+
+                  import AWSCore
+
+                        //. . .
+
+                  AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
+                  AWSDDLog.sharedInstance.logLevel = .info
+
+             **Optional:** The following example shows how to retrieve the reference to :code:`AWSCredentialsProvider` object which can be used to instantiate other SDK clients. You can use the :code:`AWSIdentityManager` to fetch the AWS identity id of the user from Amazon Cognito.
+
+             .. code-block:: swift
+
+                  import UIKit
+                  import AWSMobileClient
+                  import AWSAuthCore
+
+                  class ViewController: UIViewController {
+
+                      @IBOutlet weak var textfield: UITextField!
+                      override func viewDidLoad() {
+                          super.viewDidLoad()
+                          textfield.text = "View Controller Loaded"
+
+                          // Get the AWSCredentialsProvider from the AWSMobileClient
+                          let credentialsProvider = AWSMobileClient.sharedInstance().getCredentialsProvider()
+
+                          // Get the identity Id from the AWSIdentityManager
+                          let identityId = AWSIdentityManager.default().identityId
+                      }
+                  }
 
 .. _add-aws-mobile-sdk-next-steps:
 
@@ -256,6 +383,3 @@ Next Steps
   * :ref:`Add Conversational Bots <add-aws-mobile-conversational-bots>`
 
   * :ref:`Add Hosting and Streaming <add-aws-mobile-hosting-and-streaming>`
-
-
-

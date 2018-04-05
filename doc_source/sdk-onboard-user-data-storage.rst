@@ -104,10 +104,10 @@ Add the awsconfiguration.json file to your app
 
 .. container:: option
 
-    Android-Java
+    Android - Java
     	Place the `awsconfiguration.json` file you created in the previous step into a `res/raw` `Android Resource Directory <https://developer.android.com/studio/write/add-resources.html>`__ in your Android project.
 
-    iOS-Swift
+    iOS - Swift
     	Place the `awsconfiguration.json` into the folder containing your `Info.plist` file in your Xcode project. Select `Copy items` if needed and `Create groups` in the options dialog to make sure the file is actually copied into the Xcode project.
 
 
