@@ -158,7 +158,7 @@ Use the following steps to add analytics to your mobile app through AWS Pinpoint
                        import AWSCore
                        import AWSPinpoint
 
-               #. Insert the following code into the :code:`didFinishLaunchwithOptions` method of your app's :file:`AppDelegate.swift`.
+               #. Insert the following code into the :code:`application(_:didFinishLaunchingWithOptions:)` method of your app's :file:`AppDelegate.swift`.
 
                   .. code-block:: swift
                      :emphasize-lines: 3-12
