@@ -8,18 +8,25 @@
    either express or implied. See the License for the specific language governing permissions and
    limitations under the License.
 
-.. _how-to-ios-data-sync:
-
 #######################################
 iOS: Sync Data with Amazon Cognito Sync
 #######################################
+
+.. list-table::
+   :widths: 1 6
+
+   * - New User?
+
+     - Use `AWS AppSync <https://aws.amazon.com/appsync/>`__ instead. AppSync is a new service for synchronizing application data across devices. Like Cognito Sync, AppSync enables synchronization of a user's own data, such as game state or app preferences. AppSync extends these capabilities by allowing multiple users to synchronize and collaborate in real-time on shared data, such as a virtual meeting space or chatroom.
+
+       `Start building an iOS app with AWS AppSync now <https://docs.aws.amazon.com/appsync/latest/devguide/building-a-client-app-ios.html>`__.
 
 Authenticate Users with Amazon Cognito Identity
 -----------------------------------------------
 
 Amazon Cognito Identity provides secure access to AWS services. Identities are managed by an identity pool. Roles specify resources an identity can access and are associated with an identity pool. To create an identity pool for your application:
 
-#. Log into the `Amazon Cognito console <https://console.aws.amazon.com/cognito/>`__ and click the :guilabel:`New Identity Pool` button
+#. Log into the `Amazon Cognito console <https://console.aws.amazon.com/cognito/>`_ and click the :guilabel:`New Identity Pool` button
 #. Give your Identity Pool a unique name and enable access to unauthenticated identities
 #. Click the :guilabel:`Create Pool` button and then the :guilabel:`Update Roles` to create your identity pool and associated roles
 
@@ -132,15 +139,4 @@ To sync the dataset with the cloud, call the synchronize method on the dataset o
 All data written to datasets will be stored locally until the dataset is synced. The code in this section assumes you are using an unauthenticated Amazon Cognito identity, so when the user data is synced with the cloud it will be stored per device. The device has a device ID associated with it, when the user data is synced to the cloud, it will be associated with that device ID.
 
 To sync user data across devices (based on an authenticated Cognito Identity) see `Amazon Cognito Sync Developer Guide
-<http://docs.aws.amazon.com/cognito/devguide/sync/>`__.
-
-Related Documentation
----------------------
-:ref:`Amazon Cognito Setup for iOS <cognito-auth-aws-identity-for-ios>`
-
-`Developer Authenticated Identities`_
-
-
-.. _Cognito Console: https://console.aws.amazon.com/cognito
-.. _Developer Authenticated Identities: http://docs.aws.amazon.com/cognito/latest/developerguide/developer-authenticated-identities.html
-
+<http://docs.aws.amazon.com/cognito/devguide/sync/>`_.

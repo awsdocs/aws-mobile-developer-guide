@@ -37,13 +37,13 @@ This section provides information on the steps for achieving specific tasks for 
 
    Manual SDK Setup <how-to-sdk-setup>
    User Sign-in (Amazon Cognito) <how-to-user-sign-in>
-   Data Storage (Amazon S3) <how-to-storage>
+   User File Storage (Amazon S3) <how-to-storage>
    NoSQL Database (Amazon DynamoDB)<how-to-nosql>
    Serverless Code (AWS Lambda) <how-to-lambda>
    Natural Language (Amazon Lex) <how-to-lex>
    Speech to Text (Amazon Polly) <how-to-polly>
    Data Streaming (Amazon Kinesis) <how-to-kinesis-data-stream>
-   Data Sync (Amazon Cognito Sync) <how-to-data-sync>
+   Data Sync (AWS Cognito Sync) <how-to-data-sync>
    Machine Learning (Amazon Machine Learning) <how-to-machine-learning>
    Miscellaneous <how-to-miscellaneous>
 
