@@ -288,7 +288,7 @@ Download a File
    Android - Java
     To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
     to get the :code:`AWSConfigurationand` :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
-    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :cdoe:`AWSCredentialsProvider`.
+    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
     The following example shows using the :code:`TransferUtility` in the context of an Activity.
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
