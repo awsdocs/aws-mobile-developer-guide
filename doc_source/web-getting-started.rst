@@ -96,7 +96,7 @@ Set Up Your Backend
 
    .. code-block:: bash
 
-      ? Where is your project's distribution directory to store build artifacts:  dist
+      ? Where is your project's distribution directory to store build artifacts:  build
       ? What is your project's build command:  npm run-script build
       ? What is your project's start command for local test run:  npm run-script start
       ? What awsmobile project name would you like to use:  YOUR-APP-NAME-2017-11-10-15-17-48
@@ -131,13 +131,13 @@ In :file:`index.js` (or in other code that runs at launch-time), add the followi
 .. code-block:: javascript
 
     import Amplify from 'aws-amplify';
-    import aws_exports from './YOUR-PATH-TO/aws-exports';
+    import awsmobile from './YOUR-PATH-TO/aws-exports';
 
 Then add the following code.
 
 .. code-block:: javascript
 
-    Amplify.configure(aws_exports);
+    Amplify.configure(awsmobile);
 
 
 Run Your App Locally

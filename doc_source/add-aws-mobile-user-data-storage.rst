@@ -11,12 +11,12 @@
 .. _add-aws-mobile-user-data-storage:
 
 #######################################################
-Add User Data Storage to Your Mobile App with Amazon S3
+Add User File Storage to Your Mobile App with Amazon S3
 #######################################################
 
 
 .. meta::
-   :description: Integrating user data storage
+   :description: Integrating user file storage
 
 
 .. _overview:
@@ -24,13 +24,9 @@ Add User Data Storage to Your Mobile App with Amazon S3
 Overview
 ==============
 
-
 Enable your app to store and retrieve user files from cloud storage with the permissions model that
-suits your purpose. |AMH|  :ref:`user-data-storage` deploys and configures cloud storage buckets
+suits your purpose. Mobile Hub  :ref:`user-data-storage` deploys and configures cloud storage buckets
 using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ (|S3|).
-
-The User Data Storage feature also uses `Amazon Cognito Sync <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/add-aws-mobile-user-data-storage.html>`__. This service enables your app to sync key/name
-pair app data, like user profiles, to the cloud and other devices.
 
 
 .. _setup-your-backend:
@@ -43,7 +39,7 @@ Set Up Your Backend
 
    If you want to integrate an |S3| bucket that you have already configured, go to :ref:`Integrate an Existing Bucket <how-to-integrate-an-existing-bucket>`.
 
-#. Enable :guilabel:`User Data Storage`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`User Data Storage` tile to enable the feature.
+#. Enable :guilabel:`User File Storage`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`User File Storage` tile to enable the feature.
 
 #. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
 
@@ -54,7 +50,7 @@ Set Up Your Backend
    .. image:: images/updated-cloud-config2.png
       :scale: 25
 
-#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the User Data Storage documentation below to connect to your backend.
+#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the User File Storage documentation below to connect to your backend.
 
 .. _add-aws-mobile-user-data-storage-app:
 
@@ -64,7 +60,7 @@ Connect to Your Backend
 Make sure to complete the :ref:`add-aws-mobile-user-sign-in-backend-setup` steps before
 using the integration steps on this page.
 
-**To add User Data Storage to your app**
+**To add User File Storage to your app**
 
 .. container:: option
 
@@ -97,7 +93,7 @@ using the integration steps on this page.
 
                </application>
 
-         #. For each Activity where you make calls to perform user data storage operations, import the
+         #. For each Activity where you make calls to perform user file storage operations, import the
             following packages.
 
             .. code-block:: none
@@ -125,7 +121,7 @@ using the integration steps on this page.
 
                Run :code:`pod install --repo-update` before you continue.
 
-         #. Add the following imports to the classes that perform user data storage operations:
+         #. Add the following imports to the classes that perform user file storage operations:
 
             .. code-block:: none
 
@@ -292,7 +288,7 @@ Download a File
    Android - Java
     To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
     to get the :code:`AWSConfigurationand` :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
-    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :cdoe:`AWSCredentialsProvider`.
+    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
     The following example shows using the :code:`TransferUtility` in the context of an Activity.
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
@@ -412,85 +408,6 @@ Download a File
           }
 
 
-.. _add-aws-user-data-storage-sync:
-
-Save User Profile Data
-======================
-
-The following shows how to load user settings and access those settings using |COG| Sync.
-
-.. container:: option
-
-   Android - Java
-     .. code-block:: java
-
-        import java.util.List;
-
-        import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-
-        import com.amazonaws.mobileconnectors.cognito.CognitoSyncManager;
-        import com.amazonaws.mobileconnectors.cognito.Dataset;
-        import com.amazonaws.mobileconnectors.cognito.exceptions.DataStorageException;
-        import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-
-        public void saveProfileData() {
-
-           CognitoSyncManager manager =
-              new CognitoSyncManager(getApplicationContext(), (CognitoCachingCredentialsProvider)AWSMobileClient.getInstance().getCredentialsProvider(),
-                        AWSMobileClient.getInstance().getConfiguration());
-
-           Dataset dataset = manager.openOrCreateDataset("myDataset");
-           dataset.put("myKey", "myValue");
-
-           // synchronize dataset with the Cloud
-           dataset.synchronize(new Dataset.SyncCallback() {
-              public void onSuccess(Dataset dataset, List list) {
-
-              }
-
-              public boolean onConflict(Dataset dataset, List list) {
-                 return false;
-              }
-
-              public boolean onDatasetDeleted(Dataset dataset, String list) {
-                 return true;
-              }
-
-              public boolean onDatasetsMerged(Dataset dataset, List list) {
-                 return true;
-              }
-
-              public void onFailure(DataStorageException exception) {
-
-              }
-           });
-        }
-
-
-   iOS - Swift
-     .. code-block:: swift
-       :emphasize-lines: 0
-
-        import AWSCore
-        import AWSCognito
-
-        func loadSettings() {
-           let syncClient: AWSCognito = AWSCognito.default()
-           let userSettings: AWSCognitoDataset = syncClient.openOrCreateDataset("user_settings")
-
-           userSettings.synchronize().continueWith { (task: AWSTask<AnyObject>) -> Any? in
-              if let error = task.error as NSError? {
-                 print("loadSettings error: \(error.localizedDescription)")
-                 return nil;
-              }
-              let titleTextColorString = userSettings.string(forKey: "titleTextColorStringKey")
-              let titleBarColorString = userSettings.string(forKey: "titleBarColorStringKey")
-              let backgroundColorString = userSettings.string(forKey: "backgroundColorStringKey")
-              return nil;
-           }
-        }
-
-
 Next Steps
 ==========
 
@@ -498,3 +415,4 @@ Next Steps
 
 * For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`__.
 
+* Looking for Amazon Cognito Sync? If you are new user, use `AWS AppSync <https://aws.amazon.com/appsync/>`__ instead. AppSync is a new service for synchronizing application data across devices. Like Cognito Sync, AppSync enables synchronization of a user's own data, such as game state or app preferences. AppSync extends these capabilities by allowing multiple users to synchronize and collaborate in real-time on shared data, such as a virtual meeting space or chatroom. `Start building with AWS AppSync now <https://aws.amazon.com/appsync/>`__ 

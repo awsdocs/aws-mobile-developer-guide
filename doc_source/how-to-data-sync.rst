@@ -19,19 +19,17 @@ How To: Sync Data with Amazon Cognito Sync
     :description:
         Learn how to integrate data sync into your mobile app.
 
+
 .. list-table::
    :widths: 1 6
 
-   * - **Just Getting Started?**
+   * - New User?
 
-     - :ref:`Use streamlined steps <add-aws-mobile-user-data-storage>` to install the SDK and integrate Amazon Cognito Sync.
+     - Use `AWS AppSync <https://aws.amazon.com/appsync/>`__ instead. AppSync is a new service for synchronizing application data across devices. Like Cognito Sync, AppSync enables synchronization of a user's own data, such as game state or app preferences. AppSync extends these capabilities by allowing multiple users to synchronize and collaborate in real-time on shared data, such as a virtual meeting space or chatroom.
 
-*Or, use the contents of this page if your app will integrate existing AWS services.*
+       `Start building with AWS AppSync now <https://aws.amazon.com/appsync/>`__.
 
-
-
-
-This section provides information on the steps for achieving specific tasks for integrating data sync features into your Android and iOS apps.
+Existing Cognito Sync users can find documentation here:
 
 .. toctree::
    :titlesonly:
@@ -39,5 +37,4 @@ This section provides information on the steps for achieving specific tasks for 
 
    how-to-android-data-sync
    how-to-ios-data-sync
-
 
