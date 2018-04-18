@@ -36,6 +36,7 @@ This section provides information on the steps for achieving specific tasks for 
    :maxdepth: 1
 
    Integrate an Existing Identity Pool <how-to-cognito-integrate-an-existing-identity-pool>
+   Sign-out a Signed-in User <how-to-user-sign-in-sign-out>
    Set Up Facebook Sign-in <auth-facebook-setup>
    Set Up Google Sign-in <auth-google-setup>
    Set Up Your Custom Sign-in <auth-custom-setup>

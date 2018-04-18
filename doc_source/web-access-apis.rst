@@ -192,7 +192,7 @@ The :code:`API` module from AWS Amplify allows you to send requests to your Clou
    .. code:: javascript
 
         async makeGuess() {
-          const guess = parseInt(this.refs.guess.value, 10);
+          const guess = parseInt(this.refs.guess.value);
           const body = { guess }
           const { result } = await API.post('Guesses', '/number', { body });
           this.setState({
@@ -225,7 +225,7 @@ Your entire component should look like the following:
             state = { guess: null };
 
             async makeGuess() {
-              const guess = parseInt(this.refs.guess.value);
+              const guess = parseInt(this.refs.guess.value, 10);
               const body = { guess }
               const { result } = await API.post('Guesses', '/number', { body });
               this.setState({

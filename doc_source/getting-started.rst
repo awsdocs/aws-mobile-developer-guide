@@ -27,7 +27,7 @@ Get Started
     Add User Sign-in <add-aws-mobile-user-sign-in>
     Add Push Notifications <add-aws-mobile-push-notifications>
     Add NoSQL Database <add-aws-mobile-nosql-database>
-    Add Data Storage <add-aws-mobile-user-data-storage>
+    Add User File Storage <add-aws-mobile-user-data-storage>
     Add Cloud Logic <add-aws-mobile-cloud-logic>
     Add Messaging <add-aws-mobile-messaging>
     Add Conversational Bots <add-aws-mobile-conversational-bots>
@@ -207,8 +207,8 @@ Connect to Your Backend
 
                 public class YourMainActivity extends Activity {
 
-                    private AWSCredentialsProvider awsCredentialsProvider;
-                    private AWSConfiguration awsConfiguration;
+                    private AWSCredentialsProvider credentialsProvider;
+                    private AWSConfiguration configuration;
 
                     @Override
                     protected void onCreate(Bundle savedInstanceState) {
@@ -374,7 +374,7 @@ Next Steps
 
   * :ref:`Add NoSQL Database <add-aws-mobile-nosql-database>`
 
-  * :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`
+  * :ref:`Add User File Storage <add-aws-mobile-user-data-storage>`
 
   * :ref:`Add Cloud logic <cloud-backend>`
 

@@ -28,7 +28,7 @@ Get Started
      Add Analytics <web-add-analytics>
      Add User Sign-in <web-add-user-sign-in>
      Add NoSQL Database <web-access-databases>
-     Add User Data Storage <web-add-storage>
+     Add User File Storage <web-add-storage>
      Add Cloud Logic <web-access-apis>
 
 
@@ -224,7 +224,7 @@ Add the following AWS Mobile features to your mobile app using the CLI.
 
     * :ref:`NoSQL Database <web-access-databases>`
 
-    * :ref:`User Data Storage <web-add-storage>`
+    * :ref:`User File Storage <web-add-storage>`
 
     * :ref:`Cloud Logic <web-access-apis>`
 

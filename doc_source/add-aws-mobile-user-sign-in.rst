@@ -189,15 +189,15 @@ Setup Email & Password Login in your Mobile App
 
          * - API References
 
-           - * `AWSMobileClient <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSMobileClient.html>`_
+           - * `AWSMobileClient <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/client/AWSMobileClient.html>`_
 
                :superscript:`A library that initializes the SDK, constructs CredentialsProvider and AWSConfiguration objects, fetches the AWS credentials, and creates a SDK SignInUI client instance.`
 
-             * `Auth UserPools <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSUserPoolsUIOperations.html>`_
+             * `Auth UserPools <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/auth/userpools/CognitoUserPoolsSignInProvider.html>`_
 
                :superscript:`A wrapper Library for Amazon Cognito UserPools that provides a managed Email/Password sign-in UI.`
 
-             * `Auth Core <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSIdentityManager.html>`_
+             * `Auth Core <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/auth/core/IdentityManager.html>`_
 
                :superscript:`A library that caches and federates a login provider authentication token using Amazon Cognito Federated Identities, caches the federated AWS credentials, and handles the sign-in flow.`
 
@@ -234,7 +234,6 @@ Setup Email & Password Login in your Mobile App
 
              import UIKit
 
-             //import AWSMobileClient
              import AWSMobileClient
 
              @UIApplicationMain
@@ -428,24 +427,24 @@ Setup Facebook Login in your Mobile App
                 }
             }
 
-        Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the Run icon in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
-        .. list-table::
-           :widths: 1 6
+      .. list-table::
+         :widths: 1 6
 
-           * - API References
+         * - API References
 
-             - * `AWSMobileClient <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSMobileClient.html>`_
+           - * `AWSMobileClient <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/client/AWSMobileClient.html>`_
 
-                 :superscript:`A library that initializes the SDK, constructs CredentialsProvider and AWSConfiguration objects, fetches the AWS credentials, and creates a SDK SignInUI client instance.`
+               :superscript:`A library that initializes the SDK, constructs CredentialsProvider and AWSConfiguration objects, fetches the AWS credentials, and creates a SDK SignInUI client instance.`
 
-               * `Auth UserPools <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSUserPoolsUIOperations.html>`_
+             * `Auth UserPools <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/auth/userpools/CognitoUserPoolsSignInProvider.html>`_
 
-                 :superscript:`A wrapper Library for Amazon Cognito UserPools that provides a managed Email/Password sign-in UI.`
+               :superscript:`A wrapper Library for Amazon Cognito UserPools that provides a managed Email/Password sign-in UI.`
 
-               * `Auth Core <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSIdentityManager.html>`_
+             * `Auth Core <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/auth/core/IdentityManager.html>`_
 
-                 :superscript:`A library that caches and federates a login provider authentication token using Amazon Cognito Federated Identities, caches the federated AWS credentials, and handles the sign-in flow.`
+               :superscript:`A library that caches and federates a login provider authentication token using Amazon Cognito Federated Identities, caches the federated AWS credentials, and handles the sign-in flow.`
 
    iOS - Swift
       #. Add or update your AWS backend configuration file to incorporate your new sign-in. For details, see the last steps in the :ref:`Get Started: Set Up Your Backend <add-aws-mobile-sdk-basic-setup>` section.
@@ -683,18 +682,17 @@ Setup Google Login in your Mobile App
 
          * - API References
 
-           - * `AWSMobileClient <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSMobileClient.html>`_
+           - * `AWSMobileClient <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/client/AWSMobileClient.html>`_
 
                :superscript:`A library that initializes the SDK, constructs CredentialsProvider and AWSConfiguration objects, fetches the AWS credentials, and creates a SDK SignInUI client instance.`
 
-             * `Auth UserPools <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSUserPoolsUIOperations.html>`_
+             * `Auth UserPools <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/auth/userpools/CognitoUserPoolsSignInProvider.html>`_
 
                :superscript:`A wrapper Library for Amazon Cognito UserPools that provides a managed Email/Password sign-in UI.`
 
-             * `Auth Core <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSIdentityManager.html>`_
+             * `Auth Core <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobile/auth/core/IdentityManager.html>`_
 
                :superscript:`A library that caches and federates a login provider authentication token using Amazon Cognito Federated Identities, caches the federated AWS credentials, and handles the sign-in flow.`
-
 
    iOS - Swift
       #. Add or update your AWS backend configuration file to incorporate your new sign-in. For details, see the last steps in the :ref:`Get Started: Set Up Your Backend <add-aws-mobile-sdk-basic-setup>` section.
@@ -823,6 +821,56 @@ Setup Google Login in your Mobile App
              * `Auth Core <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSIdentityManager.html>`_
 
                :superscript:`A library that caches and federates a login provider authentication token using Amazon Cognito Federated Identities, caches the federated AWS credentials, and handles the sign-in flow.`
+
+.. _auth-sign-out:
+
+Enable Sign-out
+===============
+
+.. container:: option
+
+   Android - Java
+       To enable a user to sign-out of your app, register a callback for sign-in events by adding a :code:`SignInStateChangeListener` to :code:`IdentityManager`. The listener captures both :code:`onUserSignedIn` and :code:`onUserSignedOut` events.
+
+        .. code-block:: java
+
+           IdentityManager.getDefaultIdentityManager().addSignInStateChangeListener(new SignInStateChangeListener() {
+               @Override
+               // Sign-in listener
+               public void onUserSignedIn() {
+                   Log.d(LOG_TAG, "User Signed In");
+               }
+
+               // Sign-out listener
+               @Override
+               public void onUserSignedOut() {
+
+                   // return to the sign-in screen upon sign-out
+                  showSignIn();
+               }
+           });
+
+       To initiate a sign-out, call the :code:`signOut` method of :code:`IdentityManager`.
+
+        .. code-block:: java
+
+           IdentityManager.getDefaultIdentityManager().signOut();
+
+   iOS - Swift
+       To initiate a sign-out, add a call to  :code:`AWSSignInManager.sharedInstance().logout`.
+
+       .. code-block:: swift
+
+          @IBAction func signOutButtonPress(_ sender: Any) {
+                  AWSSignInManager.sharedInstance().logout(completionHandler: {(result: Any?, error: Error?) in
+                      self.showSignIn()
+                   // print("Sign-out Successful: \(signInProvider.getDisplayName)");
+
+                  })
+
+          }
+
+For a fuller example, see :ref:`Sign-out a Signed-in User <how-to-user-sign-in-sign-out>` in the How To section.
 
 .. _auth-next-steps:
 
