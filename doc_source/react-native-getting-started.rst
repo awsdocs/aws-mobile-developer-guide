@@ -28,7 +28,7 @@ Get Started
      Add Analytics <react-native-add-analytics>
      Add User Sign-in <react-native-add-user-sign-in>
      Add NoSQL Database <react-native-access-databases>
-     Add User Data Storage <react-native-add-storage>
+     Add User File Storage <react-native-add-storage>
      Add Cloud Logic <react-native-access-apis>
 
 
@@ -179,7 +179,7 @@ Add the following AWS Mobile features to your mobile app using the CLI.
 
     * :ref:`NoSQL Database <react-native-access-databases>`
 
-    * :ref:`User Data Storage <react-native-add-storage>`
+    * :ref:`User File Storage <react-native-add-storage>`
 
     * :ref:`Cloud Logic <react-native-access-apis>`
 

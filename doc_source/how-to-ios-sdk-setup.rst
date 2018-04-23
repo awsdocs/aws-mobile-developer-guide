@@ -88,7 +88,6 @@ The samples included with the SDK are standalone projects that are already set u
                     pod 'AWSCognitoAuth'
                     pod 'AWSCognitoIdentityProvider'
                     pod 'AWSCognitoIdentityProviderASF'
-                    pod 'AWSCognitoSync'
                     pod 'AWSCore'
                     pod 'AWSDynamoDB'
                     pod 'AWSEC2'
@@ -152,7 +151,6 @@ The samples included with the SDK are standalone projects that are already set u
             * :code:`AWSCognitoAuth`
             * :code:`AWSCognitoIdentityProvider`
             * :code:`AWSCognitoIdentityProviderASF`
-            * :code:`AWSCognitoSync`
             * :code:`AWSCore`
             * :code:`AWSDynamoDB`
             * :code:`AWSEC2`
@@ -217,7 +215,6 @@ The samples included with the SDK are standalone projects that are already set u
             * :code:`AWSCognitoAuth`
             * :code:`AWSCognitoIdentityProvider`
             * :code:`AWSCognitoIdentityProviderASF`
-            * :code:`AWSCognitoSync`
             * :code:`AWSCore`
             * :code:`AWSDynamoDB`
             * :code:`AWSEC2`
@@ -294,7 +291,6 @@ This section describes how to pick up changes when a new SDK is released.
             * :code:`AWSCognitoAuth`
             * :code:`AWSCognitoIdentityProvider`
             * :code:`AWSCognitoIdentityProviderASF`
-            * :code:`AWSCognitoSync`
             * :code:`AWSCore`
             * :code:`AWSDynamoDB`
             * :code:`AWSEC2`
@@ -419,17 +415,6 @@ The AWS Mobile SDK for iOS includes sample apps that demonstrate common use case
     AWS services demonstrated:
 
     - `Amazon Cognito Pools <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`__
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
-
-**Amazon Cognito Sync Sample**
-(`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/CognitoSync-Sample/Swift/>`__,
-`Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/CognitoSync-Sample/Objective-C/>`__)
-
-    This sample demonstrates how to securely manage and sync your mobile app data. It also demonstrates how to create unique identities using login providers including Facebook, Google, and Login with Amazon.
-
-    AWS services demonstrated:
-
-    - `Amazon Cognito Sync <http://aws.amazon.com/cognito/>`__
     - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 **Amazon DynamoDB Object Mapper Sample**

@@ -34,11 +34,11 @@ US East (Virginia)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),                   US East (Virginia)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             US East (Virginia)
+    **Amazon Cognito** (User Sign-in / User File Storage),             US East (Virginia)
     **Amazon DynamoDB** (NoSQL Database),              US East (Virginia)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  US East (Virginia)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  US East (Virginia)
     **AWS Lambda** (Cloud Logic),              US East (Virginia)
 
 US East (Ohio)
@@ -49,11 +49,11 @@ US East (Ohio)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         US East (Ohio)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             US East (Ohio)
+    **Amazon Cognito** (User Sign-in / User File Storage),             US East (Ohio)
     **Amazon DynamoDB** (NoSQL Database),              US East (Ohio)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  US East (Ohio)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  US East (Ohio)
     **AWS Lambda** (Cloud Logic),              US East (Ohio)
 
 US West (California)
@@ -64,11 +64,11 @@ US West (California)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         US West (California)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             US West (Oregon)
+    **Amazon Cognito** (User Sign-in / User File Storage),             US West (Oregon)
     **Amazon DynamoDB** (NoSQL Database),              US West (California)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  US West (California)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  US West (California)
     **AWS Lambda** (Cloud Logic),              US West (California)
 
 US West (Oregon)
@@ -79,11 +79,11 @@ US West (Oregon)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         US West (Oregon)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             US West (Oregon)
+    **Amazon Cognito** (User Sign-in / User File Storage),             US West (Oregon)
     **Amazon DynamoDB** (NoSQL Database),              US West (Oregon)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  US West (Oregon)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  US West (Oregon)
     **AWS Lambda** (Cloud Logic),              US West (Oregon)
 
 EU West (Ireland)
@@ -94,11 +94,11 @@ EU West (Ireland)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         EU West (Ireland)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             EU West (Ireland)
+    **Amazon Cognito** (User Sign-in / User File Storage),             EU West (Ireland)
     **Amazon DynamoDB** (NoSQL Database),              EU West (Ireland)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  EU West (Ireland)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  EU West (Ireland)
     **AWS Lambda** (Cloud Logic),              EU West (Ireland)
 
 EU West (London)
@@ -109,11 +109,11 @@ EU West (London)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         EU West (London)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             EU West (London)
+    **Amazon Cognito** (User Sign-in / User File Storage),             EU West (London)
     **Amazon DynamoDB** (NoSQL Database),              EU West (London)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  EU West (London)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  EU West (London)
     **AWS Lambda** (Cloud Logic),              EU West (London)
 
 EU (Frankfurt)
@@ -124,11 +124,11 @@ EU (Frankfurt)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         EU (Frankfurt)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             EU (Frankfurt)
+    **Amazon Cognito** (User Sign-in / User File Storage),             EU (Frankfurt)
     **Amazon DynamoDB** (NoSQL Database),              EU (Frankfurt)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  EU (Frankfurt)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  EU (Frankfurt)
     **AWS Lambda** (Cloud Logic),              EU (Frankfurt)
 
 Asia Pacific (Tokyo)
@@ -139,11 +139,11 @@ Asia Pacific (Tokyo)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         Asia Pacific (Tokyo)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             Asia Pacific (Tokyo)
+    **Amazon Cognito** (User Sign-in / User File Storage),             Asia Pacific (Tokyo)
     **Amazon DynamoDB** (NoSQL Database),              Asia Pacific (Tokyo)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  Asia Pacific (Tokyo)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  Asia Pacific (Tokyo)
     **AWS Lambda** (Cloud Logic),              Asia Pacific (Tokyo)
 
 Asia Pacific (Seoul)
@@ -154,11 +154,11 @@ Asia Pacific (Seoul)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         Asia Pacific (Seoul)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             Asia Pacific (Seoul)
+    **Amazon Cognito** (User Sign-in / User File Storage),             Asia Pacific (Seoul)
     **Amazon DynamoDB** (NoSQL Database),              Asia Pacific (Seoul)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  Asia Pacific (Seoul)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  Asia Pacific (Seoul)
     **AWS Lambda** (Cloud Logic),              Asia Pacific (Seoul)
 
 Asia Pacific (Mumbai)
@@ -169,11 +169,11 @@ Asia Pacific (Mumbai)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         Asia Pacific (Mumbai)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             Asia Pacific (Mumbai)
+    **Amazon Cognito** (User Sign-in / User File Storage),             Asia Pacific (Mumbai)
     **Amazon DynamoDB** (NoSQL Database),              Asia Pacific (Mumbai)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  Asia Pacific (Mumbai)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  Asia Pacific (Mumbai)
     **AWS Lambda** (Cloud Logic),              Asia Pacific (Mumbai)
 
 Asia Pacific (Singapore)
@@ -184,11 +184,11 @@ Asia Pacific (Singapore)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         Asia Pacific (Singapore)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             Asia Pacific (Singapore)
+    **Amazon Cognito** (User Sign-in / User File Storage),             Asia Pacific (Singapore)
     **Amazon DynamoDB** (NoSQL Database),              Asia Pacific (Singapore)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  Asia Pacific (Singapore)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  Asia Pacific (Singapore)
     **AWS Lambda** (Cloud Logic),              Asia Pacific (Singapore)
 
 Asia Pacific (Sydney)
@@ -199,11 +199,11 @@ Asia Pacific (Sydney)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         Asia Pacific (Sydney)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             Asia Pacific (Sydney)
+    **Amazon Cognito** (User Sign-in / User File Storage),             Asia Pacific (Sydney)
     **Amazon DynamoDB** (NoSQL Database),              Asia Pacific (Sydney)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  Asia Pacific (Sydney)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  Asia Pacific (Sydney)
     **AWS Lambda** (Cloud Logic),              Asia Pacific (Sydney)
 
 South America (São Paulo)
@@ -214,9 +214,9 @@ South America (São Paulo)
    :widths: 1, 4
 
     **Amazon API Gateway** (Cloud Logic),         South America (São Paulo)
-    **Amazon Cognito** (User Sign-in / User Data Storage),             US East (Virginia)
+    **Amazon Cognito** (User Sign-in / User File Storage),             US East (Virginia)
     **Amazon DynamoDB** (NoSQL Database),              South America (São Paulo)
     **Amazon Lex** (Conversational Bots),                 US East (Virginia)
     **Amazon Pinpoint** (Messaging and Analytics),    US East (Virginia)
-    **Amazon S3** (User Data Storage / Messaging and Hosting),                  US East (Virginia)
+    **Amazon S3** (User File Storage / Messaging and Hosting),                  US East (Virginia)
     **AWS Lambda** (Cloud Logic),              South America (São Paulo)

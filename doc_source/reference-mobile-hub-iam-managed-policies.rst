@@ -15,19 +15,32 @@ Control Access to Mobile Hub Projects
 #####################################
 
 
-This section describes how to control access to your projects using the
-:ref:`AdministratorAccess <aws-mobile-hub-read-only-access-policy>` and :ref:`AWSMobileHub_ReadOnly <aws-mobile-hub-read-only-access-policy>` AWS managed policies.
+Overview
+========
 
-To understand how |AMH| uses |IAM| policies attached to a user, or a group or role they belong to, to
-create and modify services on a users behalf, see :ref:`Mobile Hub Project Permissions Model <reference-mobile-hub-project-permissions-model>`.
+This section describes two different ways to control access to your |AMH| projects:
 
-To understand |IAMlong| (|IAM|) in more detail, see :ref:`reference-mobile-hub-iam-auth-access` and
-:ref:`reference-mobile-hub-iam-auth-access`.
+* :ref:`Grant a user administrative account permissions <reference-mobile-hub-iam-managed-policies-how-to>`
+
+  For individual developers, or groups whose requirements for segmenting access to their |AMH| projects are simple, permission can be granted by attaching the managed :ref:`AdministratorAccess <aws-mobile-hub-read-only-access-policy>` or :ref:`AWSMobileHub_ReadOnly <aws-mobile-hub-read-only-access-policy>` AWS managed policies to a user, a role they are attached to, or a group they belong to.
+
+Or:
+
+* :ref:`Use AWS Organizations to manage permissions<reference-mobile-hub-iam-managed-policies-aws-organizations>`
+
+  For organizations that require fine-grained access control and cost tracking for their |AMH| projects, AWS account administrators can provide sub-accounts and determine the policies that apply to their users.
+
+.. list-table::
+     :widths: 1
+
+     * - To understand how |AMH| uses |IAM| policies attached to a user to create and modify services on a users behalf, see :ref:`Mobile Hub Project Permissions Model <reference-mobile-hub-project-permissions-model>`.
+
+         To understand |IAMlong| (|IAM|) in more detail, see :ref:`reference-mobile-hub-iam-auth-access` and :ref:`reference-mobile-hub-iam-auth-access`.
 
 .. _aws-account-security-recommendations:
 
-Create an IAM User for Better AWS Account Security
-==================================================
+Best Practice: Create IAM Users to Access AWS
+=============================================
 
 To provide better security, we recommend that you do not use your AWS root account to access |AMH|.
 Instead, create an |IAMlong| (|IAM|) user in your AWS account, or use an existing |IAM| user, and
@@ -46,15 +59,44 @@ You can create an |IAM| user for yourself or a delegate user using the |IAM| con
 
 .. _reference-mobile-hub-iam-managed-policies-how-to:
 
-How to Create a Group and Grant Users Permissions to Mobile Hub Projects
-========================================================================
+Grant Users Permissions to Mobile Hub Projects
+==============================================
 
-The following steps use the example of providing group access to your |AMH| projects.
+.. contents::
+     :local:
+     :depth: 1
+
+Use the following steps to create a group and/or users, and grant users access to your |AMH| projects.
 
 To grant permissions to a role, see `Adding Permissions <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_change-permissions.html#w2ab1c19c19c26b9>`__ in the *AWS IAM User Guide*.
 
-To Create an |IAM| Group
--------------------------
+.. _reference-mobile-hub-iam-managed-policies-new-user:
+
+Create a New |IAM| User in Your Account and Grant |AMH| Permissions
+-------------------------------------------------------------------
+
+#. Open the `IAM console <https://console.aws.amazon.com/iam/>`__. On the left, choose :guilabel:`Users`, and then choose :guilabel:`Add User`.
+
+#. Type a user name, select the checkboxes for :guilabel:`Programmatic access` and :guilabel:`AWS Management Console access`.
+
+#. Choose the password policy you prefer. Then choose :guilabel:`Next: Permissions`.
+
+#. In the :guilabel:`Add user to group` tab, select the :guilabel:`Administrators` or :guilabel:`Read_Only` group for the user, and choose :guilabel:`Next, Review`.
+
+   In the process, you will see options to customize the user's password, alert them about their new account via   email, and to download their access key ID, key value and password.
+
+#. Choose :guilabel:`Create user`.
+
+#. To apply policy:
+
+   * If you have created a group to manage project permissions, choose :guilabel:`Add user to group`, select the group, choose :guilabel:`Next: Review`, then choose choose :guilabel:`Create User`.
+
+   Or:
+
+   * If you are managing project permissions per user, choose :guilabel:`Attach existing policies directly`, select the policy you want to attach, :guilabel:`AdministratorAccess` or :guilabel:`AWSMobileHub_ReadOnly`, and then choose :guilabel:`Create user`.
+
+Create an |IAM| Group
+---------------------
 
 #. Sign in to the AWS Management Console and open the |IAM| console at
    `http://console.aws.amazon.com/iam/ <https://console.aws.amazon.com/iam/>`__.
@@ -70,23 +112,10 @@ To Create an |IAM| Group
 #. Choose :guilabel:`Next Step`, and then choose :guilabel:`Create Group`. Your new group is listed
    under :guilabel:`Group Name`.
 
+.. _reference-mobile-hub-iam-managed-policies-existing-user:
 
-To Create a New |IAM| User in Your Account and Add it to the a Group
---------------------------------------------------------------------
-
-#. On the left, choose :guilabel:`Users`, and then choose :guilabel:`Add User`.
-
-#. Type a user name, select the checkboxes for :guilabel:`Programmatic access` and :guilabel:`AWS Management Console access`. Then choose :guilabel:`Next: Permissions`.
-
-#. In the :guilabel:`Add user to group` tab, select the :guilabel:`Administrators` or :guilabel:`Read_Only` group for the user, and choose :guilabel:`Next, Review`.
-
-#. Choose :guilabel:`Create user`.
-
-In the process, you will see options to customize the user's password, alert them about their new account via email, and to download their access key ID, key value and password.
-
-
-To add an existing account user to a group
-------------------------------------------
+Grant |AMH| Permissions to an Existing Account User
+---------------------------------------------------
 
 #. On the left, choose :guilabel:`Policies`.
 
@@ -99,6 +128,44 @@ To add an existing account user to a group
 #. Choose the users, roles, or groups you want to grant permissions.
 
 #. Choose :guilabel:`Attach Policy`.
+
+.. _reference-mobile-hub-iam-managed-policies-aws-organizations:
+
+Use AWS Organizations to Manage Permissions
+===========================================
+
+`AWS Organizations <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html>`__ can be used to manage permissions for groups that need to segment access to their |AMH| projects. For example, an administrator could provide an account for each developer on a team. Within their own account, each user would have the permissions granted by the administrator. The steps to acheive this would be:
+
+#. If you do not have an AWS account, `sign up for the AWS Free Tier <https://aws.amazon.com/free/>`__.
+
+#. Create an organization in the `AWS Organizations console <https://console.aws.amazon.com/organizations/>`__.
+
+#. Create or add existing accounts for each user in the organization.
+
+#. Invite the users.
+
+#. Create a organizational unit for the developers.
+
+#. Enable and attach a policy for members of the unit.
+
+   The policy you attach will apply within the scope of the AWS account of a user. You may want to limit access to services and capabilites not required for |AMH| use. For instance, the following policy, grants all permissions defined in the :code:`FullAWSAccess` managed policy, but excludes access to the Amazon EC2 service.
+
+    .. code-block:: json
+
+        "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": "*",
+                    "Resource": "*"
+                },
+                {
+                    "Effect": “Deny”,
+                    "Action": “ec2:*”,
+                    "Resource": "*"
+                }
+        ]
+
+For step by step instructions, see the tutorial at `Creating and Managing an AWS Organization <https://alpha-docs-aws.amazon.com/organizations/latest/userguide/orgs_tutorials_basic.html>`__.
 
 .. _mobilehub-policies:
 

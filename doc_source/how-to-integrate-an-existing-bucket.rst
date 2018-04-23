@@ -196,7 +196,7 @@ Add the SDK to your App
 
                </application>
 
-         #. For each Activity where you make calls to perform user data storage operations, import the
+         #. For each Activity where you make calls to perform user file storage operations, import the
             following packages.
 
             .. code-block:: none
@@ -243,7 +243,7 @@ Add the SDK to your App
 
                Run :code:`pod install --repo-update` before you continue.
 
-         #. Add the following imports to the classes that perform user data storage operations:
+         #. Add the following imports to the classes that perform user file storage operations:
 
             .. code-block:: none
 

@@ -862,12 +862,12 @@ Enable Sign-out
        .. code-block:: swift
 
           @IBAction func signOutButtonPress(_ sender: Any) {
-                  AWSSignInManager.sharedInstance().logout(completionHandler: {(result: Any?, error: Error?) in
-                      self.showSignIn()
-                   // print("Sign-out Successful: \(signInProvider.getDisplayName)");
 
-                  })
+              AWSSignInManager.sharedInstance().logout(completionHandler: {(result: Any?, error: Error?) in
+                  self.showSignIn()
+                  // print("Sign-out Successful: \(signInProvider.getDisplayName)");
 
+              })
           }
 
 For a fuller example, see :ref:`Sign-out a Signed-in User <how-to-user-sign-in-sign-out>` in the How To section.
@@ -875,7 +875,7 @@ For a fuller example, see :ref:`Sign-out a Signed-in User <how-to-user-sign-in-s
 .. _auth-next-steps:
 
 Next Steps
-========
+==========
 
   * :ref:`Customize the UI <add-aws-mobile-user-sign-in-customize>`
 

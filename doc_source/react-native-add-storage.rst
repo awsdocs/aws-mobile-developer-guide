@@ -27,7 +27,7 @@ Add Storage
 
      - The steps on this page assume you have already completed the steps on :ref:`Get Started <react-native-getting-started>`.
 
-The AWS Mobile CLI :ref:`User Data Storage <user-data-storage>` feature enables apps to store user files in the cloud.
+The AWS Mobile CLI :ref:`User File Storage <user-data-storage>` feature enables apps to store user files in the cloud.
 
 .. _react-native-add-storage-setup:
 
@@ -50,7 +50,7 @@ In your app root folder, run:
 Connect to Your Backend
 =======================
 
-**To add User Data Storage to your app**
+**To add User File Storage to your app**
 
 In your component where you want to transfer files:
 
@@ -144,7 +144,7 @@ Add the following state to the element where you handle file transfers.
 Next Steps
 ==========
 
-Learn more about the analytics in AWS Mobile which are part of the :ref:`User Data Storage <user-data-storage>` feature. This feature uses `Amazon Simple Storage Service (S3) <http://docs.aws.amazon.com/s3/latest/developerguide/welcome.html>`__.
+Learn more about the analytics in AWS Mobile which are part of the :ref:`User File Storage <user-data-storage>` feature. This feature uses `Amazon Simple Storage Service (S3) <http://docs.aws.amazon.com/s3/latest/developerguide/welcome.html>`__.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 

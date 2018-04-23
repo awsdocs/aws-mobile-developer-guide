@@ -11,7 +11,7 @@
 .. _how-to-storage:
 
 ###################################
-How To: Data Storage with Amazon S3
+How To: File Storage with Amazon S3
 ###################################
 
 

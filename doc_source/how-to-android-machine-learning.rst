@@ -39,8 +39,7 @@ this tutorial.
 Granting Access to Amazon Machine Learning Resources
 ----------------------------------------------------
 
-The default IAM role policy grants you access to Amazon Mobile Analytics and Amazon Cognito Sync. To
-use Amazon Machine Learning in an application, you must set the proper permissions. The following
+To use Amazon Machine Learning in an application, you must set the proper permissions. The following
 IAM policy allows the user to perform the actions shown in this tutorial on two actions identified
 by ARN
 

@@ -142,7 +142,7 @@ project's exported :file:`.zip` file:
 
 * Data User Storage Contents
 
-  To import files stored in a User Data Storage |S3| bucket in your original project, see
+  To import files stored in a User File Storage |S3| bucket in your original project, see
   :ref:`import-export-user-data-storage-contents`.
 
 
@@ -207,7 +207,7 @@ topics.
 
        No (for remedy, see :ref:`import-export-troubleshooting-imported-api`)
 
-   * - :guilabel:`User Data Storage`
+   * - :guilabel:`User File Storage`
 
      - Yes
 

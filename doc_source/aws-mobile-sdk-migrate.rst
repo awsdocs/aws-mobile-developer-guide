@@ -222,12 +222,12 @@ Add the SDK to Your App
 
                      use_frameworks!
 
-                         pod 'AWSS3', '~> 2.6.13'              // User Data Storage & Hosting and Streaming features
+                         pod 'AWSS3', '~> 2.6.13'              // User File Storage & Hosting and Streaming features
                          pod 'AWSAPIGateway', '~> 2.6.13'      // Cloud Logic feature
                          pod 'AWSDynamoDB', '~> 2.6.13'        // NoSQL Database feature
                          pod 'AWSPinpoint', '~> 2.6.13'        // Messaging and Analytics (and Push Notification) features
                          pod 'AWSLex', '~> 2.6.13'             // Conversational Bots feature
-                         pod 'AWSCognito', '~> 2.6.13'         // User Data Storage feature
+                         pod 'AWSCognito', '~> 2.6.13'         // User File Storage feature
                          pod 'AWSAuthUI', '~> 2.6.13'          // Sign-in UI feature
                          pod 'AWSGoogleSignIn', '~> 2.6.13'    // Google identity provider feature
                          pod 'AWSFacebookSignIn', '~> 2.6.13'  // Facebook identity provider feature

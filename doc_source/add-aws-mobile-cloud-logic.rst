@@ -133,6 +133,7 @@ Use the following steps to add AWS Cloud Logic to your app.
              import java.io.InputStream;
              import java.util.HashMap;
 
+             import com.amazonaws.mobile.client.AWSMobileClient;
              import com.amazonaws.mobileconnectors.api.YOUR-API-CLASS-ID.YOUR-API-CLASS-NAMEMobilehubClient;
              import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
              import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
@@ -281,57 +282,65 @@ Use the following steps to add AWS Cloud Logic to your app.
 
          .. code-block:: swift
 
-            func doInvokeAPI() {
-                 // change the method name, or path or the query string parameters here as desired
-                 let httpMethodName = "POST"
-                 // change to any valid path you configured in the API
-                 let URLString = "/items"
-                 let queryStringParameters = ["key1":"{value1}"]
-                 let headerParameters = [
-                     "Content-Type": "application/json",
-                     "Accept": "application/json"
-                 ]
+            import UIKit
+            import AWSAuthCore
+            import AWSCore
+            import AWSAPIGateway
+            import AWSMobileClient
 
-                 let httpBody = "{ \n  " +
-                         "\"key1\":\"value1\", \n  " +
-                         "\"key2\":\"value2\", \n  " +
-                         "\"key3\":\"value3\"\n}"
+            // ViewController or application context . . .
 
-                 // Construct the request object
-                 let apiRequest = AWSAPIGatewayRequest(httpMethod: httpMethodName,
-                         urlString: URLString,
-                         queryParameters: queryStringParameters,
-                         headerParameters: headerParameters,
-                         httpBody: httpBody)
+              func doInvokeAPI() {
+                   // change the method name, or path or the query string parameters here as desired
+                   let httpMethodName = "POST"
+                   // change to any valid path you configured in the API
+                   let URLString = "/items"
+                   let queryStringParameters = ["key1":"{value1}"]
+                   let headerParameters = [
+                       "Content-Type": "application/json",
+                       "Accept": "application/json"
+                   ]
 
-                 // Create a service configuration object for the region your AWS API was created in
-                 let serviceConfiguration = AWSServiceConfiguration(
-                     region: AWSRegionType.USEast1,
-                     credentialsProvider: AWSMobileClient.sharedInstance().getCredentialsProvider())
+                   let httpBody = "{ \n  " +
+                           "\"key1\":\"value1\", \n  " +
+                           "\"key2\":\"value2\", \n  " +
+                           "\"key3\":\"value3\"\n}"
 
-                     YOUR-API-CLASS-NAMEMobileHubClient.register(with: serviceConfiguration!, forKey: "CloudLogicAPIKey")
+                   // Construct the request object
+                   let apiRequest = AWSAPIGatewayRequest(httpMethod: httpMethodName,
+                           urlString: URLString,
+                           queryParameters: queryStringParameters,
+                           headerParameters: headerParameters,
+                           httpBody: httpBody)
 
-                     // Fetch the Cloud Logic client to be used for invocation
-                     let invocationClient =
-                         YOUR-API-CLASS-NAMEMobileHubClient(forKey: "CloudLogicAPIKey")
+                   // Create a service configuration object for the region your AWS API was created in
+                   let serviceConfiguration = AWSServiceConfiguration(
+                       region: AWSRegionType.USEast1,
+                       credentialsProvider: AWSMobileClient.sharedInstance().getCredentialsProvider())
 
-                     invocationClient.invoke(apiRequest).continueWith { (
-                         task: AWSTask) -> Any? in
+                       YOUR-API-CLASS-NAMEMobileHubClient.register(with: serviceConfiguration!, forKey: "CloudLogicAPIKey")
 
-                         if let error = task.error {
-                             print("Error occurred: \(error)")
-                             // Handle error here
-                             return nil
-                         }
+                       // Fetch the Cloud Logic client to be used for invocation
+                       let invocationClient =
+                           YOUR-API-CLASS-NAMEMobileHubClient(forKey: "CloudLogicAPIKey")
 
-                         // Handle successful result here
-                         let result = task.result!
-                         let responseString =
-                             String(data: result.responseData!, encoding: .utf8)
+                       invocationClient.invoke(apiRequest).continueWith { (
+                           task: AWSTask) -> Any? in
 
-                         print(responseString)
-                         print(result.statusCode)
+                           if let error = task.error {
+                               print("Error occurred: \(error)")
+                               // Handle error here
+                               return nil
+                           }
 
-                         return nil
-                     }
-                 }
+                           // Handle successful result here
+                           let result = task.result!
+                           let responseString =
+                               String(data: result.responseData!, encoding: .utf8)
+
+                           print(responseString)
+                           print(result.statusCode)
+
+                           return nil
+                       }
+                   }

@@ -1,4 +1,4 @@
-**To add User Data Storage to your app**
+**To add User File Storage to your app**
 
 .. container:: option
 
@@ -34,7 +34,7 @@
 
                </application>
 
-         #. For each Activity where you make calls to perform user data storage operations, import the
+         #. For each Activity where you make calls to perform user file storage operations, import the
             following packages.
 
             .. code-block:: none
@@ -79,7 +79,7 @@
 
                Run :code:`pod install --repo-update` before you continue.
 
-         #. Add the following imports to the classes that perform user data storage operations:
+         #. Add the following imports to the classes that perform user file storage operations:
 
             .. code-block:: none
 

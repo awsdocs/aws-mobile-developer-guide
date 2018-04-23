@@ -25,7 +25,7 @@ Transfer Files and Data Using TransferUtility and |S3|
 
 This page explains how to implement upload and download functionality and a number of additional storage use cases.
 
-The examples on this page assume you have added the the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User Data Storage <add-aws-mobile-user-data-storage>`.
+The examples on this page assume you have added the the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User File Storage <add-aws-mobile-user-data-storage>`.
 
 .. list-table::
    :widths: 1 6

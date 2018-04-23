@@ -87,7 +87,6 @@ A full list of dependencies are listed below. For dependencies ending in ":code:
     "AWS Cognito User Pools SignIn Provider","aws-android-sdk-auth-userpools:2.6.+@aar"
     "Amazon Auto Scaling","aws-android-sdk-autoscaling:2.6.+"
     "Amazon CloudWatch","aws-android-sdk-cloudwatch:2.6.+"
-    "Amazon Cognito Sync","aws-android-sdk-cognito:2.6.+"
     "Amazon Cognito Auth","aws-android-sdk-cognitoauth:2.6.+@aar"
     "Amazon Cognito Identity Provider","aws-android-sdk-cognitoidentityprovider:2.6.+"
     "AWS Core","aws-android-sdk-core:2.6.+"
@@ -197,7 +196,6 @@ The AWS Mobile :code:`artifactId` values are as follows:
     "AWS Cognito User Pools SignIn Provider","aws-android-sdk-auth-userpools"
     "Amazon Auto Scaling","aws-android-sdk-autoscaling"
     "Amazon CloudWatch","aws-android-sdk-cloudwatch"
-    "Amazon Cognito Sync","aws-android-sdk-cognito"
     "Amazon Cognito Auth","aws-android-sdk-cognitoauth"
     "Amazon Cognito Identity Provider","aws-android-sdk-cognitoidentityprovider"
     "AWS Core","aws-android-sdk-core"
@@ -258,8 +256,7 @@ To create an identity pool for your application:
    identities. Click :guilabel:`Create Pool` to create your identity pool.
 
 #. Click :guilabel:`Allow` to create the two default roles associated with your identity pool
-   |mdash| one for unauthenticated users and one for authenticated users. These default roles
-   provide your identity pool access to Cognito Sync and Mobile Analytics.
+   |mdash| one for unauthenticated users and one for authenticated users.
 
 The next page displays code that creates a credentials provider so you can easily integrate Cognito
 Identity with your Android application. You pass the credentials provider object to the constructor

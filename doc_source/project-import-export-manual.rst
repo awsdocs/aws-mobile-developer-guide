@@ -27,15 +27,15 @@ This section describes how to manually add project components to an exported pro
 
 .. _import-export-user-data-storage-contents:
 
-Importing User Data Storage Contents
+Importing User File Storage Contents
 ====================================
 
 
-When a project that enables User Data Storage is exported, files stored in its |S3| bucket are not
+When a project that enables User File Storage is exported, files stored in its |S3| bucket are not
 included in its exported project definition. You can manually configure the project definition to
 upload those files to the new bucket of the imported project.
 
-**To configure import and upload of project files stored in a User Data Storage bucket**
+**To configure import and upload of project files stored in a User File Storage bucket**
 
 #. Uncompress your exported project :file:`.zip` file.
 

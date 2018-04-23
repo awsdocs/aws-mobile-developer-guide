@@ -90,7 +90,7 @@ In the abstract, the basic structure of a |AMH| project export :file:`.yml` file
 The following YAML is a sample of the :file:`mobile-hub-project.yml` exported from a project with
 many |AMH| features enabled. The project definition has also been manually updated to enable the
 import and upload of components of the original project. These components include files stored in
-the original project's User Data Storage bucket, files hosted in its Hosting and Streaming bucket,
+the original project's User File Storage bucket, files hosted in its Hosting and Streaming bucket,
 and API handler code in its |LAM| functions.
 
 .. code-block:: yaml

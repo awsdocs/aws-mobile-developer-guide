@@ -11,17 +11,17 @@
 .. _user-data-storage:
 
 #################
-User Data Storage
+User File Storage
 #################
 
 
 .. meta::
-   :description: Use User Data Storage mobile backend feature to add cloud storage of user files,
+   :description: Use User File Storage mobile backend feature to add cloud storage of user files,
       profile data, and app state to your mobile app. Use the simple programming model of this
       feature to enable sync and caching of data between devices.
 
 
-Choose |AMHlong| User Data Storage to:
+Choose |AMHlong| User File Storage to:
 
 
 * Add cloud storage of user files, profile data, and app state to your mobile app
@@ -30,10 +30,14 @@ Choose |AMHlong| User Data Storage to:
 * Use fine-grained control of access to files and data, implementing four common patterns of
   permissions policy
 
+.. list-table::
+   :widths: 1 6
 
-* Implement sync and caching of your app's data between devices using a simple programming model
+   * - Looking for Amazon Cognito Sync?
 
-`Create a free Mobile Hub project and add the User Data Storage
+     - Amazon Cognito Sync has been deprecated. For real time data sync between devices, with built-in offline capabilities, see `AWS AppSync <https://aws.amazon.com/appsync/>`__.
+
+`Create a free Mobile Hub project and add the User File Storage
 feature. <https://console.aws.amazon.com/mobilehub/home#/>`__
 
 .. _user-data-storage-details:
@@ -42,7 +46,7 @@ Feature Details
 ===============
 
 
-The Mobile Hub User Data Storage feature, creates and configures four folders for each user, inside
+The Mobile Hub User File Storage feature, creates and configures four folders for each user, inside
 an |S3long| (|S3|) bucket belonging to the app.
 
 Best practice for app security is to allow the minimum access to your buckets that will support your
@@ -98,23 +102,15 @@ for everyone else.
 
 .. image:: images/diagram-abstract-user-data-storage-folders.png
 
-The following image shows user profile data sync for persisting user data and synchronizing it
-across devices.
-
-.. image:: images/diagram-abstract-user-data-storage-sync.png
-
-The User Data Storage feature enables you to store user files such as photos or documents in the
+The User File Storage feature enables you to store user files such as photos or documents in the
 cloud, and it also allows you to save user profile data in key/value pairs, such as app settings or
 game state. When you select this feature, an `Amazon S3 <http://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html>`__ bucket is created as
 the place your app will store user files.
 
-|AMH| will also configure `Amazon Cognito Sync <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sync.html>`__ so you can save user profile
-data in key/value pairs and synchronize that data across a user's authenticated devices.
-
 
 .. _user-data-storage-ataglance:
 
-User Data Storage At a Glance
+User File Storage At a Glance
 =============================
 
 
@@ -129,25 +125,19 @@ User Data Storage At a Glance
 
          `Concepts <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ | `Console <https://console.aws.amazon.com/s3/>`__ | `Pricing <https://aws.amazon.com/s3/pricing/>`__
 
-       - **Amazon Cognito Sync** (:emphasis:`see` `Amazon Cognito Sync <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sync.html>`__)
-
-         `Concepts <http://docs.aws.amazon.com/cognito/latest/developerguide/synchronizing-data.html>`__ | `Console <https://console.aws.amazon.com/cognito/>`__ | `Pricing <https://aws.amazon.com/cognito/pricing/#Cognito_Sync%C2%A0>`__
-
        |AMH|-enabled features use |COG| for authentication and |IAM| for authorization. For more information, see :ref:`User Sign-in <user-sign-in>`. For more information, see :ref:`resources-user-data-storage`.
 
    * - **Configuration options**
 
      - This feature enables the following configuration options mobile backend capabilities:
 
-       - Store user files and app data using |S3|. When you enable User Data Storage four folders are provisioned, each with a distinct access policy configuration:
+       - Store user files and app data using |S3|. When you enable User File Storage four folders are provisioned, each with a distinct access policy configuration:
 
          - :code:`private` - Each mobile app user can create, read, update, and delete their own files in this folder. No other app users can access this folder.
 
          - :code:`protected` - Each mobile app user can create, read, update, and delete their own files in this folder. In addition, any app user can read any other app user's files in this folder.
 
          - :code:`public` ? Any app user can create, read, update, and delete files in this folder.
-
-         - :code:`uploads` - Any app user can only create files in this folder. Synchronize data to the cloud and between a user's devices using |COG| Sync.
 
    * - :guilabel:`Quickstart demo features`
 
@@ -168,7 +158,7 @@ Viewing AWS Resources Provisioned for this Feature
 
 
 The following image shows the |AMH| :guilabel:`Resources` pane displaying elements typically
-provisioned for the User Data Storage feature.
+provisioned for the User File Storage feature.
 
 .. image:: images/resources-user-data-storage.png
 

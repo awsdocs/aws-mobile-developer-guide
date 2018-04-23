@@ -37,7 +37,7 @@ AWS Mobile gives you the tools to rapidly configure and integrate the cloud back
         :ref:`User Sign-in <add-aws-mobile-user-sign-in>` -
         :ref:`Push Notification <add-aws-mobile-push-notifications-app>` -
         :ref:`NoSQL Database <add-aws-mobile-nosql-database-app>` -
-        :ref:`User Data Storage <add-aws-mobile-user-data-storage-app>` -
+        :ref:`User File Storage <add-aws-mobile-user-data-storage-app>` -
         `Cloud Logic <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/add-aws-mobile-cloud-logic.html#connect-to-your-backend>`__ -
         `Messaging <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/add-aws-mobile-messaging.html#connect-to-your-backend>`__ -
         :ref:`Conversational Bots <add-aws-mobile-conversational-bots-app>` -
@@ -57,14 +57,14 @@ Get started with :ref:`Web <web-getting-started>` or :ref:`React Native <react-n
         **Web** - :ref:`Analytics <web-add-analytics>` -
         :ref:`User Sign-in <web-add-user-sign-in>` -
         :ref:`NoSQL Database <web-access-databases>` -
-        :ref:`User Data Storage <web-add-storage>` -
+        :ref:`User File Storage <web-add-storage>` -
         :ref:`Cloud Logic <web-access-apis>`
 
         **React Native**
         :ref:`Analytics <react-native-add-analytics>` -
         :ref:`User Sign-in <react-native-add-user-sign-in>` -
         :ref:`NoSQL Database <react-native-access-databases>` -
-        :ref:`User Data Storage <react-native-add-storage>` -
+        :ref:`User File Storage <react-native-add-storage>` -
         :ref:`Cloud Logic <react-native-access-apis>`
 
         Behind the scenes `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/>`__ lets you configure powerful backend services from the command line with no AWS expertise needed.

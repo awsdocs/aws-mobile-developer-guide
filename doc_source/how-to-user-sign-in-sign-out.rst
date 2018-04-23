@@ -36,7 +36,7 @@ Enable User Sign-out
    Android - Java
        In the following example, :code:`AWSMobileClient` is instantiated within the :code:`onCreate` method of an activity called :code:`AuthenticatorActivity`.  If the client does not find a cached identity from a previous sign-in, it retrieves an unauthenticated “guest” Amazon Cognito Federated Identity ID that is used to access other AWS services. In Logcat, look for the string: :code:`Welcome to AWS!` to see that the client has successfully instantiated.
 
-       If the user already has a cached authenticated identity ID from a previous sign-in, then  :code:`AWSMobileClient` will resume the session without an additional sign-in. In this case, :code:`IdentityManager.getDefaultIdentityManager().isUserSignedIn()` is set to :code:`true`.
+       If the user already has a cached authenticated identity ID from a previous sign-in, then  :code:`AWSMobileClient` will resume the session without an additional sign-in.
 
        A :code:`SignInStateChangeListener` object is added to :code:`IdentityManager`, which captures :code:`onUserSignedIn` and :code:`onUserSignedOut` events.
 
@@ -151,7 +151,7 @@ Enable User Sign-out
    iOS - Swift
        In the following example, :code:`AWSMobileClient` is instantiated within the :code:`didfinishlaunching` and :code:`open url` blocks in :code:`AppDelegate`, as described in :ref:`Add User Sign-In <add-aws-mobile-user-sign-in>`.  If the client does not find a cached identity from a previous sign-in, it retrieves an unauthenticated “guest” Amazon Cognito Federated Identity ID that is used to access other AWS services. In debug output, look for the string: :code:`Welcome to AWS!`.
 
-       If the user already has a cached authenticated identity ID from a previous sign-in, then  :code:`AWSMobileClient` will resume the session without an additional sign-in. In this case, :code:`AWSSignInManager.sharedInstance().isLoggedIn` is set to :code:`true`.
+       If the user already has a cached authenticated identity ID from a previous sign-in, then  :code:`AWSMobileClient` will resume the session without an additional sign-in.
 
        When :code:`AWSMobileClient` is instantiated, the app navigates to a Navigation Control hosted in a ViewController whose UIView contains a sign-out button.  If the user is not already signed in, the viewDidLoad of the ViewController calls the built-in sign-in UI of the AWS Mobile SDK.  A successful sign-in prints the string: :code:`Sign-in succeeded` to debug output.
 
@@ -176,9 +176,7 @@ Enable User Sign-out
                 override func viewDidLoad() {
                     super.viewDidLoad()
 
-                    if !AWSSignInManager.sharedInstance().isLoggedIn {
-                      showSignIn()
-                }
+                    showSignIn()
 
                 }
 

@@ -19,7 +19,7 @@
    :description: Describes |S3long| (|S3|) security considerations for |AMHlong| users.
 
 
-When you enable the |AMH| User Data Storage or Hosting and Streaming features, it creates an |S3|
+When you enable the |AMH| User File Storage or Hosting and Streaming features, it creates an |S3|
 bucket in your account. This topic describes the key |S3| security-related features that you might
 want to use for this bucket. Hosting and Streaming also configures a |CF| distribution that caches
 the assets stored in the bucket it creates. For the same type of information regarding the
