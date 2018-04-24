@@ -34,9 +34,19 @@ Set Up Your Backend
    Email & Password
       #. Enable :guilabel:`User Sign-in`: Open your project in `Mobile Hub console <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`User Sign-in` tile.
 
-      #. Configure **Email and Password sign-in**: Choose the feature and then select sign-in policies including: allowed login methods; multi-factor authentication; and password requirements and then choose :guilabel:`Create user pool`.
+      #. Choose :guilabel:`Email and Password sign-in`
 
          .. image:: images/add-aws-mobile-sdk-email-and-password.png
+
+         * Choose :guilabel:`Create a new user pool`, the feature and then select sign-in settings including: allowed login methods; multi-factor authentication; and password requirements. Then choose :guilabel:`Create user pool`.
+
+           .. image:: images/add-aws-mobile-sdk-email-and-password-create.png
+
+         Or:
+
+         * Choose :guilabel:`Import an existing user pool`, select a user pool from the list of pools that are  available in the account. Choose if sign-in is required, and then choose :guilabel:`Create user pool`. If you import a user pool that is in use by another app, then the two apps will share the user directory and authenticate sign-in by the same set of users.
+
+           .. image:: images/add-aws-mobile-sdk-email-and-password-import.png
 
       #. When you are done configuring providers, choose :guilabel:`Click here to return to project details page` in the blue banner at the top.
 
