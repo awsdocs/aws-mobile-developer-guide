@@ -16,7 +16,7 @@ Add Analytics to the Notes App
 
 In the :ref:`previous section <tutorial-android-aws-mobile-notes-setup>` of this tutorial, we installed Xcode,
 downloaded a sample note-taking app from GitHub, then compiled and ran
-it in Simulator. This tutorial assumes you have completed the
+it in the Android Emulator. This tutorial assumes you have completed the
 those steps. In this section, we will extend the notes app to
 include application analytics. Application analytics allow us to gather
 demographic information about the application usage.
@@ -48,7 +48,7 @@ To start, set up the mobile backend resources in AWS:
 Connect to Your Backend
 -----------------------
 
-#. Drag :file:`awsconfiguration.json` from the download location into the Xcode project folder containing :file:`Info.plist`. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
+#. Drag :file:`awsconfiguration.json` from the download location into the folder in the XCode Project Navigator that contains :file:`Info.plist`. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
 
 #. Choose :guilabel:`Finish`.
 

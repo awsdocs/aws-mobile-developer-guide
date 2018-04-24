@@ -22,7 +22,7 @@ This section describes two different ways to control access to your |AMH| projec
 
 * :ref:`Grant a user administrative account permissions <reference-mobile-hub-iam-managed-policies-how-to>`
 
-  For individual developers, or groups whose requirements for segmenting access to their |AMH| projects are simple, permission can be granted by attaching the managed :ref:`AdministratorAccess <aws-mobile-hub-read-only-access-policy>` or :ref:`AWSMobileHub_ReadOnly <aws-mobile-hub-read-only-access-policy>` AWS managed policies to a user, a role they are attached to, or a group they belong to.
+  For individual developers, or groups whose requirements for segmenting access to their |AMH| projects are simple, permission can be granted by attaching the managed :ref:`AdministratorAccess <aws-mobile-hub-administrator-access-policy>` or :ref:`AWSMobileHub_ReadOnly <aws-mobile-hub-read-only-access-policy>` AWS managed policies to a user, a role they are attached to, or a group they belong to.
 
 Or:
 
@@ -177,7 +177,7 @@ are required in order to view and modify configuration for any project with |AMH
 permissions have been grouped into the following managed policies, which you can attach to an |IAM|
 user, role, or group.
 
-.. _administrator-access-policy:
+.. _aws-mobile-hub-administrator-access-policy:
 
 * **AdministratorAccess**
 
