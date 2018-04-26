@@ -151,11 +151,7 @@ Add the awsconfiguration.json file to your app
       Drag the :file:`awsconfiguration.json` you created into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
 
     iOS - Swift
-      Drag the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
-
-
-    iOS - Swift
-      Place the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
+      Drag the :file:`awsconfiguration.json` into the Xcode Project Navigator folder containing :file:`Info.plist`. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
 
 
 Add the SDK to your App

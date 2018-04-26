@@ -78,9 +78,9 @@ Compile and Run the Project
 
 To compile the source code and the project in a simulator:
 
-#.  Unzip :file:`aws-mobile-ios-notes-tutorial-latest.zip and launch Xcode by choosing :file:`MyNotes.xcodeproj` in the expanded folder.
+#.  Unzip :file:`aws-mobile-ios-notes-tutorial-latest.zip` and launch Xcode by choosing :file:`MyNotes.xcodeproj` in the expanded folder.
 #.  Select :guilabel:`Product > Build` :userinput:`Command-B` to build the project.
-#.  Select any compatible simulator from the list in toolbar at the top, next to the label with your app name.
+#.  Select any compatible simulator from the list in the toolbar at the top, next to the label with your app name.
 #.  Choose the Run icon (Play button) on the top left or type :userinput:`Command-R` to build and run the app.
 
 You should be able to interact with the application. Try clicking on the :guilabel:`+` at the top right to create a note, or click on a note to show the editor screen.

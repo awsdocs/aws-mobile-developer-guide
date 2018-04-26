@@ -44,91 +44,92 @@ Set up your Backend
 Connect to your Backend
 =======================
 
-Use the following steps to add analytics to your mobile app through AWS Pinpoint.
+Use the following steps to add analytics to your mobile app and monitor the results through Amazon Pinpoint.
+
+Add Analytics
+-------------
 
    .. container:: option
 
          Android - Java
-            #. Set up AWS Mobile SDK components with the following :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` steps.
+            #. Set up AWS Mobile SDK components by following the :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` steps. These include:
 
-               #. :file:`app/build.gradle` must contain:
+               #. Include the following libraries in your :file:`app/build.gradle` dependencies list.
 
                   .. code-block:: java
-                     :emphasize-lines: 2
 
                      dependencies{
                         implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+                        implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                        // other dependencies . . .
                      }
 
-            #. Instrument your app to provide basic session data for Amazon Pinpoint analytics. The Amazon Pinpoint SDK gives you full control of when your sessions are started and stopped. Your app must explicitly start and stop the sessions. The following example shows one way to handle this by instrumenting a public class that extends `MultidexApplication <https://developer.android.com/studio/build/multidex.html>`__. :code:`StartSession()` is called during the :code:`OnCreate` event.
+                  * :code:`aws-android-sdk-pinpoint` library enables sending analytics to Amazon Pinpoint.
+                  * :code:`aws-android-sdk-mobile-client` library gives access to the AWS credentials provider and configurations.
 
-               #. Add the following to :file:`app/build.gradle`:
+               #. Add required permissions to your app manifest.
 
-                  .. code-block:: java
-                     :emphasize-lines: 4
-
-                       android {
-                           defaultConfig {
-                               ...
-                               multiDexEnabled = true
-                           }
-                       }
-
-               #. Add the following to the dependencies section of :file:`app/build.gradle`:
-
-                  .. code-block:: none
-                     :emphasize-lines: 1
-
-                       implementation 'com.android.support:multidex:1.0.+'
-
-               #. Add the following to :file:`AndroidManifest.xml`:
+                  The AWS Mobile SDK required the :code:`INTERNET` and :code:`ACCESS_NETWORK_STATE` permissions.  These are defined in the :code:`AndroidManifest.xml` file.
 
                   .. code-block:: xml
-                     :emphasize-lines: 3,4
 
-                       <application
-                       ..
-                       android:theme="@style/AppTheme"
-                       android:name="com.YourApplication.Application">
-                       ..
-                       </application>
+                     <uses-permission android:name="android.permission.INTERNET"/>
+                     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-               #. Add the following to your activity:
+            #. Add calls to capture session starts and stops.
+
+               Three typical places to instrument your app session start and stop are:
+
+               * Start a session in the :code:`Application.onCreate()` method.
+
+               * Start a session in the :code:`onCreate()` method of the app's first activity.
+
+               * Start and/or stop a session in the `ActivityLifecycleCallbacks <https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks>`__ class.
+
+               The following example shows starting a session in the :code:`OnCreate` event of :code:`MainActivity`.
 
                   .. code-block:: java
-                     :emphasize-lines: 2-3,8,15-27
 
-                       //. . .
-                       import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
-                       import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
-                       //. . .
+                      import android.support.v7.app.AppCompatActivity;
+                      import android.os.Bundle;
 
-                       public class MainActivity extends AppCompatActivity {
+                      import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
+                      import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
+                      import com.amazonaws.mobile.client.AWSMobileClient;
+
+                      public class MainActivity extends AppCompatActivity {
 
                           public static PinpointManager pinpointManager;
 
-                           @Override
-                           public void onCreate() {
+                          @Override
+                          protected void onCreate(Bundle savedInstanceState) {
+                              super.onCreate(savedInstanceState);
+                              setContentView(R.layout.activity_main);
 
-                               super.onCreate();
+                              // Initialize the AWS Mobile Client
+                              AWSMobileClient.getInstance().initialize(this).execute();
 
-                               PinpointConfiguration pinpointConfig = new PinpointConfiguration(
-                                       getApplicationContext(),
-                                       AWSMobileClient.getInstance().getCredentialsProvider(),
-                                       AWSMobileClient.getInstance().getConfiguration());
+                              PinpointConfiguration config = new PinpointConfiguration(
+                                      MainActivity.this,
+                                      AWSMobileClient.getInstance().getCredentialsProvider(),
+                                      AWSMobileClient.getInstance().getConfiguration()
+                              );
+                              pinpointManager = new PinpointManager(config);
+                              pinpointManager.getSessionClient().startSession();
+                              pinpointManager.getAnalyticsClient().submitEvents();
+                          }
+                      }
 
-                               pinpointManager = new PinpointManager(pinpointConfig);
+               To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session you want to capture.
 
-                               // Start a session with Pinpoint
-                               pinpointManager.getSessionClient().startSession();
+               .. code-block:: java
 
-                               // Stop the session and submit the default app started event
-                               pinpointManager.getSessionClient().stopSession();
-                               pinpointManager.getAnalyticsClient().submitEvents();
-                           }
+                  // . . .
 
-                       }
+                  pinpointManager.getSessionClient().stopSession();
+                  pinpointManager.getAnalyticsClient().submitEvents();
 
+                  // . . .
 
          iOS - Swift
             #. Set up AWS Mobile SDK components with the following :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` steps.
@@ -180,6 +181,9 @@ Use the following steps to add analytics to your mobile app through AWS Pinpoint
                            }
                        }
 
+Monitor Analytics
+-----------------
+
 Build and run your app to see usage metrics in Amazon Pinpoint.
 
 #. To see visualizations of the analytics coming from your app, open your project in the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`__.
@@ -198,7 +202,7 @@ Build and run your app to see usage metrics in Amazon Pinpoint.
 .. _add-aws-mobile-analytics-enable-custom-data:
 
 Enable Custom App Analytics
----------------------------
+===========================
 
 Instrument your code to capture app usage event information, including attributes you define.  Use graphs of your custom usage event data  in the Amazon Pinpoint console. Visualize how your users' behavior aligns with a model you design using `Amazon Pinpoint Funnel Analytics <https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-funnels.html>`__, or use `stream the data <https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-streaming.html>`__ for deeper analysis.
 
