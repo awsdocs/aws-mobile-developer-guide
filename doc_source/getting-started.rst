@@ -188,7 +188,7 @@ Connect to Your Backend
 
       Your app is now set up to interact with the AWS services you configured in your Mobile Hub project!
 
-      Choose the Run icon in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
 
       .. list-table::
          :widths: 1
@@ -280,6 +280,8 @@ Connect to Your Backend
 
              pod install --repo-update
 
+         If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
+
       #. The command :code:`pod install` creates a new workspace file. Close your Xcode project and reopen it using :file:`./YOUR-PROJECT-NAME.xcworkspace`.
 
          .. list-table::
@@ -322,7 +324,7 @@ Connect to Your Backend
 
       Your app is now set up to interact with the AWS services you configured in your |AMH| project!
 
-      Choose the run icon in the top left of the Xcode window or type Command-R to build and run your app. Look for  :code:`Welcome to AWS!` in the log output.
+      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. Look for  :code:`Welcome to AWS!` in the log output.
 
       .. list-table::
          :widths: 1

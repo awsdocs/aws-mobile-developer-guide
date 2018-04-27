@@ -162,6 +162,8 @@ Connect to your backend
 
             Run :code:`pod install --repo-update` before you continue.
 
+            If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
+
          #. Classes that call |DDB| APIs must use the following import statements:
 
             .. code-block:: swift
@@ -194,9 +196,9 @@ To connect your app to an Amazon DynamoDB table you have created, use a data mod
 .. container:: option
 
    Android - Java
-       In the following example, the :code:`NewsDO` class defines the data model of the :code:`News` table. The class is used by the CRUD methods in this section to access the table and its attributes. The data model file you downloaded from |AMH| in previous steps contains a similar class that defines the model of your table.
+      In the following example, the :code:`NewsDO` class defines the data model of the :code:`News` table. The class is used by the CRUD methods in this section to access the table and its attributes. The data model file you downloaded from |AMH| in previous steps contains a similar class that defines the model of your table.
 
-       Note that the class is annotated to map it to the Amazon DynamoDB table name. The attribute names, hash key, and range key of the getters in the class are annotated to map them to local variable names used by the app for performing data operations.
+      Note that the class is annotated to map it to the Amazon DynamoDB table name. The attribute names, hash key, and range key of the getters in the class are annotated to map them to local variable names used by the app for performing data operations.
 
       .. code-block:: java
 

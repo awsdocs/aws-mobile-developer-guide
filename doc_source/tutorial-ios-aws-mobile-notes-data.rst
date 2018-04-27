@@ -106,6 +106,7 @@ Add NoSQL Data Dependencies
 
       pod install --repo-update
 
+      If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
 Implement Mutation Methods
 --------------------------
@@ -189,7 +190,7 @@ Then add CRUD functions (insert, update, and delete) to the NotesContentProvider
               })
           }
 
-      //Insert a note using Amazon DynamoDB
+      //Delete a note using Amazon DynamoDB
       func deleteNoteDDB(noteId: String) {
               let dynamoDbObjectMapper = AWSDynamoDBObjectMapper.default()
 
@@ -259,11 +260,29 @@ Add Data Access Calls
 Calls to insert, update, delete, and query data stored in Amazon DynamoDB are made in :code:`MasterViewController` and :code:`DetailsViewController`.
 
 
-#. To create a note in Amazon DynamoDB , add the following line in to the *insert* portion of the :code:`autoSave()` function of :code:`DetailViewController`.
+#. To create a note in Amazon DynamoDB , add the following call to :code:`noteContentProvider?.insertNoteDDB()`  to the *insert* portion of the :code:`autoSave()` function of :code:`DetailViewController`.
 
     .. code-block:: javascript
 
-       noteContentProvider?.insertNoteDDB(noteId: noteId!, noteTitle: "", noteContent: "")
+       // . . .
+
+        // If this is a NEW note, set the Note Id
+        if (DetailViewController.noteId == nil) // Insert
+        {
+            let id = noteContentProvider?.insert(noteTitle: "", noteContent: "")
+            noteContentProvider?.insertNoteDDB(noteId: id!, noteTitle: "", noteContent: "")
+            DetailViewController.noteId = id
+        }
+        else // Update
+        {
+            let noteId = DetailViewController.noteId
+            let noteTitle = self.noteTitle.text
+            let noteContent = self.noteContent.text
+            noteContentProvider?.update(noteId: noteId!, noteTitle: noteTitle!, noteContent: noteContent!)
+            noteContentProvider?.update(noteId: noteId!, noteTitle: noteTitle!, noteContent: noteContent!)
+        }
+
+        // . . .
 
 #. To update a note from Amazon DynamoDB , add the following line in to the *update* portion of the :code:`autoSave()` function of :code:`DetailViewController`.
 
@@ -307,7 +326,7 @@ Calls to insert, update, delete, and query data stored in Amazon DynamoDB are ma
 
               }
 
-#. To delete a note from Amazon DynamoDB, add the following function  in the :code:`MasterViewController`.
+#. To delete a note from Amazon DynamoDB, update the following function  in the :code:`MasterViewController` with a call to :code:`deleteNoteDDB()`.
 
     .. code-block:: swift
 
@@ -318,18 +337,18 @@ Calls to insert, update, delete, and query data stored in Amazon DynamoDB are ma
                     let noteId = fetchedResultsController.object(at: indexPath).noteId
 
                     //Delete Note Locally
-                    noteContentProvider?.delete(managedObjectContext: context, managedObj: noteObj, noteId: noteObj.noteId) //Core Data Delete
+                    _noteContentProvider?.delete(managedObjectContext: context, managedObj: noteObj, noteId: noteObj.noteId) //Core Data Delete
 
                     //Delete Note in DynamoDB
                     _noteContentProvider?.deleteNoteDDB(noteId: noteId!)
                 }
             }
 
-#. To query for all notes from Amazon DynamoDB, add the following line to the :code:`viewDidLoad()` function  in the MasterViewController:
+#. To query for all notes from Amazon DynamoDB, add the following line to the bottom of the :code:`viewDidLoad()` function  in the MasterViewController:
 
     .. code-block:: swift
 
-        noteContentProvider?.getNotesFromDDB()
+        _noteContentProvider?.getNotesFromDDB()
 
 .. list-table::
    :widths: 1 6

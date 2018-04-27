@@ -64,7 +64,7 @@ Add Analytics the Dependencies
       cd YOUR-APP-ROOT-FOLDER
       pod init
 
-#. Open :file:`Podfile` replace the placeholder code with the following. If the file is not visible your Xcode Project Navigator, right-click the project root and choose :guilabel:`Show in finder`.
+#. Open :file:`Podfile` and replace the placeholder code with the following. If the file is not visible your Xcode Project Navigator, right-click the project root and choose :guilabel:`Show in finder`.
 
    .. code-block:: bash
 
@@ -84,6 +84,8 @@ Add Analytics the Dependencies
    .. code-block:: bash
 
         pod install --repo-update
+
+   If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
    .. list-table::
       :widths: 1 6

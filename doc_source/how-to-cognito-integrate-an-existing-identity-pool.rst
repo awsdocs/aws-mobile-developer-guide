@@ -238,6 +238,8 @@ Add the SDK to your App
 
          #. Run :code:`pod install --repo-update` in your app root folder before you continue.
 
+            If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
+
 
          #. Add the following code to your AppDelegate to establish a run-time connection with AWS Mobile.
 
