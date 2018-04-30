@@ -56,7 +56,7 @@ Requiring the HTTPS Protocol
 
 
 |CF| supports use of the HTTPS protocol to encrypt communications to and from a distribution. This
-highly recommended practice for protects both the user and the service. |CF| enables you to require
+highly recommended practice protects both the user and the service. |CF| enables you to require
 HTTPS both between customers and your distribution endpoints, and |CF| between your distribution's
 caches and the source bucket where your assets originate. Global redirection of HTTP traffic to
 HTTPS, use of HTTPS for custom domains and other options are also supported.
