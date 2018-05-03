@@ -111,12 +111,12 @@ First, create a :file:`raw` resource folder to store the AWS configuration file:
 
 #. Expand the :file:`app` folder.
 #. Right-click the :file:`res` folder.
-#. Choose :guilabel:`New > Android resource directory`.
-#. Choose the :guilabel:`Resource type` dropdown menu and select :guilabel:`raw`.
+#. Choose :guilabel:`New > Directory`.
+#. Type :userinput:`raw`.
 
    .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
        :scale: 100
-       :alt: Image of selecting a Raw Android Resource Directory in Android Studio.
+       :alt: Image of creating a raw directory in Android Studio.
 
 #. Choose :guilabel:`OK`.
 #. Copy the :file:`awsconfiguration.json` file from its download location to the

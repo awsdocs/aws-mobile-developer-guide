@@ -98,10 +98,7 @@ Add the SDK to Your App
       .. container:: option
 
          Android - Java
-            #. Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android
-               Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown
-               menu.
-
+            In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
                .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
                   :scale: 100

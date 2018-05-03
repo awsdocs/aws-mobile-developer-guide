@@ -253,13 +253,11 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
 
       #. Add the backend service configuration file to your app.
 
-         #. Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android
-            Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown
-            menu.
+         In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
                :scale: 100
-               :alt: Image of selecting a Raw Android Resource Directory in Android Studio.
+               :alt: Image of creating a raw directory in Android Studio.
 
             .. only:: pdf
 
