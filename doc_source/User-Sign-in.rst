@@ -172,7 +172,7 @@ Google
 
         - An iOS and/or Android client ID, depending on which platform you are supporting
 
-    For full instructions on integrating your application with Google+, see `Setting Up Google Authentication <auth-google-setup>`.
+    For full instructions on integrating your application with Google+, see :ref:`Setting Up Google Authentication <auth-google-setup>`.
 
 
 
