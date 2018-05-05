@@ -63,7 +63,6 @@ Connect to your backend
 **To add AWS Mobile NoSQL Database to your app**
 
 .. container:: option
-
    Android - Java
       #. Set up AWS Mobile SDK components with the following
          :ref:`add-aws-mobile-sdk-basic-setup` steps.
@@ -140,12 +139,77 @@ Connect to your backend
                      Thread mythread = new Thread(runnable);
                      mythread.start();
 
+   Android - Kotlin
+      #. Set up AWS Mobile SDK components with the following
+         :ref:`add-aws-mobile-sdk-basic-setup` steps.
 
+         #. :file:`app/build.gradle` must contain:
+
+            .. code-block:: java
+               :emphasize-lines: 2
+
+                dependencies{
+                    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
+                }
+
+         #. For each Activity where you make calls to perform database operations, import the
+            following APIs.
+
+            .. code-block:: java
+               :emphasize-lines: 1
+
+                import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+
+      #. Create a :code:`DynamoDBMapper` client for your app as in the following
+         example.
+
+         .. code-block:: kotlin
+            :emphasize-lines: 2, 9-13
+
+             // import DynamoDBMapper
+             import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+
+             class MainActivity : AppCompatActivity() {
+               private var dynamoDBMapper: DynamoDBMapper? = null
+
+               override fun onCreate(savedInstanceState: Bundle?) {
+                 super.onCreate(savedInstanceState)
+                 setContentView(R.layout.activity_main)
+
+                 val client = AmazonDynamoDBClient(AWSMobileClient.getInstance().credentialsProvider)
+                 dynamoDBMapper = DynamoDBMapper.builder()
+                    .dynamoDBClient(client)
+                    .awsConfiguration(AWSMobileClient.getInstance().configuration)
+                    .build()
+               }
+            }
+
+      #. Add the project data model files you downloaded from the
+         |AMH| console. The data models provide set and get methods for each attribute of a |DDB|
+         table they model.
+
+         #. Copy the data model file(s) you downloaded,
+            :file:`./YOUR-PROJECT-NAME-integration-lib-aws-my-sample-app-android/src/main/java/com/amazonaws/models/nosqlYOUR-TABLE-NAMEDO.java` into the Android Studio folder that contains your main activity.
+
+
+      .. list-table::
+         :widths: 1
+
+         * - .. note:: **Use Asynchronous Calls to DynamoDB**
+
+                Since calls to |DDB| are synchronous, they don't belong on your UI thread. Use an
+                asynchronous method like the :code:`thread` wrapper to call :code:`DynamoDBObjectMapper` in a
+                separate thread.
+
+                .. code-block:: kotlin
+
+                    thread(start = true) {
+                        // DynamoDB calls go here
+                    }
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following
          :ref:`add-aws-mobile-sdk-basic-setup` steps.
-
 
          #. :file:`Podfile` that you configure to install the AWS Mobile SDK must contain:
 
@@ -257,6 +321,45 @@ To connect your app to an Amazon DynamoDB table you have created, use a data mod
 
           }
 
+   Android - Kotlin
+      In the following example, the :code:`NewsDO` class defines the data model of the :code:`News` table. The class is used by the CRUD methods in this section to access the table and its attributes. The data model file you downloaded from |AMH| in previous steps contains a similar class that defines the model of your table.
+
+      Note that the class is annotated to map it to the Amazon DynamoDB table name. The attribute names, hash key, and range key of the getters in the class are annotated to map them to local variable names used by the app for performing data operations.
+
+      .. code-block:: kotlin
+
+          package com.amazonaws.models.nosql;
+
+          import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+          import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
+          import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBIndexHashKey;
+          import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBIndexRangeKey;
+          import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBRangeKey;
+          import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
+
+          import java.util.List;
+          import java.util.Map;
+          import java.util.Set;
+
+          @DynamoDBTable(tableName = "nosqlnews-mobilehub-1234567890-News")
+
+          data class NewsDO {
+              @DynamoDBHashKey(attributeName = "userId" )
+              @DynamoDBAttribute(attributeName = "userId")
+              var userId: String?
+
+              @DynamoDBRangeKey(attributeName = "articleId")
+              @DynamoDBAttribute(attributeName = "articleId")
+              var articleId: String?
+
+              @DynamoDBAttribute(attributeName = "author")
+              var author: String?
+
+              // setters and getters for other attribues ...
+          }
+
+        If you download the model files, they will be provided in Java.  The model files
+        are equally useable in Kotlin projects.
 
    iOS - Swift
       In the following example, the :code:`News` class defines the data model of the :code:`News` table. The class is used by the CRUD methods in this section to access the table and its attributes. The data model file you downloaded from |AMH| in previous steps contains a similar class that defines the model of your table.
@@ -332,6 +435,21 @@ Use the following code to create an item in your NoSQL Database table.
               }).start();
           }
 
+   Android - Kotlin
+      .. code-block:: kotlin
+         :emphasize-lines: 1-11
+
+            fun createNews() {
+                val NewsDO newsItem = NewsDO()
+                newsItem.userId = "unique-user-id"
+                newsItem.articleId = UUID.randomUUID().toString()
+                newsItem.author = "Your Name"
+                newsItem.content = "This is the article content"
+
+                thread(start = true) {
+                    dynamoDBMapper.save(newsItem)
+                }
+            }
 
    iOS - Swift
       .. code-block:: swift
@@ -393,6 +511,17 @@ Use the following code to read an item in your NoSQL Database table.
               }).start();
           }
 
+   Android - Kotlin
+      .. code-block:: kotlin
+         :emphasize-lines: 1-7
+
+            fun readNews(userId: String, articleId: String, callback: (NewsDO?) -> Unit) {
+                thread(start = true) {
+                    var newsItem = dynamoDBMapper.load(NewsDO::class.java,
+                            userId, articleId)
+                    runOnUiThread { callback(newsItem) }
+                }
+            }
 
    iOS - Swift
       .. code-block:: swift
@@ -453,6 +582,15 @@ Use the following code to update an item in your NoSQL Database table.
               }).start();
           }
 
+   Android - Kotlin
+      .. code-block:: kotlin
+         :emphasize-lines: 1-5
+
+            fun updateNews(updatedNews: NewsDO) {
+                thread(start = true) {
+                    dynamoDBMapper.save(updatedNews)
+                }
+            }
 
    iOS - Swift
       .. code-block:: swift
@@ -513,6 +651,19 @@ Use the following code to delete an item in your NoSQL Database table.
               }).start();
           }
 
+   Android - Kotlin
+      .. code-block:: kotlin
+         :emphasize-lines: 1-9
+
+          public void deleteNews(userId: String, articleId: String) {
+            thread(start = true) {
+                val item = NewsDO()
+                item.userId = userId
+                item.articleId = articleId
+
+                dynamoDBMapper.delete(item)
+            }
+          }
 
    iOS - Swift
       .. code-block:: swift
@@ -593,6 +744,27 @@ The following example code shows querying for news submitted with :CODE:`userId`
             }).start();
          }
 
+   Android - Kotlin
+      .. code-block:: kotlin
+         :emphasize-lines: 1-17
+
+         public void queryNews(userId: String, articleId: String, callback: (List<NewsDO>?) -> Unit) {
+            thread(start = true) {
+                val item = NewsDO()
+                item.userId = userId
+                item.articleId = articleId
+
+                val rangeKeyCondition = Condition()
+                    .withComparisonOperator(ComparisonOperator.BEGINS_WITH)
+                    .withAttributeValueList(AttributeValue().withS("Trial"))
+                val queryExpression = DynamoDBQueryExpression()
+                            .withHashKeyValues(item)
+                            .withRangeKeyCondition("articleId", rangeKeyCondition)
+                            .withConsistentRead(false);
+                val result = dynamoDBMapper.query(NewsDO::class.java, queryExpression)
+                runOnUiThread { callback(result) }
+            }
+        }
 
    iOS - Swift
       .. code-block:: swift

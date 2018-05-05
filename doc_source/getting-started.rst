@@ -71,7 +71,50 @@ Set Up Your Backend
 
       #. Add the backend service configuration file to your app.
 
-         In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+         In the Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+               :scale: 100
+               :alt: Image of creating a raw directory in Android Studio.
+
+            .. only:: pdf
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 50
+
+            .. only:: kindle
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 75
+
+         From the location where configuration file, :file:`awsconfiguration.json`, was downloaded in a previous step, drag it into the :file:`res/raw` folder.  Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
+
+         .. list-table::
+            :widths: 1 6
+
+            * - **Remember**
+
+              - Every time you create or update a feature in your |AMH| project, download and integrate a new version of your :file:`awsconfiguration.json` into each app in the project that will use the update.
+
+      Your backend is now configured. Follow the next steps at :ref:`Connect to Your Backend <add-aws-mobile-sdk-connect-to-your-backend>`.
+
+    Android - Kotlin
+      #. Choose :guilabel:`Android` as your platform and then choose Next.
+
+         .. image:: images/wizard-createproject-platform-android.png
+            :scale: 75
+
+      #. Choose the :guilabel:`Download Cloud Config` and then choose :guilabel:`Next`.
+
+         The :file:`awsconfiguration.json` file you download contains the configuration of backend resources that |AMH| enabled in your project. Analytics cloud services are enabled for your app by default.
+
+         .. image:: images/wizard-createproject-backendsetup-android.png
+            :scale: 75
+
+
+      #. Add the backend service configuration file to your app.
+
+         In the Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
                :scale: 100
@@ -244,6 +287,106 @@ Connect to Your Backend
 
                         // .. more code
                     }
+                }
+
+  Android - Kotlin
+      #. Prerequisites
+
+         * `Install Android Studio <https://developer.android.com/studio/index.html#downloads>`__ version 2.33 or higher.
+
+         * Install Android SDK v7.11 (Nougat), API level 25.
+
+      #. Your :file:`AndroidManifest.xml` must contain:
+
+         .. code-block:: xml
+
+             <uses-permission android:name="android.permission.INTERNET"/>
+             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+      #. Add dependencies to your :file:`app/build.gradle`, then choose :guilabel:`Sync Now` in the upper right of Android Studio. This libraries enable basic AWS functions, like credentials, and analytics.
+
+         .. code-block:: java
+
+             dependencies {
+                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+             }
+
+      #. Add the following code to the :code:`onCreate` method of your main or startup activity. :code:`AWSMobileClient` is a singleton that establishes your connection to |AWS| and acts as an interface for your services.
+
+         .. code-block:: kotlin
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+
+            class YourMainActivity : Activity() {
+              companion object {
+                private val TAG: String = this::class.java.simpleName
+              }
+
+              override fun onCreate(savedInstanceState: Bundle?) {
+                super.onCreate(savedInstanceState);
+
+                AWSMobileClient.getInstance().initialize(this) {
+                  Log.d(TAG, "AWSMobileClient is initialized")
+                }.execute()
+
+                // More onCreate code...
+              }
+            }
+
+         .. list-table::
+            :widths: 1 6
+
+            * - What does this do?
+
+              - When :code:`AWSMobileClient` is initialized, it constructs the :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects which, in turn, are used when creating other SDK clients. The client then makes a `Sigv4 signed <https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`__ network call to `Amazon Cognito Federated Identities <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__ to retrieve AWS credentials that provide the user access to your backend resources. When the network interaction succeeds, the callback (which is technically the :code:`onComplete` method of the :code:`AWSStartUpHandler`) is called.
+
+      Your app is now set up to interact with the AWS services you configured in your Mobile Hub project!
+
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
+
+      .. list-table::
+         :widths: 1
+
+         * - **Optional:** The following example shows how to retrieve the reference to :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects which can be used to instantiate other SDK clients. You can use the :code:`IdentityManager` to fetch the user's AWS identity id either directly from Amazon Cognito or from the locally cached identity id value.
+
+             .. code-block:: kotlin
+
+                import com.amazonaws.auth.AWSCredentialsProvider
+                import com.amazonaws.mobile.auth.core.IdentityHandler
+                import com.amazonaws.mobile.auth.core.IdentityManager
+                import com.amazonaws.mobile.client.AWSMobileClient
+                import com.amazonaws.mobile.config.AWSConfiguration
+
+                class YourMainActivity : Activity() {
+                  companion object {
+                    private val TAG: String = this::class.java.simpleName
+                  }
+
+                  private var credentialsProvider: AWSCredentialsProvider? = null
+                  private var awsConfiguration: AWSConfiguration? = null
+
+                  override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState);
+
+                    AWSMobileClient.getInstance().initialize(this) {
+                      credentialsProvider = AWSMobileClient.getInstance().credentialsProvider
+                      awsConfiguration = AWSMobileClient.getInstance().configuration
+
+                      IdentityManager.getDefaultIdentityManager().getUserID(object : IdentityHandler {
+                        override fun handleError(exception: Exception?) {
+                          Log.e(TAG, "Retrieving identity: ${exception.message}")
+                        }
+
+                        override fun onIdentityId(identityId: String?) {
+                          Log.d(TAG, "Identity = $identityId")
+                          val cachedIdentityId = IdentityManager.getDefaultIdentityManager().cachedUserID
+                          // Do something with the identity here
+                        }
+                      })
+                    }.execute()
+
+                    // More onCreate code...
+                  }
                 }
 
    iOS - Swift

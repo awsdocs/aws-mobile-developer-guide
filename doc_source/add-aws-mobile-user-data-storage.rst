@@ -100,6 +100,42 @@ using the integration steps on this page.
 
                import com.amazonaws.mobileconnectors.s3.transferutility.*;
 
+   Android - Kotlin
+      Set up AWS Mobile SDK components as follows:
+
+         #. Add the following to :file:`app/build.gradle`:
+
+            .. code-block:: none
+
+               dependencies {
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+               }
+
+            Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
+
+         #. Add the following to :file:`AndroidManifest.xml`:
+
+            .. code-block:: xml
+               :emphasize-lines: 1,7
+
+               <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+               <application ... >
+
+                  <!- Other manifest / application items . . . ->
+
+                  <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
+
+               </application>
+
+         #. For each Activity where you make calls to perform user file storage operations, import the
+            following packages.
+
+            .. code-block:: none
+
+               import com.amazonaws.mobileconnectors.s3.transferutility.*;
+
    iOS - Swift
       Set up AWS Mobile SDK components as follows:
 
@@ -235,6 +271,78 @@ Upload a File
               }
           }
 
+   Android - Kotlin
+    To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`,
+    then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
+
+    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object. :code:`TransferUtility` will check the size of file being uploaded and will automatically switch over to using multi-part uploads if the file size exceeds 5 MB.
+
+       .. code-block:: java
+
+            import android.app.Activity;
+            import android.util.Log;
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+            import com.amazonaws.services.s3.AmazonS3Client;
+
+            import java.io.File;
+
+            class YourActivity : Activity() {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+
+                    AWSMobileClient.getInstance().initialize(this).execute()
+                    uploadWithTransferUtility()
+                }
+
+                fun uploadWithTransferUtility() {
+                    val transferUtility = TransferUtility.builder()
+                        .context(this@YourActivity.applicationContext)
+                        .awsConfiguration(AWSMobileClient.getInstance().configutation)
+                        .s3Client(AMazonS3Clinet(AWSMobileClient.getInstance().credentialsProvider)
+                        .build()
+
+                    val uploadObserver = transferUtility.upload("s3folder/s3key.txt", File("/path/to/localfile.txt"))
+
+                    // Attach a listener to the observer
+                    uploadObserver.transferListener = object : TransferListener() {
+                        override fun onStateChanged(id: Int, state: TransferState) {
+                            when(state) {
+                                TransferState.COMPLETED -> {
+                                    /* Handle a completed upload */
+                                }
+                                else -> {
+                                    /* Anything else */
+                                }
+                            }
+                        }
+
+                        override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
+                            val percent = ((bytesCurrent as Float) / (bytesTotal as Float) * 100.0) as Int
+
+                            Log.d(TAG, "ID: $id is $percent done")
+                        }
+
+                        override fun onError(id: Int, exception: Exception) {
+                            /* Handle errors */
+                        }
+                    }
+
+                    // If you prefer to long-poll for updates
+                    if (uploadObserver.state == TransferState.COMPLETED) {
+                        /* Handle completion */
+                    }
+
+                    val bytesTransferred = uploadObserver.bytesTransferred
+                }
+            }
+
 
    iOS - Swift
      The following example shows how to upload a file to an |S3| bucket.
@@ -289,7 +397,7 @@ Download a File
 
    Android - Java
     To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
-    to get the :code:`AWSConfigurationand` :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
+    to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
     :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
     The following example shows using the :code:`TransferUtility` in the context of an Activity.
@@ -368,7 +476,78 @@ Download a File
                 }
             }
 
+   Android - Kotlin
+    To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
+    to get the :code:`AWSConfiguration` and  :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
+    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
+    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
+    pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.
+
+      .. code-block:: kotlin
+
+            import android.app.Activity;
+            import android.util.Log;
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+            import com.amazonaws.services.s3.AmazonS3Client;
+
+            import java.io.File;
+
+            class YourActivity : Activity() {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    setContentView(R.layout.activity_your)
+
+                    AWSMobileClient.getInstance().initialize(this).execute()
+                    donwloadWithTransferUtility()
+                }
+
+                private fun downloadWithTransferUtility() {
+                    val transferUtility = TransferUtility.builder()
+                        .context(applicationContext)
+                        .awsConfiguration(AWSMobileClient.getInstance.configuration)
+                        .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
+                        .build()
+                    val downloadObserver = transferUtility.download(
+                        "s3folder/s3key.txt",
+                        File("/path/to/file/localfile.txt"))
+
+                    // Attach a listener to get state updates
+                    downloadObserver.transferListener = object : TransferListener() {
+                        override fun onStateChanged(id: Int, state: TransferState) =
+                            when(state) {
+                                TransferState.COMPLETED -> {
+                                    /* File has finished downloading */
+                                }
+                                else -> { /* Something else happened */ }
+                            }
+
+                        override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
+                            val percent = ((bytesCurrent as Float) / (bytesTotal as Float) * 100.0) as Int
+
+                            Log.d(TAG, "ID: $id is $percent done")
+                        }
+
+                        override fun onError(id: Int, exception: Exception) {
+                            /* Handle errors */
+                        }
+                    }
+
+                    // If you prefer to poll for the data, instead of attaching a
+                    // listener, check for the state and progress in the observer.
+                    if (downloadObserver.state == TransferState.COMPLETED) {
+                        // Handle a completed upload.
+                    }
+
+                    Log.d("YourActivity", "Bytes Transferrred: ${downloadObserver.bytesTransferred}");
+                }
+            }
 
    iOS - Swift
      The following example shows how to download a file from an |S3| bucket.
