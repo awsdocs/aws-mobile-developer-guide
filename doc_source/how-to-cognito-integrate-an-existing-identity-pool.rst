@@ -126,7 +126,26 @@ Add the awsconfiguration.json file to your app
 .. container:: option
 
     Android - Java
-         In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+         In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+          .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+             :scale: 100
+             :alt: Image of creating a raw directory in Android Studio.
+
+          .. only:: pdf
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 50
+
+          .. only:: kindle
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 75
+
+      Drag the :file:`awsconfiguration.json` you created into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
+
+    Android - Kotlin
+         In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
           .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
              :scale: 100
@@ -212,6 +231,58 @@ Add the SDK to your App
                                 });
                             }
                         }).execute();
+                    }
+                }
+
+            When you run your app, you should see no behavior change. To verify success, look for the message :code:`"Welcome to AWS!"` in your debug output.
+
+   Android - Kotlin
+      Set up AWS Mobile SDK components as follows:
+
+         #. Add the following to :file:`app/build.gradle`:
+
+            .. code-block:: none
+
+               dependencies {
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+
+                  // other dependencies . . .
+               }
+
+         #. Perform a Gradle sync to download the AWS Mobile SDK components into your app.
+
+         #. Add the following code to the :code:`onCreate` method of your main or startup activity. This will establish a connection with AWS Mobile. :code:`AWSMobileClient` is a singleton that will be an interface for your AWS services.
+
+            Once the network call to retrieve the user's AWS identity ID has succeeded, you can get the users identity using :code:`getCachedUserID()` from the :code:`AWSIdentityManager`.
+
+            .. code-block:: kotlin
+
+                import com.amazonaws.auth.AWSCredentialsProvider;
+                import com.amazonaws.mobile.auth.core.IdentityHandler;
+                import com.amazonaws.mobile.auth.core.IdentityManager;
+                import com.amazonaws.mobile.client.AWSMobileClient;
+                import com.amazonaws.mobile.client.AWSStartupHandler;
+                import com.amazonaws.mobile.client.AWSStartupResult;
+
+                class MainActivity : AppCompatActivity() {
+                    override fun onCrearte(savedInstanceState: Bundle?) {
+                        super.onCreate(savedInstanceState)
+                        setContentView(R.layout.activity_main)
+
+                        AWSMobileClient.getInstance().initialize(this) {
+                            IdentityManager.defaultIdentityManager.getUserID(
+                                object : IdentityHandler() {
+                                    override fun onIdentityId(s: String) {
+                                        // The netwirk call to fetch AWS credentials succeeded
+                                        Log.d(TAG, "Identity ID is: ${s}")
+                                    }
+
+                                    override fun handleError(ex: Exception) {
+                                        Log.e(TAG, "Error: ${ex.message}")
+                                    }
+                                }
+                            )
+                        }.execute()
                     }
                 }
 

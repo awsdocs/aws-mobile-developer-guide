@@ -100,11 +100,24 @@ Get AWS User Credentials
 Both text and voice API calls require validated AWS credentials. To establish Amazon Cognito as the credentials provider,
 include the following code in the function where you initialize your |LEX| interaction objects.
 
-  .. code-block:: java
+.. container:: option
 
-    CognitoCredentialsProvider credentialsProvider = new CognitoCredentialsProvider(
+   Android - Java
+      .. code-block:: java
+
+         CognitoCredentialsProvider credentialsProvider =
+            new CognitoCredentialsProvider(
                 appContext.getResources().getString(R.string.identity_id_test),
-                Regions.fromName(appContext.getResources().getString(R.string.aws_region)));
+                Regions.fromName(appContext.getResources().getString(R.string.aws_region))
+            );
+
+   Android - Kotlin
+      .. code-block:: kotlin
+
+         val region = applicationContext.resources.getString(R.string.aws_region)
+         val credentialsProvider = CognitoCredentialsProvider
+                applicationContext.resources.getString(R.string.identity_id_test),
+                Regions.fromName(region))
 
 Integrate Lex Interaction Client
 --------------------------------
@@ -122,16 +135,31 @@ Initialize Your Lex Interaction Client
     - :code:`InteractionListener` - your app's receiver for text responses from |LEX|
     - :code:`AudioPlaybackListener`  - your app's receiver for voice responses from |LEX|
 
-  .. code-block:: java
+.. container:: option
 
-    // Create Lex interaction client.
-        lexInteractionClient = new InteractionClient(getApplicationContext(),
+   Android - Java
+      .. code-block:: java
+
+         // Create Lex interaction client.
+         lexInteractionClient = new InteractionClient(getApplicationContext(),
                 credentialsProvider,
                 Regions.US_EAST_1,
                 <your_bot_name>,
                 <your_bot_alias>);
-        lexInteractionClient.setAudioPlaybackListener(audioPlaybackListener);
-        lexInteractionClient.setInteractionListener(interactionListener);
+         lexInteractionClient.setAudioPlaybackListener(audioPlaybackListener);
+         lexInteractionClient.setInteractionListener(interactionListener);
+
+   Android - Kotlin
+      .. code-block:: kotlin
+
+         // Create Lex interaction client.
+         val lexInteractionClient = InteractionClient(applicationContext,
+                credentialsProvider,
+                Regions.US_EAST_1,
+                <your_bot_name>,
+                <your_bot_alias>)
+         lexInteractionClient.audioPlaybackListener = audioPlaybackListener
+         lexInteractionClient.interactionListener = interactionListener
 
 Begin or Continue a Conversation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -143,9 +171,21 @@ Begin or Continue a Conversation
   :code:`textInForTextOut`, :code:`textInForAudioOut`, :code:`audioInForTextOut`, or :code:`audioInForAudioOut` method
   of an :code:`InteractionClient` instance. These calls are in the form of:
 
-  .. code-block:: java
+  .. container:: option
 
-    lexInteractionClient.textInForTextOut(String text, Map<String, String> sessionAttributes)
+     Android - Java
+        .. code-block:: java
+
+           lexInteractionClient.textInForTextOut(
+              String text,
+              Map<String, String> sessionAttributes)
+
+     Android - Kotlin
+        .. code-block:: kotlin
+
+           lexInteractionClient.textInForTextOut(
+              text: String,
+              sessionAttributes: Map<String,String>)
 
   If :code:`inConversation` is true, then the input should be passed to an instance of :code:`LexServiceContinuation`
   using the :code:`continueWithTextInForTextOut`, :code:`continueWithTextInForAudioOut`, :code:`continueWithAudioInForTextOut`,
@@ -241,19 +281,33 @@ Initialize Your Voice Activity
 
   The following code shows initialization of :code:`InteractiveVoiceView`.
 
-  .. code-block:: java
+  .. container:: option
 
-    private void init() {
-        appContext = getApplicationContext();
-        voiceView = (InteractiveVoiceView) findViewById(R.id.voiceInterface);
-        voiceView.setInteractiveVoiceListener(this);
-        CognitoCredentialsProvider credentialsProvider = new CognitoCredentialsProvider(
-            <your_conginto_identity_pool_id>,
-            Regions.fromName(<your_aws_region>)));
-        voiceView.getViewAdapter().setCredentialProvider(credentialsProvider);
-        voiceView.getViewAdapter().setInteractionConfig(
-            new InteractionConfig(<your_bot_name>),
-                <your_bot_alias>));
-        voiceView.getViewAdapter().setAwsRegion(<your_aws_region>));
-    }
+     Android - Java
+        .. code-block:: java
 
+           private void init() {
+               appContext = getApplicationContext();
+               voiceView = (InteractiveVoiceView) findViewById(R.id.voiceInterface);
+               voiceView.setInteractiveVoiceListener(this);
+               CognitoCredentialsProvider credentialsProvider = new CognitoCredentialsProvider(
+                    <your_conginto_identity_pool_id>,
+                    Regions.fromName(<your_aws_region>)));
+               voiceView.getViewAdapter().setCredentialProvider(credentialsProvider);
+               voiceView.getViewAdapter().setInteractionConfig(
+                   new InteractionConfig(<your_bot_name>),  <your_bot_alias>));
+               voiceView.getViewAdapter().setAwsRegion(<your_aws_region>));
+           }
+
+     Android - Kotlin
+        .. code-block:: kotlin
+
+           private fun init() {
+              val voiceView = voiceInterface as InteractiveVoiceView
+              val cp = CognitoCredentialsProvider(IDENTITY_POOL_ID, REGION)
+              with (voiceView.viewAdapter) {
+                credentialsProvider = cp
+                setInteractionConfig(InteractionConfig(<your_bot_name>), <your_bot_alias>)
+                setAwsRegion(REGION)
+              }
+           }

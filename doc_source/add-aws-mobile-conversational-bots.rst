@@ -158,6 +158,86 @@ Connect to your backend
                                  .getString(R.string.aws_region));
                     }
 
+   Android - Kotlin
+      #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.
+
+         #. Add the following permissions to your :file:`AndroidManifest.xml`:
+
+            .. code-block:: xml
+               :emphasize-lines: 1-2
+
+                <uses-permission android:name="android.permission.RECORD_AUDIO" />
+                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+         #. Add the following to your :file:`app/build.gradle`:
+
+            .. code-block:: none
+               :emphasize-lines: 2
+
+                dependencies{
+                    implementation ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar') {transitive = true;}
+                }
+
+         #. For each Activity where you make calls to |LEXlong|, import the following APIs.
+
+            .. code-block:: none
+               :emphasize-lines: 1-3
+
+                import com.amazonaws.mobileconnectors.lex.interactionkit.Response;
+                import com.amazonaws.mobileconnectors.lex.interactionkit.config.InteractionConfig;
+                import com.amazonaws.mobileconnectors.lex.interactionkit.ui.InteractiveVoiceView;
+
+      #. Add a voice button to an activity or fragment layout
+
+         #. Add a :code:`voice_component` to your layout file.
+
+            .. code-block:: xml
+               :emphasize-lines: 1-5
+
+                <com.amazonaws.mobileconnectors.lex.interactionkit.ui.InteractiveVoiceView
+                android:id="@+id/voiceInterface"
+                layout="@layout/voice_component"
+                android:layout_width="200dp"
+                android:layout_height="200dp"/>
+
+         #. In your :file:`strings.xml` file add the region for your bot. :emphasis:`Note: Currently bots are
+            only supported in US Virginia East (us-east-1).`
+
+            .. code-block:: xml
+               :emphasize-lines: 1
+
+                <string name="aws_region">us-east-1</string>
+
+         #. Initialize the voice button
+
+            In the :code:`onCreate()` of the activity where your Bot will be used, call
+            :code:`init()`.
+
+            .. code-block:: java
+               :emphasize-lines: 1-39
+
+                fun init() {
+                    voiceInterface.interactiveVoiceListener =
+                        object : InteractiveVoiceView.InteractiveVoiceListener() {
+                            override fun dialogReadyFOrFulfillment(slots: Map, intent: String) {
+                                Log.d(TAG, "Dialog ready for fulfillment:\n\tIntent: $intent")
+                            }
+
+                            override fun onResponse(response: Response) {
+                                Log.d(TAG, "Bot response: ${response.textResponse}")
+                            }
+
+                            override fun onError(responseText: String, e: Exception) {
+                                Log.e(TAG, "Error: ${e.message}")
+                            }
+                        }
+
+                    with (voiceInterface.viewAdapter) {
+                        credentialsProvider = AWSMobileClient.getInstance().credentialsProvider
+                        interactionConfig = InteractionConfig("YOUR-BOT-NAME","$LATEST")
+                        awsRegion = applicationContext.getString(R.string.aws_region)
+                    }
+                }
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.

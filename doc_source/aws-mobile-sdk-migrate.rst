@@ -98,7 +98,7 @@ Add the SDK to Your App
       .. container:: option
 
          Android - Java
-            In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+            In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
                .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
                   :scale: 100
@@ -122,9 +122,36 @@ Add the SDK to Your App
                :file:`{your-table-name}DO.java` into the folder that contains your main activity.
 
             #. If Cloud Logic is enabled in your project:, from the location where you downloaded the
-               data model file(s), drag and drop all files in that folder into the Xcode project
-               folder that contains :file:`AppDelegate.swift`.
+               data model file(s), drag and drop all files in your project folder.  They should appear
+               in the Java package structure.
 
+         Android - Kotlin
+            In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 100
+                  :alt: Image of the Download Configuration Files button in the |AMH| console.
+
+               .. only:: pdf
+
+                  .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                     :scale: 50
+
+               .. only:: kindle
+
+                  .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                     :scale: 75
+
+            #. From the location where configuration files were downloaded in a previous step, drag
+               :file:`awsconfiguration.json` into the :file:`res/raw` folder.
+
+            #. If NoSQL Database is enabled in your project, from the location where you downloaded
+               the data model file(s), drag and drop each file with the form of
+               :file:`{your-table-name}DO.java` into the folder that contains your main activity.
+
+            #. If Cloud Logic is enabled in your project:, from the location where you downloaded the
+               data model file(s), drag and drop all files in your project folder.  They should appear
+               in the Java package structure.
 
          iOS - Swift
             Add the backend service configuration and data model files you downloaded from the
@@ -200,6 +227,49 @@ Add the SDK to Your App
             You can continue to use PushManager framework in an app that uses the new SDK, but you
             must maintain that code going forward.
 
+      Android - Kotlin
+         #. Add identity providers you want to enable to the app using Gradle.
+
+            .. code-block:: none
+               :emphasize-lines: 0, 2, 4, 6
+
+                implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar')  {transitive = true;} // optional
+                implementation ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar')  {transitive = true;}  // optional
+                implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar')  {transitive = true;}   // optional
+                implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar')  {transitive = true;}    // required for auth in 2.6.+
+
+            If you encounter more than one version of a library, choose the one that begins with
+            :code:`com.amazonaws.mobile.auth`.
+
+         #. Increment the version number of your :code:`aws-android-sdk` from the following:
+
+            .. code-block:: none
+
+                implementation 'com.amazonaws:aws-android-sdk-s3:2.4.7'
+
+            To the following:
+
+            .. code-block:: none
+
+                implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+
+         #. Use the new SDK-provided sign-in UI.
+
+            The SDK now offers a library that implements an integrated sign-in UI for Facebook,
+            Google, and |COG| user pools. If your app use components downloaded from Mobile
+            Hub to make your sign-in UI, you can replace them with the following steps.
+
+            Follow the steps in :ref:`add-aws-mobile-user-sign-in`
+
+         #. Replace |SNS| with Amazon Pinpoint
+
+            |AMH| now supports use of Amazon Pinpoint for push notifications. Amazon Pinpoint ties together
+            messaging, including push, e-mail, and SMS, with Analytics. Each component can be used
+            separately to communicate with users and their devices. Usage data gathered through
+            analytics can be used to drive messaging campaigns.
+
+            You can continue to use PushManager framework in an app that uses the new SDK, but you
+            must maintain that code going forward.
 
       iOS - Swift
          #. Use Cocoapods instead of Frameworks.

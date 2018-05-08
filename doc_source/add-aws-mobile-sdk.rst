@@ -69,6 +69,55 @@ Basic Backend Setup
 
           Each time you change the Mobile Hub project for your app, download and use a fresh :file:`awsconfiguration.json` to reflect those changes in your app. If NoSQL Database or Cloud Logic are changed, also download and use fresh files for those features.
 
+   Android - Kotlin
+      #. `Get a free AWS Account. <https://aws.amazon.com/free>`_
+
+      #. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/>`_ to enable backend features for your app, if you
+         don't already have one.
+
+         Already have an app using a Mobile Hub custom SDK?
+         :ref:`aws-mobile-sdk-migrate`.
+
+         .. image:: images/add-aws-mobile-sdk-mobile-hub-console.png
+            :scale: 100
+            :alt: Image of the |AMH| console.
+
+         .. only:: pdf
+
+            .. image:: images/add-aws-mobile-sdk-mobile-hub-console.png
+               :scale: 50
+
+         .. only:: kindle
+
+            .. image:: images/add-aws-mobile-sdk-mobile-hub-console.png
+               :scale: 75
+
+         :emphasis:`Analytics are enabled by default for new projects created in Mobile Hub.`
+
+      #. Download your Mobile Hub project configuration file.
+
+         #. In the Mobile Hub console, choose your project, and then choose the :guilabel:`Integrate` icon from the left margin.
+
+         #. Choose :guilabel:`Download Configuration File` to get the :file:`awsconfiguration.json` file that connects your app to your backend.
+
+            .. image:: images/add-aws-mobile-sdk-download-configuration-file.png
+               :scale: 100 %
+               :alt: Image of the Mobile Hub console when choosing Download Configuration File.
+
+            .. only:: pdf
+
+               .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
+                  :scale: 50
+
+            .. only:: kindle
+
+               .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
+                  :scale: 75
+
+          *Remember:*
+
+          Each time you change the Mobile Hub project for your app, download and use a fresh :file:`awsconfiguration.json` to reflect those changes in your app. If NoSQL Database or Cloud Logic are changed, also download and use fresh files for those features.
+
 
    iOS - Swift
       #. `Get a free AWS Account. <https://aws.amazon.com/free>`_
@@ -433,6 +482,198 @@ If you have not created a |AMH| project and downloaded its configuration file, s
 
       Your app is now set up to interact with the AWS services you configured in your |AMH| project!
 
+   Android - Kotlin
+      #. `Install Android Studio <https://developer.android.com/studio/index.html>`_
+         version 3.1 or higher .
+
+      #. Install Android SDK version 7.11 (Nougat), API level 25
+
+         In Android Studio, from the top menu bar choose :guilabel:`Tools > Android > SDK Manager`
+         to install an SDK version.
+
+      #. Add the backend service configuration file to your app.`
+
+         #. Open your mobile app project in Android Studio and choose :guilabel:`Project` in the
+            left margin to open project view.
+
+         #. Right-click your app's :file:`res` folder, and then choose :guilabel:`New > Android
+            Resource Directory`. Select :guilabel:`raw` in the :guilabel:`Resource type` dropdown
+            menu.
+
+            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+               :scale: 100
+               :alt: Image of the Download Configuration Files button in the |AMH| console.
+
+            .. only:: pdf
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 50
+
+            .. only:: kindle
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 75
+
+            Learn more about `Android Studio
+            <https://developer.android.com/studio/intro/index.html>`_.
+
+         #. From the location where configuration files were downloaded in a previous step, drag
+            :file:`awsconfiguration.json` into the :file:`res/raw` folder.
+
+      #. Add dependencies to the your app/build.gradle.
+
+         Add the following `Android gradle dependencies
+         <https://docs.gradle.org/current/userguide/artifact_dependencies_tutorial.html>`_ entries
+         and configuration to your :file:`app/build.gradle`. These libraries enable basic AWS
+         functions, like credentials, and analytics. Adding `:code:`multidex application`
+         <https://developer.android.com/studio/build/multidex.html>`_ configuration ensures that you
+         won't run into method count limitations in your app.
+
+         .. code-block:: none
+            :emphasize-lines: 6, 18
+
+             dependencies {
+               compile 'com.amazonaws:aws-android-sdk-core:2.6.+'
+               compile ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
+             }
+
+      #. Create an :code:`Application` class and add the following code to its
+         :code:`onCreate` method.
+
+         To create the class, right click on the :file:`java` folder in your Xcode project explorer,
+         and then choose :guilabel:`New > Java Class`. Name the class :code:`Application` and choose
+         public for :guilabel:`Visibility` and none for :guilabel:`Modifiers`.
+
+         .. code-block:: kotlin
+
+             import com.amazonaws.mobile.config.AWSConfiguration;
+             import com.amazonaws.mobile.auth.core.IdentityManager;
+             import android.app.Application
+
+
+             /**
+              * Application class responsible for initializing singletons and other
+              * common components.
+              */
+             class ApplicationWrapper : Application() {
+               companion object {
+                 private val TAG = this::class.java.simpleName
+               }
+
+               override fun onCreate() {
+                 super.onCreate()
+                 initializeAWSSDK()
+               }
+
+               private fun initializeAWSSDK() {
+                 val config = AWSConfiguration(applicationContext)
+
+                 if (IdentityManager.defaultIdentityManager == null) {
+                   IdentityManager.defaultIdentityManager =
+                        IdentityManager(applicationContext, config)
+                 }
+               }
+             }
+
+      #. Create a :code:`SplashActivity` class or modify your existing splash activity.
+
+         #. To create the activity, right click on the :file:`java` folder in your Xcode project
+            explorer, and then choose :guilabel:`File > New > Activity > Basic Activity`.
+
+
+            .. image:: images/add-aws-mobile-sdk-xcode-add-splash-activity.png
+               :scale: 100
+               :alt: Image of the Download Configuration Files button in the |AMH| console.
+
+            .. only:: pdf
+
+               .. image:: images/add-aws-mobile-sdk-xcode-add-splash-activity.png
+                  :scale: 50
+
+            .. only:: kindle
+
+               .. image:: images/add-aws-mobile-sdk-xcode-add-splash-activity.png
+                  :scale: 75
+
+         #. Add the following code to the activity's :code:`onCreate` method to establish user
+            credentials that enable access to AWS services whenever your app starts.
+
+            .. code-block:: kotlin
+
+                import com.amazonaws.mobile.config.AWSConfiguration;
+                import com.amazonaws.mobile.auth.core.IdentityManager;
+                import com.amazonaws.mobile.auth.core.StartupAuthResultHandler;
+                import com.amazonaws.mobile.auth.core.StartupAuthResult;
+
+                class SplashActivity : AppCompatActivity() {
+                    override fun onCreate(savedInstanceState: Bundle?) {
+                        super.onCreate(savedInstanceState);
+                        setContentView(R.layout.activity_splash);
+
+                        val config = AWSConfiguration(applicationContext)
+                        val identityManager = IdentityManager(applicationContext, config)
+                        IdentityManager.defaultIdentityManager = identityManager
+                        identityManager.doStartupAuth(this) {
+                            // User identity is ready
+                            intent = Intent(this, :samp:`{MainActivity}`::class.java)
+                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            startActivity(intent)
+                            finish()
+                        }
+                    }
+                }
+
+      #. Modify your app manifest to add `Android permissions
+         <https://developer.android.com/guide/topics/permissions/requesting.html>`_
+
+         Delete the :code:`intent-filter` declarations for the :code:`MAIN` action and and
+         :code:`LAUNCHER` category from your original start up activity. If there are no other
+         declarations in the :code:`intent-filter`, then also delete the empty
+         :code:`<intent-filter></intent-filter>` tags.
+
+         .. code-block:: xml
+
+             <uses-permission android:name="android.permission.INTERNET" />
+             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+              . . .
+             <application
+                 android:name="com.:samp:`{yourpackagename}`.Application">
+              . . .
+                <activity android:name=".SplashActivity" >
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+                 <activity android:name=".MainActivity" >
+                    <intent-filter>
+                        <!--
+                             * REMOVE THESE FROM YOUR START UP ACTIVITY
+
+                                 <action android:name="android.intent.action.MAIN" />
+                                 <category android:name="android.intent.category.LAUNCHER" />
+
+                             *    IF THERE ARE NO OTHER ITEMS INSIDE THE intent-filter
+                             *    TAGS, DELETE THE TAGS
+
+                         -->
+                    </intent-filter>
+                </activity>
+
+              . . .
+             </application>
+
+         :emphasis:`Make sure to remove the MAIN action and LAUNCHER category from your previous
+         starting activity's :code:`intent-filter`.`
+
+      #. Click the :guilabel:`Run` icon (the one that looks like a Play button) in Android Studio to
+         build your app and run it on your device/emulator. After your app is deployed, search
+         through your logcat for a message similar to :code:`"IdentityManager: Got user ID:
+         us-east-1:abcabcabc-0be6-444e-b101-abcabcabc"`. If you see the log, your app is
+         successfully connected to AWS services.
+
+      Your app is now set up to interact with the AWS services you configured in your |AMH| project!
 
    iOS - Swift
       #. `Install Xcode <https://developer.apple.com/download/>`_ version 8.0 or later.

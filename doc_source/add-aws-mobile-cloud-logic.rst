@@ -220,6 +220,123 @@ Use the following steps to add AWS Cloud Logic to your app.
                  }
              }
 
+   Android - Kotlin
+      #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.
+
+         #. Add the following to your :file:`app/build.gradle`:
+
+            .. code-block:: none
+
+                dependencies{
+
+                    // other dependencies . . .
+
+                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
+
+                }
+
+         #. For each Activity where you make calls to |ABP|, declare the following imports. Replace the portion of the first declaration, denoted here as   :code:`idABCD012345.NAME-OF-YOUR-API-MODEL-CLASS`, with class id and name of the API model that you downloaded from your |AMH| project.
+
+            You can find these values at the top of the :file:`./src/main/java/com/amazonaws/mobile/api/API-CLASS-ID/TestMobileHubClient.java` file of the download.
+
+            .. code-block:: java
+
+                // This statement imports the model class you download from |AMH|.
+                import com.amazonaws.mobile.api.idABCD012345.NAME-OF-YOUR-API-MODEL-CLASSMobileHubClient;
+
+                import com.amazonaws.mobile.auth.core.IdentityManager;
+                import com.amazonaws.mobile.config.AWSConfiguration;
+                import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+                import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
+                import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
+                import com.amazonaws.util.IOUtils;
+                import com.amazonaws.util.StringUtils;
+                import java.io.InputStream;
+
+         #. The location where you downloaded the API model file(s) contains a folder for each Cloud Logic API you created in your |AMH| project. The folders are named for the class ID assigned to the API by |ABP|. For each folder:
+
+
+            #. In a text editor, open :file:`./src/main/java/com/amazonaws/mobile/api/YOUR-API-CLASS-ID/YOUR-API-CLASS-NAMEMobileHubClient.java`.
+
+            #. Copy the package name at the top of the file with the form: :code:`com.amazonaws.mobile.api.{api-class-id}`.
+
+            #. In Android Studio, right-choose :file:`app/java`, and then choose :guilabel:`New > Package`.
+
+            #. Paste the package name you copied in a previous step and choose :guilabel:`OK`.
+
+            #. Drag and drop the contents of the API class folder into the newly created package. The contents include :file:`YOUR-API-CLASS-NAMEMobileHubClient.java` and the :file:`model` folder.
+
+      #. Invoke a Cloud Logic API.
+
+         The following code shows how to invoke a Cloud Logic API using your API's client class,
+         model, and resource paths.
+
+         .. code-block:: kotlin
+
+             import android.support.v7.app.AppCompatActivity;
+             import android.os.Bundle;
+             import android.util.Log;
+             import com.amazonaws.http.HttpMethodName;
+             import java.io.InputStream;
+             import java.util.HashMap;
+
+             import com.amazonaws.mobile.client.AWSMobileClient;
+             import com.amazonaws.mobileconnectors.api.YOUR-API-CLASS-ID.YOUR-API-CLASS-NAMEMobilehubClient;
+             import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+             import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
+             import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
+             import com.amazonaws.util.StringUtils;
+
+             class MainActivity : AppCompatActivity() {
+               companion object {
+                 private val TAG = this::class.java.simpleName
+               }
+
+               private var apiClient: YOUR-API-CLASS-NAMEMobileHubClient? = null
+
+               override fun onCreate(savedInstanceState: Bundle?) {
+                 super.onCreate(savedInstanceState)
+                 setContentView(R.layout.activity_main)
+
+                 apiClient = ApiClientFactory()
+                    .credentialsProvider(AWSMobileClient.getInstance().credentialsProvider)
+                    .build(YOUR-API-CLASS-NAMEMobileHubClinet::class.java)
+             }
+
+             fun callCloudLogic(body: String) {
+
+               val parameters = mapOf("lang" to "en_US")
+               val headers = mapOf("Content-Type" to "application/json")
+
+               var localRequest = ApiRequest(apiClient::class.java.simpleName)
+                        .withPath("/items")
+                        .withHttpMethod(HttpMethod.GET)
+                        .withHeaders(headers)
+                        .withParameters(parameters)
+                if (body.isNotEmpty()) {
+                    val content = body.getBytes(StringUtils.UTF8)
+                    localRequest = localRequest
+                        .addHeader("Content-Length", String.valueOf(content.length))
+                        .withBody(content)
+                }
+
+                // We need a "val" to pass the value to another thread
+                val request = localRequest
+                thread(start = true) {
+                    try {
+                        Log.d(TAG, "Invoking API")
+                        val response = apiClient.execute(request)
+                        val responseContentStream = response.getContent()
+                        if (responseContentStream != null) {
+                            val responseData = IOUtils.toString(responseContentStream)
+                            // Do something with the response data here
+                        }
+                    } catch (ex: Exception) {
+                        Log.e(TAG, "Error invoking API")
+                    }
+                }
+            }
+         }
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.

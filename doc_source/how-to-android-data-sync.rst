@@ -68,19 +68,37 @@ To sync unauthenticated user data:
 Create a Dataset and Add User Data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create an instance of :code:`Dataset`. User data is added in the form of key/value pairs. Dataset
-objects are created with the :code:`CognitoSyncManager` class which functions as a Cognito client
-object. Use the defaultCognito method to get a reference to the instance of CognitoSyncManager. The
-openOrCreateDataset method is used to create a new dataset or open an existing instance of a dataset
-stored locally on the device::
+.. container:: option
 
-  Dataset dataset = client.openOrCreateDataset("datasetname");
+   Android - Java
 
-Cognito datasets function as dictionaries, with values accessible by key::
+    Create an instance of :code:`Dataset`. User data is added in the form of key/value pairs. Dataset objects are created with the :code:`CognitoSyncManager` class which functions as a Cognito client object. Use the defaultCognito method to get a reference to the instance of CognitoSyncManager. The openOrCreateDataset method is used to create a new dataset or open an existing instance of a dataset stored locally on the device::
 
-  String value = dataset.get("myKey");
-  dataset.put("myKey", "my value");
+    .. code-block:: java
 
+       Dataset dataset = client.openOrCreateDataset("datasetname");
+
+    Cognito datasets function as dictionaries, with values accessible by key::
+
+    .. code-block:: java
+
+       String value = dataset.get("myKey");
+       dataset.put("myKey", "my value");
+
+   Android - Kotlin
+
+    Create an instance of :code:`Dataset`. User data is added in the form of key/value pairs. Dataset objects are created with the :code:`CognitoSyncManager` class which functions as a Cognito client object. Use the defaultCognito method to get a reference to the instance of CognitoSyncManager. The openOrCreateDataset method is used to create a new dataset or open an existing instance of a dataset stored locally on the device::
+
+    .. code-block:: kotlin
+
+       val dataset = client.openOrCreateDataset("datasetname")
+
+    Cognito datasets function as dictionaries, with values accessible by key::
+
+    .. code-block:: kotlin
+
+      var dataValue = dataset.get("myKey")
+      dataset.put("myKey", dataValue);
 
 Synchronize Dataset with the Cloud
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,10 +107,7 @@ To synchronize a dataset, call its synchronize method::
 
   dataset.synchronize();
 
-All data written to datasets will be stored locally until the dataset is synced. The code in this
-section assumes you are using an unauthenticated Cognito identity, so when the user data is synced
-with the cloud it will be stored per device. The device has a device ID associated with it. When the
-user data is synced to the cloud, it will be associated with that device ID.
+All data written to datasets will be stored locally until the dataset is synced. The code in this section assumes you are using an unauthenticated Cognito identity, so when the user data is synced with the cloud it will be stored per device. The device has a device ID associated with it. When the user data is synced to the cloud, it will be associated with that device ID.
 
 To sync user data across devices (using an authenticated identity), see `Amazon Cognito Sync
 <http://docs.aws.amazon.com/cognito/devguide/sync/>`_.

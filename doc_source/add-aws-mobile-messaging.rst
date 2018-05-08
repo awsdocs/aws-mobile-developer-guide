@@ -18,7 +18,6 @@ Add Messaging to Your Mobile App with Amazon Pinpoint
 .. meta::
    :description: Integrate AWS Mobile analytics into your existing mobile app.
 
-
 .. _add-aws-mobile-messaging-overview:
 
 Overview
@@ -46,7 +45,6 @@ selected a certain category in a feature of your app.
 Set Up Your Backend
 ===================
 
-
 To set up email or SMS as part of a Amazon Pinpoint campaign take the following steps.
 
 To setup your app to receive Push Notifications from Amazon Pinpoint, see
@@ -56,7 +54,6 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
 
 #. **For Email**: Choose the :guilabel:`Messaging and Analytics` tile to enable the
       feature.
-
 
       #. Choose :guilabel:`Email`, and then choose :guilabel:`Enable`.
 

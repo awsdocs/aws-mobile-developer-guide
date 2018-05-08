@@ -56,8 +56,7 @@ described at `Amazon Lambda Getting Started
 <http://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`__, replacing the function code
 with the code below::
 
- exports.
- handler = function(event, context) {
+ exports.handler = function(event, context) {
       console.log("Received event");
       context.succeed("Hello "+ event.firstName + "using " + context.clientContext.deviceManufacturer);
    }
@@ -128,69 +127,88 @@ In your :file:`AndroidManifest.xml`, add the following permission
 Initialize LambdaInvokerFactory
 ===============================
 
-Pass your initialized Amazon Cognito credentials provider to the :code:`LambdaInvokerFactory` constructor::
+.. container:: option
 
-  LambdaInvokerFactory factory = new LambdaInvokerFactory(
-    myActivity.getApplicationContext(),
-    REGION,
-    credentialsProvider);
+   Android - Java
+      Pass your initialized Amazon Cognito credentials provider to the :code:`LambdaInvokerFactory` constructor::
 
+      .. code-block:: java
+
+         LambdaInvokerFactory factory = new LambdaInvokerFactory(
+             myActivity.getApplicationContext(),
+             REGION,
+             credentialsProvider);
+
+   Android - Kotlin
+      Pass your initialized Amazon Cognito credentials provider to the :code:`LambdaInvokerFactory` constructor::
+
+      .. code-block:: kotlin
+
+         val factory = LambdaInvokerFactory(applicationContext,
+             REGION, credentialsProvider)
 
 Declare Data Types
 ==================
 
-Declare the Java classes to hold the data you pass to the Lambda function. The following class
-defines a NameInfo class that contains a person's first and last name::
+.. container:: option
 
-   package com.amazonaws.demo.lambdainvoker;
+   Android - Java
 
-   /**
-    * A simple POJO
-    */
-    public class NameInfo {
-       private String firstName;
-       private String lastName;
+      Declare the Java classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name::
 
-       public NameInfo() {}
+      .. code-block:: java
+         package com.amazonaws.demo.lambdainvoker;
 
-       public NameInfo(String firstName, String lastName) {
-           this.firstName = firstName;
-           this.lastName = lastName;
-       }
+         /**
+          * A simple POJO
+          */
+         public class NameInfo {
+            private String firstName;
+            private String lastName;
 
-       public String getFirstName() {
-          return firstName;
-       }
+            public NameInfo() {}
 
-       public void setFirstName(String firstName) {
-          this.firstName = firstName;
-       }
+            public NameInfo(String firstName, String lastName) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+            }
 
-       public String getLastName() {
-          return lastName;
-       }
+            public String getFirstName() {
+                return firstName;
+            }
 
-       public void setLastName(String lastName) {
-           this.lastName = lastName;
-       }
-   }
+            public void setFirstName(String firstName) {
+                this.firstName = firstName;
+            }
 
+            public String getLastName() {
+                return lastName;
+            }
+
+            public void setLastName(String lastName) {
+                this.lastName = lastName;
+            }
+         }
+
+   Android - Kotlin
+
+      Declare the Kotlin data classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name::
+
+      .. code-block:: kotlin
+         package com.amazonaws.demo.lambdainvoker;
+
+         data class NameInfo(var firstName: String, var lastName: String)
 
 Create a Lambda proxy
 =====================
 
-Declare an interface containing one method for each Lambda function call. Each method in the
-interface must be decorated with the "@LambdaFunction" annotation. The LambdaFunction attribute can
-take 3 optional parameters:
+Declare an interface containing one method for each Lambda function call. Each method in the interface must be decorated with the "@LambdaFunction" annotation. The LambdaFunction attribute can take 3 optional parameters:
 
-- :code:`functionName` allows you to specify the name of the Lambda function to call when the method
-  is executed, by default the name of the method is used.
+- :code:`functionName` allows you to specify the name of the Lambda function to call when the method is executed, by default the name of the method is used.
 
-- :code:`logType` is valid only when invocationType is set to "Event". If set, AWS Lambda will
-  return the last 4KB of log data produced by your Lambda Function in the x-amz-log-results header.
+- :code:`logType` is valid only when invocationType is set to "Event". If set, AWS Lambda will return the last 4KB of log data produced by your Lambda Function in the x-amz-log-results header.
 
-- :code:`invocationType` specifies how the Lambda function will be invoked. Can be one of the
-  following values:
+- :code:`invocationType` specifies how the Lambda function will be invoked. Can be one of the following values:
 
   - Event: calls the Lambda Function asynchronously
   - RequestResponse: calls the Lambda Function synchronously
@@ -198,86 +216,149 @@ take 3 optional parameters:
 
 The following code shows how to create a Lambda proxy::
 
-   package com.amazonaws.demo.lambdainvoker;
-   import com.amazonaws.mobileconnectors.lambdainvoker.LambdaFunction;
+.. container:: option
 
-   /*
-    * A holder for lambda functions
-    */
-   public interface MyInterface {
+   Android - Java
+      .. code-block:: java
 
-      /**
-       * Invoke lambda function "echo". The function name is the method name
-       */
-      @LambdaFunction
-      String echo(NameInfo nameInfo);
+         package com.amazonaws.demo.lambdainvoker;
 
-      /**
-       * Invoke lambda function "echo". The functionName in the annotation
-       * overrides the default which is the method name
-       */
-      @LambdaFunction(functionName = "echo")
-      void noEcho(NameInfo nameInfo);
-   }
+         import com.amazonaws.mobileconnectors.lambdainvoker.LambdaFunction;
+
+         public interface MyInterface {
+            /**
+             * Invoke lambda function "echo". The function name is the method name
+             */
+            @LambdaFunction
+            String echo(NameInfo nameInfo)
+
+            /**
+             * Invoke lambda function "echo". The functionName in the annotation
+             * overrides the default which is the method name
+             */
+            @LambdaFunction(functionName = "echo")
+            void noEcho(NameInfo nameInfo)
+         }
+
+   Android - Kotlin
+      .. code-block:: kotlin
+
+         package com.amazonaws.demo.lambdainvoker;
+
+         import com.amazonaws.mobileconnectors.lambdainvoker.LambdaFunction;
+
+         interface MyInterface {
+            /**
+             * Invoke lambda function "echo". The function name is the method name
+             */
+            @LambdaFunction
+            fun echo(nameInfo: NameInfo): String
+
+            /**
+             * Invoke lambda function "echo". The functionName in the annotation
+             * overrides the default which is the method name
+             */
+            @LambdaFunction(functionName = "echo")
+            fun noEcho(nameInfo: NameInfo): Unit
+         }
 
 Invoke the Lambda Function
 ==========================
 
 .. note:: Do not invoke the Lambda function from the main thread as it results in a network call.
 
-The following code shows how to initialize the Cognito Caching Credentials Provider and invoke a
-Lambda function. The value for :code:`IDENTITY_POOL_ID` will be specific to your account. Ensure the
-region is the same as the Lambda function you are trying to invoke.
+The following code shows how to initialize the Cognito Caching Credentials Provider and invoke a Lambda function. The value for :code:`IDENTITY_POOL_ID` will be specific to your account. Ensure the region is the same as the Lambda function you are trying to invoke.
 
-::
+.. container:: option
 
-    // Create an instance of CognitoCachingCredentialsProvider
-    CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-         myActivity.getApplicationContext(),
-         IDENTITY_POOL_ID,
-         Regions.YOUR_REGION);
+   Android - Java
+      .. code-block:: java
 
-    // Create a LambdaInvokerFactory, to be used to instantiate the Lambda proxy
-    LambdaInvokerFactory factory = new LambdaInvokerFactory(
-      myActivity.getApplicationContext(),
-      REGION,
-      credentialsProvider);
+         // Create an instance of CognitoCachingCredentialsProvider
+         CognitoCachingCredentialsProvider credentialsProvider =
+             new CognitoCachingCredentialsProvider(
+                myActivity.getApplicationContext(),
+                IDENTITY_POOL_ID,
+                Regions.YOUR_REGION);
 
-    // Create the Lambda proxy object with default Json data binder.
-    // You can provide your own data binder by implementing
-    // LambdaDataBinder
-    MyInterface myInterface = factory.build(MyInterface.class);
+         // Create a LambdaInvokerFactory, to be used to instantiate the Lambda proxy
+         LambdaInvokerFactory factory = new LambdaInvokerFactory(
+            myActivity.getApplicationContext(),
+            REGION,
+            credentialsProvider);
 
-    NameInfo nameInfo = new NameInfo("John", "Doe");
+         // Create the Lambda proxy object with default Json data binder.
+         // You can provide your own data binder by implementing
+         // LambdaDataBinder
+         MyInterface myInterface = factory.build(MyInterface.class);
 
-    // The Lambda function invocation results in a network call
-    // Make sure it is not called from the main thread
-    new AsyncTask<NameInfo, Void, String>() {
-        @Override
-        protected String doInBackground(NameInfo... params) {
-        // invoke "echo" method. In case it fails, it will throw a
-        // LambdaFunctionException.
-        try {
-                return myInterface.echo(params[0]);
-         } catch (LambdaFunctionException lfe) {
-             Log.e(TAG, "Failed to invoke echo", lfe);
-             return null;
-          }
-     }
+         // Create an instance of the POJO to transfer data
+         NameInfo nameInfo = new NameInfo("John", "Doe");
 
-    @Override
-    protected void onPostExecute(String result) {
-        if (result == null) {
-            return;
+         // The Lambda function invocation results in a network call
+         // Make sure it is not called from the main thread
+         new AsyncTask<NameInfo, Void, String>() {
+             @Override
+             protected String doInBackground(NameInfo... params) {
+                 // invoke "echo" method. In case it fails, it will throw a
+                 // LambdaFunctionException.
+                 try {
+                     return myInterface.echo(params[0]);
+                 } catch (LambdaFunctionException lfe) {
+                     Log.e(TAG, "Failed to invoke echo", lfe);
+                     return null;
+                 }
+             }
+
+             @Override
+             protected void onPostExecute(String result) {
+                 if (result == null) {
+                      return;
+                 }
+
+                 // Do a toast
+                 Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
+             }
+         }.execute(nameInfo);
+
+   Android - Kotlin
+      .. code-block:: kotlin
+
+         // Create an instance of CognitoCachingCredentialsProvider
+         val credentialsProvider = CognitoCachingCredentialsProvider(
+            this@MainActivity.applicationContext,
+            IDENTITY_POOL_ID,
+            Regions.IDENTITY_POOL_REGION)
+
+         // Create a LambdaInvokerFactory, to be used to instantiate the Lambda proxy
+         val factory = LambdaInvokerFactory(
+            this@MainActivity.applicationContext,
+            LAMBDA_REGION,
+            credentialsProvider)
+
+         // Create the Lambda proxy object with default Json data binder.
+         // You can provide your own data binder by implementing
+         // LambdaDataBinder
+         val  myInterface = factory.build(MyInterface::class.java);
+
+         // Create an instance of the POJO to transfer data
+         val nameInfo = NameInfo("John", "Doe");
+
+         // The Lambda function invocation results in a network call
+         // Make sure it is not called from the main thread
+         thread(start = true) {
+            // Invoke "echo" method.  In case it fails, it will throw an exception
+            try {
+                val response: String = myInterface.echo(nameInfo)
+                runOnUiThread {
+                    Toast.makeText(this@MainActivity, result, Toast.LENGTH_LONG).show()
+                }
+            } catch (ex: LambdaFunctionException) {
+                Log.e(TAG, "Lambda execution failed")
+            }
          }
 
-            // Do a toast
-            Toast.makeText(MainActivity.this, result, Toast.LENGTH_LONG).show();
-        }
-    }.execute(nameInfo);
-
-Now whenever the Lambda function is invoked, you should see an application toast with the text
-"Hello John using <device>".
+Now whenever the Lambda function is invoked, you should see an application toast with the text "Hello John using <device>".
 
 For more information on accessing AWS Lambda, see :doc:`lambda`.
 

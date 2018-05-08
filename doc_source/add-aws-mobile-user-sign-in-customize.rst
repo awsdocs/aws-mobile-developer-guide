@@ -83,6 +83,59 @@ To override the defaults, and modify the behavior, look, and feel of the sign-in
                 }
             }
 
+    Android - Kotlin
+        Create and configure an :code:`AuthUIConfiguration` object and set its properties.
+
+            * To present the Email and Password user :code:`SignInUI`, set :code:`userPools` to :code:`true`.
+
+            * To present Facebook or Google  user :code:`SignInUI`, add :code:`signInButton(FacebookButton.class)` or :code:`signInButton(GoogleButton.class)`.
+
+            * To change the logo, use the :code:`logoResId`.
+
+            * To change the background color, use :code:`backgroundColor`.
+
+            * To cancel the sign-in flow, set :code:`.canCancel(true)`.
+
+            * To change the font in the sign-in views, use the :code:`fontFamily` method and pass in the string that represents a font family.
+
+            * To draw the :code:`backgroundColor` full screen, use :code:`fullScreenBackgroundColor`.
+
+
+        .. code-block:: java
+
+            import android.app.Activity;
+            import android.graphics.Color;
+            import android.os.Bundle;
+
+            import com.amazonaws.mobile.auth.facebook.FacebookButton;
+            import com.amazonaws.mobile.auth.google.GoogleButton;
+            import com.amazonaws.mobile.auth.ui.AuthUIConfiguration;
+            import com.amazonaws.mobile.auth.ui.SignInUI;
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobile.client.AWSStartupHandler;
+            import com.amazonaws.mobile.client.AWSStartupResult;
+
+            class MainActivity : AppCompatActivity() {
+                override fun onCreate(savedInstanceState : Bundle?) {
+                    super.onCreate()
+                    AWSMobileClient.getInstance().initialize(this) {
+                        val config = AuthUIConfiguration.Builder()
+                                .userPools(true) // show the Email and Password UI
+                                .signInButton(FacebookButton.class) // Show Facebook
+                                .signInButton(GoogleButton.class) // Show Google
+                                .logoResId(R.drawable.mylogo) // Change the logo
+                                .backgroundColor(Color.BLUE) // Change the background color
+                                .isBackgroundColorFullScreen(true) // Full screen background color
+                                .fontFamily("sans-serif-light") // font
+                                .canCancel(true) // Add a cancel/back button
+                                .build()
+                        val signInUI = AWSMobileClient.getInstance().getClient(this@MainActivity, SignInUI::class.java) as SignInUI
+                        signInUI.login(this@MainActivity, NextActivity::class.java).authUIConfiguration(config).execute()
+                    }.execute()
+                }
+            }
+
     iOS - Swift
         Create and configure an :code:`AWSAuthUIConfiguration` object and set its properties.
 

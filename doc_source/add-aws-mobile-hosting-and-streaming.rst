@@ -117,6 +117,80 @@ Set Up Your Backend
 
                   Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app. If NoSQL Database or Cloud Logic are changed, also download and use updated files for those features.
 
+   Android - Kotlin
+      #. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the integration steps on this page.
+
+      #. Use |AMHlong| to deploy your backend in minutes.
+
+
+         #. Sign in to the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
+
+         #. Choose :guilabel:`Create a new project`, type a name for it, and then choose
+            :guilabel:`Create project`.
+
+            Or select an existing project.
+
+         #. Choose the :guilabel:`Hosting and Streaming` tile.
+
+
+            #. Choose the :ref:`hosting-and-streaming` feature.
+
+               .. image:: images/add-aws-mobile-add-hosting-and-streaming.png
+                  :scale: 100
+                  :alt: Image of choosing Hosting and Streaming in the |AMH| console.
+
+               .. only:: pdf
+
+                  .. image:: images/add-aws-mobile-add-hosting-and-streaming.png
+                     :scale: 50
+
+               .. only:: kindle
+
+                  .. image:: images/add-aws-mobile-add-hosting-and-streaming.png
+                     :scale: 75
+
+            #. Check the box to indicate you understand that content hosted by the feature is
+               public, and then choose :guilabel:`Enable`.
+
+
+               .. image:: images/add-aws-mobile-add-hosting-and-streaming-enable.png
+                  :scale: 100
+                  :alt: Image of the |AMH| console.
+
+               .. only:: pdf
+
+                  .. image:: images/add-aws-mobile-add-hosting-and-streaming-enable.png
+                     :scale: 50
+
+               .. only:: kindle
+
+                  .. image:: images/add-aws-mobile-add-hosting-and-streaming-enable.png
+                     :scale: 75
+
+         #. Download your |AMH| project configuration file.
+
+               #. In the |AMH| console, choose your project, and then choose the :guilabel:`Integrate` icon on the left.
+
+               #. Choose :guilabel:`Download Configuration File` to get the :file:`awsconfiguration.json` file that connects your app to your backend.
+
+                  .. image:: images/add-aws-mobile-sdk-download-configuration-file.png
+                     :scale: 100 %
+                     :alt: Image of the Mobile Hub console when choosing Download Configuration File.
+
+                  .. only:: pdf
+
+                     .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
+                        :scale: 50
+
+                  .. only:: kindle
+
+                     .. image:: images/add-aws-mobile-sdk-download-nosql-cloud-logic.png
+                        :scale: 75
+
+                  *Remember:*
+
+                  Each time you change the |AMH| project for your app, download and use an updated :file:`awsconfiguration.json` to reflect those changes in your app. If NoSQL Database or Cloud Logic are changed, also download and use updated files for those features.
+
    iOS - Swift
       #. Complete the :ref:`add-aws-mobile-sdk-basic-setup` steps before using the integration steps on this page.
 
@@ -272,6 +346,47 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
          #. From the location where configuration files were downloaded in a previous step, drag
             :file:`awsconfiguration.json` into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
 
+   Android - Kotlin
+      #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.
+
+         #. :file:`AndroidManifest.xml` must contain:
+
+            .. code-block:: xml
+               :emphasize-lines: 0
+
+                <uses-permission android:name="android.permission.INTERNET" />
+                <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+         #. :file:`app/build.gradle` must contain:
+
+            .. code-block:: none
+               :emphasize-lines: 2
+
+                dependencies{
+                    implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
+                }
+
+      #. Add the backend service configuration file to your app.
+
+         In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+            .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+               :scale: 100
+               :alt: Image of creating a raw directory in Android Studio.
+
+            .. only:: pdf
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 50
+
+            .. only:: kindle
+
+               .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                  :scale: 75
+
+         #. From the location where configuration files were downloaded in a previous step, drag
+            :file:`awsconfiguration.json` into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.
