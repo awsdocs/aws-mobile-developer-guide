@@ -27,7 +27,7 @@ Start with a working app and then add cloud enable features. In this tutorial, y
 
 - :ref:`Add analytics to your app <tutorial-ios-aws-mobile-notes-analytics>` so you can view demographic information about your users.
 
-- :ref:`Add a simple sign-in/sign-up flow <tutorial-ios-aws-mobile-notes-analytics>` for authentication.
+- :ref:`Add a simple sign-in/sign-up flow <tutorial-ios-aws-mobile-notes-auth>` for authentication.
 
 - :ref:`Access data stores in the AWS <tutorial-ios-aws-mobile-notes-data>` cloud, so that a user's notes are available to them on any device with the app installed.
 

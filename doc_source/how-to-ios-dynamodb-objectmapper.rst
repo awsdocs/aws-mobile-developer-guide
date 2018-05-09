@@ -119,10 +119,10 @@ Book table to a ``Book`` object in the client-side code, as shown in the followi
                 import AWSDynamoDB
 
                 class Book : AWSDynamoDBObjectModel, AWSDynamoDBModeling  {
-                    var Title:String?
-                    var Author:String?
-                    var Price:String?
-                    var ISBN:String?
+                    @objc var Title:String?
+                    @objc var Author:String?
+                    @objc var Price:String?
+                    @objc var ISBN:String?
 
                     class Amazon DynamoDBTableName() -> String {
                         return "Books"

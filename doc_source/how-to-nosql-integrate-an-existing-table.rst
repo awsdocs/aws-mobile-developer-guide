@@ -216,11 +216,6 @@ To make the connection between your app and your backend services, add the confi
       Drag the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
 
 
-
-    iOS - Swift
-      Drag the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
-
-
 Add the SDK to your App
 -----------------------
 
@@ -438,10 +433,10 @@ To connect your app to your table create a data model object in the following fo
 
        class Books: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
 
-            var _isbn: String?
-            var _category: String?
-            var _author: String?
-            var _title: String?
+            @objc var _isbn: String?
+            @objc var _category: String?
+            @objc var _author: String?
+            @objc var _title: String?
 
             class func dynamoDBTableName() -> String {
                 return "Books"
