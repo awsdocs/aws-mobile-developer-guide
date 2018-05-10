@@ -108,49 +108,76 @@ Connect to your backend
 
          #. Initialize the voice button
 
-            In the :code:`onCreate()` of the activity where your Bot will be used, call
-            :code:`init()`.
+            Add the following :code:`init()` function to the :code:`onCreate()` of the activity where your Bot will be used.
+
+            Initialize :code:`AWSMobileClient` before the call to :code:`init()`, as the  :code:`InteractiveVoiceView` in the function connects to  Amazon Lex using the credentials provider object created by :code:`AWSMobileClient` .
 
             .. code-block:: java
 
-                public void init(){
+                import com.amazonaws.mobile.client.AWSMobileClient;
+                import com.amazonaws.mobile.client.AWSStartupHandler;
+                import com.amazonaws.mobile.client.AWSStartupResult;
+                import com.amazonaws.mobileconnectors.lex.interactionkit.Response;
+                import com.amazonaws.mobileconnectors.lex.interactionkit.config.InteractionConfig;
+                import com.amazonaws.mobileconnectors.lex.interactionkit.ui.InteractiveVoiceView;
+
+                public class MainActivity extends AppCompatActivity {
+
+                    @Override
+                    protected void onCreate(Bundle savedInstanceState) {
+                        super.onCreate(savedInstanceState);
+                        setContentView(R.layout.activity_main);
+
+                        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                            @Override
+                            public void onComplete(AWSStartupResult awsStartupResult) {
+                                Log.d("YourMainActivity", "AWSMobileClient is instantiated and you are connected to AWS!");
+                            }
+                        }).execute();
+
+                        init();
+
+                    }
+
+                    public void init(){
                         InteractiveVoiceView voiceView =
-                            (InteractiveVoiceView) findViewById(R.id.voiceInterface);
+                                (InteractiveVoiceView) findViewById(R.id.voiceInterface);
 
                         voiceView.setInteractiveVoiceListener(
-                            new InteractiveVoiceView.InteractiveVoiceListener() {
+                                new InteractiveVoiceView.InteractiveVoiceListener() {
 
-                            @Override
-                            public void dialogReadyForFulfillment(Map slots, String intent) {
-                                Log.d(TAG, String.format(
-                                        Locale.US,
-                                        "Dialog ready for fulfillment:\n\tIntent: %s\n\tSlots: %s",
-                                        intent,
-                                        slots.toString()));
-                            }
+                                    @Override
+                                    public void dialogReadyForFulfillment(Map slots, String intent) {
+                                        Log.d(LOG_TAG, String.format(
+                                                Locale.US,
+                                                "Dialog ready for fulfillment:\n\tIntent: %s\n\tSlots: %s",
+                                                intent,
+                                                slots.toString()));
+                                    }
 
-                            @Override
-                            public void onResponse(Response response) {
-                                Log.d(TAG, "Bot response: " + response.getTextResponse());
-                            }
+                                    @Override
+                                    public void onResponse(Response response) {
+                                        Log.d(LOG_TAG, "Bot response: " + response.getTextResponse());
+                                    }
 
-                            @Override
-                            public void onError(String responseText, Exception e) {
-                                Log.e(TAG, "Error: " + responseText, e);
-                            }
-                        });
+                                    @Override
+                                    public void onError(String responseText, Exception e) {
+                                        Log.e(LOG_TAG, "Error: " + responseText, e);
+                                    }
+                                });
 
                         voiceView.getViewAdapter().setCredentialProvider(AWSMobileClient.getInstance().getCredentialsProvider());
 
                         //replace parameters with your botname, bot-alias
                         voiceView.getViewAdapter()
-                                 .setInteractionConfig(
-                                      new InteractionConfig("YOUR-BOT-NAME","$LATEST"));
+                                .setInteractionConfig(
+                                        new InteractionConfig("YOUR-BOT-NAME","$LATEST"));
 
                         voiceView.getViewAdapter()
-                                 .setAwsRegion(getApplicationContext()
-                                 .getString(R.string.aws_region));
+                                .setAwsRegion(getApplicationContext()
+                                        .getString(R.string.aws_region));
                     }
+                }
 
 
    iOS - Swift

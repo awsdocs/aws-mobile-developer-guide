@@ -74,8 +74,8 @@ Using AWSTask
 =============
 
 An ``AWSTask`` object represents the result of an asynchronous method. Using ``AWSTask``,
-you can wait for an asynchronous method to return a value, and then something with that
-value after it has returned. You can chain asynchronous requests instead of nesting them. This
+you can wait for an asynchronous method to return a value, and then do something with that
+returned value. You can chain asynchronous requests instead of nesting them. This
 helps keep logic clean and code readable.
 
 Handling Asynchronous Method Returns with AWSTask
