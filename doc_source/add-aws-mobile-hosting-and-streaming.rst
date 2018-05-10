@@ -236,7 +236,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
          #. :file:`AndroidManifest.xml` must contain:
 
             .. code-block:: xml
-               :emphasize-lines: 0
+
 
                 <uses-permission android:name="android.permission.INTERNET" />
                 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -245,7 +245,6 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
          #. :file:`app/build.gradle` must contain:
 
             .. code-block:: none
-               :emphasize-lines: 2
 
                 dependencies{
                     implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'

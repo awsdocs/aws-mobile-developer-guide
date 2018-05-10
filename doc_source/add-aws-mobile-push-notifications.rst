@@ -107,7 +107,6 @@ Connect to your backend
          #. Add the following to your :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 0
 
                 dependencies{
                     implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
@@ -120,7 +119,6 @@ Connect to your backend
          #. Add the following to your project level :file:`build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 0
 
                 buildscript {
                     dependencies {
@@ -139,7 +137,6 @@ Connect to your backend
       #. Create an Amazon Pinpoint client in the location of your push notification code.
 
          .. code-block:: java
-            :emphasize-lines: 0
 
             import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
             import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
@@ -336,7 +333,6 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
             The following code can be placed where your app will react to incoming notifications.
 
             .. code-block:: java
-               :emphasize-lines: 0
 
                 import android.app.Activity;
                 import android.app.AlertDialog;
@@ -393,7 +389,6 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
          listening code exists in the following functions.
 
          .. code-block:: swift
-            :emphasize-lines: 0
 
              // . . .
 

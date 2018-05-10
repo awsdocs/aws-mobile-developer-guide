@@ -93,7 +93,6 @@ Edit the :file:`app/build.gradle` file and add the DynamoDB libraries to the
 dependencies:
 
 .. code-block:: java
-   :emphasize-lines: 8,9
 
    dependencies {
 
@@ -125,7 +124,6 @@ server.
 #. Import :code:`DynamoDBMapper` and :code:`AmazonDynamoDBClient` in :file:`AWSProvider.java`.
 
    .. code-block:: java
-      :emphasize-lines: 1,5,6,9
 
        import com.amazonaws.auth.AWSCredentialsProvider;
        import com.amazonaws.mobile.auth.core.IdentityManager;
@@ -142,7 +140,6 @@ server.
 #. Add private :code:`DynamoDBMapper` and :code:`AmazonDynamoDBClient` variables to the :code:`AWSProvider` class:
 
    .. code-block:: java
-      :emphasize-lines: 1,5,6,9
 
       public class AWSProvider {
           private static AWSProvider instance = null;
@@ -226,7 +223,6 @@ These functions convert object attributes when they are passed between :code:`Co
 Mutation events handle the :code:`insert`, :code:`update`, and :code:`delete` methods:
 
 .. code-block:: java
-   :emphasize-lines: 5-15,26-34,49-55
 
     @Nullable
     @Override
@@ -462,7 +458,6 @@ In the :code:`saveData()` method, replace the following local cursor methods:
 with an :code:`AsyncQueryHandler`:
 
 .. code-block:: java
-   :emphasize-lines: 18-29,30,32,34
 
     private void saveData() {
         // Save the edited text back to the item.
@@ -520,7 +515,6 @@ with an :code:`AsyncQueryHandler`:
 Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the following.
 
 .. code-block:: java
-   :emphasize-lines: 15-25
 
     private static final int DELETE_TOKEN = 1004;
 

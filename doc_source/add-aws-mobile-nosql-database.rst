@@ -71,7 +71,6 @@ Connect to your backend
          #. :file:`app/build.gradle` must contain:
 
             .. code-block:: java
-               :emphasize-lines: 2
 
                 dependencies{
                     implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
@@ -81,7 +80,6 @@ Connect to your backend
             following APIs.
 
             .. code-block:: java
-               :emphasize-lines: 1
 
                 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 
@@ -89,7 +87,6 @@ Connect to your backend
          example.
 
          .. code-block:: java
-            :emphasize-lines: 2, 9-13
 
              // import DynamoDBMapper
              import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
@@ -313,7 +310,6 @@ Use the following code to create an item in your NoSQL Database table.
 
    Android - Java
       .. code-block:: java
-         :emphasize-lines: 1-18
 
           public void createNews() {
               final NewsDO newsItem = new NewsDO();
@@ -375,7 +371,6 @@ Use the following code to read an item in your NoSQL Database table.
 
    Android - Java
       .. code-block:: java
-         :emphasize-lines: 1-15
 
           public void readNews() {
               new Thread(new Runnable() {
@@ -432,7 +427,6 @@ Use the following code to update an item in your NoSQL Database table.
 
    Android - Java
       .. code-block:: java
-         :emphasize-lines: 1-18
 
           public void updateNews() {
               final NewsDO newsItem = new NewsDO();
@@ -493,7 +487,6 @@ Use the following code to delete an item in your NoSQL Database table.
 
    Android - Java
       .. code-block:: java
-         :emphasize-lines: 1-17
 
           public void deleteNews() {
               new Thread(new Runnable() {
@@ -552,7 +545,6 @@ The following example code shows querying for news submitted with :CODE:`userId`
 
    Android - Java
       .. code-block:: java
-         :emphasize-lines: 1-38
 
          public void queryNews() {
 
@@ -596,7 +588,6 @@ The following example code shows querying for news submitted with :CODE:`userId`
 
    iOS - Swift
       .. code-block:: swift
-         :emphasize-lines: 0
 
           func queryNote() {
               // 1) Configure the query

@@ -67,7 +67,6 @@ Connect to your backend
          #. Add the following permissions to your :file:`AndroidManifest.xml`:
 
             .. code-block:: xml
-               :emphasize-lines: 1-2
 
                 <uses-permission android:name="android.permission.RECORD_AUDIO" />
                 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -75,7 +74,6 @@ Connect to your backend
          #. Add the following to your :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 2
 
                 dependencies{
                     implementation ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar') {transitive = true;}
@@ -84,7 +82,6 @@ Connect to your backend
          #. For each Activity where you make calls to |LEXlong|, import the following APIs.
 
             .. code-block:: none
-               :emphasize-lines: 1-3
 
                 import com.amazonaws.mobileconnectors.lex.interactionkit.Response;
                 import com.amazonaws.mobileconnectors.lex.interactionkit.config.InteractionConfig;
@@ -95,7 +92,6 @@ Connect to your backend
          #. Add a :code:`voice_component` to your layout file.
 
             .. code-block:: xml
-               :emphasize-lines: 1-5
 
                 <com.amazonaws.mobileconnectors.lex.interactionkit.ui.InteractiveVoiceView
                 android:id="@+id/voiceInterface"
@@ -107,7 +103,6 @@ Connect to your backend
             only supported in US Virginia East (us-east-1).`
 
             .. code-block:: xml
-               :emphasize-lines: 1
 
                 <string name="aws_region">us-east-1</string>
 
@@ -117,7 +112,6 @@ Connect to your backend
             :code:`init()`.
 
             .. code-block:: java
-               :emphasize-lines: 1-39
 
                 public void init(){
                         InteractiveVoiceView voiceView =

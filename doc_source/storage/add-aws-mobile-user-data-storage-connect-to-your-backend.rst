@@ -8,7 +8,6 @@
          #. Add the following to :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 2-3
 
                dependencies {
                   implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
@@ -20,7 +19,6 @@
          #. Add the following to :file:`AndroidManifest.xml`:
 
             .. code-block:: xml
-               :emphasize-lines: 1,7
 
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -38,7 +36,6 @@
             following packages.
 
             .. code-block:: none
-               :emphasize-lines: 1-2
 
                import com.amazonaws.mobile.config.AWSConfiguration;
                import com.amazonaws.mobileconnectors.s3.transferutility.*;

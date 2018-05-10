@@ -160,7 +160,6 @@ Add the SDK to Your App
          #. Add identity providers you want to enable to the app using Gradle.
 
             .. code-block:: none
-               :emphasize-lines: 0, 2, 4, 6
 
                 implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar')  {transitive = true;} // optional
                 implementation ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar')  {transitive = true;}  // optional
@@ -211,7 +210,6 @@ Add the SDK to Your App
                project features depend on.
 
                .. code-block:: none
-                  :emphasize-lines: 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34
 
                    platform :ios, '9.0'
 
@@ -252,7 +250,6 @@ Add the SDK to Your App
               To the following:
 
               .. code-block:: none
-                 :emphasize-lines: 0
 
                   import AWSMobileHubHelper
 
@@ -270,7 +267,6 @@ Add the SDK to Your App
               To the following:
 
               .. code-block:: none
-                 :emphasize-lines: 0
 
                   import AWSContentManager
 
@@ -325,7 +321,6 @@ Add the SDK to Your App
             To the following:
 
             .. code-block:: none
-               :emphasize-lines: 1
 
                 import AWSPinpoint
 

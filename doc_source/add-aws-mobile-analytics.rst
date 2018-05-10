@@ -137,7 +137,6 @@ Add Analytics
                #. The :file:`Podfile` that you configure to install the AWS Mobile SDK must contain:
 
                   .. code-block:: none
-                     :emphasize-lines: 4
 
                        platform :ios, '9.0'
                        target :'YourAppName' do
@@ -156,7 +155,6 @@ Add Analytics
                #. Classes that call Amazon Pinpoint APIs must use the following import statements:
 
                   .. code-block:: none
-                     :emphasize-lines: 1,2
 
                        import AWSCore
                        import AWSPinpoint
@@ -164,7 +162,6 @@ Add Analytics
                #. Insert the following code into the :code:`application(_:didFinishLaunchingWithOptions:)` method of your app's :file:`AppDelegate.swift`.
 
                   .. code-block:: swift
-                     :emphasize-lines: 3-12
 
                        class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -214,7 +211,6 @@ Use the following steps to implement Amazon Pinpoint custom analytics for your a
 
        Android - Java
           .. code-block:: java
-             :emphasize-lines: 1-15
 
                  import com.amazonaws.mobileconnectors.pinpoint.analytics.AnalyticsEvent;
 
@@ -233,7 +229,6 @@ Use the following steps to implement Amazon Pinpoint custom analytics for your a
 
        iOS - Swift
           .. code-block:: swift
-             :emphasize-lines: 9-19
 
              func logEvent() {
 
@@ -264,7 +259,6 @@ and design analytics related to purchases through your app.
 
          Android - Java
             .. code-block:: java
-               :emphasize-lines: 1-17
 
                import com.amazonaws.mobileconnectors.pinpoint.analytics.monetization.AmazonMonetizationEventBuilder;
 
@@ -285,7 +279,6 @@ and design analytics related to purchases through your app.
 
          iOS - Swift
             .. code-block:: swift
-               :emphasize-lines: 1-12
 
                   func sendMonetizationEvent()
                    {

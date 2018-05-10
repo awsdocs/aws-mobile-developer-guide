@@ -68,7 +68,6 @@ Add the Authentication UI Library
 #. Open the :file:`app/build.gradle` file and add the following lines to the :code:`dependencies` section:
 
     .. code-block:: java
-       :emphasize-lines: 13-15
 
        dependencies {
           compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -104,7 +103,6 @@ a plug-in provider that handles the appropriate sign-in flow.
 3. Add the following to the import declarations:
 
    .. code-block:: java
-      :emphasize-lines: 3
 
       import com.amazonaws.auth.AWSCredentialsProvider;
       import com.amazonaws.mobile.auth.core.IdentityManager;
@@ -116,7 +114,6 @@ a plug-in provider that handles the appropriate sign-in flow.
 4. Adjust the constructor to add the :code:`CognitoUserPoolsSignInProvider`.
 
    .. code-block:: java
-      :emphasize-lines: 3
 
       private AWSProvider(Context context) {
          this.context = context;
@@ -146,7 +143,6 @@ backend will be authenticated.
 Edit the :code:`onCreate()` method of :file:`AuthenticatorActivity.java` as follows:
 
   .. code-block:: java
-     :emphasize-lines: 6-32
 
       @Override
       protected void onCreate(Bundle savedInstanceState) {
@@ -199,7 +195,6 @@ activity. To make the AuthenticatorActivity primary, edit the
 :file:`AndroidManifest.xml`:
 
   .. code-block:: xml
-     :emphasize-lines: 1-8,13
 
      <activity
          android:name=".AuthenticatorActivity"

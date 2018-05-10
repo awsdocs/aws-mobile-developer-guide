@@ -361,7 +361,6 @@ CORS configuration in your project export file.
    following fragment.
 
    .. code-block:: yaml
-      :emphasize-lines: 24
 
        --- !com.amazonaws.mobilehub.v0.Project
            features:

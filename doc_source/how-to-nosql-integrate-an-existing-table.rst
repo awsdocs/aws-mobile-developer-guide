@@ -230,7 +230,6 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
          #. :file:`app/build.gradle` must contain:
 
             .. code-block:: java
-               :emphasize-lines: 2
 
                 dependencies{
 

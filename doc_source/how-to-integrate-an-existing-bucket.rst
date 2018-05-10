@@ -165,7 +165,6 @@ Add the SDK to your App
          #. Add the following to :file:`app/build.gradle`:
 
             .. code-block:: none
-               :emphasize-lines: 1-3
 
                dependencies {
                   implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
@@ -178,7 +177,6 @@ Add the SDK to your App
          #. Add the following to :file:`AndroidManifest.xml`:
 
             .. code-block:: xml
-               :emphasize-lines: 1,7
 
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -196,7 +194,6 @@ Add the SDK to your App
             following packages.
 
             .. code-block:: none
-               :emphasize-lines: 1-2
 
                import com.amazonaws.mobile.config.AWSConfiguration;
                import com.amazonaws.mobileconnectors.s3.transferutility.*;

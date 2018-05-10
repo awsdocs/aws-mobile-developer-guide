@@ -54,7 +54,6 @@ Add Permissions to the AndroidManifest.xml
    :code:`ACCESS_WIFI_STATE`: permissions to your project's :file:`AndroidManifest.xml` file.
 
 .. code-block:: xml
-   :emphasize-lines: 5-7
 
     <?xml version="1.0" encoding="utf-8"?>
     <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -83,7 +82,6 @@ Add AWS SDK for Android library
     :code:`dependencies` section:
 
     .. code-block:: xml
-       :emphasize-lines: 11-14
 
        dependencies {
           compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -241,7 +239,6 @@ This has been done for you in this project. Open the
 we previously added:
 
 .. code-block:: java
-   :emphasize-lines: 6,7
 
    public class Application extends MultiDexApplication {
       @Override
@@ -268,7 +265,6 @@ Pinpoint. Adjust the :code:`onActivityStarted()` and :code:`onActivityStopped()`
 methods as follows:
 
 .. code-block:: java
-   :emphasize-lines: 5,6,16,17
 
     @Override
     public void onActivityStarted(Activity activity) {
@@ -300,7 +296,6 @@ custom event for each operation. The Delete Note operation occurs in the
 :file:`NoteListActivity.java` class. Review the :code:`onSwiped` method, and add the following code:
 
 .. code-block:: java
-   :emphasize-lines: 6-13
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
@@ -323,7 +318,6 @@ Review the :code:`saveData()` method, and add code to send the custom event
 to Amazon Pinpoint as shown in the following fragment.
 
 .. code-block:: java
-   :emphasize-lines: 24-31
 
     private void saveData() {
         // Save the edited text back to the item.

@@ -190,7 +190,6 @@ Save an item (create or update)
 In the part of your app where you access the database, such as an event handler in your React component, call the :code:`put` method. Use the JSON and the root path (:code:`/Notes`) of your API that you copied from the CLI prompt response earlier.
 
 .. code-block:: java
-    :emphasize-lines: 2,5
 
       // Create a new Note according to the columns we defined earlier
         async saveNote() {
@@ -228,7 +227,6 @@ Get a specific item
 Call the :code:`get` method using the API path (copied earlier) to the item you are querying for.
 
 .. code-block:: java
-    :emphasize-lines: 3,4
 
       // noteId is the primary key of the particular record you want to fetch
           async getNote() {
@@ -251,7 +249,6 @@ Delete an item
 Add this method to your component. Use your API path (copied earlier).
 
 .. code-block:: javascript
-    :emphasize-lines: 2,3
 
       // noteId is the NoteId of the particular record you want to delete
           async deleteNote() {

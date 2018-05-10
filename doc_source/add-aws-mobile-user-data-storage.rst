@@ -81,7 +81,6 @@ using the integration steps on this page.
          #. Add the following to :file:`AndroidManifest.xml`:
 
             .. code-block:: xml
-               :emphasize-lines: 1,7
 
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
