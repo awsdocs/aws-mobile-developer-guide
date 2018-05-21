@@ -1,0 +1,14 @@
+# Dependencies for the AWS Mobile SDK Developer Guide, which are copied into the build directory
+# during a build.
+#
+# The format of this file is simple: each line represents a single dependency, consisting of a Git
+# URL and an optional sub-directory within the repository. If the sub-directory is given, then
+# everything within it and down is copied.
+# when testing, you can add line starting with dir to copy a local copy of
+# dependencies. Hereâ€™s an example:
+# dir <path-to-local-dir>
+#
+# Git URL                                                      Subdirectory to copy
+# -------------------------------------------------------    ------------------------------------------
+https://github.com/awsdocs/aws-doc-shared-content.git          sphinx_shared
+# https://github.com/awsdocs/aws-mobile-developer-guide. git     doc_source

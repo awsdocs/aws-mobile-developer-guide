@@ -11,6 +11,12 @@
 # General information about the project.
 #
 
+# sphinx-build constants
+extensions = ['sphinx.ext.extlinks']
+
+master_doc = 'index'
+
+
 # Optional service/SDK name, typically the three letter acronym (TLA) that
 # represents the service, such as 'SWF'. If this is an SDK, you can use 'SDK'
 # here.
