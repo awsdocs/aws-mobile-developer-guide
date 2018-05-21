@@ -308,20 +308,18 @@ Use the following steps to add AWS Cloud Logic to your app.
                val parameters = mapOf("lang" to "en_US")
                val headers = mapOf("Content-Type" to "application/json")
 
-               var localRequest = ApiRequest(apiClient::class.java.simpleName)
+               val request = ApiRequest(apiClient::class.java.simpleName)
                         .withPath("/items")
                         .withHttpMethod(HttpMethod.GET)
                         .withHeaders(headers)
                         .withParameters(parameters)
                 if (body.isNotEmpty()) {
                     val content = body.getBytes(StringUtils.UTF8)
-                    localRequest = localRequest
+                    request
                         .addHeader("Content-Length", String.valueOf(content.length))
                         .withBody(content)
                 }
 
-                // We need a "val" to pass the value to another thread
-                val request = localRequest
                 thread(start = true) {
                     try {
                         Log.d(TAG, "Invoking API")

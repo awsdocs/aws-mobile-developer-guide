@@ -327,7 +327,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
 
       #. Add the backend service configuration file to your app.
 
-         In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+         In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
                :scale: 100
@@ -369,7 +369,7 @@ Use the following steps to add |AMH| Hosting and Streaming to your app.
 
       #. Add the backend service configuration file to your app.
 
-         In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+         In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
                :scale: 100
