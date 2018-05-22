@@ -67,7 +67,7 @@ using the integration steps on this page.
    Android - Java
       Set up AWS Mobile SDK components as follows:
 
-         #. Add the following to :file:`app/build.gradle`:
+         #. Add the following to :file:`app/build.gradle` (Module:app):
 
             .. code-block:: none
 
@@ -416,4 +416,4 @@ Next Steps
 
 * For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`__.
 
-* Looking for Amazon Cognito Sync? If you are new user, use `AWS AppSync <https://aws.amazon.com/appsync/>`__ instead. AppSync is a new service for synchronizing application data across devices. Like Cognito Sync, AppSync enables synchronization of a user's own data, such as game state or app preferences. AppSync extends these capabilities by allowing multiple users to synchronize and collaborate in real-time on shared data, such as a virtual meeting space or chatroom. `Start building with AWS AppSync now <https://aws.amazon.com/appsync/>`__
+* Looking for Amazon Cognito Sync? If you are a new user, use `AWS AppSync <https://aws.amazon.com/appsync/>`__ instead. AppSync is a new service for synchronizing application data across devices. Like Cognito Sync, AppSync enables synchronization of a user's own data, such as game state or app preferences. AppSync extends these capabilities by allowing multiple users to synchronize and collaborate in real-time on shared data, such as a virtual meeting space or chatroom. `Start building with AWS AppSync now <https://aws.amazon.com/appsync/>`__
