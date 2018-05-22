@@ -163,8 +163,8 @@ Once the real-time endpoint is ready, we can begin calling Predict. Note that yo
 	     // Do something with the prediction
 	     // ...
 
-   Android - Java
-      .. code-block:: java
+   Android - Kotlin
+      .. code-block:: kotlin
 
 	     // Create a Predict request with your ML model ID and the appropriate Record mapping
 	     val predictRequest predictRequest = PredictRequest().apply {
@@ -174,7 +174,7 @@ Once the real-time endpoint is ready, we can begin calling Predict. Note that yo
 		 }
 
 		 val predictResult = client.predict(predictRequest)
-		 Log.d(TAG, predictResult.prediction)
+		 Log.d(LOG_TAG, predictResult.prediction)
 
 		 // Do something with the prediction
 		 // ...
