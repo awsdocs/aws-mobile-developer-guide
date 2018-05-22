@@ -67,8 +67,7 @@ using the integration steps on this page.
    Android - Java
       Set up AWS Mobile SDK components as follows:
 
-         #. Add the following to :file:`app/build.gradle` 
-         NB: in the Android Studio GUI, the file to edit should say 'build.gradle (Module: app)':
+         #. Add the following to :file:`app/build.gradle` (Module:app):
 
             .. code-block:: none
 
