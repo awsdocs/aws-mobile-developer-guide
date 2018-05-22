@@ -358,8 +358,7 @@ To connect your app to an Amazon DynamoDB table you have created, use a data mod
               // setters and getters for other attribues ...
           }
 
-        If you download the model files, they will be provided in Java.  The model files
-        are equally useable in Kotlin projects.
+      If you download the model files, they will be provided in Java.  The model files are equally useable in Kotlin projects.
 
    iOS - Swift
       In the following example, the :code:`News` class defines the data model of the :code:`News` table. The class is used by the CRUD methods in this section to access the table and its attributes. The data model file you downloaded from |AMH| in previous steps contains a similar class that defines the model of your table.
@@ -479,13 +478,10 @@ Use the following code to create an item in your NoSQL Database table.
                })
           }
 
-
-
 .. _add-aws-mobile-nosql-database-crud-read:
 
 Read (Load) an Item
 -------------------
-
 
 Use the following code to read an item in your NoSQL Database table.
 
@@ -546,8 +542,6 @@ Use the following code to read an item in your NoSQL Database table.
                       print("An item was read.")
                   })
           }
-
-
 
 .. _add-aws-mobile-nosql-database-crud-update:
 
@@ -692,7 +686,6 @@ Use the following code to delete an item in your NoSQL Database table.
 Perform a Query
 ===============
 
-
 A query operation enables you to find items in a table. You must define a query using both the hash key
 (partition key) and range key (sort key) attributes of a table. You can filter the results by
 specifying the attributes you are looking for.
@@ -703,7 +696,6 @@ The following example code shows querying for news submitted with :CODE:`userId`
 
    Android - Java
       .. code-block:: java
-         :emphasize-lines: 1-38
 
          public void queryNews() {
 
@@ -746,7 +738,6 @@ The following example code shows querying for news submitted with :CODE:`userId`
 
    Android - Kotlin
       .. code-block:: kotlin
-         :emphasize-lines: 1-17
 
          public void queryNews(userId: String, articleId: String, callback: (List<NewsDO>?) -> Unit) {
             thread(start = true) {
@@ -764,11 +755,10 @@ The following example code shows querying for news submitted with :CODE:`userId`
                 val result = dynamoDBMapper.query(NewsDO::class.java, queryExpression)
                 runOnUiThread { callback(result) }
             }
-        }
+         }
 
    iOS - Swift
       .. code-block:: swift
-         :emphasize-lines: 0
 
           func queryNote() {
               // 1) Configure the query
@@ -800,7 +790,4 @@ The following example code shows querying for news submitted with :CODE:`userId`
                 }
              }
           }
-
-
-
 

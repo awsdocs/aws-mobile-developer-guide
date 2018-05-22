@@ -66,18 +66,15 @@ policies, see `Introduction to IAM
 Add Import Statements
 ---------------------
 
-Add the following imports to the main activity of your app:
-::
+Add the following imports to the main activity of your app::
 
 	import com.amazonaws.services.machinelearning.*;
-
 
 Initialize AmazonMachineLearningClient
 ======================================
 
 Pass your initialized Amazon Cognito credentials provider to the :code:`AmazonMachineLearningClient`
-constructor::
-
+constructor:
 
 .. container:: option
 

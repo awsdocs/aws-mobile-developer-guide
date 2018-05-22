@@ -371,6 +371,7 @@ Download a File
      AWSConfiguration object and pass it into TransferUtility.
 
        .. code-block:: kotlin
+
             import android.app.Activity;
             import android.util.Log;
 
@@ -1486,6 +1487,11 @@ Limitations
 .. container:: option
 
     Android - Java
+        If you expect your app to perform transfers that take longer than 50 minutes, use `AmazonS3Client <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html>`__ instead of `TransferUtility <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/s3/transferutility/TransferUtility.html>`__.
+
+        :code:`TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using |COG| Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. Generated |S3| pre-signed URLs cannot last longer than that time. Because of this limitation, the Amazon S3 Transfer Utility enforces 50 minute transfer timeouts, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After **50 minutes**, you receive a transfer failure.
+
+    Android - Kotlin
         If you expect your app to perform transfers that take longer than 50 minutes, use `AmazonS3Client <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html>`__ instead of `TransferUtility <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/s3/transferutility/TransferUtility.html>`__.
 
         :code:`TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using |COG| Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. Generated |S3| pre-signed URLs cannot last longer than that time. Because of this limitation, the Amazon S3 Transfer Utility enforces 50 minute transfer timeouts, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After **50 minutes**, you receive a transfer failure.

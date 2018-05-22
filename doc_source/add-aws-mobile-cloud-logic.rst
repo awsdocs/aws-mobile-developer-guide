@@ -273,68 +273,67 @@ Use the following steps to add AWS Cloud Logic to your app.
 
          .. code-block:: kotlin
 
-             import android.support.v7.app.AppCompatActivity;
-             import android.os.Bundle;
-             import android.util.Log;
-             import com.amazonaws.http.HttpMethodName;
-             import java.io.InputStream;
-             import java.util.HashMap;
+            import android.support.v7.app.AppCompatActivity;
+            import android.os.Bundle;
+            import android.util.Log;
+            import com.amazonaws.http.HttpMethodName;
+            import java.io.InputStream;
+            import java.util.HashMap;
 
-             import com.amazonaws.mobile.client.AWSMobileClient;
-             import com.amazonaws.mobileconnectors.api.YOUR-API-CLASS-ID.YOUR-API-CLASS-NAMEMobilehubClient;
-             import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
-             import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
-             import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
-             import com.amazonaws.util.StringUtils;
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobileconnectors.api.YOUR-API-CLASS-ID.YOUR-API-CLASS-NAMEMobilehubClient;
+            import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+            import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
+            import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
+            import com.amazonaws.util.StringUtils;
 
-             class MainActivity : AppCompatActivity() {
-               companion object {
-                 private val TAG = this::class.java.simpleName
-               }
+            class MainActivity : AppCompatActivity() {
+                companion object {
+                    private val TAG = this::class.java.simpleName
+                }
 
-               private var apiClient: YOUR-API-CLASS-NAMEMobileHubClient? = null
+                private var apiClient: YOUR-API-CLASS-NAMEMobileHubClient? = null
 
-               override fun onCreate(savedInstanceState: Bundle?) {
-                 super.onCreate(savedInstanceState)
-                 setContentView(R.layout.activity_main)
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    setContentView(R.layout.activity_main)
 
-                 apiClient = ApiClientFactory()
-                    .credentialsProvider(AWSMobileClient.getInstance().credentialsProvider)
-                    .build(YOUR-API-CLASS-NAMEMobileHubClinet::class.java)
-             }
+                    apiClient = ApiClientFactory()
+                        .credentialsProvider(AWSMobileClient.getInstance().credentialsProvider)
+                        .build(YOUR-API-CLASS-NAMEMobileHubClinet::class.java)
+                }
 
-             fun callCloudLogic(body: String) {
+                fun callCloudLogic(body: String) {
+                    val parameters = mapOf("lang" to "en_US")
+                    val headers = mapOf("Content-Type" to "application/json")
 
-               val parameters = mapOf("lang" to "en_US")
-               val headers = mapOf("Content-Type" to "application/json")
-
-               val request = ApiRequest(apiClient::class.java.simpleName)
+                    val request = ApiRequest(apiClient::class.java.simpleName)
                         .withPath("/items")
                         .withHttpMethod(HttpMethod.GET)
                         .withHeaders(headers)
                         .withParameters(parameters)
-                if (body.isNotEmpty()) {
-                    val content = body.getBytes(StringUtils.UTF8)
-                    request
-                        .addHeader("Content-Length", String.valueOf(content.length))
-                        .withBody(content)
-                }
+                    if (body.isNotEmpty()) {
+                        val content = body.getBytes(StringUtils.UTF8)
+                        request
+                            .addHeader("Content-Length", String.valueOf(content.length))
+                            .withBody(content)
+                    }
 
-                thread(start = true) {
-                    try {
-                        Log.d(TAG, "Invoking API")
-                        val response = apiClient.execute(request)
-                        val responseContentStream = response.getContent()
-                        if (responseContentStream != null) {
-                            val responseData = IOUtils.toString(responseContentStream)
-                            // Do something with the response data here
+                    thread(start = true) {
+                        try {
+                            Log.d(TAG, "Invoking API")
+                            val response = apiClient.execute(request)
+                            val responseContentStream = response.getContent()
+                            if (responseContentStream != null) {
+                                val responseData = IOUtils.toString(responseContentStream)
+                                // Do something with the response data here
+                            }
+                        } catch (ex: Exception) {
+                            Log.e(TAG, "Error invoking API")
                         }
-                    } catch (ex: Exception) {
-                        Log.e(TAG, "Error invoking API")
                     }
                 }
             }
-         }
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.

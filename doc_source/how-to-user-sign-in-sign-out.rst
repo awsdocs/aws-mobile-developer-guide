@@ -48,7 +48,7 @@ Enable User Sign-out
 
             // AuthenticatorActivity.java
 
-            package com.your-domain.android.YOUR-APP-NAME;
+            package com.YOUR-DOMAIN.android.YOUR-APP-NAME;
 
             import android.content.Intent;
             import android.support.v7.app.AppCompatActivity;
@@ -213,7 +213,7 @@ Enable User Sign-out
 
         .. code-block:: java
 
-            package com.dzmedia.android.YOUR-APP-NAME;
+            package com.YOUR-DOMAIN.android.YOUR-APP-NAME;
 
             import android.support.v7.app.AppCompatActivity;
             import android.os.Bundle;

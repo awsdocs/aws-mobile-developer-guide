@@ -51,10 +51,7 @@ this tutorial.
 Create a Lambda Function in the AWS Console
 -------------------------------------------
 
-For this tutorial, let's use a simple "echo" function that returns the input. Follow the steps
-described at `Amazon Lambda Getting Started
-<http://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`__, replacing the function code
-with the code below::
+For this tutorial, let's use a simple "echo" function that returns the input. Follow the steps described at `Amazon Lambda Getting Started <http://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`__, replacing the function code with the code below::
 
  exports.handler = function(event, context) {
       console.log("Received event");
@@ -130,7 +127,7 @@ Initialize LambdaInvokerFactory
 .. container:: option
 
    Android - Java
-      Pass your initialized Amazon Cognito credentials provider to the :code:`LambdaInvokerFactory` constructor::
+      Pass your initialized Amazon Cognito credentials provider to the :code:`LambdaInvokerFactory` constructor:
 
       .. code-block:: java
 
@@ -140,7 +137,7 @@ Initialize LambdaInvokerFactory
              credentialsProvider);
 
    Android - Kotlin
-      Pass your initialized Amazon Cognito credentials provider to the :code:`LambdaInvokerFactory` constructor::
+      Pass your initialized Amazon Cognito credentials provider to the :code:`LambdaInvokerFactory` constructor:
 
       .. code-block:: kotlin
 
@@ -154,7 +151,7 @@ Declare Data Types
 
    Android - Java
 
-      Declare the Java classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name::
+      Declare the Java classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name:
 
       .. code-block:: java
          package com.amazonaws.demo.lambdainvoker;
@@ -192,7 +189,7 @@ Declare Data Types
 
    Android - Kotlin
 
-      Declare the Kotlin data classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name::
+      Declare the Kotlin data classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name:
 
       .. code-block:: kotlin
          package com.amazonaws.demo.lambdainvoker;
@@ -214,7 +211,7 @@ Declare an interface containing one method for each Lambda function call. Each m
   - RequestResponse: calls the Lambda Function synchronously
   - DryRun: allows you to validate access to a Lambda Function without executing it
 
-The following code shows how to create a Lambda proxy::
+The following code shows how to create a Lambda proxy:
 
 .. container:: option
 

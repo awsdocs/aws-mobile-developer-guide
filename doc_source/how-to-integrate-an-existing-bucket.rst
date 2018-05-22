@@ -103,9 +103,7 @@ Create the awsconfiguration.json file
             }
         },
         "IdentityManager" : {
-          "Default" : {
-
-          }
+          "Default" : { }
         },
         "S3TransferUtility": {
             "Default": {
@@ -132,7 +130,26 @@ Add the awsconfiguration.json file to your app
 .. container:: option
 
     Android - Java
-      In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+      In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+          .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+             :scale: 100
+             :alt: Image of creating a raw directory in Android Studio.
+
+          .. only:: pdf
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 50
+
+          .. only:: kindle
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 75
+
+      Drag the :file:`awsconfiguration.json` you created into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
+
+    Android - Kotlin
+      In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
           .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
              :scale: 100
