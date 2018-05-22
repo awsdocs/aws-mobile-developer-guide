@@ -289,7 +289,7 @@ Connect to Your Backend
                     }
                 }
 
-  Android - Kotlin
+   Android - Kotlin
       #. Prerequisites
 
          * `Install Android Studio <https://developer.android.com/studio/index.html#downloads>`__ version 2.33 or higher.
