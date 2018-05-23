@@ -194,7 +194,26 @@ To make the connection between your app and your backend services, add the confi
 .. container:: option
 
     Android - Java
-         In the Xcode Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+         In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+          .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+             :scale: 100
+             :alt: Image of creating a raw directory in Android Studio.
+
+          .. only:: pdf
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 50
+
+          .. only:: kindle
+
+             .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                :scale: 75
+
+      Drag the :file:`awsconfiguration.json` you created into the :file:`res/raw` folder. Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
+
+    Android - Kotlin
+         In the Android Studio Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
 
           .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
              :scale: 100
@@ -311,6 +330,80 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
                  Thread mythread = new Thread(runnable);
                  mythread.start();
 
+   Android - Kotlin
+
+      #. Set up AWS Mobile SDK components with the following
+         :ref:`add-aws-mobile-sdk-basic-setup` steps.
+
+         #. :file:`app/build.gradle` must contain:
+
+            .. code-block:: java
+
+                dependencies{
+
+                    // Amazon Cognito dependencies for user access to AWS resources
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+
+                    // AmazonDynamoDB dependencies for NoSQL Database
+                    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
+
+                    // other dependencies . . .
+                }
+
+         #. Add the following permissions to :file:`AndroidManifest.xml`.
+
+            .. code-block:: xml
+
+                 <uses-permission android:name="android.permission.INTERNET"/>
+                 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
+      #. Create an :code:`AWSDynamoDBMapper` client in the call back of your call to instantiate :code:`AWSMobileClient`. This will ensure that the AWS credentials needed to connect to Amazon DynamoDB are available, and is typically in :code:`onCreate` function of of your start up activity.
+
+         .. code-block:: kotlin
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobile.client.AWSStartupHandler;
+            import com.amazonaws.mobile.client.AWSStartupResult;
+
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+            import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+
+            class MainActivity : AppCompatActivity() {
+                var ddbMapper: DynamoDBMapper? = null
+
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    setContentView(R.layout.activity_main)
+
+                    AWSMobileClient.getInstance().initialize(this, object : AWSStartupHandler() {
+                        override fun onComplete(awsStartupResult: AWSStartupResult) {
+                            val ddbClient = AmazonDynamoDBClient(AWSMobileClient.getInstance().credentialsProvider)
+                            ddbMapper = DynamoDBMapper.builder()
+                                .dynamoDBClient(ddbClient)
+                                .awsConfiguration(AWSMobileClient.getInstance().configuration)
+                                .build()
+                        }
+                    }).execute()
+
+                    // other setup within onCreate() ...
+                }
+            }
+
+      .. list-table::
+         :widths: 1 6
+
+         * - **Important**
+
+           - **Use Asynchronous Calls to DynamoDB**
+
+             Since calls to |DDB| are synchronous, they don't belong on your UI thread. Use an asynchronous method like the :code:`thread` wrapper to call :code:`DynamoDBObjectMapper` in a separate thread.
+
+             .. code-block:: kotlin
+
+                thread(start = true ) {
+                    // DynamoDB calls go here
+                }
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following
@@ -419,6 +512,40 @@ To connect your app to your table create a data model object in the following fo
 
             }
 
+   Android - Kotlin
+     In the Android Studio project explorer right-click the folder containing your main activity, and choose :guilabel:`New > Java Class`. Type the :guilabel:`Name` you will use to refer to your data model. In this example the name would be :userinput:`BooksDO`. Add code in the following form.
+
+     .. code-block:: Kotlin
+
+            package com.amazonaws.models.nosql;
+
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBIndexHashKey;
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBIndexRangeKey;
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBRangeKey;
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
+
+            import java.util.List;
+            import java.util.Map;
+            import java.util.Set;
+
+            @DynamoDBTable(tableName = "Books")
+            class BooksDO {
+                @DynamoDBHashKey(attributeName = "ISBN")
+                @DynamoDBAttribute(attributeName = "ISBN")
+                var isbn: String? = null
+
+                @DynamoDBRangeKey (attributeName = "Category")
+                @DynamoDBAttribute(attributeName = "Category")
+                var category: String? = null
+
+                @DynamoDBIndexHashKey(attributeName = "Author", globalSecondaryIndexName = "Author")
+                var author: String? = null
+
+                @DynamoDBIndexRangeKey(attributeName = "Title", globalSecondaryIndexName = "Title")
+                var title: String? = null
+            }
 
    iOS - Swift
      In the Xcode project explorer,  right-click the folder containing your app delegate, and choose :guilabel:`New File > Swift File > Next`. Type the name you will use to refer to your data model as the filenam. In this example the name would be :userinput:`Books`. Add code in the following form.
@@ -501,6 +628,21 @@ Use the following code to create an item in your NoSQL Database table.
                 }).start();
             }
 
+   Android - Kotlin
+      .. code-block:: kotlin
+
+            fun createBooks() {
+                val booksItem = BooksDO().apply {
+                    isbn = "ISBN1"
+                    author = "Frederick Douglas"
+                    title = "Escape from Slavery"
+                    category = "History"
+                }
+
+                thread(start = true) {
+                    ddbMapper.save(booksItem)
+                }
+            }
 
    iOS - Swift
       .. code-block:: swift
@@ -551,9 +693,22 @@ Use the following code to read an item in your NoSQL Database table.
                                 "History");    // Sort key (range key)
 
                         // Item read
-                         Log.d("Books Item:", booksItem.toString());
+                         Log.d(LOG_TAG, String.format("Books Item: %s", booksItem.toString()));
                     }
                 }).start();
+            }
+
+   Android - Kotlin
+      .. code-block:: kotlin
+
+            fun readBooks() {
+                thread(start = true) {
+                    val booksItem = ddbMapper.load(BooksDO::class.java,
+                        "ISBN1",    // Partition Key (hash key)
+                        "History")  // Sort key (range key)
+
+                    Log.d(LOG_TAG, "Books Item: $booksItem")
+                }
             }
 
    iOS - Swift
@@ -615,7 +770,21 @@ Use the following code to update an item in your NoSQL Database table.
               }).start();
           }
 
+   Android - Kotlin
+      .. code-block:: kotlin
 
+        fun updateBooks() {
+            val booksItem = BooksDO().apply {
+                isbn = "ISBN1"
+                category = "History"
+                author = "Frederick M. Douglas"
+                // Do not set title - it will be removed from the item in DynamoDB
+            }
+
+            thread(start = true) {
+                ddbMapper.save(booksItem, DynamoDBMapperConfig(DynamoDBMappConfig.SaveBehavior.UPDATE_SKIP_NULL_ATTERIBUTES))
+            }
+        }
 
    iOS - Swift
       .. code-block:: swift
@@ -640,12 +809,10 @@ Use the following code to update an item in your NoSQL Database table.
             })
          }
 
-
 .. _add-aws-mobile-nosql-database-crud-delete:
 
 Delete an Item
 --------------
-
 
 Use the following code to delete an item in your NoSQL Database table.
 
@@ -670,6 +837,18 @@ Use the following code to delete an item in your NoSQL Database table.
                 }).start();
             }
 
+   Android - Kotlin
+      .. code-block:: kotlin
+
+            fun deleteBook() {
+                thread(start = true) {
+                    val booksItem = BooksDO().apply {
+                        isbn = "ISBN1"          // Partition key
+                        category = "History"    // Range key
+                    }
+                    ddbMapper.delete(booksItem)
+                }
+            }
 
    iOS - Swift
       .. code-block:: swift
@@ -695,7 +874,6 @@ Use the following code to delete an item in your NoSQL Database table.
 Perform a Query
 ===============
 
-
 A query operation enables you to find items in a table. You must define a query using both the hash key
 (partition key) and range key (sort key) attributes of a table. You can filter the results by
 specifying the attributes you are looking for. For more information about :code:`DynamoDBQueryExpression`, see the `AWS Mobile SDK for Android API reference <The AWS Mobile SDK pattern used for Amazon DynamoDB queries matches the `https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/dynamodbv2/dynamodbmapper/DynamoDBQueryExpression.html>`__.
@@ -705,7 +883,7 @@ The following example code shows querying for books with partition key (hash key
 .. container:: option
 
    Android - Java
-      .. code-block:: swift
+      .. code-block:: java
 
            public void queryBook() {
 
@@ -749,6 +927,33 @@ The following example code shows querying for books with partition key (hash key
                         }
                     }
                 }).start();
+            }
+
+   Android - Kotlin
+      .. code-block:: kotlin
+
+            fun queryBooks() {
+                thread(start = true) {
+                    val book = BooksDO().apply {
+                        isbn = "ISBN1"          // Partition key
+                        category = "History"    // Range key
+                    }
+
+                    val rangeKeyCondition = Condition()
+                        .withComparisonOperator(ComparisionOperator.BEGINS_WITH)
+                        .withAttrbiuteValueList(AttributeValue().withS("History"))
+                    val queryExpression = DynamoDBQUeryExpression()
+                        .withHashKeyValues(book)
+                        .withRangeKeyCondition("Category", rangeKeyCondition)
+                        .withConsistentRead(false)
+
+                    val result = ddbMapper.query(BooksDO::class.java, queryExpression) as PaginatedList<BooksDO>
+                    if (result.isEmpty()) {
+                        // There were no items matching your query
+                    } else {
+                        // loop through the result list and process the response
+                    }
+                }
             }
 
    iOS - Swift
