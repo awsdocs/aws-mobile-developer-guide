@@ -30,6 +30,7 @@ Get Started
      Add NoSQL Database <web-access-databases>
      Add User File Storage <web-add-storage>
      Add Cloud Logic <web-access-apis>
+     Host Your Web App <web-host-frontend>
 
 
 .. _web-getting-started_overview:

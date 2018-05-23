@@ -1,18 +1,9 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
 
 .. _web-host-frontend:
 
-################
-Access Your APIs
-################
+#################
+Host Your Web App
+#################
 
 
 .. meta::
@@ -28,56 +19,85 @@ Access Your APIs
 About Hosting and Streaming
 ===========================
 
-The AWS Mobile :ref:`Hosting and Streaming <hosting-and-streaming>` feature is especially useful to web developers. It uses the ability of `Amazon S3 <https://docs.aws.amazon.com/AmazonS3/latest/dev/Introduction.html>`__ buckets to statically host content and the `Amazon CloudFront <https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html>`__ content distribution network (CDN) to host on an endpoint close to every user globally. Amazon CloudFront endpoints can also stream media content.
 
-**About the Hosting and Streaming Sample App**
+The first time that you push your web app to the cloud, the Hosting and Streaming feature is enabled to statically host your app on the web. Using the AWS Mobile CLI, this happens when you first run:
 
-When you enable Hosting and Streaming , |AMH| provisions content in the root of your
-source bucket which includes a local copy of the |JSBlong|
-(:file:`aws-min.js`).
+.. code-block:: bash
 
-
-* :file:`aws-sdk.min.js` - An |JSBlong| source file.
-
-* :file:`aws-config.js,`- A web app configuration file that is generated to contain constants for the endpoints for each |AMH| feature you have enabled for this project.
-
-* `index.html` - Which uses a constant formed in :file:`aws-config.js` to request and display an AWS guest (unauthenticated) user identity ID from the |COG| service.
-
-When you enable Hosting and Streaming an |CFlong| global content delivery network (CDN)
-distribution is created and associated with your bucket. When |AMH| propagates the sample
-web app content to the bucket, the content is then propagated to the CDN and becomes
-available from local endpoints around the globe. If you configure `CloudFront streaming
-<http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Tutorials.html>`__, then media content you upload to your |S3| bucket can be streamed from
-those endpoints.
-
-** To view the Hosting and Streaming Sample App
-
-The |AMH| Hosting and Streaming feature creates a sample JavaScript web app that
-demonstrates connecting to the AWS resources of your |AMH| project.
-
-The sample app web assets are deployed to an |S3| bucket. The bucket is configured to host
-static web content for public access.
+   $ awsmobile publish
 
 
-#. In the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__, open your project and then choose the Hosting and Streaming tile.
+A container for your content is created using an `Amazon S3 <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ bucket. The content is available publicly on the Internet and you can preview the content directly using a testing URL.
 
-#. Choose :guilabel:`View from S3`.
+Content placed in your bucket is automatically distributed to a global content delivery network (CDN). `Amazon CloudFront <https://aws.amazon.com/cloudfront/>`__ implements the CDN which can host your app on an endpoint close to every user, globally. These endpoints can also stream media content. To learn more, see `CloudFront Streaming Tutorials <http://docs.aws.amazon.com/mobile-hub/latest/developerguide/url-cf-dev;Tutorials.html>`__.
 
-   This opens a browser and displays the :file:`index.html` of the sample web app from the |S3| bucket.
+By default, Hosting and Streaming deploys a simple sample web app that accesses AWS services.
 
-    .. image:: images/add-aws-mobile-add-hosting-and-streaming-view-from-s3.png
-       :scale: 100
-       :alt: Image of the |AMH| console.
+.. _manage-app-assets:
 
-    .. only:: pdf
+Managing Your App Assets
+========================
 
-       .. image:: images/add-aws-mobile-add-hosting-and-streaming-view-from-s3.png
-          :scale: 50
+You can use the AWS Mobile CLI or the |S3| console to manage the content of your bucket.
 
-    .. only:: kindle
+.. _manage-app-assets-use-cli:
 
-       .. image:: images/add-aws-mobile-add-hosting-and-streaming-view-from-s3.png
-          :scale: 75
+Use the AWS CLI to Manage Your Bucket Contents
+----------------------------------------------
+
+AWS CLI allows you to review, upload, move or delete your files stored in your bucket using the command line. To install and configure the AWS CLI client, see `Getting Set Up with the AWS Command Line Interface <https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html>`__.
+
+As an example, the sync command enables transfer of files to and from your local folder
+(:code:`source`) and your bucket (:code:`destination`).
+
+.. code-block:: bash
+
+   $ aws s3 sync {source destination} [--options]
+
+The following command syncs all files from your current local folder to the folder in your web app's bucket defined by :code:`path`.
+
+.. code-block:: bash
+
+   $ aws s3 sync . s3://my-web-app-bucket/path
+
+To learn more about using AWS CLI to manage Amazon S3, see `Using Amazon S3 with the AWS Command Line Interface <https://docs.aws.amazon.com/cli/latest/userguide/cli-s3.html>`__
+
+.. _manage-app-assets-use-s3-console:
+
+Use the Amazon S3 Console to Manage Your Bucket
+-----------------------------------------------
+
+To use the Amazon S3 console to review, upload, move or delete your files stored in your bucket, use the following steps.
+
+#. From the root of your project, run:
+
+   .. code-block:: bash
+
+      awsmobile console
+
+#. Choose the tile with the name of your project, then choose the Hosting and Streaming tile.
+
+#. Choose the link labelled :guilabel:`Manage files` to display the contents of your bucket in the Amazon S3 console.
+
+   .. image:: images/hosting-and-streaming-manage-files-link.png
+
+
+Other Useful Functions in the AWS Mobile Hub Console
+----------------------------------------------------
+
+The |AMH| console also provides convenient ways to browse to your web content, return to the AWS CLI content on this page, and other relevant tasks. These include:
+
+    * The :guilabel:`View from S3` link browses to the web contents of your bucket. When Hosting and Streaming is enabled, the bucket is populated with the files for a default web app files that is viewable immediately.
+
+      .. image:: images/hosting-and-streaming-view-s3-link.png
+
+    * The :guilabel:`View from CloudFront` browses to the web contents that have  propagated from your bucket to CDN. The endpoint propagation is dependent on network conditions. You can expect your content to be distributed and viewable within one hour.
+
+      .. image:: images/hosting-and-streaming-view-cloudfront-link.png
+
+    * The :guilabel:`Sync files with the command line` link takes you to content on this page that describes how to use the command line to manage the web app and streaming media files in your bucket.
+
+      .. image:: images/hosting-and-streaming-cli-sync-files-link.png
 
 
 Configure a Custom Domain for Your Web App
