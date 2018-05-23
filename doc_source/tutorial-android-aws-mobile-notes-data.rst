@@ -533,6 +533,7 @@ Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the fo
 
         // Remove the item from the database
         final int position = holder.getAdapterPosition();
+        Uri itemUri = NotesContentContract.Notes.uriBuilder(holder.getNote().getNoteId());
         AsyncQueryHandler queryHandler = new AsyncQueryHandler(getContentResolver()) {
             @Override
             protected void onDeleteComplete(int token, Object cookie, int result) {
@@ -541,6 +542,8 @@ Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the fo
                 Log.d("NoteListActivity", "delete completed");
             }
         };
+
+        queryHandler.startDelete(DELETE_TOKEN, null, itemUri, null, null);
     }
 
 If you need to do a query (for example, to respond to a search request),
