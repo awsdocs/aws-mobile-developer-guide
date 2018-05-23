@@ -331,7 +331,6 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
                  mythread.start();
 
    Android - Kotlin
-
       #. Set up AWS Mobile SDK components with the following
          :ref:`add-aws-mobile-sdk-basic-setup` steps.
 
@@ -513,7 +512,7 @@ To connect your app to your table create a data model object in the following fo
             }
 
    Android - Kotlin
-     In the Android Studio project explorer right-click the folder containing your main activity, and choose :guilabel:`New > Java Class`. Type the :guilabel:`Name` you will use to refer to your data model. In this example the name would be :userinput:`BooksDO`. Add code in the following form.
+     In the Android Studio project explorer right-click the folder containing your main activity, and choose :guilabel:`New > Java Class`. Type the :guilabel:`Name` you will use to refer to your data model. In this example the name would be :userinput:`BooksDO`. Add code in the following form. You can also use a data model in the Java form in a Kotlin project.
 
      .. code-block:: Kotlin
 

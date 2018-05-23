@@ -104,7 +104,7 @@ The current set of commands supported by the :code:`awsmobile CLI` are listed be
 
    * - :ref:`awsmobile publish <aws-mobile-cli-reference-publish>`
 
-     - Executes :code:`awsmobile push`, then builds and publishes client-side applicatioin to S3 and Cloud Front
+     - Executes :code:`awsmobile push`, then builds and publishes client-side application to S3 and Cloud Front
 
    * - :ref:`awsmobile run <aws-mobile-cli-reference-run>`
 

@@ -357,6 +357,6 @@ The following code shows how to initialize the Cognito Caching Credentials Provi
 
 Now whenever the Lambda function is invoked, you should see an application toast with the text "Hello John using <device>".
 
-For more information on accessing AWS Lambda, see :doc:`lambda`.
+To get started using streamlined steps for setting up and using lambda functions to handle cloud API calls, see :ref:`Add AWS Mobile Cloud Logic <add-aws-mobile-cloud-logic>`.
 
 .. _Cognito Console: https://console.aws.amazon.com/cognito/home

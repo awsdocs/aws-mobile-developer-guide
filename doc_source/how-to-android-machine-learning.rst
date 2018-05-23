@@ -80,11 +80,13 @@ constructor:
 
    Android - Java
       .. code-block:: java
-	     AmazonMachineLearningClient client = new AmazonMachineLearningClient(credentialsProvider);
+
+         AmazonMachineLearningClient client = new AmazonMachineLearningClient(credentialsProvider);
 
    Android - Kotlin
       .. code-block:: kotlin
-	     val client = AmazonMachineLearningClient(credentialsProvider)
+
+         val client = AmazonMachineLearningClient(credentialsProvider)
 
 Create an Amazon Machine Learning Client
 ========================================

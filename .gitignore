@@ -8,6 +8,7 @@ AwsSphinxSharedContent/
 aws-doc-shared-content/
 mobile-hub/
 build/
+doc_output/
 
 #awsmobilejs
 awsmobilejs/.awsmobile/backend-build

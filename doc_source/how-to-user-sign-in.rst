@@ -40,4 +40,4 @@ This section provides information on the steps for achieving specific tasks for 
    Set Up Facebook Sign-in <auth-facebook-setup>
    Set Up Google Sign-in <auth-google-setup>
    Set Up Your Custom Sign-in <auth-custom-setup>
-   Customize Your Sign-in UI <add-aws-mobile-user-sign-in-customize>
+   Customize the SDK Sign-in UI <add-aws-mobile-user-sign-in-customize>

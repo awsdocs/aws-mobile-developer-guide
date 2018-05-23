@@ -10,9 +10,9 @@
 
 .. _add-aws-mobile-user-sign-in-customize:
 
-#########################
-Customize Your Sign-In UI
-#########################
+############################
+Customize the SDK Sign-In UI
+############################
 
 .. _customize-signin-ui-steps:
 

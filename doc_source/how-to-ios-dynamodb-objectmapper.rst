@@ -10,9 +10,9 @@
 
 .. _how-to-ios-dynamodb-objectmapper:
 
-#################################
-Amazon DynamoDB Object Mapper API
-#################################
+######################################
+iOS: Amazon DynamoDB Object Mapper API
+######################################
 
 .. contents::
    :local:
