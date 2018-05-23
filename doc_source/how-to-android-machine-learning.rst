@@ -66,75 +66,118 @@ policies, see `Introduction to IAM
 Add Import Statements
 ---------------------
 
-Add the following imports to the main activity of your app:
-::
+Add the following imports to the main activity of your app::
 
 	import com.amazonaws.services.machinelearning.*;
-
 
 Initialize AmazonMachineLearningClient
 ======================================
 
 Pass your initialized Amazon Cognito credentials provider to the :code:`AmazonMachineLearningClient`
-constructor::
+constructor:
 
-	AmazonMachineLearningClient client = new AmazonMachineLearningClient(credentialsProvider);
+.. container:: option
 
+   Android - Java
+      .. code-block:: java
+	     AmazonMachineLearningClient client = new AmazonMachineLearningClient(credentialsProvider);
+
+   Android - Kotlin
+      .. code-block:: kotlin
+	     val client = AmazonMachineLearningClient(credentialsProvider)
 
 Create an Amazon Machine Learning Client
 ========================================
 
-
 Making a Predict Request
 ------------------------
 
-Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created
-real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have
-to use the Machine Learning Console or an alternate `SDK
-<http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that
-this ML can be used for real-time Predictions::
+Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have to use the Machine Learning Console or an alternate `SDK <http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that this ML can be used for real-time Predictions:
 
-	// Use a created model that has a created real-time endpoint
-	String mlModelId = "example-model-id";
+.. container:: option
 
-	// Call GetMLModel to get the realtime endpoint URL
-	GetMLModelRequest getMLModelRequest = new GetMLModelRequest();
-	getMLModelRequest.setMLModelId(mlModelId);
-	GetMLModelResult mlModelResult = client.getMLModel(getMLModelRequest);
+   Android - Java
+      .. code-block:: java
 
-	// Validate that the ML model is completed
-	if (!mlModelResult.getStatus().equals(EntityStatus.COMPLETED.toString())) {
-		System.out.println("ML Model is not completed: + mlModelResult.getStatus()");
-		return;
-	}
+         // Use a created model that has a created real-time endpoint
+		 String mlModelId = "example-model-id";
 
-	// Validate that the realtime endpoint is ready
-	if (!mlModelResult.getEndpointInfo().getEndpointStatus().equals(RealtimeEndpointStatus.READY.toString())){
-		System.out.println("Realtime endpoint is not ready: " + mlModelResult.getEndpointInfo().getEndpointStatus());
-		return;
-	}
+		 // Call GetMLModel to get the realtime endpoint URL
+		 GetMLModelRequest getMLModelRequest = new GetMLModelRequest();
+		 getMLModelRequest.setMLModelId(mlModelId);
+		 GetMLModelResult mlModelResult = client.getMLModel(getMLModelRequest);
 
-Once the real-time endpoint is ready, we can begin calling Predict. Note that you must pass the
-real-time endpoint through the PredictRequest.
+		 // Validate that the ML model is completed
+		 if (!mlModelResult.getStatus().equals(EntityStatus.COMPLETED.toString())) {
+			System.out.println("ML Model is not completed: " + mlModelResult.getStatus()");
+			return;
+		 }
 
-::
+		 // Validate that the realtime endpoint is ready
+		 if (!mlModelResult.getEndpointInfo().getEndpointStatus().equals(RealtimeEndpointStatus.READY.toString())){
+			System.out.println("Realtime endpoint is not ready: " + mlModelResult.getEndpointInfo().getEndpointStatus());
+			return;
+		 }
 
-	// Create a Predict request with your ML model ID and the appropriate Record mapping
-	PredictRequest predictRequest predictRequest = new PredictRequest();
-	predictRequest.setMLModelId(mlModelId);
+   Android - Kotlin
+      .. code-block:: kotlin
 
-	HashMap<String, String> record = new HashMap<String, String>();
-	record.put("example attribute", "example value");
+		 // Call GetMLModel to get the realtime endpoint URL
+		 val modelRequest = new GetMLModelRequest()
+		 modelRequest.mLModelID = "example-model-id"
+		 val modelResult = client.getMLModel(modelRequest);
 
-	predictRequest.setRecord(record);
-	predictRequest.setPredictEndpoint(mlModelResult.getEndpointInfo().getEndpointUrl());
+		 // Validate that the ML model is completed
+		 if (modelResult.status != EntityStatus.COMPLETED.toString()) {
+			Log.d(TAG, "ML Model is not completed: ${modelResult.status}");
+			return;
+		 }
 
-	// Call Predict and print out your prediction
-	PredictResult predictResult = client.predict(predictRequest);
-	System.out.println(predictResult.getPrediction());
+		 // Validate that the realtime endpoint is ready
+		 if (modelResult.endpointInfo.endpointStatus != RealtimeEndpointStatus.READY.toString()) {
+			Log.d(TAG, "Realtime endpoint is not ready: ${modelResult.endpointInfo.endpointStatus}");
+			return;
+		 }
 
-	// Do something with the prediction
-	// ...
+Once the real-time endpoint is ready, we can begin calling Predict. Note that you must pass the real-time endpoint through the PredictRequest.
+
+.. container:: option
+
+   Android - Java
+      .. code-block:: java
+
+	     // Create a Predict request with your ML model ID and the appropriate Record mapping
+	     PredictRequest predictRequest predictRequest = new PredictRequest();
+	     predictRequest.setMLModelId(mlModelId);
+
+	     HashMap<String, String> record = new HashMap<String, String>();
+	     record.put("example attribute", "example value");
+
+	     predictRequest.setRecord(record);
+	     predictRequest.setPredictEndpoint(mlModelResult.getEndpointInfo().getEndpointUrl());
+
+	     // Call Predict and print out your prediction
+	     PredictResult predictResult = client.predict(predictRequest);
+	     Log.d(LOG_TAG. predictResult.getPrediction());
+
+	     // Do something with the prediction
+	     // ...
+
+   Android - Kotlin
+      .. code-block:: kotlin
+
+	     // Create a Predict request with your ML model ID and the appropriate Record mapping
+	     val predictRequest predictRequest = PredictRequest().apply {
+		     mLModelID = "example-model-id"
+		     record = mapOf("example attribute" to "example value")
+		     predictEndpoint = modelResult.endpointInfo.getEndpointUrl
+		 }
+
+		 val predictResult = client.predict(predictRequest)
+		 Log.d(LOG_TAG, predictResult.prediction)
+
+		 // Do something with the prediction
+		 // ...
 
 Additional Resources
 

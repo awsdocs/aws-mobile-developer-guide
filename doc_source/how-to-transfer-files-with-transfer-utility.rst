@@ -123,6 +123,70 @@ Upload a File
                 }
             }
 
+   Android - Kotlin
+     The following example shows how to upload a file to an |S3| bucket.
+
+     Use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`, then create the :code:`TransferUtility` object. AWSMobileClient expects an activity context for resuming an authenticated session and creating the credentials provider.
+
+     The following example shows using the transfer utility in the context of an Activity. If you are creating transfer utility from an application context, you can construct the CredentialsProvider and
+     AWSConfiguration object and pass it into TransferUtility. The TransferUtility will check the size of file being uploaded and will automatically switch over to using multi part uploads if the file size exceeds 5 MB.
+
+       .. code-block:: kotlin
+
+            import android.app.Activity;
+            import android.util.Log;
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+            import com.amazonaws.services.s3.AmazonS3Client;
+
+            import java.io.File;
+
+            class MainActivity : Activity() {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate()
+                    AWSMobileClient.getInstance().initialize(this).execute()
+                    uploadWithTransferUtility(
+                        "s3Folder/s3Key.txt"
+                        File("/path/to/file/localfile.txt")
+                    )
+                }
+
+                private fun uploadWithTransferUtility(remote: String, local: File) {
+                    val txUtil = TransferUtility.builder()
+                            .context(getApplicationContext)
+                            .awsConfiguration(AWSMobileClient.getInstance().configuration)
+                            .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
+                            .build()
+
+                    val txObserver = txUtil.upload(remote, local)
+                    txObserver.transferListener = object : TransferListener() {
+                        override fun onStateChanged(id: Int, state: TransferState) {
+                            if (state == TransferState.COMPLETED) {
+                                // Handle a completed upload
+                            }
+                        }
+
+                        override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                            val done = (((current / total) * 100.0) as Float) as Int
+                            Log.d(TAG, "ID: $id, percent done = $done")
+                        }
+
+                        override fun onError(id: Int, ex: Exception) {
+                            // Handle errors
+                        }
+                    }
+
+                    // If you prefer to poll for the data, instead of attaching a
+                    // listener, check for the state and progress in the observer.
+                    if (txObserver.state == TransferState.COMPLETED) {
+                        // Handle a completed upload.
+                    }
+                }
+            }
 
    iOS - Swift
      The transfer utility provides methods for both single-part and multipart uploads. When a transfer uses multipart upload, the data is chunked into a number of 5 MB parts which are transferred in parallel for increased speed.
@@ -300,6 +364,68 @@ Download a File
               }
           }
 
+   Android - Kotlin
+     The following example shows how to download a file from an |S3| bucket. We use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object. AWSMobileClient expects an activity context for resuming an authenticated session and creating the credentials provider.
+
+     This example shows using the transfer utility in the context of an Activity. If you are creating transfer utility from an application context, you can construct the CredentialsProvider and
+     AWSConfiguration object and pass it into TransferUtility.
+
+       .. code-block:: kotlin
+
+            import android.app.Activity;
+            import android.util.Log;
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+            import com.amazonaws.services.s3.AmazonS3Client;
+
+            import java.io.File;
+
+            class MainActivity : Activity() {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate()
+                    AWSMobileClient.getInstance().initialize(this).execute()
+                    downloadWithTransferUtility(
+                        "s3Folder/s3Key.txt"
+                        File("/path/to/file/localfile.txt")
+                    )
+                }
+
+                private fun downloadWithTransferUtility(remote: String, local: File) {
+                    val txUtil = TransferUtility.builder()
+                            .context(getApplicationContext)
+                            .awsConfiguration(AWSMobileClient.getInstance().configuration)
+                            .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
+                            .build()
+
+                    val txObserver = txUtil.download(remote, local)
+                    txObserver.transferListener = object : TransferListener() {
+                        override fun onStateChanged(id: Int, state: TransferState) {
+                            if (state == TransferState.COMPLETED) {
+                                // Handle a completed upload
+                            }
+                        }
+
+                        override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                            val done = (((current / total) * 100.0) as Float) as Int
+                            Log.d(TAG, "ID: $id, percent done = $done")
+                        }
+
+                        override fun onError(id: Int, ex: Exception) {
+                            // Handle errors
+                        }
+                    }
+
+                    // If you prefer to poll for the data, instead of attaching a
+                    // listener, check for the state and progress in the observer.
+                    if (txObserver.state == TransferState.COMPLETED) {
+                        // Handle a completed upload.
+                    }
+                }
+            }
 
    iOS - Swift
      The following example shows how to download a file from an |S3| bucket.
@@ -391,6 +517,45 @@ Track Transfer Progress
             // Gets id of the transfer.
             int transferId = transferObserver.getId();
 
+    Android - Kotlin
+        With the :code:`TransferUtility`, the download() and upload() methods return a :code:`TransferObserver` object. This object gives access to:
+
+        #.  The state, as an :code:`enum`
+        #.  The total bytes currently transferred
+        #.  The total bytes remaining to transfer, to aid in calculating progress bars
+        #.  A unique ID that you can use to keep track of distinct transfers
+
+        Given the transfer ID, the :code:`TransferObserver` object can be retrieved from anywhere in your app, even if the app was terminated during a transfer. It also lets you create a :code:`TransferListener`, which will be updated on state or progress change, as well as when an error occurs.
+
+        To get the progress of a transfer, call :code:`setTransferListener()` on your :code:`TransferObserver`. This requires you to implement :code:`onStateChanged`, :code:`onProgressChanged`, and :code:`onError`. For example:
+
+        You can also query for :code:`TransferObservers` with either the :code:`getTransfersWithType(transferType)` or :code:`getTransfersWithTypeAndState(transferType, transferState)` method. You can use :code:`TransferObservers` to determine what transfers are underway, what are paused and handle the transfers as necessary.
+
+        .. code-block:: kotlin
+
+            val transferObserver = download(MY_BUCKET, OBJECT_KEY, MY_FILE);
+            transferObserver.transferListener = object : TransferListener() {
+                override fun onStateChanged(id: Int, state: TransferState) {
+                    // Do something
+                }
+
+                override fun onProgressChanged(id: int, current: Long, total: Long) {
+                    int percent = ((current / total) * 100.0) as Int
+                    // Display percent transferred
+                }
+
+                override fun onError(id: Int, ex: Exception) {
+                    // Do something
+                }
+            }
+
+        The transfer ID can be retrieved from the :code:`TransferObserver` object that is returned from upload or download function.
+
+        .. code-block:: kotlin
+
+            // Gets id of the transfer.
+            val transferId = transferObserver.id;
+
     iOS - Swift
         Implement progress and completion actions for transfers by passing a :code:`progressBlock` and :code:`completionHandler` blocks to the call to :code:`AWSS3TransferUtility` that initiates the transfer.
 
@@ -480,6 +645,35 @@ Pause a Transfer
 
             transferUtility.pauseAllWithType(TransferType.ANY);
 
+    Android - Kotlin
+        Transfers can be paused using the :code:`pause(transferId)` method. If your app is terminated, crashes, or loses Internet connectivity, transfers are automatically paused.
+
+        The :code:`transferId` can be retrieved from the :code:`TransferObserver` object as described in :ref:`native-track-progress-and-completion-of-a-transfer`.
+
+        To pause a single transfer:
+
+        .. code-block:: kotlin
+
+            transferUtility.pause(idOfTransferToBePaused);
+
+        To pause all uploads:
+
+        .. code-block:: kotlin
+
+            transferUtility.pauseAllWithType(TransferType.UPLOAD);
+
+        To pause all downloads:
+
+        .. code-block:: kotlin
+
+            transferUtility.pauseAllWithType(TransferType.DOWNLOAD);
+
+        To pause all transfers of any type:
+
+        .. code-block:: kotlin
+
+            transferUtility.pauseAllWithType(TransferType.ANY);
+
     iOS - Swift
         To pause or suspend a transfer, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` or :code:`AWSS3TransferUtilityDownloadTask` .
 
@@ -527,6 +721,35 @@ Resume a Transfer
 
             transferUtility.resumeAllWithType(TransferType.ANY);
 
+    Android - Kotlin
+        In the case of a loss in network connectivity, transfers will automatically resume when network connectivity is restored. If the app crashed or was terminated by the operating system, transfers can be resumed with the :code:`resume(transferId)` method.
+
+        The :code:`transferId` can be retrieved from the :code:`TransferObserver` object as described in :ref:`native-track-progress-and-completion-of-a-transfer`.
+
+        To resume a single transfer:
+
+        .. code-block:: kotlin
+
+            transferUtility.resume(idOfTransferToBeResumed);
+
+        To resume all uploads:
+
+        .. code-block:: kotlin
+
+            transferUtility.resumeAllWithType(TransferType.UPLOAD);
+
+        To resume all downloads:
+
+        .. code-block:: kotlin
+
+            transferUtility.resumeAllWithType(TransferType.DOWNLOAD);
+
+        To resume all transfers of any type:
+
+        .. code-block:: kotlin
+
+            transferUtility.resumeAllWithType(TransferType.ANY);
+
     iOS - Swift
         To resume an upload or a download operation, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` or :code:`AWSS3TransferUtilityDownloadTask`.
 
@@ -562,6 +785,23 @@ Cancel a Transfer
 
             transferUtility.cancelAllWithType(TransferType.DOWNLOAD);
 
+    Android - Kotlin
+        To cancel an upload, call cancel() or cancelAllWithType() on the :code:`TransferUtility` object.
+
+        The :code:`transferId` can be retrieved from the :code:`TransferObserver` object as described in :ref:`native-track-progress-and-completion-of-a-transfer`.
+
+        To cancel a single transfer, use:
+
+        .. code-block:: kotlin
+
+            transferUtility.cancel(idToBeCancelled);
+
+        To cancel all transfers of a certain type, use:
+
+        .. code-block:: kotlin
+
+            transferUtility.cancelAllWithType(TransferType.DOWNLOAD);
+
     iOS - Swift
         To cancel an upload or a download operation, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask`.
 
@@ -584,6 +824,9 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
 .. container:: option
 
     Android - Java
+       No additional work is needed to use this feature. As long as your app is present in the background a transfer that is in progress will continue.
+
+    Android - Kotlin
        No additional work is needed to use this feature. As long as your app is present in the background a transfer that is in progress will continue.
 
     iOS - Swift
@@ -736,6 +979,29 @@ Transfer with Object Metadata
 
         To download the meta, use the S3 :code:`getObjectMetadata` method. For more information, see the `API Reference <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html#getObjectMetadata%28com.amazonaws.services.s3.model.GetObjectMetadataRequest%29>`__.
 
+    Android - Kotlin
+        To upload a file with metadata, use the :code:`ObjectMetadata` object. Create a :code:`ObjectMetadata` object and add in the metadata headers and pass it to the upload function.
+
+        .. code-block:: kotlin
+
+            import com.amazonaws.services.s3.model.ObjectMetadata;
+
+            val myObjectMetadata = new ObjectMetadata()
+            myObjectMetadata.userMetadata = mapOf("myKey" to "myVal")
+
+        Then, upload an object along with its metadata:
+
+        .. code-block:: kotlin
+
+            val observer = transferUtility.upload(
+              MY_BUCKET,        /* The bucket to upload to */
+              OBJECT_KEY,       /* The key for the uploaded object */
+              MY_FILE,          /* The file where the data to upload exists */
+              myObjectMetadata  /* The ObjectMetadata associated with the object*/
+            )
+
+        To download the meta, use the S3 :code:`getObjectMetadata` method. For more information, see the `API Reference <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html#getObjectMetadata%28com.amazonaws.services.s3.model.GetObjectMetadataRequest%29>`__.
+
     iOS - Swift
         :code:`AWSS3TransferUtilityUploadExpression` and :code:`AWSS3TransferUtilityMultiPartUploadExpression` contain the method `setValue:forRequestHeader` where you can pass in metadata to Amazon S3.
         This example demonstrates passing in the Server-side Encryption Algorithm as a request header in uploading data to S3 using MultiPart.
@@ -786,6 +1052,20 @@ Transfer with Access Control List
               MY_FILE,                            /* The file where the data to upload exists */
               CannedAccessControlList.PublicRead  /* Specify PublicRead ACL for the object in the bucket. */
             );
+
+    Android - Kotlin
+        To upload a file with Access Control List, use the :code:`CannedAccessControlList` object. The `CannedAccessControlList <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/model/CannedAccessControlList.html>`__ specifies the constants defining a canned access control list. For example, if you use `CannedAccessControlList.PublicRead <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/model/CannedAccessControlList.html#PublicRead>`__ , this specifies the owner is granted :code:`Permission.FullControl` and the :code:`GroupGrantee.AllUsers` group grantee is granted Permission.Read access.
+
+        Then, upload an object along with its ACL:
+
+        .. code-block:: kotlin
+
+            val observer = transferUtility.upload(
+              MY_BUCKET,                          /* The bucket to upload to */
+              OBJECT_KEY,                         /* The key for the uploaded object */
+              MY_FILE,                            /* The file where the data to upload exists */
+              CannedAccessControlList.PublicRead  /* Specify PublicRead ACL for the object in the bucket. */
+            )
 
     iOS - Swift
         To upload a file and specify permissions for it, you can use predefined grants, also known as canned ACLs. The following code shows you how to setup a file with publicRead access using the AWSS3 client.
@@ -852,6 +1132,38 @@ Transfer Utility Options
             // Pass-in S3Client, Context, AWSConfiguration/DefaultBucket Name
             .transferUtilityOptions(options)
             .build();
+
+    Android - Kotlin
+      You can use the :code:`TransferUtilityOptions` object to customize the operations of the :code:`TransferUtility`.
+
+      **TransferThreadPoolSize**
+      This parameter will let you specify the number of threads in the thread pool for transfers. By increasing the number of threads, you will be able to increase the number of parts of a mulit-part upload that will be uploaded in parallel. By default, this is set to 2 * (N + 1), where N is the number of available processors on the mobile device. The minimum allowed value is 2.
+
+      .. code-block:: kotlin
+
+        val options = new TransferUtilityOptions().apply {
+            transferThreadPoolSize = 8
+        }
+
+        val transferUtility = TransferUtility.builder()
+            // Pass-in S3Client, Context, AWSConfiguration/DefaultBucket Name
+            .transferUtilityOptions(options)
+            .build()
+
+      **TransferServiceCheckTimeInterval**
+      The :code:`TransferUtility` monitors each on-going transfer by checking its status periodically. If a stalled transfer is detected, it will be automatically resumed by the :code:`TransferUtility`. The TransferServiceCheckTimeInterval option allows you to set the time interval
+      between the status checks. It is specified in milliseconds and set to 60,000 by default.
+
+      .. code-block:: kotlin
+
+        val options = new TransferUtilityOptions().apply {
+            transferServiceCheckTimeInterval = 2 * 60 * 1000 // 2-minutes
+        }
+
+        val transferUtility = TransferUtility.builder()
+            // Pass-in S3Client, Context, AWSConfiguration/DefaultBucket Name
+            .transferUtilityOptions(options)
+            .build()
 
     iOS - Swift
         You can use the :code:`AWSS3TransferUtilityConfiguration` object to configure the operations of the :code:`TransferUtility`.
@@ -953,6 +1265,29 @@ The following code shows how to download an |S3| Object to a local file.
 
             });
 
+    Android - Kotlin
+        .. code-block:: kotlin
+
+            val observer = transferUtility.download(
+                      "s3Folder/s3Key.txt",
+                      new File("/path/to/file/localFile.txt"))
+            observer.transferListener = object : TransferListener() {
+                override fun onStateChanged(id: int, state: TransferState) {
+                    if (state == TransferState.COMPLETED) {
+                        // Handle a completed download
+                    }
+                }
+
+                override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                    val done = ((current / total) * 100.0) as Int
+                    // Do something
+                }
+
+                override fun onError(id: Int, ex: Exception) {
+                    // Do something
+                }
+            }
+
     iOS - Swift
         .. code-block:: swift
 
@@ -1013,6 +1348,31 @@ Uploading Binary Data to a File
                  }
 
             });
+
+    Android - Kotlin
+        Use the following code to upload binary data to a file in |S3|.
+
+        .. code-block:: kotlin
+
+            val observer = transferUtility.upload(
+                      "s3Folder/s3Key.bin",
+                      new File("/path/to/file/localFile.bin"))
+            observer.transferListener = object : TransferListener() {
+                override fun onStateChanged(id: int, state: TransferState) {
+                    if (state == TransferState.COMPLETED) {
+                        // Handle a completed download
+                    }
+                }
+
+                override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                    val done = ((current / total) * 100.0) as Int
+                    // Do something
+                }
+
+                override fun onError(id: Int, ex: Exception) {
+                    // Do something
+                }
+            }
 
     iOS - Swift
         To upload a binary data to a file, you have to make sure to set the appropriate content type in the uploadData method of the TransferUtility. In the example below, we are uploading a PNG image to S3.
@@ -1077,6 +1437,29 @@ The following code shows how to download a binary file.
 
             });
 
+    Android - Kotlin
+        .. code-block:: kotlin
+
+            val observer = transferUtility.download(
+                      "s3Folder/s3Key.bin",
+                      new File("/path/to/file/localFile.bin"))
+            observer.transferListener = object : TransferListener() {
+                override fun onStateChanged(id: int, state: TransferState) {
+                    if (state == TransferState.COMPLETED) {
+                        // Handle a completed download
+                    }
+                }
+
+                override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                    val done = ((current / total) * 100.0) as Int
+                    // Do something
+                }
+
+                override fun onError(id: Int, ex: Exception) {
+                    // Do something
+                }
+            }
+
     iOS - Swift
         .. code-block:: swift
 
@@ -1104,6 +1487,11 @@ Limitations
 .. container:: option
 
     Android - Java
+        If you expect your app to perform transfers that take longer than 50 minutes, use `AmazonS3Client <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html>`__ instead of `TransferUtility <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/s3/transferutility/TransferUtility.html>`__.
+
+        :code:`TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using |COG| Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. Generated |S3| pre-signed URLs cannot last longer than that time. Because of this limitation, the Amazon S3 Transfer Utility enforces 50 minute transfer timeouts, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After **50 minutes**, you receive a transfer failure.
+
+    Android - Kotlin
         If you expect your app to perform transfers that take longer than 50 minutes, use `AmazonS3Client <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Client.html>`__ instead of `TransferUtility <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/s3/transferutility/TransferUtility.html>`__.
 
         :code:`TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using |COG| Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. Generated |S3| pre-signed URLs cannot last longer than that time. Because of this limitation, the Amazon S3 Transfer Utility enforces 50 minute transfer timeouts, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After **50 minutes**, you receive a transfer failure.

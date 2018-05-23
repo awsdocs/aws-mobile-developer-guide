@@ -48,7 +48,7 @@ Enable User Sign-out
 
             // AuthenticatorActivity.java
 
-            package com.your-domain.android.YOUR-APP-NAME;
+            package com.YOUR-DOMAIN.android.YOUR-APP-NAME;
 
             import android.content.Intent;
             import android.support.v7.app.AppCompatActivity;
@@ -147,6 +147,94 @@ Enable User Sign-out
                 // other MainActivity code . . .
             }
 
+   Android - Kotlin
+       In the following example, :code:`AWSMobileClient` is instantiated within the :code:`onCreate` method of an activity called :code:`AuthenticatorActivity`.  If the client does not find a cached identity from a previous sign-in, it retrieves an unauthenticated “guest” Amazon Cognito Federated Identity ID that is used to access other AWS services. In Logcat, look for the string: :code:`Welcome to AWS!` to see that the client has successfully instantiated.
+
+       If the user already has a cached authenticated identity ID from a previous sign-in, then  :code:`AWSMobileClient` will resume the session without an additional sign-in.
+
+       A :code:`SignInStateChangeListener` object is added to :code:`IdentityManager`, which captures :code:`onUserSignedIn` and :code:`onUserSignedOut` events.
+
+       Finally, :code:`showSignIn()` is called to create a :code:`SignInUI` object, and to call the object's :code:`login` method. This displays the built-in sign-in UI of the SDK, and defines :code:`MainActivity` as the navigation target of a successful sign-in. The :code:`SignInUI` calls are placed in a separate function so they can also easily be called when the :code:`onUserSignedOut` event fires.
+
+       In Logcat, a successful sign-in prints the string; :code:`Sign-in succeeded`.
+
+       .. code-block:: java
+
+            // AuthenticatorActivity.java
+
+            package com.your-domain.android.YOUR-APP-NAME;
+
+            import android.content.Intent;
+            import android.support.v7.app.AppCompatActivity;
+            import android.os.Bundle;
+            import android.util.Log;
+            import android.widget.TextView;
+
+            // AWSMobileClient imports
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobile.client.AWSStartupHandler;
+            import com.amazonaws.mobile.client.AWSStartupResult;
+
+            // AWS SDK sign-in UI imports
+            import com.amazonaws.mobile.auth.core.IdentityHandler;
+            import com.amazonaws.mobile.auth.core.IdentityManager;
+            import com.amazonaws.mobile.auth.core.SignInStateChangeListener;
+            import com.amazonaws.mobile.auth.ui.SignInUI;
+
+            class AuthenticatorActivity : AppCompatActivity() {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    AWSMobileClient.getInstance().initialize(this).execute()
+
+                    // Sign-in listener
+                    IdentityManager.defaultIdentityManager.addSignInStateChangeListener(
+                        object : SignInStateChangeListener() {
+                            override fun onUserSignedIn() {
+                                // Do something
+                            }
+
+                            override fun onUserSignedOut() {
+                                showSignIn()
+                            }
+                        }
+                    )
+                    showSignIn()
+                }
+
+                private fun showSignIn() {
+                    val ui = AWSMobileClient.getInstance().getClient(this@AuthenticatorActivity, SignInUI::class.java)
+                    ui.login(this@AuthenticatorActivity, MainActivity::class.java).execute()
+                }
+            }
+
+       :code:`MainActivity` displays a sign-out button, that calls the :code:`signOut()` method of the :code:`IdentityManager`. This will fire the :code:`SignInStateChangeListener.onSignedOut()` event defined in the :code:`AuthenticatorActivity`. In Logcat, you should see the string: :code:`Signing out...`.
+
+       :code:`onUserSignedOut()` then calls  :code:`showSignIn` which causes the sign-in screen to reappear.
+
+        .. code-block:: java
+
+            package com.YOUR-DOMAIN.android.YOUR-APP-NAME;
+
+            import android.support.v7.app.AppCompatActivity;
+            import android.os.Bundle;
+            import android.util.Log;
+            import android.view.View;
+            import android.widget.Button;
+            import android.widget.TextView;
+            import com.amazonaws.mobile.auth.core.IdentityHandler;
+            import com.amazonaws.mobile.auth.core.IdentityManager;
+            import com.amazonaws.mobile.client.AWSMobileClient;
+
+            class MainActivity : AppCompatActivity() {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    setContentView(R.layout.activity_main)
+
+                    signOutButton.onClick {
+                        IdentityManager.defaultIdentityManager.signOut()
+                    }
+                }
+            }
 
    iOS - Swift
        In the following example, :code:`AWSMobileClient` is instantiated within the :code:`didfinishlaunching` and :code:`open url` blocks in :code:`AppDelegate`, as described in :ref:`Add User Sign-In <add-aws-mobile-user-sign-in>`.  If the client does not find a cached identity from a previous sign-in, it retrieves an unauthenticated “guest” Amazon Cognito Federated Identity ID that is used to access other AWS services. In debug output, look for the string: :code:`Welcome to AWS!`.
