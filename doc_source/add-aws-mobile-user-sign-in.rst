@@ -823,6 +823,7 @@ Setup Google Login in your Mobile App
 =====================================
 
 .. container:: option
+
    Android - Java
       .. list-table::
          :widths: 1 6
