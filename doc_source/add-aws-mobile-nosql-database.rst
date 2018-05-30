@@ -63,6 +63,7 @@ Connect to your backend
 **To add AWS Mobile NoSQL Database to your app**
 
 .. container:: option
+
    Android - Java
       #. Set up AWS Mobile SDK components with the following
          :ref:`add-aws-mobile-sdk-basic-setup` steps.
