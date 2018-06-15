@@ -88,25 +88,41 @@ Connect to your backend
 
          .. code-block:: java
 
-             // import DynamoDBMapper
-             import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+            import com.amazonaws.auth.AWSCredentialsProvider;
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobile.config.AWSConfiguration;
 
-             public class MainActivity extends AppCompatActivity {
+            import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+            import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
-                 // Declare a DynamoDBMapper object
-                 DynamoDBMapper dynamoDBMapper;
+            import java.util.Random;
 
-                 @Override
-                 protected void onCreate(Bundle savedInstanceState) {
-                     super.onCreate(savedInstanceState);
-                     setContentView(R.layout.activity_main);
+            public class MainActivity extends AppCompatActivity {
 
-                     // Instantiate a AmazonDynamoDBMapperClient
-                     AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(AWSMobileClient.getInstance().getCredentialsProvider());
-                     this.dynamoDBMapper = DynamoDBMapper.builder()
+                // Declare a DynamoDBMapper object
+                DynamoDBMapper dynamoDBMapper;
+
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_main);
+
+                    // AWSMobileClient enables AWS user credentials to access your table
+                    AWSMobileClient.getInstance().initialize(this).execute();
+
+                    AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
+                    AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
+
+
+                    // Add code to instantiate a AmazonDynamoDBClient
+                    AmazonDynamoDBClient dynamoDBClient = new AmazonDynamoDBClient(credentialsProvider);
+
+                    this.dynamoDBMapper = DynamoDBMapper.builder()
                             .dynamoDBClient(dynamoDBClient)
-                            .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
+                            .awsConfiguration(configuration)
                             .build();
+
+                    // other activity code ...
                 }
             }
 

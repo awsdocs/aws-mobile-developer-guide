@@ -51,7 +51,7 @@ this tutorial.
 Create a Lambda Function in the AWS Console
 -------------------------------------------
 
-For this tutorial, let's use a simple "echo" function that returns the input. Follow the steps described at `Amazon Lambda Getting Started <http://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`__, replacing the function code with the code below::
+For this tutorial, let's use a simple "echo" function that returns the input. Follow the steps described at `AWS Lambda Getting Started <http://docs.aws.amazon.com/lambda/latest/dg/getting-started.html>`__, replacing the function code with the code below::
 
  exports.handler = function(event, context) {
       console.log("Received event");

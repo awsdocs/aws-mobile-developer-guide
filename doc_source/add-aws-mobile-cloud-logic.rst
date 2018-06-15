@@ -49,6 +49,8 @@ Set Up Your Backend
 
       Choose :guilabel:`Create API` to deploy a default API and its associated handler function. The default handler is a Node.js function that echoes JSON input that it receives. For more information, see `Using AWS Lambda with Amazon API Gateway <with-on-demand-https.html>`__.
 
+      The definition of APIs and paths configured in a |AMH| project are captured in an AWS CloudFormation‎ template. The body of a request containing a template is limited to 51,200 bytes, see `AWS CloudFormation Limits <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html>`__ for details. If your API definition is too large to fit this size, you can use the `AWS API Gateway Console <https://console.aws.amazon.com/apigateway/>`__ to create your API and the import it into your |AMH| project.
+
 #. When you are done configuring the feature and the last operation is complete, choose your project name in the upper left to go the project details page. The banner that appears also links there.
 
    .. image:: images/updated-cloud-config.png

@@ -16,7 +16,7 @@ How To: Serverless Code with AWS Lambda
 
 .. meta::
     :description:
-        Learn how to integrate data storage offered by Amazon Lambda to your mobile app.
+        Learn how to integrate data storage offered by AWS Lambda to your mobile app.
 
 .. list-table::
    :widths: 1 6
@@ -30,7 +30,7 @@ How To: Serverless Code with AWS Lambda
 
 
 
-This section provides information on the steps for achieving specific tasks for integrating your Amazon Lambda functions into your Android and iOS apps.
+This section provides information on the steps for achieving specific tasks for integrating your AWS Lambda functions into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:

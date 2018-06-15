@@ -33,7 +33,6 @@ The following steps  include:
 
     * Create an AWS Mobile configuration file that ties your app code to your bucket.
 
-To configure a new Amazon S3 bucket, see .
 
 Set Up Your Backend
 ===================
@@ -90,28 +89,28 @@ Create the awsconfiguration.json file
 
 #. Create a file with name :file:`awsconfiguration.json` with the following contents:
 
-  .. code-block:: json
+    .. code-block:: json
 
-    {
-        "Version": "1.0",
-        "CredentialsProvider": {
-            "CognitoIdentity": {
-                "Default": {
-                    "PoolId": "COGNITO-IDENTITY-POOL-ID",
-                    "Region": "COGNITO-IDENTITY-POOL-REGION"
-                }
-            }
-        },
-        "IdentityManager" : {
-          "Default" : { }
-        },
-        "S3TransferUtility": {
-            "Default": {
-                "Bucket": "S3-BUCKET-NAME",
-                "Region": "S3-REGION"
-            }
-        }
-    }
+      {
+          "Version": "1.0",
+          "CredentialsProvider": {
+              "CognitoIdentity": {
+                  "Default": {
+                      "PoolId": "COGNITO-IDENTITY-POOL-ID",
+                      "Region": "COGNITO-IDENTITY-POOL-REGION"
+                  }
+              }
+          },
+          "IdentityManager" : {
+            "Default" : { }
+          },
+          "S3TransferUtility": {
+              "Default": {
+                  "Bucket": "S3-BUCKET-NAME",
+                  "Region": "S3-REGION"
+              }
+          }
+      }
 
 #. Make the following changes to the configuration file.
 
@@ -347,6 +346,7 @@ Upload a File
 --------------
 
 .. container:: option
+
    Android - Java
     To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`,
     then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
