@@ -33,7 +33,9 @@ Add User Sign-in to the AWS Mobile Hub Project
 #. Scroll down to the :guilabel:`Add More Backend Features` section.
 #. Choose the :guilabel:`User Sign-in` tile.
 #. Choose :guilabel:`Email and Password`.
-#. Scroll to the bottom and then Choose :guilabel:`Create user pool`.
+#. Select the :guilabel:`Username` radio button and the :guilabel:`Phone` checkbox under it.
+#. Select **Required** for :guilabel:`Multi-factor authentication`.
+#. At the bottom of the page, set the :guilabel:`Require user sign-in?` switch to :guilabel:`YES`.
 
     .. list-table::
        :widths: 1 6

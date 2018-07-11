@@ -141,7 +141,7 @@ To override the defaults, and modify the behavior, look, and feel of the sign-in
 
         Create and configure an :code:`AuthUIConfiguration` object.
 
-            * To present the Email and Password user :code:`SignInUI`, set et :code:`enableUserPoolsUI` to :code:`true`.
+            * To present the Email and Password user :code:`SignInUI`, set :code:`enableUserPoolsUI` to :code:`true`.
 
             * To present Facebook or Google  user :code:`SignInUI`, add :code:`.addSignInButtonView(class: AWSFacebookSignInButton.self)` or :code:`.addSignInButtonView(class: AWSFacebookSignInButton.self)`.
 
