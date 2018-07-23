@@ -1,12 +1,3 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
 
 .. _how-to-integrate-an-existing-bucket:
 
@@ -440,15 +431,18 @@ Upload a File
 
        .. code-block:: kotlin
 
-            import android.app.Activity;
-            import android.util.Log;
+            import android.os.Bundle
+            import android.support.v7.app.AppCompatActivity
+            import android.util.Log
+            import com.amazonaws.AmazonServiceException
+            import com.amazonaws.mobile.client.AWSMobileClient
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
+            import com.amazonaws.services.s3.AmazonS3Client
+            import kotlinx.android.synthetic.main.activity_main.*
+            import java.io.File;
 
-            import com.amazonaws.mobile.client.AWSMobileClient;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
-            import com.amazonaws.services.s3.AmazonS3Client;
 
             import java.io.File;
 
@@ -463,14 +457,15 @@ Upload a File
                 }
 
                 private fun uploadWithTransferUtility(remote: String, local: File) {
-                    val txUtil = TransferUtility.builder()
-                            .context(getApplicationContext)
+                    val transferUtility = TransferUtility.builder()
+                            .context(this.applicationContext)
                             .awsConfiguration(AWSMobileClient.getInstance().configuration)
                             .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
                             .build()
 
-                    val txObserver = txUtil.upload(remote, local)
-                    txObserver.transferListener = object : TransferListener() {
+                    val uploadObserver = transferUtility.upload(remote, local)
+
+                    uploadObserver.transferListener = object : TransferListener() {
                         override fun onStateChanged(id: Int, state: TransferState) {
                             if (state == TransferState.COMPLETED) {
                                 // Handle a completed upload
@@ -478,7 +473,7 @@ Upload a File
                         }
 
                         override fun onProgressChanged(id: Int, current: Long, total: Long) {
-                            val done = (((current / total) * 100.0) as Float) as Int
+                            val done = (((current.toDouble() / total) * 100.0).toInt())
                             Log.d(TAG, "ID: $id, percent done = $done")
                         }
 
@@ -489,7 +484,7 @@ Upload a File
 
                     // If you prefer to poll for the data, instead of attaching a
                     // listener, check for the state and progress in the observer.
-                    if (txObserver.state == TransferState.COMPLETED) {
+                    if (uploadObserver.state == TransferState.COMPLETED) {
                         // Handle a completed upload.
                     }
                 }
@@ -664,24 +659,30 @@ Download a File
                 }
 
                 private fun downloadWithTransferUtility(remote: String, local: File) {
-                    val txUtil = TransferUtility.builder()
+                    val transferUtility = TransferUtility.builder()
                             .context(getApplicationContext)
                             .awsConfiguration(AWSMobileClient.getInstance().configuration)
                             .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
                             .build()
 
-                    val txObserver = txUtil.download(remote, local)
-                    txObserver.transferListener = object : TransferListener() {
+                    val downloadObserver = transferUtility.download(remote, local)
+
+                    downloadObserver.transferListener = object : TransferListener() {
                         override fun onStateChanged(id: Int, state: TransferState) {
                             if (state == TransferState.COMPLETED) {
                                 // Handle a completed upload
                             }
                         }
 
-                        override fun onProgressChanged(id: Int, current: Long, total: Long) {
-                            val done = (((current / total) * 100.0) as Float) as Int
-                            Log.d(TAG, "ID: $id, percent done = $done")
+                    override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                        try {
+                            val done = (((current.toDouble() / total) * 100.0).toInt()) //as Int
+                            Log.d("downloadObserver", "DOWNLOAD - - ID: $id, percent done = $done")
                         }
+                        catch (e: Exception) {
+                            // Handle errors
+                        }
+                    }
 
                         override fun onError(id: Int, ex: Exception) {
                             // Handle errors
@@ -690,7 +691,7 @@ Download a File
 
                     // If you prefer to poll for the data, instead of attaching a
                     // listener, check for the state and progress in the observer.
-                    if (txObserver.state == TransferState.COMPLETED) {
+                    if (downloadObserver.state == TransferState.COMPLETED) {
                         // Handle a completed upload.
                     }
                 }

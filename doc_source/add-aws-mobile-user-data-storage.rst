@@ -1,12 +1,3 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
 
 .. _add-aws-mobile-user-data-storage:
 
@@ -106,7 +97,12 @@ using the integration steps on this page.
 
             .. code-block:: none
 
+               apply plugin: 'kotlin-android'
+
+               apply plugin: 'kotlin-android-extensions'
+
                dependencies {
+                  implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
                   implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
                   implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
                }
@@ -278,18 +274,18 @@ Upload a File
 
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object. :code:`TransferUtility` will check the size of file being uploaded and will automatically switch over to using multi-part uploads if the file size exceeds 5 MB.
 
-       .. code-block:: java
+      .. code-block:: kotlin
 
-            import android.app.Activity;
-            import android.util.Log;
-
-            import com.amazonaws.mobile.client.AWSMobileClient;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
-            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
-            import com.amazonaws.services.s3.AmazonS3Client;
-
+            import android.os.Bundle
+            import android.support.v7.app.AppCompatActivity
+            import android.util.Log
+            import com.amazonaws.AmazonServiceException
+            import com.amazonaws.mobile.client.AWSMobileClient
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
+            import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
+            import com.amazonaws.services.s3.AmazonS3Client
+            import kotlinx.android.synthetic.main.activity_main.*
             import java.io.File;
 
             class YourActivity : Activity() {
@@ -302,36 +298,30 @@ Upload a File
 
                 fun uploadWithTransferUtility() {
                     val transferUtility = TransferUtility.builder()
-                        .context(this@YourActivity.applicationContext)
-                        .awsConfiguration(AWSMobileClient.getInstance().configutation)
-                        .s3Client(AMazonS3Clinet(AWSMobileClient.getInstance().credentialsProvider)
+                        .context(this.applicationContext)
+                        .awsConfiguration(AWSMobileClient.getInstance().configuration)
+                        .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
                         .build()
 
                     val uploadObserver = transferUtility.upload("s3folder/s3key.txt", File("/path/to/localfile.txt"))
 
                     // Attach a listener to the observer
-                    uploadObserver.transferListener = object : TransferListener() {
+                    uploadObserver.setTransferListener(object : TransferListener {
                         override fun onStateChanged(id: Int, state: TransferState) {
-                            when(state) {
-                                TransferState.COMPLETED -> {
-                                    /* Handle a completed upload */
-                                }
-                                else -> {
-                                    /* Anything else */
-                                }
+                            if (state == TransferState.COMPLETED) {
+                                // Handle a completed upload
                             }
                         }
 
-                        override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
-                            val percent = ((bytesCurrent as Float) / (bytesTotal as Float) * 100.0) as Int
-
-                            Log.d(TAG, "ID: $id is $percent done")
+                        override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                            val done = (((current.toDouble() / total) * 100.0).toInt())
+                            Log.d(LOG_TAG, "UPLOAD - - ID: $id, percent done = $done")
                         }
 
-                        override fun onError(id: Int, exception: Exception) {
-                            /* Handle errors */
+                        override fun onError(id: Int, ex: Exception) {
+                            Log.d(LOG_TAG, "UPLOAD ERROR - - ID: $id - - EX: ${ex.message.toString()}")
                         }
-                    }
+                    })
 
                     // If you prefer to long-poll for updates
                     if (uploadObserver.state == TransferState.COMPLETED) {
@@ -341,7 +331,6 @@ Upload a File
                     val bytesTransferred = uploadObserver.bytesTransferred
                 }
             }
-
 
    iOS - Swift
      The following example shows how to upload a file to an |S3| bucket.
@@ -454,7 +443,7 @@ Download a File
                                 float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
                                 int percentDone = (int)percentDonef;
 
-                                Log.d("MainActivity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
+                                Log.d(LOG_TAG, "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
                         }
 
                         @Override
@@ -470,8 +459,8 @@ Download a File
                         // Handle a completed upload.
                     }
 
-                    Log.d("YourActivity", "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
-                    Log.d("YourActivity", "Bytes Total: " + downloadObserver.getBytesTotal());
+                    Log.d(LOG_TAG, "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
+                    Log.d(LOG_TAG, "Bytes Total: " + downloadObserver.getBytesTotal());
                 }
             }
 
@@ -513,30 +502,33 @@ Download a File
                         .awsConfiguration(AWSMobileClient.getInstance().configuration)
                         .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
                         .build()
+
                     val downloadObserver = transferUtility.download(
                         "s3folder/s3key.txt",
                         File("/path/to/file/localfile.txt"))
 
                     // Attach a listener to get state updates
-                    downloadObserver.transferListener = object : TransferListener() {
-                        override fun onStateChanged(id: Int, state: TransferState) =
-                            when(state) {
-                                TransferState.COMPLETED -> {
-                                    /* File has finished downloading */
-                                }
-                                else -> { /* Something else happened */ }
+                    downloadObserver.setTransferListener(object : TransferListener {
+                        override fun onStateChanged(id: Int, state: TransferState) {
+                            if (state == TransferState.COMPLETED) {
+                                // Handle a completed upload.
                             }
-
-                        override fun onProgressChanged(id: Int, bytesCurrent: Long, bytesTotal: Long) {
-                            val percent = ((bytesCurrent as Float) / (bytesTotal as Float) * 100.0) as Int
-
-                            Log.d(TAG, "ID: $id is $percent done")
                         }
 
-                        override fun onError(id: Int, exception: Exception) {
-                            /* Handle errors */
+                        override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                            try {
+                                val done = (((current.toDouble() / total) * 100.0).toInt()) //as Int
+                                Log.d(LOG_TAG, "DOWNLOAD - - ID: $id, percent done = $done")
+                            }
+                            catch (e: Exception) {
+                                Log.e(LOG_TAG, "Trouble calculating progress percent", e)
+                            }
                         }
-                    }
+
+                        override fun onError(id: Int, ex: Exception) {
+                            Log.d(LOG_TAG, "DOWNLOAD ERROR - - ID: $id - - EX: ${ex.message.toString()}")
+                        }
+                    })
 
                     // If you prefer to poll for the data, instead of attaching a
                     // listener, check for the state and progress in the observer.
@@ -544,7 +536,7 @@ Download a File
                         // Handle a completed upload.
                     }
 
-                    Log.d("YourActivity", "Bytes Transferrred: ${downloadObserver.bytesTransferred}");
+                    Log.d(LOG_TAG, "Bytes Transferrred: ${downloadObserver.bytesTransferred}");
                 }
             }
 
