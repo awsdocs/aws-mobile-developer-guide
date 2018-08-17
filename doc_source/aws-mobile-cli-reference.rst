@@ -90,6 +90,10 @@ The current set of commands supported by the :code:`awsmobile CLI` are listed be
 
      - Initializes a new Mobile Hub project, checks for IAM keys, and pulls the aws-exports.js file
 
+   * - :ref:`awsmobile start <projectName> [templateName]`
+     
+     - Starts a new Mobile Hub project using a starter kit: `react` or `react-native`   
+
    * - :ref:`awsmobile configure <aws-mobile-cli-reference-configure>`
 
      - Shows existing keys and allows them to be changed if already set. If keys aren’t set, deep links the user to the IAM console to create keys and then prompts for the access key and secret key. This command helps edit configuration settings for the aws account or the project.
