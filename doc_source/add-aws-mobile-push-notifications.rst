@@ -34,7 +34,7 @@ Set Up Your Backend
 ===================
 
 
-#. Complete the :ref:`Get Started <getting-started>` steps before your proceed.
+#. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
 #. Choose the :guilabel:`Messaging and Analytics` tile
 
