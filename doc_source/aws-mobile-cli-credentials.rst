@@ -1,13 +1,3 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
-
 
 .. _aws-mobile-cli-credentials:
 
@@ -21,10 +11,15 @@ AWS Mobile CLI User Credentials
         Learn about the credentials required to use |AMHlong| to create, build, test and monitor mobile apps that are
         integrated with AWS services.
 
+.. important::
+
+   The following content applies if you are already using the AWS Mobile CLI to configure your backend. If you are building a new mobile or web app, or you're adding cloud capabilities to your existing app, use the new `AWS Amplify CLI <http://aws-amplify.github.io/>`__ instead. With the new Amplify CLI, you can use all of the features described in `Announcing the AWS Amplify CLI toolchain <https://aws.amazon.com/blogs/mobile/announcing-the-aws-amplify-cli-toolchain/>`__, including AWS CloudFormation functionality that provides additional workflows.
+
+
 Overview
 --------
 
-As described on the AWS Mobile CLI :ref:`Get Started <web-getting-started>` page, the first time you set up the CLI you will be prompted to provide AWS user credentials. The credentials establish permissions for the CLI to manage AWS services on your behalf. They must belong to an AWS IAM user with administrator permissions in the account where the CLI is being used.
+The first time you set up the CLI you will be prompted to provide AWS user credentials. The credentials establish permissions for the CLI to manage AWS services on your behalf. They must belong to an AWS IAM user with administrator permissions in the account where the CLI is being used.
 
 Permissions
 -----------

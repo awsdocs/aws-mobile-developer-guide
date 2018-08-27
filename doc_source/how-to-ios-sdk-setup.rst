@@ -140,7 +140,7 @@ The samples included with the SDK are standalone projects that are already set u
 
         #. With your project open in Xcode, choose your **Target**. In the **General** tab, find **Embedded Binaries**,  then choose the **+** button.
 
-        #. Choose the **Add Other** button, navigate to the ``AWS<#ServiceName#>.framework`` files under **Carthage** > **Build** > **iOS** and select ``AWSCore.framework`` and the other service frameworks you require. Do not select the **Destination: Copy items if needed** checkbox when prompted.
+        #. Choose the **Add Other** button, navigate to the ``AWS<#ServiceName#>.framework`` files under **Carthage** > **Build** > **iOS** and select ``AWSCore.framework`` and the other service frameworks you require. Do not select the **Destination: Copy items if needed** check box when prompted.
 
             * :code:`AWSAuth`
             * :code:`AWSAuthCore`
@@ -324,7 +324,7 @@ Logging
 
 As of version 2.5.4 of this SDK, logging utilizes `CocoaLumberjack SDK <https://github.com/CocoaLumberjack/CocoaLumberjack>`__, a flexible, fast, open source logging framework. It supports many capabilities including the ability to set logging level per output target, for instance, concise messages logged to the console and verbose messages to a log file.
 
-CocoaLumberjack logging levels are additive such that when the level is set to verbose, all messages from the levels below verbose are logged. It is also possible to set custom logging to meet your needs. For more information, see `CocoaLumberjack Logging Levels <https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/Documentation/CustomLogLevels.md>`__
+CocoaLumberjack logging levels are additive such that when the level is set to verbose, all messages from the levels below verbose are logged. It is also possible to set custom logging to meet your needs. For more information, see `CocoaLumberjack Logging Levels <https://github.com/CocoaLumberjack/CocoaLumberjack/blob/master/Documentation/CustomLogLevels.md>`__.
 
 Changing Logging Level
 ----------------------
@@ -483,10 +483,6 @@ Next Steps
 
 - **Read the API Reference**: View the `API Reference
   <https://docs.aws.amazon.com/AWSiOSSDK/latest/>`__ for the AWS Mobile SDK for Android.
-
-- **Try AWS Mobile Hub**: Quickly configure and provision an AWS cloud backend for many common mobile
-  app features, and download end to end working iOS demonstration projects, SDK, and helper code, all
-  generated based on your choices.
 
 - **Ask questions**: Post questions on the :forum:`AWS Mobile SDK Forums <88>`.
 

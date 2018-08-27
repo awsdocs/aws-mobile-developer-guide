@@ -144,7 +144,7 @@ Add the following state to the element where you handle file transfers.
 Next Steps
 ==========
 
-Learn more about the analytics in AWS Mobile which are part of the :ref:`User File Storage <user-data-storage>` feature. This feature uses `Amazon Simple Storage Service (S3) <http://docs.aws.amazon.com/s3/latest/developerguide/welcome.html>`__.
+Learn more about the analytics in AWS Mobile which are part of the :ref:`User File Storage <user-data-storage>` feature. This feature uses `Amazon Simple Storage Service (S3) <https://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html>`__.
 
 Learn about :ref:`AWS Mobile CLI <aws-mobile-cli-reference>`.
 

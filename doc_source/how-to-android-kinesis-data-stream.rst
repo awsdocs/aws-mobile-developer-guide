@@ -89,8 +89,7 @@ To create an identity pool for your application:
 The next page displays code that creates a credentials provider so you can easily integrate |COGID|
 in your Android application.
 
-For more information on Cognito Identity, see :doc:`cognito-auth`.
-
+For more information on Cognito Identity, see :doc:`how-to-cognito-integrate-an-existing-identity-pool`.
 
 Set IAM Permissions (Amazon Kinesis)
 ------------------------------------
@@ -109,7 +108,7 @@ policy allows the user to submit records to a Kinesis stream identified by :aws-
         }]
     }
 
-This policy should be applied to roles assigned to the Cognito identity pool, but you will need to
+This policy should be applied to roles assigned to the Cognito identity pool, but you need to
 replace the :code:`Resource` value with the correct ARN for your Kinesis stream. You can apply
 policies at the `IAM console <https://console.aws.amazon.com/iam/>`__.
 
@@ -169,7 +168,7 @@ Add the following imports to the main activity of your app.
     import com.amazonaws.auth.CognitoCachingCredentialsProvider;
     import com.amazonaws.regions.Regions;
 
-Instantiate a Kinesis recorder
+Instantiate a Kinesis Recorder
 ==============================
 
 Once you've imported the necessary libraries and have your credentials object, you can instantiate :code:`KinesisRecorder`. :code:`KinesisRecorder` is a high-level client meant for storing PutRecord requests on an Android device. Storing requests on the device lets you retain data when the device is offline, and it can also increase performance and battery efficiency since the network doesn't need to be awakened as frequently.

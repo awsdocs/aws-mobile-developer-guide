@@ -153,7 +153,9 @@ Remedy
 
       The remedy for this condition is to make the location of the Lambda file(s) match the path specified in the project definition YAML.
 
-      The error occurs if, for any reason, the path described in the codeFilename: key in the YAML does not match the actual location of the Lambda function file relative to the root of the :code:`...-deployments-...` Amazon S3 bucket that Mobile Hub deploys when Cloud Logic is enabled. For more information, see :ref:`Importing API Handlers for Cloud Logic APIs <import-export-cloud-logic>`.
+      The error occurs if, for any reason, the path described in the codeFilename: key in the YAML does not match the actual location of the Lambda function file relative to the root of the :code:`...-deployments-...` Amazon S3 bucket that Mobile Hub deploys when Cloud Logic is enabled.
+
+..      For more information, see :ref:`Importing API Handlers for Cloud Logic APIs <import-export-cloud-logic>`.
 
       .. code-block:: yaml
 

@@ -19,17 +19,17 @@ How To: NoSQL Database with Amazon DynamoDB
     :description:
         Learn how to integrate data storage offered by Amazon DynamoDB to your mobile app.
 
-.. list-table::
-   :widths: 1 6
-
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <add-aws-mobile-nosql-database>` to install the SDK and integrate Amazon DynamoDB.
-
-
+.. .. list-table::
+..    :widths: 1 6
+.. 
+..   * - **Just Getting Started?**
+.. 
+..      - :ref:`Use streamlined steps <add-aws-mobile-nosql-database>` to install the SDK and integrate Amazon DynamoDB.
 
 
-This section provides information on the steps for achieving specific tasks for integrating your DynamoDB into your Android and iOS apps.
+
+
+This section provides procedures for integrating Amazon DynamoDB into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:
@@ -38,3 +38,5 @@ This section provides information on the steps for achieving specific tasks for 
    how-to-nosql-integrate-an-existing-table
    how-to-ios-dynamodb-objectmapper
    how-to-ios-dynamodb-low-level-client
+
+..   add-aws-mobile-nosql-database

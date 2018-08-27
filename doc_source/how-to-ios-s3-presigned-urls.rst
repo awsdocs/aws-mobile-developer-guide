@@ -17,7 +17,7 @@ If you are working with large file transfers, you
 may want to perform uploads and downloads in the background. To do this, you need to create a
 background session using ``NSURLSession`` and then transfer your objects using pre-signed URLs.
 
-The following sections describe pre-signed S3 URLs. To learn more about ``NSURLSession``, see
+The following sections describe pre-signed Amazon S3 URLs. To learn more about ``NSURLSession``, see
 `Using NSURLSession <https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/URLLoadingSystem/Articles/UsingNSURLSession.html>`__.
 
 Pre-Signed URLs
@@ -106,7 +106,7 @@ we would need to use a PUT method and also specify a content type.
                 NSString *fileContentTypeStr = @"text/plain";
                 getPreSignedURLRequest.contentType = fileContentTypeStr;
 
-Here's an example of building a pre-signed URL for a background upload to S3.
+Here's an example of building a pre-signed URL for a background upload to Amazon S3.
 
     .. container:: option
 

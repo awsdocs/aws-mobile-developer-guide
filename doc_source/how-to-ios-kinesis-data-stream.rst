@@ -123,7 +123,7 @@ stream.
         }
 
 This policy should be applied to roles assigned to the Amazon Cognito
-identity pool, but you will need to replace the :command:`Resource` value
+identity pool, but you need to replace the :command:`Resource` value
 with the correct ARN for your Amazon Kinesis or Amazon Kinesis Firehose stream. You can apply policies at the
 `IAM console <https://console.aws.amazon.com/iam/>`_. To
 learn more about IAM policies, see `Using IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`_.

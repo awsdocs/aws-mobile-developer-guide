@@ -11,86 +11,86 @@
 .. _tutorial-android-aws-mobile-notes-data:
 
 #######################################
-Add Online Data Access to the Notes App
+Add Serverless Backend to the Notes App
 #######################################
 
-In the :ref:`previous section <tutorial-android-aws-mobile-notes-auth>` of this tutorial , we added a simple sign-up / sign-in flow to the sample note-taking app with email validation. This tutorial assumes you have completed the previous tutorials. If you jumped to this step, please go back and :ref:`start from
-the beginning <tutorial-android-aws-mobile-notes-setup>`. In this tutorial, we will add a NoSQL
-database to our mobile backend, then configure a basic data access service to the note-taking app.
+In the :ref:`previous section <tutorial-android-aws-mobile-notes-auth>` of this tutorial , you added a simple sign-up and sign-in flow to the sample note-taking app with email validation. This tutorial assumes you have completed the previous tutorials. If you jumped to this step, :ref:`go back to the beginning <tutorial-android-aws-mobile-notes-setup>` and start from
+there. In this tutorial, you add a NoSQL
+database to the mobile backend, and then configure a basic data access service to the note-taking app.
 
-The Notes sample app uses a
-`ContentProvider <https://developer.android.com/guide/topics/providers/content-providers.html>`__
-(called :code:`NotesContentProvider`) to provide access to a local SQLite
-database that is used to store the notes that you enter into the app. We
-will replace the code within the :code:`ContentProvider` with code that uses
-DynamoDB instead of SQLite.
+You should be able to complete this section of the tutorial in 45-60 minutes.
 
-You should be able to complete this section of the tutorial in 30-45 minutes.
+Add a Data Access API to the Backend
+------------------------------------
 
-Add a NoSQL database to the AWS Mobile Hub project
---------------------------------------------------
+#. In Android Studio, switch to the Project view.
+#. Right-click on the project, and then select :guilabel:`New > Directory`.
+#. For directory name, enter :userinput:`server`, and then choose :guilabel:`OK`.
+#. Right-click on the :file:`server` directory, and then select :guilabel:`New > File`.
+#. For file name, enter :userinput:`schema.graphql`, and then choose :guilabel:`OK`.
+#. Copy the following code into the :file:`schema.graphql` file:
 
-Before we work on the client-side code, we need to add a NoSQL database
-and table to the backend project:
+     .. code-block:: none
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
-#. Select  your project.
-#. Scroll down to the :guilabel:`Add More Backend Features` section and then choose the :guilabel:`NoSQL Database` tile.
-#. Choose :guilabel:`Enable NoSQL`, choose :guilabel:`Add Table`, and then choose :guilabel:`Example` to start with an example schema.
-#. Choose :guilabel:`Notes`, which most closely matches the model we wish to use.
-#. Choose :guilabel:`Add attribute`, then fill in the details of the new attribute:
+        type Note @model @auth(rules:[{allow: owner}]) {
+            id: ID!
+            title: String!
+            content: String!
+        }
 
-    -  :guilabel:`Attribute name`: :userinput:`updatedDate`
-    -  :guilabel:`Type`: :userinput:`number`
+#. In the terminal window, enter the following commands:
 
-#.  Choose :guilabel:`Add index` then fill in the details of the new index:
+   .. code-block:: bash
 
-    -  :guilabel:`Index name`: :userinput:`LastUpdated`
-    -  :guilabel:`Partition key`: :userinput:`userId`
-    -  :guilabel:`Sort key`: :userinput:`updatedDate`
+      $ amplify api add
 
-#. Choose :guilabel:`Create table`
-#. Choose :guilabel:`Create table` in the modal dialog. It will take a few moments for AWS to create the table.
+#. When prompted by the CLI, do the following:
 
-    You have just created a NoSQL table in the `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`__ service.
+   * Select a service type: :userinput:`GraphQL`.
+   * Choose an authorization type: :userinput:`Amazon Cognito User Pool`.
+   * Do you have an annotated GraphQL schema: :userinput:`Y`.
+   * Provide your schema file path: :userinput:`./server/schema.graphql`.
 
-#. When the table is ready, choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
-#. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
-#. Choose :guilabel:`Next` and then choose :guilabel:`Done`.
+#. To deploy the new service, enter the following:
 
-.. list-table::
-   :widths: 1 6
+   .. code-block:: bash
 
-   * - **Remember**
+      $ amplify push
 
-     - Whenever you update the AWS Mobile Hub project, a new AWS configuration file for your app is generated.
+#. To download the generated GraphQL schema, enter the following:
 
-Connect to Your Backend
------------------------
+   .. code-block:: bash
 
-Replace the :file:`awsconfiguration.json` file in :file:`app/src/main/res/raw` directory with the updated version.
+      $ amplify codegen add
 
-Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Android Studio project is named :file:`awsconfiguration.json`.
+The AWS CloudFormation template that is generated creates an Amazon DynamoDB table that is protected by Amazon Cognito user pool authentication.  Access is provided by AWS AppSync.  AWS AppSync tags each record that is inserted into the database with the user ID of the authenticated user.  The authenticated user can read only the records that they own.
 
-Download the Models
--------------------
+In addition to updating the :file:`awsconfiguration.json` file, the Amplify CLI generates the :file:`schema.json` file in the :file:`app/src/main/graphql` directory.  The :file:`schema.json` file is required by the AWS Mobile SDK for Android to run code generation for GraphQL operations.
 
-To aid in implementing a provider for the table you created, |AMH| generated a data model descriptor file. To add the data model to your project:
+Add Required Libraries to the Project
+-------------------------------------
 
-#. Choose your project name in the upper left and then choose :guilabel:`Integrate` on the Android app card.
-#. Choose :guilabel:`Android Models` under :guilabel:`Download Models`.
-#. Unpack the downloaded ZIP file and copy the files under :file:`src/main/java/com/amazonaws/models/nosql` to your Android Studio project in :file:`app/src/main/java/com/amazonaws/mobile/samples/mynotes/data`. One file (:file:`NotesDO.java`) should be copied.
-#. Edit the :file:`data/NotesDO.java` file and change the package setting:
+Edit the project-level :file:`build.gradle` file and add the AWS AppSync plugin path
+to the dependencies as follows:
 
 .. code-block:: java
 
-    package com.amazonaws.mobile.samples.mynotes.data;
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradle_version"
+        classpath "com.amazonaws:aws-android-sdk-appsync-gradle-plugin:2.6.+"
 
-Add required libraries to the project
--------------------------------------
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
 
-Edit the :file:`app/build.gradle` file and add the DynamoDB libraries to the
-dependencies:
+Edit the :file:`app/build.gradle` file. Add the AWS AppSync plugin below the other plugins:
+
+.. code-block:: java
+
+    apply plugin: 'com.android.application'
+    apply plugin: 'com.amazonaws.appsync'
+
+Add the AWS AppSync dependencies with the other SDKs.
 
 .. code-block:: java
 
@@ -98,480 +98,435 @@ dependencies:
 
         // . . .
 
-        implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
-        implementation 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
-        implementation 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
-        implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
-        implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
-        implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+        // AWS SDK for Android
+        def aws_version = '2.6.27'
+        implementation "com.amazonaws:aws-android-sdk-core:$aws_version"
+        implementation "com.amazonaws:aws-android-sdk-auth-core:$aws_version@aar"
+        implementation "com.amazonaws:aws-android-sdk-auth-ui:$aws_version@aar"
+        implementation "com.amazonaws:aws-android-sdk-auth-userpools:$aws_version@aar"
+        implementation "com.amazonaws:aws-android-sdk-cognitoidentityprovider:$aws_version"
+        implementation "com.amazonaws:aws-android-sdk-pinpoint:$aws_version"
 
-        // Amazon DynamoDB for NoSQL tables
-        implementation 'com.amazonaws:aws-android-sdk-ddb:2.6.+'
-        implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
+        // AWS AppSync SDK
+        implementation "com.amazonaws:aws-android-sdk-appsync:2.6.+"
     }
 
-#. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.
+On the upper-right side, choose :guilabel:`Sync Now` to incorporate the dependencies you just declared.
 
-Add Data access methods to the AWSProvider class
-------------------------------------------------
+Add Permissions to the AndroidManifest.xml
+------------------------------------------
 
-To implement data synchronization, we need two explicit methods: a
-method to upload changes and a method to download updates from the
-server.
+#. In Android Studio, open the project.
+#. On the left side of the project, choose :guilabel:`Project` to open the project browser.
+#.  To find the app manifest, change the project browser view menu at the top to :guilabel:`Android`, and then open the :file:`app/manifests` folder.
+#. Add the :code:`WAKE_LOCK`, :code:`READ_PHONE_STATE`, :code:`WRITE_EXTERNAL_STORAGE`, and
+   :code:`READ_EXTERNAL_STORAGE`: permissions to your project's :file:`AndroidManifest.xml` file.
 
-**To add data access methods**
+.. code-block:: xml
 
-#. Import :code:`DynamoDBMapper` and :code:`AmazonDynamoDBClient` in :file:`AWSProvider.java`.
+    <?xml version="1.0" encoding="utf-8"?>
+    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.amazonaws.mobile.samples.mynotes">
 
-   .. code-block:: java
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+        <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
-       import com.amazonaws.auth.AWSCredentialsProvider;
-       import com.amazonaws.mobile.auth.core.IdentityManager;
-       import com.amazonaws.mobile.auth.userpools.CognitoUserPoolsSignInProvider;
-       import com.amazonaws.mobile.config.AWSConfiguration;
-       import com.amazonaws.mobile.samples.mynotes.data.NotesDO;
-       import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
-       import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
+        <application
+            android:name=".NotesApp"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        </application>
+    </manifest>
 
-       // Add DynamoDBMapper and AmazonDynamoDBClient to support data access methods
-       import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
-       import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+Configure Sample Queries and Mutations for Code Generation
+----------------------------------------------------------
 
-#. Add private :code:`DynamoDBMapper` and :code:`AmazonDynamoDBClient` variables to the :code:`AWSProvider` class:
+To interact with AWS AppSync, your client needs to define GraphQL queries and mutations.  These are created as individual files within your application.
 
-   .. code-block:: java
+#. In Android Studio, switch to the :guilabel:`Project` view.
+#. Expand the :file:`app/src/main/graphql` folder.
+#. Right-click the :file:`graphql` folder and choose :guilabel:`New > Directory`.
+#. For directory name, enter :userinput:`com/amazonaws/mobile/samples/mynotes`, and then choose :guilabel:`OK`.
+#. Right-click the newly created :file:`mynotes` folder and choose :guilabel:`New > File`.
+#. For file name, enter :file:`operations.graphql`, and then choose :guilabel:`OK`.
+#. Copy the following contents into the file you just created:
 
-      public class AWSProvider {
-          private static AWSProvider instance = null;
-          private Context context;
-          private AWSConfiguration awsConfiguration;
-          private PinpointManager pinpointManager = null;
+   .. code-block:: graphql
 
-          // Declare DynamoDBMapper and AmazonDynamoDBClient private variables
-          // to support data access methods
-          private AmazonDynamoDBClient dbClient = null;
-          private DynamoDBMapper dbMapper = null;
-
-          public static AWSProvider getInstance() {
-                return instance;
-          }
-      }
-
-
-#. Add the following method to the class:
-
-   .. code-block:: java
-
-        public DynamoDBMapper getDynamoDBMapper() {
-            if (dbMapper == null) {
-                final AWSCredentialsProvider cp = getIdentityManager().getCredentialsProvider();
-                dbClient = new AmazonDynamoDBClient(cp);
-                dbMapper = DynamoDBMapper.builder()
-                        .awsConfiguration(getConfiguration())
-                        .dynamoDBClient(dbClient)
-                        .build();
+        query GetNote($id:ID!) {
+            getNote(id:$id) {
+                id
+                title
+                content
             }
-            return dbMapper;
         }
 
-Implement Mutation Methods
---------------------------
-
-The `ContentProvider <https://developer.android.com/guide/topics/providers/content-providers.html>`__
-is the basic interface that Android uses to communicate with databases
-on Android. It uses four methods that match the basic CRUD (create, read,
-update, delete) methods.
-
-Add the following methods to the ``NotesContentProvider`` class:
-
-.. code-block:: java
-
-        private NotesDO toNotesDO(ContentValues values) {
-            final NotesDO note = new NotesDO();
-            note.setContent(values.getAsString(NotesContentContract.Notes.CONTENT));
-            note.setCreationDate(values.getAsDouble(NotesContentContract.Notes.CREATED));
-            note.setNoteId(values.getAsString(NotesContentContract.Notes.NOTEID));
-            note.setTitle(values.getAsString(NotesContentContract.Notes.TITLE));
-            note.setUpdatedDate(values.getAsDouble(NotesContentContract.Notes.UPDATED));
-            note.setUserId(AWSProvider.getInstance().getIdentityManager().getCachedUserID());
-            return note;
-        }
-
-        private Object[] fromNotesDO(NotesDO note) {
-            String[] fields = NotesContentContract.Notes.PROJECTION_ALL;
-            Object[] r = new Object[fields.length];
-            for (int i = 0 ; i < fields.length ; i++) {
-                if (fields[i].equals(NotesContentContract.Notes.CONTENT)) {
-                    r[i] = note.getContent();
-                } else if (fields[i].equals(NotesContentContract.Notes.CREATED)) {
-                    r[i] = note.getCreationDate();
-                } else if (fields[i].equals(NotesContentContract.Notes.NOTEID)) {
-                    r[i] = note.getNoteId();
-                } else if (fields[i].equals(NotesContentContract.Notes.TITLE)) {
-                    r[i] = note.getTitle();
-                } else if (fields[i].equals(NotesContentContract.Notes.UPDATED)) {
-                    r[i] = note.getUpdatedDate();
-                } else {
-                    r[i] = new Integer(0);
+        query ListNotes($limit:Int,$nextToken:String) {
+            listNotes(limit:$limit,nextToken:$nextToken) {
+                items {
+                    id
+                    title
+                    content
                 }
+                nextToken
             }
-            return r;
         }
 
-These functions convert object attributes when they are passed between :code:`ContentValues` of the app and the :code:`NotesDO` object, which required by the Amazon DynamoDB service.
-
-Mutation events handle the :code:`insert`, :code:`update`, and :code:`delete` methods:
-
-.. code-block:: java
-
-    @Nullable
-    @Override
-    public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        int uriType = sUriMatcher.match(uri);
-        switch (uriType) {
-            case ALL_ITEMS:
-                DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
-                final NotesDO newNote = toNotesDO(values);
-                dbMapper.save(newNote);
-                Uri item = NotesContentContract.Notes.uriBuilder(newNote.getNoteId());
-                notifyAllListeners(item);
-                return item;
-            default:
-                throw new IllegalArgumentException("Unsupported URI: " + uri);
-        }
-    }
-
-    @Override
-    public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        int uriType = sUriMatcher.match(uri);
-        int rows;
-
-        switch (uriType) {
-            case ONE_ITEM:
-                DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
-                final NotesDO note = new NotesDO();
-                note.setNoteId(uri.getLastPathSegment());
-                note.setUserId(AWSProvider.getInstance().getIdentityManager().getCachedUserID());
-                dbMapper.delete(note);
-                rows = 1;
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported URI: " + uri);
-        }
-        if (rows > 0) {
-            notifyAllListeners(uri);
-        }
-        return rows;
-    }
-
-    @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        int uriType = sUriMatcher.match(uri);
-        int rows;
-
-        switch (uriType) {
-            case ONE_ITEM:
-                DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
-                final NotesDO updatedNote = toNotesDO(values);
-                dbMapper.save(updatedNote);
-                rows = 1;
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported URI: " + uri);
-        }
-        if (rows > 0) {
-            notifyAllListeners(uri);
-        }
-        return rows;
-    }
-
-Implement Query Methods
------------------------
-
-This application always asks for the entire data set that the user is
-entitled to see, so there is no need to implement complex query
-management. This simplifies the :code:`query()` method considerably. The
-:code:`query()` method returns a :code:`Cursor` (which is a standard mechanism
-for iterating over data sets returned from databases).
-
-.. code-block:: java
-
-    @Nullable
-    @Override
-    public Cursor query(
-                  @NonNull Uri uri,
-                  @Nullable String[] projection,
-                  @Nullable String selection,
-                  @Nullable String[] selectionArgs,
-                  @Nullable String sortOrder) {
-        int uriType = sUriMatcher.match(uri);
-
-        DynamoDBMapper dbMapper = AWSProvider.getInstance().getDynamoDBMapper();
-        MatrixCursor cursor = new MatrixCursor(NotesContentContract.Notes.PROJECTION_ALL);
-        String userId = AWSProvider.getInstance().getIdentityManager().getCachedUserID();
-
-        switch (uriType) {
-            case ALL_ITEMS:
-                // In this (simplified) version of a content provider, we only allow searching
-                // for all records that the user owns.  The first step to this is establishing
-                // a template record that has the partition key pre-populated.
-                NotesDO template = new NotesDO();
-                template.setUserId(userId);
-                // Now create a query expression that is based on the template record.
-                DynamoDBQueryExpression<NotesDO> queryExpression;
-                queryExpression = new DynamoDBQueryExpression<NotesDO>()
-                        .withHashKeyValues(template);
-                // Finally, do the query with that query expression.
-                List<NotesDO> result = dbMapper.query(NotesDO.class, queryExpression);
-                Iterator<NotesDO> iterator = result.iterator();
-                while (iterator.hasNext()) {
-                    final NotesDO note = iterator.next();
-                    Object[] columnValues = fromNotesDO(note);
-                    cursor.addRow(columnValues);
-                }
-
-                break;
-            case ONE_ITEM:
-                // In this (simplified) version of a content provider, we only allow searching
-                // for the specific record that was requested
-                final NotesDO note = dbMapper.load(NotesDO.class, userId, uri.getLastPathSegment());
-                if (note != null) {
-                    Object[] columnValues = fromNotesDO(note);
-                    cursor.addRow(columnValues);
-                }
-                break;
+        mutation CreateNote($input:CreateNoteInput!) {
+            createNote(input:$input) {
+                id
+                title
+                content
+            }
         }
 
-        cursor.setNotificationUri(getContext().getContentResolver(), uri);
-        return cursor;
-    }
+        mutation UpdateNote($input:UpdateNoteInput!) {
+            updateNote(input:$input) {
+                id
+                title
+                content
+            }
+        }
 
+        mutation DeleteNote($id:ID!) {
+            deleteNote(input: { id: $id }) {
+                id
+            }
+        }
 
 .. list-table::
    :widths: 1 6
 
-   * - **Note**
+   * - What is in this file?
 
-     - Differences from a real implementation
+     - Your mobile app sends GraphQL commands (mutations and queries) to the AWS AppSync service.  These are template commands that are then converted (using a code generation plugin that we added to the :file:`build.gradle` file) to Java classes that you can use in your application.
 
-       We've taken a simplified approach for this content provider to demonstrate the CRUD
-       implementation. A real implementation would need to deal with online
-       state and handle caching of the data, plus handle appropriate query
-       capabilities as required by the application.
+Before continuing, perform a build to generate the appropriate classes through code generation.  You can do this by using the :guilabel:`Build > Make project` option.
 
-Convert the CRUD methods to Async
----------------------------------
+Create an AWSDataService Class
+------------------------------
 
-The in-built SQLite driver has asynchronous wrappers so that you don't
-need to think about what the content provider is actually doing.
-However, network connections cannot happen on the UI thread. In the
-absence of an asynchronous wrapper, you must provide your own. This
-affects the create, update, and delete operations. There is no need to add code to
-load the data from the server, as that operation is already asynchronous.
+Data access is proxied through a class that implements the :code:`DataService` interface.  At this point, the data access is provided by the :code:`MockDataService` class that stores a number of notes in memory.  In this section, you replace this class with an :code:`AWSDataService` class that provides access to the API that you recently deployed.
 
-Inserts and updates are done in the :code:`NoteDetailFragment.java` class.
-Deletes are done in the :code:`NoteListActivity.java` class.
+#. Right-click on the :file:`services/aws` folder, and then select :guilabel:`New > Java Class`.
+#. For class name, enter :file:`AWSDataService`, and then choose :guilabel:`OK`.
+#. Replace the contents of the file with the following:
 
-In the :code:`OnCreate()` method of the :code:`NoteDetailFragment.java` class, replace the following :code:`if` statement that calls local cursor functions:
+   .. code-block:: java
 
-.. code-block:: java
+        package com.amazonaws.mobile.samples.mynotes.services.aws;
 
-        if (arguments != null && arguments.containsKey(ARG_ITEM_ID)) {
-            String itemId = getArguments().getString(ARG_ITEM_ID);
-            itemUri = NotesContentContract.Notes.uriBuilder(itemId);
-            Cursor data = contentResolver.query(itemUri, NotesContentContract.Notes.PROJECTION_ALL, null, null, null);
-            if (data != null) {
-                data.moveToFirst();
-                mItem = Note.fromCursor(data);
-                isUpdate = true;
+        import android.content.Context;
+        import android.util.Log;
+
+        import com.amazonaws.mobile.config.AWSConfiguration;
+        import com.amazonaws.mobile.samples.mynotes.CreateNoteMutation;
+        import com.amazonaws.mobile.samples.mynotes.DeleteNoteMutation;
+        import com.amazonaws.mobile.samples.mynotes.GetNoteQuery;
+        import com.amazonaws.mobile.samples.mynotes.ListNotesQuery;
+        import com.amazonaws.mobile.samples.mynotes.UpdateNoteMutation;
+        import com.amazonaws.mobile.samples.mynotes.models.Note;
+        import com.amazonaws.mobile.samples.mynotes.models.PagedListConnectionResponse;
+        import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
+        import com.amazonaws.mobile.samples.mynotes.services.DataService;
+        import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
+        import com.amazonaws.mobileconnectors.appsync.fetcher.AppSyncResponseFetchers;
+        import com.amazonaws.mobileconnectors.appsync.sigv4.BasicCognitoUserPoolsAuthProvider;
+        import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserPool;
+        import com.apollographql.apollo.GraphQLCall;
+        import com.apollographql.apollo.api.Error;
+        import com.apollographql.apollo.api.Response;
+        import com.apollographql.apollo.exception.ApolloException;
+
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.Locale;
+
+        import javax.annotation.Nonnull;
+
+        import type.CreateNoteInput;
+        import type.UpdateNoteInput;
+
+        import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
+
+        public class AWSDataService implements DataService {
+            private static final String TAG = "AWSDataService";
+            private AWSAppSyncClient client;
+
+            public AWSDataService(Context context, AWSService awsService) {
+                // Create an AppSync client from the AWSConfiguration
+                AWSConfiguration config = awsService.getConfiguration();
+                CognitoUserPool userPool = new CognitoUserPool(context, awsService.getConfiguration());
+                client = AWSAppSyncClient.builder()
+                        .context(context)
+                        .awsConfiguration(config)
+                        .cognitoUserPoolsAuthProvider(new BasicCognitoUserPoolsAuthProvider(userPool))
+                        .build();
             }
-        } else {
-            mItem = new Note();
-            isUpdate = false;
+
+            @Override
+            public void loadNotes(int limit, String after, ResultCallback<PagedListConnectionResponse<Note>> callback) {
+                // Load notes will go here
+            }
+
+            @Override
+            public void getNote(String noteId, ResultCallback<Note> callback) {
+                // Get note will go here
+            }
+
+            @Override
+            public void deleteNote(String noteId, ResultCallback<Boolean> callback) {
+                // Delete note will go here
+            }
+
+            @Override
+            public void createNote(String title, String content, ResultCallback<Note> callback) {
+                // Create note will go here
+            }
+
+            @Override
+            public void updateNote(Note note, ResultCallback<Note> callback) {
+                // Update note will go here
+            }
+
+            private void showErrors(List<Error> errors) {
+                Log.e(TAG, "Response has errors:");
+                for (Error e : errors) {
+                    Log.e(TAG, String.format(Locale.ENGLISH, "Error: %s", e.message()));
+                }
+                Log.e(TAG, "End of Response errors");
+            }
         }
 
-With the following constants and statement that establishes an :code:`AsyncQueryHandler`, which provides a wrapper to make the calls run on a non-UI thread asynchronously:
+Register the AWSDataService with the Injection Service
+------------------------------------------------------
+
+Similar to the :file:`AWSService` class, the :file:`AWSDataService` class should be instantiated as a singleton object.  You use the :file:`Injection` service to do this.  Open the :file:`Injection` class, and replace the :code:`initialize()` method with the following code:
 
 .. code-block:: java
 
-    // Constants used for async data operations
-    private static final int QUERY_TOKEN = 1001;
-    private static final int UPDATE_TOKEN = 1002;
-    private static final int INSERT_TOKEN = 1003;
+   public static synchronized void initialize(Context context) {
+     if (awsService == null) {
+       awsService = new AWSService(context);
+     }
+
+     if (analyticsService == null) {
+       analyticsService = new AWSAnalyticsService(context, awsService);
+     }
+
+     if (dataService == null) {
+       dataService = new AWSDataService(context, awsService);
+     }
+
+     if (notesRepository == null) {
+       notesRepository = new NotesRepository(dataService);
+     }
+   }
+
+You should also add the :file:`AWSDataService` class to the list of imports for the class.  You can easily do this using Alt-Enter within the editor.
+
+Add the Create, Update, and Delete Mutations
+-------------------------------------------
+
+We added some placeholder methods in the :file:`AWSDataService`.  These placeholders should contain the API calls to the backend.  Mutations follow a pattern:
+
+#. Create an input object to represent the arguments that are required to perform the mutation.
+#. Create a request object with the input object.
+#. Enqueue the request with the AppSync client object.
+#. When the request returns, handle the response on the UI thread.
+
+Use the following code for the :code:`createNote()` and :code:`updateNote()` methods:
+
+.. code-block:: java
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void createNote(String title, String content, ResultCallback<Note> callback) {
+        CreateNoteInput input = CreateNoteInput.builder()
+            .title(title.isEmpty() ? " " : title)
+            .content(content.isEmpty() ? " " : content)
+            .build();
+        CreateNoteMutation mutation = CreateNoteMutation.builder().input(input).build();
 
-        // Get the ContentResolver
-        contentResolver = getContext().getContentResolver();
-
-        // Unbundle the arguments if any.  If there is an argument, load the data from
-        // the content resolver aka the content provider.
-        Bundle arguments = getArguments();
-        mItem = new Note();
-        if (arguments != null && arguments.containsKey(ARG_ITEM_ID)) {
-            String itemId = getArguments().getString(ARG_ITEM_ID);
-            itemUri = NotesContentContract.Notes.uriBuilder(itemId);
-
-
-            // Replace local cursor methods with async query handling
-            AsyncQueryHandler queryHandler = new AsyncQueryHandler(contentResolver) {
+        client.mutate(mutation)
+            .enqueue(new GraphQLCall.Callback<CreateNoteMutation.Data>() {
                 @Override
-                protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-                    super.onQueryComplete(token, cookie, cursor);
-                    cursor.moveToFirst();
-                    mItem = Note.fromCursor(cursor);
-                    isUpdate = true;
-
-                    editTitle.setText(mItem.getTitle());
-                    editContent.setText(mItem.getContent());
-                }
-            };
-            queryHandler.startQuery(QUERY_TOKEN, null, itemUri, NotesContentContract.Notes.PROJECTION_ALL, null, null, null);
-
-
-        } else {
-            isUpdate = false;
-        }
-
-        // Start the timer for the delayed start
-        timer.postDelayed(timerTask, 5000);
-    }
-
-In the :code:`saveData()` method, replace the following local cursor methods:
-
-.. code-block:: java
-
-    // Convert to ContentValues and store in the database.
-    if (isUpdated) {
-        ContentValues values = mItem.toContentValues();
-        if (isUpdate) {
-            contentResolver.update(itemUri, values, null, null);
-        } else {
-            itemUri = contentResolver.insert(NotesContentContract.Notes.CONTENT_URI, values);
-            isUpdate = true;    // Anything from now on is an update
-            itemUri = NotesContentContract.Notes.uriBuilder(mItem.getNoteId());
-        }
-    }
-
-with an :code:`AsyncQueryHandler`:
-
-.. code-block:: java
-
-    private void saveData() {
-        // Save the edited text back to the item.
-        boolean isUpdated = false;
-        if (!mItem.getTitle().equals(editTitle.getText().toString().trim())) {
-            mItem.setTitle(editTitle.getText().toString().trim());
-            mItem.setUpdated(DateTime.now(DateTimeZone.UTC));
-            isUpdated = true;
-        }
-        if (!mItem.getContent().equals(editContent.getText().toString().trim())) {
-            mItem.setContent(editContent.getText().toString().trim());
-            mItem.setUpdated(DateTime.now(DateTimeZone.UTC));
-            isUpdated = true;
-        }
-
-        // Replace local cursor methods with an async query handler
-        // Convert to ContentValues and store in the database.
-        if (isUpdated) {
-            ContentValues values = mItem.toContentValues();
-
-            AsyncQueryHandler queryHandler = new AsyncQueryHandler(contentResolver) {
-                @Override
-                protected void onInsertComplete(int token, Object cookie, Uri uri) {
-                    super.onInsertComplete(token, cookie, uri);
-                    Log.d("NoteDetailFragment", "insert completed");
+                public void onResponse(@Nonnull Response<CreateNoteMutation.Data> response) {
+                    if (response.hasErrors()) {
+                        showErrors(response.errors());
+                        runOnUiThread(() -> callback.onResult(null));
+                    } else {
+                        CreateNoteMutation.CreateNote item = response.data().createNote();
+                        final Note returnedNote = new Note(item.id());
+                        returnedNote.setTitle(item.title().equals(" ") ? "" : item.title());
+                        returnedNote.setContent(item.content().equals(" ") ? "" : item.content());
+                        runOnUiThread(() -> callback.onResult(returnedNote));
+                    }
                 }
 
                 @Override
-                protected void onUpdateComplete(int token, Object cookie, int result) {
-                    super.onUpdateComplete(token, cookie, result);
-                    Log.d("NoteDetailFragment", "update completed");
+                public void onFailure(@Nonnull ApolloException e) {
+                    Log.e(TAG, String.format(Locale.ENGLISH, "Error during GraphQL Operation: %s", e.getMessage()), e);
                 }
-            };
-            if (isUpdate) {
-                queryHandler.startUpdate(UPDATE_TOKEN, null, itemUri, values, null, null);
-            } else {
-                queryHandler.startInsert(INSERT_TOKEN, null, NotesContentContract.Notes.CONTENT_URI, values);
-                isUpdate = true;    // Anything from now on is an update
-
-                // Send Custom Event to Amazon Pinpoint
-                final AnalyticsClient mgr = AWSProvider.getInstance()
-                        .getPinpointManager()
-                        .getAnalyticsClient();
-                final AnalyticsEvent evt = mgr.createEvent("AddNote")
-                        .withAttribute("noteId", mItem.getNoteId());
-                mgr.recordEvent(evt);
-                mgr.submitEvents();
-            }
-
-
-        }
+            });
     }
 
+    @Override
+    public void updateNote(Note note, ResultCallback<Note> callback) {
+        UpdateNoteInput input = UpdateNoteInput.builder()
+            .id(note.getNoteId())
+            .title(note.getTitle().isEmpty() ? " " : note.getTitle())
+            .content(note.getContent().isEmpty() ? " " : note.getContent())
+            .build();
+        UpdateNoteMutation mutation = UpdateNoteMutation.builder().input(input).build();
 
-Replace the :code:`remove()` method in :file:`NoteListActivity.java` with the following.
+        client.mutate(mutation)
+            .enqueue(new GraphQLCall.Callback<UpdateNoteMutation.Data>() {
+                @Override
+                public void onResponse(@Nonnull Response<UpdateNoteMutation.Data> response) {
+                    if (response.hasErrors()) {
+                        showErrors(response.errors());
+                        runOnUiThread(() -> callback.onResult(null));
+                    } else {
+                        UpdateNoteMutation.UpdateNote item = response.data().updateNote();
+                        final Note returnedNote = new Note(item.id());
+                        returnedNote.setTitle(item.title().equals(" ") ? "" : item.title());
+                        returnedNote.setContent(item.content().equals(" ") ? "" : item.content());
+                        runOnUiThread(() -> callback.onResult(returnedNote));
+                    }
+                }
+
+                @Override
+                public void onFailure(@Nonnull ApolloException e) {
+                    Log.e(TAG, String.format(Locale.ENGLISH, "Error during GraphQL Operation: %s", e.getMessage()), e);
+                }
+            });
+    }
+
+The classes for the input, mutation, and response data are all generated from the information within the :file:`schema.json` and :file:`operations.graphql` files.  The names of the classes are based on the query or mutation name within the file.
+
+Note that Amazon DynamoDB does not allow blank string values.  The code here ensures that blanks are replaced with something that is not blank for the purposes of storage.
+
+The code for the :code:`deleteNote()` method is similar to the :code:`createNote()` and :code:`deleteNote()` methods.  However, the :code:`DeleteNote` operation does not take an input object as an argument. We can feed the :code:`noteId` directly into the mutation operation object:
 
 .. code-block:: java
 
-    private static final int DELETE_TOKEN = 1004;
+    @Override
+    public void deleteNote(String noteId, ResultCallback<Boolean> callback) {
+        DeleteNoteMutation mutation = DeleteNoteMutation.builder().id(noteId).build();
 
-    void remove(final NoteViewHolder holder) {
-        if (mTwoPane ){
-            // Check to see if the current fragment is the record we are deleting
-            Fragment currentFragment = NoteListActivity.this.getSupportFragmentManager().findFragmentById(R.id.note_detail_container);
-            if (currentFragment instanceof NoteDetailFragment) {
-                String deletedNote = holder.getNote().getNoteId();
-                String displayedNote = ((NoteDetailFragment) currentFragment).getNote().getNoteId();
-                if (deletedNote.equals(displayedNote)) {
-                    getSupportFragmentManager().beginTransaction().remove(currentFragment).commit();
+        client.mutate(mutation)
+            .enqueue(new GraphQLCall.Callback<DeleteNoteMutation.Data>() {
+                @Override
+                public void onResponse(@Nonnull Response<DeleteNoteMutation.Data> response) {
+                    runOnUiThread(() -> callback.onResult(true));
                 }
-            }
-        }
 
-        // Remove the item from the database
-        final int position = holder.getAdapterPosition();
-        Uri itemUri = NotesContentContract.Notes.uriBuilder(holder.getNote().getNoteId());
-        AsyncQueryHandler queryHandler = new AsyncQueryHandler(getContentResolver()) {
-            @Override
-            protected void onDeleteComplete(int token, Object cookie, int result) {
-                super.onDeleteComplete(token, cookie, result);
-                notifyItemRemoved(position);
-                Log.d("NoteListActivity", "delete completed");
-            }
-        };
-
-        queryHandler.startDelete(DELETE_TOKEN, null, itemUri, null, null);
+                @Override
+                public void onFailure(@Nonnull ApolloException e) {
+                    Log.e(TAG, String.format(Locale.ENGLISH, "Error during GraphQL Operation: %s", e.getMessage()), e);
+                    callback.onResult(false);
+                }
+            });
     }
 
-If you need to do a query (for example, to respond to a search request),
-then you can use a similar technique to wrap the :code:`query()` method.
+Add the LoadNotes and GetNote Queries
+-------------------------------------
 
-Run the application
+Queries operate very similarly to the mutations.  However, you have to take care to convert all the records that are received to the proper form for the application, and you have to deal with caching.  The AWS Mobile SDK performs caching for you, but you have to select the appropriate cache policy.
+
+*  :code:`CACHE_ONLY` consults the cache only and never requests data from the backend.  This is useful in an offline scenario.
+*  :code:`NETWORK_ONLY` is the reverse of :code:`CACHE_ONLY`. It consults the backend only and never uses the cache.
+*  :code:`CACHE_FIRST` fetches the data from the cache if available, and fetches from the backend if it is not available in the cache.
+*  :code:`NETWORK_FIRST` fetches the data from the network.  If the network is unavailable, it uses the cache.
+*  :code:`CACHE_AND_NETWORK` consults both the cache and network for data. If both are available, you get two callbacks.
+
+In the sample application, you use a :code:`NETWORK_FIRST` cache policy.  This guarantees that the callback is only called once, but it still uses the cache when the application goes offline.
+
+The :code:`getNote()` method looks very similar to the mutations covered earlier:
+
+.. code-block:: java
+
+    @Override
+    public void getNote(String noteId, ResultCallback<Note> callback) {
+        GetNoteQuery query = GetNoteQuery.builder().id(noteId).build();
+        client.query(query)
+            .responseFetcher(AppSyncResponseFetchers.NETWORK_FIRST)
+            .enqueue(new GraphQLCall.Callback<GetNoteQuery.Data>() {
+                @Override
+                public void onResponse(@Nonnull Response<GetNoteQuery.Data> response) {
+                    GetNoteQuery.GetNote item = response.data().getNote();
+                    final Note note = new Note(noteId);
+                    note.setTitle(item != null ? (item.title().equals(" ") ? "" : item.title()) : "");
+                    note.setContent(item != null ? (item.content().equals(" ") ? "" : item.content()) : "");
+                    runOnUiThread(() -> callback.onResult(note));
+                }
+
+                @Override
+                public void onFailure(@Nonnull ApolloException e) {
+                    Log.e(TAG, String.format(Locale.ENGLISH, "Error during GraphQL Operation: %s", e.getMessage()), e);
+                }
+            });
+    }
+
+You need to convert the return value to the internal representation prior to returning the data to the main application.  The :code:`loadNotes()` method is a little more involved because the return value is a complex type that needs to be decoded before returning:
+
+.. code-block:: java
+
+    @Override
+    public void loadNotes(int limit, String after, ResultCallback<PagedListConnectionResponse<Note>> callback) {
+        ListNotesQuery query = ListNotesQuery.builder().limit(limit).nextToken(after).build();
+        client.query(query)
+            .responseFetcher(AppSyncResponseFetchers.NETWORK_FIRST)
+            .enqueue(new GraphQLCall.Callback<ListNotesQuery.Data>() {
+                @Override
+                public void onResponse(@Nonnull Response<ListNotesQuery.Data> response) {
+                    String nextToken = response.data().listNotes().nextToken();
+                    List<ListNotesQuery.Item> rItems = response.data().listNotes().items();
+
+                    List<Note> items = new ArrayList<>();
+                    for (ListNotesQuery.Item item : rItems) {
+                        Note n = new Note(item.id());
+                        n.setTitle(item.title().equals(" ") ? "" : item.title());
+                        n.setContent(item.content().equals(" ") ? "" : item.content());
+                        items.add(n);
+                    }
+                    runOnUiThread(() -> callback.onResult(new PagedListConnectionResponse<>(items, nextToken)));
+                }
+
+                @Override
+                public void onFailure(@Nonnull ApolloException e) {
+                    Log.e(TAG, String.format(Locale.ENGLISH, "Error during GraphQL Operation: %s", e.getMessage()), e);
+                }
+            });
+    }
+
+Run the Application
 -------------------
 
-You must be online in order to run this application. Run the application
-in the emulator. Note that the initial startup after logging in is
-slightly longer (due to reading the data from the remote database).
+You must be online in order to run this application. Run the application in the emulator. Note that the initial startup after logging in is slightly longer. This is happens because it's reading the data from the remote database.
 
-Data is available immediately in the mobile backend. Create a few notes,
-then view the records within the AWS Console:
+Data is available immediately in the mobile backend. Create a few notes, and then view the records in the AWS Console:
 
-1. Open the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
-2. Choose your project.
-3. Choose **Resources** in the left hand menu.
-4. Choose the link for your DynamoDB table.
-5. Choose the **Items** tab.
+#. Open the `DynamoDB console <https://console.aws.amazon.com/dynamodb/home>`__.
+#. In the left navigation, choose :guilabel:`Tables`.
+#. Choose the table for your project. It will be based on the API name you set.
+#. Choose the :guilabel:`Items` tab.
 
-When you  insert, edit or delete notes in the app, you should be able to see the data on the server reflect your actions almost immediately.
+When you  insert, edit, or delete notes in the app, you should be able to see that the data on the server reflect your actions immediately.
 
 Next Steps
 ----------
 
--  Learn about data synchronization by reading about the Android `Sync
-   Framework <https://developer.android.com/training/sync-adapters/index.html>`__.
+-  Learn about `AWS AppSync  <https://aws.amaozn.com/appsync/>`__.
 -  Learn about `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`__.
 
 

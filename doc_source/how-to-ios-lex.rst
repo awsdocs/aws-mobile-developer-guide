@@ -16,14 +16,14 @@
 iOS: Use Natural Language with Amazon Lex
 #########################################
 
-.. list-table::
-   :widths: 1 6
+.. .. list-table::
+..    :widths: 1 6
 
-   * - **Just Getting Started?**
+..    * - **Just Getting Started?**
 
-     - :ref:`Use streamlined steps <add-aws-mobile-conversational-bots>` to install the SDK and integrate Amazon Lex.
+..      - :ref:`Use streamlined steps <add-aws-mobile-conversational-bots>` to install the SDK and integrate Amazon Lex.
 
-*Or, use the contents of this page if your app will integrate existing AWS services.*
+.. *Or, use the contents of this page if your app will integrate existing AWS services.*
 
 
 

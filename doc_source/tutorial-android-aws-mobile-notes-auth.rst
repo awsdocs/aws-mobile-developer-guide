@@ -14,133 +14,115 @@
 Add Authentication to the Notes App
 ###################################
 
-In the :ref:`previous section <tutorial-android-aws-mobile-notes-analytics>` of this tutorial, we created a mobile backend project in AWS Mobile Hub, then added analytics to the sample note-taking app. This section assumes you have completed those steps. If you jumped to this step, please go back and :ref:`start from
-the beginning <tutorial-android-aws-mobile-notes-setup>`. In this tutorial, we will configure a sign-up / sign-in flow in our mobile backend. We will then add a new authentication activity to our note-taking app.
+In the :ref:`previous section <tutorial-android-aws-mobile-notes-analytics>` of this tutorial, you created a mobile backend project using the AWS Amplify CLI, and then added analytics to the sample note-taking app. This section assumes you have completed these steps. If you jumped ahead to this step, :ref:`go back to the beginning <tutorial-android-aws-mobile-notes-setup>` and start from there. In this tutorial, you configure a sign-up and sign-in flow in our mobile backend. Then, you add a new authentication activity to the note-taking app.
 
 You should be able to complete this section of the tutorial in 20-30 minutes.
 
 Set Up Your Backend
 -------------------
 
-Before we work on the client-side code, we need to add User Sign-in to
-the backend project:
+Before you work on the client-side code, you need to add user sign-in to the backend project.  These steps assume you have already completed the :ref:`analytics <tutorial-android-aws-mobile-notes-analytics>` portion of this tutorial.
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
-#. Select your project.
-#. Scroll down to the :guilabel:`Add More Backend Features` section.
-#. Choose the :guilabel:`User Sign-in` tile.
-#. Choose :guilabel:`Email and Password`.
-#. Select the :guilabel:`Username` radio button and the :guilabel:`Phone` checkbox under it.
-#. Select **Required** for :guilabel:`Multi-factor authentication`.
-#. At the bottom of the page, set the :guilabel:`Require user sign-in?` switch to :guilabel:`YES`.
+#. Open the project in Android Studio.
+#. Choose :guilabel:`View`, choose :guilabel:`Tool Windows`, and then choose :guilabel:`Terminal`.  This opens a terminal prompt in Android Studio at the bottom of the window.
+#. In the terminal window, enter the following commands:
 
-    .. list-table::
-       :widths: 1 6
+.. code-block:: bash
 
-       * - What does this do?
+   $ amplify auth update
 
-         - You have just created your own user pool in the `Amazon Cognito <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`__ service. When used in conjunction with the AWS Mobile sign-in process, the user pool enforces the password requirement rules you chose. It also supports sign-up and forgot my password user flows.
+#. When prompted, use the default configuration.  When asked to overwrite the default authentication and security configuration, answer :userinput:`Yes`.
+#. Deploy your new resources with the following command:
 
-#. Choose your project name in the upper left and then choose :guilabel:`Integrate` on your Android app card.
-#. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
-#. Choose :guilabel:`Next` and then choose :guilabel:`Done`.
+.. code-block:: bash
 
-.. list-table::
-   :widths: 1 6
+   $ amplify push
 
-   * - **Remember**
-
-     - Whenever you update the AWS Mobile Hub project, a new AWS configuration file for your app is generated.
-
-Connect to Your Backend
------------------------
-
-Replace the :file:`awsconfiguration.json` file in :file:`app/src/main/res/raw` directory with the updated version.
-
-.. list-table::
-   :widths: 1 6
-
-   * - **Note**
-
-     - Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Xcode project is named :file:`awsconfiguration.json`.
+The :code:`amplify auth add` command creates an Amazon Cognito user pool configured for username and password authentication with phone verification of the sign-up and forgot password flows.  You can adjust this to include multi-factor authentication, TOTP, phone number sign-up, and more.
 
 Add the Authentication UI Library
 ---------------------------------
 
 #. Open the :file:`app/build.gradle` file and add the following lines to the :code:`dependencies` section:
 
-    .. code-block:: java
+    .. code-block:: gradle
 
        dependencies {
-          compile fileTree(dir: 'libs', include: ['*.jar'])
-          implementation 'com.android.support:appcompat-v7:26.1.0'
-          implementation 'com.android.support:support-v4:26.1.0'
-          implementation 'com.android.support:cardview-v7:26.1.0'
-          implementation 'com.android.support:recyclerview-v7:26.1.0'
-          implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-          implementation 'com.android.support:design:26.1.0'
-          implementation 'com.android.support:multidex:1.0.1'
-          implementation 'joda-time:joda-time:2.9.9'
+          // Other dependencies will be here already
 
-          //AWS Mobile SDK for Android
-          implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
-          implementation 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
-          implementation 'com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar'
-          implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar'
-          implementation 'com.amazonaws:aws-android-sdk-cognitoidentityprovider:2.6.+'
-          implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+          // AWS Mobile SDK for Android
+          def aws_version = '2.6.27'
+          implementation "com.amazonaws:aws-android-sdk-core:$aws_version"
+          implementation "com.amazonaws:aws-android-sdk-auth-core:$aws_version@aar"
+          implementation "com.amazonaws:aws-android-sdk-auth-ui:$aws_version@aar"
+          implementation "com.amazonaws:aws-android-sdk-auth-userpools:$aws_version@aar"
+          implementation "com.amazonaws:aws-android-sdk-cognitoidentityprovider:$aws_version"
+          implementation "com.amazonaws:aws-android-sdk-pinpoint:$aws_version"
         }
 
-#. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.
+#. On the upper right, choose :guilabel:`Sync Now` to incorporate the dependencies you just declared.
+
+#. Open the :file:`Injection.java` file and add the following method declaration:
+
+    .. code-block:: java
+
+       public static synchronized AWSService getAWSService() {
+           return awsService;
+       }
 
 Register the Email and Password Sign-in Provider
 ------------------------------------------------
 
-The sign-in UI is provided by :code:`IdentityManager`. Each method of
-establishing identity (email and password, Facebook and Google) requires
-a plug-in provider that handles the appropriate sign-in flow.
+The sign-in UI is provided by :code:`IdentityManager`. Each method of establishing identity (email and password, Facebook and Google) requires a plug-in provider that handles the appropriate sign-in flow.
 
 1. Open your project in Android Studio.
-2. Open the :code:`AWSProvider.java` class.
+2. Open the :code:`service/aws/AWSService.java` class.
 3. Add the following to the import declarations:
 
    .. code-block:: java
 
-      import com.amazonaws.auth.AWSCredentialsProvider;
-      import com.amazonaws.mobile.auth.core.IdentityManager;
       import com.amazonaws.mobile.auth.userpools.CognitoUserPoolsSignInProvider;
-      import com.amazonaws.mobile.config.AWSConfiguration;
-      import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
-      import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
 
 4. Adjust the constructor to add the :code:`CognitoUserPoolsSignInProvider`.
 
    .. code-block:: java
 
-      private AWSProvider(Context context) {
-         this.context = context;
-         this.awsConfiguration = new AWSConfiguration(context);
-
-         IdentityManager identityManager = new IdentityManager(context, awsConfiguration);
-         IdentityManager.setDefaultIdentityManager(identityManager);
-         identityManager.addSignInProvider(CognitoUserPoolsSignInProvider.class);
+      public AWSService(Context context) {
+        awsConfiguration = new AWSConfiguration(context);
+        identityManager = new IdentityManager(context, awsConfiguration);
+        identityManager.addSignInProvider(CognitoUserPoolsSignInProvider.class);
+        IdentityManager.setDefaultIdentityManager(identityManager);
       }
 
-Add a AuthenticatorActivity to the project
+Add a AuthenticatorActivity to the Project
 ------------------------------------------
 
-You can call the IdentityProvider at any point in your application. In
-this tutorial, we will add a new screen to the project that is displayed
-before the list. The user will be prompted to sign-up or sign-in prior
-to seeing the list of notes. This ensures that all connections to the
-backend will be authenticated.
+You can call the IdentityProvider at any point in your application. In this tutorial, you add a new screen to the project that is displayed before the list. The user will be prompted to sign-up or sign-in prior to seeing the list of notes. This ensures that all connections to the backend are authenticated.
 
-**To add a AuthenticatorActivity to the project, in Android Studio**
+**To add a AuthenticatorActivity to the project in Android Studio**
 
-1. Right-click the :file:`com.amazonaws.mobile.samples.mynotes` folder.
+1. Right-click the :file:`ui` package.
 2. Choose :guilabel:`New > Activity > Empty Activity`.
-3. Type :userinput:`AuthenticatorActivity` as the :guilabel:`Activity Name`.
+3. For :guilabel:`Activity Name`, enter :userinput:`AuthenticatorActivity`.
 4. Choose :guilabel:`Finish`.
+
+Add the following imports to the top of the :file:`AuthenticatorActivity.java`:
+
+  .. code-block:: java
+
+     import android.app.Activity;
+     import android.content.Intent;
+     import android.support.v7.app.AppCompatActivity;
+     import android.os.Bundle;
+     import android.widget.Toast;
+
+     import com.amazonaws.mobile.auth.core.DefaultSignInResultHandler;
+     import com.amazonaws.mobile.auth.core.IdentityManager;
+     import com.amazonaws.mobile.auth.core.IdentityProvider;
+     import com.amazonaws.mobile.auth.ui.AuthUIConfiguration;
+     import com.amazonaws.mobile.auth.ui.SignInActivity;
+     import com.amazonaws.mobile.samples.mynotes.Injection;
+     import com.amazonaws.mobile.samples.mynotes.R;
 
 Edit the :code:`onCreate()` method of :file:`AuthenticatorActivity.java` as follows:
 
@@ -151,7 +133,7 @@ Edit the :code:`onCreate()` method of :file:`AuthenticatorActivity.java` as foll
           super.onCreate(savedInstanceState);
           setContentView(R.layout.activity_authenticator);
 
-          final IdentityManager identityManager = AWSProvider.getInstance().getIdentityManager();
+          final IdentityManager identityManager = Injection.getAWSService().getIdentityManager();
           // Set up the callbacks to handle the authentication response
           identityManager.login(this, new DefaultSignInResultHandler() {
               @Override
@@ -199,7 +181,7 @@ activity. To make the AuthenticatorActivity primary, edit the
   .. code-block:: xml
 
      <activity
-         android:name=".AuthenticatorActivity"
+         android:name=".ui.AuthenticatorActivity"
          android:label="Sign In"
          android:theme="@style/AppTheme.NoActionBar">
          <intent-filter>
@@ -208,22 +190,22 @@ activity. To make the AuthenticatorActivity primary, edit the
          </intent-filter>
      </activity>
      <activity
-         android:name=".NoteListActivity"
+         android:name=".ui.NoteListActivity"
          android:label="@string/app_name"
          android:theme="@style/AppTheme.NoActionBar">
          <!-- Remove the intent-filter from here -->
      </activity>
 
 The :code:`.AuthenticatorActivity` section is added at the end. Ensure it is not
-duplicated. You will see build errors if the section is duplicated.
+duplicated. If the section is duplicated, build errors occur.
 
-Run the project and validate results
+Run the Project and Validate Results
 ------------------------------------
 
-Run in the emulator using :guilabel:`Run` > :guilabel:`Run 'app'`. You should see a sign-in
-screen. Choose the :guilabel:`Create new account` button to create a new account.
-Once the information is submitted, you will be sent a confirmation code
-via email. Enter the confirmation code to complete registration, then
+In the emulator, run the project using :guilabel:`Run` > :guilabel:`Run 'app'`. You should see a sign-in
+screen. Choose :guilabel:`Create new account` to create a new account.
+After the information is submitted, you should receive a confirmation code
+via email. Enter the confirmation code to complete registration, and then
 sign-in with your new account.
 
 .. list-table::
@@ -231,18 +213,18 @@ sign-in with your new account.
 
    * - **Tip**
 
-     - Use Amazon WorkMail as a test email account
+     - Use Amazon WorkMail as a test email account.
 
-       If you do not want to use your own email account as a test account, create an
+       If you don't want to use your own email account as a test account, create an
        `Amazon WorkMail <https://aws.amazon.com/workmail/>`__ service within AWS for test accounts. You can get started for free with a 30-day trial for up to 25 accounts.
 
 .. image:: images/tutorial-notes-authentication-anim.gif
    :scale: 75
    :alt: Demo of Notes tutorial app with user sign-in added.
 
-Next steps
+Next Steps
 ----------
 
--  Continue by integrating :ref:`NoSQL Data <tutorial-android-aws-mobile-notes-data>`.
+-  Continue by integrating :ref:`Serverless Backend <tutorial-android-aws-mobile-notes-data>`.
 
 -  Learn more about `Amazon Cognito <https://aws.amazon.com/cognito/>`__.

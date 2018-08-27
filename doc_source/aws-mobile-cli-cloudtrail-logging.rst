@@ -14,7 +14,7 @@ Logging AWS Mobile CLI API Calls with AWS CloudTrail
     :description:
        Learn about logging AWS Mobile CLI with |CTlong|.
 
-The AWS Mobile CLI is integrated with |CTlong|, a service that provides a record of actions taken by a user, role, or an AWS service in the CLI. |CT| captures all API calls for the CLI as events, including calls from the AWS Mobile Hub console and from code calls to the CLI APIs. If you create a trail, you can enable continuous delivery of |CT| events to an |S3| bucket, including events for the CLI. If you don't configure a trail, you can still view the most recent events in the |CT| console in :guilabel:`Event history`.  Using the information collected by |CT|, you can determine the request that was made to the CLI, the IP address from which the request was made, who made the request, when it was made, and additional details.
+The AWS Mobile CLI is integrated with |CTlong|, a service that provides a record of actions taken by a user, role, or an AWS service in the CLI. |CT| captures all API calls for the CLI as events, including calls from code calls to the CLI APIs. If you create a trail, you can enable continuous delivery of |CT| events to an |S3| bucket, including events for the CLI. If you don't configure a trail, you can still view the most recent events in the |CT| console in :guilabel:`Event history`.  Using the information collected by |CT|, you can determine the request that was made to the CLI, the IP address from which the request was made, who made the request, when it was made, and additional details.
 
 To learn more about |CT|, see the `AWS CloudTrail User Guide <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html>`__.
 

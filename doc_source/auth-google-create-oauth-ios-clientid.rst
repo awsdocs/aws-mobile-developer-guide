@@ -116,7 +116,7 @@ To create an OAuth iOS client ID
 #. Choose :guilabel:`Create`.
 
 #. In the :guilabel:`OAuth client` pop-up, copy and save the value that was generated for your iOS
-   client ID. You will need these values to implement Google Sign-In in your |AMH| app. After you
+   client ID. You need these values to implement Google Sign-In in your |AMH| app. After you
    copy the client ID, choose :guilabel:`OK`.
 
    .. image:: images/android-oauth-id.png

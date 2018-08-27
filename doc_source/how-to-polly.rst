@@ -15,9 +15,6 @@
 Convert Text to Speech with Amazon Polly
 ########################################
 
-What is Amazon Polly?
-=====================
-
 Amazon Polly is a service that turns text into lifelike speech, making it easy to develop mobile applications that use high-quality speech to increase engagement and accessibility. With Amazon Polly you can  quickly build speech-enabled apps that work in multiple geographies.
 
 Using the following resources, you can integrate Amazon Polly with your iOS app to add text to speech transformation. No deep knowledge of either AWS services or natural language computing is needed.

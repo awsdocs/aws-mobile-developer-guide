@@ -41,7 +41,7 @@ Granting Access to Amazon Machine Learning Resources
 
 To use Amazon Machine Learning in an application, you must set the proper permissions. The following
 IAM policy allows the user to perform the actions shown in this tutorial on two actions identified
-by ARN
+by ARN.
 
 .. code-block:: json
 
@@ -94,7 +94,7 @@ Create an Amazon Machine Learning Client
 Making a Predict Request
 ------------------------
 
-Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have to use the Machine Learning Console or an alternate `SDK <http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that this ML can be used for real-time Predictions:
+Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have to use the Machine Learning Console or an alternate `SDK <http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that this ML can be used for real-time predictions:
 
 .. container:: option
 

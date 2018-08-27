@@ -43,8 +43,7 @@ This section provides information on the steps for achieving specific tasks for 
    Natural Language (Amazon Lex) <how-to-lex>
    Speech to Text (Amazon Polly) <how-to-polly>
    Data Streaming (Amazon Kinesis) <how-to-kinesis-data-stream>
-   Data Sync (AWS Cognito Sync) <how-to-data-sync>
    Machine Learning (Amazon Machine Learning) <how-to-machine-learning>
    Miscellaneous <how-to-miscellaneous>
 
-
+..   Data Sync (AWS Cognito Sync) <how-to-data-sync>

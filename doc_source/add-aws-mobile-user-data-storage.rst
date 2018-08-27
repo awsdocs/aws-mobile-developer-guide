@@ -15,48 +15,72 @@ Add User File Storage to Your Mobile App with Amazon S3
 Overview
 ==============
 
-Enable your app to store and retrieve user files from cloud storage with the permissions model that
-suits your purpose. Mobile Hub  :ref:`user-data-storage` deploys and configures cloud storage buckets
-using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ (|S3|).
+.. container:: option
 
+   Android - Java
+      .. _android-java:
 
-.. _setup-your-backend:
+      Enable your app to store and retrieve user files from cloud storage with the permissions model that suits your purpose. The CLI deploys and configures cloud storage buckets using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ (|S3|).
+
+   Android - Kotlin
+      .. _android-kotlin:
+
+      Enable your app to store and retrieve user files from cloud storage with the permissions model that suits your purpose. The CLI deploys and configures cloud storage buckets using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ (|S3|).
+
+   iOS - Swift
+      .. _ios-swift:
+
+      Enable your app to store and retrieve user files from cloud storage with the permissions model that suits your purpose. The CLI deploys and configures cloud storage buckets using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ (|S3|).
+
+.. _setup-your-backend-user-file-storage:
 
 Set Up Your Backend
 ===================
 
 
-#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk>` steps before you proceed.
 
-   If you want to integrate an |S3| bucket that you have already configured, go to :ref:`Integrate an Existing Bucket <how-to-integrate-an-existing-bucket>`.
+#. In a terminal window, navigate to the root of your app files and add the storage category to your app. The CLI will prompt you for configuration parameters.
 
-#. Enable :guilabel:`User File Storage`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`User File Storage` tile to enable the feature.
+     .. code-block:: none
 
-#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done configuring the feature, choose the banner to return to the project details page.
+        $ cd ./ROOT_OF_YOUR_APP_FILES
+        $ amplify storage add
 
-   .. image:: images/updated-cloud-config.png
+#.  Choose Content as your storage service.
 
-#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
+     .. code-block:: none
 
-   .. image:: images/updated-cloud-config2.png
-      :scale: 25
+        ❯ Content (Images, audio, video, etc.)
 
-#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the User File Storage documentation below to connect to your backend.
+#. Provide names when prompted by the CLI project. The CLI displays a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
+
+   .. code-block:: none
+
+      $ amplify status
+      | Category  | Resource name   | Operation | Provider plugin   |
+      | --------- | --------------- | --------- | ----------------- |
+      | Storage   | sabc0123de      | Create    | awscloudformation |
+
+#. To create your backend AWS resources run:
+
+     .. code-block:: none
+
+        amplify push
+
+   Use the steps in the next section to connect your app to your backend.
 
 .. _add-aws-mobile-user-data-storage-app:
 
 Connect to Your Backend
 =======================
 
-Make sure to complete the :ref:`add-aws-mobile-user-sign-in-backend-setup` steps before
-using the integration steps on this page.
-
-**To add User File Storage to your app**
+Use the following steps to connect add file storage backend services to your app.
 
 .. container:: option
 
    Android - Java
-      Set up AWS Mobile SDK components as follows:
+      Set up AWS Mobile SDK components as follows.
 
          #. Add the following to :file:`app/build.gradle` (Module:app):
 
@@ -67,7 +91,7 @@ using the integration steps on this page.
                   implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
                }
 
-            Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
+            Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app.
 
          #. Add the following to :file:`AndroidManifest.xml`:
 
@@ -91,7 +115,7 @@ using the integration steps on this page.
                import com.amazonaws.mobileconnectors.s3.transferutility.*;
 
    Android - Kotlin
-      Set up AWS Mobile SDK components as follows:
+      Set up AWS Mobile SDK components as follows.
 
          #. Add the following to :file:`app/build.gradle`:
 
@@ -132,7 +156,7 @@ using the integration steps on this page.
                import com.amazonaws.mobileconnectors.s3.transferutility.*;
 
    iOS - Swift
-      Set up AWS Mobile SDK components as follows:
+      Set up AWS Mobile SDK components as follows.
 
          #. Add the following to :file:`Podfile` that you configure to install the AWS Mobile SDK:
 
@@ -144,7 +168,6 @@ using the integration steps on this page.
                      use_frameworks!
 
                      pod 'AWSS3', '~> 2.6.13'   # For file transfers
-                     pod 'AWSCognito', '~> 2.6.13'   #For data sync
 
                      # other pods . . .
 
@@ -188,10 +211,10 @@ Upload a File
 
    Android - Java
     To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`,
-    then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
+    and then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
 
-    The following example shows using the :code:`TransferUtility` in the context of an Activity.
-    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object. :code:`TransferUtility` will check the size of file being uploaded and will automatically switch over to using multi-part uploads if the file size exceeds 5 MB.
+    The following example shows how to use the :code:`TransferUtility` in the context of an Activity.
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object. :code:`TransferUtility` checks the size of the file being uploaded and automatically switches over to using multi-part uploads if the file size exceeds 5 MB.
 
        .. code-block:: java
 
@@ -261,7 +284,7 @@ Upload a File
                         // Handle a completed upload.
                     }
 
-                    Log.d("YourActivity", "Bytes Transferrred: " + uploadObserver.getBytesTransferred());
+                    Log.d("YourActivity", "Bytes Transferred: " + uploadObserver.getBytesTransferred());
                     Log.d("YourActivity", "Bytes Total: " + uploadObserver.getBytesTotal());
               }
           }
@@ -270,9 +293,9 @@ Upload a File
     To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`,
     then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
 
-    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+    The following example shows how to use the :code:`TransferUtility` in the context of an Activity.
 
-    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object. :code:`TransferUtility` will check the size of file being uploaded and will automatically switch over to using multi-part uploads if the file size exceeds 5 MB.
+    If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object. :code:`TransferUtility` checks the size of the file being uploaded and automatically switches over to using multi-part uploads if the file size exceeds 5 MB.
 
       .. code-block:: kotlin
 
@@ -388,7 +411,7 @@ Download a File
     to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
     :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
-    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+    The following example shows how to use the :code:`TransferUtility` in the context of an Activity.
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
     pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.
 
@@ -459,7 +482,7 @@ Download a File
                         // Handle a completed upload.
                     }
 
-                    Log.d(LOG_TAG, "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
+                    Log.d(LOG_TAG, "Bytes Transferred: " + downloadObserver.getBytesTransferred());
                     Log.d(LOG_TAG, "Bytes Total: " + downloadObserver.getBytesTotal());
                 }
             }
@@ -469,7 +492,7 @@ Download a File
     to get the :code:`AWSConfiguration` and  :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
     :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
-    The following example shows using the :code:`TransferUtility` in the context of an Activity.
+    The following example shows how to use the :code:`TransferUtility` in the context of an Activity.
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
     pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.
 
@@ -536,7 +559,7 @@ Download a File
                         // Handle a completed upload.
                     }
 
-                    Log.d(LOG_TAG, "Bytes Transferrred: ${downloadObserver.bytesTransferred}");
+                    Log.d(LOG_TAG, "Bytes Transferred: ${downloadObserver.bytesTransferred}");
                 }
             }
 
@@ -583,8 +606,8 @@ Download a File
 Next Steps
 ==========
 
-* For further information about TransferUtility capabilities, see :ref:`how-to-transfer-files-with-transfer-utility`.
+* For more information about TransferUtility capabilities, see :ref:`how-to-transfer-files-with-transfer-utility`.
 
 * For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`__.
 
-* Looking for Amazon Cognito Sync? If you are a new user, use `AWS AppSync <https://aws.amazon.com/appsync/>`__ instead. AppSync is a new service for synchronizing application data across devices. Like Cognito Sync, AppSync enables synchronization of a user's own data, such as game state or app preferences. AppSync extends these capabilities by allowing multiple users to synchronize and collaborate in real-time on shared data, such as a virtual meeting space or chatroom. `Start building with AWS AppSync now <https://aws.amazon.com/appsync/>`__
+* Looking for Amazon Cognito Sync? If you are a new user, use `AWS AppSync <https://aws.amazon.com/appsync/>`__ instead. AppSync is a new service for synchronizing application data across devices. Like Cognito Sync, AppSync enables synchronization of a user's own data, such as game state or app preferences. AppSync extends these capabilities by allowing multiple users to synchronize and collaborate in real time on shared data, such as a virtual meeting space or chat room. `Start building with AWS AppSync now <https://aws.amazon.com/appsync/>`__

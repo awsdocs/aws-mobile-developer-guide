@@ -22,7 +22,6 @@ Android and iOS API References
 **Android**
 
 * `AWS Mobile SDK for Android API Reference <http://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/>`__
-* `Latest AWS Mobile SDK for Android Download <http://sdk-for-android.amazonwebservices.com/latest/aws-android-sdk.zip>`__
 * `AWS Mobile SDK for Android on GitHub <https://github.com/aws/aws-sdk-android>`__
 * `AWS Mobile SDK for Android Samples <https://github.com/awslabs/aws-sdk-android-samples>`__
 

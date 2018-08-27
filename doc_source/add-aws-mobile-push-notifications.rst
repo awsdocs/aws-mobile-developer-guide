@@ -1,19 +1,9 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
 
 .. _add-aws-mobile-push-notifications:
 
 ##############################################################
 Add Push Notifications to Your Mobile App with Amazon Pinpoint
 ##############################################################
-
 
 .. meta::
    :description: Integrate AWS Push Notifications into your mobile app.
@@ -23,51 +13,87 @@ Add Push Notifications to Your Mobile App with Amazon Pinpoint
 Overview
 ==========================
 
-|AMH| deploys your Push Notifications backend services when you enable the
-:ref:`messaging-and-analytics` feature using the `Amazon Pinpoint service <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`__. Amazon Pinpoint enables apps to
-receive mobile push messages sent from the Apple (APNs) and Google (FCM/GCM) platforms. You can also
-create Amazon Pinpoint campaigns that tie user behavior to push or other forms of messaging.
+.. container:: option
+
+   Android - Java
+      .. _android-java:
+
+      Enable your users to receive mobile push messages sent from the Apple (APNs) and Google (FCM/GCM) platforms. The CLI deploys a push notification backend using `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`__. You can also create Amazon Pinpoint campaigns that tie user behavior to push or other forms of messaging.
+
+   Android - Kotlin
+      .. _android-kotlin:
+
+      Enable your users to receive mobile push messages sent from the Apple (APNs) and Google (FCM/GCM) platforms. The CLI deploys a push notification backend using `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`__. You can also create Amazon Pinpoint campaigns that tie user behavior to push or other forms of messaging.
+
+   iOS - Swift
+      .. _ios-swift:
+
+      Enable your users to receive mobile push messages sent from the Apple (APNs) and Google (FCM/GCM) platforms. The CLI deploys your push notification backend using `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/>`__. You can also create Amazon Pinpoint campaigns that tie user behavior to push or other forms of messaging.
 
 .. _setup-your-backend:
 
 Set Up Your Backend
 ===================
 
+#. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
-#. Complete the :ref:`Get Started <getting-started>` steps before your proceed.
+#. In a terminal window, navigate to the root of your app files, and add notifications.
 
-#. Choose the :guilabel:`Messaging and Analytics` tile
+   .. code-block:: none
 
-#. Choose :guilabel:`Mobile push`.
+      $ cd ROOT_OF_YOUR_APP_FILES
+      $ amplify notifications add
 
-   **For Android - Firebase/Google Cloud Messaging (FCM/GCM):** Choose :guilabel:`Android` and provide your Firebase/Google application API key and Sender ID. To retrieve or create these values, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__ .
+#. Set up your backend to support receiving push notifications:
 
-   **For iOS - Apple Push Notification Service (APNs):** Choose :guilabel:`iOS` and provide your Apple app P12 Certificate and, optionally, Certificate password. To retrieve or create these items, see `Setting Up iOS Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`__.
+   .. container:: option
 
-#. When the operation is complete, an alert will pop up saying "Your Backend has been updated", prompting you to download the latest copy of the cloud configuration file. If you're done with configuring the feature, choose the banner to return to the project details page.
+       Android - Java
+          - Choose Firebase Cloud Messaging (FCM).
 
-   .. image:: images/updated-cloud-config.png
+            .. code-block:: none
 
-#. From the project detail page, every app that needs to be updated with the latest cloud configuration file will have a flashing :guilabel:`Integrate` button. Choose the button to enter the integrate wizard.
+               > FCM
 
-   .. image:: images/updated-cloud-config2.png
-      :scale: 25
+          - Provide your ApiKey. For information on getting an FCM ApiKey, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__
 
-#. Update your app with the latest copy of the cloud configuration file. Your app now references the latest version of your backend. Choose Next and follow the Push Notification documentation below to connect to your backend.
+       Android - Kotlin
+          - Choose Firebase Cloud Messaging (FCM).
+
+            .. code-block:: none
+
+               > FCM
+
+          - Provide your ApiKey. For information on getting an FCM ApiKey, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__
+
+       iOS - Swift
+          - Choose Apple Push Notification Service (APNs).
+
+            .. code-block:: none
+
+               > APNS
+
+          - Choose Certificate as your authentication method.
+
+            .. code-block:: none
+
+               > Certificate
+
+          - Provide the path to your P12 certificate. For information on creating your APNs certificate, see `Setting Up iOS Push Notifications. <http://docs.aws.amazon.com/pinpoint/latest/developerguide/apns-setup.html>`__
+
+   Use the steps in the next section to connect your app to your backend.
 
 .. _add-aws-mobile-push-notifications-app:
 
-Connect to your backend
+Connect to Your Backend
 =======================
 
-
-**To add push notification to your app**
+Use the following steps to connect add push notification backend services to your app.
 
 .. container:: option
 
    Android - Java
-      #. Set up AWS Mobile SDK components with the following
-         :ref:`add-aws-mobile-sdk-basic-setup` steps.
+      #. Set up AWS Mobile SDK components as follows.
 
 
          #. :file:`AndroidManifest.xml` must contain:
@@ -182,9 +208,7 @@ Connect to your backend
              }
 
    Android - Kotlin
-      #. Set up AWS Mobile SDK components with the following
-         :ref:`add-aws-mobile-sdk-basic-setup` steps.
-
+      #. Set up AWS Mobile SDK components as follows.
 
          #. :file:`AndroidManifest.xml` must contain:
 
@@ -345,14 +369,14 @@ Connect to your backend
 Add Amazon Pinpoint Targeted and Campaign Push Messaging
 ===========================
 
-`Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enables you to target your app users with push messaging. You can send individual messages or configure campaigns that target a group of users that match a profile that you define. For instance, you could email users that have not used the app in 30 days, or send an SMS to those that frequently use a given feature of your app.
+The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enables you to target your app users with push messaging. You can send individual messages or configure campaigns that target a group of users that match a profile that you define. For instance, you could email users that have not used the app in 30 days, or send an SMS to those that frequently use a given feature of your app.
 
 .. container:: option
 
    Android - Java
-      The following 2 steps show how to receive push notifications targeted for your app.
+      The following steps show how to receive push notifications targeted for your app.
 
-      #. Add a Push Listener Service to Your App.
+      #. Add a push listener service to your app.
 
          The name of the class must match the push listener service name used in the app manifest.
          :code:`pinpointManager` is a reference to the static PinpointManager variable declared in
@@ -437,7 +461,7 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
 
          #. Add code to react to your push listener service.
 
-            The following code can be placed where your app will react to incoming notifications.
+            Place the following code where you want your app to react to incoming notifications.
 
             .. code-block:: java
 
@@ -491,9 +515,9 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
                 }
 
    Android - Kotlin
-      The following 2 steps show how to receive push notifications targeted for your app.
+      The following steps show how to receive push notifications targeted for your app.
 
-      #. Add a Push Listener Service to Your App.
+      #. Add a push listener service to your app.
 
          The name of the class must match the push listener service name used in the app manifest.
          :code:`pinpointManager` is a reference to the static PinpointManager variable declared in
@@ -561,7 +585,7 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
 
          #. Add code to react to your push listener service.
 
-            The following code can be placed where your app will react to incoming notifications.
+            Place the following code where you want your app to react to incoming notifications.
 
             .. code-block:: kotlin
 
@@ -603,7 +627,7 @@ Add Amazon Pinpoint Targeted and Campaign Push Messaging
 
                     override fun onResume() {
                         super.onResume()
-                        LoadBroadcastManager.getInstance(this).registerReceiver(notificationReceiver,
+                        LocalBroadcastManager.getInstance(this).registerReceiver(notificationReceiver,
                             IntentFilter(PushListenerService.ACTION_PUSH_NOTIFICATION))
                     }
 

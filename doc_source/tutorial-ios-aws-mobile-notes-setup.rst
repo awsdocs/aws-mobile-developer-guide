@@ -1,12 +1,3 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
 
 .. _tutorial-ios-aws-mobile-notes-setup:
 
@@ -21,7 +12,7 @@ A Simple Note-taking App
 
    Analytics <tutorial-ios-aws-mobile-notes-analytics>
    Authentication <tutorial-ios-aws-mobile-notes-auth>
-   NoSQL Data <tutorial-ios-aws-mobile-notes-data>
+..   Serverless Backend <tutorial-ios-aws-mobile-notes-data>
 
 Start with a working app and then add cloud enable features. In this tutorial, you will take a working app, driven from locally stored data, and then:
 
@@ -29,7 +20,7 @@ Start with a working app and then add cloud enable features. In this tutorial, y
 
 - :ref:`Add a simple sign-in/sign-up flow <tutorial-ios-aws-mobile-notes-auth>` for authentication.
 
-- :ref:`Access data stores in the AWS <tutorial-ios-aws-mobile-notes-data>` cloud, so that a user's notes are available to them on any device with the app installed.
+.. - :ref:`Access data stores in the AWS <tutorial-ios-aws-mobile-notes-data>` cloud, so that a user's notes are available to them on any device with the app installed.
 
 .. image:: images/tutorial-ios-notes-app-anim.gif
    :scale: 100
@@ -44,41 +35,28 @@ you have installed all required software. Once you complete the instructions on 
 Getting Started
 ---------------
 
-Before beginning, on your Mac:
+Before beginning, you must:
 
--  Install
-   `XCode <https://itunes.apple.com/us/app/xcode/id497799835?mt=12>`__
-   using the Mac App Store (version 8.0 or higher is required).
+#. Complete the `Getting Started <https://aws-amplify.github.io/media/get_started>`__ instructions to install the Amplify CLI.
+#. Install `Xcode <https://itunes.apple.com/us/app/xcode/id497799835?mt=12>`__ using the Mac App Store (version 9.0 or higher is required).
+#. Configure the Xcode command line tools. Run ``xcode-select --install`` from a Terminal window.
+#. Install `Cocoapods <https://cocoapods.org/>`__. From a terminal window run:
 
--  Configure the XCode command line tools. Run
-   ``xcode-select --install`` from a Terminal window.
-
-
-
-- Install Cocoapods. From a terminal window run:
-
-
-  .. code-block:: bash
+   .. code-block:: bash
 
       sudo gem install cocoapods
-
 
 Download the Source code
 ------------------------
 
-1. Get the tutorial source code using one of the following choices:
-
-* Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/archive/master.zip>`__.
-
-* Browse to  `https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/ <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/>`__ and clone or fork the repository (`sign up for GitHub account <https://github.com/join?source=header-home>`__, if you do not have one).
-
+Download the `source code <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/>`__ as a `ZIP file <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/archive/master.zip>`__.
 
 Compile and Run the Project
 ---------------------------
 
-To compile the source code and the project in a simulator:
+To compile the source code and run the project in a simulator:
 
-#.  Unzip :file:`aws-mobile-ios-notes-tutorial-latest.zip` and launch Xcode by choosing :file:`MyNotes.xcodeproj` in the expanded folder.
+#.  Unzip :file:`aws-mobile-ios-notes-tutorial-master.zip` and launch Xcode by choosing :file:`MyNotes.xcodeproj` in the expanded folder.
 #.  Select :guilabel:`Product > Build` (|Acommand|-B) to build the project.
 #.  Select any compatible simulator from the list in the toolbar at the top, next to the label with your app name.
 #.  Choose the run icon (|play|) on the top left or type |Acommand|-R to build and run the app.

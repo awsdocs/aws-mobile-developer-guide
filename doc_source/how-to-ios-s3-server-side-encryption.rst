@@ -24,7 +24,7 @@ The following properties are available to configure the encryption:
 * `SSECustomerKeyMD5 <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSS3PutObjectOutput.html#//api/name/SSECustomerKeyMD5>`__
 * `AWSS3ServerSideEncryption <http://docs.aws.amazon.com/AWSiOSSDK/latest/Constants/AWSS3ServerSideEncryption.html>`__
 
-To use these properties, import the ``AWSSS3Model`` with the following statement.
+To use these properties, add the following statement which imports the ``AWSSS3Model``.
 
     .. container:: option
 

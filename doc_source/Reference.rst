@@ -24,9 +24,10 @@ AWS Mobile Reference
    :maxdepth: 1
 
    SDK API References <reference-api-refs>
-   Amazon S3 Security Considerations <reference-s3-security>
-   Amazon CloudFront Security Considerations <reference-cloudfront-security>
    AWS Mobile Hub Reference <reference-mobile-hub>
+
+..   Amazon S3 Security Considerations <reference-s3-security>
+..   Amazon CloudFront Security Considerations <reference-cloudfront-security>
 
 
 

@@ -116,7 +116,7 @@ To create an OAuth Android client ID
          :scale: 85
 
 
-#. Use your your SHA-1 fingerprint to ensure that your apps APK are associated with your Google app.
+#. Use your SHA-1 fingerprint to ensure that your apps APK are associated with your Google app.
    See instructions at `Generate a key and keystore
    <https://developer.android.com/studio/publish/app-signing.html#generate-key>`__.
 
@@ -126,7 +126,7 @@ To create an OAuth Android client ID
 #. Choose :guilabel:`Create`.
 
 #. In the :guilabel:`OAuth client` pop-up, copy and save the value generated for your Android client
-   ID. You will need this client ID to implement Google Sign-In in your |AMH| app. After you copy
+   ID. You need this client ID to implement Google Sign-In in your |AMH| app. After you copy
    the client ID, choose :guilabel:`OK`.
 
    .. image:: images/android-oauth-id.png

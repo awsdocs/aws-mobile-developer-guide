@@ -27,7 +27,7 @@ The :ref:`Get Started <add-aws-mobile-user-sign-in>` section of this guide allow
 
     * Set up short-lived credentials for accessing your AWS resources using a `Cognito Identity Pool <http://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`__.
 
-    * Create an AWS Mobile configuration file that ties your app code to the identity pool that enables users to acces your AWS resources.
+    * Create an AWS Mobile configuration file that ties your app code to the identity pool that enables users to access your AWS resources.
 
     * Make small adjustments to your app code to install the SDK and retrieve AWS credentials for your user.
 
@@ -62,7 +62,7 @@ To create a new identity pool:
 Connect to Your Backend
 =======================
 
-Take the following steps to connect your app to its backedn.
+Take the following steps to connect your app to its backend.
 
 .. contents::
    :local:
@@ -234,7 +234,7 @@ Add the SDK to your App
                     }
                 }
 
-            When you run your app, you should see no behavior change. To verify success, look for the message :code:`"Welcome to AWS!"` in your debug output.
+            When you run your app, you shouldn't see a behavior change. To verify success, look for the message :code:`"Welcome to AWS!"` in your debug output.
 
    Android - Kotlin
       Set up AWS Mobile SDK components as follows:
@@ -265,7 +265,7 @@ Add the SDK to your App
                 import com.amazonaws.mobile.client.AWSStartupResult;
 
                 class MainActivity : AppCompatActivity() {
-                    override fun onCrearte(savedInstanceState: Bundle?) {
+                    override fun onCreate(savedInstanceState: Bundle?) {
                         super.onCreate(savedInstanceState)
                         setContentView(R.layout.activity_main)
 
@@ -286,7 +286,7 @@ Add the SDK to your App
                     }
                 }
 
-            When you run your app, you should see no behavior change. To verify success, look for the message :code:`"Welcome to AWS!"` in your debug output.
+            When you run your app, you shouldn't see a behavior change. To verify success, look for the message :code:`"Welcome to AWS!"` in your debug output.
 
 
    iOS - Swift

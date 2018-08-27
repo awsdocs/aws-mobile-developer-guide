@@ -31,7 +31,7 @@ How To: File Storage with Amazon S3
 
 
 
-This section provides information on the steps for achieving specific tasks for integrating your Amazon S3 into your Android and iOS apps.
+This section provides procedures for integrating Amazon S3 into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:
@@ -39,6 +39,6 @@ This section provides information on the steps for achieving specific tasks for 
 
    Integrate an Existing Bucket <how-to-integrate-an-existing-bucket>
    Transfer Files with TransferUtility <how-to-transfer-files-with-transfer-utility>
-   iOS: Use Presigned Urls to Access Files <how-to-ios-s3-presigned-urls>
+   iOS: Use Presigned URLs to Access Files <how-to-ios-s3-presigned-urls>
    iOS: Use Server-side Encryption <how-to-ios-s3-server-side-encryption>
    iOS: Use TransferManager <how-to-ios-s3-transfermanager>

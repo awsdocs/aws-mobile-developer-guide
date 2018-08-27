@@ -11,7 +11,7 @@
 .. _how-to-user-sign-in-sign-out:
 
 #########################
-Sign-out a Signed-in User
+Sign Out a Signed-in User
 #########################
 
 
@@ -202,8 +202,14 @@ Enable User Sign-out
                 }
 
                 private fun showSignIn() {
-                    val ui = AWSMobileClient.getInstance().getClient(this@AuthenticatorActivity, SignInUI::class.java)
-                    ui.login(this@AuthenticatorActivity, MainActivity::class.java).execute()
+                    AWSMobileClient.getInstance().initialize(this) {
+                        val ui = AWSMobileClient.getInstance().getClient(
+                              this@AuthenticatorActivity,
+                              SignInUI::class.java) as SignInUI?
+                        ui?.login(
+                              this@AuthenticatorActivity,
+                              MainActivity::class.java)?.execute()
+                    }.execute()
                 }
             }
 

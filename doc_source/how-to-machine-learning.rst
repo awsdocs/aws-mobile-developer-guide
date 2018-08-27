@@ -19,7 +19,7 @@ How To Add Machine Learning with Amazon Machine Learning
     :description:
         Learn how to integrate data storage offered by Amazon Lex to your mobile app.
 
-This section provides information on the steps for achieving specific tasks for integrating your Amazon Machine Learning into your Android and iOS apps.
+This section provides procedures for integrating Amazon Machine Learning into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:

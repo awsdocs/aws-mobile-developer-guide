@@ -43,7 +43,7 @@ Create or Import the Amazon Cognito Identity Pool
 
 #. In the code snippet labeled :guilabel:`Get AWSCredentials` displayed by the console, copy the Identity Pool ID and the Region for use in a following configuration step.
 
-Set up the required Amazon IAM permissions
+Set Up the Required Amazon IAM Permissions
 -------------------------------------------
 
 #. Go to `Amazon IAM Console <https://console.aws.amazon.com/iam/home>`__ and choose :guilabel:`Roles`.
@@ -66,16 +66,16 @@ Get Your Bucket Name and ID
 
 #. Go to `Amazon S3 Console <https://console.aws.amazon.com/s3/home>`__ and select the bucket you want to integrate.
 
-#. Copy and keep the bucket name value from the breadcrumb at the top of the console, for use in a following step.
+#. Copy and keep the bucket name value from the breadcrumb at the top of the console for use later.
 
-#. Copy and keep the bucket's region, for use in a following step.
+#. Copy and keep the bucket's region for use later.
 
 .. _how-to-storage-connect-to-your-backend:
 
 Connect to Your Backend
 =======================
 
-Create the awsconfiguration.json file
+Create the awsconfiguration.json File
 -------------------------------------
 
 #. Create a file with name :file:`awsconfiguration.json` with the following contents:
@@ -107,14 +107,14 @@ Create the awsconfiguration.json file
 
     * Replace the :code:`COGNITO-IDENTITY-POOL-ID` with the identity pool ID.
 
-    * Replace the :code:`COGNITO-IDENTITY-POOL-REGION` with the region the identity pool was created in.
+    * Replace the :code:`COGNITO-IDENTITY-POOL-REGION` with the Region the identity pool was created in.
 
     * Replace the :code:`S3-BUCKET-NAME` with the name of your bucket.
 
-    * Replace the :code:`S3-REGION` with the region your bucket was created in.
+    * Replace the :code:`S3-REGION` with the Region your bucket was created in.
 
 
-Add the awsconfiguration.json file to your app
+Add the awsconfiguration.json File to Your App
 -----------------------------------------------
 
 .. container:: option
@@ -161,7 +161,7 @@ Add the awsconfiguration.json file to your app
       Drag the :file:`awsconfiguration.json` into the Xcode Project Navigator folder containing :file:`Info.plist`. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
 
 
-Add the SDK to your App
+Add the SDK to Your App
 -----------------------
 
 .. container:: option
@@ -205,7 +205,7 @@ Add the SDK to your App
                import com.amazonaws.mobile.config.AWSConfiguration;
                import com.amazonaws.mobileconnectors.s3.transferutility.*;
 
-         #. Add the following code to the :code:`onCreate` method of your main or startup activity. This will establish a connection with AWS Mobile. :code:`AWSMobileClient` is a singleton that will be an interface for your AWS services.
+         #. Add the following code to the :code:`onCreate` method of your main or startup activity. This establishes a connection with AWS Mobile. :code:`AWSMobileClient` is a singleton that will be an interface for your AWS services.
 
             .. code-block:: java
 
@@ -297,7 +297,7 @@ Add the SDK to your App
 
             Run :code:`pod install --repo-update` before you continue.
 
-            If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
+            If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you might need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
          #. Add the following imports to the classes that perform user file storage operations:
 
@@ -329,7 +329,7 @@ Add the SDK to your App
 Implement Storage Operations
 ============================
 
-Once your backend is setup and connected to your app, use the following steps to upload and download a file using the SDK's transfer utility.
+After your backend is set up and connected to your app, use the following steps to upload and download a file using the SDK's transfer utility.
 
 .. _native-how-to-integrate-add-aws-user-data-storage-upload:
 
@@ -344,8 +344,8 @@ Upload a File
 
     The following example shows using the :code:`TransferUtility `in the context of an Activity.
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
-    pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.. The :code:`TransferUtility` will check
-    the size of file being uploaded and will automatically switch over to using multi-part uploads if the file size exceeds 5 MB.
+    pass it into :code:`TransferUtility` to use in forming the :code:`AWSConfiguration` object.. The :code:`TransferUtility` checks
+    the size of file being uploaded and automatically uses multi-part uploads if the file size exceeds 5 MB.
 
        .. code-block:: java
 
@@ -415,7 +415,7 @@ Upload a File
                         // Handle a completed upload.
                     }
 
-                    Log.d("YourActivity", "Bytes Transferrred: " + uploadObserver.getBytesTransferred());
+                    Log.d("YourActivity", "Bytes Transferred: " + uploadObserver.getBytesTransferred());
                     Log.d("YourActivity", "Bytes Total: " + uploadObserver.getBytesTotal());
                 }
             }
@@ -544,7 +544,7 @@ Download a File
    Android - Java
     To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
     to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
-    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :cdoe:`AWSCredentialsProvider`.
+    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
     The following example shows using the :code:`TransferUtility` in the context of an Activity.
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and
@@ -620,7 +620,7 @@ Download a File
                         // Handle a completed upload.
                     }
 
-                    Log.d("YourActivity", "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
+                    Log.d("YourActivity", "Bytes Transferred: " + downloadObserver.getBytesTransferred());
                     Log.d("YourActivity", "Bytes Total: " + downloadObserver.getBytesTotal());
                 }
             }
@@ -628,7 +628,7 @@ Download a File
    Android - Kotlin
     To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
     to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
-    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :cdoe:`AWSCredentialsProvider`.
+    :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the :code:`AWSCredentialsProvider`.
 
     The following example shows using the :code:`TransferUtility` in the context of an Activity.
     If you are creating :code:`TransferUtility` from an application context, you can construct the :code:`AWSCredentialsProvider` and

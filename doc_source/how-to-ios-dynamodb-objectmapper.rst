@@ -39,12 +39,12 @@ Setup
 
 To set your project up to use the AWS SDK for iOS :code:`dynamoDBObjectMapper`, take the following steps.
 
-Setup the SDK, Credentials, and Services
+Set Up the SDK, Credentials, and Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To integrate :code:`dynamoDBObjectMapper` into a new app, follow the steps described in `Get Started <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`__ to install the AWS Mobile SDK for iOS.
 
-For apps that use an SDK version prior to 2.6.0, follow the steps on :doc:`setup-options-for-aws-sdk-for-ios` to install the AWS Mobile SDK for iOS. Then use the steps on :doc:`cognito-auth-identity-for-ios-legacy` to configure user credentials, and permissions.
+For apps that use an SDK version prior to 2.6.0, follow the steps on :doc:`setup-options-for-aws-sdk-for-ios` to install the AWS Mobile SDK for iOS. Then use the steps on :ref:`how-to-user-sign-in` to configure user credentials, and permissions.
 
 Instantiate the Object Mapper API
 ---------------------------------
@@ -124,7 +124,7 @@ Book table to a ``Book`` object in the client-side code, as shown in the followi
                     @objc var Price:String?
                     @objc var ISBN:String?
 
-                    class Amazon DynamoDBTableName() -> String {
+                    class Amazon dynamoDBTableName() -> String {
                         return "Books"
                     }
 
@@ -171,7 +171,6 @@ To conform to the ``AWSDynamoDBModeling`` protocol, implement ``dynamoDBTableNam
 
 CRUD Operations
 ---------------
-In this section:
 
 .. contents::
    :local:
@@ -410,11 +409,11 @@ The following example shows how to create an ``AWSDynamoDBScanExpression`` objec
                 }];
 
 Filter a Scan
-~~~~~~~~~~~~-
+~~~~~~~~~~~~~
 
 The output of a scan is returned as an ``AWSDynamoDBPaginatedOutput`` object. The array of returned items is in the ``items`` property.
 
-The ``scanExpression` method provides several optional parameters. Use ``filterExpression``
+The ``scanExpression`` method provides several optional parameters. Use ``filterExpression``
 and ``expressionAttributeValues`` to specify a scan result for the attribute names and conditions
 you define. For more information about the parameters and the API, see
 `AWSDynamoDBScanExpression <http://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSDynamoDBScanExpression.html>`__.

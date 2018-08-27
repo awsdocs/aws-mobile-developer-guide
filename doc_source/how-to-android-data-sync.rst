@@ -53,8 +53,8 @@ constructor::
       Regions.YOUR_REGION,
       credentialsProvider);
 
-For more information about Cognito Identity, see :doc:`cognito-auth-legacy`.
-
+For more information about Cognito identity pools, see see  `Amazon Cognito
+Developer Guide <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`_.
 
 Syncing User Data
 -----------------
@@ -66,7 +66,7 @@ To sync unauthenticated user data:
 
 
 Create a Dataset and Add User Data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
 .. container:: option
 
@@ -101,7 +101,7 @@ Create a Dataset and Add User Data
       dataset.put("myKey", dataValue);
 
 Synchronize Dataset with the Cloud
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------
 
 To synchronize a dataset, call its synchronize method::
 

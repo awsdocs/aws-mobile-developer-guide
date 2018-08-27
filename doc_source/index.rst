@@ -10,9 +10,9 @@
 
 .. _index:
 
-#########
-|AMHlong|
-#########
+##########
+AWS Mobile
+##########
 
 
 .. meta::
@@ -27,7 +27,8 @@
 
 
 
-    What is AWS Mobile? <what-is-aws-mobile>
+    Mobile and Web App Development <what-is-aws-mobile>
     Android and iOS <aws-mobile-android-and-iOS>
-    Web <aws-mobile-web>
-    React Native <aws-mobile-react-native>
+    Reference <Reference>
+..    Web (AWS Amplify)<aws-mobile-web>
+..    React Native (AWS Amplify) <aws-mobile-react-native>

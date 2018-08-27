@@ -32,7 +32,7 @@ you can integrate the SDK with an existing project. You can also clone and run t
 Prerequisites
 =============
 
-Before you can use the |sdk-android|, you will need the following:
+Before you can use the |sdk-android|, you need the following:
 
 - An `AWS Account <http://aws.amazon.com>`__
 
@@ -42,7 +42,7 @@ Before you can use the |sdk-android|, you will need the following:
 - `Android Studio <https://developer.android.com/sdk/index.html>`__ or `Android Development Tools for
   Eclipse <http://developer.android.com/sdk/eclipse-adt.html>`__
 
-After completing the prerequisites, you will need to do the following to get started:
+After completing the prerequisites, you need to do the following to get started:
 
 #. Get the |sdk-android|.
 #. Set permissions in your :file:`AndroidManifest.xml` file.
@@ -158,18 +158,18 @@ Here's an example of how you can add `Amazon Cognito Identity <http://aws.amazon
 
     <dependencies>
         <dependency>
-            <groupid>com.amazonaws</groupid>
-            <artifactid>aws-android-sdk-core</artifactid>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-android-sdk-core</artifactId>
             <version>[2.2.0, 2.3)</version>
         </dependency>
         <dependency>
-            <groupid>com.amazonaws</groupid>
-            <artifactid>aws-android-sdk-s3</artifactid>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-android-sdk-s3</artifactId>
             <version>[2.2.0, 2.3)</version>
         </dependency>
         <dependency>
-            <groupid>com.amazonaws</groupid>
-            <artifactid>aws-android-sdk-mobileanalytics</artifactid>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-android-sdk-mobileanalytics</artifactId>
             <version>[2.2.0, 2.3)</version>
         </dependency>
     </dependencies>
@@ -227,7 +227,7 @@ The AWS Mobile :code:`artifactId` values are as follows:
 Step 2: Set Permissions in Your Manifest
 ========================================
 
-Add the following permission to your :file:`AndroidManifest.xml`
+Add the following permission to your :file:`AndroidManifest.xml`::
 
 .. code-block:: xml
 
@@ -252,7 +252,7 @@ To create an identity pool for your application:
 #. Log in to the `Amazon Cognito Console <https://console.aws.amazon.com/cognito/home>`__ and click
    :guilabel:`Manage Federated Identities`, then :guilabel:`Create new identity pool`.
 
-#. Enter a name for your Identity Pool and check the checkbox to enable access to unauthenticated
+#. Enter a name for your Identity Pool and check the check box to enable access to unauthenticated
    identities. Click :guilabel:`Create Pool` to create your identity pool.
 
 #. Click :guilabel:`Allow` to create the two default roles associated with your identity pool
@@ -278,10 +278,6 @@ Next Steps
 
 - **Read the API Reference**: View the `API Reference
   <https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/>`__ for the AWS Mobile SDK for Android.
-
-- **Try AWS Mobile Hub**: Quickly configure and provision an AWS cloud backend for many common mobile
-  app features, and download end to end working Android demonstration projects, SDK, and helper code, all
-  generated based on your choices.
 
 - **Ask questions**: Post questions on the :forum:`AWS Mobile SDK Forums <88>`.
 

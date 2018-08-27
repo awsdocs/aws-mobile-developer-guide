@@ -11,14 +11,14 @@
 .. _how-to-storage:
 
 ##################################
-How To For Platform Specific Tasks
+How To: Platform-Specific Tasks
 ##################################
 
 .. meta::
     :description:
         Topics for integrating AWS Services on iOS.
 
-This section provides information on the steps for achieving specific tasks for integrating AWS Services into iOS apps.
+This section provides procedures for integrating AWS Services into iOS apps.
 
 .. toctree::
    :titlesonly:
