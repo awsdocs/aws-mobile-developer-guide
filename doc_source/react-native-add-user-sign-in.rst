@@ -63,7 +63,7 @@ The AWS Mobile CLI enables you to integrate ready-made sign-up/sign-in/sign-out 
 
    * - **Note**
 
-     - If your react-native app was not created using :code:`create-react-native-app` or using a version of Expo lower than v25.0.0 (the engine behind  :code:`create-react-native-app`), you will need to link libraries in your project for the Auth module on React Native,  :code:`amazon-cognito-identity-js`.
+     - If your react-native app was not created using :code:`create-react-native-app` or using a version of Expo lower than v25.0.0 (the engine behind  :code:`create-react-native-app`), you  need to link libraries in your project for the Auth module on React Native,  :code:`amazon-cognito-identity-js`.
 
        To link to the module, you must first eject the project:
 

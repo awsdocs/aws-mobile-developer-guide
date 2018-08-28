@@ -1,17 +1,8 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
 
     .. _add-aws-mobile-analytics:
 
 #####################################################
-Add Analytics to your Mobile App with Amazon Pinpoint
+Add Analytics to Your Mobile App with Amazon Pinpoint
 #####################################################
 
 
@@ -24,24 +15,61 @@ Add Analytics to your Mobile App with Amazon Pinpoint
 Overview
 =========
 
-Gather the data that helps improve your app's usability, monetization, and engagement with your
-users. |AMH| deploys your analytics backend when you enable the :ref:`messaging-and-analytics`
-feature, which uses the `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__ service.
+.. container:: option
+
+   Android - Java
+      .. _android-java:
+
+      Gather the data that helps improve your app's usability, monetization, and engagement with your users. The CLI deploys your analytics backend using `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__.
+
+   Android - Kotlin
+      .. _android-kotlin:
+
+      Gather the data that helps improve your app's usability, monetization, and engagement with your users. The CLI deploys your analytics backend using `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__.
+
+   iOS - Swift
+      .. _ios-swift:
+
+      Gather the data that helps improve your app's usability, monetization, and engagement with your users. The CLI deploys your analytics backend using `Amazon Pinpoint <http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html>`__.
 
 .. _setup-your-backend:
 
-Set up your Backend
+Set Up Your Backend
 ===================
-#. Complete the :ref:`Get Started <getting-started>` steps before your proceed.
+#. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
-#. When you create a project, we enable analytics by default in your backend. You should see a green check mark  present on the :guilabel:`Analytics` tile in your backend, indicating that the feature is enabled. If the check mark is absent, choose :guilabel:`Analytics`, and then choose :guilabel:`Enable`.
+#. In a terminal window, navigate to the root of your app files, and then add the analytics category to your app. The CLI will prompt you for configuration parameters.
 
-  .. image:: images/project-detail-analytics.png
-     :scale: 25
+     .. code-block:: bash
+
+        $ cd ./ROOT_OF_YOUR_APP_FILES
+        $ amplify analytics add
+
+#. When you complete configuration for analytics, you will see a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
+
+   .. code-block:: bash
+
+       $ amplify status
+      | Category  | Resource name   | Operation | Provider plugin   |
+      | --------- | --------------- | --------- | ----------------- |
+      | Auth      | cognitoabcd0123 | Create    | awscloudformation |
+      | Analytics | yourprojectname | Create    | awscloudformation |
+
+#. To create your backend AWS resources run:
+
+     .. code-block:: bash
+
+        $ amplify push
+
+#. Copy and save the URL labeled :code:`Pinpoint URL to track events:`. This link opens your app project in the Amazon Pinpoint console where you can monitor usage events in near real time.
+
+
+   Use the steps in the next section to connect your app to your backend.
+
 
 .. _add-aws-mobile-analytics-app:
 
-Connect to your Backend
+Connect to Your Backend
 =======================
 
 Use the following steps to add analytics to your mobile app and monitor the results through Amazon Pinpoint.
@@ -69,7 +97,7 @@ Add Analytics
 
                #. Add required permissions to your app manifest.
 
-                  The AWS Mobile SDK required the :code:`INTERNET` and :code:`ACCESS_NETWORK_STATE` permissions.  These are defined in the :code:`AndroidManifest.xml` file.
+                  The AWS Mobile SDK requires the :code:`INTERNET` and :code:`ACCESS_NETWORK_STATE` permissions.  These are defined in the :code:`AndroidManifest.xml` file.
 
                   .. code-block:: xml
 
@@ -84,9 +112,9 @@ Add Analytics
 
                * Start a session in the :code:`onCreate()` method of the app's first activity.
 
-               * Start and/or stop a session in the `ActivityLifecycleCallbacks <https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks>`__ class.
+               * Start or stop a session in the `ActivityLifecycleCallbacks <https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks>`__ class.
 
-               The following example shows starting a session in the :code:`OnCreate` event of :code:`MainActivity`.
+               The following example shows how to start a session in the :code:`OnCreate` event of :code:`MainActivity`.
 
                   .. code-block:: java
 
@@ -164,9 +192,9 @@ Add Analytics
 
                * Start a session in the :code:`onCreate()` method of the app's first activity.
 
-               * Start and/or stop a session in the `ActivityLifecycleCallbacks <https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks>`__ class.
+               * Start or stop a session in the `ActivityLifecycleCallbacks <https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks>`__ class.
 
-               The following example shows starting a session in the :code:`OnCreate` event of :code:`MainActivity`.
+               The following example shows how to start a session in the :code:`OnCreate` event of :code:`MainActivity`.
 
                   .. code-block:: kotlin
 
@@ -198,7 +226,7 @@ Add Analytics
                             }
                         }
 
-               To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session you want to capture.
+               To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session that you want to capture.
 
                .. code-block:: java
 
@@ -263,12 +291,11 @@ Monitor Analytics
 
 Build and run your app to see usage metrics in Amazon Pinpoint.
 
-#. To see visualizations of the analytics coming from your app, open your project in the `Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`__.
+#. To see visualizations of the analytics coming from your app, open your project in the Amazon Pinpoint console by running:
 
-#. Choose :guilabel:`Analytics` on the upper right to open the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
+   .. code-block:: none
 
-  .. image:: images/analytics-link-mhconsole.png
-     :alt: |AMH| console link to your project in the Amazon Pinpoint console.
+      $ amplify analytics console
 
 #. Choose :guilabel:`Analytics` from the icons on the left of the console, and view the graphs of your app's usage. It may take up to 15 minutes for metrics to become visible.
 
@@ -336,12 +363,12 @@ Use the following steps to implement Amazon Pinpoint custom analytics for your a
 
              }
 
-Build, run, and try your app, and then view your custom events in the :guilabel:`Events` tab of the Amazon Pinpoint console (use your |AMH| project / :guilabel:`Analytics` > Amazon Pinpoint console / :guilabel:`Analytics` > :guilabel:`Events`). Look for the name of your event in the :guilabel:`Events` dropdown menu.
+Build, run, and use your app. Then, view your custom events on the :guilabel:`Events` tab of the Amazon Pinpoint console (Amazon Pinpoint console / :guilabel:`Analytics` > :guilabel:`Events`). Look for the name of your event in the :guilabel:`Events` menu.
 
 .. _add-aws-mobile-analytics-enable-revenue-data:
 
 Enable Revenue Analytics
-------------------------
+========================
 
 Amazon Pinpoint supports the collection of monetization event data. Use the following steps to place
 and design analytics related to purchases through your app.

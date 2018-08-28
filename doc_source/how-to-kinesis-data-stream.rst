@@ -19,7 +19,7 @@ How To Stream Data with Amazon Kinesis
     :description:
         Learn how to integrate data storage offered by Amazon Kinesis to your mobile app.
 
-This section provides information on the steps for achieving specific tasks for integrating your Amazon Kinesis into your Android and iOS apps.
+This section provides procedures for integrating Amazon Kinesis into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:

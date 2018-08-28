@@ -15,18 +15,18 @@ Integrate Your Existing NoSQL Table
 ###################################
 
 
-.. list-table::
-   :widths: 1 6
+.. .. list-table::
+..    :widths: 1 6
 
-   * - **Just Getting Started?**
+..    * - **Just Getting Started?**
 
-     - :ref:`Use streamlined steps <add-aws-mobile-nosql-database>` to install the SDK and integrate features.
+..      - :ref:`Use streamlined steps <add-aws-mobile-nosql-database>` to install the SDK and integrate features.
 
-The :ref:`Get Started <add-aws-mobile-nosql-database>` section of this guide allows you to create new resources and complete the steps described on this page in minutes. If you want to import existing resources or create them from scratch, the contents of this page will walk you through the steps you need.
+.. The :ref:`Get Started <add-aws-mobile-nosql-database>` section of this guide allows you to create new resources and complete the steps described on this page in minutes. If you want to import existing resources or create them from scratch, the contents of this page will walk you through the steps you need.
 
 The following steps and examples are based on a simple bookstore app. The app tracks the books that are available in the bookstore using an Amazon DynamoDB table.
 
-Set up Your Backend
+Set Up Your Backend
 ===================
 
 To manually configure an Amazon DynamoDB table that you can integrate into your mobile app, use the following steps.
@@ -49,7 +49,7 @@ To create the Books table:
 #. Check the :guilabel:`Add sort key` box , then type :userinput:`Category` in the provided field and select :guilabel:`String` as the type.
 #. Clear the :guilabel:`Use default settings` checkbox and choose :guilabel:`+ Add Index`.
 #. In the :guilabel:`Add Index` dialog type :command:`Author` with :guilabel:`String` as the type.
-#. Check the :guilabel:`Add sort key` checkbox and enter :command:`Title` as the sort key value, with :guilabel:`String` as its type.
+#. Check the :guilabel:`Add sort key` check box and enter :command:`Title` as the sort key value, with :guilabel:`String` as its type.
 #. Leave the other values at their defaults. Choose :guilabel:`Add index` to add the :command:`Author-Title-index` index.
 #. Set the :guilabel:`Minimum provisioned capacity` for read to 10, and for write to 5.
 #. Choose :guilabel:`Create`.Amazon DynamoDB will create your database.
@@ -62,7 +62,7 @@ To create the Books table:
 Set Up an Identity Pool
 -----------------------
 
-To give your users permissions to access your table you'll need an `identity pool <https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`__ from Amazon Cognito. That pool has two default IAM roles, one for guest (unauthenticated), and one for signed-in (authenticated) users. The policies you design and attach to the IAM roles determine what each type of user can and cannot do.
+To give your users permissions to access your table you need an `identity pool <https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`__ from Amazon Cognito. That pool has two default IAM roles, one for guest (unauthenticated), and one for signed-in (authenticated) users. The policies you design and attach to the IAM roles determine what each type of user can and cannot do.
 
 :ref:`Import an existing pool <import-an-existing-identity-pool>` or :ref:`create a new pool <create-a-new-identity-pool>` for your app.
 
@@ -235,7 +235,7 @@ To make the connection between your app and your backend services, add the confi
       Drag the :file:`awsconfiguration.json` into the folder containing your :file:`Info.plist` file in your Xcode project. Choose :guilabel:`Copy items` and :guilabel:`Create groups` in the options dialog.
 
 
-Add the SDK to your App
+Add the SDK to Your App
 -----------------------
 
 Use the following steps to add AWS Mobile NoSQL Database to your app.
@@ -269,7 +269,7 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
                  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
-      #. Create an :code:`AWSDynamoDBMapper` client in the call back of your call to instantiate :code:`AWSMobileClient`. This will ensure that the AWS credentials needed to connect to Amazon DynamoDB are available, and is typically in :code:`onCreate` function of of your start up activity.
+      #. Create an :code:`AWSDynamoDBMapper` client in the call back of your call to instantiate :code:`AWSMobileClient`. This will ensure that the AWS credentials needed to connect to Amazon DynamoDB are available, and is typically in :code:`onCreate` function of your start up activity.
 
          .. code-block:: java
 
@@ -357,7 +357,7 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
                  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 
-      #. Create an :code:`AWSDynamoDBMapper` client in the call back of your call to instantiate :code:`AWSMobileClient`. This will ensure that the AWS credentials needed to connect to Amazon DynamoDB are available, and is typically in :code:`onCreate` function of of your start up activity.
+      #. Create an :code:`AWSDynamoDBMapper` client in the call back of your call to instantiate :code:`AWSMobileClient`. This will ensure that the AWS credentials needed to connect to Amazon DynamoDB are available, and is typically in :code:`onCreate` function of your start up activity.
 
          .. code-block:: kotlin
 
@@ -875,7 +875,7 @@ Perform a Query
 
 A query operation enables you to find items in a table. You must define a query using both the hash key
 (partition key) and range key (sort key) attributes of a table. You can filter the results by
-specifying the attributes you are looking for. For more information about :code:`DynamoDBQueryExpression`, see the `AWS Mobile SDK for Android API reference <The AWS Mobile SDK pattern used for Amazon DynamoDB queries matches the `https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/dynamodbv2/dynamodbmapper/DynamoDBQueryExpression.html>`__.
+specifying the attributes you are looking for. For more information about :code:`DynamoDBQueryExpression`, see the `AWS Mobile SDK for Android API reference <`https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/dynamodbv2/dynamodbmapper/DynamoDBQueryExpression.html>`__.
 
 The following example code shows querying for books with partition key (hash key) :code:`ISBN` and sort key (range key) Category beginning with :code:`History`.
 

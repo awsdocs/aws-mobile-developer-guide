@@ -18,7 +18,7 @@ Customize the SDK Sign-In UI
 
 
 
-By default, the SDK presents sign-in UI for each sign in provider you enable in your |AMH| project (Email and Password, Facebook, Google) with a default look and feel. It knows which provider(s) you chose by reading the :file:`awsconfiguration.json` file you downloaded.
+By default, the SDK presents sign-in UI for each sign in provider you enable in your |AMH| project (Email and Password, Facebook, Google) with a default look and feel. It knows which provider(s) you chose by reading the :file:`awsconfiguration.json` file you integrated with your app.
 
 To override the defaults, and modify the behavior, look, and feel of the sign-in UI, create an :code:`AuthUIConfiguration` object and set the appropriate properties.
 

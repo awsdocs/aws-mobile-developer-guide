@@ -14,16 +14,11 @@
 iOS: Working with Asynchronous Tasks
 ####################################
 
-To work with asynchronous operations without blocking the UI thread, the SDK provides two options:
+To work with asynchronous operations without blocking the UI thread, the SDK provides the following options:
 
-    - ``completionHandler``, a streamlined class which offers a simple, common pattern for most API calls
+    - ``completionHandler``, a streamlined class which offers a simple, common pattern for most API calls.
 
-and
-
-    - ``AWSTask``, a class which is a renamed version of BFTask from the Bolts framework. AWSTasks
-      gives advantages for more complex operations like chaining asynchronous requests.
-
-      For complete documentation on Bolts, see the
+    - ``AWSTask``, a class that is a renamed version of BFTask from the Bolts framework. AWSTasks provides advantages for more complex operations like chaining asynchronous requests. For complete documentation on Bolts, see the
       `Bolts-ObjC repo <https://github.com/BoltsFramework/Bolts-ObjC>`__.
 
 .. _completionHandler:

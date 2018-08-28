@@ -19,9 +19,7 @@ iOS: Execute Code On Demand with AWS Lambda
 
    * - **Just Getting Started?**
 
-     - :ref:`Use streamlined steps <add-aws-mobile-cloud-logic>` to install the SDK and integrate AWS Lambda functions.
-
-*Or, use the contents of this page if your app will integrate existing AWS services.*
+     - :ref:`Use streamlined steps <add-aws-mobile-cloud-logic>` to install the SDK and integrate AWS Lambda functions. *Use the contents of this page if your app will integrate existing AWS services.*
 
 
 .. contents::
@@ -45,17 +43,17 @@ This section provides a step-by-step guide for getting started with AWS Lambda u
 #. Install the SDK
 
    Add the AWS SDK for iOS to your project and import the APIs you need, by following the steps described
-   in :ref:`Set Up the AWS SDK for iOS <setup-aws-sdk-for-ios>`.
+   in :ref:`Set Up the AWS SDK for iOS <how-to-ios-sdk-setup>`.
 
 #. Configure Credentials
 
-   To use Amazon Cognito to create AWS identities and credentials that give your users access to your app's AWS resources, follow the steps described at :doc:`:ref:`Amazon Cognito Setup for iOS <cognito-auth-aws-identity-for-ios>``.
+   To use Amazon Cognito to create AWS identities and credentials that give your users access to your app's AWS resources, follow the steps described in :ref:`Add User Sign-in <how-to-user-sign-in>`.
 
-#. Create and Configure a Lamda Function
+#. Create and Configure a Lambda Function
 
     #. Sign in to the `AWS Lambda console <https://console.aws.amazon.com/lambda/>`__.
 
-    #. Choose :guilabel:`Create a Lamda function`.
+    #. Choose :guilabel:`Create a Lambda function`.
 
     #. Choose the :guilabel:`Blank Function` template.
 
@@ -365,7 +363,5 @@ The `IdentityContext` class of the SDK passes Amazon Cognito credentials making 
 
                     context.succeed("Your client ID is " + context.identity);
                 }
-
-For more about Amazon Cognito in the AWS Mobile SDK for iOS, see :doc:`:ref:`Amazon Cognito Setup for iOS <cognito-auth-aws-identity-for-ios>``.
 
 .. _Cognito Console: https://console.aws.amazon.com/cognito/home

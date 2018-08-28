@@ -24,11 +24,14 @@ AWS Mobile Reference
    :maxdepth: 1
 
    IAM Usage <reference-mobile-hub-iam>
-   Exporting and Importing Projects <project-import-export>
-   Mobile App Features <mobile-hub-features>
    Project Service Region Hosting <reference-mobile-hub-region-overrides>
    Troubleshooting Projects <project-import-export-troubleshooting>
+   AWS Mobile CLI Reference <aws-mobile-cli-reference>
+   AWS Mobile CLI Credentials <aws-mobile-cli-credentials>
 
+..   Mobile App Features <mobile-hub-features>
+..   Use the Console to Add Features <reference-mobile-hub-backend-setup>
+..   Exporting and Importing Projects <project-import-export>
 
 
 

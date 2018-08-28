@@ -243,7 +243,7 @@ The following items are not supported by the |AMH| import/export feature:
   roles and policies to these objects. When a project is imported, the default roles and policies
   are applied.
 
-  In your original project, you can to modify or add to these defaults; for example, to set access
+  In your original project, you can modify or add to these defaults; for example, to set access
   to a data table to read only. When you export your project configuration, any such customizations
   are not included in the project export. To enable your custom policy in an imported project, the
   importer must manually configure those policies in the imported project. In addition to your

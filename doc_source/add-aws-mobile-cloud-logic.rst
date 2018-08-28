@@ -1,18 +1,8 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
-
 
 .. _add-aws-mobile-cloud-logic:
 
 ########################################################################
-Add Cloud APIs to Your Mobile App with Amazon API GateWay and AWS Lambda
+Add Cloud APIs to Your Mobile App with Amazon API Gateway and AWS Lambda
 ########################################################################
 
 
@@ -22,56 +12,70 @@ Add Cloud APIs to Your Mobile App with Amazon API GateWay and AWS Lambda
 
 .. _add-aws-cloud-logic-backend-overview:
 
-Cloud Logic Overview
-====================
+Overview
+========
 
-Add RESTful APIs handled by your serverless |LAM| functions to extend your mobile app to the range
-of AWS services and beyond. In |AMH|, enabling the :ref:`cloud-logic` feature uses `Amazon API
-Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`__ and `AWS Lambda <http://docs.aws.amazon.com/lambda/latest/dg/>`__ services to provide these capabilities.
+.. container:: option
 
+   Android - Java
+      .. _android-java:
+
+      Add RESTful APIs handled by your serverless |LAM| functions. The CLI deploys your APIs and handlers using `Amazon API Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`__ and `AWS Lambda <http://docs.aws.amazon.com/lambda/latest/dg/>`__.
+
+   Android - Kotlin
+      .. _android-kotlin:
+
+      Add RESTful APIs handled by your serverless |LAM| functions. The CLI deploys your APIs and handlers using `Amazon API Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`__ and `AWS Lambda <http://docs.aws.amazon.com/lambda/latest/dg/>`__.
+
+   iOS - Swift
+      .. _ios-swift:
+
+      Add RESTful APIs handled by your serverless |LAM| functions. The CLI deploys your APIs and handlers using `Amazon API Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/>`__ and `AWS Lambda <http://docs.aws.amazon.com/lambda/latest/dg/>`__.
 
 .. _cloud-backend:
 
 Set Up Your Backend
 ===================
 
-#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk>` steps before you proceed.
 
-#. Enable :guilabel:`Cloud Logic`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`Cloud Logic` tile to enable the feature.
+#. In a terminal window, navigate to the root of your app files, and then add the storage category to your app. The CLI will prompt you for configuration parameters.
 
-#. Create a new API or import one that you created in the `API Gateway console <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`__.
+   .. code-block:: none
 
-   #. To create a new API choose :guilabel:`Create an API`.
+      $ cd ./ROOT_OF_YOUR_APP_FILES
+      $ amplify api add
 
-   #. Type an :guilabel:`API Name` and :guilabel:`Description`.
+#. Choose :code:`> REST` as your API service.
 
-   #. Configure your :guilabel:`Paths`. Paths are locations to the serverless |LAMlong| functions that handle requests to your API.
+#. Choose :code:`>  Create a new Lambda function`.
 
-      Choose :guilabel:`Create API` to deploy a default API and its associated handler function. The default handler is a Node.js function that echoes JSON input that it receives. For more information, see `Using AWS Lambda with Amazon API Gateway <with-on-demand-https.html>`__.
+#. Choose the :code:`> Serverless express function` template.
 
-      The definition of APIs and paths configured in a |AMH| project are captured in an AWS CloudFormation‎ template. The body of a request containing a template is limited to 51,200 bytes, see `AWS CloudFormation Limits <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html>`__ for details. If your API definition is too large to fit this size, you can use the `AWS API Gateway Console <https://console.aws.amazon.com/apigateway/>`__ to create your API and the import it into your |AMH| project.
+#. When you complete configuration of your API, the CLI displays a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
 
-#. When you are done configuring the feature and the last operation is complete, choose your project name in the upper left to go the project details page. The banner that appears also links there.
+   .. code-block:: none
 
-   .. image:: images/updated-cloud-config.png
+      $ amplify status
+      | Category  | Resource name   | Operation | Provider plugin   |
+      | --------- | --------------- | --------- | ----------------- |
+      | Function  | lambda01234567  | Create    | awscloudformation |
+      | Api       | api012345678    | Create    | awscloudformation |
 
-#. Choose :guilabel:`Integrate` on the app card.
+#. To create your backend AWS resources run:
 
-   .. image:: images/updated-cloud-config2.png
-      :scale: 25
+   .. code-block:: none
 
-   If you have created apps for more than one platform, the :guilabel:`Integrate` button of each that is affected by your project changes will flash, indicating that there is an updated configuration file available for each of those versions.
+      $ amplify push
 
-#. Choose :guilabel:`Download Cloud Config` and replace the old the version of :code:`awsconfiguration.json` with the new download. Your app now references the latest version of your backend.
-
-#. Choose  :guilabel:`Swift Models` to download API models that were generated for your app. These files provide access to the request surface for the API Gateway API you just created. Choose :guilabel:`Next` and follow the Cloud API documentation below to connect to your backend.
+   Use the steps in the next section to connect your app to your backend.
 
 .. _cloud-logic-connect-to-your-backend:
 
 Connect to Your Backend
 =======================
 
-Use the following steps to add AWS Cloud Logic to your app.
+Use the following steps to add Cloud Logic to your app.
 
 .. container:: option
 
@@ -90,36 +94,17 @@ Use the following steps to add AWS Cloud Logic to your app.
 
                 }
 
-         #. For each Activity where you make calls to |ABP|, declare the following imports. Replace the portion of the first declaration, denoted here as   :code:`idABCD012345.NAME-OF-YOUR-API-MODEL-CLASS`, with class id and name of the API model that you downloaded from your |AMH| project.
+      #. Get your API client name.
 
-            You can find these values at the top of the :file:`./src/main/java/com/amazonaws/mobile/api/API-CLASS-ID/TestMobileHubClient.java` file of the download.
+         The CLI generates a client code file for each API you add. The API client name is the name of that file, without the extension.
 
-            .. code-block:: java
+         The path of the client code file is :file:`./src/main/java/YOUR_API_RESOURCE_NAME/YOUR_APP_NAME_XXXXClient.java`.
 
-                // This statement imports the model class you download from |AMH|.
-                import com.amazonaws.mobile.api.idABCD012345.NAME-OF-YOUR-API-MODEL-CLASSMobileHubClient;
+         So for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file might be :file:`./src/main/java/xyz123/useamplifyabcdClient.java`. The API client name would be :code:`useamplifyabcdClient`.
 
-                import com.amazonaws.mobile.auth.core.IdentityManager;
-                import com.amazonaws.mobile.config.AWSConfiguration;
-                import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
-                import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
-                import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
-                import com.amazonaws.util.IOUtils;
-                import com.amazonaws.util.StringUtils;
-                import java.io.InputStream;
+         - Find the resource name of your API by running :code:`amplify status`.
 
-         #. The location where you downloaded the API model file(s) contains a folder for each Cloud Logic API you created in your |AMH| project. The folders are named for the class ID assigned to the API by |ABP|. For each folder:
-
-
-            #. In a text editor, open :file:`./src/main/java/com/amazonaws/mobile/api/YOUR-API-CLASS-ID/YOUR-API-CLASS-NAMEMobileHubClient.java`.
-
-            #. Copy the package name at the top of the file with the form: :code:`com.amazonaws.mobile.api.{api-class-id}`.
-
-            #. In Android Studio, right-choose :file:`app/java`, and then choose :guilabel:`New > Package`.
-
-            #. Paste the package name you copied in a previous step and choose :guilabel:`OK`.
-
-            #. Drag and drop the contents of the API class folder into the newly created package. The contents include :file:`YOUR-API-CLASS-NAMEMobileHubClient.java` and the :file:`model` folder.
+         - Copy your API client name to use when invoking the API in the following step.
 
       #. Invoke a Cloud Logic API.
 
@@ -136,7 +121,7 @@ Use the following steps to add AWS Cloud Logic to your app.
              import java.util.HashMap;
 
              import com.amazonaws.mobile.client.AWSMobileClient;
-             import com.amazonaws.mobileconnectors.api.YOUR-API-CLASS-ID.YOUR-API-CLASS-NAMEMobilehubClient;
+             import com.amazonaws.mobileconnectors.api.YOUR-API-RESOURCE_NAME.YOUR-API-CLIENT-NAME;
              import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
              import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
              import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
@@ -146,7 +131,7 @@ Use the following steps to add AWS Cloud Logic to your app.
              public class MainActivity extends AppCompatActivity {
                  private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-                 private YOUR-API-CLASS-NAMEMobileHubClient apiClient;
+                 private YOUR_API_CLIENT_NAME apiClient;
 
                  @Override
                  protected void onCreate(Bundle savedInstanceState) {
@@ -156,8 +141,8 @@ Use the following steps to add AWS Cloud Logic to your app.
                       // Create the client
                       apiClient = new ApiClientFactory()
                                      .credentialsProvider(AWSMobileClient.getInstance().getCredentialsProvider())
-                                     .build(YOUR-API-CLASS-NAMEMobileHubClient.class);
-                  }
+                                     .build(YOUR_API_CLIENT_NAME.class);
+                 }
 
 
                  public callCloudLogic() {
@@ -237,73 +222,56 @@ Use the following steps to add AWS Cloud Logic to your app.
 
                 }
 
-         #. For each Activity where you make calls to |ABP|, declare the following imports. Replace the portion of the first declaration, denoted here as   :code:`idABCD012345.NAME-OF-YOUR-API-MODEL-CLASS`, with class id and name of the API model that you downloaded from your |AMH| project.
+      #. Get your API client name.
 
-            You can find these values at the top of the :file:`./src/main/java/com/amazonaws/mobile/api/API-CLASS-ID/TestMobileHubClient.java` file of the download.
+         The CLI generates a client code file for each API you add. The API client name is the name of that file, without the extension.
 
-            .. code-block:: java
+         The path of the client code file is :file:`./src/main/java/YOUR_API_RESOURCE_NAME/YOUR_APP_NAME_XXXXClient.java`.
 
-                // This statement imports the model class you download from |AMH|.
-                import com.amazonaws.mobile.api.idABCD012345.NAME-OF-YOUR-API-MODEL-CLASSMobileHubClient;
+         So for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file might be :file:`./src/main/java/xyz123/useamplifyabcdClient.java`. The API client name would be :code:`useamplifyabcdClient`.
 
-                import com.amazonaws.mobile.auth.core.IdentityManager;
-                import com.amazonaws.mobile.config.AWSConfiguration;
-                import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
-                import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
-                import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
-                import com.amazonaws.util.IOUtils;
-                import com.amazonaws.util.StringUtils;
-                import java.io.InputStream;
+         - Find the resource name of your API by running :code:`amplify status`.
 
-         #. The location where you downloaded the API model file(s) contains a folder for each Cloud Logic API you created in your |AMH| project. The folders are named for the class ID assigned to the API by |ABP|. For each folder:
+         - Copy your API client name to use when invoking the API in the following step.
 
-
-            #. In a text editor, open :file:`./src/main/java/com/amazonaws/mobile/api/YOUR-API-CLASS-ID/YOUR-API-CLASS-NAMEMobileHubClient.java`.
-
-            #. Copy the package name at the top of the file with the form: :code:`com.amazonaws.mobile.api.{api-class-id}`.
-
-            #. In Android Studio, right-choose :file:`app/java`, and then choose :guilabel:`New > Package`.
-
-            #. Paste the package name you copied in a previous step and choose :guilabel:`OK`.
-
-            #. Drag and drop the contents of the API class folder into the newly created package. The contents include :file:`YOUR-API-CLASS-NAMEMobileHubClient.java` and the :file:`model` folder.
 
       #. Invoke a Cloud Logic API.
 
          The following code shows how to invoke a Cloud Logic API using your API's client class,
          model, and resource paths.
 
-         .. code-block:: kotlin
+         .. code-block:: java
 
-            import android.support.v7.app.AppCompatActivity;
-            import android.os.Bundle;
-            import android.util.Log;
-            import com.amazonaws.http.HttpMethodName;
-            import java.io.InputStream;
-            import java.util.HashMap;
+             import android.support.v7.app.AppCompatActivity;
+             import android.os.Bundle;
+             import android.util.Log;
+             import com.amazonaws.http.HttpMethodName;
+             import java.io.InputStream;
+             import java.util.HashMap;
 
-            import com.amazonaws.mobile.client.AWSMobileClient;
-            import com.amazonaws.mobileconnectors.api.YOUR-API-CLASS-ID.YOUR-API-CLASS-NAMEMobilehubClient;
-            import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
-            import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
-            import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
-            import com.amazonaws.util.StringUtils;
+             import com.amazonaws.mobile.client.AWSMobileClient;
+             import com.amazonaws.mobileconnectors.api.YOUR-API-RESOURCE_NAME.YOUR-API-CLIENT-NAME;
+             import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+             import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
+             import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
+             import com.amazonaws.util.StringUtils;
 
-            class MainActivity : AppCompatActivity() {
-                companion object {
-                    private val TAG = this::class.java.simpleName
-                }
 
-                private var apiClient: YOUR-API-CLASS-NAMEMobileHubClient? = null
+             public class MainActivity extends AppCompatActivity {
+                 private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-                override fun onCreate(savedInstanceState: Bundle?) {
-                    super.onCreate(savedInstanceState)
-                    setContentView(R.layout.activity_main)
+                 private YOUR_API_CLIENT_NAME apiClient;
 
-                    apiClient = ApiClientFactory()
-                        .credentialsProvider(AWSMobileClient.getInstance().credentialsProvider)
-                        .build(YOUR-API-CLASS-NAMEMobileHubClinet::class.java)
-                }
+                 @Override
+                 protected void onCreate(Bundle savedInstanceState) {
+                     super.onCreate(savedInstanceState);
+                     setContentView(R.layout.activity_main);
+
+                      // Create the client
+                      apiClient = new ApiClientFactory()
+                                     .credentialsProvider(AWSMobileClient.getInstance().getCredentialsProvider())
+                                     .build(YOUR_API_CLIENT_NAME::class.java);
+                 }
 
                 fun callCloudLogic(body: String) {
                     val parameters = mapOf("lang" to "en_US")
@@ -351,6 +319,7 @@ Use the following steps to add AWS Cloud Logic to your app.
 
                      pod 'AWSAuthCore', '~> 2.6.13'
                      pod 'AWSAPIGateway', '~> 2.6.13'
+                     pod 'AWSMobileClient', '~> 2.6.13'
                      # other pods
 
                end
@@ -366,37 +335,23 @@ Use the following steps to add AWS Cloud Logic to your app.
                 import AWSAuthCore
                 import AWSCore
                 import AWSAPIGateway
+                import AWSMobileClient
 
-         #. Add the backend service configuration and API model files that you downloaded from the |AMH|
-            console, The API model files provide an API calling surface for each |ABP| API they model.
+      #. The CLI generates a client code file for each API you add. The API client name is the name of that file, without the extension.
 
-            #. From the location where you downloaded the data model file(s), drag and drop the
-               :file:`./AmazonAws/API` folder into the Xcode project folder that contains
-               :file:`AppDelegate.swift`.
+         The path of the client code file is :file:`./generated-src/YOUR_API_RESOURCE_NAME+YOUR_APP_NAME+Client.swift`.
 
-               Select :guilabel:`Copy items if needed` and :guilabel:`Create groups`, if these options are offered.
+         So for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file might be :file:`./generated-src/xyz123useamplifyabcdClient.swift`. The API client name would be :code:`xyz123useamplifyabcdClient`.
 
-               If your Xcode project already contains a :file:`Bridging_Header.h` file then open
-               :file:`./AmazonAws/Bridging_Header.h`, copy the import statement it contains, and
-               paste it into your version of the file.
+         - Find the resource name of your API by running :code:`amplify status`.
 
-               If your Xcode project does not contain a :file:`Bridging_Header.h` file then:
+         - Copy your API client name to use when invoking the API in the following step.
 
-               #. Drag and drop :file:`./AmazonAws/Bridging_Header.h` into the Xcode project folder
-                  that contains :file:`AppDelegate.swift`.
-
-               #. Choose your project root in Xcode, then choose :guilabel:`Build Settings`, and
-                  search for "bridging headers"
-
-               #. Choose :guilabel:`Objective-C Bridging Header`, press your :emphasis:`return` key,
-                  and type the path within your Xcode project:
-
-                  :file:`{your-project-name/.../}Bridging_Header.h`
 
       #. Invoke a Cloud Logic API.
 
          To invoke a Cloud Logic API, create code in the following form and substitute your API's
-         client class, model, and resource paths.
+         client class, model, and resource paths. Replace :code:`YOUR_API_CLIENT_NAME` with the value you copied from the previous step.
 
          .. code-block:: swift
 
@@ -436,11 +391,11 @@ Use the following steps to add AWS Cloud Logic to your app.
                        region: AWSRegionType.USEast1,
                        credentialsProvider: AWSMobileClient.sharedInstance().getCredentialsProvider())
 
-                       YOUR-API-CLASS-NAMEMobileHubClient.register(with: serviceConfiguration!, forKey: "CloudLogicAPIKey")
+                       YOUR_API_CLIENT_NAME.register(with: serviceConfiguration!, forKey: "CloudLogicAPIKey")
 
                        // Fetch the Cloud Logic client to be used for invocation
                        let invocationClient =
-                           YOUR-API-CLASS-NAMEMobileHubClient(forKey: "CloudLogicAPIKey")
+                            YOUR_API_CLIENT_NAME(forKey: "CloudLogicAPIKey")
 
                        invocationClient.invoke(apiRequest).continueWith { (
                            task: AWSTask) -> Any? in

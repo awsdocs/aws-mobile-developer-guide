@@ -34,7 +34,7 @@ Add the natural language understanding that powers Amazon Alexa to your mobile a
 Set Up Your Backend
 ===================
 
-#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before you proceed.
 
 #. Enable :guilabel:`Conversational Bots`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`Conversational Bots` tile to enable the feature.
 

@@ -14,60 +14,32 @@
 Add Authentication to the Notes App
 ###################################
 
-In the :ref:`previous section <tutorial-ios-aws-mobile-notes-analytics>` of this tutorial, we created a mobile backend project in AWS Mobile Hub, then added analytics to the sample note-taking app. This section assumes you have completed those steps. If you jumped to this step, please go back and :ref:`start from
+In the :ref:`previous section <tutorial-ios-aws-mobile-notes-analytics>` of this tutorial, we created a mobile backend project using the AWS Amplify CLI, then added analytics to the sample note-taking app. This section assumes you have completed those steps. If you jumped to this step, please go back and :ref:`start from
 the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we will configure a sign-up / sign-in flow in our mobile backend. We will then add a new authentication activity to our note-taking app.
 
 You should be able to complete this section of the tutorial in 20-30 minutes.
 
-Setup Your Backend
+Set Up Your Backend
 ------------------
 
-To add User Sign-in to your app you will create the backend resources in your |AMH| project, and then update the configuration file in your app.
+Before we work on the client-side code, we need to add User Sign-in to
+the backend project.  These steps assume you have already completed the :ref:`analytics <tutorial-ios-aws-mobile-notes-analytics>` portion of this tutorial.
 
-Add User Sign-in to the AWS Mobile Hub Project
-----------------------------------------------
+1. In a terminal window, enter the following commands to add User Sign-in to the backend project:
 
-#. Right-click :file:`awsconfiguration.json` in your Xcode Project Navigator, choose :guilabel:`Delete`, and then choose :guilabel:`Move to trash`.
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
-#. Select your project.
-#. Scroll down to the :guilabel:`Add More Backend Features` section.
-#. Choose the :guilabel:`User Sign-in` tile.
-#. Choose :guilabel:`Email and Password`.
-#. Select the :guilabel:`Username` radio button and the :guilabel:`Phone` checkbox under it.
-#. Select **Required** for :guilabel:`Multi-factor authentication`.
-#. At the bottom of the page, set the :guilabel:`Require user sign-in?` switch to :guilabel:`YES`.
+   .. code-block:: bash
 
-    .. list-table::
-       :widths: 1 6
+      $ amplify auth update
 
-       * - What does this do?
+   When prompted, use the default configuration.
 
-         - You have just created your own user pool in the `Amazon Cognito <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`__ service. When used in conjunction with the AWS Mobile sign-in process, the user pool enforces the password requirement rules you chose. It also supports sign-up and forgot my password user flows.
+2. Deploy your new resources with the following command:
 
-#. Choose your project name in the upper left and then choose :guilabel:`Integrate` on your iOS app card.
-#. Choose :guilabel:`Download Cloud Config` to get an  :file:`awsconfiguration.json` file updated with the new services.
+   .. code-block:: bash
 
-    .. list-table::
-       :widths: 1 6
+      $ amplify push
 
-       * - **Remember**
-
-         - Whenever you update the AWS Mobile Hub project, a new AWS configuration file for your app is generated.
-
-
-Connect to Your Backend
------------------------
-
-To update the linkage between your app and your AWS services:
-
-#. Drag :file:`awsconfiguration.json` from your download location into the Xcode project folder containing :file:`Info.plist`. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog. Choose :guilabel:`Finish`.
-
-.. list-table::
-   :widths: 1 6
-
-   * - **Note**
-
-     - Your system may have modified the filename to avoid conflicts. Make sure the file you add to your Xcode project is named :file:`awsconfiguration.json`.
+The :code:`amplify auth update` command updates the existing Amazon Cognito user pool configured for analytics, allowing for username and password authentication with email verification of the sign-up and forgot password flows.  You can adjust this to include multi-factor authentication, TOTP, phone number sign-up and more.
 
 Add Auth Dependencies
 ---------------------
@@ -81,12 +53,12 @@ Add Auth Dependencies
           use_frameworks!
 
             # Analytics dependency
-            pod 'AWSPinpoint', '~> 2.6.5'
+            pod 'AWSPinpoint'
 
             # Auth dependencies
-            pod 'AWSUserPoolsSignIn', '~> 2.6.5'
-            pod 'AWSAuthUI', '~> 2.6.5'
-            pod 'AWSMobileClient', '~> 2.6.5'
+            pod 'AWSUserPoolsSignIn'
+            pod 'AWSAuthUI'
+            pod 'AWSMobileClient'
 
           # other pods
       end
@@ -95,7 +67,7 @@ Add Auth Dependencies
 
    .. code-block:: bash
 
-      pod install --repo-update
+      $ pod install
 
    If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
@@ -103,7 +75,7 @@ Add Auth Dependencies
 Create an AWSMobileClient and Initialize the SDK
 ------------------------------------------------
 
-Import :code:`AWSMobileClient` and add the following function into the :code:`AppDelegate` class of :file:`AppDelegate.swift`. This will create an instance of :code:`AWSMobileClient`.
+Import :code:`AWSMobileClient` and add the following function into the :file:`AppDelegate.swift` class. This will create an instance of :code:`AWSMobileClient`.
 
 .. code-block:: swift
 
@@ -120,7 +92,7 @@ Import :code:`AWSMobileClient` and add the following function into the :code:`Ap
    @UIApplicationMain
    class AppDelegate: UIResponder, UIApplicationDelegate {
 
-                  // . . .
+       // . . .
 
        //Instantiate the AWSMobileClient
        func application(_ application: UIApplication, open url: URL,
@@ -130,20 +102,21 @@ Import :code:`AWSMobileClient` and add the following function into the :code:`Ap
                application, open: url,
                sourceApplication: sourceApplication,
                annotation: annotation)
-
        }
 
-                   // . . .
+       // . . .
    }
 
-In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register your user pool as the identity provider that enables users to access your app's AWS resources.
+In the :code:`didFinishLaunching` function of the :file:`AppDelegate.swift` class, add :code:`AWSMobileClient` to register your user pool as the identity provider that enables users to access your app's AWS resources.
 
 .. code-block:: swift
 
-    func application(
+   func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions:
         [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        // . . .
 
         // Initialize AWSMobileClient
         let didFinishLaunching = AWSMobileClient.sharedInstance().interceptApplication(
@@ -151,7 +124,7 @@ In :code:`didFinishLaunching` call the :code:`AWSMobileClient` to register your 
             launchOptions)
 
         // Initialize Pinpoint to enable session analytics
-        let pinpoint = AWSPinpoint(configuration:
+        pinpoint = AWSPinpoint(configuration:
             AWSPinpointConfiguration.defaultPinpointConfiguration(
                 launchOptions: launchOptions))
 
@@ -174,45 +147,41 @@ The AWS Mobile SDK provides a library that creates a customizable sign-in UI in 
 
 .. code-block:: swift
 
-    import AWSCore
-    import AWSPinpoint
-    import UIKit
-    import AWSAuthCore
-    import AWSAuthUI
+   import UIKit
+   import CoreData
+   import Foundation
+   import AWSAuthCore
+   import AWSAuthUI
 
-    class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+   class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-               // . . .
+        // . . .
 
         override func viewDidLoad() {
-                super.viewDidLoad()
+            super.viewDidLoad()
 
-                // Instantiate sign-in UI from the SDK library
-                if !AWSSignInManager.sharedInstance().isLoggedIn {
-                    AWSAuthUIViewController
-                        .presentViewController(with: self.navigationController!,
-                             configuration: nil,
-                             completionHandler: { (provider: AWSSignInProvider, error: Error?) in
-                              if error != nil {
-                                  print("Error occurred: \(String(describing: error))")
-                              } else {
-                                  // Sign in successful.
-                              }
-                        })
-                }
-
-               // . . .
-          }
-      }
-
-
-
+            // Instantiate sign-in UI from the SDK library
+            if !AWSSignInManager.sharedInstance().isLoggedIn {
+                AWSAuthUIViewController
+                    .presentViewController(with: self.navigationController!,
+                        configuration: nil,
+                        completionHandler: { (provider: AWSSignInProvider, error: Error?) in
+                        if error != nil {
+                            print("Error occurred: \(String(describing: error))")
+                        } else {
+                            // Sign in successful.
+                        }
+                })
+            }
+            // . . .
+        }
+    }
 
 Run the App and Validate Results
 --------------------------------
 
-Rebuild the project and run in the Simulator. You should see a sign-in
-screen. Choose the :guilabel:`Create new account` button to create a new account.
+Build and run the project in a simulator. You should see a sign-in
+screen upon launch. Choose the :guilabel:`Create new account` button to create a new account.
 Once the information is submitted, you will be sent a confirmation code
 via email. Enter the confirmation code to complete registration, then
 sign-in with your new account.
@@ -234,7 +203,5 @@ sign-in with your new account.
 
 Next steps
 ----------
-
--  Continue by integrating :ref:`NoSQL Data <tutorial-ios-aws-mobile-notes-data>`.
 
 -  Learn more about `Amazon Cognito <https://aws.amazon.com/cognito/>`__.

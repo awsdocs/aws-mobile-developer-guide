@@ -19,19 +19,19 @@ How To Add Natural Language Understanding with Amazon Lex
     :description:
         Learn how to integrate data storage offered by Amazon Lex to your mobile app.
 
-.. list-table::
-   :widths: 1 6
+.. .. list-table::
+..    :widths: 1 6
 
-   * - **Just Getting Started?**
+..    * - **Just Getting Started?**
 
-     - :ref:`Use streamlined steps <add-aws-mobile-conversational-bots>` to install the SDK and integrate Amazon Lex.
+..      - :ref:`Use streamlined steps <add-aws-mobile-conversational-bots>` to install the SDK and integrate Amazon Lex.
 
-*Or, use the contents of this page if your app will integrate existing AWS services.*
-
-
+.. *Or, use the contents of this page if your app will integrate existing AWS services.*
 
 
-This section provides information on the steps for achieving specific tasks for integrating your Amazon Lex into your Android and iOS apps.
+
+
+This section provides procedures for integrating Amazon Lex into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:
@@ -39,4 +39,7 @@ This section provides information on the steps for achieving specific tasks for 
 
    how-to-android-lex
    how-to-ios-lex
+
+..   add-aws-mobile-conversational-bots
+
 

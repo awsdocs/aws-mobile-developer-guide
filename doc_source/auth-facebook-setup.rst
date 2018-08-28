@@ -15,18 +15,14 @@
 Set Up Facebook Authentication
 ##############################
 
-To use the following Facebook service configuration steps to federate Facebook as a user sign-in
-provider for AWS services called in your app, try the |AMHlong|  :ref:`User Sign-in feature
-<user-sign-in>`.
+To use the following Facebook service configuration steps to federate Facebook as a user sign-in provider for AWS services called in your app, try the AWS Amplify :ref:`User Sign-in feature <add-aws-mobile-user-sign-in>`.
 
-You must first register your application with Facebook by using the `Facebook Developers portal
-<https://developers.facebook.com/>`__.
+You must first register your application with Facebook by using the `Facebook Developers portal <https://developers.facebook.com/>`__.
 
-|AMH| generates code that enables you to use Facebook to provide federated authentication for your
-mobile app users. This topic explains how to set up Facebook as an identity provider for your app.
+AWS Amplify generates code that enables you to use Facebook to provide federated authentication for your mobile app users. This topic explains how to set up Facebook as an identity provider for your app.
 
 If you already have a Facebook app ID, copy and paste it into the :guilabel:`Facebook App ID` field
-in the |AMH| console, and choose :guilabel:`Save changes`.
+when configuring authentication using the AWS Amplify CLI.
 
 **To get a Facebook app ID**
 
@@ -124,13 +120,12 @@ in the |AMH| console, and choose :guilabel:`Save changes`.
          :scale: 85
 
 
-#. Choose your platform and provide information about your Mobile Hub app that Facebook will use for
+#. Choose your platform and provide information about your app that Facebook will use for
    integration during credential validation.
 
    :guilabel:`For iOS:`
 
-   #. Add your app's :guilabel:`Bundle ID`. (ie. :code:`com.amazon.YourProjectName`). To use the AWS
-      Mobile Hub sample app project, set your this value to :code:`com.amazon.MySampleApp`.
+   #. Add your app's :guilabel:`Bundle ID`. (for example,  :code:`com.amazon.YourProjectName`).
 
       .. image:: images/new-facebook-add-platform-ios.png
          :scale: 100
@@ -149,12 +144,10 @@ in the |AMH| console, and choose :guilabel:`Save changes`.
 
    :guilabel:`For Android:`
 
-   #. Provide your app's :guilabel:`Google Play Package Name`. (ie. :code:`com.yourprojectname`). To
-      use the AWS Mobile Hub sample app project, set this value to :code:`com.amazon.mysampleapp`.
+   #. Provide your app's :guilabel:`Google Play Package Name`. (ie. :code:`com.yourprojectname`).
 
    #. Provide your :guilabel:`Class Name` that handles deep links (ie.
-      :code:`com.yourprojectname.MainActivity`). To use the AWS Mobile Hub sample app project, set
-      your class name to :code:`com.mysampleapp.MainActivity`.
+      :code:`com.yourprojectname.MainActivity`).
 
       .. image:: images/new-facebook-add-platform-android.png
          :scale: 100
@@ -196,7 +189,7 @@ in the |AMH| console, and choose :guilabel:`Save changes`.
 #. In the Facebook Developers portal, choose :guilabel:`Save changes`, then :guilabel:`Use this
    package name` if a dialog appears saying that Google Play has an issue with your package name.
 
-#. Only users with roles assigned in the Facebook portal will be abel to authenticate through your
+#. Only users with roles assigned in the Facebook portal will be able to authenticate through your
    app while it is in development (not yet published).
 
    To authorize users, in the Facebook Developer portal's left hand navigation list, choose

@@ -30,7 +30,7 @@ How To: Serverless Code with AWS Lambda
 
 
 
-This section provides information on the steps for achieving specific tasks for integrating your AWS Lambda functions into your Android and iOS apps.
+This section provides procedures for integrating your AWS Lambda functions into your Android and iOS apps.
 
 .. toctree::
    :titlesonly:

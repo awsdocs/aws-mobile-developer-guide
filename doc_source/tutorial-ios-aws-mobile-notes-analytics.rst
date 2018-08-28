@@ -23,67 +23,67 @@ demographic information about the application usage.
 
 You should be able to complete this section in 10-15 minutes.
 
-Set Up Your Back End
---------------------
-
-To start, set up the mobile backend resources in AWS:
-
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
-
-   -  If you do not have an AWS account, `sign up for the AWS
-      Free Tier <https://aws.amazon.com/free/>`__.
-
-#. Choose :guilabel:`Create` on the upper left, and the type :userinput:`ios-notes-app` for the name of the Mobile Hub project.
-#. Choose :guilabel:`Next`, choose :guilabel:`iOS`, and then choose :guilabel:`Add`.
-#. Choose :guilabel:`Download Cloud Config`, and save :file:`awsconfiguration.json`. This file the configuration to connect your app to your backend.
-#. Choose :guilabel:`Next` and then choose :guilabel:`Done` to create the project.
-
-.. list-table::
-   :widths: 1 6
-
-   * - Used in this section
-
-     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`__: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
-
-Connect to Your Backend
------------------------
-
-#. Drag :file:`awsconfiguration.json` from the download location into the folder in the XCode Project Navigator that contains :file:`Info.plist`. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
-
-#. Choose :guilabel:`Finish`.
-
-You have now created the AWS resources you need and connected them to your app.
-
-Add Analytics the Dependencies
-------------------------------
-
-#. To create a :file:`Podfile` for your project, run:
+Create an AWS Backend
+---------------------
+#. In a terminal window, enter the following commands to initialize your project using AWS Amplify:
 
    .. code-block:: bash
 
-      cd YOUR-APP-ROOT-FOLDER
-      pod init
+      $ cd ~/aws-mobile-ios-notes-tutorial-master/
+      $ amplify init
+
+   The CLI prompts you through the process of intializing your backend project. Specify iOS for the app type when prompted.
+
+#. Next, add the anlaytics service to your backend. 
+
+   .. code-block:: bash
+
+      $ amplify analytics add
+
+   Again, the CLI prompts you through the process of initializing your backend project. Finally, deploy the resources you have provisioned:
+
+#. To create your backend AWS resources run:
+
+   .. code-block:: bash
+
+      $ amplify push
+
+The :code:`amplify init` command will do two things within your project:
+
+*  Create a basic backend definition in the :file:`amplify` directory.
+*  Create an :file:`awsconfiguration.json` file describing the backend in the :file:`aws-mobile-ios-notes-tutorial-master` project directory.
+
+The :code:`amplify analytics add` command will add the appropriate entries into the backend definition file for deploying Amazon Pinpoint as a service for this project.  The :code:`amplify push` command will deploy any new services that are defined and update the :file:`awsconfiguration.json` file so that the new services can be used within your app.
+
+
+Add Analytics Dependencies
+--------------------------
+
+#. To create a :file:`Podfile` for your project, run from within your project folder:
+
+   .. code-block:: bash
+
+      $ pod init
 
 #. Open :file:`Podfile` and replace the placeholder code with the following. If the file is not visible your Xcode Project Navigator, right-click the project root and choose :guilabel:`Show in finder`.
 
    .. code-block:: bash
 
-        platform :ios, '9.0'
+      platform :ios, '9.0'
         target :'MyNotes' do
           use_frameworks!
 
             # Analytics dependency
-            pod 'AWSPinpoint', '~> 2.6.5'
+            pod 'AWSPinpoint'
 
             # other pods
+      end
 
-        end
-
-#. Close your Xcode project and then run:
+#. Close your Xcode project and then run the following command from a terminal:
 
    .. code-block:: bash
 
-        pod install --repo-update
+      $ pod install --repo-update
 
    If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
@@ -96,38 +96,48 @@ Add Analytics the Dependencies
 
 #. Rebuild your app after reopening it in the workspace to resolve APIs from new libraries called in your code. This is a good practice any time you add import statements.
 
-Initialize Amazon Pinpoint to Enable Analytics
-----------------------------------------------
+Add AWS Resource Configuration
+------------------------------
 
-You have just installed the AWS Mobile dependencies for your app.
+#. The Amplify CLI creates and updates an AWS resources configuration :file:`awsconfiguration.json` file for each configured feature. This file needs to be added to your Xcode project just once and the Amplify CLI will keep it in sync as you add features to your project.
 
-To turn your analytics on, open your project using :file:`MyNotes.xcworkspace` insert the following code into the :code:`didFinishLaunchwithOptions` method of your app's :file:`AppDelegate.swift`.
+#. Launch project in Xcode 
+   
+   .. code-block:: bash
 
-.. code-block:: java
+      $ open MyNotes.xcworkspace
 
-                 //. . .
+#. Drag :file:`awsconfiguration.json` from the project folder into the Xcode project. Uncheck :guilabel:`Copy items if needed` and check :guilabel:`Create groups` in the options dialog.
 
-   // Analytics imports
+#. Choose :guilabel:`Finish`.
+
+You have now created the AWS resources you need and connected them to your app.
+
+Initialize Analytics
+--------------------
+
+To turn analytics on, open your project using :file:`MyNotes.xcworkspace` and insert the following code into the :code:`didFinishLaunchwithOptions` function of your app's :file:`AppDelegate.swift`.
+
+.. code-block:: swift
+
+   // Analytics required imports
+    
+   // . . .
    import AWSCore
    import AWSPinpoint
 
-                 //. . .
-
-
-    class AppDelegate: UIResponder, UIApplicationDelegate {
-
-                 //. . .
+   class AppDelegate: UIResponder, UIApplicationDelegate {
 
          // Add the pinpoint variable
          var pinpoint: AWSPinpoint?
 
-                 //. . .
+         // . . .
 
          func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
          [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-                 //. . .
-
+            // . . .
+             
             // Initialize Pinpoint to enable session analytics
             pinpoint = AWSPinpoint(configuration:
                  AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
@@ -135,23 +145,24 @@ To turn your analytics on, open your project using :file:`MyNotes.xcworkspace` i
             return true
          }
 
-                 //. . .
-
+         // . . .
     }
 
-Now your app is setup to provide session analytics you can view in the Amazon Pinpoint console.
+Now your app is setup to provide session and demographic analytics automatically when launched. 
 
-Run the App and Validate Results
---------------------------------
+Run the Project and Validate Results
+------------------------------------
 
-Re-build the application and run the application in the Simulator. It
-should work as before. Add and delete some notes to
-generate analytics traffic that can be shown in the Pinpoint console.
+Run the application in the simulator. The app should work exactly as before but now the app is
+generating analytics traffic that can be shown in the Amazon Pinpoint console.
 
-To view the demographics and custom events:
+To view the demographics and session events, run the following command:
 
-#. Choose :guilabel:`Analytics` on the top right to open your project in the Amazon Pinpoint console.
-#. Choose the :guilabel:`Analytics` icon on the left. You should see an up-tick in several graphs (it may take a few minutes for the data to show):
+.. code-block:: bash
+
+   $ amplify analytics console
+
+Note that it can take up to 5 minutes for the first data to be shown in the graphs.  You should see an up-tick in several graphs:
 
    .. image:: images/pinpoint-overview.png
       :scale: 100 %
@@ -168,7 +179,7 @@ To view the demographics and custom events:
          :scale: 75
 
 
-#. Choose :guilabel:`Demographics` to view the demographics information.
+Choose :guilabel:`Demographics` to view the demographics information.
 
    .. image:: images/pinpoint-demographics.png
       :scale: 100 %
@@ -199,20 +210,18 @@ To add analytics events, open :file:`./Data/NotesContentProvider.swift` where bo
 Start by adding the following imports.
 
 .. code-block:: swift
-
+   
+   // . . .
    import AWSCore
    import AWSPinpoint
 
-
-Add the following function and enum to the :code:`NotesContentProvider` class to send :code:`AddNote` and :code:`DeleteNote` event analytics.
+Add the following function and enum to the :code:`Data\NotesContentProvider` class to send :code:`AddNote` and :code:`DeleteNote` event analytics.
 
 .. code-block:: swift
 
-
    public class NotesContentProvider  {
 
-            // . . .
-
+       // . . .
 
        // Send analytics AddNote and DeleteNote events
        func sendNoteEvent(noteId: String, eventType: String)
@@ -236,20 +245,20 @@ Add the following function and enum to the :code:`NotesContentProvider` class to
 
    }
 
-To capture note additions, place the following :code:`sendNoteEvent` function call within the :code:`insert` function of that class.
+To capture note additions, place the following :code:`sendNoteEvent` function call within the :code:`insert` function of the :code:`NotesContentProvider` class.
 
 .. code-block:: swift
 
-    /**
-     * Insert a new record into the database using NSManagedObjectContext
-     *
-     * @param noteTitle the note title to be inserted
-     * @param noteContent the note content to be inserted
-     * @return noteId the unique Note Id
-     */
+   /**  
+    * Insert a new record into the database using NSManagedObjectContext
+    *
+    * @param noteTitle the note title to be inserted
+    * @param noteContent the note content to be inserted
+    * @return noteId the unique Note Id
+   */
    func insert(noteTitle: String, noteContent: String) -> String {
 
-               // . . .
+        // . . .
 
         print("New Note Saved : \(newNoteId)")
 
@@ -263,37 +272,34 @@ To capture note deletions, place the following :code:`sendNoteEvent` function ca
 
 .. code-block:: swift
 
-     /**
+    /**
      * Delete note using NSManagedObjectContext and NSManagedObject
      * @param managedObjectContext the managed context for the note to be deleted
      * @param managedObj the core data managed object for note to be deleted
      * @param noteId the noteId to be delete
-     */
+    */
     public func delete(managedObjectContext: NSManagedObjectContext, managedObj: NSManagedObject, noteId: String!)  {
         let context = managedObjectContext
         context.delete(managedObj)
 
         do {
 
-                  // . . .
+            // . . .
 
             // Send DeletNote analytics event
             sendNoteEvent(noteId: noteId, eventType: noteEventType.DeleteNote.rawValue)
 
-                  // . . .
-
         } catch {
-
-                  // . . .
+            // . . .
         }
     }
 
 View Your Custom Analytics
 --------------------------
 
-To view the :code:`AddNote` and :code:`DeleteNote` custom analytics events, rebuild and run your app in the Simulator, add and delete notes, then return to the Amazon Pinpoint console for your project.
+To view the :code:`AddNote` and :code:`DeleteNote` custom analytics events, rebuild and run your app in an iOS simulator, add and delete notes, then return to the Amazon Pinpoint console.
 
-#. Choose :guilabel:`Events`.
+#. From the Analytics view in the Pinpoint console, choose :guilabel:`Events`.
 
 #. Use the Event drop down to filter the event type (event types may take several minutes to appear).
 

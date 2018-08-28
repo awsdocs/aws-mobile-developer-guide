@@ -208,7 +208,7 @@ To create a Google Developers project and OAuth web client ID
 
 
 #. In the :guilabel:`OAuth client` pop-up, copy and save the value that was generated for your
-   client ID. You will need the client ID to implement Google Sign-In in your |AMH| app. After you
+   client ID. You need the client ID to implement Google Sign-In in your |AMH| app. After you
    copy the client ID, choose :guilabel:`OK`.
 
    .. image:: images/oauth-client-id.png

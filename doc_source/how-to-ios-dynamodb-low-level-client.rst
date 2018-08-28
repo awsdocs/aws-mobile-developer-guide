@@ -11,7 +11,7 @@
 .. _how-to-ios-dynamodb-low-level-client:
 
 #####################################
-iOS: Amazon DynamoDB Low-level Client
+iOS: Amazon DynamoDB Low-Level Client
 #####################################
 
 .. contents::
@@ -35,9 +35,9 @@ The high-level library includes :doc:`dynamodb-object-mapper`, which lets you ma
 Setup
 -----
 
-To set your project up to use the AWS SDK for iOS TransferUtility, take the following steps.
+To set up your project to use the AWS SDK for iOS TransferUtility, perform the following steps.
 
-1. Setup the SDK, Credentials, and Services
+1. Set Up the SDK, Credentials, and Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use the low-level DynamoDB mobile client in a new app, follow the steps described in `Get Started <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`__ to install the AWS Mobile SDK for iOS.
@@ -48,7 +48,7 @@ For apps that use an SDK version prior to 2.6.0, follow the steps on :doc:`setup
 2. Create or Use an Existing Amazon DynamoDB Table
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Follow the steps on :doc:`<dynamodb-setup-for-ios-legacy>` to create a table.
+Follow the steps on :ref:`<dynamodb-setup-for-ios-legacy>` to create a table.
 
 3. Import the AWSDynamoDB APIs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

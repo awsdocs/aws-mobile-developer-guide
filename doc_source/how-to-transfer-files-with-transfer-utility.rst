@@ -25,14 +25,14 @@ Transfer Files and Data Using TransferUtility and |S3|
 
 This page explains how to implement upload and download functionality and a number of additional storage use cases.
 
-The examples on this page assume you have added the the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User File Storage <add-aws-mobile-user-data-storage>`.
+The examples on this page assume you have added the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User File Storage <add-aws-mobile-user-data-storage>`.
 
 .. list-table::
    :widths: 1 6
 
    * - **Best practice**
 
-     -  If you use the transfer utility multipart upload feature, take advantage of automatic cleanup features by seting up the `AbortIncompleteMultipartUpload <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html>`__ action in your Amazon S3 bucket life cycle configuration.
+     -  If you use the transfer utility multipart upload feature, take advantage of automatic cleanup features by setting up the `AbortIncompleteMultipartUpload <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html>`__ action in your Amazon S3 bucket life cycle configuration.
 
 
 .. _how-to-transfer-utility-add-aws-user-data-storage-upload:
@@ -118,7 +118,7 @@ Upload a File
                         // Handle a completed upload.
                     }
 
-                    Log.d("YourActivity", "Bytes Transferrred: " + uploadObserver.getBytesTransferred());
+                    Log.d("YourActivity", "Bytes Transferred: " + uploadObserver.getBytesTransferred());
                     Log.d("YourActivity", "Bytes Total: " + uploadObserver.getBytesTotal());
                 }
             }
@@ -359,7 +359,7 @@ Download a File
                       // Handle a completed upload.
                   }
 
-                  Log.d("YourActivity", "Bytes Transferrred: " + downloadObserver.getBytesTransferred());
+                  Log.d("YourActivity", "Bytes Transferred: " + downloadObserver.getBytesTransferred());
                   Log.d("YourActivity", "Bytes Total: " + downloadObserver.getBytesTotal());
               }
           }
@@ -501,7 +501,7 @@ Track Transfer Progress
                 @Override
                 public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
                     int percentage = (int) (bytesCurrent/bytesTotal * 100);
-                    //Display percentage transfered to user
+                    //Display percentage transferred to user
                 }
 
                 @Override
@@ -844,7 +844,7 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
 
         **Manage a Transfer with the App in the Foreground**
 
-        To manage transfers for an app that has moved from the background to the foregroud, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask`. Call suspend, resume, or cancel methods on those task references. The following example shows how to suspend a transfer when the app is about to be terminated.
+        To manage transfers for an app that has moved from the background to the foreground, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask`. Call suspend, resume, or cancel methods on those task references. The following example shows how to suspend a transfer when the app is about to be terminated.
 
         .. code-block:: swift
 

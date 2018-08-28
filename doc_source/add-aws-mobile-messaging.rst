@@ -26,8 +26,8 @@ Overview
 
 Engage your users more deeply by tying their app usage behavior to messaging campaigns.
 
-When you enable the AWS Mobile Hub :ref:`messaging-and-analytics` feature, your app is registered with the
-Amazon Pinpoint service. You can define User Segments and send E-mail, SMS, and :ref:`Push
+When you enable the Amplify CLI Analytics category, your app is registered with 
+Amazon Pinpoint. You can define user segments and send email, SMS, and :ref:`Push
 Notification <add-aws-mobile-push-notifications>` messages to those recipients through the Amazon Pinpoint
 console.
 
@@ -45,70 +45,70 @@ selected a certain category in a feature of your app.
 Set Up Your Backend
 ===================
 
-To set up email or SMS as part of a Amazon Pinpoint campaign take the following steps.
+To set up email or SMS as part of a Amazon Pinpoint campaign perform the following steps.
 
 To setup your app to receive Push Notifications from Amazon Pinpoint, see
-:ref:`add-aws-mobile-push-notifications`
+:ref:`add-aws-mobile-push-notifications`.
 
-#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` steps before your proceed.
+#. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` and :ref:`Add Analytics <add-aws-mobile-analytics>` steps before you proceed.
 
-#. **For Email**: Choose the :guilabel:`Messaging and Analytics` tile to enable the
-      feature.
+#. **For Email**:
 
-      #. Choose :guilabel:`Email`, and then choose :guilabel:`Enable`.
+   #. Go to the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
 
-      #. Choose the :guilabel:`Amazon Pinpoint console` link at the bottom of the descriptive
-         text on the left.
+   #. Open the project with the name of the Analytics resource shown when you run :code:`amplify status` for your app.
 
-      #. Choose :guilabel:`Email` in the Amazon Pinpoint console :guilabel:`Channels` tab.
+   #. In the Amazon Pinpoint console, choose the :guilabel:`Channels` tab, and then choose  :guilabel:`Email`.
 
-      #. Choose :guilabel:`Email address`, type the address your messages should come from, and then
-         choose :guilabel:`verify` at the end of the entry field.
+   #. Choose :guilabel:`Email address`, type the address that you want your messages to come from, and then
+      choose :guilabel:`verify` at the end of the entry field.
 
-         The email account you enter will receive an email requesting your approval for
-         Amazon Pinpoint to use that account as the sender address for emails sent by the system. The status of :guilabel:`Pending Verification` is
-         displayed in the console entry field until Amazon Pinpoint has processed your approval.
+      The email account you enter will receive an email requesting your approval for
+      Amazon Pinpoint to use that account as the sender address for emails sent by the system. The status of :guilabel:`Pending Verification` is
+      displayed in the console entry field until Amazon Pinpoint has processed your approval.
 
-      #. Choose :guilabel:`Email domain`, type the domain your messages should come from, and then
-         choose :guilabel:`verify` at the end of the entry field.
+   #. Choose :guilabel:`Email domain`, type the domain that you want your messages to come from, and then
+      choose :guilabel:`verify` at the end of the entry field.
 
-         A dialog is displayed providing the name and value of the TXT record you must add to the
-         domain's settings. The status of :code:`Pending Verification` is displayed in the entry
-         field until the console processes your approval.
+      A dialog box displays the name and value of the TXT record you must add to the
+      domain's settings. The status of :code:`Pending Verification` is displayed in the entry
+      field until the console processes your approval.
 
-         Add a default user name to :guilabel:`Default from address`.
+      Add a default user name to :guilabel:`Default from address`.
 
-      #. Choose :guilabel:`Save`.
+   #. Choose :guilabel:`Save`.
 
-      #. For information about sending mail from Amazon Pinpoint, see `Sending an Email Message
-         <messages.html#messages-email>`__.
+   #. For information about sending mail from Amazon Pinpoint, see `Sending an Email Message
+      <messages.html#messages-email>`__.
 
-   #. **For SMS**: Choose the :guilabel:`Messaging and Analytics` tile to enable the
-      feature.
+#. **For SMS**:
 
+   #. Go to the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
 
-      #. Choose :guilabel:`SMS`, and then choose :guilabel:`Enable`.
+   #. Open the project with the name of the Analytics resource shown when you run :code:`amplify status` for your app.
 
-      #. Choose the the :guilabel:`Amazon Pinpoint console` link at the bottom of the descriptive
-         text on the left.
+   #. Choose :guilabel:`SMS`, and then choose :guilabel:`Enable`.
 
-      #. Choose :guilabel:`SMS` in the Amazon Pinpoint console :guilabel:`Channels` tab.
+   #. Choose the :guilabel:`Amazon Pinpoint console` link at the bottom of the descriptive
+      text on the left.
 
-      #. Adjust the options for :guilabel:`Default message type`, :guilabel:`Account spend limit`,
-         and :guilabel:`Default sender ID`. For more information on these options, see `Updating SMS
-         Settings <channels-sms-manage.html#channels-sms-manage-settings>`__.
+   #. Choose :guilabel:`SMS` in the Amazon Pinpoint console :guilabel:`Channels` tab.
 
-      #. For information about sending SMS messages from Amazon Pinpoint, see `Sending an SMS Message
-         <messages.html#messages-sms>`__.
+   #. Adjust the options for :guilabel:`Default message type`, :guilabel:`Account spend limit`,
+      and :guilabel:`Default sender ID`. For more information about these options, see `Updating SMS
+      Settings <channels-sms-manage.html#channels-sms-manage-settings>`__.
+
+   #. For information about sending SMS messages from Amazon Pinpoint, see `Sending an SMS Message
+      <messages.html#messages-sms>`__.
 
 
 .. _connect-to-your-backend:
 
-Connect to your backend
+Connect to Your Backend
 =======================
 
 
-The AWS Mobile SDK is not required to receive Email or SMS messages from Amazon Pinpoint.
+The AWS Mobile SDK is not required to receive email or SMS messages from Amazon Pinpoint.
 
 
 

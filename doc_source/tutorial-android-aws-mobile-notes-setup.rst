@@ -11,7 +11,7 @@
 .. _tutorial-android-aws-mobile-notes-setup:
 
 ########################
-A Simple Note-taking App
+A Simple Note-Taking App
 ########################
 
 .. toctree::
@@ -21,125 +21,87 @@ A Simple Note-taking App
 
    Analytics <tutorial-android-aws-mobile-notes-analytics>
    Authentication <tutorial-android-aws-mobile-notes-auth>
-   NoSQL Data <tutorial-android-aws-mobile-notes-data>
+   Serverless Backend <tutorial-android-aws-mobile-notes-data>
 
-Start with a working app and then add cloud enabled features. In this tutorial you will take a working app, driven from locally stored data, and then:
+In this tutorial, you start with a working app, driven from locally stored data, and then add cloud-enabled features as follows:
 
 - :ref:`Add analytics to your app <tutorial-android-aws-mobile-notes-analytics>` so you can view demographic information about your users.
 
 - :ref:`Add a simple sign-in/sign-up flow <tutorial-android-aws-mobile-notes-auth>` for authentication.
 
-- :ref:`Access data stores in the AWS <tutorial-android-aws-mobile-notes-data>` cloud, so that a user's notes are available to them on any device with the app installed.
+- :ref:`Access data stores in the AWS cloud <tutorial-android-aws-mobile-notes-data>`, so that a user's notes are available to them on any device with the app installed.
 
 .. image:: images/tutorial-notes-app-anim.gif
    :scale: 100
    :alt: Demonstration of the Notes tutorial app you can download.
 
-You should be able to complete the setup section of this tutorial within 10-15 minutes after
-you have installed all required software. Once you complete the instructions on this page, you can run the project on your local system.
+You should be able to complete the setup section of this tutorial within 10-15 minutes after you have installed all required software. After you complete the following instructions, you can run the project on your local system.
 
 .. _android-tutorial-notes-getting-started:
 
 Getting Started
 ---------------
 
-Before beginning, you must:
+Before you begin, do the following:
 
--  Download and install `Android Studio <https://developer.android.com/studio/index.html>`__ version 3.0.1 or later.
+#. Complete the `Getting Started <https://aws-amplify.github.io/media/get_started>`__ instructions to install the Amplify CLI.
+#. Download and install `Android Studio <https://developer.android.com/studio/index.html>`__ version 3.0.1 or later.
+#. Download and install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`__ version 8.0 (Oreo), API level 26.
+#. Install an `Android Emulator <https://developer.android.com/studio/run/managing-avds.html>`__. The app works with both phone and tablet emulators (for example, the Nexus 5X or Pixel C).
 
--  Download an install `Android SDK <https://developer.android.com/studio/intro/update.html#sdk-manager>`__ version 8.0 (Oreo), API level 26.
-
--  Install an `Android Emulator <https://developer.android.com/studio/run/managing-avds.html>`__ - the app works with both phone and tablet emulators (for example, the Nexus 5X or Pixel C).
-
-Windows Specific Instructions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
--  Install `Git for Windows <https://git-scm.com/download/win>`__.
-
-Mac Specific Instructions
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
--  Install
-   `XCode <https://itunes.apple.com/us/app/xcode/id497799835?mt=12>`__
-   using the Mac App Store.
-
--  Configure the XCode command line tools. Run
-   ``xcode-select --install`` from a Terminal window.
-
-   .. list-table::
-      :widths: 1
-
-      * - Why do I need XCode?
-
-          The XCode package includes command line tools that are used on a Mac to assist with software development. You don't need to run the UI XCode application.
-
-Download the Source code
+Download the Source Code
 ------------------------
 
-1. Get the tutorial source code using one of the following choices:
-
-   * Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip>`__.
-
-   * Browse to  `https://github.com/aws-samples/aws-mobile-android-notes-tutorial/ <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/>`__ and clone or fork the repository (`sign up for GitHub account <https://github.com/join?source=header-home>`__, if you do not have one).
-
+Download the source code as a `ZIP file <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/archive/master.zip>`__.  After the download is complete, unpack the downloaded ZIP file.
 
 Compile the Source Code
 -----------------------
 
-To compile the source code:
+To compile the source code, do the following:
 
 1. Start :guilabel:`Android Studio`.
 2. If you have a project open already, choose :guilabel:`File > Close Project`.
 3. Choose :guilabel:`Open an existing Android Studio project`.
-4. Find and choose the :guilabel:`aws-mobile-android-notes-tutorial-master` project in your file system, then choose :guilabel:`OK`.
+4. Find and choose the :guilabel:`aws-mobile-android-notes-tutorial-master` project in your file system, and then choose :guilabel:`OK`.
 
    .. image:: images/open-project.png
       :scale: 100
       :alt: Find MyNotes folder in the Android Studio project explorer.
 
-5. Select :guilabel:`Build > Make Project` from the menu bar.
+5. On the menu bar, choose :guilabel:`File > Sync Project with Gradle Files`.
+6. On the menu bar, choose :guilabel:`Build > Make Project`.
 
-The compilation step should complete with no errors. Errors are
-displayed within the :guilabel:`Messages` window, available on the status bar at
-the bottom of the project.
+The compilation step should finish with no errors. Errors are displayed in the :guilabel:`Messages` window, which is available on the status bar at the bottom of the project.
 
 Run the Project in an Emulator
 ------------------------------
 
-Create a new emulator if you have not done so already:
+If you haven't already done so, create a new emulator as follows:
 
-#. Select :guilabel:`Tools > Android > AVD Manager`.
+#. Choose :guilabel:`Tools > Android > AVD Manager`.
 #. Choose :guilabel:`Create Virtual Device....`
-#. Select :guilabel:`Phone  > Nexus 5X`, then choose :guilabel:`Next`.
-#. Select the :guilabel:`x86 Images` tab, then select :guilabel:`Android 8.0 (Google APIs)`.
+#. Choose :guilabel:`Phone  > Nexus 5X`, and then choose :guilabel:`Next`.
+#. Choose the :guilabel:`x86 Images` tab, and then choose :guilabel:`Android 8.0 (Google APIs)`.
 
-   -  If you have not previously downloaded the image, you can download
+   -  If you didn't previously downloaded the image, you can download
       it from this screen.
 
 #. Choose :guilabel:`Next`.
 #. Choose :guilabel:`Finish`.
 #. Close the AVD Manager.
 
-Run the project in an emulator.
+Run the project in an emulator as follows:
 
-#. Select :guilabel:`Run` > :guilabel:`Run 'app'`.
-#. Select the :guilabel:`Nexus 5X API 26` virtual device.
+#. Choose :guilabel:`Run` > :guilabel:`Run 'app'`.
+#. Choose the :guilabel:`Nexus 5X API 26` virtual device.
 #. Choose :guilabel:`OK`.
 
-The Android emulator will boot (if it is not already started) and the
-application will run. You should be able to interact with the
-application as you would any other mobile app. Try pressing on the :guilabel:`+` at
-the bottom to create a note, or choose a note to show the editor
-screen. A unique ID for each note is displayed in
-the list view underneath the note's title.
+If it isn't already running, the Android emulator starts and then the application runs. You should be able to interact with the application as you would any other mobile app. Try pressing on the plus sign :guilabel:`+` at the of the app to create a note, or choose a note to show in the editor screen. A unique ID for each note is displayed in the list view underneath the note's title.
 
-Running into Problems
+Troubleshooting
 ---------------------
 
-The most common problems at this stage involve issues with the
-installation of Java, Android Studio, the Android SDK or the Android
-Emulator. Google provides detailed instructions on `Android Studio <https://developer.android.com/studio/index.html>`__ and
-dependent features.
+The most common problems at this stage involve issues with the installation of Java, Android Studio, the Android SDK, or the Android Emulator. Google provides detailed instructions about `Android Studio <https://developer.android.com/studio/index.html>`__ and dependent features.
 
 Next Steps
 ----------

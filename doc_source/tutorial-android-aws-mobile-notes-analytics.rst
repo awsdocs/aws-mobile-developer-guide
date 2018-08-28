@@ -14,350 +14,236 @@
 Add Analytics to the Notes App
 ##############################
 
-In the :ref:`previous section <tutorial-android-aws-mobile-notes-setup>` of this tutorial, we installed Android Studio,
-downloaded a sample note-taking app from GitHub, then compiled and ran
-it in the Android Emulator. This tutorial assumes you have completed the
-those steps. In this section, we will extend the notes app to
-include application analytics. Application analytics allow us to gather
-demographic information about the application usage.
+In the :ref:`previous section <tutorial-android-aws-mobile-notes-setup>` of this tutorial, you installed Android Studio, downloaded a sample note-taking app from GitHub, and then compiled and ran it in the Android Emulator. This tutorial assumes you have completed these steps. In this section, you extend the notes app to include application analytics. Application analytics enable you to gather demographic information about the application usage.
 
 You should be able to complete this section in 10-15 minutes.
 
-Set Up Your Back End
---------------------
+Create an AWS Backend
+---------------------
 
-To start, set up the mobile backend resources in AWS:
+#. Open the project in Android Studio.
+#. Choose :guilabel:`View`, choose :guilabel:`Tool Windows`, and then choose :guilabel:`Terminal`.  This opens a terminal prompt within Android Studio at the bottom of the window.
+#. In the terminal window, enter the following commands:
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/home/>`__.
+.. code-block:: bash
 
-   -  If you do not have an AWS account, `sign up for the AWS
-      Free Tier <https://aws.amazon.com/free/>`__.
+    $ amplify init
 
-#. Choose :guilabel:`Create` on the upper left, and the type :userinput:`android-notes-app` for the name of the Mobile Hub project.
-#. Choose :guilabel:`Next`, choose :guilabel:`Android`, and then choose :guilabel:`Add`.
-#. Choose :guilabel:`Download Cloud Config`, and save :file:`awsconfiguration.json`. This file the configuration to connect your app to your backend.
-#. Choose :guilabel:`Next` and then choose :guilabel:`Done` to create the project.
+The CLI prompts you through the process of initializing your backend project.  When prompted for the Res directory:
 
-.. list-table::
-   :widths: 1 6
+.. code-block:: none
 
-   * - Used in this section
+    ? Where is your Res directory:  app/src/main/res
 
-     - `AWS Mobile Hub <https://console.aws.amazon.com/mobilehub/home/>`__: Configure your mobile app's AWS backend in minutes, and then to manage those resources as your app evolves.
+Next, add the analytics service to your backend:
+
+.. code-block:: bash
+
+    $ amplify analytics add
+
+Again, the CLI prompts you through the process of initializing your backend project.  Finally, deploy the resources you have provisioned:
+
+.. code-block:: none
+
+    $ amplify push
+
+The :code:`amplify init` command does the following within your project:
+
+*  Creates a basic backend definition in the :file:`amplify` directory.
+*  Creates an :file:`awsconfiguration.json` file describing the backend in the :file:`app/src/main/res/raw` resource directory.
+
+The :code:`amplify analytics add` command adds the appropriate entries into the backend definition file for deploying Amazon Pinpoint as a service for this project.  The :code:`amplify push` command deploys any new services that are defined and updates the :file:`awsconfiguration.json` file so that the new services can be used within your app.
 
 Add Permissions to the AndroidManifest.xml
 ------------------------------------------
 
 #. Open the project in Android Studio.
-#. Choose :guilabel:`Project` on the left side of the project to open the project browser. Find the app manifest by changing the project browser view menu at the top to :guilabel:`Android`, and opening the :file:`app/manifests` folder.
+#. On the left side of the project, choose :guilabel:`Project` to open the project browser. 
+#. To find the app manifest, change the project browser view menu at the top to :guilabel:`Android`, and open the :file:`app/manifests` folder.
 #. Add the :code:`INTERNET`, :code:`ACCESS_NETWORK_STATE`, and
    :code:`ACCESS_WIFI_STATE`: permissions to your project's :file:`AndroidManifest.xml` file.
 
-.. code-block:: xml
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.amazonaws.mobile.samples.mynotes">
-
-        <uses-permission android:name="android.permission.INTERNET"/>
-        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-        <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-        <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            android:name=".Application">
-            <!-- Other settings -->
-        </application>
-    </manifest>
-
-Add AWS SDK for Android library
--------------------------------
-
-#. Edit the :file:`app/build.gradle` file. Add the following lines to the
-    :code:`dependencies` section:
-
     .. code-block:: xml
 
+        <?xml version="1.0" encoding="utf-8"?>
+        <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+            package="com.amazonaws.mobile.samples.mynotes">
+
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+
+            <application
+                android:name=".NotesApp"
+                android:allowBackup="true"
+                android:icon="@mipmap/ic_launcher"
+                android:label="@string/app_name"
+                android:roundIcon="@mipmap/ic_launcher_round"
+                android:supportsRtl="true"
+                android:theme="@style/AppTheme">
+            </application>
+        </manifest>
+
+Add AWS SDK for Android Library
+-------------------------------
+
+#. Edit the :file:`app/build.gradle` file. Add the following lines to the :code:`dependencies` section:
+
+    .. code-block:: gradle
+
        dependencies {
-          compile fileTree(dir: 'libs', include: ['*.jar'])
-          implementation 'com.android.support:appcompat-v7:26.1.0'
-          implementation 'com.android.support:support-v4:26.1.0'
-          implementation 'com.android.support:cardview-v7:26.1.0'
-          implementation 'com.android.support:recyclerview-v7:26.1.0'
-          implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-          implementation 'com.android.support:design:26.1.0'
-          implementation 'com.android.support:multidex:1.0.1'
-          implementation 'joda-time:joda-time:2.9.9'
+          // Other dependencies will be here already
 
           // AWS Mobile SDK for Android
-          implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
-          implementation 'com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar'
-          implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+          def aws_version = '2.6.27'
+          implementation "com.amazonaws:aws-android-sdk-core:$aws_version"
+          implementation "com.amazonaws:aws-android-sdk-auth-core:$aws_version@aar"
+          implementation "com.amazonaws:aws-android-sdk-pinpoint:$aws_version"
        }
 
-#. Choose :guilabel:`Sync Now` on the upper right to incorporate the dependencies you just declared.
+#. Choose :guilabel:`Sync Now` on the upper-right corner to incorporate the dependencies you just declared.
 
-Integrate the AWS Configuration File
-------------------------------------
+Create an AWSService.java Class
+-------------------------------
 
-First, create a :file:`raw` resource folder to store the AWS configuration file:
-
-#. Expand the :file:`app` folder.
-#. Right-click the :file:`res` folder.
-#. Choose :guilabel:`New > Directory`.
-#. Type :userinput:`raw`.
-
-   .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
-       :scale: 100
-       :alt: Image of creating a raw directory in Android Studio.
-
-#. Choose :guilabel:`OK`.
-#. Copy the :file:`awsconfiguration.json` file from its download location to the
-   :file:`app/src/main/res/raw` directory.
-
-Android gives a resource ID to any arbitrary file placed in the :file:`raw` folder, making it easy to reference in the app.
-
-  .. list-table::
-   :widths: 1 6
-
-   * - **Tip**
-
-     - Use Reveal in Finder
-
-       If you are having trouble locating the right directory on disk, use Android Studio.
-       Right-click the :file:`raw` folder, then select :guilabel:`Reveal in Finder`. A new
-       window with the location of the :file:`raw directory` pre-loaded will appear.
-
-
-
-Create an AWSProvider.java Singleton Class
-------------------------------------------
-
-In our sample, all access to AWS is consolidated into a singleton class
-called :file:`AWSProvider.java`.
+In the sample, you need to provide a class to provide access to the configuration and identity provider objects.  These objects are central to how Android applications locate and communicate with AWS resources.  This object should be a singleton.  In the sample, you use a central dependency class to ensure that the :file:`AWSService` object is created one time only.
 
 1. Expand :file:`app/java` in the Android Studio project explorer.
-2. Right-click the :file:`com.amazonaws.mobile.samples.mynotes` directory.
-3. Select :guilabel:`New > Java Class`.
-4. Enter the details:
+2. Right-click the :file:`services` directory.
+3. Choose :guilabel:`New > Package`.
+4. For :guilabel:`Name`, enter :userinput:`aws` and then choose :guilabel:`OK`.
+5. Right-click the :file:`aws` directory.
+6. Choose :guilabel:`New > Java Class`.
+7. For :guilabel:`Name`, enter :userinput:`AWSService` and then choose :guilabel:`OK`.
 
-   -  Name: :userinput:`AWSProvider`
-   -  Kind: :userinput:`Singleton`
-
-5. Choose :guilabel:`OK`.
-
-You may be asked if you want to add the file to Git. Choose :guilabel:`Yes`.
+If you are asked whether you want to add the file to Git, choose :guilabel:`Yes`.
 
 The following is the initial code in this class:
 
   .. code-block:: java
 
-      package com.amazonaws.mobile.samples.mynotes;
+     package com.amazonaws.mobile.samples.mynotes.services.aws;
 
-      import android.content.Context;
+     import android.content.Context;
 
-      import com.amazonaws.auth.AWSCredentialsProvider;
-      import com.amazonaws.mobile.auth.core.IdentityManager;
-      import com.amazonaws.mobile.config.AWSConfiguration;
-      import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
-      import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
+     import com.amazonaws.mobile.auth.core.IdentityManager;
+     import com.amazonaws.mobile.config.AWSConfiguration;
 
-      public class AWSProvider {
-          private static AWSProvider instance = null;
-          private Context context;
-          private AWSConfiguration awsConfiguration;
-          private PinpointManager pinpointManager;
+     public class AWSService {
+         private AWSConfiguration awsConfiguration;
+         private IdentityManager identityManager;
 
-          public static AWSProvider getInstance() {
-              return instance;
-          }
+         public AWSService(Context context) {
+             awsConfiguration = new AWSConfiguration(context);
+             identityManager = new IdentityManager(context, awsConfiguration);
+             IdentityManager.setDefaultIdentityManager(identityManager);
+         }
 
-          public static void initialize(Context context) {
-              if (instance == null) {
-                  instance = new AWSProvider(context);
-              }
-          }
+         public IdentityManager getIdentityManager() {
+             return identityManager;
+         }
 
-          private AWSProvider(Context context) {
-              this.context = context;
-              this.awsConfiguration = new AWSConfiguration(context);
+         public AWSConfiguration getConfiguration() {
+             return awsConfiguration;
+         }
+     }
 
-              IdentityManager identityManager = new IdentityManager(context, awsConfiguration);
-              IdentityManager.setDefaultIdentityManager(identityManager);
-          }
+Create an AWSAnalyticsService.java Class
+----------------------------------------
 
-          public Context getContext() {
-              return this.context;
-          }
+In our sample, the analytics service is provided through a mock dependency injection service.  The analytics service must be an object that implements the :file:`AnalyticsService` interface.  All other parts of the application will use the :file:`AnalyticsService` that is defined in the  :file:`Injection` class.
 
-          public AWSConfiguration getConfiguration() {
-              return this.awsConfiguration;
-          }
+1. Right-click the :file:`aws` directory.
+2. Choose :guilabel:`New > Java Class`.
+3. For :guilabel:`Name`, enter :userinput:`AWSAnalyticsService` and then choose :guilabel:`OK`.
 
-          public IdentityManager getIdentityManager() {
-              return IdentityManager.getDefaultIdentityManager();
-          }
+If you are asked whether you want to add the file to Git, choose :guilabel:`Yes`.
 
-          public PinpointManager getPinpointManager() {
-              if (pinpointManager == null) {
-                  final AWSCredentialsProvider cp = getIdentityManager().getCredentialsProvider();
-                  PinpointConfiguration config = new PinpointConfiguration(
-                          getContext(), cp, getConfiguration());
-                  pinpointManager = new PinpointManager(config);
-              }
-              return pinpointManager;
-          }
-      }
+The following is the initial code in this class:
 
+  .. code-block:: java
 
-.. list-table::
-   :widths: 1 6
+     package com.amazonaws.mobile.samples.mynotes.services.aws;
 
-   * - What does this do?
+     import android.content.Context;
 
-     - The AWSProvider provides a central place
-       to add code that accesses AWS resources. The constructor will load the
-       AWS Configuration (a JSON file that you downloaded earlier) and create an
-       IdentityManager object that is used to authenticate the device and/or
-       user to AWS for accessing resources. The :code:`getPinpointManager()` method
-       will create a connection to Amazon Pinpoint if it doesn't exist.
+     import com.amazonaws.auth.AWSCredentialsProvider;
+     import com.amazonaws.mobile.samples.mynotes.services.AnalyticsService;
+     import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
+     import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
+     import com.amazonaws.mobileconnectors.pinpoint.analytics.AnalyticsEvent;
+     import java.util.Map;
 
-Update the Application Class
-----------------------------
+     public class AWSAnalyticsService implements AnalyticsService {
+         private PinpointManager pinpointManager;
 
-All Android applications that include the AWS SDK for Android must
-inherit from
-`MultiDexApplication <https://developer.android.com/studio/build/multidex.html>`__.
-This has been done for you in this project. Open the
-:file:`Application.java` file. In the :code:`onCreate()` method of the
-:code:`Application` class, add code to initialize the :code:`AWSProvider` object
-we previously added:
+         public AWSAnalyticsService(Context context, AWSService awsService) {
+             AWSCredentialsProvider cp = awsService.getIdentityManager().getCredentialsProvider();
+             PinpointConfiguration config = new PinpointConfiguration(context, cp,  awsService.getConfiguration());
+             pinpointManager = new PinpointManager(config);
+
+             // Automatically record a startSession event
+             startSession();
+         }
+
+         @Override
+         public void startSession() {
+             pinpointManager.getSessionClient().startSession();
+             pinpointManager.getAnalyticsClient().submitEvents();
+         }
+
+         @Override
+         public void stopSession() {
+             pinpointManager.getSessionClient().stopSession();
+             pinpointManager.getAnalyticsClient().submitEvents();
+         }
+
+         @Override
+         public void recordEvent(String eventName, Map<String, String> attributes, Map<String, Double> metrics) {
+             final AnalyticsEvent event = pinpointManager.getAnalyticsClient().createEvent(eventName);
+             if (attributes != null) {
+                 for (Map.Entry<String,String> entry : attributes.entrySet()) {
+                     event.addAttribute(entry.getKey(), entry.getValue());
+                 }
+             }
+             if (metrics != null) {
+                 for (Map.Entry<String,Double> entry : metrics.entrySet()) {
+                     event.addMetric(entry.getKey(), entry.getValue());
+                 }
+             }
+             pinpointManager.getAnalyticsClient().recordEvent(event);
+             pinpointManager.getAnalyticsClient().submitEvents();
+         }
+     }
+
+Register the AWSAnalyticsService with the Injection Service
+-----------------------------------------------------------
+
+Similar to the :file:`AWSService` class, the :file:`AWSAnalyticsService` class should be instantiated as a singleton object.  You use the :file:`Injection` service to do this.  Open the :file:`Injection` class, and replace the :code:`initialize()` method with the following code:
 
 .. code-block:: java
 
-   public class Application extends MultiDexApplication {
-      @Override
-      public void onCreate() {
-          super.onCreate();
+   private static AWSService awsService = null;
 
-          // Initialize the AWS Provider
-          AWSProvider.initialize(getApplicationContext());
+   public static synchronized void initialize(Context context) {
+     if (awsService == null) {
+       awsService = new AWSService(context);
+     }
 
-          registerActivityLifecycleCallbacks(new ActivityLifeCycle());
-      }
+     if (analyticsService == null) {
+       analyticsService = new AWSAnalyticsService(context, awsService);
+     }
+
+     if (dataService == null) {
+       dataService = new MockDataService();
+     }
+
+     if (notesRepository == null) {
+       notesRepository = new NotesRepository(dataService);
+     }
    }
 
-
-Update the ActivityLifeCycle Class
-----------------------------------
-
-We use an
-`ActivityLifeCycle <https://developer.android.com/guide/components/activities/activity-lifecycle.html>`__
-to monitor for activity events like start, stop, pause and resume. We
-need to determine when the user starts the application so that we can
-send a :code:`startSession` event and :code:`stopSession` event to Amazon
-Pinpoint. Adjust the :code:`onActivityStarted()` and :code:`onActivityStopped()`
-methods as follows:
-
-.. code-block:: java
-
-    @Override
-    public void onActivityStarted(Activity activity) {
-        if (depth == 0) {
-            Log.d("ActivityLifeCycle", "Application entered foreground");
-            AWSProvider.getInstance().getPinpointManager().getSessionClient().startSession();
-            AWSProvider.getInstance().getPinpointManager().getAnalyticsClient().submitEvents();
-        }
-        depth++;
-    }
-
-    @Override
-    public void onActivityStopped(Activity activity) {
-        depth--;
-        if (depth == 0) {
-            Log.d("ActivityLifeCycle", "Application entered background");
-            AWSProvider.getInstance().getPinpointManager().getSessionClient().stopSession();
-            AWSProvider.getInstance().getPinpointManager().getAnalyticsClient().submitEvents();
-        }
-    }
-
-
-Monitor Add and Delete Events in Amazon Pinpoint
-------------------------------------------------
-
-We can also monitor feature usage within our app. In this example, we
-will monitor how often users add and delete notes. We will record a
-custom event for each operation. The Delete Note operation occurs in the
-:file:`NoteListActivity.java` class. Review the :code:`onSwiped` method, and add the following code:
-
-.. code-block:: java
-
-    @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        final NoteViewHolder noteHolder = (NoteViewHolder) viewHolder;
-        ((NotesAdapter) notesList.getAdapter()).remove(noteHolder);
-
-        // Send Custom Event to Amazon Pinpoint
-        final AnalyticsClient mgr = AWSProvider.getInstance()
-                .getPinpointManager()
-                .getAnalyticsClient();
-        final AnalyticsEvent evt = mgr.createEvent("DeleteNote")
-                .withAttribute("noteId", noteHolder.getNote().getNoteId());
-        mgr.recordEvent(evt);
-        mgr.submitEvents();
-    }
-
-
-The Add Note operation occurs in the ``NoteDetailFragment.java`` class.
-Review the :code:`saveData()` method, and add code to send the custom event
-to Amazon Pinpoint as shown in the following fragment.
-
-.. code-block:: java
-
-    private void saveData() {
-        // Save the edited text back to the item.
-        boolean isUpdated = false;
-        if (!mItem.getTitle().equals(editTitle.getText().toString().trim())) {
-            mItem.setTitle(editTitle.getText().toString().trim());
-            mItem.setUpdated(DateTime.now(DateTimeZone.UTC));
-            isUpdated = true;
-        }
-        if (!mItem.getContent().equals(editContent.getText().toString().trim())) {
-            mItem.setContent(editContent.getText().toString().trim());
-            mItem.setUpdated(DateTime.now(DateTimeZone.UTC));
-            isUpdated = true;
-        }
-
-        // Convert to ContentValues and store in the database.
-        if (isUpdated) {
-            ContentValues values = mItem.toContentValues();
-            if (isUpdate) {
-                contentResolver.update(itemUri, values, null, null);
-            } else {
-                itemUri = contentResolver.insert(NotesContentContract.Notes.CONTENT_URI, values);
-                isUpdate = true;    // Anything from now on is an update
-
-                // Send Custom Event to Amazon Pinpoint
-                final AnalyticsClient mgr = AWSProvider.getInstance()
-                        .getPinpointManager()
-                        .getAnalyticsClient();
-                final AnalyticsEvent evt = mgr.createEvent("AddNote")
-                        .withAttribute("noteId", mItem.getNoteId());
-                mgr.recordEvent(evt);
-                mgr.submitEvents();
-            }
-        }
-    }
-
-
-The AnalyticsClient and AnalyticsEvent classes are not imported by
-default. Use Alt-Return to import the missing classes.
-
+You should also add the :file:`AWSService` and :file:`AWSAnalyticsService` classes to the list of imports for the class.  You can easily do this using Alt+Enter in the editor.
 
   .. list-table::
    :widths: 1 6
@@ -366,29 +252,20 @@ default. Use Alt-Return to import the missing classes.
 
      - Auto Import
 
-       You can set up Auto-Import to automatically import
-       classes that you need. On Windows or Linux, you can find Auto-Import
-       under :guilabel:`File > Settings`. On a Mac, you can find the same area
-       under :guilabel:`Android Studio > Preferences`. The auto-import setting is
-       under :guilabel:`Editor > General > Auto Import >Java`. Change
-       :guilabel:`Insert imports on paste` to :guilabel:`All` and select the :guilabel:`Add unambiguous
-       imports on the fly` option.
-
+       You can set up Auto Import to automatically import classes that you need. On Windows or Linux, you can find Auto Import under :guilabel:`File > Settings`. On a Mac, you can find it under :guilabel:`Android Studio > Preferences`. The Auto Import setting is under :guilabel:`Editor > General > Auto Import > Java`. Change :guilabel:`Insert imports on paste` to :guilabel:`All` and select the :guilabel:`Add unambiguous imports on the fly` option.
 
 Run the Project and Validate Results
 ------------------------------------
 
-Run the application in the emulator using :guilabel:`Run` > :guilabel:`Run 'app'`. It
-should work as before. Ensure you try to add and delete some notes to
-generate some traffic that can be shown in the Pinpoint console.
+Run the application in the emulator using :guilabel:`Run` > :guilabel:`Run 'app'`. Add and delete some notes to generate some traffic that will appear in the Amazon Pinpoint console.
 
-To view the demographics and custom events:
+To view the demographics and session events, run the following command:
 
-#. Open the `AWS Mobile Hub console <https://console.aws.amazon.com/mobilehub/>`__.
-#. Choose your project.
-#. Choose the :guilabel:`Analytics` icon on the left, to navigate to your project in the `AWS Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
-#. Choose :guilabel:`Analytics` on the left.
-#. You should see an up-tick in several graphs:
+.. code-block:: bash
+
+   $ amplify analytics console
+
+It can take up to 5 minutes for the first data to be shown in the graphs.  You should see an increase in several graphs:
 
    .. image:: images/pinpoint-overview.png
       :scale: 100 %
@@ -403,7 +280,6 @@ To view the demographics and custom events:
 
       .. image:: images/pinpoint-overview.png
          :scale: 75
-
 
 #. Choose :guilabel:`Demographics` to view the demographics information.
 
@@ -421,31 +297,9 @@ To view the demographics and custom events:
       .. image:: images/pinpoint-demographics.png
          :scale: 75
 
+If you see data in each page, you have successfully added analytics to your app. Should you release your app on the App Store, you can return here to see more details about your users.
 
-#. Choose :guilabel:`Events`.
-
-#. Use the Event drop down to show only the :guilabel:`AddNote` event.
-
-   .. image:: images/pinpoint-addnote.png
-      :scale: 100 %
-      :alt: Image of the Add note event in the Amazon Pinpoint.
-
-   .. only:: pdf
-
-      .. image:: images/pinpoint-addnote.png
-         :scale: 50
-
-   .. only:: kindle
-
-      .. image:: images/pinpoint-addnote.png
-         :scale: 75
-
-
-If you see data within each page, you have successfully added analytics
-to your app. Should you release your app on the App Store, you can come
-back here to see more details about your users.
-
-Next steps
+Next Steps
 ----------
 
 *  Continue by adding :ref:`Authentication <tutorial-android-aws-mobile-notes-auth>`.

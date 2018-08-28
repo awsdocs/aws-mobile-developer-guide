@@ -30,7 +30,7 @@ How To: AWS Mobile SDK Setup Options
 
 
 
-This section provides information on how to manually install the AWS Mobile SDK for your Android and iOS apps.
+This section provides information about how to manually install the AWS Mobile SDK for your Android and iOS apps.
 
 .. toctree::
    :titlesonly:

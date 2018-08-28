@@ -22,10 +22,9 @@ Integrate Amazon Machine Learning
 
 To use the Amazon Machine Learning mobile client, you’ll need to integrate the SDK for iOS into your app and import the necessary libraries. To do so, follow these steps:
 
-#. Download the SDK and unzip it as described in
-`Setup the SDK for iOS <http://docs.aws.amazon.com/mobile/sdkforios/developerguide/setup-aws-sdk-for-ios.html>`__
-#. The instructions direct you to import the headers for the services you’ll be using. For Amazon Machine
-Learning, you need the following import.
+#. Download the SDK and unzip it as described in `Setup the SDK for iOS <http://docs.aws.amazon.com/mobile/sdkforios/developerguide/setup-aws-sdk-for-ios.html>`__.
+
+#. The instructions direct you to import the headers for the services you’ll be using. For Amazon Machine Learning, you need the following import.
 
   .. container:: option
 
@@ -59,7 +58,7 @@ To use Amazon Machine Learning in an application, you must set the proper permis
             }]
         }
 
-This policy should be applied to roles assigned to the Amazon Cognito identity pool, but you will need to replace the Resource value with the correct account ID and ML Model ID. You can apply policies at the `IAM console <https://console.aws.amazon.com/iam/home>`__. To learn more about IAM policies, see `Introduction to IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`__.
+This policy should be applied to roles assigned to the Amazon Cognito identity pool, but you need to replace the Resource value with the correct account ID and ML Model ID. You can apply policies at the `IAM console <https://console.aws.amazon.com/iam/home>`__. To learn more about IAM policies, see `Introduction to IAM <http://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_Introduction.html>`__.
 
 Create an Amazon Machine Learning Client
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -81,7 +80,7 @@ Once you've imported the necessary libraries and have your credentials object, y
 Making a Predict Request
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you will have to use the `Machine Learning Console <https://console.aws.amazon.com/machinelearning>`__ or an alternate `SDK <http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that this ML can be used for real-time Predictions.
+Prior to calling Predict, make sure you have not only a completed ML Model ID but also a created real-time endpoint for that ML Model ID. This cannot be done through the mobile SDK; you have to use the `Machine Learning Console <https://console.aws.amazon.com/machinelearning>`__ or an alternate `SDK <http://docs.aws.amazon.com/AWSSdkDocsJava/latest/DeveloperGuide/welcome.html>`__. To validate that this ML can be used for real-time predictions.
 
     .. container:: option
 
@@ -114,6 +113,8 @@ Prior to calling Predict, make sure you have not only a completed ML Model ID bu
 
         Objective C
           .. code-block:: objectivec
+
+                AWSMachineLearning *MachineLearning = [AWSMachineLearning defaultMachineLearning];
 
                 // Use a created model that has a created real-time endpoint
                 NSString *MLModelId = @"example-model-id";
