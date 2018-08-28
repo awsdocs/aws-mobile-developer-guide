@@ -58,12 +58,16 @@ Set Up Your Backend
                 $ amplify add notifications
 
          iOS - Swift
-             Navigate to your project folder (the folder that typically contains your project level xcodeproj file), and add the SDK to your app.
+             Navigate to your project folder (the folder that typically contains your project level :file:`xcodeproj` file), and add the SDK to your app.
 
             .. code-block:: bash
 
                 $ cd ./YOUR_PROJECT_FOLDER
                 $ amplify add notifications
+=======
+      $ cd YOUR_PROJECT FOLDER
+      $ amplify notifications add
+>>>>>>> 4ca56aee7b6a9b4293450c09e88ed3825eea4ab2
 
 #. Set up your backend to support receiving push notifications:
 
