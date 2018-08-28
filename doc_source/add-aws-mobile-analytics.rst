@@ -253,6 +253,7 @@ Add Analytics
                To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session that you want to capture. In this example, we are using a single Activity, so the session will stop when the MainActivity is destroyed. :code:`onDestroy()` is usually called when the back button is pressed while in the activity.
 
                .. code-block:: kotlin
+
                   override fun onDestroy() {
                       super.onDestroy()
 
