@@ -38,12 +38,33 @@ Set Up Your Backend
 ===================
 #. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
-#. In a terminal window, navigate to the root of your app files, and then add the analytics category to your app. The CLI will prompt you for configuration parameters.
+#. Use the CLI to add analytics to your cloud-enabled back-end and app.
 
-     .. code-block:: bash
+    .. container:: option
 
-        $ cd ./ROOT_OF_YOUR_APP_FILES
-        $ amplify analytics add
+       Android - Java
+           Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+
+          .. code-block:: bash
+
+              $ cd ./YOUR_PROJECT_FOLDER
+              $ amplify add analytics
+
+       Android - Kotlin
+           Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+
+          .. code-block:: bash
+
+              $ cd ./YOUR_PROJECT_FOLDER
+              $ amplify add analytics
+
+       iOS - Swift
+           Navigate to your project folder (the folder that typically contains your project level xcodeproj file), and add the SDK to your app.
+
+          .. code-block:: bash
+
+              $ cd ./YOUR_PROJECT_FOLDER
+              $ amplify add analytics
 
 #. When you complete configuration for analytics, you will see a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
 
@@ -60,11 +81,6 @@ Set Up Your Backend
      .. code-block:: bash
 
         $ amplify push
-
-#. Copy and save the URL labeled :code:`Pinpoint URL to track events:`. This link opens your app project in the Amazon Pinpoint console where you can monitor usage events in near real time.
-
-
-   Use the steps in the next section to connect your app to your backend.
 
 
 .. _add-aws-mobile-analytics-app:
@@ -95,16 +111,16 @@ Add Analytics
                   * :code:`aws-android-sdk-pinpoint` library enables sending analytics to Amazon Pinpoint.
                   * :code:`aws-android-sdk-mobile-client` library gives access to the AWS credentials provider and configurations.
 
-               #. Add required permissions to your app manifest.
+            #. Add required permissions to your app manifest.
 
-                  The AWS Mobile SDK requires the :code:`INTERNET` and :code:`ACCESS_NETWORK_STATE` permissions.  These are defined in the :code:`AndroidManifest.xml` file.
+                The AWS Mobile SDK requires the :code:`INTERNET` and :code:`ACCESS_NETWORK_STATE` permissions.  These are defined in the :code:`AndroidManifest.xml` file.
 
-                  .. code-block:: xml
+                .. code-block:: xml
 
-                     <uses-permission android:name="android.permission.INTERNET"/>
-                     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+                   <uses-permission android:name="android.permission.INTERNET"/>
+                   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-            #. Add calls to capture session starts and stops.
+            #. Add calls to capture session starts and stops. A session is one use of an app by the user. A session begins when an app is launched (or brought to the foreground), and ends when the app is terminated (or goes to the background). To accommodate for brief interruptions, like a text message, an inactivity period of up to 5 seconds is not counted as a new session. Total daily sessions shows the number of sessions your app has each day. Average sessions per daily active user shows the mean number of sessions per user per day.
 
                Three typical places to instrument your app session start and stop are:
 
@@ -126,6 +142,7 @@ Add Analytics
                       import com.amazonaws.mobile.client.AWSMobileClient;
 
                       public class MainActivity extends AppCompatActivity {
+                          private static final String TAG = MainActivity.class.getSimpleName();
 
                           public static PinpointManager pinpointManager;
 
@@ -135,7 +152,12 @@ Add Analytics
                               setContentView(R.layout.activity_main);
 
                               // Initialize the AWS Mobile Client
-                              AWSMobileClient.getInstance().initialize(this).execute();
+                              AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                                  @Override
+                                  public void onComplete(AWSStartupResult awsStartupResult) {
+                                      Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!");
+                                  }
+                              }).execute();
 
                               PinpointConfiguration config = new PinpointConfiguration(
                                       MainActivity.this,
@@ -144,20 +166,20 @@ Add Analytics
                               );
                               pinpointManager = new PinpointManager(config);
                               pinpointManager.getSessionClient().startSession();
-                              pinpointManager.getAnalyticsClient().submitEvents();
                           }
                       }
 
-               To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session you want to capture.
+               To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session you want to capture. In this example, we are using a single Activity, so the session will stop when the MainActivity is destroyed. :code:`onDestroy()` is usually called when the back button is pressed while in the activity.
 
                .. code-block:: java
 
-                  // . . .
+                  @Override
+                  protected void onDestroy() {
+                      super.onDestroy();
 
-                  pinpointManager.getSessionClient().stopSession();
-                  pinpointManager.getAnalyticsClient().submitEvents();
-
-                  // . . .
+                      pinpointManager.getSessionClient().stopSession();
+                      pinpointManager.getAnalyticsClient().submitEvents();
+                  }
 
          Android - Kotlin
             #. Set up AWS Mobile SDK components by following the :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` steps. These include:
@@ -184,7 +206,7 @@ Add Analytics
                      <uses-permission android:name="android.permission.INTERNET"/>
                      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-            #. Add calls to capture session starts and stops.
+            #. Add calls to capture session starts and stops. A session is one use of an app by the user. A session begins when an app is launched (or brought to the foreground), and ends when the app is terminated (or goes to the background). To accommodate for brief interruptions, like a text message, an inactivity period of up to 5 seconds is not counted as a new session. Total daily sessions shows the number of sessions your app has each day. Average sessions per daily active user shows the mean number of sessions per user per day.
 
                Three typical places to instrument your app session start and stop are:
 
@@ -206,6 +228,7 @@ Add Analytics
 
                         class MainActivity : AppCompatActivity() {
                             companion object {
+                                private val TAG = MainActivity.javaClass.simpleName
                                 var pinpointManager: PinpointManager? = null
                             }
 
@@ -214,28 +237,28 @@ Add Analytics
                                 setContentView(R.layout.activity_main)
 
                                 // Initialize the AWS Mobile client
-                                AWSMobileClient.getInstance().initialize(this).execute()
+                                AWSMobileClient.getInstance().initialize(this) { Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!") }.execute()
 
-                                with (AWSMobileClient.getInstance()) {
-                                    val config = PinpointConfiguration(this, credentialsProvider, configuration)
-                                    pinpointManager = PinpointManager(config)
-                                }
+                                val config = PinpointConfiguration(
+                                        this@MainActivity,
+                                        AWSMobileClient.getInstance().credentialsProvider,
+                                        AWSMobileClient.getInstance().configuration
+                                )
 
+                                pinpointManager = PinpointManager(config)
                                 pinpointManager?.sessionClient?.startSession()
-                                pinpointManager?.analyticsClient?.submitEvents()
                             }
                         }
 
-               To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session that you want to capture.
+               To stop the session, use :code:`stopSession()` and :code:`submitEvents()` at the last point in the session that you want to capture. In this example, we are using a single Activity, so the session will stop when the MainActivity is destroyed. :code:`onDestroy()` is usually called when the back button is pressed while in the activity.
 
-               .. code-block:: java
+               .. code-block:: kotlin
+                  override fun onDestroy() {
+                      super.onDestroy()
 
-                  // . . .
-
-                  pinpointManager?.sessionClient?.stopSession();
-                  pinpointManager?.analyticsClient?.submitEvents();
-
-                  // . . .
+                      pinpointManager?.sessionClient?.stopSession()
+                      pinpointManager?.analyticsClient?.submitEvents()
+                  }
 
          iOS - Swift
             #. Set up AWS Mobile SDK components with the following :ref:`Basic Backend Setup <add-aws-mobile-sdk-basic-setup>` steps.
@@ -249,6 +272,7 @@ Add Analytics
                          use_frameworks!
 
                            pod 'AWSPinpoint', '~> 2.6.13'
+                           pod 'AWSMobileClient', '~> 2.6.13'
 
                            # other pods
 
@@ -262,40 +286,48 @@ Add Analytics
 
                   .. code-block:: none
 
+                       /** start code copy **/
                        import AWSCore
                        import AWSPinpoint
+                       import AWSMobileClient
+                       /** end code copy **/
 
-               #. Insert the following code into the :code:`application(_:didFinishLaunchingWithOptions:)` method of your app's :file:`AppDelegate.swift`.
+               #. Replace the return statement with following code into the :code:`application(_:didFinishLaunchingWithOptions:)` method of your app's :file:`AppDelegate.swift`.
 
                   .. code-block:: swift
 
                        class AppDelegate: UIResponder, UIApplicationDelegate {
 
+                           /** start code copy **/
                            var pinpoint: AWSPinpoint?
+                           /** end code copy **/
 
                            func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
                            [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-                           //. . .
+                                //. . .
 
-                           // Initialize Pinpoint
-                           pinpoint = AWSPinpoint(configuration:
-                                   AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
+                                // Initialize Pinpoint
+                                /** start code copy **/
+                                pinpoint = AWSPinpoint(configuration:
+                                    AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
 
-                           //. . .
+                                // Create AWSMobileClient to connect with AWS
+                                return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
+                                /** end code copy **/
                            }
                        }
 
 Monitor Analytics
 -----------------
 
-Build and run your app to see usage metrics in Amazon Pinpoint.
+Build and run your app to see usage metrics in Amazon Pinpoint. By running the previous code samples, the console will show a "Session" logged.
 
 #. To see visualizations of the analytics coming from your app, open your project in the Amazon Pinpoint console by running:
 
    .. code-block:: none
 
-      $ amplify analytics console
+      $ amplify console analytics
 
 #. Choose :guilabel:`Analytics` from the icons on the left of the console, and view the graphs of your app's usage. It may take up to 15 minutes for metrics to become visible.
 
@@ -319,6 +351,9 @@ Use the following steps to implement Amazon Pinpoint custom analytics for your a
 
                  import com.amazonaws.mobileconnectors.pinpoint.analytics.AnalyticsEvent;
 
+                /**
+                 * Call this method to log a custom event to the analytics client.
+                 */
                  public void logEvent() {
                      final AnalyticsEvent event =
                          pinpointManager.getAnalyticsClient().createEvent("EventName")
@@ -327,7 +362,6 @@ Use the following steps to implement Amazon Pinpoint custom analytics for your a
                              .withMetric("DemoMetric1", Math.random());
 
                      pinpointManager.getAnalyticsClient().recordEvent(event);
-                     pinpointManager.getAnalyticsClient().submitEvents();
                  }
 
        Android - Kotlin
@@ -335,19 +369,22 @@ Use the following steps to implement Amazon Pinpoint custom analytics for your a
 
                 import com.amazonaws.mobileconnectors.pinpoint.analytics.AnalyticsEvent;
 
+                /**
+                 * Call this method to log a custom event to the analytics client.
+                 */
                 fun logEvent() {
-                    pintpointManager?.analyticsClient?.let {
+                    pinpointManager?.analyticsClient?.let {
                         val event = it.createEvent("EventName")
                             .withAttribute("DemoAttribute1", "DemoAttributeValue1")
                             .withAttribute("DemoAttribute2", "DemoAttributeValue2")
                             .withMetric("DemoMetric1", Math.random());
                         it.recordEvent(event)
-                        it.submitEvents()
                 }
 
        iOS - Swift
           .. code-block:: swift
 
+             // You can add this function in desired part of your app. It will be used to log events to the backend.
              func logEvent() {
 
                  let pinpointAnalyticsClient =
@@ -380,32 +417,38 @@ and design analytics related to purchases through your app.
 
                import com.amazonaws.mobileconnectors.pinpoint.analytics.monetization.AmazonMonetizationEventBuilder;
 
+              /**
+               * Call this method to log a monetized event to the analytics client.
+               */
                public void logMonetizationEvent() {
                    final AnalyticsEvent event =
                        AmazonMonetizationEventBuilder.create(pinpointManager.getAnalyticsClient())
-                           .withFormattedItemPrice("$10.00")
+                           .withCurrency("USD")
+                           .withItemPrice(10.00)
                            .withProductId("DEMO_PRODUCT_ID")
                            .withQuantity(1.0)
                            .withProductId("DEMO_TRANSACTION_ID").build();
 
                    pinpointManager.getAnalyticsClient().recordEvent(event);
-                   pinpointManager.getAnalyticsClient().submitEvents();
                }
 
          Android - Kotlin
             .. code-block:: kotlin
 
-                import com.amazonaws.mobileconnectors.pinpoint.analytics.monetization.AmazonMonetizationEventBuilder;
+                import com.amazonaws.mobileconnectors.pinpoint.analytics.monetization.AmazonMonetizationEventBuilder
 
-                public void logMonetizationEvent() {
+                /**
+                 * Call this method to log a monetized event to the analytics client.
+                 */
+                fun logMonetizationEvent() {
                     pinpointManager?.analyticsClient?.let {
                         val event = AmazonMonetizationEventBuilder.create(it)
-                           .withFormattedItemPrice("$10.00")
-                           .withProductId("DEMO_PRODUCT_ID")
-                           .withQuantity(1.0)
-                           .withProductId("DEMO_TRANSACTION_ID").build();
+                                .withCurrency("USD")
+                                .withItemPrice(10.00)
+                                .withProductId("DEMO_PRODUCT_ID")
+                                .withQuantity(1.0)
+                                .withProductId("DEMO_TRANSACTION_ID").build();
                         it.recordEvent(event)
-                        it.submitEvents()
                     }
                 }
 

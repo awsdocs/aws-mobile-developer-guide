@@ -29,7 +29,7 @@ the backend project.  These steps assume you have already completed the :ref:`an
 
    .. code-block:: bash
 
-      $ amplify auth update
+      $ amplify update auth
 
    When prompted, use the default configuration.
 

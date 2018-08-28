@@ -46,10 +46,31 @@ Set Up Your Backend
 
       #. In a terminal window, navigate to the root of your app files and add the auth category to your app. The CLI will prompt you for configuration parameters.
 
-         .. code-block:: none
+          .. container:: option
 
-            $ cd ./YOUR_APP_ROOT
-            $ amplify auth add
+             Android - Java
+                 Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+
+                .. code-block:: bash
+
+                    $ cd ./YOUR_PROJECT_FOLDER
+                    $ amplify add auth
+
+             Android - Kotlin
+                 Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+
+                .. code-block:: bash
+
+                    $ cd ./YOUR_PROJECT_FOLDER
+                    $ amplify add auth
+
+             iOS - Swift
+                 Navigate to your project folder (the folder that typically contains your project level xcodeproj file), and add the SDK to your app.
+
+                .. code-block:: bash
+
+                    $ cd ./YOUR_PROJECT_FOLDER
+                    $ amplify add auth
 
       #. Choose the default configuration.
 
@@ -85,7 +106,7 @@ Set Up Your Backend
          .. code-block:: none
 
             $ cd ./YOUR_APP_ROOT
-            $ amplify auth add
+            $ amplify add auth
 
       #. Choose to set up your own configuration.
 
@@ -134,7 +155,7 @@ Set Up Your Backend
          .. code-block:: none
 
             $ cd ./YOUR_APP_ROOT
-            $ amplify auth add
+            $ amplify add auth
 
       #. Choose to set up your own configuration.
 
@@ -705,7 +726,7 @@ Setup Facebook Login in Your Mobile App
       #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction completes.
 
          If the user is already signed in, the app switches to the :code:`NextActivity`.  If not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  Once authenticated, the app continues to the :code:`NextActivity`.
-         
+
          .. code-block:: kotlin
 
             import android.app.Activity;

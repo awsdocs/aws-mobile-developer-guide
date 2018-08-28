@@ -42,7 +42,7 @@ Add a Data Access API to the Backend
 
    .. code-block:: bash
 
-      $ amplify api add
+      $ amplify add api
 
 #. When prompted by the CLI, do the following:
 
@@ -61,7 +61,7 @@ Add a Data Access API to the Backend
 
    .. code-block:: bash
 
-      $ amplify codegen add
+      $ amplify add codegen
 
 The AWS CloudFormation template that is generated creates an Amazon DynamoDB table that is protected by Amazon Cognito user pool authentication.  Access is provided by AWS AppSync.  AWS AppSync tags each record that is inserted into the database with the user ID of the authenticated user.  The authenticated user can read only the records that they own.
 

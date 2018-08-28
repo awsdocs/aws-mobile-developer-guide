@@ -50,7 +50,7 @@ Add data access API to the backend
 
    .. code-block:: bash
 
-      $ amplify api add
+      $ amplify add api
 
 #. When prompted by the CLI, do the following:
 
@@ -137,7 +137,7 @@ To interact with AWS AppSync, our iOS client needs to define GraphQL queries and
 
    .. code-block:: bash
 
-      $ amplify codegen add
+      $ amplify add codegen
 
    Provide the path to :file:`notes-operations.graphql` when asked for the queries, mutations, and subscriptions. Enter :file:`NotesAPI.swift` when prompted for generated code file name.
    When asked if ou want to generate code, choose Yes.

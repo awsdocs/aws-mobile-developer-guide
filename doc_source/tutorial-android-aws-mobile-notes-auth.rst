@@ -29,7 +29,7 @@ Before you work on the client-side code, you need to add user sign-in to the bac
 
 .. code-block:: bash
 
-   $ amplify auth update
+   $ amplify update auth
 
 #. When prompted, use the default configuration.  When asked to overwrite the default authentication and security configuration, answer :userinput:`Yes`.
 #. Deploy your new resources with the following command:

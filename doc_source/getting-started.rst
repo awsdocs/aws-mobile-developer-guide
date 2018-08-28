@@ -42,17 +42,17 @@ Choose your platform:
    Android - Java
        .. _android-java:
 
-       Get started creating your cloud backend with Amplify CLI for Android using Java.
+       Get started building a cloud-powered Android app using the AWS Amplify CLI and the AWS SDK for Android. This page guides you through setting up an initial backend and integrating the SDK into your app.
 
    Android - Kotlin
        .. _android-kotlin:
 
-       Get started creating your cloud backend with Amplify CLI for Android using Kotlin.
+       Get started building a cloud-powered Android app using the AWS Amplify CLI and the AWS SDK for Android. This page guides you through setting up an initial backend and integrating the SDK into your app.
 
    iOS - Swift
        .. _ios-swift:
 
-       Get started creating your cloud backend with Amplify CLI for iOS using Swift.
+       Get started building a cloud-powered iOS app using the AWS Amplify CLI and the AWS SDK for iOS. This page guides you through setting up an initial backend and integrating the SDK into your app.
 
 .. _add-aws-mobile-sdk-basic-setup-prerequisites:
 
@@ -65,9 +65,11 @@ We strongly recommend that you use the Amplify CLI for building the serverless b
 
 *  Install `Node.js <https://nodejs.org/>`__ and npm if they are not already on your machine.
 
-Note: Verify that you are running at least Node.js version 8.x or greater and npm version 5.x or greater by running :code:`node -v` and :code:`npm -v` in a terminal/console window. Older versions may produce errors and are unsupported.
+.. note::
 
-Now, install and configure the Amplify CLI globally.
+   Verify that you are running at least Node.js version 8.x or greater and npm version 5.x or greater by running :code:`node -v` and :code:`npm -v` in a terminal/console window. Older versions may produce errors and are unsupported.
+
+To install and configure the Amplify CLI globally, run the following commands in a terminal window.
 
 .. code-block:: bash
 
@@ -75,7 +77,7 @@ Now, install and configure the Amplify CLI globally.
 
    $ amplify configure
 
-Check the minimum requirements for your development environment.
+Minimum requirements for your development environment are as follows.
 
     .. container:: option
 
@@ -104,12 +106,33 @@ Check the minimum requirements for your development environment.
 Step 2: Set Up Your Backend
 ===========================
 
-#. Navigate to the root of your app files and add the SDK to your app. The CLI will prompt you for configuration parameters.
+#. The CLI will prompt you for configuration parameters.
 
-    .. code-block:: none
+    .. container:: option
 
-        $ cd ./ROOT_OF_YOUR_APP_FILES
-        $ amplify init
+       Android - Java
+           Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+
+          .. code-block:: none
+
+              $ cd ./YOUR_PROJECT_FOLDER
+              $ amplify init
+
+       Android - Kotlin
+           Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+
+          .. code-block:: none
+
+              $ cd ./YOUR_PROJECT_FOLDER
+              $ amplify init
+
+       iOS - Swift
+           Navigate to your project folder (the folder that typically contains your project level :file:`xcodeproj` file), and add the SDK to your app.
+
+          .. code-block:: none
+
+              $ cd ./YOUR_PROJECT_FOLDER
+              $ amplify init
 
 #. To create your backend AWS resources run the following:
 
@@ -131,7 +154,7 @@ Step 2: Set Up Your Backend
 
             $ amplify push
 
-          Then navigate to your app root, and drag :code:`awsconfiguration.json` into the root of your XCode project.  Choose :guilabel:`Copy items` if needed and then choose :guilabel:`Create groups` in the :guilabel:`Options` dialog box. Choose :guilabel:`Next`.
+          Then navigate to your project folder, and drag :code:`awsconfiguration.json` into the top folder of your XCode Project Navigator.  Choose :guilabel:`Copy items` if needed and then choose :guilabel:`Create groups` in the :guilabel:`Options` dialog box. Choose :guilabel:`Next`.
 
 #. To verify that the CLI is set up for your app, run the following command. The CLI displays a status table with no resources listed. As you add categories to your app, backend resources created for your app are listed in this table.
 
@@ -153,6 +176,14 @@ Perform the following steps to set up a connection to AWS services that you'll u
 .. container:: option
 
    Android - Java
+      #. Add dependencies to your :file:`app/build.gradle`, and then choose :guilabel:`Sync Now` on the upper-right side of Android Studio. These libraries enable basic AWS functions, like credentials and analytics.
+
+         .. code-block:: java
+
+             dependencies {
+                 implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
+             }
+
       #. Your :file:`AndroidManifest.xml` must contain:
 
          .. code-block:: xml
@@ -160,103 +191,17 @@ Perform the following steps to set up a connection to AWS services that you'll u
              <uses-permission android:name="android.permission.INTERNET"/>
              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+      Your app is now ready for adding cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
+
+   Android - Kotlin
       #. Add dependencies to your :file:`app/build.gradle`, and then choose :guilabel:`Sync Now` on the upper-right side of Android Studio. These libraries enable basic AWS functions, like credentials and analytics.
 
          .. code-block:: java
 
              dependencies {
-                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                 implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
              }
 
-      #. Add the following code to the :code:`onCreate` method of your main or startup activity. :code:`AWSMobileClient` is a singleton that establishes your connection to |AWS| and acts as an interface for your services.
-
-         .. code-block:: java
-
-            import com.amazonaws.mobile.client.AWSMobileClient;
-
-              public class YourMainActivity extends Activity {
-                @Override
-                protected void onCreate(Bundle savedInstanceState) {
-                    super.onCreate(savedInstanceState);
-
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-                        @Override
-                        public void onComplete(AWSStartupResult awsStartupResult) {
-                            Log.d("YourMainActivity", "AWSMobileClient is instantiated and you are connected to AWS!");
-                        }
-                    }).execute();
-
-                    // More onCreate code ...
-                }
-              }
-
-         .. list-table::
-            :widths: 1 6
-
-            * - What does this do?
-
-              - When :code:`AWSMobileClient` is initialized, it constructs the :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects that, in turn, are used when creating other SDK clients. The client then makes a `Sigv4 signed <https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`__ network call to `Amazon Cognito Federated Identities <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__ to retrieve AWS credentials that provide the user access to your backend resources. When the network interaction succeeds, the :code:`onComplete` method of the :code:`AWSStartUpHandler` is called.
-
-      Your app is now set up to interact with the AWS services you configured in your Amplify CLI project.
-
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
-
-      :guilabel:`Reference AWSCredentialsProvider and AWSConfiguration (Optional)`
-
-      The following example shows how to retrieve the reference to :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects that can be used to instantiate other SDK clients. You can use the :code:`IdentityManager` to fetch the user's AWS identity ID either directly from Amazon Cognito or from the locally cached identity ID value.
-
-         .. code-block:: java
-
-            import com.amazonaws.auth.AWSCredentialsProvider;
-            import com.amazonaws.mobile.auth.core.IdentityHandler;
-            import com.amazonaws.mobile.auth.core.IdentityManager;
-            import com.amazonaws.mobile.client.AWSMobileClient;
-            import com.amazonaws.mobile.client.AWSStartupHandler;
-            import com.amazonaws.mobile.client.AWSStartupResult;
-            import com.amazonaws.mobile.config.AWSConfiguration;
-
-            public class YourMainActivity extends Activity {
-
-                private AWSCredentialsProvider credentialsProvider;
-                private AWSConfiguration configuration;
-
-                @Override
-                protected void onCreate(Bundle savedInstanceState) {
-                    super.onCreate(savedInstanceState);
-
-                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
-                        @Override
-                        public void onComplete(AWSStartupResult awsStartupResult) {
-
-                            // Obtain the reference to the AWSCredentialsProvider and AWSConfiguration objects
-                            credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
-                            configuration = AWSMobileClient.getInstance().getConfiguration();
-
-                            // Use IdentityManager#getUserID to fetch the identity id.
-                            IdentityManager.getDefaultIdentityManager().getUserID(new IdentityHandler() {
-                                @Override
-                                public void onIdentityId(String identityId) {
-                                    Log.d("YourMainActivity", "Identity ID = " + identityId);
-
-                                    // Use IdentityManager#getCachedUserID to
-                                    //  fetch the locally cached identity id.
-                                    final String cachedIdentityId =
-                                        IdentityManager.getDefaultIdentityManager().getCachedUserID();
-                                }
-
-                                @Override
-                                public void handleError(Exception exception) {
-                                    Log.d("YourMainActivity", "Error in retrieving the identity" + exception);
-                                }
-                            });
-                        }
-                    }).execute();
-
-                    // .. more code
-                }
-            }
-
-   Android - Kotlin
       #. Your :file:`AndroidManifest.xml` must contain the following:
 
          .. code-block:: xml
@@ -264,90 +209,7 @@ Perform the following steps to set up a connection to AWS services that you'll u
              <uses-permission android:name="android.permission.INTERNET"/>
              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      #. Add dependencies to your :file:`app/build.gradle`, and then choose :guilabel:`Sync Now` on the upper-right side of Android Studio. These libraries enable basic AWS functions, like credentials and analytics.
-
-         .. code-block:: java
-
-             dependencies {
-                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
-             }
-
-      #. Add the following code to the :code:`onCreate` method of your main or startup activity. :code:`AWSMobileClient` is a singleton that establishes your connection to |AWS| and acts as an interface for your services.
-
-         .. code-block:: kotlin
-
-            import com.amazonaws.mobile.client.AWSMobileClient;
-
-            class YourMainActivity : Activity() {
-              companion object {
-                private val TAG: String = this::class.java.simpleName
-              }
-
-              override fun onCreate(savedInstanceState: Bundle?) {
-                super.onCreate(savedInstanceState);
-
-                AWSMobileClient.getInstance().initialize(this) {
-                  Log.d(TAG, "AWSMobileClient is initialized")
-                }.execute()
-
-                // More onCreate code...
-              }
-            }
-
-         .. list-table::
-            :widths: 1 6
-
-            * - What does this do?
-
-              - When :code:`AWSMobileClient` is initialized, it constructs the :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects which, in turn, are used when creating other SDK clients. The client then makes a `Sigv4 signed <https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`__ network call to `Amazon Cognito Federated Identities <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__ to retrieve AWS credentials that provide the user access to your backend resources. When the network interaction succeeds, the callback (which is technically the :code:`onComplete` method of the :code:`AWSStartUpHandler`) is called.
-
-      Your app is now set up to interact with the AWS services you configured in your Amplify CLI project.
-
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. Look for :code:`Welcome to AWS!` in your Android Logcat output (choose :guilabel:`View > Tool Windows > Logcat`).
-
-      :guilabel:`Reference AWSCredentialsProvider and AWSConfiguration (Optional)`
-
-      The following example shows how to retrieve the reference to :code:`AWSCredentialsProvider` and :code:`AWSConfiguration` objects that can be used to instantiate other SDK clients. You can use the :code:`IdentityManager` to fetch the user's AWS identity ID either directly from Amazon Cognito or from the locally cached identity ID value.
-
-         .. code-block:: kotlin
-
-            import com.amazonaws.auth.AWSCredentialsProvider
-            import com.amazonaws.mobile.auth.core.IdentityHandler
-            import com.amazonaws.mobile.auth.core.IdentityManager
-            import com.amazonaws.mobile.client.AWSMobileClient
-            import com.amazonaws.mobile.config.AWSConfiguration
-
-            class YourMainActivity : Activity() {
-              companion object {
-                private val TAG: String = this::class.java.simpleName
-              }
-
-              private var credentialsProvider: AWSCredentialsProvider? = null
-              private var awsConfiguration: AWSConfiguration? = null
-
-              override fun onCreate(savedInstanceState: Bundle?) {
-                super.onCreate(savedInstanceState);
-
-                AWSMobileClient.getInstance().initialize(this) {
-                  credentialsProvider = AWSMobileClient.getInstance().credentialsProvider
-                  awsConfiguration = AWSMobileClient.getInstance().configuration
-
-                  IdentityManager.getDefaultIdentityManager().getUserID(object : IdentityHandler {
-                    override fun handleError(exception: Exception?) {
-                      Log.e(TAG, "Retrieving identity: ${exception.message}")
-                    }
-
-                    override fun onIdentityId(identityId: String?) {
-                      Log.d(TAG, "Identity = $identityId")
-                      val cachedIdentityId = IdentityManager.getDefaultIdentityManager().cachedUserID
-                      // Do something with the identity here
-                    }
-                  })
-                }.execute()
-
-                // More onCreate code...
-              }
-            }
+      Your app is now ready for adding cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
 
    iOS - Swift
       #. Install Cocoapods. From a terminal window run:
@@ -369,7 +231,7 @@ Perform the following steps to set up a connection to AWS services that you'll u
               platform :ios, '9.0'
               target :'YOUR-APP-NAME' do
                   use_frameworks!
-                  pod 'AWSMobileClient', '~> 2.6.13'
+                  pod 'AWSCore', '~> 2.6.13'
                   # other pods
               end
 
@@ -392,75 +254,9 @@ Perform the following steps to set up a connection to AWS services that you'll u
 
       #. Rebuild your app after reopening it in the workspace to resolve APIs from new libraries called in your code. This is a good practice any time you add import statements.
 
-      #. Replace the :code:`return true` statement in :code:`didFinishLaunching` with the following code in your AppDelegate to establish a run-time connection with AWS Mobile.
-
-         .. code-block:: swift
-
-            import UIKit
-            import AWSMobileClient
-
-            @UIApplicationMain
-            class AppDelegate: UIResponder, UIApplicationDelegate {
-
-            func application(_ application: UIApplication,
-                             didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                // Override point for customization after application launch.
-
-                // Create AWSMobileClient to connect with AWS
-                return AWSMobileClient.sharedInstance().interceptApplication(
-                    application,
-                    didFinishLaunchingWithOptions: launchOptions)
-
-            }
+      Your app is now ready for adding cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
 
 
-         .. list-table::
-            :widths: 1 6
-
-            * - What does this do?
-
-              - When :code:`AWSMobileClient` is initialized, it makes a `Sigv4 signed <https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html>`__ network call to `Amazon Cognito Federated Identities <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html>`__ to retrieve AWS credentials that provide the user access to your backend resources. When the network interaction succeeds, the :code:`onComplete` method of the :code:`AWSStartUpHandler` is called.
-
-      Your app is now set up to interact with the AWS services you configured in your Amplify CLI project!
-
-      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. Look for  :code:`Welcome to AWS!` in the log output.
-
-      .. list-table::
-         :widths: 1
-
-         * - **Optional:** If you want to make sure you're connected to AWS, import :code:`AWSCore` and add the following code to :code:`didFinishLaunchingWithOptions` before you return :code:`AWSMobileClient`.
-
-             .. code-block:: swift
-
-                  import AWSCore
-
-                        //. . .
-
-                  AWSDDLog.add(AWSDDTTYLogger.sharedInstance)
-                  AWSDDLog.sharedInstance.logLevel = .info
-
-             **Optional:** The following example shows how to retrieve the reference to :code:`AWSCredentialsProvider` object which can be used to instantiate other SDK clients. You can use the :code:`AWSIdentityManager` to fetch the AWS identity id of the user from Amazon Cognito.
-
-             .. code-block:: swift
-
-                  import UIKit
-                  import AWSMobileClient
-                  import AWSAuthCore
-
-                  class ViewController: UIViewController {
-
-                      @IBOutlet weak var textfield: UITextField!
-                      override func viewDidLoad() {
-                          super.viewDidLoad()
-                          textfield.text = "View Controller Loaded"
-
-                          // Get the AWSCredentialsProvider from the AWSMobileClient
-                          let credentialsProvider = AWSMobileClient.sharedInstance().getCredentialsProvider()
-
-                          // Get the identity Id from the AWSIdentityManager
-                          let identityId = AWSIdentityManager.default().identityId
-                      }
-                  }
 
 .. _add-aws-mobile-sdk-next-steps:
 
@@ -477,7 +273,7 @@ Next Steps
 
   * :ref:`Add Serverless Backend <add-aws-mobile-serverless-backend>`
 
-  * :ref:`Add Cloud logic <add-aws-mobile-cloud-logic>`
+  * :ref:`Add Cloud Logic <add-aws-mobile-cloud-logic>`
 
   * :ref:`Add Messaging <add-aws-mobile-messaging>`
 

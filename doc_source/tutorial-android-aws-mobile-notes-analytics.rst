@@ -39,7 +39,7 @@ Next, add the analytics service to your backend:
 
 .. code-block:: bash
 
-    $ amplify analytics add
+    $ amplify add analytics
 
 Again, the CLI prompts you through the process of initializing your backend project.  Finally, deploy the resources you have provisioned:
 
@@ -58,7 +58,7 @@ Add Permissions to the AndroidManifest.xml
 ------------------------------------------
 
 #. Open the project in Android Studio.
-#. On the left side of the project, choose :guilabel:`Project` to open the project browser. 
+#. On the left side of the project, choose :guilabel:`Project` to open the project browser.
 #. To find the app manifest, change the project browser view menu at the top to :guilabel:`Android`, and open the :file:`app/manifests` folder.
 #. Add the :code:`INTERNET`, :code:`ACCESS_NETWORK_STATE`, and
    :code:`ACCESS_WIFI_STATE`: permissions to your project's :file:`AndroidManifest.xml` file.
@@ -263,7 +263,7 @@ To view the demographics and session events, run the following command:
 
 .. code-block:: bash
 
-   $ amplify analytics console
+   $ amplify console analytics
 
 It can take up to 5 minutes for the first data to be shown in the graphs.  You should see an increase in several graphs:
 

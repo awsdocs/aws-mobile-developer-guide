@@ -34,11 +34,11 @@ Create an AWS Backend
 
    The CLI prompts you through the process of intializing your backend project. Specify iOS for the app type when prompted.
 
-#. Next, add the anlaytics service to your backend. 
+#. Next, add the anlaytics service to your backend.
 
    .. code-block:: bash
 
-      $ amplify analytics add
+      $ amplify add analytics
 
    Again, the CLI prompts you through the process of initializing your backend project. Finally, deploy the resources you have provisioned:
 
@@ -101,8 +101,8 @@ Add AWS Resource Configuration
 
 #. The Amplify CLI creates and updates an AWS resources configuration :file:`awsconfiguration.json` file for each configured feature. This file needs to be added to your Xcode project just once and the Amplify CLI will keep it in sync as you add features to your project.
 
-#. Launch project in Xcode 
-   
+#. Launch project in Xcode
+
    .. code-block:: bash
 
       $ open MyNotes.xcworkspace
@@ -121,7 +121,7 @@ To turn analytics on, open your project using :file:`MyNotes.xcworkspace` and in
 .. code-block:: swift
 
    // Analytics required imports
-    
+
    // . . .
    import AWSCore
    import AWSPinpoint
@@ -137,7 +137,7 @@ To turn analytics on, open your project using :file:`MyNotes.xcworkspace` and in
          [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
             // . . .
-             
+
             // Initialize Pinpoint to enable session analytics
             pinpoint = AWSPinpoint(configuration:
                  AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
@@ -148,7 +148,7 @@ To turn analytics on, open your project using :file:`MyNotes.xcworkspace` and in
          // . . .
     }
 
-Now your app is setup to provide session and demographic analytics automatically when launched. 
+Now your app is setup to provide session and demographic analytics automatically when launched.
 
 Run the Project and Validate Results
 ------------------------------------
@@ -160,7 +160,7 @@ To view the demographics and session events, run the following command:
 
 .. code-block:: bash
 
-   $ amplify analytics console
+   $ amplify console analytics
 
 Note that it can take up to 5 minutes for the first data to be shown in the graphs.  You should see an up-tick in several graphs:
 
@@ -210,7 +210,7 @@ To add analytics events, open :file:`./Data/NotesContentProvider.swift` where bo
 Start by adding the following imports.
 
 .. code-block:: swift
-   
+
    // . . .
    import AWSCore
    import AWSPinpoint
@@ -249,7 +249,7 @@ To capture note additions, place the following :code:`sendNoteEvent` function ca
 
 .. code-block:: swift
 
-   /**  
+   /**
     * Insert a new record into the database using NSManagedObjectContext
     *
     * @param noteTitle the note title to be inserted

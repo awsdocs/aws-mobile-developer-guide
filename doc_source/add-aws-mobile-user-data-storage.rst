@@ -40,12 +40,33 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <add-aws-mobile-sdk>` steps before you proceed.
 
-#. In a terminal window, navigate to the root of your app files and add the storage category to your app. The CLI will prompt you for configuration parameters.
+#. Use the CLI to add storage to your cloud-enabled back-end and app.
 
-     .. code-block:: none
+      .. container:: option
 
-        $ cd ./ROOT_OF_YOUR_APP_FILES
-        $ amplify storage add
+         Android - Java
+             Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+
+            .. code-block:: bash
+
+                $ cd ./YOUR_PROJECT_FOLDER
+                $ amplify add storage
+
+         Android - Kotlin
+             Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+
+            .. code-block:: bash
+
+                $ cd ./YOUR_PROJECT_FOLDER
+                $ amplify add storage
+
+         iOS - Swift
+             Navigate to your project folder (the folder that typically contains your project level xcodeproj file), and add the SDK to your app.
+
+            .. code-block:: bash
+
+                $ cd ./YOUR_PROJECT_FOLDER
+                $ amplify add storage
 
 #.  Choose Content as your storage service.
 
