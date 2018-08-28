@@ -37,11 +37,11 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
-#. In a terminal window, navigate to the root of your app files, and add notifications.
+#. In a terminal window, navigate to the your app project folder, and add notifications.
 
    .. code-block:: none
 
-      $ cd ROOT_OF_YOUR_APP_FILES
+      $ cd YOUR_PROJECT FOLDER
       $ amplify notifications add
 
 #. Set up your backend to support receiving push notifications:
