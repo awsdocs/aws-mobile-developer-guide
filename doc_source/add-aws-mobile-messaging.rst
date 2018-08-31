@@ -26,7 +26,7 @@ Overview
 
 Engage your users more deeply by tying their app usage behavior to messaging campaigns.
 
-When you enable the Amplify CLI Analytics category, your app is registered with 
+When you enable the Amplify CLI Analytics category, your app is registered with
 Amazon Pinpoint. You can define user segments and send email, SMS, and :ref:`Push
 Notification <add-aws-mobile-push-notifications>` messages to those recipients through the Amazon Pinpoint
 console.
@@ -79,7 +79,7 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
    #. Choose :guilabel:`Save`.
 
    #. For information about sending mail from Amazon Pinpoint, see `Sending an Email Message
-      <messages.html#messages-email>`__.
+      <https://docs.aws.amazon.com/pinpoint/latest/userguide/messages.html#messages-email>`__.
 
 #. **For SMS**:
 
@@ -96,10 +96,10 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
 
    #. Adjust the options for :guilabel:`Default message type`, :guilabel:`Account spend limit`,
       and :guilabel:`Default sender ID`. For more information about these options, see `Updating SMS
-      Settings <channels-sms-manage.html#channels-sms-manage-settings>`__.
+      Settings <https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-manage.html>`__.
 
    #. For information about sending SMS messages from Amazon Pinpoint, see `Sending an SMS Message
-      <messages.html#messages-sms>`__.
+      <https://docs.aws.amazon.com/pinpoint/latest/userguide/messages.html#messages-sms>`__.
 
 
 .. _connect-to-your-backend:
