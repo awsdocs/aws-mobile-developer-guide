@@ -43,7 +43,7 @@ Set Up Your Backend
     .. container:: option
 
        Android - Java
-           Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+           In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
 
           .. code-block:: bash
 
@@ -51,7 +51,7 @@ Set Up Your Backend
               $ amplify add analytics
 
        Android - Kotlin
-           Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+           In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
 
           .. code-block:: bash
 
@@ -59,14 +59,14 @@ Set Up Your Backend
               $ amplify add analytics
 
        iOS - Swift
-           Navigate to your project folder (the folder that typically contains your project level xcodeproj file), and add the SDK to your app.
+           In a terminal window, navigate to your project folder (the folder contains your app :file:`.xcodeproj` file), and add the SDK to your app.
 
           .. code-block:: bash
 
               $ cd ./YOUR_PROJECT_FOLDER
               $ amplify add analytics
 
-#. When you complete configuration for analytics, you will see a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
+#. When configuration for analytics is complete, you will see a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
 
    .. code-block:: bash
 
@@ -120,7 +120,7 @@ Add Analytics
                    <uses-permission android:name="android.permission.INTERNET"/>
                    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-            #. Add calls to capture session starts and stops. A session is one use of an app by the user. A session begins when an app is launched (or brought to the foreground), and ends when the app is terminated (or goes to the background). To accommodate for brief interruptions, like a text message, an inactivity period of up to 5 seconds is not counted as a new session. Total daily sessions shows the number of sessions your app has each day. Average sessions per daily active user shows the mean number of sessions per user per day.
+            #. Add calls to capture session starts and stops. A session is one use of an app by the user. A session begins when an app is launched (or brought to the foreground), and ends when the app is terminated (or goes to the background). To accommodate for brief interruptions, like a text message, an inactivity period of up to 5 seconds is not counted as a new session. :guilabel: `Total daily sessions` shows the number of sessions your app has each day. :guilabel: `Average sessions per daily active user` shows the mean number of sessions per user per day.
 
                Three typical places to instrument your app session start and stop are:
 

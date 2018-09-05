@@ -111,7 +111,7 @@ Step 2: Set Up Your Backend
     .. container:: option
 
        Android - Java
-           Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+           In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
 
           .. code-block:: none
 
@@ -119,7 +119,7 @@ Step 2: Set Up Your Backend
               $ amplify init
 
        Android - Kotlin
-           Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+           In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
 
           .. code-block:: none
 
@@ -127,14 +127,14 @@ Step 2: Set Up Your Backend
               $ amplify init
 
        iOS - Swift
-           Navigate to your project folder (the folder that typically contains your project level :file:`xcodeproj` file), and add the SDK to your app.
+           In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`xcodeproj` file), and add the SDK to your app.
 
           .. code-block:: none
 
               $ cd ./YOUR_PROJECT_FOLDER
               $ amplify init
 
-#. To create your backend AWS resources run the following:
+#. To create your backend AWS resources and add a configuration file to your app, run the following:
 
    .. container:: option
 
@@ -154,7 +154,11 @@ Step 2: Set Up Your Backend
 
             $ amplify push
 
-          Then navigate to your project folder, and drag :code:`awsconfiguration.json` into the top folder of your XCode Project Navigator.  Choose :guilabel:`Copy items` if needed and then choose :guilabel:`Create groups` in the :guilabel:`Options` dialog box. Choose :guilabel:`Next`.
+          In the Finder, navigate to the folder containing your app :file:`.xcodeproject` file. From there, drag and drop :code:`awsconfiguration.json` into Xcode under the top Project Navigator folder (the folder name should match your Xcode project name). In the :guilabel:`Options` dialog box that appears:
+
+          * Uncheck :guilabel:`Copy items if needed`.
+
+          * Choose :guilabel:`Create groups`, and then choose :guilabel:`Next`.
 
 #. To verify that the CLI is set up for your app, run the following command. The CLI displays a status table with no resources listed. As you add categories to your app, backend resources created for your app are listed in this table.
 

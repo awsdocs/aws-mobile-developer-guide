@@ -41,4 +41,3 @@ This section provides procedures for integrating Amazon S3 into your Android and
    Transfer Files with TransferUtility <how-to-transfer-files-with-transfer-utility>
    iOS: Use Presigned URLs to Access Files <how-to-ios-s3-presigned-urls>
    iOS: Use Server-side Encryption <how-to-ios-s3-server-side-encryption>
-   iOS: Use TransferManager <how-to-ios-s3-transfermanager>

@@ -32,6 +32,17 @@ Overview
 
       Enable your app to store and retrieve user files from cloud storage with the permissions model that suits your purpose. The CLI deploys and configures cloud storage buckets using `Amazon Simple Storage Service <http://docs.aws.amazon.com/AmazonS3/latest/dev/>`__ (|S3|).
 
+Storage Access
+--------------
+
+The CLI configures three different access levels on the storage bucket; public, protected and private.
+
+- Files with public access level can be accessed by all users who are using your app. In S3, they are stored under the ``public/`` path in your S3 bucket.
+
+- Files with protected access level are readable by all users but writable only by the creating user. In S3, they are stored under ``protected/{user_identity_id}/`` where the user_identity_id corresponds to a unique Amazon Cognito Identity ID for that user.
+
+- Files with private access level are only accessible for specific authenticated users only. In S3, they are stored under ``private/{user_identity_id}/`` where the user_identity_id corresponds to a unique Amazon Cognito Identity ID for that user.
+
 .. _setup-your-backend-user-file-storage:
 
 Set Up Your Backend
@@ -45,25 +56,25 @@ Set Up Your Backend
       .. container:: option
 
          Android - Java
-             Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
 
-            .. code-block:: bash
+            .. code-block:: none
 
                 $ cd ./YOUR_PROJECT_FOLDER
                 $ amplify add storage
 
          Android - Kotlin
-             Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
 
-            .. code-block:: bash
+            .. code-block:: none
 
                 $ cd ./YOUR_PROJECT_FOLDER
                 $ amplify add storage
 
          iOS - Swift
-             Navigate to your project folder (the folder that typically contains your project level xcodeproj file), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that contains your app :file:`.xcodeproj` file), and add the SDK to your app.
 
-            .. code-block:: bash
+            .. code-block:: none
 
                 $ cd ./YOUR_PROJECT_FOLDER
                 $ amplify add storage
@@ -74,22 +85,43 @@ Set Up Your Backend
 
         ❯ Content (Images, audio, video, etc.)
 
-#. Provide names when prompted by the CLI project. The CLI displays a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
+#. The CLI will walk you though the options to enable Auth (if not enabled previously), to name your S3 bucket, and to decide who should have access (select ``Auth and guest users`` and ``read/write`` for both auth and guest users).
+
+#. Confirm that you have storage and auth setup
 
    .. code-block:: none
 
       $ amplify status
       | Category  | Resource name   | Operation | Provider plugin   |
       | --------- | --------------- | --------- | ----------------- |
+      | Auth      | cognito2e202b09 | Create    | awscloudformation |
       | Storage   | sabc0123de      | Create    | awscloudformation |
 
-#. To create your backend AWS resources run:
+#. To create your backend run:
 
-     .. code-block:: none
+      .. container:: option
 
-        amplify push
+         Android - Java
+            .. code-block:: none
 
-   Use the steps in the next section to connect your app to your backend.
+               amplify push
+
+	          The CLI will create the awsconfiguration.json file in your project's ``res/raw`` directory.
+
+         Android - Kotlin
+            .. code-block:: none
+
+               amplify push
+
+            The CLI will create the awsconfiguration.json file in your project's ``res/raw`` directory.
+
+         iOS - Swift
+            .. code-block:: none
+
+               amplify push
+
+            The CLI will create the awsconfiguration.json file in your project directory. Add it to your project using XCode.
+
 
 .. _add-aws-mobile-user-data-storage-app:
 
@@ -105,35 +137,23 @@ Use the following steps to connect add file storage backend services to your app
 
          #. Add the following to :file:`app/build.gradle` (Module:app):
 
-            .. code-block:: none
+            .. code-block:: json
 
                dependencies {
                   implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app.
 
          #. Add the following to :file:`AndroidManifest.xml`:
 
-            .. code-block:: xml
+	    .. code-block:: xml
 
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-               <application ... >
-
-                  <!- Other manifest / application items . . . ->
-
-                  <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
-
-               </application>
-
-         #. For each Activity where you make calls to perform user file storage operations, import the
-            following packages.
-
-            .. code-block:: none
-
-               import com.amazonaws.mobileconnectors.s3.transferutility.*;
+               <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
 
    Android - Kotlin
       Set up AWS Mobile SDK components as follows.
@@ -142,46 +162,30 @@ Use the following steps to connect add file storage backend services to your app
 
             .. code-block:: none
 
-               apply plugin: 'kotlin-android'
-
-               apply plugin: 'kotlin-android-extensions'
-
                dependencies {
-                  implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
                   implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
 
          #. Add the following to :file:`AndroidManifest.xml`:
 
-            .. code-block:: xml
-               :emphasize-lines: 1,7
+	    .. code-block:: xml
 
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-               <application ... >
-
-                  <!- Other manifest / application items . . . ->
+            .. code-block:: xml
 
                   <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
-
-               </application>
-
-         #. For each Activity where you make calls to perform user file storage operations, import the
-            following packages.
-
-            .. code-block:: none
-
-               import com.amazonaws.mobileconnectors.s3.transferutility.*;
 
    iOS - Swift
       Set up AWS Mobile SDK components as follows.
 
          #. Add the following to :file:`Podfile` that you configure to install the AWS Mobile SDK:
 
-            .. code-block:: swift
+            .. code-block:: none
 
                platform :ios, '9.0'
 
@@ -189,6 +193,8 @@ Use the following steps to connect add file storage backend services to your app
                      use_frameworks!
 
                      pod 'AWSS3', '~> 2.6.13'   # For file transfers
+                     pod 'AWSMobileClient', '~> 2.6.13'
+                     pod 'AWSUserPoolsSignIn', '~> 2.6.13'
 
                      # other pods . . .
 
@@ -198,29 +204,11 @@ Use the following steps to connect add file storage backend services to your app
 
             If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
-         #. Add the following imports to the classes that perform user file storage operations:
-
-            .. code-block:: none
-
-               import AWSCore
-               import AWSS3
-
-         #. Add the following code to your AppDelegate to establish a run-time connection with AWS Mobile.
+         #. Add the following import to the classes that perform user file storage operations:
 
             .. code-block:: swift
 
-               import UIKit
-               import AWSMobileClient
-
-               @UIApplicationMain
-               class AppDelegate: UIResponder, UIApplicationDelegate {
-
-                func application(_ application: UIApplication,
-                    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-                        return AWSMobileClient.sharedInstance().interceptApplication(application, didFinishLaunchingWithOptions: launchOptions)
-                }
-               }
-
+               import AWSS3
 
 
 .. _add-aws-user-data-storage-upload:
@@ -270,7 +258,7 @@ Upload a File
 
                     TransferObserver uploadObserver =
                         transferUtility.upload(
-                            "s3Folder/s3Key.txt",
+                            "public/s3Key.txt",
                             new File("/path/to/file/localFile.txt"));
 
                     // Attach a listener to the observer to get state update and progress notifications
@@ -347,7 +335,7 @@ Upload a File
                         .s3Client(AmazonS3Client(AWSMobileClient.getInstance().credentialsProvider))
                         .build()
 
-                    val uploadObserver = transferUtility.upload("s3folder/s3key.txt", File("/path/to/localfile.txt"))
+                    val uploadObserver = transferUtility.upload("public/s3key.txt", File("/path/to/localfile.txt"))
 
                     // Attach a listener to the observer
                     uploadObserver.setTransferListener(object : TransferListener {
@@ -359,11 +347,11 @@ Upload a File
 
                         override fun onProgressChanged(id: Int, current: Long, total: Long) {
                             val done = (((current.toDouble() / total) * 100.0).toInt())
-                            Log.d(LOG_TAG, "UPLOAD - - ID: $id, percent done = $done")
+                            Log.d("Your Activity", "UPLOAD - - ID: $id, percent done = $done")
                         }
 
                         override fun onError(id: Int, ex: Exception) {
-                            Log.d(LOG_TAG, "UPLOAD ERROR - - ID: $id - - EX: ${ex.message.toString()}")
+                            Log.d("Your Activity", "UPLOAD ERROR - - ID: $id - - EX: ${ex.message.toString()}")
                         }
                     })
 
@@ -377,47 +365,38 @@ Upload a File
             }
 
    iOS - Swift
-     The following example shows how to upload a file to an |S3| bucket.
+     The following example shows how to upload data to an |S3| bucket.
 
        .. code-block:: swift
 
           func uploadData() {
 
-             let data: Data = Data() // Data to be uploaded
+             let data: Data = "TestData".data(using: .utf8) // Data to be uploaded
 
+             //Create an expression object for progress tracking, to pass in request headers etc.
              let expression = AWSS3TransferUtilityUploadExpression()
                 expression.progressBlock = {(task, progress) in
-                   DispatchQueue.main.async(execute: {
                      // Do something e.g. Update a progress bar.
-                  })
              }
 
+	     //Create a completion handler to be called when the transfer completes
              var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
              completionHandler = { (task, error) -> Void in
-                DispatchQueue.main.async(execute: {
-                   // Do something e.g. Alert a user for transfer completion.
+                   // Do something e.g. Alert a user that the transfer has completed.
                    // On failed uploads, `error` contains the error object.
-                })
              }
 
+             //Instantiate the transferUtility object. This will pick up the bucketName, region,
+             //and auth configuration from the awsconfiguration.json file
              let transferUtility = AWSS3TransferUtility.default()
 
-             transferUtility.uploadData(data,
-                  bucket: "YourBucket",
-                  key: "YourFileName",
+             //Upload the data. Pass in the expression to get progress updates and completion handler to get notified
+             //when the transfer is completed.
+             let task = transferUtility.uploadData(data!,
+                  key: "public/YourFileName"
                   contentType: "text/plain",
                   expression: expression,
-                  completionHandler: completionHandler).continueWith {
-                     (task) -> AnyObject! in
-                         if let error = task.error {
-                            print("Error: \(error.localizedDescription)")
-                         }
-
-                         if let _ = task.result {
-                            // Do something with uploadTask.
-                         }
-                         return nil;
-                 }
+                  completionHandler: completionHandler)
           }
 
 .. _add-aws-user-data-storage-download:
@@ -469,7 +448,7 @@ Download a File
 
                     TransferObserver downloadObserver =
                         transferUtility.download(
-                                "s3Folder/s3Key.txt",
+                                "public/s3Key.txt",
                                 new File("/path/to/file/localFile.txt"));
 
                     // Attach a listener to the observer to get state update and progress notifications
@@ -487,7 +466,7 @@ Download a File
                                 float percentDonef = ((float)bytesCurrent/(float)bytesTotal) * 100;
                                 int percentDone = (int)percentDonef;
 
-                                Log.d(LOG_TAG, "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
+                                Log.d("Your Activity", "   ID:" + id + "   bytesCurrent: " + bytesCurrent + "   bytesTotal: " + bytesTotal + " " + percentDone + "%");
                         }
 
                         @Override
@@ -503,8 +482,8 @@ Download a File
                         // Handle a completed upload.
                     }
 
-                    Log.d(LOG_TAG, "Bytes Transferred: " + downloadObserver.getBytesTransferred());
-                    Log.d(LOG_TAG, "Bytes Total: " + downloadObserver.getBytesTotal());
+                    Log.d("Your Activity", "Bytes Transferred: " + downloadObserver.getBytesTransferred());
+                    Log.d("Your Activity", "Bytes Total: " + downloadObserver.getBytesTotal());
                 }
             }
 
@@ -534,10 +513,9 @@ Download a File
             class YourActivity : Activity() {
                 override fun onCreate(savedInstanceState: Bundle?) {
                     super.onCreate(savedInstanceState)
-                    setContentView(R.layout.activity_your)
 
                     AWSMobileClient.getInstance().initialize(this).execute()
-                    donwloadWithTransferUtility()
+                    downloadWithTransferUtility()
                 }
 
                 private fun downloadWithTransferUtility() {
@@ -548,7 +526,7 @@ Download a File
                         .build()
 
                     val downloadObserver = transferUtility.download(
-                        "s3folder/s3key.txt",
+                        "public/s3key.txt",
                         File("/path/to/file/localfile.txt"))
 
                     // Attach a listener to get state updates
@@ -562,15 +540,15 @@ Download a File
                         override fun onProgressChanged(id: Int, current: Long, total: Long) {
                             try {
                                 val done = (((current.toDouble() / total) * 100.0).toInt()) //as Int
-                                Log.d(LOG_TAG, "DOWNLOAD - - ID: $id, percent done = $done")
+                                Log.d("Your Activity", "DOWNLOAD - - ID: $id, percent done = $done")
                             }
                             catch (e: Exception) {
-                                Log.e(LOG_TAG, "Trouble calculating progress percent", e)
+                                Log.e("Your Activity", "Trouble calculating progress percent", e)
                             }
                         }
 
                         override fun onError(id: Int, ex: Exception) {
-                            Log.d(LOG_TAG, "DOWNLOAD ERROR - - ID: $id - - EX: ${ex.message.toString()}")
+                            Log.d("Your Activity", "DOWNLOAD ERROR - - ID: $id - - EX: ${ex.message.toString()}")
                         }
                     })
 
@@ -580,7 +558,7 @@ Download a File
                         // Handle a completed upload.
                     }
 
-                    Log.d(LOG_TAG, "Bytes Transferred: ${downloadObserver.bytesTransferred}");
+                    Log.d("Your Activity", "Bytes Transferred: ${downloadObserver.bytesTransferred}");
                 }
             }
 
@@ -590,44 +568,38 @@ Download a File
        .. code-block:: swift
 
           func downloadData() {
+
+             //Create an expression object for progress tracking, to pass in request headers etc.
              let expression = AWSS3TransferUtilityDownloadExpression()
-             expression.progressBlock = {(task, progress) in DispatchQueue.main.async(execute: {
+             expression.progressBlock = {(task, progress) in
                   // Do something e.g. Update a progress bar.
-                })
              }
 
+	     //Create a completion handler to be called when the transfer completes
              var completionHandler: AWSS3TransferUtilityDownloadCompletionHandlerBlock?
              completionHandler = { (task, URL, data, error) -> Void in
-                DispatchQueue.main.async(execute: {
                   // Do something e.g. Alert a user for transfer completion.
                   // On failed downloads, `error` contains the error object.
-                })
              }
 
+
+             //Instantiate the transferUtility object. This will pickup the bucketName, region, and auth configuration
+             //from the awsconfiguration.json file
              let transferUtility = AWSS3TransferUtility.default()
-             transferUtility.downloadData(
-                   fromBucket: "YourBucket",
-                   key: "YourFileName",
+
+             //Download the data. Pass in the expression to get progress updates and completion handler to get notified
+             //when the transfer is completed.
+             let task = transferUtility.downloadData(
+                   fromKey: "public/YourFileName",
                    expression: expression,
                    completionHandler: completionHandler
-                   ).continueWith {
-                      (task) -> AnyObject! in if let error = task.error {
-                        print("Error: \(error.localizedDescription)")
-                      }
+                   )
 
-                      if let _ = task.result {
-                        // Do something with downloadTask.
-
-                      }
-                      return nil;
-                  }
           }
 
 
 Next Steps
 ==========
-
-* For more information about TransferUtility capabilities, see :ref:`how-to-transfer-files-with-transfer-utility`.
 
 * For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`__.
 

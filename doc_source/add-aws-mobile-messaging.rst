@@ -24,12 +24,9 @@ Overview
 ========
 
 
-Engage your users more deeply by tying their app usage behavior to messaging campaigns.
+Engage your users more deeply by tying their app usage behavior to Push Notification, email, or SMS messaging campaigns.
 
-When you enable the Amplify CLI Analytics category, your app is registered with
-Amazon Pinpoint. You can define user segments and send email, SMS, and :ref:`Push
-Notification <add-aws-mobile-push-notifications>` messages to those recipients through the Amazon Pinpoint
-console.
+When you enable the Amplify CLI Analytics category, your app is registered with Amazon Pinpoint. You can define user segments and send messages to those recipients through the Amazon Pinpoint console.
 
 Amazon Pinpoint also enables you to gather and visualize your app's :ref:`Analytics
 <add-aws-mobile-analytics>`. The metrics you gather can be as simple as session start and stop data,
@@ -45,7 +42,9 @@ selected a certain category in a feature of your app.
 Set Up Your Backend
 ===================
 
-To set up email or SMS as part of a Amazon Pinpoint campaign perform the following steps.
+To setup your app to receive Push Notifications from Amazon Pinpoint, see :ref:`Add Push Notifications to Your Mobile App with Amazon Pinpoint <add-aws-mobile-push-notifications>`.
+
+To set up email or SMS as part of an Amazon Pinpoint campaign perform the following steps.
 
 To setup your app to receive Push Notifications from Amazon Pinpoint, see
 :ref:`add-aws-mobile-push-notifications`.
@@ -54,21 +53,22 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
 
 #. **For Email**:
 
-   #. Go to the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
+   #. In a terminal window, use the following command to open the project for your app by in the Amazon Pinpoint console.
 
-   #. Open the project with the name of the Analytics resource shown when you run :code:`amplify status` for your app.
+      .. code-block:: none
 
-   #. In the Amazon Pinpoint console, choose the :guilabel:`Channels` tab, and then choose  :guilabel:`Email`.
+         $ cd YOUR_APP_PROJECT_FOLDER
+         $ amplify console analytics
 
-   #. Choose :guilabel:`Email address`, type the address that you want your messages to come from, and then
-      choose :guilabel:`verify` at the end of the entry field.
+   #. In the Amazon Pinpoint console, navigate to :guilabel:`Settings` on the left, choose the :guilabel:`Channels` tab, and then choose  :guilabel:`Email`.
+
+   #. Choose the :guilabel:`Enable email channel` checkbox, choose :guilabel:`Email address`, type the address that you want your messages to come from, and then choose :guilabel:`verify`.
 
       The email account you enter will receive an email requesting your approval for
       Amazon Pinpoint to use that account as the sender address for emails sent by the system. The status of :guilabel:`Pending Verification` is
       displayed in the console entry field until Amazon Pinpoint has processed your approval.
 
-   #. Choose :guilabel:`Email domain`, type the domain that you want your messages to come from, and then
-      choose :guilabel:`verify` at the end of the entry field.
+   #. Choose :guilabel:`Email domain`, type the domain that you want your messages to come from, and then choose :guilabel:`verify`.
 
       A dialog box displays the name and value of the TXT record you must add to the
       domain's settings. The status of :code:`Pending Verification` is displayed in the entry
@@ -83,16 +83,16 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
 
 #. **For SMS**:
 
-   #. Go to the `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__.
+   #. In a terminal window, use the following command to open the project for your app by in the Amazon Pinpoint console.
 
-   #. Open the project with the name of the Analytics resource shown when you run :code:`amplify status` for your app.
+      .. code-block::
 
-   #. Choose :guilabel:`SMS`, and then choose :guilabel:`Enable`.
+         $ cd YOUR_APP_PROJECT_FOLDER
+         $ amplify console analytics
 
-   #. Choose the :guilabel:`Amazon Pinpoint console` link at the bottom of the descriptive
-      text on the left.
+   #. Navigate to Settings in the left-hand navigation, choose :guilabel:`SMS`, and then choose :guilabel:`Enable SMS channel`.
 
-   #. Choose :guilabel:`SMS` in the Amazon Pinpoint console :guilabel:`Channels` tab.
+   #. Navigate to Direct messaging in the left-hand navigation and chose SMS.
 
    #. Adjust the options for :guilabel:`Default message type`, :guilabel:`Account spend limit`,
       and :guilabel:`Default sender ID`. For more information about these options, see `Updating SMS
@@ -109,6 +109,3 @@ Connect to Your Backend
 
 
 The AWS Mobile SDK is not required to receive email or SMS messages from Amazon Pinpoint.
-
-
-

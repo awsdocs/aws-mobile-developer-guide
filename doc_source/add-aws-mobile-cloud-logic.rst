@@ -44,7 +44,7 @@ Set Up Your Backend
       .. container:: option
 
          Android - Java
-             Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app. Note that the friendly name that specified for the `api` category will be the package name of the generated code.
 
             .. code-block:: bash
 
@@ -52,7 +52,7 @@ Set Up Your Backend
                 $ amplify add api
 
          Android - Kotlin
-             Navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that typically contains your project level build.gradle), and add the SDK to your app. Note that the friendly name that specified for the `api` category will be the package name of the generated code.
 
             .. code-block:: bash
 
@@ -60,7 +60,7 @@ Set Up Your Backend
                 $ amplify add api
 
          iOS - Swift
-             Navigate to your project folder (the folder that typically contains your project level xcodeproj file), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that contains your app :file:`.xcodeproj` file), and add the SDK to your app.
 
             .. code-block:: bash
 
@@ -69,11 +69,15 @@ Set Up Your Backend
 
 #. Choose :code:`> REST` as your API service.
 
-#. Choose :code:`>  Create a new Lambda function`.
+#. Choose :code:`> Create a new Lambda function`.
 
 #. Choose the :code:`> Serverless express function` template.
 
-#. When you complete configuration of your API, the CLI displays a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
+#. Restrict API access? Choose :code:`Yes`
+
+#. Who should have access? Choose :code:`Authenticated and Guest users`
+
+#. When configuration of your API is complete, the CLI displays a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
 
    .. code-block:: none
 
@@ -112,7 +116,8 @@ Use the following steps to add Cloud Logic to your app.
                     // other dependencies . . .
 
                     implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
-
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                    implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
                 }
 
       #. Get your API client name.
@@ -121,7 +126,7 @@ Use the following steps to add Cloud Logic to your app.
 
          The path of the client code file is :file:`./src/main/java/YOUR_API_RESOURCE_NAME/YOUR_APP_NAME_XXXXClient.java`.
 
-         So for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file might be :file:`./src/main/java/xyz123/useamplifyabcdClient.java`. The API client name would be :code:`useamplifyabcdClient`.
+         So, for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file will be :file:`./src/main/java/xyz123/useamplifyabcdClient.java`. The API client name will be :code:`useamplifyabcdClient`.
 
          - Find the resource name of your API by running :code:`amplify status`.
 
@@ -134,99 +139,115 @@ Use the following steps to add Cloud Logic to your app.
 
          .. code-block:: java
 
-             import android.support.v7.app.AppCompatActivity;
-             import android.os.Bundle;
-             import android.util.Log;
-             import com.amazonaws.http.HttpMethodName;
-             import java.io.InputStream;
-             import java.util.HashMap;
+            import android.support.v7.app.AppCompatActivity;
+            import android.os.Bundle;
+            import android.util.Log;
 
-             import com.amazonaws.mobile.client.AWSMobileClient;
-             import com.amazonaws.mobileconnectors.api.YOUR-API-RESOURCE_NAME.YOUR-API-CLIENT-NAME;
-             import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
-             import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
-             import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
-             import com.amazonaws.util.StringUtils;
+            import com.amazonaws.http.HttpMethodName;
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobile.client.AWSStartupHandler;
+            import com.amazonaws.mobile.client.AWSStartupResult;
+            import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+            import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
+            import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
+            import com.amazonaws.util.IOUtils;
+            import com.amazonaws.util.StringUtils;
+
+            import java.io.InputStream;
+            import java.util.HashMap;
+            import java.util.Map;
+
+            // TODO Replace this with your api friendly name and client class name
+            import YOUR_API_RESOURCE_NAME.YOUR_APP_NAME_XXXXClient;
+
+            public class MainActivity extends AppCompatActivity {
+                private static final String TAG = MainActivity.class.getSimpleName();
+
+                // TODO Replace this with your client class name
+                private YOUR_APP_NAME_XXXXClient apiClient;
+
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_main);
+
+                    // Initialize the AWS Mobile Client
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                        @Override
+                        public void onComplete(AWSStartupResult awsStartupResult) {
+                            Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!");
+                        }
+                    }).execute();
 
 
-             public class MainActivity extends AppCompatActivity {
-                 private static final String LOG_TAG = MainActivity.class.getSimpleName();
+                    // Create the client
+                    apiClient = new ApiClientFactory()
+                            .credentialsProvider(AWSMobileClient.getInstance().getCredentialsProvider())
+                            .build(YOUR_API_CLIENT_NAME.class);
 
-                 private YOUR_API_CLIENT_NAME apiClient;
+                    callCloudLogic();
+                }
 
-                 @Override
-                 protected void onCreate(Bundle savedInstanceState) {
-                     super.onCreate(savedInstanceState);
-                     setContentView(R.layout.activity_main);
+                public void callCloudLogic() {
+                    // Create components of api request
+                    final String method = "GET";
+                    final String path = "/items";
 
-                      // Create the client
-                      apiClient = new ApiClientFactory()
-                                     .credentialsProvider(AWSMobileClient.getInstance().getCredentialsProvider())
-                                     .build(YOUR_API_CLIENT_NAME.class);
-                 }
+                    final String body = "";
+                    final byte[] content = body.getBytes(StringUtils.UTF8);
 
+                    final Map parameters = new HashMap<>();
+                    parameters.put("lang", "en_US");
 
-                 public callCloudLogic() {
-                     // Create components of api request
-                     final String method = "GET";
+                    final Map headers = new HashMap<>();
 
-                     final String path = "/items";
+                    // Use components to create the api request
+                    ApiRequest localRequest =
+                            new ApiRequest(apiClient.getClass().getSimpleName())
+                                    .withPath(path)
+                                    .withHttpMethod(HttpMethodName.valueOf(method))
+                                    .withHeaders(headers)
+                                    .addHeader("Content-Type", "application/json")
+                                    .withParameters(parameters);
 
-                     final String body = "";
-                     final byte[] content = body.getBytes(StringUtils.UTF8);
+                    // Only set body if it has content.
+                    if (body.length() > 0) {
+                        localRequest = localRequest
+                                .addHeader("Content-Length", String.valueOf(content.length))
+                                .withBody(content);
+                    }
 
-                     final Map parameters = new HashMap<>();
-                     parameters.put("lang", "en_US");
+                    final ApiRequest request = localRequest;
 
-                     final Map headers = new HashMap<>();
+                    // Make network call on background thread
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Log.d(TAG,
+                                        "Invoking API w/ Request : " +
+                                                request.getHttpMethod() + ":" +
+                                                request.getPath());
 
-                     // Use components to create the api request
-                     ApiRequest localRequest =
-                             new ApiRequest(apiClient.getClass().getSimpleName())
-                                     .withPath(path)
-                                     .withHttpMethod(HttpMethodName.valueOf(method))
-                                     .withHeaders(headers)
-                                     .addHeader("Content-Type", "application/json")
-                                     .withParameters(parameters);
+                                final ApiResponse response = apiClient.execute(request);
 
-                     // Only set body if it has content.
-                     if (body.length() > 0) {
-                         localRequest = localRequest
-                                 .addHeader("Content-Length", String.valueOf(content.length))
-                                 .withBody(content);
-                     }
+                                final InputStream responseContentStream = response.getContent();
 
-                     final ApiRequest request = localRequest;
+                                if (responseContentStream != null) {
+                                    final String responseData = IOUtils.toString(responseContentStream);
+                                    Log.d(TAG, "Response : " + responseData);
+                                }
 
-                     // Make network call on background thread
-                     new Thread(new Runnable() {
-                         @Override
-                         public void run() {
-                             try {
-                                 Log.d(LOG_TAG,
-                                 "Invoking API w/ Request : " +
-                                 request.getHttpMethod() + ":" +
-                                 request.getPath());
+                                Log.d(TAG, response.getStatusCode() + " " + response.getStatusText());
 
-                                 final ApiResponse response = apiClient.execute(request);
-
-                                 final InputStream responseContentStream = response.getContent();
-
-                                 if (responseContentStream != null) {
-                                     final String responseData = IOUtils.toString(responseContentStream);
-                                     Log.d(LOG_TAG, "Response : " + responseData);
-                                 }
-
-                                 Log.d(LOG_TAG, response.getStatusCode() + " " + response.getStatusText());
-
-                             } catch (final Exception exception) {
-                                 Log.e(LOG_TAG, exception.getMessage(), exception);
-                                 exception.printStackTrace();
-                             }
-                         }
-                     }).start();
-                 }
-             }
+                            } catch (final Exception exception) {
+                                Log.e(TAG, exception.getMessage(), exception);
+                                exception.printStackTrace();
+                            }
+                        }
+                    }).start();
+                }
+            }
 
    Android - Kotlin
       #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.
@@ -240,6 +261,8 @@ Use the following steps to add Cloud Logic to your app.
                     // other dependencies . . .
 
                     implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                    implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
 
                 }
 
@@ -249,7 +272,7 @@ Use the following steps to add Cloud Logic to your app.
 
          The path of the client code file is :file:`./src/main/java/YOUR_API_RESOURCE_NAME/YOUR_APP_NAME_XXXXClient.java`.
 
-         So for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file might be :file:`./src/main/java/xyz123/useamplifyabcdClient.java`. The API client name would be :code:`useamplifyabcdClient`.
+         So, for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file will be :file:`./src/main/java/xyz123/useamplifyabcdClient.java`. The API client name will be :code:`useamplifyabcdClient`.
 
          - Find the resource name of your API by running :code:`amplify status`.
 
@@ -263,68 +286,77 @@ Use the following steps to add Cloud Logic to your app.
 
          .. code-block:: java
 
-             import android.support.v7.app.AppCompatActivity;
-             import android.os.Bundle;
-             import android.util.Log;
-             import com.amazonaws.http.HttpMethodName;
-             import java.io.InputStream;
-             import java.util.HashMap;
+             import android.os.Bundle
+             import android.support.v7.app.AppCompatActivity
+             import android.util.Log
+             import com.amazonaws.http.HttpMethodName
+             import com.amazonaws.mobile.client.AWSMobileClient
+             import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory
+             import com.amazonaws.mobileconnectors.apigateway.ApiRequest
+             import com.amazonaws.util.IOUtils
+             import com.amazonaws.util.StringUtils
 
-             import com.amazonaws.mobile.client.AWSMobileClient;
-             import com.amazonaws.mobileconnectors.api.YOUR-API-RESOURCE_NAME.YOUR-API-CLIENT-NAME;
-             import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
-             import com.amazonaws.mobileconnectors.apigateway.ApiRequest;
-             import com.amazonaws.mobileconnectors.apigateway.ApiResponse;
-             import com.amazonaws.util.StringUtils;
+             // TODO Replace this with your api friendly name and client class name
+             import YOUR_API_RESOURCE_NAME.YOUR_APP_NAME_XXXXClient
+             import kotlin.concurrent.thread
 
-
-             public class MainActivity extends AppCompatActivity {
-                 private static final String LOG_TAG = MainActivity.class.getSimpleName();
-
-                 private YOUR_API_CLIENT_NAME apiClient;
-
-                 @Override
-                 protected void onCreate(Bundle savedInstanceState) {
-                     super.onCreate(savedInstanceState);
-                     setContentView(R.layout.activity_main);
-
-                      // Create the client
-                      apiClient = new ApiClientFactory()
-                                     .credentialsProvider(AWSMobileClient.getInstance().getCredentialsProvider())
-                                     .build(YOUR_API_CLIENT_NAME::class.java);
+             class MainActivity : AppCompatActivity() {
+                 companion object {
+                     private val TAG = MainActivity.javaClass.simpleName
                  }
 
-                fun callCloudLogic(body: String) {
-                    val parameters = mapOf("lang" to "en_US")
-                    val headers = mapOf("Content-Type" to "application/json")
+                 // TODO Replace this with your client class name
+                 private var apiClient: YOUR_APP_NAME_XXXXClient? = null
 
-                    val request = ApiRequest(apiClient::class.java.simpleName)
-                        .withPath("/items")
-                        .withHttpMethod(HttpMethod.GET)
-                        .withHeaders(headers)
-                        .withParameters(parameters)
-                    if (body.isNotEmpty()) {
-                        val content = body.getBytes(StringUtils.UTF8)
-                        request
-                            .addHeader("Content-Length", String.valueOf(content.length))
-                            .withBody(content)
-                    }
+                 override fun onCreate(savedInstanceState: Bundle?) {
+                     super.onCreate(savedInstanceState)
+                     setContentView(R.layout.activity_main)
 
-                    thread(start = true) {
-                        try {
-                            Log.d(TAG, "Invoking API")
-                            val response = apiClient.execute(request)
-                            val responseContentStream = response.getContent()
-                            if (responseContentStream != null) {
-                                val responseData = IOUtils.toString(responseContentStream)
-                                // Do something with the response data here
-                            }
-                        } catch (ex: Exception) {
-                            Log.e(TAG, "Error invoking API")
-                        }
-                    }
-                }
-            }
+                     // Initialize the AWS Mobile Client
+                     AWSMobileClient.getInstance().initialize(this) { Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!") }.execute()
+
+                     // Create the client
+                     apiClient = ApiClientFactory().credentialsProvider(AWSMobileClient.getInstance().credentialsProvider)
+                             // TODO Replace this with your client class name
+                             .build(YOUR_APP_NAME_XXXXClient::class.java)
+
+                     callCloudLogic()
+                 }
+
+                 fun callCloudLogic() {
+                     val body = ""
+
+                     val parameters = mapOf("lang" to "en_US")
+                     val headers = mapOf("Content-Type" to "application/json")
+
+                     val request = ApiRequest(apiClient?.javaClass?.simpleName)
+                             .withPath("/items")
+                             .withHttpMethod(HttpMethodName.GET)
+                             .withHeaders(headers)
+                             .withParameters(parameters)
+
+                     if (body.isNotEmpty()) {
+                         val content = body.toByteArray(StringUtils.UTF8)
+                         request.addHeader("Content-Length", content.size.toString())
+                                 .withBody(content)
+                     }
+
+                     thread(start = true) {
+                         try {
+                             Log.d(TAG, "Invoking API")
+                             val response = apiClient?.execute(request)
+                             val responseContentStream = response?.getContent()
+                             if (responseContentStream != null) {
+                                 val responseData = IOUtils.toString(responseContentStream)
+                                 // Do something with the response data here
+                                 Log.d(TAG, "Response: $responseData")
+                             }
+                         } catch (ex: Exception) {
+                             Log.e(TAG, "Error invoking API")
+                         }
+                     }
+                 }
+             }
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following :ref:`add-aws-mobile-sdk-basic-setup` steps.
@@ -338,9 +370,13 @@ Use the following steps to add Cloud Logic to your app.
                target :'YOUR-APP-NAME' do
                   use_frameworks!
 
+                     # For auth
                      pod 'AWSAuthCore', '~> 2.6.13'
-                     pod 'AWSAPIGateway', '~> 2.6.13'
                      pod 'AWSMobileClient', '~> 2.6.13'
+
+                     # For API
+                     pod 'AWSAPIGateway', '~> 2.6.13'
+
                      # other pods
 
                end
@@ -358,11 +394,25 @@ Use the following steps to add Cloud Logic to your app.
                 import AWSAPIGateway
                 import AWSMobileClient
 
-      #. The CLI generates a client code file for each API you add. The API client name is the name of that file, without the extension.
+          #. Next, import files generated by CLI. The CLI generates a client code file and request-response structure file for each API you add.
+
+          #. Add those files by going to your Xcode Project Navigator project, right-click on project's name in top left corner, and select "Add Files to YOUR_APP_NAME".
+
+          #. Select all the files under :code:`generated-src` folder of your application's root folder and add them to your project.
+
+          #. Next, set the bridging header for Swift in your project settings. Double-click your project name in the Xcode Project Navigator, choose the Build Settings tab and search for  :guilabel:`Objective-C Bridging Header`. Enter :code:`generated-src/Bridging_Header.h`
+
+             This is needed because the AWS generated code has some Objective-C code which requires bridging to be used for Swift.
+
+             .. note::
+
+                If you already have a bridging header in your app, you can just append an extra line to it: :code:`#import "AWSApiGatewayBridge.h"` instead of above step.
+
+      #. Use the files generated by CLI to determine the client name of your API. In the :code:`generated-src` folder, files ending with name :code:`*Client.swift` are the names of your client (without .swift extension).
 
          The path of the client code file is :file:`./generated-src/YOUR_API_RESOURCE_NAME+YOUR_APP_NAME+Client.swift`.
 
-         So for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file might be :file:`./generated-src/xyz123useamplifyabcdClient.swift`. The API client name would be :code:`xyz123useamplifyabcdClient`.
+         So, for an app named :code:`useamplify` with an API resource named :code:`xyz123`, the path of the code file might be :file:`./generated-src/xyz123useamplifyabcdClient.swift`. The API client name would be :code:`xyz123useamplifyabcdClient`.
 
          - Find the resource name of your API by running :code:`amplify status`.
 
@@ -407,20 +457,17 @@ Use the following steps to add Cloud Logic to your app.
                            headerParameters: headerParameters,
                            httpBody: httpBody)
 
-                   // Create a service configuration object for the region your AWS API was created in
-                   let serviceConfiguration = AWSServiceConfiguration(
-                       region: AWSRegionType.USEast1,
-                       credentialsProvider: AWSMobileClient.sharedInstance().getCredentialsProvider())
+                  // Create a service configuration
+                  let serviceConfiguration = AWSServiceConfiguration(region: AWSRegionType.USEast1,
+                        credentialsProvider: AWSMobileClient.sharedInstance().getCredentialsProvider())
 
-                       YOUR_API_CLIENT_NAME.register(with: serviceConfiguration!, forKey: "CloudLogicAPIKey")
+                  // Initialize the API client using the service configuration
+                  xyz123useamplifyabcdClient.registerClient(withConfiguration: serviceConfiguration!, forKey: "CloudLogicAPIKey")
 
-                       // Fetch the Cloud Logic client to be used for invocation
-                       let invocationClient =
-                            YOUR_API_CLIENT_NAME(forKey: "CloudLogicAPIKey")
+                  // Fetch the Cloud Logic client to be used for invocation
+                  let invocationClient = xyz123useamplifyabcdClient.client(forKey: "CloudLogicAPIKey")
 
-                       invocationClient.invoke(apiRequest).continueWith { (
-                           task: AWSTask) -> Any? in
-
+                  invocationClient.invoke(apiRequest).continueWith { (task: AWSTask) -> Any? in
                            if let error = task.error {
                                print("Error occurred: \(error)")
                                // Handle error here
@@ -429,8 +476,7 @@ Use the following steps to add Cloud Logic to your app.
 
                            // Handle successful result here
                            let result = task.result!
-                           let responseString =
-                               String(data: result.responseData!, encoding: .utf8)
+                           let responseString = String(data: result.responseData!, encoding: .utf8)
 
                            print(responseString)
                            print(result.statusCode)

@@ -42,7 +42,7 @@ Set Up Your Backend
       .. container:: option
 
          Android - Java
-             Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
 
             .. code-block:: bash
 
@@ -50,7 +50,7 @@ Set Up Your Backend
                 $ amplify add notifications
 
          Android - Kotlin
-             Navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`build.gradle`), and add the SDK to your app.
 
             .. code-block:: bash
 
@@ -58,7 +58,7 @@ Set Up Your Backend
                 $ amplify add notifications
 
          iOS - Swift
-             Navigate to your project folder (the folder that typically contains your project level :file:`xcodeproj` file), and add the SDK to your app.
+             In a terminal window, navigate to your project folder (the folder that typically contains your project level :file:`xcodeproj` file), and add the SDK to your app.
 
             .. code-block:: bash
 
@@ -76,7 +76,7 @@ Set Up Your Backend
 
                > FCM
 
-          - Provide your ApiKey. For information on getting an FCM ApiKey, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__
+          - Provide your ApiKey. The FCM console refers to this value as :guilabel:`ServerKey`. For information on getting an FCM ApiKey, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__
 
        Android - Kotlin
           - Choose Firebase Cloud Messaging (FCM).
@@ -85,7 +85,7 @@ Set Up Your Backend
 
                > FCM
 
-          - Provide your ApiKey. For information on getting an FCM ApiKey, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__
+          - Provide your ApiKey. The FCM console refers to this value as "ServerKey". For information on getting an FCM ApiKey, see `Setting Up Android Push Notifications <http://docs.aws.amazon.com/pinpoint/latest/developerguide/mobile-push-android.html>`__
 
        iOS - Swift
           - Choose Apple Push Notification Service (APNs).
@@ -116,221 +116,250 @@ Use the following steps to connect add push notification backend services to you
    Android - Java
       #. Set up AWS Mobile SDK components as follows.
 
-
-         #. :file:`AndroidManifest.xml` must contain:
-
-            .. code-block:: xml
-
-                    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-                    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-                    <permission android:name="com.mysampleapp.permission.C2D_MESSAGE"
-                                android:protectionLevel="signature" />
-                    <uses-permission android:name="com.mysampleapp.permission.C2D_MESSAGE" />
-
-                    <application
-
-                        <!--Add these to your Application declaration
-                        to filter for the notification intent-->
-                        <receiver
-                            android:name="com.google.android.gms.gcm.GcmReceiver"
-                            android:exported="true"
-                            android:permission="com.google.android.c2dm.permission.SEND" >
-                            <intent-filter>
-                                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                                <category android:name="com.mysampleapp" />
-                            </intent-filter>
-                        </receiver>
-
-                        <service
-                            android:name=".PushListenerService"
-                            android:exported="false" >
-                            <intent-filter>
-                                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                            </intent-filter>
-                        </service>
-
-                    </application>
-
-         #. Add the following to your :file:`app/build.gradle`:
+         #. Add the following dependencies and plugin to your :file:`app/build.gradle`:
 
             .. code-block:: none
 
-                dependencies{
-                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
+                dependencies {
+                    // Overrides an auth dependency to ensure correct behavior
+                    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 
-                    implementation 'com.google.android.gms:play-services-iid:11.6.0'
-                    implementation 'com.google.android.gms:play-services-gcm:11.6.0'
+                    implementation 'com.google.firebase:firebase-core:16.0.1'
+                    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+
+                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
                 }
 
-         #. Add the following to your project level :file:`build.gradle`:
+                apply plugin: 'com.google.gms.google-services'
+
+         #. Add the following to your project level :file:`build.gradle`. Make sure that you have the `google` repository specified as well:
 
             .. code-block:: none
 
                 buildscript {
                     dependencies {
-                        classpath 'com.google.gms:google-services:3.1.1'
+                        classpath 'com.google.gms:google-services:4.0.1'
                     }
                 }
 
                 allprojects {
                     repositories {
-                        maven {
-                            url "https://maven.google.com"
-                        }
+                        google()
                     }
                 }
+
+         #. :file:`AndroidManifest.xml` must contain the definition of the following service for PushListenerService in the application tag:
+
+            .. code-block:: xml
+
+                <service
+                    android:name=".PushListenerService">
+                    <intent-filter>
+                        <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                    </intent-filter>
+                </service>
 
       #. Create an Amazon Pinpoint client in the location of your push notification code.
 
          .. code-block:: java
 
+            import android.content.BroadcastReceiver;
+            import android.content.Context;
+            import android.content.Intent;
+            import android.content.IntentFilter;
+            import android.os.Bundle;
+            import android.support.annotation.NonNull;
+            import android.support.v4.content.LocalBroadcastManager;
+            import android.support.v7.app.AlertDialog;
+            import android.support.v7.app.AppCompatActivity;
+            import android.util.Log;
+
+            import com.amazonaws.mobile.client.AWSMobileClient;
+            import com.amazonaws.mobile.client.AWSStartupHandler;
+            import com.amazonaws.mobile.client.AWSStartupResult;
             import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
             import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
-            import com.google.android.gms.gcm.GoogleCloudMessaging;
-            import com.google.android.gms.iid.InstanceID;
+            import com.google.android.gms.tasks.OnCompleteListener;
+            import com.google.android.gms.tasks.Task;
+            import com.google.firebase.iid.FirebaseInstanceId;
+            import com.google.firebase.iid.InstanceIdResult;
 
             public class MainActivity extends AppCompatActivity {
-                 public static final String LOG_TAG = MainActivity.class.getSimpleName();
+                public static final String TAG = MainActivity.class.getSimpleName();
 
-                 public static PinpointManager pinpointManager;
+                private static PinpointManager pinpointManager;
 
-                 @Override
-                 protected void onCreate(Bundle savedInstanceState) {
-                     super.onCreate(savedInstanceState);
-                     setContentView(R.layout.activity_main);
+                public static PinpointManager getPinpointManager(final Context applicationContext) {
+                    if (pinpointManager == null) {
+                        PinpointConfiguration pinpointConfig = new PinpointConfiguration(
+                                applicationContext,
+                                AWSMobileClient.getInstance().getCredentialsProvider(),
+                                AWSMobileClient.getInstance().getConfiguration());
 
-                     if (pinpointManager == null) {
-                         PinpointConfiguration pinpointConfig = new PinpointConfiguration(
-                                 getApplicationContext(),
-                                 AWSMobileClient.getInstance().getCredentialsProvider(),
-                                 AWSMobileClient.getInstance().getConfiguration());
+                        pinpointManager = new PinpointManager(pinpointConfig);
 
-                         pinpointManager = new PinpointManager(pinpointConfig);
+                        FirebaseInstanceId.getInstance().getInstanceId()
+                                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                        final String token = task.getResult().getToken();
+                                        Log.d(TAG, "Registering push notifications token: " + token);
+                                        pinpointManager.getNotificationClient().registerDeviceToken(token);
+                                    }
+                                });
+                    }
+                    return pinpointManager;
+                }
 
-                         new Thread(new Runnable() {
-                             @Override
-                             public void run() {
-                               try {
-                                   String deviceToken =
-                                     InstanceID.getInstance(MainActivity.this).getToken(
-                                         "123456789Your_GCM_Sender_Id",
-                                         GoogleCloudMessaging.INSTANCE_ID_SCOPE);
-                                   Log.e("NotError", deviceToken);
-                                   pinpointManager.getNotificationClient()
-                                                  .registerGCMDeviceToken(deviceToken);
-                             } catch (Exception e) {
-                                 e.printStackTrace();
-                             }
-                             }
-                         }).start();
-                     }
-                 }
-             }
+                @Override
+                protected void onCreate(Bundle savedInstanceState) {
+                    super.onCreate(savedInstanceState);
+                    setContentView(R.layout.activity_main);
+
+                    // Initialize the AWS Mobile Client
+                    AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+                        @Override
+                        public void onComplete(AWSStartupResult awsStartupResult) {
+                            Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!");
+                        }
+                    }).execute();
+
+                    // Initialize PinpointManager
+                    getPinpointManager(getApplicationContext());
+                }
+            }
 
    Android - Kotlin
       #. Set up AWS Mobile SDK components as follows.
 
-         #. :file:`AndroidManifest.xml` must contain:
-
-            .. code-block:: xml
-
-                    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-                    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-                    <permission android:name="com.mysampleapp.permission.C2D_MESSAGE"
-                                android:protectionLevel="signature" />
-                    <uses-permission android:name="com.mysampleapp.permission.C2D_MESSAGE" />
-
-                    <application
-
-                        <!--Add these to your Application declaration
-                        to filter for the notification intent-->
-                        <receiver
-                            android:name="com.google.android.gms.gcm.GcmReceiver"
-                            android:exported="true"
-                            android:permission="com.google.android.c2dm.permission.SEND" >
-                            <intent-filter>
-                                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                                <category android:name="com.mysampleapp" />
-                            </intent-filter>
-                        </receiver>
-
-                        <service
-                            android:name=".PushListenerService"
-                            android:exported="false" >
-                            <intent-filter>
-                                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                            </intent-filter>
-                        </service>
-
-                    </application>
-
-         #. Add the following to your :file:`app/build.gradle`:
+         #. Add the following dependencies and plugin to your :file:`app/build.gradle`:
 
             .. code-block:: none
 
-                dependencies{
-                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
+                dependencies {
+                    // Overrides an auth dependency to ensure correct behavior
+                    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 
-                    implementation 'com.google.android.gms:play-services-iid:11.6.0'
-                    implementation 'com.google.android.gms:play-services-gcm:11.6.0'
+                    implementation 'com.google.firebase:firebase-core:16.0.1'
+                    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+
+                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
                 }
 
-         #. Add the following to your project level :file:`build.gradle`:
+                apply plugin: 'com.google.gms.google-services'
+
+         #. Add the following to your project level :file:`build.gradle`. Make sure that you have the `google` repository specified as well:
 
             .. code-block:: none
 
                 buildscript {
                     dependencies {
-                        classpath 'com.google.gms:google-services:3.1.1'
+                        classpath 'com.google.gms:google-services:4.0.1'
                     }
                 }
 
                 allprojects {
                     repositories {
-                        maven {
-                            url "https://maven.google.com"
-                        }
+                        google()
                     }
                 }
+
+         #. :file:`AndroidManifest.xml` must contain the definition of the following service for PushListenerService in the application tag:
+
+            .. code-block:: xml
+
+                    <service
+                        android:name=".PushListenerService">
+                        <intent-filter>
+                            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                        </intent-filter>
+                    </service>
 
       #. Create an Amazon Pinpoint client in the location of your push notification code.
 
          .. code-block:: kotlin
 
-            import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration;
-            import com.amazonaws.mobileconnectors.pinpoint.PinpointManager;
-            import com.google.android.gms.gcm.GoogleCloudMessaging;
-            import com.google.android.gms.iid.InstanceID;
+            import android.content.BroadcastReceiver
+            import android.content.Context
+            import android.content.Intent
+            import android.content.IntentFilter
+            import android.support.v7.app.AppCompatActivity
+            import android.os.Bundle
+            import android.support.v4.content.LocalBroadcastManager
+            import android.support.v7.app.AlertDialog
+            import android.util.Log
+            import com.amazonaws.mobile.client.AWSMobileClient
+            import com.amazonaws.mobileconnectors.pinpoint.PinpointConfiguration
+            import com.amazonaws.mobileconnectors.pinpoint.PinpointManager
+            import com.google.firebase.iid.FirebaseInstanceId
 
             class MainActivity : AppCompatActivity() {
-                companion object {
-                    private val LOG_TAG = this::class.java.getSimpleName
-                    var pinpointManager: PinpointManager? = null
+
+                private val notificationReceiver = object : BroadcastReceiver() {
+                    override fun onReceive(context: Context, intent: Intent) {
+                        Log.d(TAG, "Received notification from local broadcast. Display it in a dialog.")
+
+                        val bundle = intent.extras
+                        val message = PushListenerService.getMessage(bundle!!)
+
+                        AlertDialog.Builder(this@MainActivity)
+                                .setTitle("Push notification")
+                                .setMessage(message)
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show()
+                    }
                 }
 
                 override fun onCreate(savedInstanceState: Bundle?) {
                     super.onCreate(savedInstanceState)
                     setContentView(R.layout.activity_main)
 
-                    AWSMobileClient.getInstance().initialize(this).execute()
-                    with (AWSMobileClient.getInstance()) {
-                        if (pinpointManager == null) {
-                            val config = PinpointConfiguration(applicationContext, credentialsProvider, configuration)
-                            pinpointManager = PinpointManager(config)
-                        }
-                    }
+                    // Initialize the AWS Mobile Client
+                    AWSMobileClient.getInstance().initialize(this) { Log.d(TAG, "AWSMobileClient is instantiated and you are connected to AWS!") }.execute()
 
-                    thread(start = true) {
-                        try {
-                            val deviceToken = InstanceID.getInstance(this@MainActivity)
-                                .getToken("YOUR-GCM-SENDER-ID", GoogleCloudMessaging.INSTANCE_ID_SCOPE)
-                            Log.i(LOG_TAG, "GCM DeviceToken = $deviceToken")
-                            pinpointManager?.notificationClient?.registerGCMDeviceToken(deviceToken)
-                        } catch (e: Exception) {
-                            e.printStackTrace()
+                    // Initialize PinpointManager
+                    getPinpointManager(applicationContext)
+                }
+
+                override fun onPause() {
+                    super.onPause()
+
+                    // Unregister notification receiver
+                    LocalBroadcastManager.getInstance(this).unregisterReceiver(notificationReceiver)
+                }
+
+                override fun onResume() {
+                    super.onResume()
+
+                    // Register notification receiver
+                    LocalBroadcastManager.getInstance(this).registerReceiver(notificationReceiver,
+                            IntentFilter(PushListenerService.ACTION_PUSH_NOTIFICATION))
+                }
+
+                companion object {
+                    val TAG = MainActivity.javaClass.simpleName
+
+                    private var pinpointManager: PinpointManager? = null
+
+                    fun getPinpointManager(applicationContext: Context): PinpointManager? {
+                        if (pinpointManager == null) {
+                            val pinpointConfig = PinpointConfiguration(
+                                    applicationContext,
+                                    AWSMobileClient.getInstance().credentialsProvider,
+                                    AWSMobileClient.getInstance().configuration)
+
+                            pinpointManager = PinpointManager(pinpointConfig)
+
+                            FirebaseInstanceId.getInstance().instanceId
+                                    .addOnCompleteListener { task ->
+                                        val token = task.result.token
+                                        Log.d(TAG, "Registering push notifications token: $token")
+                                        pinpointManager!!.notificationClient.registerDeviceToken(token)
+                                    }
                         }
+                        return pinpointManager
                     }
                 }
             }
@@ -368,17 +397,22 @@ Use the following steps to connect add push notification backend services to you
          :code:`didFinishLaunchwithOptions` method of your app's :file:`AppDelegate.swift`. This
          will also register your device token with Amazon Pinpoint.
 
+         Note: If you have already integrated :code:`Analytics`, then you can skip this step.
+
          .. code-block:: swift
 
+             /** start code copy **/
              var pinpoint: AWSPinpoint?
+             /** end code copy **/
 
 
              func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
                  [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-                 pinpoint =
-                     AWSPinpoint(configuration:
+                 /** start code copy **/
+                 pinpoint = AWSPinpoint(configuration:
                          AWSPinpointConfiguration.defaultPinpointConfiguration(launchOptions: launchOptions))
+                 /** end code copy **/
 
                  return true
              }
@@ -401,8 +435,8 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
 
          The name of the class must match the push listener service name used in the app manifest.
          :code:`pinpointManager` is a reference to the static PinpointManager variable declared in
-         the MainActivity shown in a previous step. Use the following steps to set up Push
-         Notification listening in your app.
+         the MainActivity shown in a previous step. Use the following steps to detect and display Push
+         Notification in your app.
 
 
          #. The following push listener code assumes that the app's MainActivity is configured using
@@ -416,16 +450,68 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
                 import android.util.Log;
 
                 import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationClient;
-                import com.google.android.gms.gcm.GcmListenerService;
+                import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationDetails;
+                import com.google.firebase.messaging.FirebaseMessagingService;
+                import com.google.firebase.messaging.RemoteMessage;
 
-                public class YOUR-PUSH-LISTENER-SERVICE-NAME extends GcmListenerService {
-                    public static final String LOGTAG = PushListenerService.class.getSimpleName();
+                import java.util.HashMap;
+
+                public class PushListenerService extends FirebaseMessagingService {
+                    public static final String TAG = PushListenerService.class.getSimpleName();
 
                     // Intent action used in local broadcast
                     public static final String ACTION_PUSH_NOTIFICATION = "push-notification";
                     // Intent keys
                     public static final String INTENT_SNS_NOTIFICATION_FROM = "from";
                     public static final String INTENT_SNS_NOTIFICATION_DATA = "data";
+
+                    @Override
+                    public void onNewToken(String token) {
+                        super.onNewToken(token);
+
+                        Log.d(TAG, "Registering push notifications token: " + token);
+                        MainActivity.getPinpointManager(getApplicationContext()).getNotificationClient().registerDeviceToken(token);
+                    }
+
+                    @Override
+                    public void onMessageReceived(RemoteMessage remoteMessage) {
+                        super.onMessageReceived(remoteMessage);
+                        Log.d(TAG, "Message: " + remoteMessage.getData());
+
+                        final NotificationClient notificationClient = MainActivity.getPinpointManager(getApplicationContext()).getNotificationClient();
+
+                        final NotificationDetails notificationDetails = NotificationDetails.builder()
+                                .from(remoteMessage.getFrom())
+                                .mapData(remoteMessage.getData())
+                                .intentAction(NotificationClient.FCM_INTENT_ACTION)
+                                .build();
+
+                        NotificationClient.CampaignPushResult pushResult = notificationClient.handleCampaignPush(notificationDetails);
+
+                        if (!NotificationClient.CampaignPushResult.NOT_HANDLED.equals(pushResult)) {
+                            /**
+                               The push message was due to a Pinpoint campaign.
+                               If the app was in the background, a local notification was added
+                               in the notification center. If the app was in the foreground, an
+                               event was recorded indicating the app was in the foreground,
+                               for the demo, we will broadcast the notification to let the main
+                               activity display it in a dialog.
+                            */
+                            if (NotificationClient.CampaignPushResult.APP_IN_FOREGROUND.equals(pushResult)) {
+                                /* Create a message that will display the raw data of the campaign push in a dialog. */
+                                final HashMap<String, String> dataMap = new HashMap<>(remoteMessage.getData());
+                                broadcast(remoteMessage.getFrom(), dataMap);
+                            }
+                            return;
+                        }
+                    }
+
+                    private void broadcast(final String from, final HashMap<String, String> dataMap) {
+                        Intent intent = new Intent(ACTION_PUSH_NOTIFICATION);
+                        intent.putExtra(INTENT_SNS_NOTIFICATION_FROM, from);
+                        intent.putExtra(INTENT_SNS_NOTIFICATION_DATA, dataMap);
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                    }
 
                     /**
                      * Helper method to extract push message from bundle.
@@ -434,105 +520,8 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
                      * @return message string from push notification
                      */
                     public static String getMessage(Bundle data) {
-                        // If a push notification is sent as plain
-                        // text, then the message appears in "default".
-                        // Otherwise it's in the "message" for JSON format.
-                        return data.containsKey("default") ? data.getString("default") : data.getString(
-                                "message", "");
+                        return ((HashMap) data.get("data")).toString();
                     }
-
-                    private void broadcast(final String from, final Bundle data) {
-                        Intent intent = new Intent(ACTION_PUSH_NOTIFICATION);
-                        intent.putExtra(INTENT_SNS_NOTIFICATION_FROM, from);
-                        intent.putExtra(INTENT_SNS_NOTIFICATION_DATA, data);
-                        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-                    }
-
-                    @Override
-                    public void onMessageReceived(final String from, final Bundle data) {
-                        Log.d(LOGTAG, "From:" + from);
-                        Log.d(LOGTAG, "Data:" + data.toString());
-
-                        final NotificationClient notificationClient =
-                            MainActivity.pinpointManager.getNotificationClient();
-
-                        NotificationClient.CampaignPushResult pushResult =
-                                notificationClient.handleGCMCampaignPush(from, data, this.getClass());
-
-                        if (!NotificationClient.CampaignPushResult.NOT_HANDLED.equals(pushResult)) {
-                            // The push message was due to a Pinpoint campaign.
-                            // If the app was in the background, a local notification was added
-                            // in the notification center. If the app was in the foreground, an
-                            // event was recorded indicating the app was in the foreground,
-                            // for the demo, we will broadcast the notification to let the main
-                            // activity display it in a dialog.
-                            if (
-                                NotificationClient.CampaignPushResult.APP_IN_FOREGROUND.equals(pushResult)) {
-                                    // Create a message that will display the raw
-                                    //data of the campaign push in a dialog.
-                                    data.putString("
-                                        message",
-                                        String.format("Received Campaign Push:\n%s", data.toString()));
-                                    broadcast(from, data);
-                            }
-                            return;
-                        }
-                    }
-                }
-
-         #. Add code to react to your push listener service.
-
-            Place the following code where you want your app to react to incoming notifications.
-
-            .. code-block:: java
-
-                import android.app.Activity;
-                import android.app.AlertDialog;
-                import android.content.BroadcastReceiver;
-                import android.content.Context;
-                import android.content.Intent;
-                import android.content.IntentFilter;
-                import android.support.v4.content.LocalBroadcastManager;
-                import android.support.v7.app.AppCompatActivity;
-                import android.os.Bundle;
-                import android.util.Log;
-
-                public class MainActivity extends AppCompatActivity {
-                    public static final String LOG_TAG = MainActivity.class.getSimpleName();
-
-                    @Override
-                    protected void onPause() {
-                        super.onPause();
-
-                        // unregister notification receiver
-                        LocalBroadcastManager.getInstance(this).unregisterReceiver(notificationReceiver);
-                    }
-
-                    @Override
-                    protected void onResume() {
-                        super.onResume();
-
-                        // register notification receiver
-                        LocalBroadcastManager.getInstance(this).registerReceiver(notificationReceiver,
-                                new IntentFilter(PushListenerService.ACTION_PUSH_NOTIFICATION));
-                    }
-
-                    private final BroadcastReceiver notificationReceiver = new BroadcastReceiver() {
-                        @Override
-                        public void onReceive(Context context, Intent intent) {
-                            Log.d(LOG_TAG, "Received notification from local broadcast. Display it in a dialog.");
-
-                            Bundle data = intent.getBundleExtra(PushListenerService.INTENT_SNS_NOTIFICATION_DATA);
-                            String message = PushListenerService.getMessage(data);
-
-                            new AlertDialog.Builder(MainActivity.this)
-                                    .setTitle("Push notification")
-                                    .setMessage(message)
-                                    .setPositiveButton(android.R.string.ok, null)
-                                    .show();
-                        }
-                    };
-
                 }
 
    Android - Kotlin
@@ -551,108 +540,85 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
 
             .. code-block:: kotlin
 
-                import android.content.Intent;
-                import android.os.Bundle;
-                import android.support.v4.content.LocalBroadcastManager;
-                import android.util.Log;
+                import android.content.Intent
+                import android.os.Bundle
+                import android.support.v4.content.LocalBroadcastManager
+                import android.util.Log
 
-                import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationClient;
-                import com.google.android.gms.gcm.GcmListenerService;
+                import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationClient
+                import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationDetails
+                import com.google.firebase.messaging.FirebaseMessagingService
+                import com.google.firebase.messaging.RemoteMessage
 
-                class YOUR-PUSH-LISTENER-SERVICE-NAME : GcmListenerService() {
-                    companion object {
-                        private val LOG_TAG = this::class.java.simpleName
-                        const val ACTION_PUSH_NOTIFICATION: String = "push-notification"
-                        const val INTENT_SNS_NOTIFICATION_FROM: String = "from"
-                        const val INTENT_SNS_NOTIFICATION_DATA: String = "data"
+                import java.util.HashMap
 
-                        // Helper method to extract push message from bundle.
-                        fun getMessage(data: Bundle) =
-                            if (data.containsKey("default")
-                                data.getString("default")
-                            else
-                                data.getString("message", "")
+                class PushListenerService : FirebaseMessagingService() {
+
+                    override fun onNewToken(token: String?) {
+                        super.onNewToken(token)
+
+                        Log.d(TAG,"Registering push notifications token: " + token!!)
+                        MainActivity.getPinpointManager(applicationContext)?.notificationClient?.registerDeviceToken(token)
                     }
 
-                    private fun broadcast(from: String, data: Bundle) {
-                        val intent = Intent(ACTION_PUSH_NOTIFICATION).apply {
-                            putExtra(INTENT_SNS_NOTIFICATION_FROM, from)
-                            putExtra(INTENT_SNS_NOTIFICATION_DATA, data)
-                        }
-                        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
-                    }
+                    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+                        super.onMessageReceived(remoteMessage)
+                        Log.d(TAG,"Message: " + remoteMessage?.data)
 
-                    override fun onMessageReceived(from: String?, data: Bundle?) {
-                        Log.d(LOG_TAG, "From: $from")
-                        Log.d(LOG_TAG, "Data: $data")
+                        val notificationClient = MainActivity.getPinpointManager(applicationContext)?.notificationClient
 
-                        val notificationClient = MainActivity.pinpointManager!!.notificationClient!!
-                        val pushResult = notificationClient.handleGCMCampaignPush(from, data, this::class.java)
-                        if (pushResult != NotificationClient.CampaignPushResult.NOT_HANDLED) {
-                            // The push message was due to a Pinpoint campaign
-                            // If the app was in the background, a local notification was added
-                            // in the notification center. If the app was in the foreground, an
-                            // event was recorded indicating the app was in the foreground,
-                            // for the demo, we will broadcast the notification to let the main
-                            // activity display it in a dialog.
-                            if (pushResult == NotificationClient.CampaignPushResult.APP_IN_FOREGROUND) {
-                                data.putString("message", "Received Campaign Push:\n$data")
-                                broadcast(from, data)
+                        val notificationDetails = NotificationDetails.builder()
+                                .from(remoteMessage?.from)
+                                .mapData(remoteMessage?.data)
+                                .intentAction(NotificationClient.FCM_INTENT_ACTION)
+                                .build()
+
+                        val pushResult = notificationClient?.handleCampaignPush(notificationDetails)
+
+                        if (NotificationClient.CampaignPushResult.NOT_HANDLED != pushResult) {
+                            /**
+                             * The push message was due to a Pinpoint campaign.
+                             * If the app was in the background, a local notification was added
+                             * in the notification center. If the app was in the foreground, an
+                             * event was recorded indicating the app was in the foreground,
+                             * for the demo, we will broadcast the notification to let the main
+                             * activity display it in a dialog.
+                             */
+                            if (NotificationClient.CampaignPushResult.APP_IN_FOREGROUND == pushResult) {
+                                /* Create a message that will display the raw data of the campaign push in a dialog. */
+                                val dataMap = HashMap(remoteMessage?.data)
+                                broadcast(remoteMessage?.from, dataMap)
                             }
                             return
                         }
                     }
-                }
 
-         #. Add code to react to your push listener service.
+                    private fun broadcast(from: String?, dataMap: HashMap<String, String>) {
+                        val intent = Intent(ACTION_PUSH_NOTIFICATION)
+                        intent.putExtra(INTENT_SNS_NOTIFICATION_FROM, from)
+                        intent.putExtra(INTENT_SNS_NOTIFICATION_DATA, dataMap)
+                        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+                    }
 
-            Place the following code where you want your app to react to incoming notifications.
-
-            .. code-block:: kotlin
-
-                import android.app.Activity;
-                import android.app.AlertDialog;
-                import android.content.BroadcastReceiver;
-                import android.content.Context;
-                import android.content.Intent;
-                import android.content.IntentFilter;
-                import android.support.v4.content.LocalBroadcastManager;
-                import android.support.v7.app.AppCompatActivity;
-                import android.os.Bundle;
-                import android.util.Log;
-
-                class MainActivity : AppCompatActivity() {
                     companion object {
-                        // ...
+                        val TAG = PushListenerService.javaClass.simpleName
 
-                        val notificationReceiver = object : BroadcastReceiver() {
-                            override fun onReceive(context: Context, intent: Intent) {
-                                Log.d(LOG_TAG, "Received notification from local broadcast.")
+                        // Intent action used in local broadcast
+                        val ACTION_PUSH_NOTIFICATION = "push-notification"
+                        // Intent keys
+                        val INTENT_SNS_NOTIFICATION_FROM = "from"
+                        val INTENT_SNS_NOTIFICATION_DATA = "data"
 
-                                val data = intent.getBundleExtra(PushListenerService.INTENT_SNS_NOTIFICATION_DATA)
-                                val message = PushListenerService.getMessage(data)
-
-                                // Uses anko library to display an alert dialog
-                                alert(message) {
-                                    title = "Push notification"
-                                    positiveButton("OK") { /* Do nothing */ }
-                                }.show()
-                            }
+                        /**
+                         * Helper method to extract push message from bundle.
+                         *
+                         * @param data bundle
+                         * @return message string from push notification
+                         */
+                        fun getMessage(data: Bundle): String {
+                            return (data.get("data") as HashMap<*, *>).toString()
                         }
                     }
-
-                    override fun onPause() {
-                        super.onPause()
-                        LocalBroadcastManager.getInstance(this).unregisterReceiver(notificationReceiver)
-                    }
-
-                    override fun onResume() {
-                        super.onResume()
-                        LocalBroadcastManager.getInstance(this).registerReceiver(notificationReceiver,
-                            IntentFilter(PushListenerService.ACTION_PUSH_NOTIFICATION))
-                    }
-
-                    // ...
                 }
 
    iOS - Swift
@@ -661,7 +627,7 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
 
          .. code-block:: swift
 
-             // . . .
+             // . . . other app delegate methods
 
                  func application(
                      _ application: UIApplication,
@@ -690,11 +656,15 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
                              alert, animated: true, completion:nil)
                      }
                  }
-             // . . .
+
+             // . . . other app delegate methods
              }
 
-      #. Add the following code in the :code:`ViewController` where you request notification
-         permissions.
+         .. note::
+
+            If you already have push notification delegate methods, you can just add the :code:`interceptDidRegisterForRemoteNotifications` and :code:`interceptDidReceiveRemoteNotification` callbacks to Pinpoint client.
+
+      #. Add the following code in the :code:`ViewController` where you want to request notification permissions. Adding this code will prompt the end user to give permissions for receiving push notifications.
 
          .. code-block:: swift
 
@@ -704,8 +674,7 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
              UIApplication.shared.registerUserNotificationSettings(notificationSettings)
              UIApplication.shared.registerForRemoteNotifications()
 
-      #. In Xcode, choose your app target in the Project Navigator, choose :guilabel:`Capabilities`,
-         turn on :guilabel:`Push Notifications`.
+      #. In Xcode Project Navigator, choose your app name at the top, choose your app name under :guilabel:`Targets`, then choose the :guilabel:`Capabilities` tab, and turn on :guilabel:`Push Notifications`.
 
          .. image:: images/xcode-turn-on-push-notification.png
             :scale: 100
@@ -721,9 +690,37 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
             .. image:: images/xcode-turn-on-push-notification.png
                :scale: 75
 
-      #. Build and run your app using information at `Building the Sample iOS App From AWS Mobile
-         Hub <http://docs.aws.amazon.com/pinpoint/latest/developerguide/getting-started-ios-sampleapp.html>`__.
+      #. Configure the app to run in the :guilabel:`Release` profile instead of the default :guilabel:`Debug` profile. Perform the following steps to get a notification to the device:
 
+         #. For your app target, go to the :guilabel:`General` tab of project configuration and make sure :guilabel:`Automatically Manage Signing` checkbox is not checked.
 
+         #. In the :guilabel:`Signing(Release)` section, choose the production provisioning profile you created on Apple developer console. For testing push notifications on a device, you will need an `Ad Hoc Provisioining Profile <https://help.apple.com/xcode/mac/current/#/dev4335bfd3d>`__ configured with a Production AppStore and Ad Hoc certificate, and with the device(s) to be used for testing.
+
+         #. In the top left corner of Xcode (where your app name is displayed next to the current build target device), choose on your app name and then select :guilabel:`Edit Scheme`, and then set :guilabel:`Build configuration` to :code:`Release`
+
+            Run your app on an iPhone device to test. Push notifications are not supported on simulators.
+
+         #. Xcode will give an error that it could not run the app, this is due to production profile apps not being allowed to debug. Click :code:`Ok` and launch the app directly from the device.
+
+         #. When prompted, chose to allow notifications for the device.
+
+         #. To create a new campaign to send notifications to your app from the Amazon Pinpoint console run the following command from your app project folder.
+
+            .. code-block:: none
+
+               $ cd YOUR_APP_PROJECT_FOLDER
+               $ amplify notifications console
+
+         #. Provide a campaign name, choose :guilabel:`Next`, then choose :guilabel:`Filter by standard attributes` and choose iOS as the platform.
+
+         #. You should see 1 device as a targeted endpoint, which is the app we are running on the iPhone device. Choose the option and then choose :guilabel:`Next Step`.
+
+         #. Provide text for a sample title and body for push notification, and then choose :guilabel:`Next Step`.
+
+         #. Choose :guilabel:`Immediate`, and then choose :guilabel:`Next Step`.
+
+         #. Review the details on the screen, then choose :guilabel:`Launch Campaign`.
+
+         #. A notification should appear on the iPhone device. You may want to try testing your app receiving notifications when it is in the foreground and when closed.
 
 
