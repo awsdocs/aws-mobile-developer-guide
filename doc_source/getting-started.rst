@@ -154,7 +154,7 @@ Step 2: Set Up Your Backend
 
             $ amplify push
 
-          In the Finder, navigate to the folder containing your app :file:`.xcodeproject` file. From there, drag and drop :code:`awsconfiguration.json` into Xcode under the top Project Navigator folder (the folder name should match your Xcode project name). In the :guilabel:`Options` dialog box that appears:
+          In the Finder, navigate to the folder containing your app :file:`.xcodeproj` file. From there, drag and drop :code:`awsconfiguration.json` into Xcode under the top Project Navigator folder (the folder name should match your Xcode project name). In the :guilabel:`Options` dialog box that appears:
 
           * Uncheck :guilabel:`Copy items if needed`.
 

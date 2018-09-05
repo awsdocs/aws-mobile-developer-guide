@@ -243,9 +243,6 @@ Connect to your backend
 
       #. From the location where you downloaded the data model file(s), drag and drop each file with the form of :file:`{your-table-name}.swift` into the folder that contains your :file:`AppDelegate.swift`. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups`, if these options are offered.
 
-         .. list-table::
-            :widths: 1 6
-
 
 .. _mobile-hub-add-aws-mobile-nosql-database-crud:
 

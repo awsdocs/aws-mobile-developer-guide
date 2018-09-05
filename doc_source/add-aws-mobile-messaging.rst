@@ -85,7 +85,7 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
 
    #. In a terminal window, use the following command to open the project for your app by in the Amazon Pinpoint console.
 
-      .. code-block::
+      .. code-block:: none
 
          $ cd YOUR_APP_PROJECT_FOLDER
          $ amplify console analytics

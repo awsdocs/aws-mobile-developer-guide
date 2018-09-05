@@ -1,12 +1,3 @@
-.. Copyright 2010-2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-   This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0
-   International License (the "License"). You may not use this file except in compliance with the
-   License. A copy of the License is located at http://creativecommons.org/licenses/by-nc-sa/4.0/.
-
-   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-   either express or implied. See the License for the specific language governing permissions and
-   limitations under the License.
 
 .. _tutorial-ios-aws-mobile-notes-data:
 
@@ -14,31 +5,20 @@
 Add Serverless Backend to the Notes App
 #######################################
 
-In the :ref:`previous section <tutorial-ios-aws-mobile-notes-auth>` of this tutorial, we added a simple sign-up / sign-in flow to the sample note-taking app with email validation. This tutorial assumes you have completed the previous tutorials. If you jumped to this step, please go back and :ref:`start from
-the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we will add a NoSQL
-database to our mobile backend, then configure a basic data access provider to the note-taking app.
+In the :ref:`previous section <tutorial-ios-aws-mobile-notes-auth>` of this tutorial, we added a simple sign-up / sign-in flow to the sample note-taking app with email validation. This tutorial assumes you have completed the previous tutorials. If you jumped to this step, please go back and :ref:`start from the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we will add a GraphQL API backed by a NoSQL database to our mobile backend, then configure a basic data access provider to the note-taking app.
 
-The notes app uses iOS `Core Data <https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CoreData/index.html>`__ as a persistence framework. :code:`NotesContentProvider.swift` is custom content provider used as a clean interface for managing your application content locally. In the following steps, you will modify the content provider code to use DynamoDB and sync with the local Core data.
-
-You should be able to complete this section of the tutorial in about 45 minutes.
+You should be able to complete this section of the tutorial in 45-60 minutes.
 
 Add data access API to the backend
 ----------------------------------
 
 #. In a terminal window, create a :file:`server` directory under the root of iOS notes tutorial project folder.
 
-   .. code-block:: bash
-
-      $ cd ~/aws-mobile-ios-notes-tutorial-master/
-      $ mkdir server
-      $ cd ~/aws-mobile-ios-notes-tutorial-master/server/
-
 #. Inside the :file:`server` directory, create a new file called :userinput:`schema-model.graphql` using your favorite text editor.
-   e.g. ~/aws-mobile-ios-notes-tutorial-master/server/schema-model.graphql
 
-#. Copy the following code into the :file:`schema-model.graphql` file:
+#. Copy the following schema definition into the :file:`schema-model.graphql` file:
 
-   .. code-block:: none
+   .. code-block:: graphql
 
       type Note @model @auth(rules:[{allow: owner}]) {
          id: ID!
@@ -67,26 +47,26 @@ Add data access API to the backend
 
 The AWS CloudFormation template that is generated creates an Amazon DynamoDB table that is protected by Amazon Cognito user pool authentication.  Access is provided by AWS AppSync.  AWS AppSync will tag each record that is inserted into the database with the user ID of the authenticated user.  The authenticated user will only be able to read the records that they own.
 
-In addition to updating the :file:`awsconfiguration.json` file, the Amplify CLI will also generate the :file:`schema.graphql` file under the :file:`./aws-mobile-ios-notes-tutorial-master/amplify/backend/api/YOURAPI/build` directory. The :file:`schema.graphql` file will be used by the Amplify CLI to run code generation for GraphQL operations.
+In addition to updating the :file:`awsconfiguration.json` file, the Amplify CLI will also generate the :file:`schema.graphql` file under the :file:`./amplify/backend/api/YOURAPI/build` directory. The :file:`schema.graphql` file will be used by the Amplify CLI to run code generation for GraphQL operations.
 
-Code Generation for the API
----------------------------
+Generate an API stub class
+--------------------------
 
-To integrate our iOS notes app with AWS AppSync, we need to generate strongly typed Swift API code based on the GraphQL notes schema and operations. This Swift API code is a class that helps you create native Swift request and response data objects for persisting notes in the cloud.
+To integrate the iOS notes app with AWS AppSync, we need to generate strongly typed Swift API code based on the GraphQL notes schema and operations. This Swift API code is a class that helps you create native Swift request and response data objects for persisting notes in the cloud.
 
-To interact with AWS AppSync, our iOS client needs to define GraphQL queries and mutations which are converted to strongly typed Swift objects by the Amplify codegen step below.
+To interact with AWS AppSync, the iOS client needs to define GraphQL queries and mutations which are converted to strongly typed Swift objects by the Amplify codegen step below.
 
-#. In your project folder, create a new folder called :file:`GraphQLOperations`:
+#. In Xcode, create a new folder called :file:`GraphQLOperations`:
 
-   *  Right-click on :file:`MyNotes` in the Xcode project navigation, and choose :guilabel:`New Group...`
+   *  In the Xcode Project Navigator, right-click on the :file:`MyNotes` folder that is a child of the top-level :file:`MyNotes` project. Choose :guilabel:`New Group...`
    *  Enter the name :userinput:`GraphQLOperations`.
 
 #. Create a new file under the :file:`GraphQLOperations` folder called :file:`notes-operations.graphql`:
 
-   *  Right-click on :file:`GraphQLOperations` in the Xcode project navigation, and choose :guilabel:`New File...`
-   *  Enter :userinput:`Empty` in the :guilabel:`Filter` box.
-   *  Choose :guilabel:`Empty` under :guilabel:`Other`, then choose :guilabel:`Next`.
-   *  Enter :userinput:`notes-operations.graphql` in the :guilabel:`Save As` field, then choose :guilabel:`Create`.
+   *  In the Xcode Project Navigator, right-click on the :file:`GraphQLOperations` folder you created, and choose :guilabel:`New File...`
+   *  For :guilabel:`Filter` box, enter :userinput:`Empty`.
+   *  In the :guilabel:`Other` section, choose :guilabel:`Empty`, and then choose :guilabel:`Next`.
+   *  For :guilabel:`Save As`, enter :userinput:`notes-operations.graphql`, and then choose :guilabel:`Create`.
 
 #. Paste the following operations into the newly created file.
 
@@ -139,8 +119,8 @@ To interact with AWS AppSync, our iOS client needs to define GraphQL queries and
 
       $ amplify add codegen
 
-   Provide the path to :file:`notes-operations.graphql` when asked for the queries, mutations, and subscriptions. Enter :file:`NotesAPI.swift` when prompted for generated code file name.
-   When asked if ou want to generate code, choose Yes.
+   - The file name pattern of graphql queries: :userinput:`./MyNotes/GraphQLOperations/notes-operations.graphql`
+   - The file name for the generated code: :userinput:`NotesAPI.swift`
 
 You should now have a :file:`NotesAPI.swift` file in the root of your project.
 
@@ -192,17 +172,19 @@ Add NotesAPI.swift to your Xcode project
 
       $ open MyNotes.xcworkspace
 
-#. Drag the :file:`NotesAPI.swift` file from your project folder into the Xcode project. Uncheck :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog.
-   Note: We are unchecking :guilabel:`Copy items if needed` as we only want a reference to :file:`NotesAPI.swift` file in your Xcode project so the Amplify CLI can keep it in sync if backend API changes are made.
+#. Drag the :file:`NotesAPI.swift` file from your project folder into the Xcode project. Uncheck :guilabel:`Copy items if needed` in the options dialog.  Unchecking :guilabel:`Copy items if needed` will ensure that the Amplify CLI can re-generate the :file:`NotesAPI.swift` file when we change the schema.
 
 #. Choose :guilabel:`Finish`.
 
 You have now created the AWS resources you need and connected them to your app.
 
-AWS AppSync Client Configuration
---------------------------------
+Create an AWS AppSync authentication context
+--------------------------------------------
 
-#. Create a new Swift class called :file:`MyCognitoUserPoolsAuthProvider.swift` and paste in the following code:
+#. Right-click on the :file:`MyNotes` directory within the Xcode project explorer, and choose :guilabel:`New File...`
+#. Choose :guilabel:`Swift File`, then choose :guilabel:`Next`.
+#. Enter the name :userinput:`MyCognitoUserPoolsAuthProvider.swift`, then choose :guilabel:`Create`.
+#. Copy the following code into the newly created file:
 
    .. code-block:: swift
 
@@ -221,396 +203,141 @@ AWS AppSync Client Configuration
          }
       }
 
-#. Add the following imports to the top of the :file:`AppDelegate.swift` class file:
+Create an AWS AppSync DataService class
+---------------------------------------
+
+All data access is already routed through a :file:`DataService` protocol, which has a concrete implementation in :file:`MockDataService.swift`.  We will now replace the mock data service with an implementation that reads and writes data to AWS AppSync.
+
+#. Right-click on the :file:`MyNotes` directory within the Xcode project explorer, and choose :guilabel:`New File...`
+#. Choose :guilabel:`Swift File`, then choose :guilabel:`Next`.
+#. Enter the name :userinput:`AWSDataService.swift`, then choose :guilabel:`Create`.
+#. Copy the following code into the newly created file:
 
    .. code-block:: swift
 
-      import UIKit
-      import CoreData
-
-      // Anaytics imports
       import AWSCore
-      import AWSPinpoint
-
-      // Auth imports
-      import AWSMobileClient
-
-      // AppSync
       import AWSAppSync
 
-#. Add the :code:`AWSAppSyncClient` definition at the top of your :file:`AppDelegate.swift` class:
+      class AWSDataService : DataService {
 
-   .. code-block:: swift
+          // AWS AppSync Client
+          var appSyncClient: AWSAppSyncClient?
+          let databaseURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent("appsync.db")
 
-      var window: UIWindow?
-      var pinpoint: AWSPinpoint?
+          // Notes
+          var notes = [Note]()
 
-      // AWS AppSync Client
-      var appSyncClient: AWSAppSyncClient?
+          init() {
+              do {
+                  // Initialize the AWS AppSync configuration
+                  let appSyncConfig = try AWSAppSyncClientConfiguration(appSyncClientInfo: AWSAppSyncClientInfo(),
+                                            userPoolsAuthProvider: MyCognitoUserPoolsAuthProvider(),
+                                            databaseURL:databaseURL)
+                  // Initialize the AWS AppSync client
+                  appSyncClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
+              } catch {
+                  print("Error initializing appsync client. \(error)")
+              }
+          }
 
-#. Initialize the :code:`appSyncClient` in the :code:`didFinishLaunchingWithOptions` function of your :file:`AppDelegate.swift` class:
+          // DynamoDB does not accept blanks, so we use a space instead - this converts back to blanks
+          func convertNote(id: String?, title: String?, content: String?) -> Note {
+              var note = Note()
+              note.id = id
+              note.title = (title == " ") ? "" : title
+              note.content = (content == " ") ? "" : content
+              return note
+          }
 
-   .. code-block:: swift
+          func getNote(_ noteId: String, onCompletion: @escaping (Note?, Error?) -> Void) {
+              appSyncClient?.fetch(query: GetNoteQuery(id: noteId)) { (result, error) in
+                  if let result = result {
+                      onCompletion(self.convertNote(id: result.data?.getNote?.id, title: result.data?.getNote?.title, content:    result.data?.getNote?.content), nil)
+                  } else {
+                      onCompletion(nil, error)
+                  }
+              }
+          }
 
-      // Place immediately after the pinpoint definition and before the return statement of the :code:`didFinishLaunchingWithOptions` function.
-      let database_name = "appsync.db"
-      let databaseURL = URL(fileURLWithPath:NSTemporaryDirectory()).appendingPathComponent(database_name)
+          func loadNotes(onCompletion: @escaping ([Note]?, Error?) -> Void) {
+              var myNotes: [Note]? = nil
+              appSyncClient?.fetch(query: ListNotesQuery(), cachePolicy: .fetchIgnoringCacheData) { (result, error) in
+                  if let result = result {
+                      myNotes = [Note]()
+                      for item in (result.data?.listNotes?.items)! {
+                          let note = self.convertNote(id: item?.id, title: item?.title, content: item?.content)
+                          myNotes?.append(note)
+                      }
+                      onCompletion(myNotes, nil)
+                  } else {
+                      onCompletion(nil, error)
+                  }
+              }
+          }
 
-      do {
-         // Initialize the AWS AppSync configuration
-         let appSyncConfig = try AWSAppSyncClientConfiguration(appSyncClientInfo: AWSAppSyncClientInfo(),
-                                                               userPoolsAuthProvider: MyCognitoUserPoolsAuthProvider(),
-                                                               databaseURL:databaseURL)
+          func updateNote(_ note: Note, onCompletion: @escaping (Note?, Error?) -> Void) {
+              // DynamoDB doesn't accept empty values, so check first and add an extra space if empty
+              let noteTitle = (note.title ?? "").isEmpty ? " " : note.title
+              let noteContent = (note.content ?? "").isEmpty ? " " : note.content
 
-         // Initialize the AWS AppSync client
-         appSyncClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
-      } catch {
-         print("Error initializing appsync client. \(error)")
+              if (note.id == nil) { // Create
+                  let createNoteInput = CreateNoteInput(title: noteTitle!, content: noteContent!)
+                  let createMutation = CreateNoteMutation(input: createNoteInput)
+                  appSyncClient?.perform(mutation: createMutation, resultHandler: { (result, error) in
+                      if let result = result {
+                          let item = result.data?.createNote
+                          onCompletion(self.convertNote(id: item?.id, title: item?.title, content: item?.content), nil)
+                      } else if let error = error {
+                          onCompletion(nil, error)
+                      }
+                  })
+              } else { // Update
+                  let updateNoteInput = UpdateNoteInput(id: note.id!, title: noteTitle, content: noteContent)
+                  let updateMutation = UpdateNoteMutation(input: updateNoteInput)
+                  appSyncClient?.perform(mutation: updateMutation, resultHandler: { (result, error) in
+                      if let result = result {
+                          let item = result.data?.updateNote
+                          onCompletion(self.convertNote(id: item?.id, title: item?.title, content: item?.content), nil)
+                      } else if let error = error {
+                          onCompletion(nil, error)
+                      }
+                  })
+              }
+          }
+
+          func deleteNote(_ noteId: String, onCompletion: @escaping (Error?) -> Void) {
+              let deleteMutation = DeleteNoteMutation(id: noteId)
+              appSyncClient?.perform(mutation: deleteMutation, resultHandler: { (result, error) in
+                  if result != nil {
+                      onCompletion(nil)
+                  } else if let error = error {
+                      onCompletion(error)
+                  }
+              })
+          }
       }
 
-      return didFinishLaunching
+Register the AWS Data Service
+-----------------------------
 
-#. Adjust the :code:`splitViewController()` method in :code:`AppDelegate.swift` as follows:
-
-   .. code-block:: swift
-
-
-#. Add the following imports to the top of the :file:`Data/NotesContentProvider.swift` file:
-
-   .. code-block:: swift
-
-      // . . .
-
-      // AWS AppSync
-      import AWSAppSync
-      import AWSAuthCore
-
-#. Add the :code:`AWSAppSyncClient` definition and init() code near the top of the :file:`Data/NotesContentProvider.swift` class:
-
-   .. code-block:: swift
-
-      var appSyncClient: AWSAppSyncClient?
-
-      public init() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appSyncClient = appDelegate.appSyncClient
-      }
-
-Add the Create, Update, and Delete Mutations
---------------------------------------------
-
-:code:`Data/NotesContentProvider` is the basic interface the app uses to communicate with your API data. Mutation events handle the CRUD operations when you call its :code:`createNote`, :code:`updateNote`, and :code:`deleteNote` functions.
-
-#. Add insert, update, and delete functions to the NotesContentProvider class as follows:
-
-   .. code-block:: swift
-
-      // Insert note
-      func insertNote(completionHandler: @escaping ((String?, Error?) -> Void)) {
-            var noteId = ""
-            let noteTitle = " "
-            let noteContent = " "
-            let createNoteInput = CreateNoteInput(title: noteTitle, content: noteContent)
-            let mutation = CreateNoteMutation(input: createNoteInput)
-            appSyncClient?.perform(mutation: mutation, resultHandler: { (result, error) in
-                if let result = result {
-                    guard result.data?.createNote?.id != nil else {
-                        return
-                    }
-                    noteId = (result.data?.createNote?.id)!
-                    self.sendNoteEvent(noteId: noteId, eventType: noteEventType.AddNote.rawValue)
-                    completionHandler(noteId, nil)
-                } else if let error = error {
-                    print(error.localizedDescription)
-                }
-            })
-      }
-
-      // Update note
-      func updateNote(noteId: String, noteTitle: String, noteContent: String)  {
-
-            let updateNoteInput = UpdateNoteInput(id: noteId, title: noteTitle, content: noteContent)
-            let mutation = UpdateNoteMutation(input: updateNoteInput)
-
-            appSyncClient?.perform(mutation: mutation, resultHandler: { (result, error) in
-                if let result = result {
-                } else if let error = error {
-                    print(error.localizedDescription)
-                }
-            })
-       }
-
-      // Delete note
-      public func deleteNote(noteId: String!, completionHandler: @escaping (Error?) -> Void)  {
-
-            let mutation = DeleteNoteMutation(id: noteId)
-
-            appSyncClient?.perform(mutation: mutation, resultHandler: { (result, error) in
-                if let result = result {
-                    self.sendNoteEvent(noteId: noteId, eventType: noteEventType.DeleteNote.rawValue)
-                    completionHandler(nil)
-                } else if let error = error {
-                    print(error.localizedDescription)
-                    completionHandler(error)
-                }
-            })
-      }
-
-
-Add the GraphQL query functions
--------------------------------
-
-Add the following query functions just below the init() function in the :file:`Data/NotesContentProvider.swift` class:
+Register the new data service in the :file:`AppDelegate.swift` file:
 
 .. code-block:: swift
 
-   func getNote(id: String) -> GetNoteQuery.Data.GetNote {
-        var myNote: GetNoteQuery.Data.GetNote? = nil
-        appSyncClient?.fetch(query: GetNoteQuery(id: id)) { (result, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-                return
-            }
-            myNote = (result?.data?.getNote)!
-            print("myNote: \(myNote)")
-        }
-        return myNote!
-   }
+    // Initialize the analytics service
+    // analyticsService = LocalAnalyticsService()
+    analyticsService = AWSAnalyticsService()
 
-   func loadNotes(completionHandler: @escaping ([ListNotesQuery.Data.ListNote.Item?]?, Error? ) -> Void) {
-        var myNotes: [ListNotesQuery.Data.ListNote.Item?] = []
-        appSyncClient?.fetch(query: ListNotesQuery(), cachePolicy: .returnCacheDataDontFetch) { (result, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-                return
-            }
-            myNotes = (result?.data?.listNotes?.items)!
-            completionHandler(myNotes, nil)
-            print("myNotes: \(myNotes)")
-        }
-   }
-
-    func loadNotesFromNetwork(completionHandler: @escaping ([ListNotesQuery.Data.ListNote.Item?]?, Error? ) -> Void) {
-        var myNotes: [ListNotesQuery.Data.ListNote.Item?] = []
-        appSyncClient?.fetch(query: ListNotesQuery(), cachePolicy: .fetchIgnoringCacheData) { (result, error) in
-            if error != nil {
-                print(error?.localizedDescription)
-                return
-            }
-            myNotes = (result?.data?.listNotes?.items)!
-            completionHandler(myNotes, nil)
-            print("myNotes: \(myNotes)")
-        }
-    }
-
-Update the local operations for remote GraphQL calls
-----------------------------------------------------
-
-Calls to insert, update, delete, and query are made in :code:`MasterViewController` and :code:`DetailsViewController` classes.
-
-#. Replace :code:`autoSave()` function code in the :code:`DetailViewController` class with the following:
-
-   .. code-block:: swift
-
-      func autoSave() {
-        // If this is a NEW note, set the Note Id
-        if (self.noteId == nil) // Insert
-        {
-            noteContentProvider?.insertNote() { (noteId, error) in
-                if error == nil {
-                    self.noteId = noteId!
-                }
-            }
-        }
-        else // Update
-        {
-            let noteId = self.noteId
-            let noteTitle = self.noteTitle.text
-            let noteContent = self.noteContent.text
-            noteContentProvider?.updateNote(noteId: noteId!, noteTitle: noteTitle!, noteContent: noteContent!)
-        }
-    }
-
-#. Replace the :code:`configureView()` function code in the :code:`DetailViewController` class with the following:
-
-    .. code-block:: swift
-
-       // Display the note title and content
-       func configureView() {
-            DispatchQueue.main.async {
-                self.noteTitle?.text = self.appsyncNote?.title
-                self.noteContent.text = self.appsyncNote?.content
-            }
-       }
-
-#. Remove the static reference to :code:`noteId` and add a new definition for :code:`appsyncNote` at the top of the :code:`DetailViewController` class
-
-   .. code-block:: swift
-
-   var noteId: String?
-
-   // AppSync version of the note
-   var appsyncNote: ListNotesQuery.Data.ListNote.Item? {
-       didSet {
-           self.noteId = appsyncNote?.id
-           configureView()
-       }
-   }
-
-#. Remove the definition for :code:`myNote` in the :code:`DetailViewController` class:
-
-   .. code-block:: swift
-
-      //    var myNote: Note? {
-      //        didSet {
-      //            // Set the note Id if passed in from the MasterView
-      //            DetailViewController.noteId = myNote?.value(forKey: "noteId") as? String
-      //            // Update the view with passed in note title and content.
-      //            configureView()
-      //        }
-      //    }
-
-#. Replace the :code:`viewWillDisappear` and :code:`viewDidDisappear` functions in the :code:`DetailViewController` class as follows:
-
-    .. code-block:: swift
-
-       override func viewWillDisappear(_ animated: Bool) {
-            // Stop the auto-save timer
-            if autoSaveTimer != nil {
-                autoSaveTimer.invalidate()
-            }
-
-            // Update the note one last time unless a note was never created
-            let noteId = self.noteId
-            if  noteId != nil {
-                noteContentProvider?.updateNote(noteId: (noteId)!, noteTitle: self.noteTitle.text!, noteContent: self.noteContent.text!) //Core Data
-            }
-       }
-
-       override func viewDidDisappear(_ animated: Bool) {
-            self.noteId = nil
-       }
-
-#. Replace the prepare segue in the :code:`MasterViewController` class with the follwoing:
-
-   .. code-block:: swift
-
-      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let sender = sender as? ListNotesQuery.Data.ListNote.Item {
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                let appsyncNote = sender
-                controller.appsyncNote = appsyncNote
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
-      }
-
-#. At the top of the :code:`MasterViewController.swift` class, add the following code:
-
-   .. code-block:: swift
-
-      var notes: [NSManagedObject] = []
-      var notesList: [ListNotesQuery.Data.ListNote.Item?]? = [] {
-        didSet {
-            tableView.reloadData()
-        }
-      }
-
-#. Add this new function to :code:`MasterViewController.swift` class just before the configureCell function
-
-   .. code-block:: swift
-
-      func loadNotesFromNetwork() {
-         _noteContentProvider?.loadNotesFromNetwork() { (notes, error) in
-             DispatchQueue.main.async {
-                 self.notesList = notes
-            }
-         }
-      }
-
-#. Update the :code:`viewDidLoad()` function in the :code:`MasterViewController.swift` class by adding the following code to the bottom of the :code:`viewDidLoad()` function:
-
-   .. code-block:: swift
-
-      _noteContentProvider?.loadNotes() { (notes, error) in
-            DispatchQueue.main.async {
-                self.notesList = notes
-            }
-      }
-      self.tableView.dataSource = self
-      self.tableView.delegate = self
-
-#. Replace the :code:`tableView()` used for handling note deletion in the :code:`MasterViewController.swift` class wtih the following:
-
-   .. code-block:: swift
-
-      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                let noteId = notesList![indexPath.row]?.id
-                _noteContentProvider?.deleteNote(noteId: noteId!) { (error) in
-                    if error == nil {
-                        self.loadNotesFromNetwork()
-                    }
-                }
-
-            }
-      }
-
-#. Replace the :code:`configureCell()` function in the :code:`MasterViewController.swift` class with the following:
-
-   .. code-block:: swift
-
-      func configureCell(_ cell: UITableViewCell, withEvent note: ListNotesQuery.Data.ListNote.Item) {
-        cell.textLabel!.text = "Title: " + note.title
-        cell.detailTextLabel?.text = note.content
-      }
-
-#. Replace the following functions in the :code:`MasterViewController.swift` class:
-
-   .. code-block:: swift
-
-      override func numberOfSections(in tableView: UITableView) -> Int {
-            return 1
-      }
-
-      override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return notesList?.count ?? 0
-      }
-
-      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-          let cellIdentifier = "ElementCell"
-          let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
-                    ?? UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
-          let note = notesList![indexPath.row]!
-          configureCell(cell, withEvent: note)
-          return cell
-      }
-
-#. Replace the controller for the table in the :code:`MasterViewController.swift` class:
-
-   .. code-block:: swift
-
-      // Called when user swipes and selects "Delete"
-      func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-          switch type {
-              case .insert:
-                  tableView.insertRows(at: [newIndexPath!], with: .fade)
-              case .delete:
-                  tableView.deleteRows(at: [indexPath!], with: .fade)
-              case .update:
-                  configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! ListNotesQuery.Data.ListNote.Item)
-              case .move:
-                  configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! ListNotesQuery.Data.ListNote.Item)
-                  tableView.moveRow(at: indexPath!, to: newIndexPath!)
-          }
-      }
+    // Initialize the data service
+    // dataService = MockDataService()
+    dataService = AWSDataService()
 
 Run the application
 -------------------
 
-Run the application in an iOS simulator. Note: You must be online in order to run this application.
+Run the application in an iOS simulator and perform some operations.  Create a couple of notes and delete a note.
+
+**Note**: You must be online in order to run this application.
 
 #. Open the `DynamoDB console <https://console.aws.amazon.com/dynamodb/home/>`__.
 #. Choose :guilabel:`Tables` in the left-hand menu.

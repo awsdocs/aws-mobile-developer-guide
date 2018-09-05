@@ -12,22 +12,21 @@ A Simple Note-taking App
 
    Analytics <tutorial-ios-aws-mobile-notes-analytics>
    Authentication <tutorial-ios-aws-mobile-notes-auth>
-..   Serverless Backend <tutorial-ios-aws-mobile-notes-data>
+   Serverless Backend <tutorial-ios-aws-mobile-notes-data>
 
 Start with a working app and then add cloud enable features. In this tutorial, you will take a working app, driven from locally stored data, and then:
 
-- :ref:`Add analytics to your app <tutorial-ios-aws-mobile-notes-analytics>` so you can view demographic information about your users.
+- :ref:`Add analytics to your app <tutorial-ios-aws-mobile-notes-analytics>`, so you can view demographic information about your users.
 
 - :ref:`Add a simple sign-in/sign-up flow <tutorial-ios-aws-mobile-notes-auth>` for authentication.
 
-.. - :ref:`Access data stores in the AWS <tutorial-ios-aws-mobile-notes-data>` cloud, so that a user's notes are available to them on any device with the app installed.
+- :ref:`Access data stores in the AWS  cloud<tutorial-ios-aws-mobile-notes-data>`, so that a users' notes are available to them on any device with the app installed.
 
 .. image:: images/tutorial-ios-notes-app-anim.gif
    :scale: 100
    :alt: Demonstration of the Notes tutorial app you can download.
 
-You should be able to complete the setup section of this tutorial within 10-15 minutes after
-you have installed all required software. Once you complete the instructions on this page, you can run the project on your local system.
+You should be able to complete the setup section of this tutorial within 10-15 minutes after you have installed all required software. Once you complete the instructions on this page, you can run the project on your local system.
 
 
 .. _ios-tutorial-notes-getting-started:
@@ -42,7 +41,7 @@ Before beginning, you must:
 #. Configure the Xcode command line tools. Run ``xcode-select --install`` from a Terminal window.
 #. Install `Cocoapods <https://cocoapods.org/>`__. From a terminal window run:
 
-   .. code-block:: bash
+   .. code-block:: none
 
       sudo gem install cocoapods
 
