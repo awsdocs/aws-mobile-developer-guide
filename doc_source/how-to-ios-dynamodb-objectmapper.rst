@@ -124,7 +124,7 @@ Book table to a ``Book`` object in the client-side code, as shown in the followi
                     @objc var Price:String?
                     @objc var ISBN:String?
 
-                    class Amazon dynamoDBTableName() -> String {
+                    class func dynamoDBTableName() -> String {
                         return "Books"
                     }
 
