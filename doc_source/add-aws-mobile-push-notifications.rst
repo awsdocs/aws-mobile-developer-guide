@@ -37,7 +37,7 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
-#. Use the CLI to add storage to your cloud-enabled back-end and app.
+#. Use the CLI to add storage to your cloud-enabled backend and app.
 
       .. container:: option
 
@@ -133,7 +133,7 @@ Use the following steps to connect add push notification backend services to you
 
                 apply plugin: 'com.google.gms.google-services'
 
-         #. Add the following to your project level :file:`build.gradle`. Make sure that you have the `google` repository specified as well:
+         #. Add the following to your project level :file:`build.gradle`. Make sure that you specify the `google` repository:
 
             .. code-block:: none
 
@@ -250,7 +250,7 @@ Use the following steps to connect add push notification backend services to you
 
                 apply plugin: 'com.google.gms.google-services'
 
-         #. Add the following to your project level :file:`build.gradle`. Make sure that you have the `google` repository specified as well:
+         #. Add the following to your project level :file:`build.gradle`. Make sure that you specify the `google` repository:
 
             .. code-block:: none
 
@@ -397,7 +397,7 @@ Use the following steps to connect add push notification backend services to you
          :code:`didFinishLaunchwithOptions` method of your app's :file:`AppDelegate.swift`. This
          will also register your device token with Amazon Pinpoint.
 
-         Note: If you have already integrated :code:`Analytics`, then you can skip this step.
+         Note: If you have already integrated :code:`Analytics`, you can skip this step.
 
          .. code-block:: swift
 
@@ -674,7 +674,7 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
              UIApplication.shared.registerUserNotificationSettings(notificationSettings)
              UIApplication.shared.registerForRemoteNotifications()
 
-      #. In Xcode Project Navigator, choose your app name at the top, choose your app name under :guilabel:`Targets`, then choose the :guilabel:`Capabilities` tab, and turn on :guilabel:`Push Notifications`.
+      #. In Xcode Project Navigator, choose your app name at the top, choose your app name under :guilabel:`Targets`, choose the :guilabel:`Capabilities` tab, and then turn on :guilabel:`Push Notifications`.
 
          .. image:: images/xcode-turn-on-push-notification.png
             :scale: 100
@@ -711,7 +711,7 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
                $ cd YOUR_APP_PROJECT_FOLDER
                $ amplify notifications console
 
-         #. Provide a campaign name, choose :guilabel:`Next`, then choose :guilabel:`Filter by standard attributes` and choose iOS as the platform.
+         #. Provide a campaign name, choose :guilabel:`Next`, choose :guilabel:`Filter by standard attributes`, and then choose iOS as the platform.
 
          #. You should see 1 device as a targeted endpoint, which is the app we are running on the iPhone device. Choose the option and then choose :guilabel:`Next Step`.
 
@@ -719,7 +719,7 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
 
          #. Choose :guilabel:`Immediate`, and then choose :guilabel:`Next Step`.
 
-         #. Review the details on the screen, then choose :guilabel:`Launch Campaign`.
+         #. Review the details on the screen, and then choose :guilabel:`Launch Campaign`.
 
          #. A notification should appear on the iPhone device. You may want to try testing your app receiving notifications when it is in the foreground and when closed.
 

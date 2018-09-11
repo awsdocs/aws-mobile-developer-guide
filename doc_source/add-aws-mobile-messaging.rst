@@ -42,11 +42,11 @@ selected a certain category in a feature of your app.
 Set Up Your Backend
 ===================
 
-To setup your app to receive Push Notifications from Amazon Pinpoint, see :ref:`Add Push Notifications to Your Mobile App with Amazon Pinpoint <add-aws-mobile-push-notifications>`.
+To set up your app to receive Push Notifications from Amazon Pinpoint, see :ref:`Add Push Notifications to Your Mobile App with Amazon Pinpoint <add-aws-mobile-push-notifications>`.
 
 To set up email or SMS as part of an Amazon Pinpoint campaign perform the following steps.
 
-To setup your app to receive Push Notifications from Amazon Pinpoint, see
+To set up your app to receive Push Notifications from Amazon Pinpoint, see
 :ref:`add-aws-mobile-push-notifications`.
 
 #. Complete the :ref:`Get Started <add-aws-mobile-sdk-basic-setup>` and :ref:`Add Analytics <add-aws-mobile-analytics>` steps before you proceed.

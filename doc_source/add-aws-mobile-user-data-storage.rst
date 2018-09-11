@@ -51,7 +51,7 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <add-aws-mobile-sdk>` steps before you proceed.
 
-#. Use the CLI to add storage to your cloud-enabled back-end and app.
+#. Use the CLI to add storage to your cloud-enabled backend and app.
 
       .. container:: option
 
@@ -85,9 +85,9 @@ Set Up Your Backend
 
         ❯ Content (Images, audio, video, etc.)
 
-#. The CLI will walk you though the options to enable Auth (if not enabled previously), to name your S3 bucket, and to decide who should have access (select ``Auth and guest users`` and ``read/write`` for both auth and guest users).
+#. The CLI walks you though the options to enable Auth (if not enabled previously), to name your S3 bucket, and to decide who should have access (select ``Auth and guest users`` and ``read/write`` for both auth and guest users).
 
-#. Confirm that you have storage and auth setup
+#. Confirm that you have storage and auth set up.
 
    .. code-block:: none
 
@@ -202,7 +202,7 @@ Use the following steps to connect add file storage backend services to your app
 
             Run :code:`pod install --repo-update` before you continue.
 
-            If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
+            If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you might need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
          #. Add the following import to the classes that perform user file storage operations:
 
@@ -299,7 +299,7 @@ Upload a File
           }
 
    Android - Kotlin
-    To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`,
+    To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`, and
     then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
 
     The following example shows how to use the :code:`TransferUtility` in the context of an Activity.

@@ -2,7 +2,7 @@
 .. _tutorial-ios-aws-mobile-notes-setup:
 
 ########################
-A Simple Note-taking App
+Tutorial: Create a Simple iOS Note-Taking App
 ########################
 
 .. toctree::
@@ -14,7 +14,7 @@ A Simple Note-taking App
    Authentication <tutorial-ios-aws-mobile-notes-auth>
    Serverless Backend <tutorial-ios-aws-mobile-notes-data>
 
-Start with a working app and then add cloud enable features. In this tutorial, you will take a working app, driven from locally stored data, and then:
+Start with a working app and then add cloud enable features. In this tutorial, you take a working app, driven from locally stored data, and then do the following:
 
 - :ref:`Add analytics to your app <tutorial-ios-aws-mobile-notes-analytics>`, so you can view demographic information about your users.
 
@@ -39,13 +39,13 @@ Before beginning, you must:
 #. Complete the `Getting Started <https://aws-amplify.github.io/media/get_started>`__ instructions to install the Amplify CLI.
 #. Install `Xcode <https://itunes.apple.com/us/app/xcode/id497799835?mt=12>`__ using the Mac App Store (version 9.0 or higher is required).
 #. Configure the Xcode command line tools. Run ``xcode-select --install`` from a Terminal window.
-#. Install `Cocoapods <https://cocoapods.org/>`__. From a terminal window run:
+#. Install `Cocoapods <https://cocoapods.org/>`__. From a terminal window run the following:
 
    .. code-block:: none
 
       sudo gem install cocoapods
 
-Download the Source code
+Download the Source Code
 ------------------------
 
 Download the `source code <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/>`__ as a `ZIP file <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/archive/master.zip>`__.
@@ -56,11 +56,11 @@ Compile and Run the Project
 To compile the source code and run the project in a simulator:
 
 #.  Unzip :file:`aws-mobile-ios-notes-tutorial-master.zip` and launch Xcode by choosing :file:`MyNotes.xcodeproj` in the expanded folder.
-#.  Select :guilabel:`Product > Build` (|Acommand|-B) to build the project.
-#.  Select any compatible simulator from the list in the toolbar at the top, next to the label with your app name.
-#.  Choose the run icon (|play|) on the top left or type |Acommand|-R to build and run the app.
+#.  Choose :guilabel:`Product > Build` (|Acommand|-B) to build the project.
+#.  In the toolbar next to the label with your app name, choose any compatible simulator from the list.
+#.  On the top left choose the run icon (|play|) or type |Acommand|-R to build and run the app.
 
-You should be able to interact with the application. Try clicking on the :guilabel:`+` at the top right to create a note, or click on a note to show the editor screen.
+You should be able to interact with the application. Try clicking on the :guilabel:`+` at the top right to create a note, or choose a note to show the editor screen.
 
 
 Next Steps

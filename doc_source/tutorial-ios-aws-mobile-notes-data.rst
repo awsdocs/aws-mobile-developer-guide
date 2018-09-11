@@ -5,18 +5,18 @@
 Add Serverless Backend to the Notes App
 #######################################
 
-In the :ref:`previous section <tutorial-ios-aws-mobile-notes-auth>` of this tutorial, we added a simple sign-up / sign-in flow to the sample note-taking app with email validation. This tutorial assumes you have completed the previous tutorials. If you jumped to this step, please go back and :ref:`start from the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we will add a GraphQL API backed by a NoSQL database to our mobile backend, then configure a basic data access provider to the note-taking app.
+In the :ref:`previous section <tutorial-ios-aws-mobile-notes-auth>` of this tutorial, we added a simple sign-up / sign-in flow to the sample note-taking app with email validation. This tutorial assumes you have completed the previous tutorials. If you jumped to this step, go back and :ref:`start from the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we add a GraphQL API backed by a NoSQL database to our mobile backend, and then configure a basic data access provider to the note-taking app.
 
 You should be able to complete this section of the tutorial in 45-60 minutes.
 
-Add data access API to the backend
+Add Data Access API to the Backend
 ----------------------------------
 
-#. In a terminal window, create a :file:`server` directory under the root of iOS notes tutorial project folder.
+#. In a terminal window, navigate to the root of iOS notes tutorial project folder, and  create a :file:`server` subdirectory.
 
-#. Inside the :file:`server` directory, create a new file called :userinput:`schema-model.graphql` using your favorite text editor.
+#. In the :file:`server` directory, create a file called :userinput:`schema-model.graphql` using your favorite text editor.
 
-#. Copy the following schema definition into the :file:`schema-model.graphql` file:
+#. In the :file:`schema-model.graphql` file, copy the following schema definition:
 
    .. code-block:: graphql
 
@@ -49,7 +49,7 @@ The AWS CloudFormation template that is generated creates an Amazon DynamoDB tab
 
 In addition to updating the :file:`awsconfiguration.json` file, the Amplify CLI will also generate the :file:`schema.graphql` file under the :file:`./amplify/backend/api/YOURAPI/build` directory. The :file:`schema.graphql` file will be used by the Amplify CLI to run code generation for GraphQL operations.
 
-Generate an API stub class
+Generate an API Stub Class
 --------------------------
 
 To integrate the iOS notes app with AWS AppSync, we need to generate strongly typed Swift API code based on the GraphQL notes schema and operations. This Swift API code is a class that helps you create native Swift request and response data objects for persisting notes in the cloud.
@@ -61,14 +61,14 @@ To interact with AWS AppSync, the iOS client needs to define GraphQL queries and
    *  In the Xcode Project Navigator, right-click on the :file:`MyNotes` folder that is a child of the top-level :file:`MyNotes` project. Choose :guilabel:`New Group...`
    *  Enter the name :userinput:`GraphQLOperations`.
 
-#. Create a new file under the :file:`GraphQLOperations` folder called :file:`notes-operations.graphql`:
+#. Under the :file:`GraphQLOperations` folder called :file:`notes-operations.graphql`, create a new file as follows:
 
-   *  In the Xcode Project Navigator, right-click on the :file:`GraphQLOperations` folder you created, and choose :guilabel:`New File...`
-   *  For :guilabel:`Filter` box, enter :userinput:`Empty`.
+   *  In the Xcode Project Navigator, right-click the :file:`GraphQLOperations` folder you created, and choose :guilabel:`New File...`
+   *  For :guilabel:`Filter`, enter :userinput:`Empty`.
    *  In the :guilabel:`Other` section, choose :guilabel:`Empty`, and then choose :guilabel:`Next`.
    *  For :guilabel:`Save As`, enter :userinput:`notes-operations.graphql`, and then choose :guilabel:`Create`.
 
-#. Paste the following operations into the newly created file.
+#. In the file you just created, copy the following operations:
 
    .. code-block:: graphql
 
@@ -113,9 +113,9 @@ To interact with AWS AppSync, the iOS client needs to define GraphQL queries and
         }
       }
 
-#. In your project folder, type the following command in terminal, telling Amplify CLI to generate the :file:`NotesAPI.swift` file based on the GraphQL schema and our mutations and query operations :file:`notes-operations.graphql` file.
+#. In a terminal window, navigate to your project directory, and run the following command. This tells Amplify CLI to generate the :file:`NotesAPI.swift` file based on the GraphQL schema and our mutations and query operations :file:`notes-operations.graphql` file.
 
-   .. code-block:: bash
+   .. code-block:: none
 
       $ amplify add codegen
 
@@ -135,9 +135,9 @@ You should now have a :file:`NotesAPI.swift` file in the root of your project.
 Add API Dependencies
 --------------------
 
-#. Add the following API dependencies in your project's :file:`Podfile`
+#. Add the following API dependencies in your project's :file:`Podfile`:
 
-   .. code-block:: bash
+   .. code-block:: none
 
       platform :ios, '9.0'
       target :'MyNotes' do
@@ -157,34 +157,35 @@ Add API Dependencies
           # other pods
       end
 
-#. In a terminal under your project folder, run:
 
-   .. code-block:: bash
+#. In a terminal under your project folder, run the following:
 
-      $ pod install
+   .. code-block:: none
 
-Add NotesAPI.swift to your Xcode project
+      $  pod install -–repo-update
+
+Add NotesAPI.swift to Your Xcode Project
 ----------------------------------------
 
-#. Open your project in Xcode
+#. Open your project in Xcode as follows:
 
-   .. code-block:: bash
+   .. code-block:: none
 
       $ open MyNotes.xcworkspace
 
-#. Drag the :file:`NotesAPI.swift` file from your project folder into the Xcode project. Uncheck :guilabel:`Copy items if needed` in the options dialog.  Unchecking :guilabel:`Copy items if needed` will ensure that the Amplify CLI can re-generate the :file:`NotesAPI.swift` file when we change the schema.
+#. Drag the :file:`NotesAPI.swift` file from your project folder to the Xcode project. In  :guilabel:`Options`, clear the :guilabel:`Copy items if needed` check box.  By clearing :guilabel:`Copy items if needed` you ensure that the Amplify CLI can re-generate the :file:`NotesAPI.swift` file when we change the schema.
 
 #. Choose :guilabel:`Finish`.
 
 You have now created the AWS resources you need and connected them to your app.
 
-Create an AWS AppSync authentication context
+Create an AWS AppSync Authentication Context
 --------------------------------------------
 
-#. Right-click on the :file:`MyNotes` directory within the Xcode project explorer, and choose :guilabel:`New File...`
-#. Choose :guilabel:`Swift File`, then choose :guilabel:`Next`.
-#. Enter the name :userinput:`MyCognitoUserPoolsAuthProvider.swift`, then choose :guilabel:`Create`.
-#. Copy the following code into the newly created file:
+#. In the Xcode project explorer, right-click the :file:`MyNotes` directory, and then choose :guilabel:`New File...`
+#. Choose :guilabel:`Swift File`, and then choose :guilabel:`Next`.
+#. Enter the name :userinput:`MyCognitoUserPoolsAuthProvider.swift`, and then choose :guilabel:`Create`.
+#. In the file you just created, copy the following code:
 
    .. code-block:: swift
 
@@ -203,15 +204,15 @@ Create an AWS AppSync authentication context
          }
       }
 
-Create an AWS AppSync DataService class
+Create an AWS AppSync DataService Class
 ---------------------------------------
 
 All data access is already routed through a :file:`DataService` protocol, which has a concrete implementation in :file:`MockDataService.swift`.  We will now replace the mock data service with an implementation that reads and writes data to AWS AppSync.
 
-#. Right-click on the :file:`MyNotes` directory within the Xcode project explorer, and choose :guilabel:`New File...`
-#. Choose :guilabel:`Swift File`, then choose :guilabel:`Next`.
-#. Enter the name :userinput:`AWSDataService.swift`, then choose :guilabel:`Create`.
-#. Copy the following code into the newly created file:
+#. In the Xcode project explorer, right-click the :file:`MyNotes` directory, and then choose :guilabel:`New File...`
+#. Choose :guilabel:`Swift File`, and then choose :guilabel:`Next`.
+#. Enter the name :userinput:`AWSDataService.swift`, and then choose :guilabel:`Create`.
+#.  In the file you just created, copy the following code:
 
    .. code-block:: swift
 
@@ -320,7 +321,7 @@ All data access is already routed through a :file:`DataService` protocol, which 
 Register the AWS Data Service
 -----------------------------
 
-Register the new data service in the :file:`AppDelegate.swift` file:
+Register the new data service in the :file:`AppDelegate.swift` file as follows:
 
 .. code-block:: swift
 
@@ -332,7 +333,7 @@ Register the new data service in the :file:`AppDelegate.swift` file:
     // dataService = MockDataService()
     dataService = AWSDataService()
 
-Run the application
+Run the Application
 -------------------
 
 Run the application in an iOS simulator and perform some operations.  Create a couple of notes and delete a note.
@@ -340,11 +341,11 @@ Run the application in an iOS simulator and perform some operations.  Create a c
 **Note**: You must be online in order to run this application.
 
 #. Open the `DynamoDB console <https://console.aws.amazon.com/dynamodb/home/>`__.
-#. Choose :guilabel:`Tables` in the left-hand menu.
+#. In the left navigation, choose :guilabel:`Tables`.
 #. Choose the table for your project.  It will be based on the API name you set.
 #. Choose the :guilabel:`Items` tab.
 
-When you insert, edit or delete notes in the app, you should be able to see the data on the server reflect your actions almost immediately.
+When you insert, edit, or delete notes in the app, you should be able to see the data on the server reflect your actions almost immediately.
 
 Next Steps
 ----------

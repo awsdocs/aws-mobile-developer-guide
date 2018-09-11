@@ -63,11 +63,11 @@ We strongly recommend that you use the Amplify CLI for building the serverless b
 
 *  `Sign up for an AWS Account <https://portal.aws.amazon.com/billing/signup?redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start>`__.
 
-*  Install `Node.js <https://nodejs.org/>`__ and npm if they are not already on your machine.
+*  Install `Node.js <https://nodejs.org/>`__ and npm (if they are not already installed).
 
 .. note::
 
-   Verify that you are running at least Node.js version 8.x or greater and npm version 5.x or greater by running :code:`node -v` and :code:`npm -v` in a terminal/console window. Older versions may produce errors and are unsupported.
+   Verify that you are running at least Node.js version 8.x or greater and npm version 5.x or greater by running :code:`node -v` and :code:`npm -v` in a terminal/console window. Older versions aren't supported and might generate errors.
 
 To install and configure the Amplify CLI globally, run the following commands in a terminal window.
 
@@ -96,7 +96,7 @@ Minimum requirements for your development environment are as follows.
            * Install Android SDK for API level 23 (Android SDK 6.0).
 
        iOS - Swift
-          * Choose the iOS app project you will integrate with an AWS backend.
+          * Choose the iOS app project you want to integrate with an AWS backend.
 
           * `Install Xcode <https://developer.apple.com/xcode/downloads/>`__ version 8.0 or later.
 
@@ -106,7 +106,7 @@ Minimum requirements for your development environment are as follows.
 Step 2: Set Up Your Backend
 ===========================
 
-#. The CLI will prompt you for configuration parameters.
+#. The CLI prompts you for configuration parameters.
 
     .. container:: option
 
@@ -154,9 +154,9 @@ Step 2: Set Up Your Backend
 
             $ amplify push
 
-          In the Finder, navigate to the folder containing your app :file:`.xcodeproj` file. From there, drag and drop :code:`awsconfiguration.json` into Xcode under the top Project Navigator folder (the folder name should match your Xcode project name). In the :guilabel:`Options` dialog box that appears:
+          In the Finder, navigate to the folder containing your app :file:`.xcodeproj` file. From there, drag :code:`awsconfiguration.json` to Xcode under the top Project Navigator folder (the folder name should match your Xcode project name). In the :guilabel:`Options` dialog box that appears, do the following:
 
-          * Uncheck :guilabel:`Copy items if needed`.
+          * Clear the :guilabel:`Copy items if needed` check box.
 
           * Choose :guilabel:`Create groups`, and then choose :guilabel:`Next`.
 
@@ -188,14 +188,14 @@ Perform the following steps to set up a connection to AWS services that you'll u
                  implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
              }
 
-      #. Your :file:`AndroidManifest.xml` must contain:
+      #. Your :file:`AndroidManifest.xml` must contain the following:
 
          .. code-block:: xml
 
              <uses-permission android:name="android.permission.INTERNET"/>
              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      Your app is now ready for adding cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
+      Your app is now ready for you to add cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
 
    Android - Kotlin
       #. Add dependencies to your :file:`app/build.gradle`, and then choose :guilabel:`Sync Now` on the upper-right side of Android Studio. These libraries enable basic AWS functions, like credentials and analytics.
@@ -213,39 +213,41 @@ Perform the following steps to set up a connection to AWS services that you'll u
              <uses-permission android:name="android.permission.INTERNET"/>
              <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      Your app is now ready for adding cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
+      Your app is now ready for you to add cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
 
    iOS - Swift
-      #. Install Cocoapods. From a terminal window run:
+      #. Install Cocoapods. From a terminal window run the following:
 
          .. code-block:: none
 
             sudo gem install cocoapods
 
-      #. Create :file:`Podfile`. From a terminal window, navigate to the directory that contains your project's :file:`.xcodeproj` file and run:
+      #. Create :file:`Podfile`. From a terminal window, navigate to the directory that contains your project's :file:`.xcodeproj` file and run the following:
 
           .. code-block:: none
 
               pod init
 
-      #. Add core AWS Mobile SDK components to your build.
+      #. Open :file:`Podfile` in a text editor and add the pod for core AWS Mobile SDK components to your build.
 
          .. code-block:: none
 
               platform :ios, '9.0'
               target :'YOUR-APP-NAME' do
                   use_frameworks!
+
                   pod 'AWSCore', '~> 2.6.13'
+
                   # other pods
               end
 
-      #. Install dependencies by runnng:
+      #. Install dependencies by runnng the following:
 
          .. code-block:: none
 
              pod install --repo-update
 
-         If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you may need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
+         If you encounter an error message that begins ":code:`[!] Failed to connect to GitHub to update the CocoaPods/Specs . . .`", and your internet connectivity is working, you might need to `update openssl and Ruby <https://stackoverflow.com/questions/38993527/cocoapods-failed-to-connect-to-github-to-update-the-cocoapods-specs-specs-repo/48962041#48962041>`__.
 
       #. The command :code:`pod install` creates a new workspace file. Close your Xcode project and reopen it using :file:`./YOUR-PROJECT-NAME.xcworkspace`.
 
@@ -258,7 +260,7 @@ Perform the following steps to set up a connection to AWS services that you'll u
 
       #. Rebuild your app after reopening it in the workspace to resolve APIs from new libraries called in your code. This is a good practice any time you add import statements.
 
-      Your app is now ready for adding cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
+      Your app is now ready for you to add cloud-powered features. We recommend :ref:`adding analytics <add-aws-mobile-analytics>` as your first feature.
 
 
 

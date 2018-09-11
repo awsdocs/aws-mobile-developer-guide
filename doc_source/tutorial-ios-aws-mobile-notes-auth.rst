@@ -14,16 +14,16 @@
 Add Authentication to the Notes App
 ###################################
 
-In the :ref:`previous section <tutorial-ios-aws-mobile-notes-analytics>` of this tutorial, we created a mobile backend project using the AWS Amplify CLI, then added analytics to the sample note-taking app. This section assumes you have completed those steps. If you jumped to this step, please go back and :ref:`start from the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we will configure a sign-up / sign-in flow in our mobile backend. We will then add a new authentication activity to our note-taking app.
+In the :ref:`previous section <tutorial-ios-aws-mobile-notes-analytics>` of this tutorial, we created a mobile backend project using the AWS Amplify CLI, and then added analytics to the sample note-taking app. This section assumes you have completed those steps. If you jumped to this step, please go back and :ref:`start from the beginning <tutorial-ios-aws-mobile-notes-setup>`. In this tutorial, we configure a sign-up / sign-in flow in our mobile backend. We then add a new authentication activity to our note-taking app.
 
 You should be able to complete this section of the tutorial in 15-20 minutes.
 
 Set Up Your Backend
 ------------------
 
-Before we work on the client-side code, we need to add User Sign-in to the backend project.  These steps assume you have already completed the :ref:`analytics <tutorial-ios-aws-mobile-notes-analytics>` portion of this tutorial.
+Before we work on the client-side code, we need to add user sign-in to the backend project.  These steps assume you have already completed the :ref:`analytics <tutorial-ios-aws-mobile-notes-analytics>` portion of this tutorial.
 
-1. In a terminal window, enter the following commands to add User Sign-in to the backend project:
+1. In a terminal window, enter the following commands to add user sign-in to the backend project:
 
    .. code-block:: none
 
@@ -42,7 +42,7 @@ The :code:`amplify update auth` command updates the existing Amazon Cognito user
 Add Auth Dependencies
 ---------------------
 
-#. Add the following Auth dependencies in your project's :file:`Podfile`
+#. Add the following Auth dependencies in your project's :file:`Podfile`:
 
    .. code-block:: none
 
@@ -61,7 +61,7 @@ Add Auth Dependencies
           # other pods
       end
 
-   Then, in a terminal run:
+   Then, in a terminal run the following:
 
    .. code-block:: none
 
@@ -164,19 +164,19 @@ The AWS Mobile SDK provides a library that creates a customizable sign-in UI in 
         }
     }
 
-The event names used for recording authentication events are specific and drive graphs within the Amazon Pinpoint console.  With these analytics events, you will be able to see authentication failure rates and sign-in rates.
+The event names used for recording authentication events are specific and drive graphs within the Amazon Pinpoint console.  With these analytics events, you can see authentication failure rates and sign-in rates.
 
 Run the App and Validate Results
 --------------------------------
 
-Build and run the project in a simulator. You should see a sign-in screen upon launch. Choose the :guilabel:`Create new account` button to create a new account.  Once the information is submitted, you will be sent a confirmation code via email. Enter the confirmation code to complete registration, then sign-in with your new account.
+Build and run the project in a simulator. In the sign-in screen, choose :guilabel:`Create new account`.  After you submit the information, you receive a confirmation code via email. Enter the confirmation code to complete registration, and then sign in with your new account.
 
 .. list-table::
    :widths: 1 6
 
    * - **Tip**
 
-     - Use Amazon WorkMail as a test email account
+     - Use Amazon WorkMail as a test email account.
 
        If you do not want to use your own email account as a test account, create an
        `Amazon WorkMail <https://aws.amazon.com/workmail/>`__ service within AWS for test accounts. You can get started for free with a 30-day trial for up to 25 accounts.
@@ -186,7 +186,7 @@ Build and run the project in a simulator. You should see a sign-in screen upon l
    :alt: Demo of Notes tutorial app with user sign-in added.
 
 
-Next steps
+Next Steps
 ----------
 
 *  Continue by adding a :ref:`Serverless Backend <tutorial-ios-aws-mobile-notes-data>`.

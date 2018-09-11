@@ -38,7 +38,7 @@ Set Up Your Backend
 ===================
 #. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
-#. Use the CLI to add analytics to your cloud-enabled back-end and app.
+#. Use the CLI to add analytics to your cloud-enabled backend and app.
 
     .. container:: option
 
@@ -66,7 +66,7 @@ Set Up Your Backend
               $ cd ./YOUR_PROJECT_FOLDER
               $ amplify add analytics
 
-#. When configuration for analytics is complete, you will see a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
+#. When configuration for analytics is complete, a message appears confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
 
    .. code-block:: bash
 
@@ -76,7 +76,7 @@ Set Up Your Backend
       | Auth      | cognitoabcd0123 | Create    | awscloudformation |
       | Analytics | yourprojectname | Create    | awscloudformation |
 
-#. To create your backend AWS resources run:
+#. To create your backend AWS resources run the following:
 
      .. code-block:: bash
 
@@ -120,9 +120,9 @@ Add Analytics
                    <uses-permission android:name="android.permission.INTERNET"/>
                    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-            #. Add calls to capture session starts and stops. A session is one use of an app by the user. A session begins when an app is launched (or brought to the foreground), and ends when the app is terminated (or goes to the background). To accommodate for brief interruptions, like a text message, an inactivity period of up to 5 seconds is not counted as a new session. :guilabel: `Total daily sessions` shows the number of sessions your app has each day. :guilabel: `Average sessions per daily active user` shows the mean number of sessions per user per day.
+            #. Add calls to capture session starts and stops. A session is one use of an app by the user. A session begins when an app is launched (or brought to the foreground), and ends when the app is terminated (or goes to the background). To accommodate for brief interruptions, like a text message, an inactivity period of up to 5 seconds is not counted as a new session. :guilabel:`Total daily sessions` shows the number of sessions your app has each day. :guilabel:`Average sessions per daily active user` shows the mean number of sessions per user per day.
 
-               Three typical places to instrument your app session start and stop are:
+               The following are typical places where you can instrument your app session start and stop:
 
                * Start a session in the :code:`Application.onCreate()` method.
 
@@ -322,9 +322,9 @@ Add Analytics
 Monitor Analytics
 -----------------
 
-Build and run your app to see usage metrics in Amazon Pinpoint. By running the previous code samples, the console will show a "Session" logged.
+Build and run your app to see usage metrics in Amazon Pinpoint. When you run the previous code samples, the console shows a logged Session.
 
-#. To see visualizations of the analytics coming from your app, open your project in the Amazon Pinpoint console by running:
+#. To see visualizations of the analytics coming from your app, open your project in the Amazon Pinpoint console by running the following:
 
    .. code-block:: none
 
@@ -401,7 +401,7 @@ Use the following steps to implement Amazon Pinpoint custom analytics for your a
 
              }
 
-Build, run, and use your app. Then, view your custom events on the :guilabel:`Events` tab of the Amazon Pinpoint console (Amazon Pinpoint console / :guilabel:`Analytics` > :guilabel:`Events`). Look for the name of your event in the :guilabel:`Events` menu.
+Build, run, and use your app. Then, view your custom events on the :guilabel:`Events` tab of the Amazon Pinpoint console (choose :guilabel:`Analytics`>:guilabel:`Events`). Look for the name of your event in the :guilabel:`Events` menu.
 
 .. _add-aws-mobile-analytics-enable-revenue-data:
 

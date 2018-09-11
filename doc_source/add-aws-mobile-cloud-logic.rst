@@ -39,7 +39,7 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <add-aws-mobile-sdk>` steps before you proceed.
 
-#. Use the CLI to add api to your cloud-enabled back-end and app.
+#. Use the CLI to add api to your cloud-enabled backend and app.
 
       .. container:: option
 

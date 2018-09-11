@@ -11,7 +11,7 @@
 .. _tutorial-android-aws-mobile-notes-setup:
 
 ########################
-A Simple Note-taking App
+Tutorial: Create a Simple Android Note-Taking App
 ########################
 
 .. toctree::

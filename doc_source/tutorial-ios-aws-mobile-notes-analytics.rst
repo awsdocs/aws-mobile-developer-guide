@@ -14,7 +14,7 @@
 Add Analytics to the Notes App
 ##############################
 
-In the :ref:`previous section <tutorial-ios-aws-mobile-notes-setup>` of this tutorial, we installed Xcode, downloaded a sample note-taking app from GitHub, then compiled and ran it in the iOS Simulator. This tutorial assumes you have completed those steps. In this section, we will extend the notes app to include application analytics. Application analytics allow us to gather demographic information about the application usage.
+In the :ref:`previous section <tutorial-ios-aws-mobile-notes-setup>` of this tutorial, we installed Xcode, downloaded a sample note-taking app from GitHub, then compiled and ran it in the iOS Simulator. This tutorial assumes you have completed those steps. In this section, we  extend the notes app to include application analytics. Application analytics enable us to gather demographic information about the application usage.
 
 You should be able to complete this section in 10-15 minutes.
 
@@ -37,18 +37,18 @@ Create an AWS Backend
 
    Again, the CLI prompts you through the process of initializing your backend project.
 
-#. To deploy your backend AWS resources run:
+#. To deploy your backend AWS resources run the following:
 
    .. code-block:: none
 
       $ amplify push
 
-The :code:`amplify init` command will do two things within your project:
+The :code:`amplify init` command does the following within your project:
 
 *  Create a basic backend definition in the :file:`amplify` directory.
 *  Create an :file:`awsconfiguration.json` file describing the backend in the :file:`aws-mobile-ios-notes-tutorial-master` project directory.
 
-The :code:`amplify add analytics` command will add the appropriate entries into the backend definition file for deploying Amazon Pinpoint as a service for this project.  The :code:`amplify push` command will deploy any new services that are defined and update the :file:`awsconfiguration.json` file so that the new services can be used within your app.
+The :code:`amplify add analytics` command adds the appropriate entries into the backend definition file for deploying Amazon Pinpoint as a service for this project.  The :code:`amplify push` command deploys any new services that are defined and updates the :file:`awsconfiguration.json` file so that the new services can be used within your app.
 
 
 Add Analytics Dependencies
@@ -100,11 +100,11 @@ Add Analytics Dependencies
 Add AWS Resource Configuration
 ------------------------------
 
-#. The Amplify CLI creates and updates an AWS resources configuration :file:`awsconfiguration.json` file for each configured feature. This file needs to be added to your Xcode project just once and the Amplify CLI will keep it in sync as you add features to your project.
+#. The Amplify CLI creates and updates an AWS resources configuration :file:`awsconfiguration.json` file for each configured feature. This file needs to be added to your Xcode project just once. The Amplify CLI keeps it in sync as you add features to your project.
 
-#. In the Finder, navigate to the folder containing your app :file:`.xcodeproj` file. From there, drag and drop :code:`awsconfiguration.json` into Xcode under the top Project Navigator folder (the folder name should match your Xcode project name).
+#. In the Finder, navigate to the folder containing your app :file:`.xcodeproj` file. From there, drag :code:`awsconfiguration.json` to Xcode under the top Project Navigator folder (the folder name should match your Xcode project name).
 
-#. In the :guilabel:`Options` dialog box that appears, uncheck :guilabel:`Copy items if needed`. Choose :guilabel:`Create groups`, then choose :guilabel:`Next`.
+#. In the :guilabel:`Options` dialog box that appears, clear the :guilabel:`Copy items if needed` check box. Choose :guilabel:`Create groups`, and then choose :guilabel:`Next`.
 
 #. Choose :guilabel:`Finish`.
 
@@ -118,9 +118,9 @@ The app contains a :code:`protocol` definition called :file:`AnalyticsService.sw
 In this section, we will create a new provider that submits the recorded events to Amazon Pinpoint.  Start by creating an implementation of the :file:`AnalyticsService`:
 
 #. From the XCode project navigation, right-click the :file:`MyNotes` folder (the same folder that contains the :file:`AppDelegate.swift`) and choose :guilabel:`New File...`
-#. Ensure :guilabel:`Swift File` is highlighted, then choose :guilabel:`Next`.
-#. Enter :userinput:`AWSAnalyticsService.swift` in the :guilabel:`Save As` box, then choose :guilabel:`Create`.
-#. The :file:`AWSAnalyticsService.swift` file will automatically open.  Paste the following code into the file:
+#. Ensure :guilabel:`Swift File` is highlighted, and then choose :guilabel:`Next`.
+#. In :guilabel:`Save As`, enter :userinput:`AWSAnalyticsService.swift`, and then choose :guilabel:`Create`.
+#. In the :file:`AWSAnalyticsService.swift` file that automatically opens, copy the following code:
 
    .. code-block:: swift
 
@@ -166,7 +166,7 @@ Now that we have an appropriate implementation of the :code:`AnalyticsService` p
    analyticsService = AWSAnalyticsService()
 
 
-Now your app is setup to provide session and demographic analytics automatically when launched.
+Now your app is set up to provide session and demographic analytics automatically when launched.
 
 Run the Project and Validate Results
 ------------------------------------
@@ -179,7 +179,7 @@ To view the demographics and session events, run the following command:
 
    $ amplify console analytics
 
-Note that it can take up to 5 minutes for the first data to be shown in the graphs.  You should see an up-tick in several graphs:
+Note that it can take up to 5 minutes for the first data to be shown in the graphs.  You should see an uptick in several graphs:
 
    .. image:: images/pinpoint-overview.png
       :scale: 100 %
@@ -218,11 +218,11 @@ If you see data within each page, you have successfully added analytics to your 
 Add Custom Analytics
 --------------------
 
-Amazon Pinpoint also allows you to capture custom analytics data for events that show usage of your app's features. For this tutorial we'll send analytics each time a note is added or deleted.
+Amazon Pinpoint also enables you to capture custom analytics data for events that show usage of your app's features. For this tutorial we send analytics each time a note is added or deleted.
 
 To add analytics events, open :file:`./Data/NotesContentProvider.swift` where both add and delete operations happen.
 
-Start by adding the following imports.
+Start by adding the following imports:
 
 .. code-block:: swift
 
@@ -316,7 +316,7 @@ To view the :code:`AddNote` and :code:`DeleteNote` custom analytics events, rebu
 
 #. From the Analytics view in the Pinpoint console, choose :guilabel:`Events`.
 
-#. Use the Event drop down to filter the event type (event types may take several minutes to appear).
+#. For :guilabel:`Event`, filter on the event type (event types may take several minutes to appear).
 
    .. image:: images/pinpoint-addnote.png
       :scale: 100 %
@@ -332,7 +332,7 @@ To view the :code:`AddNote` and :code:`DeleteNote` custom analytics events, rebu
       .. image:: images/pinpoint-addnote.png
          :scale: 75
 
-Next steps
+Next Steps
 ----------
 
 *  Continue by adding :ref:`Authentication <tutorial-ios-aws-mobile-notes-auth>`.

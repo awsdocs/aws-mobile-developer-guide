@@ -82,7 +82,7 @@ Set Up Your Backend
             ❯ Yes, use the default configuration.
 
 
-      #. When configuration for email and password sign-in is complete, you will see a message confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
+      #. When configuration for email and password sign-in is complete, a message appears confirming that you have configured local CLI metadata for this category. You can confirm this by viewing status.
 
          .. code-block:: none
 
@@ -91,7 +91,7 @@ Set Up Your Backend
               | -------- | --------------- | --------- | ----------------- |
               | Auth     | cognitoabcd0123 | Create    | awscloudformation |
 
-      #. To create your backend AWS resources run:
+      #. To create your backend AWS resources run the following:
 
            .. code-block:: none
 
@@ -105,7 +105,7 @@ Set Up Your Backend
 
       **To set up Facebook sign-in**
 
-      #. In a terminal window, navigate to the root of your app files and add the auth category to your app. The CLI will prompt you for configuration parameters.
+      #. In a terminal window, navigate to the root of your app files and add the auth category to your app. The CLI prompts you for configuration parameters.
 
          .. code-block:: none
 
@@ -141,7 +141,7 @@ Set Up Your Backend
             | --------- | --------------- | --------- | ----------------- |
             | Auth      | cognitoa7cbb553 | Create    | awscloudformation |
 
-      #. To create your backend AWS resources run:
+      #. To create your backend AWS resources run the following:
 
            .. code-block:: none
 
@@ -155,7 +155,7 @@ Set Up Your Backend
 
       **To set up Google sign-in**
 
-      #. In a terminal window, navigate to the root of your app files and add the auth category to your app. The CLI will prompt you for configuration parameters.
+      #. In a terminal window, navigate to the root of your app files and add the auth category to your app. The CLI prompts you for configuration parameters.
 
          .. code-block:: none
 
@@ -190,7 +190,7 @@ Set Up Your Backend
             | --------- | --------------- | --------- | ----------------- |
             | Auth      | cognitoa7cbb553 | Create    | awscloudformation |
 
-      #. To create your backend AWS resources run:
+      #. To create your backend AWS resources run the following:
 
            .. code-block:: none
 
@@ -203,7 +203,7 @@ Note that the CLI allows you to select more than one identity provider for your 
 
 .. _set-up-email-and-password:
 
-Setup Email and Password Login in Your Mobile App
+Set Up Email and Password Login in Your Mobile App
 ================================================
 
 :subscript:`Choose your platform:`
@@ -218,14 +218,14 @@ Setup Email and Password Login in Your Mobile App
 
            - The AWS Mobile SDK library for Android sign-in (:code:`aws-android-sdk-auth-ui`) provides the activity and view for presenting a :code:`SignInUI` for the sign-in providers you configure. This library depends on the Android SDK API Level 23 or higher.
 
-      #. Add these permissions to the :file:`AndroidManifest.xml` file:
+      #. Add the following permissions to the :file:`AndroidManifest.xml` file:
 
          .. code-block:: xml
 
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      #. Add these dependencies to the :file:`app/build.gradle` file:
+      #. Add the following dependencies to the :file:`app/build.gradle` file:
 
          .. code-block:: java
 
@@ -242,7 +242,7 @@ Setup Email and Password Login in Your Mobile App
                   implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
              }
 
-          Note: While adding the dependencies make sure the major version of appcompat and support libraries match. Above we are using version 24.
+          Note: When you add the dependencies, make sure that the major version of appcompat and support libraries match. In the previous example, we're using version 24.
 
       #. Create an activity that will present your sign-in screen.
 
@@ -258,9 +258,9 @@ Setup Email and Password Login in Your Mobile App
                 </intent-filter>
             </activity>
 
-      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction completes.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction is complete.
 
-         If the user is already signed in, the app switches to the :code:`NextActivity`.  If not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  Once authenticated, the app continues to the :code:`NextActivity`.
+         If the user is already signed in, the app switches to the :code:`NextActivity`.  If the user isn't signed in, the user is presented with the AWS Mobile configurable sign-in UI.  After the user is authenticated, the app continues to the :code:`NextActivity`.
 
 
          .. code-block:: java
@@ -321,14 +321,14 @@ Setup Email and Password Login in Your Mobile App
 
            - The AWS Mobile SDK library for Android sign-in (:code:`aws-android-sdk-auth-ui`) provides the activity and view for presenting a :code:`SignInUI` for the sign-in providers you configure. This library depends on the Android SDK API Level 23 or higher.
 
-      #. Add these permisions to the :file:`AndroidManifest.xml` file:
+      #. Add the following permisions to the :file:`AndroidManifest.xml` file:
 
          .. code-block:: xml
 
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      #. Add these dependencies to the :file:`app/build.gradle` file:
+      #. Add the following dependencies to the :file:`app/build.gradle` file:
 
          .. code-block:: java
 
@@ -345,7 +345,7 @@ Setup Email and Password Login in Your Mobile App
                   implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
              }
 
-          Note: While adding the dependencies make sure the major version of appcompat and support libraries match. Above we are using version 24.
+          Note: When you add the dependencies, make sure that the major version of appcompat and support libraries match. In the previous example, we're using version 24.
 
       #. Create an activity that will present your sign-in screen.
 
@@ -361,9 +361,9 @@ Setup Email and Password Login in Your Mobile App
                 </intent-filter>
             </activity>
 
-      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allows users to access your AWS resources and registers a callback for when that transaction completes.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allows users to access your AWS resources and registers a callback for when that transaction is complete.
 
-         If the user is already signed in, the app switches to the :code:`NextActivity`.  If not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  Once authenticated, the app continues to the :code:`NextActivity`.
+         If the user is already signed in, the app switches to the :code:`NextActivity`.  If the user isn't signed in, the user is presented with the AWS Mobile configurable sign-in UI.  After the user is authenticated, the app continues to the :code:`NextActivity`.
 
 
          .. code-block:: kotlin
@@ -412,7 +412,7 @@ Setup Email and Password Login in Your Mobile App
                :superscript:`A library that caches and federates a login provider authentication token using Amazon Cognito federated identities, caches the federated AWS credentials, and handles the sign-in flow.`
 
    iOS - Swift
-      #. Add the following dependencies in your project's :file:`Podfile`.
+      #. Add the following dependencies in your project's :file:`Podfile`:
 
          .. code-block:: none
 
@@ -425,7 +425,7 @@ Setup Email and Password Login in Your Mobile App
                 # other pods
             end
 
-      #. Pull the SDK libraries into your local repo:
+      #. Pull the SDK libraries into your local repo as follows:
 
          .. code-block:: bash
 
@@ -438,7 +438,7 @@ Setup Email and Password Login in Your Mobile App
 
          Add code to create an instance of :code:`AWSMobileClient` in the :code:`application:open url` function  of your :code:`AppDelegate.swift`, to resume a previously signed-in authenticated session.
 
-         Then add another instance of :code:`AWSMobileClient` in the :code:`didFinishLaunching` function to register the sign in providers, and to fetch an Amazon Cognito credentials that AWS will use to authorize access once the user signs in.
+         Then add another instance of :code:`AWSMobileClient` in the :code:`didFinishLaunching` function to register the sign-in providers, and to fetch Amazon Cognito credentials that AWS will use to authorize access when the user signs in.
 
          .. code-block:: swift
 
@@ -518,7 +518,7 @@ Setup Email and Password Login in Your Mobile App
                  }
              }
 
-        Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -539,7 +539,7 @@ Setup Email and Password Login in Your Mobile App
 
 .. _set-up-facebook:
 
-Setup Facebook Login in Your Mobile App
+Set Up Facebook Login in Your Mobile App
 =======================================
 
 .. container:: option
@@ -581,7 +581,7 @@ Setup Facebook Login in Your Mobile App
             <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
 
 
-      #. Add these dependencies to your `app/build.gradle` file:
+      #. Add the following dependencies to your `app/build.gradle` file:
 
          .. code-block:: java
 
@@ -598,9 +598,9 @@ Setup Facebook Login in Your Mobile App
               implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
             }
 
-          Note: While adding the dependencies make sure the major version of appcompat and support libraries match. Above we are using version 24.
+          Note: When you add the dependencies, make sure that the major version of appcompat and support libraries match. In the previous example, we're using version 24.
 
-      #. In :file:`strings.xml`, add string definitions for your Facebook app ID and login protocol scheme. The value for app_id is your Facebook app ID and teh value for logic_protocol_scheme should be your Facebook app ID prefixed with :code:`fb`.
+      #. In :file:`strings.xml`, add string definitions for your Facebook app ID and login protocol scheme. The value for app_id is your Facebook app ID and the value for logic_protocol_scheme should be your Facebook app ID prefixed with :code:`fb`.
 
          .. code-block:: xml
 
@@ -620,9 +620,9 @@ Setup Facebook Login in Your Mobile App
                 </intent-filter>
             </activity>
 
-      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction completes.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction is complete.
 
-         If the user is already signed in, the app switches to the :code:`NextActivity`.  If not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  Once authenticated, the app continues to the :code:`NextActivity`.
+         If the user is already signed in, the app switches to the :code:`NextActivity`.  If the user is not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  After the user is authenticated, the app continues to the :code:`NextActivity`.
 
          .. code-block:: java
 
@@ -706,7 +706,7 @@ Setup Facebook Login in Your Mobile App
 
             <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
 
-      #. Add these dependencies to your `app/build.gradle` file:
+      #. Add the following dependencies to your `app/build.gradle` file:
 
          .. code-block:: java
 
@@ -743,9 +743,9 @@ Setup Facebook Login in Your Mobile App
                 </intent-filter>
             </activity>
 
-      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction completes.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction is complete.
 
-         If the user is already signed in, the app switches to the :code:`NextActivity`.  If not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  Once authenticated, the app continues to the :code:`NextActivity`.
+         If the user is already signed in, the app switches to the :code:`NextActivity`.  If the user is not signed in, the user is presented with the AWS Mobile configurable sign-in UI. After the user is authenticated, the app continues to the :code:`NextActivity`.
 
          .. code-block:: kotlin
 
@@ -960,7 +960,7 @@ Setup Facebook Login in Your Mobile App
 
 .. _set-up-google:
 
-Setup Google Login in Your Mobile App
+Set Up Google Login in Your Mobile App
 =====================================
 
 .. container:: option
@@ -975,14 +975,14 @@ Setup Google Login in Your Mobile App
 
       #. Add or update your AWS backend configuration file to incorporate your new sign-in. For details, see the last steps in the :ref:`Get Started: Set Up Your Backend <add-aws-mobile-sdk-basic-setup>` section.
 
-      #. Add these permissions to your `AndroidManifest.xml` file:
+      #. Add the following permissions to your `AndroidManifest.xml` file:
 
          .. code-block:: xml
 
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      #. Add these dependencies to your `app/build.gradle` file:
+      #. Add the following dependencies to your `app/build.gradle` file:
 
          .. code-block:: java
 
@@ -1013,9 +1013,9 @@ Setup Google Login in Your Mobile App
                     </intent-filter>
                 </activity>
 
-      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction completes.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction is complete.
 
-         If the user is already signed in, the app switches to the :code:`NextActivity`.  If not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  Once authenticated, the app continues to the :code:`NextActivity`.
+         If the user is already signed in, the app switches to the :code:`NextActivity`.  If the user is not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  After the user is authenticated, the app continues to the :code:`NextActivity`.
 
          .. code-block:: java
 
@@ -1075,14 +1075,14 @@ Setup Google Login in Your Mobile App
 
       #. Add or update your AWS backend configuration file to incorporate your new sign-in. For details, see the last steps in the :ref:`Get Started: Set Up Your Backend <add-aws-mobile-sdk-basic-setup>` section.
 
-      #. Add these permissions to your `AndroidManifest.xml` file:
+      #. Add the following permissions to your `AndroidManifest.xml` file:
 
          .. code-block:: xml
 
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-      #. Add these dependencies to your `app/build.gradle` file:
+      #. Add the following dependencies to your `app/build.gradle` file:
 
          .. code-block:: java
 
@@ -1113,9 +1113,9 @@ Setup Google Login in Your Mobile App
                     </intent-filter>
                 </activity>
 
-      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction completes.
+      #. Update the :code:`onCreate` function of your :code:`AuthenticatorActivity` to call :code:`AWSMobileClient`. This component provides the functionality to resume a signed-in authentication session. It makes a network call to retrieve the AWS credentials that allow users to access your AWS resources and registers a callback for when that transaction is complete.
 
-         If the user is already signed in, the app switches to the :code:`NextActivity`.  If not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  Once authenticated, the app continues to the :code:`NextActivity`.
+         If the user is already signed in, the app switches to the :code:`NextActivity`.  If the user is not signed in, the user is presented with the AWS Mobile configurable sign-in UI.  After the user is authenticated, the app continues to the :code:`NextActivity`.
 
          .. code-block:: kotlin
 
