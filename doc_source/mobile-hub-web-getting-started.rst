@@ -33,7 +33,7 @@ Get Started
 Overview
 ========
 
-The AWS Mobile CLI provides a command line experience that allows frontend JavaScript developers to quickly create and integrate AWS backend resources into their mobile apps.
+The AWS Mobile CLI provides a command line experience that allows front end JavaScript developers to quickly create and integrate AWS backend resources into their mobile apps.
 
 .. _mobile-hub-web-getting-started_prerequisites:
 
@@ -82,7 +82,7 @@ Set Up Your Backend
 
    The :code:`init` command creates a backend project for your app. By default, analytics and web hosting are enabled in your backend and this configuration is automatically pulled into your app when you initialize.
 
-#. When prompted, provide the source directory for your project. The CLI will generate :file:`aws-exports.js` in this location. This file contains the configuration and endpoint metadata used to link your frontend to your backend services.
+#. When prompted, provide the source directory for your project. The CLI will generate :file:`aws-exports.js` in this location. This file contains the configuration and endpoint metadata used to link your front end to your backend services.
 
    .. code-block:: bash
 
@@ -149,7 +149,7 @@ In the root folder of your app, run:
 
     awsmobile run
 
-Behind the scenes, this command runs :code:`npm install` to install the Amplify library and also pushes any backend configuration changes to AWS Mobile. To run your app locally without pushing backend changes you cou can choose to run :code:`npm install` and then run :code:`npm start`.
+Behind the scenes, this command runs :code:`npm install` to install the Amplify library and also pushes any backend configuration changes to AWS Mobile. To run your app locally without pushing backend changes you can choose to run :code:`npm install` and then run :code:`npm start`.
 
 Anytime you launch your app, :ref:`app analytics are gathered and can be visualized<web-add-analytics>` in an AWS console.
 
@@ -173,7 +173,7 @@ Next Steps
 Deploy your app to the cloud
 ----------------------------
 
-Using a simple command, you can publish your app's frontend to hosting on a robust content distribution network (CDN) and view it in a browser.
+Using a simple command, you can publish your app's front end to hosting on a robust content distribution network (CDN) and view it in a browser.
 
 **To deploy your app to the cloud and launch it in a browser**
 

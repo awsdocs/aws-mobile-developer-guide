@@ -82,7 +82,7 @@ Set Up Your Backend
 
    .. code-block:: bash
 
-      ? Where is your projects's source directory:  /
+      ? Where is your project's source directory:  /
 
 
    Then respond to further prompts with the following values.

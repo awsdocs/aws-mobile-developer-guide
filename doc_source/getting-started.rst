@@ -241,7 +241,7 @@ Perform the following steps to set up a connection to AWS services that you'll u
                   # other pods
               end
 
-      #. Install dependencies by runnng the following:
+      #. Install dependencies by running the following:
 
          .. code-block:: none
 

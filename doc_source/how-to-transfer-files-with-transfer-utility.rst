@@ -1107,7 +1107,7 @@ Transfer Utility Options
       You can use the :code:`TransferUtilityOptions` object to customize the operations of the :code:`TransferUtility`.
 
       **TransferThreadPoolSize**
-      This parameter will let you specify the number of threads in the thread pool for transfers. By increasing the number of threads, you will be able to increase the number of parts of a mulit-part upload that will be uploaded in parallel. By default, this is set to 2 * (N + 1), where N is the number of available processors on the mobile device. The minimum allowed value is 2.
+      This parameter will let you specify the number of threads in the thread pool for transfers. By increasing the number of threads, you will be able to increase the number of parts of a multi-part upload that will be uploaded in parallel. By default, this is set to 2 * (N + 1), where N is the number of available processors on the mobile device. The minimum allowed value is 2.
 
       .. code-block:: Java
 
@@ -1137,7 +1137,7 @@ Transfer Utility Options
       You can use the :code:`TransferUtilityOptions` object to customize the operations of the :code:`TransferUtility`.
 
       **TransferThreadPoolSize**
-      This parameter will let you specify the number of threads in the thread pool for transfers. By increasing the number of threads, you will be able to increase the number of parts of a mulit-part upload that will be uploaded in parallel. By default, this is set to 2 * (N + 1), where N is the number of available processors on the mobile device. The minimum allowed value is 2.
+      This parameter will let you specify the number of threads in the thread pool for transfers. By increasing the number of threads, you will be able to increase the number of parts of a multi-part upload that will be uploaded in parallel. By default, this is set to 2 * (N + 1), where N is the number of available processors on the mobile device. The minimum allowed value is 2.
 
       .. code-block:: kotlin
 

@@ -204,7 +204,7 @@ The samples included with the SDK are standalone projects that are already set u
 
         #. Choose **Add Other**. Navigate to the ``AWS<#ServiceName#>.framework`` files
            and select ``AWSCore.framework`` and the other service frameworks you require. Select
-           the **Destination: Copy items if needed** checkbox when prompted.
+           the **Destination: Copy items if needed** check box when prompted.
 
             * :code:`AWSAuth`
             * :code:`AWSAuthCore`

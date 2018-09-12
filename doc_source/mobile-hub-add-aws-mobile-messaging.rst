@@ -84,7 +84,7 @@ To setup your app to receive Push Notifications from Amazon Pinpoint, see
 
       #. Choose :guilabel:`SMS`, and then choose :guilabel:`Enable`.
 
-      #. Choose the the :guilabel:`Amazon Pinpoint console` link at the bottom of the descriptive
+      #. Choose the :guilabel:`Amazon Pinpoint console` link at the bottom of the descriptive
          text on the left.
 
       #. Choose :guilabel:`SMS` in the Amazon Pinpoint console :guilabel:`Channels` tab.

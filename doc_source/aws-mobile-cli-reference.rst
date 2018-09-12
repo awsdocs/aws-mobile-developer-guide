@@ -15,7 +15,7 @@ AWS Mobile CLI Reference
 
    The following content applies if you are already using the AWS Mobile CLI to configure your backend. If you are building a new mobile or web app, or you're adding cloud capabilities to your existing app, use the new `AWS Amplify CLI <http://aws-amplify.github.io/>`__ instead. With the new Amplify CLI, you can use all of the features described in `Announcing the AWS Amplify CLI toolchain <https://aws.amazon.com/blogs/mobile/announcing-the-aws-amplify-cli-toolchain/>`__, including AWS CloudFormation functionality that provides additional workflows.
 
-The AWS Mobile CLI provides a command line interface for frontend JavaScript developers to seamlessly enable AWS services and configure into their apps. With minimal configuration, you can start using all of the functionality provided by the the `AWS Mobile Hub <http://console.aws.amazon.com/mobilehub>`__ from your favorite terminal program.
+The AWS Mobile CLI provides a command line interface for front end JavaScript developers to seamlessly enable AWS services and configure into their apps. With minimal configuration, you can start using all of the functionality provided by the `AWS Mobile Hub <http://console.aws.amazon.com/mobilehub>`__ from your favorite terminal program.
 
 Installation and Usage
 ======================
@@ -85,7 +85,7 @@ The current set of commands supported by the :code:`awsmobile CLI` are listed be
 
    * - :ref:`awsmobile configure <aws-mobile-cli-reference-configure>`
 
-     - Shows existing keys and allows them to be changed if already set. If keys aren’t set, deep links the user to the IAM console to create keys and then prompts for the access key and secret key. This command helps edit configuration settings for the aws account or the project.
+     - Shows existing keys and allows them to be changed if already set. If keys aren’t set, deep links the user to the IAM console to create keys and then prompts for the access key and secret key. This command helps edit configuration settings for the AWS account or the project.
 
    * - :ref:`awsmobile pull <aws-mobile-cli-reference-pull>`
 
@@ -93,7 +93,7 @@ The current set of commands supported by the :code:`awsmobile CLI` are listed be
 
    * - :ref:`awsmobile push <aws-mobile-cli-reference-push>`
 
-     - Uploads local metadata, Lambda code, Dynamo definitions or any other relevant project details to Mobile Hub
+     - Uploads local metadata, Lambda code, DynamoDB definitions or any other relevant project details to Mobile Hub
 
    * - :ref:`awsmobile publish <aws-mobile-cli-reference-publish>`
 
@@ -165,7 +165,7 @@ There are two usages of the :code:`awsmobile init` command
       ? What awsmobile project name would you like to use:  my-mobile-project
 
 
-   The source directory is where the the AWS Mobile CLI copies the latest :code:`aws-exports.js` to be easily available for your front-end code. This file is automatically updated everytime features are added or removed. Specifying a wrong / unavailable folder will not copy the file over.
+   The source directory is where the AWS Mobile CLI copies the latest :code:`aws-exports.js` to be easily available for your front-end code. This file is automatically updated every time features are added or removed. Specifying a wrong / unavailable folder will not copy the file over.
 
    The Distribution directly is essentially the build directory for your project. This is used during the :code:`awsmobile publish` process.
 
@@ -197,13 +197,13 @@ There are two usages of the :code:`awsmobile init` command
 configure
 =========
 
-The :code:`awsmobile configure` shows existing keys and allows them to be changed if already set. If keys aren’t set, deep links the user to the IAM console to create keys and then prompts for the access key and secret key. There are two possible usages of this command. Based on the argument selected, this command can be used to set or change the aws account settings OR the project settings.
+The :code:`awsmobile configure` shows existing keys and allows them to be changed if already set. If keys aren’t set, deep links the user to the IAM console to create keys and then prompts for the access key and secret key. There are two possible usages of this command. Based on the argument selected, this command can be used to set or change the AWS account settings OR the project settings.
 
 .. code-block:: bash
 
     awsmobile configure [aws|project]
 
-#. Configuring the aws account settings using the :code:`aws` argument. This is the default argument for this command
+#. Configuring the AWS account settings using the :code:`aws` argument. This is the default argument for this command
 
    .. code-block:: bash
 
@@ -211,7 +211,7 @@ The :code:`awsmobile configure` shows existing keys and allows them to be change
        or
        awsmobile configure aws
 
-   You will be prompted with questions to set the aws account credentials as below
+   You will be prompted with questions to set the AWS account credentials as below
 
    .. code-block:: bash
 
@@ -236,7 +236,7 @@ The :code:`awsmobile configure` shows existing keys and allows them to be change
       ? What is your project's build command:  npm run-script build
       ? What is your project's start command for local test run:  npm run-script start
 
-#. Retrieve and display the aws credentials using the :code:`--list` option
+#. Retrieve and display the AWS credentials using the :code:`--list` option
 
    .. code-block:: bash
 
@@ -259,7 +259,7 @@ The :code:`awsmobile pull` command downloads the latest aws-exports.js, YAML and
 push
 ====
 
-The :code:`awsmobile push` uploads local metadata, Lambda code, Dynamo definitions and any relevant artifacts to Mobile Hub. Use this command when you enable, disable or configure features on your local evironment and want to update the backend project on the Mobile Hub with the relevant updates.
+The :code:`awsmobile push` uploads local metadata, Lambda code, Dynamo definitions and any relevant artifacts to Mobile Hub. Use this command when you enable, disable or configure features on your local environment and want to update the backend project on the Mobile Hub with the relevant updates.
 
 .. code-block:: bash
 
@@ -461,7 +461,7 @@ Enabling the :code:`hosting` feature with the :code:`--prompt` will prompt you t
     ? Do you want to host your web app including a global CDN? (y/N)
 
 
-Execute :code:`awsmobile push` after using :code:`awsmobile <feature> enable` to to update the awsmobile project in the cloud.
+Execute :code:`awsmobile push` after using :code:`awsmobile <feature> enable` to update the awsmobile project in the cloud.
 
 .. _aws-mobile-cli-reference-disable:
 
@@ -495,7 +495,7 @@ Use :code:`awsmobile push` after using :code:`awsmobile <feature> disable` to up
 configure
 =========
 
-The :code:`awsmobile <feature> configure` configures the objects in the selected feature. The configuration could mean adding, deleting or updating a particular artifact. This command can be used only if the specfic feature is already enabled.
+The :code:`awsmobile <feature> configure` configures the objects in the selected feature. The configuration could mean adding, deleting or updating a particular artifact. This command can be used only if the specific feature is already enabled.
 
 .. code-block:: bash
 
@@ -581,7 +581,7 @@ Use :code:`awsmobile push` after using :code:`awsmobile <feature> configure` to 
 invoke
 ======
 
-The :code:`awsmobile cloud-api invoke` invokes the API for testing locally. This helps quickly test the unsigned API locally by passing the appropritate arguments. This is intended to be used for the development environment or debugging of your API / Lambda function.
+The :code:`awsmobile cloud-api invoke` invokes the API for testing locally. This helps quickly test the unsigned API locally by passing the appropriate arguments. This is intended to be used for the development environment or debugging of your API / Lambda function.
 
 .. code-block:: bash
 

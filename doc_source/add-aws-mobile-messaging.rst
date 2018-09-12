@@ -62,7 +62,7 @@ To set up your app to receive Push Notifications from Amazon Pinpoint, see
 
    #. In the Amazon Pinpoint console, navigate to :guilabel:`Settings` on the left, choose the :guilabel:`Channels` tab, and then choose  :guilabel:`Email`.
 
-   #. Choose the :guilabel:`Enable email channel` checkbox, choose :guilabel:`Email address`, type the address that you want your messages to come from, and then choose :guilabel:`verify`.
+   #. Choose the :guilabel:`Enable email channel` check box, choose :guilabel:`Email address`, type the address that you want your messages to come from, and then choose :guilabel:`verify`.
 
       The email account you enter will receive an email requesting your approval for
       Amazon Pinpoint to use that account as the sender address for emails sent by the system. The status of :guilabel:`Pending Verification` is

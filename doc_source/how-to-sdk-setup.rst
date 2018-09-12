@@ -17,7 +17,7 @@ How To: AWS Mobile SDK Setup Options
 
 .. meta::
     :description:
-        Optionsfor AWS Mobile SDK Setup
+        Options for AWS Mobile SDK Setup
 
 .. list-table::
    :widths: 1 6

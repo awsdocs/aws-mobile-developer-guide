@@ -208,7 +208,7 @@ Interaction Response Events
 
   - :code:`onInteractionError(final Response response, final Exception e)`
 
-    This response means that |LEX| is providing an identifier for the exception that has occured.
+    This response means that |LEX| is providing an identifier for the exception that has occurred.
 
 Microphone Events
 ~~~~~~~~~~~~~~~~~
@@ -246,10 +246,10 @@ Audio Playback Events
 
   - :code:`onAudioPlaybackError(Exception e)`
 
-    This event returns an exception when an error occurs duringplayback of an |LEX| voice response.
+    This event returns an exception when an error occurs during playback of an |LEX| voice response.
 
 
-Add Voice Interactons
+Add Voice Interactions
 ---------------------
 
 Perform the following tasks to implement voice interaction with |LEX| in your Android app.

@@ -16,7 +16,7 @@ Mobile Hub Project Permissions Model
 
 
 .. meta::
-   :description: This section describes the new permissios model for administrators and users of |AMH| accounts.
+   :description: This section describes the new permissions model for administrators and users of |AMH| accounts.
 
 
 .. list-table::

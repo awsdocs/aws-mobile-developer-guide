@@ -47,7 +47,7 @@ To create the Books table:
 #. Type :userinput:`Books` as the name of the table.
 #. Enter :userinput:`ISBN` in the :guilabel:`Partition key` field of the :guilabel:`Primary key` with :guilabel:`String` as their type.
 #. Check the :guilabel:`Add sort key` box , then type :userinput:`Category` in the provided field and select :guilabel:`String` as the type.
-#. Clear the :guilabel:`Use default settings` checkbox and choose :guilabel:`+ Add Index`.
+#. Clear the :guilabel:`Use default settings` check box and choose :guilabel:`+ Add Index`.
 #. In the :guilabel:`Add Index` dialog type :command:`Author` with :guilabel:`String` as the type.
 #. Check the :guilabel:`Add sort key` check box and enter :command:`Title` as the sort key value, with :guilabel:`String` as its type.
 #. Leave the other values at their defaults. Choose :guilabel:`Add index` to add the :command:`Author-Title-index` index.
@@ -547,7 +547,7 @@ To connect your app to your table create a data model object in the following fo
             }
 
    iOS - Swift
-     In the Xcode project explorer,  right-click the folder containing your app delegate, and choose :guilabel:`New File > Swift File > Next`. Type the name you will use to refer to your data model as the filenam. In this example the name would be :userinput:`Books`. Add code in the following form.
+     In the Xcode project explorer,  right-click the folder containing your app delegate, and choose :guilabel:`New File > Swift File > Next`. Type the name you will use to refer to your data model as the filename. In this example the name would be :userinput:`Books`. Add code in the following form.
 
     .. code-block:: swift
 
@@ -875,7 +875,7 @@ Perform a Query
 
 A query operation enables you to find items in a table. You must define a query using both the hash key
 (partition key) and range key (sort key) attributes of a table. You can filter the results by
-specifying the attributes you are looking for. For more information about :code:`DynamoDBQueryExpression`, see the `AWS Mobile SDK for Android API reference <`https://docs.aws.amazon.com/AWSAndroidSDK/latest/javadoc/com/amazonaws/mobileconnectors/dynamodbv2/dynamodbmapper/DynamoDBQueryExpression.html>`__.
+specifying the attributes you are looking for. For more information about :code:`DynamoDBQueryExpression`, see the `AWS Mobile SDK for Android API reference <`https://aws.github.io/aws-sdk-android/docs/reference//com/amazonaws/mobileconnectors/dynamodbv2/dynamodbmapper/DynamoDBQueryExpression.html>`__.
 
 The following example code shows querying for books with partition key (hash key) :code:`ISBN` and sort key (range key) Category beginning with :code:`History`.
 

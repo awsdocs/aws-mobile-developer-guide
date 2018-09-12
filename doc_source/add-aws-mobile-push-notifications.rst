@@ -692,7 +692,7 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
 
       #. Configure the app to run in the :guilabel:`Release` profile instead of the default :guilabel:`Debug` profile. Perform the following steps to get a notification to the device:
 
-         #. For your app target, go to the :guilabel:`General` tab of project configuration and make sure :guilabel:`Automatically Manage Signing` checkbox is not checked.
+         #. For your app target, go to the :guilabel:`General` tab of project configuration and make sure :guilabel:`Automatically Manage Signing` check box is not selected.
 
          #. In the :guilabel:`Signing(Release)` section, choose the production provisioning profile you created on Apple developer console. For testing push notifications on a device, you will need an `Ad Hoc Provisioining Profile <https://help.apple.com/xcode/mac/current/#/dev4335bfd3d>`__ configured with a Production AppStore and Ad Hoc certificate, and with the device(s) to be used for testing.
 

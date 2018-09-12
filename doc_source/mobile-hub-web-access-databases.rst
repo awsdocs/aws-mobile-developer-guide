@@ -83,7 +83,7 @@ You are creating a table in a `NoSQL database <http://docs.aws.amazon.com/amazon
 
       * - Sort Keys and Indexes
 
-        - To optimize preformance, you can define a column as a Sort Key. Choose a column to be a Sort Key if it will be frequently used in combination with the Primary key to query your table. You can also create Secondary Indexes to make addtional columns sort keys.
+        - To optimize performance, you can define a column as a Sort Key. Choose a column to be a Sort Key if it will be frequently used in combination with the Primary key to query your table. You can also create Secondary Indexes to make additional columns sort keys.
 
    .. code:: bash
 
@@ -107,17 +107,17 @@ To access your NoSQL database, you will create an API that can be called from yo
 
    * - Why an API?
 
-     - Using an API to access your database provides a simple coding interface on the frontend and robust flexibility on the backend. Behind the scenes, a call to an `Amazon API Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`__ API end point in the cloud is handled by a serverless `Lambda <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>`__ function.
+     - Using an API to access your database provides a simple coding interface on the front end and robust flexibility on the backend. Behind the scenes, a call to an `Amazon API Gateway <http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html>`__ API end point in the cloud is handled by a serverless `Lambda <http://docs.aws.amazon.com/lambda/latest/dg/welcome.html>`__ function.
 
 **To create a CRUD API**
 
-#. Enable and configure the CLoud Logic featue**
+#. Enable and configure the Cloud Logic feature**
 
    .. code:: bash
 
         awsmobile cloud-api enable --prompt
 
-#. Choose  :code:`Create CRUD API for an existing Amazon DynamoDB table` API for an exisitng Amazon DynamoDB table" and then choose enter.
+#. Choose  :code:`Create CRUD API for an existing Amazon DynamoDB table` API for an existing Amazon DynamoDB table" and then choose enter.
 
    .. code:: bash
 

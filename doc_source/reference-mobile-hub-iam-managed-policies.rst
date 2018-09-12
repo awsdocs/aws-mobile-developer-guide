@@ -77,7 +77,7 @@ Create a New |IAM| User in Your Account and Grant |AMH| Permissions
 
 #. Open the `IAM console <https://console.aws.amazon.com/iam/>`__. On the left, choose :guilabel:`Users`, and then choose :guilabel:`Add User`.
 
-#. Type a user name, select the checkboxes for :guilabel:`Programmatic access` and :guilabel:`AWS Management Console access`.
+#. Type a user name, select the check boxes for :guilabel:`Programmatic access` and :guilabel:`AWS Management Console access`.
 
 #. Choose the password policy you prefer. Then choose :guilabel:`Next: Permissions`.
 
@@ -89,7 +89,7 @@ Create a New |IAM| User in Your Account and Grant |AMH| Permissions
 
 #. To apply policy:
 
-   * If you have created a group to manage project permissions, choose :guilabel:`Add user to group`, select the group, choose :guilabel:`Next: Review`, then choose choose :guilabel:`Create User`.
+   * If you have created a group to manage project permissions, choose :guilabel:`Add user to group`, select the group, choose :guilabel:`Next: Review`, then choose :guilabel:`Create User`.
 
    Or:
 
@@ -134,7 +134,7 @@ Grant |AMH| Permissions to an Existing Account User
 Use AWS Organizations to Manage Permissions
 ===========================================
 
-`AWS Organizations <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html>`__ can be used to manage permissions for groups that need to segment access to their |AMH| projects. For example, an administrator could provide an account for each developer on a team. Within their own account, each user would have the permissions granted by the administrator. The steps to acheive this would be:
+`AWS Organizations <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html>`__ can be used to manage permissions for groups that need to segment access to their |AMH| projects. For example, an administrator could provide an account for each developer on a team. Within their own account, each user would have the permissions granted by the administrator. The steps to achieve this would be:
 
 #. If you do not have an AWS account, `sign up for the AWS Free Tier <https://aws.amazon.com/free/>`__.
 
@@ -148,7 +148,7 @@ Use AWS Organizations to Manage Permissions
 
 #. Enable and attach a policy for members of the unit.
 
-   The policy you attach will apply within the scope of the AWS account of a user. You may want to limit access to services and capabilites not required for |AMH| use. For instance, the following policy, grants all permissions defined in the :code:`FullAWSAccess` managed policy, but excludes access to the Amazon EC2 service.
+   The policy you attach will apply within the scope of the AWS account of a user. You may want to limit access to services and capabilities not required for |AMH| use. For instance, the following policy, grants all permissions defined in the :code:`FullAWSAccess` managed policy, but excludes access to the Amazon EC2 service.
 
     .. code-block:: json
 

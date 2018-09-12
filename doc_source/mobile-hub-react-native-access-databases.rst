@@ -140,7 +140,7 @@ AWS Mobile will create a custom API for your app to perform create, read, update
 
         awsmobile push
 
-   Until deployment of API to the cloud the has completed, the CLI displays the message: :code:`cloud-api update status: CREATE_IN_PROGRESS`. Once deployed a sucessful creation message :code:`cloud-api update status: CREATE_COMPLETE` is displayed.
+   Until deployment of API to the cloud the has completed, the CLI displays the message: :code:`cloud-api update status: CREATE_IN_PROGRESS`. Once deployed a successful creation message :code:`cloud-api update status: CREATE_COMPLETE` is displayed.
 
    You can view the API that the CLI created by running :code:`awmobile console` and then choosing :guilabel:`Cloud Logic` in the |AMH| console.
 
@@ -250,7 +250,7 @@ Add this method to your component. Use your API path (copied earlier).
             const path = "/Notes/object/" + this.state.noteId;
             try {
               const apiResponse = await API.del("NotesCRUD", path);
-              console.log("response from deleteing note: " + apiResponse);
+              console.log("response from deleting note: " + apiResponse);
               this.setState({apiResponse});
             } catch (e) {
               console.log(e);
@@ -261,7 +261,7 @@ Add this method to your component. Use your API path (copied earlier).
 UI to exercise CRUD calls
 -------------------------
 
-The following is and example of how you might construct UI to excercise these operations.
+The following is and example of how you might construct UI to exercise these operations.
 
 .. code-block:: javascript
 

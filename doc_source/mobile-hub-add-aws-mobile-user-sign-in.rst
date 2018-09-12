@@ -116,7 +116,7 @@ Setup Email & Password Login in your Mobile App
 
       #. Add or update your AWS backend configuration file to incorporate your new sign-in. For details, see the last steps in the :ref:`Get Started: Set Up Your Backend <mobile-hub-add-aws-mobile-sdk-basic-setup>` section.
 
-      #. Add these permisions to the :file:`AndroidManifest.xml` file:
+      #. Add these permissions to the :file:`AndroidManifest.xml` file:
 
          .. code-block:: xml
 
@@ -142,7 +142,7 @@ Setup Email & Password Login in your Mobile App
 
       #. Create an activity that will present your sign-in screen.
 
-         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
+         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
 
 
          .. code-block:: xml
@@ -219,7 +219,7 @@ Setup Email & Password Login in your Mobile App
 
       #. Add or update your AWS backend configuration file to incorporate your new sign-in. For details, see the last steps in the :ref:`Get Started: Set Up Your Backend <mobile-hub-add-aws-mobile-sdk-basic-setup>` section.
 
-      #. Add these permisions to the :file:`AndroidManifest.xml` file:
+      #. Add these permissions to the :file:`AndroidManifest.xml` file:
 
          .. code-block:: xml
 
@@ -245,7 +245,7 @@ Setup Email & Password Login in your Mobile App
 
       #. Create an activity that will present your sign-in screen.
 
-         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
+         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
 
 
          .. code-block:: xml
@@ -491,7 +491,7 @@ Setup Facebook Login in your Mobile App
 
       #. Create an activity that will present your sign-in screen.
 
-         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
+         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
 
          .. code-block:: xml
 
@@ -616,7 +616,7 @@ Setup Facebook Login in your Mobile App
 
       #. Create an activity that will present your sign-in screen.
 
-         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
+         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
 
          .. code-block:: xml
 
@@ -865,7 +865,7 @@ Setup Google Login in your Mobile App
 
       #. Create an activity that will present your sign-in screen.
 
-         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
+         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
 
          .. code-block:: xml
 
@@ -963,7 +963,7 @@ Setup Google Login in your Mobile App
 
       #. Create an activity that will present your sign-in screen.
 
-         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
+         In Android Studio, choose :guilabel:`File > New > Activity > Basic Activity` and type an activity name, such as :userinput:`AuthenticatorActivity`. If you want to make this your starting activity, move the intent filter block containing :code:`.LAUNCHER` to the :code:`AuthenticatorActivity` in your app's :file:`AndroidManifest.xml`.
 
          .. code-block:: xml
 

@@ -81,7 +81,7 @@ To create an identity pool for your application:
 #. Log in to the :console:`Cognito Console <cognito>` and click :guilabel:`Create new identity
    pool`.
 
-#. Enter a name for your Identity Pool and check the checkbox to enable access to unauthenticated
+#. Enter a name for your Identity Pool and check the check box to enable access to unauthenticated
    identities. Click :guilabel:`Create Pool` to create your identity pool.
 
 #. Click :guilabel:`Allow` to create the roles associated with your identity pool.

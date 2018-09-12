@@ -177,7 +177,7 @@ Here's an example of how you can add `Amazon Cognito Identity <http://aws.amazon
 As shown above, the groupId for the |sdk-android| is ``com.amazonaws``. For each additional service,
 include a ``<dependency>`` element following the model above, and use the appropriate artifactID
 from the table below. The ``<version>`` element specifies the version of the |sdk-android|. The
-example above demonstrate's Maven's ability to use a range of acceptable versions for a given
+example above demonstrates Maven's ability to use a range of acceptable versions for a given
 dependency. To review available versions of the SDK for Android, see the `Release Notes
 <https://aws.amazon.com/releasenotes/Android>`__.
 
@@ -209,7 +209,7 @@ The AWS Mobile :code:`artifactId` values are as follows:
     "Amazon Kinesis Video","aws-android-sdk-kinesisvideo"
     "Amazon Key Management Service (KMS)","aws-android-sdk-kms"
     "AWS Lambda","aws-android-sdk-lambda"
-    "Amzon Lex","aws-android-sdk-lex"
+    "Amazon Lex","aws-android-sdk-lex"
     "Amazon CloudWatch Logs","aws-android-sdk-logs"
     "Amazon Machine Learning","aws-android-sdk-machinelearning"
     "AWS Mobile Client","aws-android-sdk-mobile-client"

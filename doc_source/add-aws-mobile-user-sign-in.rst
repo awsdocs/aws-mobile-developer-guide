@@ -321,7 +321,7 @@ Set Up Email and Password Login in Your Mobile App
 
            - The AWS Mobile SDK library for Android sign-in (:code:`aws-android-sdk-auth-ui`) provides the activity and view for presenting a :code:`SignInUI` for the sign-in providers you configure. This library depends on the Android SDK API Level 23 or higher.
 
-      #. Add the following permisions to the :file:`AndroidManifest.xml` file:
+      #. Add the following permissions to the :file:`AndroidManifest.xml` file:
 
          .. code-block:: xml
 

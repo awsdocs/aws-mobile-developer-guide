@@ -273,7 +273,7 @@ Add the SDK to your App
                             IdentityManager.defaultIdentityManager.getUserID(
                                 object : IdentityHandler() {
                                     override fun onIdentityId(s: String) {
-                                        // The netwirk call to fetch AWS credentials succeeded
+                                        // The network call to fetch AWS credentials succeeded
                                         Log.d(TAG, "Identity ID is: ${s}")
                                     }
 
