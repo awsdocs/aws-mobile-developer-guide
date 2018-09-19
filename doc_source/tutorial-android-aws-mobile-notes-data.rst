@@ -526,7 +526,7 @@ When you  insert, edit, or delete notes in the app, you should be able to see th
 Next Steps
 ----------
 
--  Learn about `AWS AppSync  <https://aws.amaozn.com/appsync/>`__.
+-  Learn about `AWS AppSync  <https://aws.amazon.com/appsync/>`__.
 -  Learn about `Amazon DynamoDB <https://aws.amazon.com/dynamodb/>`__.
 
 

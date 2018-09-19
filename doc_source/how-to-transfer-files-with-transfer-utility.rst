@@ -14,25 +14,13 @@
 Transfer Files and Data Using TransferUtility and |S3|
 ######################################################
 
-.. list-table::
-   :widths: 1 6
-
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <add-aws-mobile-user-data-storage>` to install the SDK and integrate Amazon S3.
-
-*Or, use the contents of this page if your app will integrate existing AWS services.*
-
 This page explains how to implement upload and download functionality and a number of additional storage use cases.
 
-The examples on this page assume you have added the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app, see :ref:`Add User File Storage <add-aws-mobile-user-data-storage>`.
+The examples on this page assume you have added the AWS Mobile SDK to your mobile app. To create a new cloud storage backend for your app or to add existing AWS resources, see :ref:`Add User File Storage <add-aws-mobile-user-data-storage>`.
 
-.. list-table::
-   :widths: 1 6
+If you use the transfer utility multipart upload feature, take advantage of automatic cleanup features by setting up the `AbortIncompleteMultipartUpload <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html>`__ action in your Amazon S3 bucket life cycle configuration.
 
-   * - **Best practice**
-
-     -  If you use the transfer utility multipart upload feature, take advantage of automatic cleanup features by setting up the `AbortIncompleteMultipartUpload <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html>`__ action in your Amazon S3 bucket life cycle configuration.
+If your app is built for Android and depends on long-running background transfers, see :ref:`Executing Long-running Transfers in the Background <long-running-transfers>`.
 
 
 .. _how-to-transfer-utility-add-aws-user-data-storage-upload:
@@ -933,6 +921,39 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
                 // Do something with downloadTask.
             }
 
+.. _long-running-transfers:
+
+Executing Long-running Transfers in the Background
+==================================================
+
+
+.. container:: option
+
+    Android - Java
+        Starting in version 2.7.0 of the SDK, :code:`TransferService` logic has been refactored to be compatible with recent Android changes. In version 2.7.0, this service will only monitor network connectivity changes. In previous AWS Mobile SDK versions, :code:`TransferService` was started by :code:`TransferUtility`. In v. 2.7.0, :code:`TransferService` must be started manually from your application. You can use the following code in the :code:`onCreate` method of your app's Application class to start :code:`TransferService`.
+
+        .. code-block:: java
+
+            getApplicationContext().startService(new Intent(getApplicationContext(), TransferService.class));
+
+        When the network becomes offline, the in-progress transfers that are in scope of the application will be paused. When network comes back online, the transfers that are paused will be resumed.
+
+        If you expect your app to perform long-running transfers in the background, initiate the transfers from a background service. For a recommended way to use a service to initate the transfer, see a `Transfer Utility sample application <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ .
+
+    Android - Kotlin
+        Starting in version 2.7.0 of the SDK, :code:`TransferService` logic has been refactored to be compatible with recent Android changes. In version 2.7.0, this service will only monitor network connectivity changes. In previous AWS Mobile SDK versions, :code:`TransferService` was started by :code:`TransferUtility`. In v. 2.7.0, :code:`TransferService` must be started manually from your application. You can use the following code in the :code:`onCreate` method of your app's Application class to start :code:`TransferService`.
+
+        .. code-block:: java
+
+            getApplicationContext().startService(new Intent(getApplicationContext(), TransferService.class));
+
+        When network becomes offline, the in-progress transfers that are in scope of the application will be paused. When network comes back online, the transfers that are paused will be resumed.
+
+        If you expect your app to perform long-running transfers in the background, initiate the transfers from a background service. For a recommended way to use a service to initate the transfer, see a `Transfer Utility sample application <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ .
+
+    iOS - Swift
+       No additional work is needed to support long-running background transfers.
+
 
 .. _native-advanced-transfers:
 
@@ -1481,8 +1502,14 @@ The following code shows how to download a binary file.
                         return nil;
                     }
 
+.. _transfer-utility-limitations:
+
 Limitations
 ===========
+
+
+Long Running Transfers with Cognito Credentials
+-----------------------------------------------
 
 .. container:: option
 

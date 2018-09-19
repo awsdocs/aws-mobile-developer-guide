@@ -13,7 +13,7 @@ Add User File Storage to Your Mobile App with Amazon S3
 .. _overview:
 
 Overview
-==============
+=========
 
 .. container:: option
 
@@ -140,9 +140,9 @@ Use the following steps to connect add file storage backend services to your app
             .. code-block:: json
 
                dependencies {
-                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
-                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app.
@@ -163,9 +163,9 @@ Use the following steps to connect add file storage backend services to your app
             .. code-block:: none
 
                dependencies {
-                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
-                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
@@ -298,6 +298,12 @@ Upload a File
               }
           }
 
+    .. note::
+
+       If your app will depend on long-running background transfers, see :ref:`Executing Long-running Transfers in the Background <long-running-transfers>`.
+
+
+
    Android - Kotlin
     To upload a file to an Amazon S3 bucket, use :code:`AWSMobileClient` to get the :code:`AWSConfiguration` and :code:`AWSCredentialsProvider`, and
     then create the :code:`TransferUtility` object. :code:`AWSMobileClient` expects an activity context for resuming an authenticated session and creating the credentials provider.
@@ -363,6 +369,11 @@ Upload a File
                     val bytesTransferred = uploadObserver.bytesTransferred
                 }
             }
+
+    .. note::
+
+       If your app will depend on long-running background transfers, see :ref:`Executing Long-running Transfers in the Background <long-running-transfers>`.
+
 
    iOS - Swift
      The following example shows how to upload data to an |S3| bucket.
@@ -487,6 +498,10 @@ Download a File
                 }
             }
 
+    .. note::
+
+       If your app will depend on long-running background transfers, see :ref:`Executing Long-running Transfers in the Background <long-running-transfers>`.
+
    Android - Kotlin
     To download a file from an Amazon S3 bucket, use :code:`AWSMobileClient`
     to get the :code:`AWSConfiguration` and  :code:`AWSCredentialsProvider` to create the :code:`TransferUtility` object.
@@ -561,6 +576,10 @@ Download a File
                     Log.d("Your Activity", "Bytes Transferred: ${downloadObserver.bytesTransferred}");
                 }
             }
+
+    .. note::
+
+       If your app will depend on long-running background transfers, see :ref:`Executing Long-running Transfers in the Background <long-running-transfers>`.
 
    iOS - Swift
      The following example shows how to download a file from an |S3| bucket.
