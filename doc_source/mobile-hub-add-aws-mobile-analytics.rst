@@ -53,8 +53,8 @@ Add Analytics
                   .. code-block:: java
 
                      dependencies{
-                        implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                        implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                        implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.7.+'
+                        implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
                         // other dependencies . . .
                      }
 
@@ -133,8 +133,8 @@ Add Analytics
                   .. code-block:: java
 
                      dependencies {
-                        implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                        implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                        implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.7.+'
+                        implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
                         // other dependencies . . .
                      }
 

@@ -102,8 +102,8 @@ Connect to your backend
             .. code-block:: none
 
                 dependencies{
-                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
+                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.7.+'
+                    implementation ('com.amazonaws:aws-android-sdk-auth-core:2.7.+@aar')  {transitive = true;}
 
                     implementation 'com.google.android.gms:play-services-iid:11.6.0'
                     implementation 'com.google.android.gms:play-services-gcm:11.6.0'
@@ -216,8 +216,8 @@ Connect to your backend
             .. code-block:: none
 
                 dependencies{
-                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-auth-core:2.6.+@aar')  {transitive = true;}
+                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.7.+'
+                    implementation ('com.amazonaws:aws-android-sdk-auth-core:2.7.+@aar')  {transitive = true;}
 
                     implementation 'com.google.android.gms:play-services-iid:11.6.0'
                     implementation 'com.google.android.gms:play-services-gcm:11.6.0'

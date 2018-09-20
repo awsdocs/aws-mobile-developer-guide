@@ -77,7 +77,7 @@ to the dependencies as follows:
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
-        classpath "com.amazonaws:aws-android-sdk-appsync-gradle-plugin:2.6.+"
+        classpath "com.amazonaws:aws-android-sdk-appsync-gradle-plugin:2.7.+"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -108,7 +108,7 @@ Add the AWS AppSync dependencies with the other SDKs.
         implementation "com.amazonaws:aws-android-sdk-pinpoint:$aws_version"
 
         // AWS AppSync SDK
-        implementation "com.amazonaws:aws-android-sdk-appsync:2.6.+"
+        implementation "com.amazonaws:aws-android-sdk-appsync:2.7.+"
     }
 
 On the upper-right side, choose :guilabel:`Sync Now` to incorporate the dependencies you just declared.

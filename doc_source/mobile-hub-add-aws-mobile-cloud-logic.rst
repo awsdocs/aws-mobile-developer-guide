@@ -81,7 +81,7 @@ Use the following steps to add AWS Cloud Logic to your app.
 
                     // other dependencies . . .
 
-                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
+                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.7.+'
 
                 }
 
@@ -228,7 +228,7 @@ Use the following steps to add AWS Cloud Logic to your app.
 
                     // other dependencies . . .
 
-                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
+                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.7.+'
 
                 }
 

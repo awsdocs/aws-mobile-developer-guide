@@ -67,8 +67,8 @@ using the integration steps on this page.
             .. code-block:: none
 
                dependencies {
-                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.+'
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
@@ -107,8 +107,8 @@ using the integration steps on this page.
 
                dependencies {
                   implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.+'
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app

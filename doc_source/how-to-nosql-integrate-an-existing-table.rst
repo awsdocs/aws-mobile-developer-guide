@@ -253,10 +253,10 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
                 dependencies{
 
                     // Amazon Cognito dependencies for user access to AWS resources
-                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                     // AmazonDynamoDB dependencies for NoSQL Database
-                    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
+                    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.7.+'
 
                     // other dependencies . . .
                 }
@@ -341,10 +341,10 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
                 dependencies{
 
                     // Amazon Cognito dependencies for user access to AWS resources
-                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                     // AmazonDynamoDB dependencies for NoSQL Database
-                    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.6.+'
+                    implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.7.+'
 
                     // other dependencies . . .
                 }

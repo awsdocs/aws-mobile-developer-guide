@@ -115,9 +115,9 @@ Use the following steps to add Cloud Logic to your app.
 
                     // other dependencies . . .
 
-                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
-                    implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
+                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.7.+'
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+                    implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
                 }
 
       #. Get your API client name.
@@ -260,9 +260,9 @@ Use the following steps to add Cloud Logic to your app.
 
                     // other dependencies . . .
 
-                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
-                    implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
+                    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.7.+'
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+                    implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
 
                 }
 

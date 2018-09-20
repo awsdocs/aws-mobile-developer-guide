@@ -127,8 +127,8 @@ Use the following steps to connect add push notification backend services to you
                     implementation 'com.google.firebase:firebase-core:16.0.1'
                     implementation 'com.google.firebase:firebase-messaging:17.3.0'
 
-                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.7.+'
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
                 }
 
                 apply plugin: 'com.google.gms.google-services'
@@ -244,8 +244,8 @@ Use the following steps to connect add push notification backend services to you
                     implementation 'com.google.firebase:firebase-core:16.0.1'
                     implementation 'com.google.firebase:firebase-messaging:17.3.0'
 
-                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.6.+'
-                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.7.+'
+                    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
                 }
 
                 apply plugin: 'com.google.gms.google-services'

@@ -231,15 +231,15 @@ Set Up Email and Password Login in Your Mobile App
 
              dependencies {
                   // Mobile Client for initializing the SDK
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                   // Cognito UserPools for SignIn
                   implementation 'com.android.support:support-v4:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
 
                   // Sign in UI Library
                   implementation 'com.android.support:appcompat-v7:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.7.+@aar') { transitive = true }
              }
 
           Note: When you add the dependencies, make sure that the major version of appcompat and support libraries match. In the previous example, we're using version 24.
@@ -334,15 +334,15 @@ Set Up Email and Password Login in Your Mobile App
 
              dependencies {
                   // Mobile Client for initializing the SDK
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                   // Cognito UserPools for SignIn
                   implementation 'com.android.support:support-v4:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
 
                   // Sign in UI Library
                   implementation 'com.android.support:appcompat-v7:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.7.+@aar') { transitive = true }
              }
 
           Note: When you add the dependencies, make sure that the major version of appcompat and support libraries match. In the previous example, we're using version 24.
@@ -587,15 +587,15 @@ Set Up Facebook Login in Your Mobile App
 
             dependencies {
               // Mobile Client for initializing the SDK
-              implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+              implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
               // Facebook SignIn
               implementation 'com.android.support:support-v4:24.+'
-              implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar') { transitive = true }
+              implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.7.+@aar') { transitive = true }
 
               // Sign in UI
               implementation 'com.android.support:appcompat-v7:24.+'
-              implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
+              implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.7.+@aar') { transitive = true }
             }
 
           Note: When you add the dependencies, make sure that the major version of appcompat and support libraries match. In the previous example, we're using version 24.
@@ -712,15 +712,15 @@ Set Up Facebook Login in Your Mobile App
 
             dependencies {
               // Mobile Client for initializing the SDK
-              implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+              implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
               // Facebook SignIn
               implementation 'com.android.support:support-v4:24.+'
-              implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.6.+@aar') { transitive = true }
+              implementation ('com.amazonaws:aws-android-sdk-auth-facebook:2.7.+@aar') { transitive = true }
 
               // Sign in UI
               implementation 'com.android.support:appcompat-v7:24.+'
-              implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
+              implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.7.+@aar') { transitive = true }
             }
 
       #. In :file:`strings.xml`, add string definitions for your Facebook app ID and login protocol scheme. The value for app_id is your Facebook app ID and the value for logic_protocol_scheme should be your Facebook app ID prefixed with :code:`fb`.
@@ -988,15 +988,15 @@ Set Up Google Login in Your Mobile App
 
               dependencies {
                   // Mobile Client for initializing the SDK
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                   // Google SignIn
                   implementation 'com.android.support:support-v4:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-google:2.7.+@aar') { transitive = true }
 
                   // Sign in UI Library
                   implementation 'com.android.support:appcompat-v7:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.7.+@aar') { transitive = true }
               }
 
 
@@ -1088,15 +1088,15 @@ Set Up Google Login in Your Mobile App
 
               dependencies {
                   // Mobile Client for initializing the SDK
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                   // Google SignIn
                   implementation 'com.android.support:support-v4:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-google:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-google:2.7.+@aar') { transitive = true }
 
                   // Sign in UI Library
                   implementation 'com.android.support:appcompat-v7:24.+'
-                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-auth-ui:2.7.+@aar') { transitive = true }
               }
 
 

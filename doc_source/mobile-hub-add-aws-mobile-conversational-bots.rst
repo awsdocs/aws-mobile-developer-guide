@@ -69,7 +69,7 @@ Connect to your backend
             .. code-block:: none
 
                 dependencies{
-                    implementation ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar') {transitive = true;}
+                    implementation ('com.amazonaws:aws-android-sdk-lex:2.7.+@aar') {transitive = true;}
                 }
 
          #. For each Activity where you make calls to |LEXlong|, import the following APIs.
@@ -189,7 +189,7 @@ Connect to your backend
                :emphasize-lines: 2
 
                 dependencies{
-                    implementation ('com.amazonaws:aws-android-sdk-lex:2.6.+@aar') {transitive = true;}
+                    implementation ('com.amazonaws:aws-android-sdk-lex:2.7.+@aar') {transitive = true;}
                 }
 
          #. For each Activity where you make calls to |LEXlong|, import the following APIs.

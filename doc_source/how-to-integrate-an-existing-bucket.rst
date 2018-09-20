@@ -174,9 +174,9 @@ Add the SDK to Your App
             .. code-block:: none
 
                dependencies {
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
-                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.+'
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
@@ -185,15 +185,23 @@ Add the SDK to Your App
 
             .. code-block:: xml
 
+      #. Your :file:`AndroidManifest.xml` must contain the following:
+
+         .. code-block:: xml
+
+               <!- Include these permissions  ->
+               <uses-permission android:name="android.permission.INTERNET"/>
+               <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+                <!- Other manifest elements . . . ->
 
                <application ... >
 
-                  <!- . . . ->
-
+                  <!- Include this service in the application ->
                   <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
 
-                  <!- . . . ->
+                  <!- Other application elements . . . ->
 
                </application>
 
@@ -229,9 +237,9 @@ Add the SDK to Your App
                :emphasize-lines: 1-3
 
                dependencies {
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
-                  implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.6.+'
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+                  implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
+                  implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.+'
                }
 
             Perform a `Gradle Sync` to download the AWS Mobile SDK components into your app
@@ -239,17 +247,20 @@ Add the SDK to Your App
          #. Add the following to :file:`AndroidManifest.xml`:
 
             .. code-block:: xml
-               :emphasize-lines: 1,7
 
+               <!- Include these permissions  ->
+               <uses-permission android:name="android.permission.INTERNET"/>
+               <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
                <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+                <!- Other manifest elements . . . ->
 
                <application ... >
 
-                  <!- . . . ->
-
+                  <!- Include this service in the application ->
                   <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService" android:enabled="true" />
 
-                  <!- . . . ->
+                  <!- Other application elements . . . ->
 
                </application>
 

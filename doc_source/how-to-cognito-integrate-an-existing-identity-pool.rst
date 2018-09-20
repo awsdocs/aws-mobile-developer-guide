@@ -180,7 +180,7 @@ Add the SDK to your App
             .. code-block:: none
 
                dependencies {
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                   // other dependencies . . .
                }
@@ -244,7 +244,7 @@ Add the SDK to your App
             .. code-block:: none
 
                dependencies {
-                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
 
                   // other dependencies . . .
                }

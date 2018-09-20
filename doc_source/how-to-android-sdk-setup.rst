@@ -63,56 +63,56 @@ that your project will use, as shown below.
 .. code-block:: groovy
 
     dependencies {
-        implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
-        implementation 'com.amazonaws:aws-android-sdk-s3:2.6.+'
-        implementation 'com.amazonaws:aws-android-sdk-ddb:2.6.+'
+        implementation 'com.amazonaws:aws-android-sdk-core:2.7.0'
+        implementation 'com.amazonaws:aws-android-sdk-s3:2.7.0'
+        implementation 'com.amazonaws:aws-android-sdk-ddb:2.7.0'
     }
 
 A full list of dependencies are listed below. For dependencies ending in ":code:`@aar`" use a compile statement in the following form.
 
 .. code-block:: groovy
 
-      implementation ('com.amazonaws:aws-android-sdk-cognitoauth:2.6.+@aar') { transitive = true }
+      implementation ('com.amazonaws:aws-android-sdk-cognitoauth:2.7.0@aar') { transitive = true }
 
 
 .. csv-table::
    :header: Dependency,Build.gradle Value
    :widths: 1 1
 
-    "Amazon API Gateway","aws-android-sdk-apigateway-core:2.6.+"
-    "AWS Auth Core","aws-android-sdk-auth-core:2.6.+@aar"
-    "AWS Facebook SignIn Provider","aws-android-sdk-auth-facebook:2.6.+@aar"
-    "AWS Google SignIn Provider","aws-android-sdk-auth-google:2.6.+@aar"
-    "AWS Auth UI","aws-android-sdk-auth-ui:2.6.+@aar"
-    "AWS Cognito User Pools SignIn Provider","aws-android-sdk-auth-userpools:2.6.+@aar"
-    "Amazon Auto Scaling","aws-android-sdk-autoscaling:2.6.+"
-    "Amazon CloudWatch","aws-android-sdk-cloudwatch:2.6.+"
-    "Amazon Cognito Auth","aws-android-sdk-cognitoauth:2.6.+@aar"
-    "Amazon Cognito Identity Provider","aws-android-sdk-cognitoidentityprovider:2.6.+"
-    "AWS Core","aws-android-sdk-core:2.6.+"
-    "Amazon DynamoDB Document Model","aws-android-sdk-ddb-document:2.6.+"
-    "Amazon DynamoDB Object Mapper","aws-android-sdk-ddb-mapper:2.6.+"
-    "Amazon DynamoDB","aws-android-sdk-ddb:2.6.+"
-    "Amazon Elastic Compute Cloud","aws-android-sdk-ec2:2.6.+"
-    "Amazon Elastic Load Balancing","aws-android-sdk-elb:2.6.+"
-    "AWS IoT","aws-android-sdk-iot:2.6.+"
-    "Amazon Kinesis","aws-android-sdk-kinesis:2.6.+"
-    "Amazon Kinesis Video","aws-android-sdk-kinesisvideo:2.6.+@aar"
-    "Amazon Key Management Service (KMS)","aws-android-sdk-kms:2.6.+"
-    "AWS Lambda","aws-android-sdk-lambda:2.6.+"
-    "Amazon Lex","aws-android-sdk-lex:2.6.+@aar"
-    "Amazon CloudWatch Logs","aws-android-sdk-logs:2.6.+"
-    "Amazon Machine Learning","aws-android-sdk-machinelearning:2.6.+"
-    "AWS Mobile Client","aws-android-sdk-mobile-client:2.6.+@aar"
-    "Amazon Mobile Analytics","aws-android-sdk-mobileanalytics:2.6.+"
-    "Amazon Pinpoint","aws-android-sdk-pinpoint:2.6.+"
-    "Amazon Polly","aws-android-sdk-polly:2.6.+"
-    "Amazon Rekognition","aws-android-sdk-rekognition:2.6.+"
-    "Amazon Simple Storage Service (S3)","aws-android-sdk-s3:2.6.+"
-    "Amazon Simple DB (SDB)","aws-android-sdk-sdb:2.6.+"
-    "Amazon SES","aws-android-sdk-ses:2.6.+"
-    "Amazon SNS","aws-android-sdk-sns:2.6.+"
-    "Amazon SQS","aws-android-sdk-sqs:2.6.+"
+    "Amazon API Gateway","aws-android-sdk-apigateway-core:2.7.0"
+    "AWS Auth Core","aws-android-sdk-auth-core:2.7.0@aar"
+    "AWS Facebook SignIn Provider","aws-android-sdk-auth-facebook:2.7.0@aar"
+    "AWS Google SignIn Provider","aws-android-sdk-auth-google:2.7.0@aar"
+    "AWS Auth UI","aws-android-sdk-auth-ui:2.7.0@aar"
+    "AWS Cognito User Pools SignIn Provider","aws-android-sdk-auth-userpools:2.7.0@aar"
+    "Amazon Auto Scaling","aws-android-sdk-autoscaling:2.7.0"
+    "Amazon CloudWatch","aws-android-sdk-cloudwatch:2.7.0"
+    "Amazon Cognito Auth","aws-android-sdk-cognitoauth:2.7.0@aar"
+    "Amazon Cognito Identity Provider","aws-android-sdk-cognitoidentityprovider:2.7.0"
+    "AWS Core","aws-android-sdk-core:2.7.0"
+    "Amazon DynamoDB Document Model","aws-android-sdk-ddb-document:2.7.0"
+    "Amazon DynamoDB Object Mapper","aws-android-sdk-ddb-mapper:2.7.0"
+    "Amazon DynamoDB","aws-android-sdk-ddb:2.7.0"
+    "Amazon Elastic Compute Cloud","aws-android-sdk-ec2:2.7.0"
+    "Amazon Elastic Load Balancing","aws-android-sdk-elb:2.7.0"
+    "AWS IoT","aws-android-sdk-iot:2.7.0"
+    "Amazon Kinesis","aws-android-sdk-kinesis:2.7.0"
+    "Amazon Kinesis Video","aws-android-sdk-kinesisvideo:2.7.0@aar"
+    "Amazon Key Management Service (KMS)","aws-android-sdk-kms:2.7.0"
+    "AWS Lambda","aws-android-sdk-lambda:2.7.0"
+    "Amazon Lex","aws-android-sdk-lex:2.7.0@aar"
+    "Amazon CloudWatch Logs","aws-android-sdk-logs:2.7.0"
+    "Amazon Machine Learning","aws-android-sdk-machinelearning:2.7.0"
+    "AWS Mobile Client","aws-android-sdk-mobile-client:2.7.0@aar"
+    "Amazon Mobile Analytics","aws-android-sdk-mobileanalytics:2.7.0"
+    "Amazon Pinpoint","aws-android-sdk-pinpoint:2.7.0"
+    "Amazon Polly","aws-android-sdk-polly:2.7.0"
+    "Amazon Rekognition","aws-android-sdk-rekognition:2.7.0"
+    "Amazon Simple Storage Service (S3)","aws-android-sdk-s3:2.7.0"
+    "Amazon Simple DB (SDB)","aws-android-sdk-sdb:2.7.0"
+    "Amazon SES","aws-android-sdk-ses:2.7.0"
+    "Amazon SNS","aws-android-sdk-sns:2.7.0"
+    "Amazon SQS","aws-android-sdk-sqs:2.7.0"
 
 
 Option 2: Import the JAR Files
@@ -227,7 +227,7 @@ The AWS Mobile :code:`artifactId` values are as follows:
 Step 2: Set Permissions in Your Manifest
 ========================================
 
-Add the following permission to your :file:`AndroidManifest.xml`::
+Add the following permission to your :file:`AndroidManifest.xml`:
 
 .. code-block:: xml
 

@@ -185,7 +185,7 @@ Perform the following steps to set up a connection to AWS services that you'll u
          .. code-block:: java
 
              dependencies {
-                 implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
+                 implementation 'com.amazonaws:aws-android-sdk-core:2.7.+'
              }
 
       #. Your :file:`AndroidManifest.xml` must contain the following:
@@ -203,7 +203,7 @@ Perform the following steps to set up a connection to AWS services that you'll u
          .. code-block:: java
 
              dependencies {
-                 implementation 'com.amazonaws:aws-android-sdk-core:2.6.+'
+                 implementation 'com.amazonaws:aws-android-sdk-core:2.7.+'
              }
 
       #. Your :file:`AndroidManifest.xml` must contain the following:

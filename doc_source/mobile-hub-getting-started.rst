@@ -190,7 +190,7 @@ Connect to Your Backend
          .. code-block:: java
 
              dependencies {
-                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
              }
 
       #. Add the following code to the :code:`onCreate` method of your main or startup activity. :code:`AWSMobileClient` is a singleton that establishes your connection to |AWS| and acts as an interface for your services.
@@ -301,7 +301,7 @@ Connect to Your Backend
          .. code-block:: java
 
              dependencies {
-                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.6.+@aar') { transitive = true }
+                 implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
              }
 
       #. Add the following code to the :code:`onCreate` method of your main or startup activity. :code:`AWSMobileClient` is a singleton that establishes your connection to |AWS| and acts as an interface for your services.
