@@ -200,7 +200,11 @@ Create an AWS AppSync Authentication Context
                 token = task.result!.idToken!.tokenString
                 return nil
              }).waitUntilFinished()
-             return token!
+             if token != nil {
+               return token!
+            } else {
+               return ""
+            }
          }
       }
 
