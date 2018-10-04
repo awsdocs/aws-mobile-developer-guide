@@ -153,6 +153,7 @@ Declare Data Types
       Declare the Java classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name:
 
       .. code-block:: java
+
          package com.amazonaws.demo.lambdainvoker;
 
          /**
@@ -190,6 +191,7 @@ Declare Data Types
       Declare the Kotlin data classes to hold the data you pass to the Lambda function. The following class defines a NameInfo class that contains a person's first and last name:
 
       .. code-block:: kotlin
+
          package com.amazonaws.demo.lambdainvoker;
 
          data class NameInfo(var firstName: String, var lastName: String)

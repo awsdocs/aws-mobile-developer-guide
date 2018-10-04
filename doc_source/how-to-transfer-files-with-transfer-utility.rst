@@ -545,9 +545,9 @@ Track Transfer Progress
             val transferId = transferObserver.id;
 
     iOS - Swift
-        Implement progress and completion actions for transfers by passing a :code:`progressBlock` and :code:`completionHandler` blocks to the call to :code:`AWSS3TransferUtility` that initiates the transfer.
+        To implement progress and completion actions for transfers, pass :code:`progressBlock` and :code:`completionHandler` blocks when you call :code:`AWSS3TransferUtility` to initiate the transfer.
 
-        The following example of initiating a data upload, shows how progress and completion handling is typically done for all transfers. The :code:`AWSS3TransferUtilityUploadExpression`, :code:`AWSS3TransferUtilityMultiPartUploadExpression` and :code:`AWSS3TransferUtilityDownloadExpression` contains the :code:`progressBlock` that gives you the progress of the transfer which you can use to update the progress bar.
+        The following code for initiating a transfer uses the example of data upload to show how progress reporting and completion handling are typically done for all transfers. The :code:`progressBlock` gives you transfer status data you can display in the progress bar. Depending on the kind of transfer, the block is contained in either :code:`AWSS3TransferUtilityUploadExpression`, :code:`AWSS3TransferUtilityMultiPartUploadExpression or :code:`AWSS3TransferUtilityDownloadExpression.
 
         .. code-block:: swift
 
@@ -818,10 +818,11 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
        No additional work is needed to use this feature. As long as your app is present in the background a transfer that is in progress will continue.
 
     iOS - Swift
-        **Configure the Application Delegate**
+        **Manage Transfers with the App in the Foreground, in the Background, or Suspended**
 
-        The :code:`TransferUtility` for iOS uses NSURLSession background transfers to continue data transfers even when your app moves to the background. Call the following method in the :code:`- application:handleEventsForBackgroundURLSession: completionHandler:` of your application delegate.
-        When the app moves the foreground, the delegate enables iOS to notify TransferUtility that a transfer has completed.
+         All transfers performed by :code:`TransferUtility` for iOS happen in the background using :code:`NSURLSession` background sessions. Once a transfer is initiated, it will continue regardless of whether the initiating app moves to the foreground, moves to the background, is suspended, or is terminated by the system (transfers initiated by apps the user terminates are cancelled).
+
+         To wake an app that is suspended or in the background when a transfer it has initiated is completed, implement the :code:`handleEventsForBackgroundURLSession` method in the :code:`AppDelegate` and have it call the :code:`interceptApplication` method of :code:`AWSS3TransferUtility` as follows.
 
         .. code-block:: swift
 
@@ -830,96 +831,42 @@ The SDK supports uploading to and downloading from Amazon S3 while your app is r
                 AWSS3TransferUtility.interceptApplication(application, handleEventsForBackgroundURLSession: identifier, completionHandler: completionHandler)
             }
 
-        **Manage a Transfer with the App in the Foreground**
+        **Managing Transfers When an App Restarts**
 
-        To manage transfers for an app that has moved from the background to the foreground, retain references to :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask`. Call suspend, resume, or cancel methods on those task references. The following example shows how to suspend a transfer when the app is about to be terminated.
+        When an app that has initiated a transfer is terminated by the system restarts, the transfer may still be in progress or may have completed. To make the restarting app aware of the status of transfers it initiated before termination, instantiate the transfer utility using the :code:`AWSS3TransferUtility.s3TransferUtility(forKey: "YOUR_KEY")` method. :code:`AWSS3TransferUtility` uses the key to uniquely identify the :code:`NSURLSession` of each transfer initiated by an app, so it is important to always use the same identifier when referring to a given transfer. :code:`AWSS3TransferUtility` will automatically reconnect to the transfers that were in progress the last time the app was running.
 
-        .. code-block:: swift
+        Though it can be called anywhere in the app, we recommended that you instantiate :code:`AWSS3TransferUtility` when the app starts up in the :code:`appDidFinishLaunching` lifecyle method.
 
-            transferUtility.uploadFile(fileURL,
-                    bucket: S3BucketName,
-                    key: S3UploadKeyName,
-                    contentType: "image/png",
-                    expression: nil,
-                    completionHandler: nil).continueWith {
-                        (task) -> AnyObject! in if let error = task.error {
-                            print("Error: \(error.localizedDescription)")
-                        }
-
-                        if let uploadTask = task.result {
-                            uploadTask.suspend()
-                        }
-
-                        return nil;
-                    }
 
         **Manage a Transfer when a Suspended App Returns to the Foreground**
 
         When an app that has initiated a transfer becomes suspended and then returns to the foreground, the transfer may still be in progress or may have completed. In both cases, use the following code to reestablish the progress and completion handler blocks of the app.
 
-        This code example is for downloading a file but the same pattern can be used for upload:
-
-        You can get a reference to the :code:`AWSS3TransferUtilityUploadTask`, :code:`AWSS3TransferUtilityMultiPartUploadTask` and :code:`AWSS3TransferUtilityDownloadTask` objects from the task.result in continueWith block when you initiate the upload and download respectively. These tasks have a property called taskIdentifier, which uniquely identifies the transfer task object within the :code:`AWSS3TransferUtility`. Your app should persist the identifier through closure and relaunch, so that you can uniquely identify the task objects when the app comes back into the foreground.
+        This code example is for downloading a file but the same pattern can be used for upload and multi-part upload.
 
         .. code-block:: swift
 
-            let transferUtility = AWSS3TransferUtility.default()
+            let uploadTasks = transferUtility.getUploadTasks().result
+              for task in uploadTasks! {
+                   task.setCompletionHandler(completionHandler!)
+                   task.setProgressBlock(progressBlock!)
+            }
 
-            var uploadProgressBlock: AWSS3TransferUtilityProgressBlock? = {(task: AWSS3TransferUtilityTask, progress: Progress) in
-                DispatchQueue.main.async {
-                    // Handle progress feedback, e.g. update progress bar
+
+            let downloadTasks = transferUtility.getDownloadTasks().result
+               for task in downloadTasks! {
+                   task.setCompletionHandler(completionHandler!)
+                   task.setProgressBlock(progressBlock!)
                 }
             }
 
 
-            var downloadProgressBlock: AWSS3TransferUtilityProgressBlock? = {
-                (task: AWSS3TransferUtilityTask, progress: Progress) in DispatchQueue.main.async {
-                    // Handle progress feedback, e.g. update progress bar
-                }
-            }
-            var completionBlockUpload:AWSS3TransferUtilityUploadCompletionHandlerBlock? = {
-                (task, error) in DispatchQueue.main.async {
-                    // perform some action on completed upload operation
-                }
-            }
-            var completionBlockDownload:AWSS3TransferUtilityDownloadCompletionHandlerBlock? = {
-                (task, url, data, error) in DispatchQueue.main.async {
-                    // perform some action on completed download operation
-                }
-            }
+            let multiPartUploadTasks = transferUtility.getMultiPartUploadTasks().result
+                for task in multiPartUploadTasks! {
+                    task.setCompletionHandler(completionHandler!)
+                    task.setProgressBlock(progressBlock!)
 
-
-
-            transferUtility.enumerateToAssignBlocks(forUploadTask: {
-                (task, progress, completion) -> Void in
-
-                    let progressPointer = AutoreleasingUnsafeMutablePointer<AWSS3TransferUtilityProgressBlock?>(& uploadProgressBlock)
-
-                    let completionPointer = AutoreleasingUnsafeMutablePointer<AWSS3TransferUtilityUploadCompletionHandlerBlock?>(&completionBlockUpload)
-
-                    // Reassign your progress feedback
-                    progress?.pointee = progressPointer.pointee
-
-                    // Reassign your completion handler.
-                    completion?.pointee = completionPointer.pointee
-
-            }, downloadTask: {
-                (task, progress, completion) -> Void in
-
-                    let progressPointer = AutoreleasingUnsafeMutablePointer<AWSS3TransferUtilityProgressBlock?>(&downloadProgressBlock)
-
-                    let completionPointer = AutoreleasingUnsafeMutablePointer<AWSS3TransferUtilityDownloadCompletionHandlerBlock?>(&completionBlockDownload)
-
-                    // Reassign your progress feedback
-                    progress?.pointee = progressPointer.pointee
-
-                    // Reassign your completion handler.
-                    completion?.pointee = completionPointer.pointee
-            })
-
-             if let downloadTask = task.result {
-                // Do something with downloadTask.
-            }
+             }
 
 .. _long-running-transfers:
 
@@ -1190,7 +1137,7 @@ Transfer Utility Options
         You can use the :code:`AWSS3TransferUtilityConfiguration` object to configure the operations of the :code:`TransferUtility`.
 
         **isAccelerateModeEnabled**
-        The isAccelerateModeEnabled option lets you to upload and download content from a bucket that has Transfer Acceleration enabled on it. See https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html for information on how to enable transfer acceleration for your bucket.
+        The :code:`isAccelerateModeEnabled` option lets you to upload and download content from a bucket that has Transfer Acceleration enabled on it. See https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html for information on how to enable transfer acceleration for your bucket.
 
         This option is set to false by default.
 
@@ -1218,10 +1165,6 @@ Transfer Utility Options
           //Look up the transfer utility object from the registry to use for your transfers.
           let transferUtility = AWSS3TransferUtility.s3TransferUtility(forKey: "transfer-utility-with-advanced-options")
 
-        * :code:`YOUR-IDENTITY-POOL-REGION` should be in the form of :code:`.USEast1`
-
-        * :code:`YOUR-IDENTITY-POOL-ID` should be in the form of :code:`us-east-1:01234567-yyyy-0123-xxxx-012345678901`
-
         **retryLimit**
         The retryLimit option allows you to specify the number of times the TransferUtility will retry a transfer when it encounters an error during the transfer. By default, it is set to 0, which means that there will be no retries.
 
@@ -1235,6 +1178,9 @@ Transfer Utility Options
         .. code-block:: Swift
 
           tuConf.multiPartConcurrencyLimit = 3
+
+        **timeoutIntervalForResource**
+        The :code:`timeoutIntervalForResource` parameter allows you to specify the maximum duration the transfer can run.  The default value for this parameter is 50 minutes. This value is important if you use Amazon Cognito temporary credential because it aligns with the maximum span of time that those credentials are valid.
 
 .. _native-more-transfer-examples:
 
@@ -1484,7 +1430,6 @@ The following code shows how to download a binary file.
     iOS - Swift
         .. code-block:: swift
 
-            let fileURL = // The file URL of the download destination
             let transferUtility = AWSS3TransferUtility.default()
             transferUtility.downloadData(
                     fromBucket: S3BucketName,
@@ -1501,6 +1446,192 @@ The following code shows how to download a binary file.
 
                         return nil;
                     }
+
+
+.. _transfer-encryption:
+
+Securing your content stored in Amazon S3
+=========================================
+
+To add encryption to an S3 Object, you can follow one of the following recommended approaches:
+
+Use Client-side Encryption
+--------------------------
+
+For uploads, you can encrypt the file locally using an algorithm of your choice and use the TransferUtility API to upload the encrypted file to S3. For downloads, you can use the :code:`TransferUtility` API to download the file and then decrypt it using the algorithm that you used to upload the file.
+
+Use Server-side Encryption on Amazon S3
+---------------------------------------
+
+There are multiple options available for server-side encryption:
+
+Use the Amazon S3 console to `encrypt all objects in the bucket <https://docs.aws.amazon.com/AmazonS3/latest/user-guide/default-bucket-encryption.html>`__, or to  `encrypt individual objects after they have been uploaded <https://docs.aws.amazon.com/AmazonS3/latest/user-guide/add-object-encryption.html>`__.
+
+You can also request server-side encryption for the object being uploaded using an AWS SDK. Options include:
+
+.. container:: option
+
+     Android - Java
+         To request server-side encryption for objects you transfer using :code:`transferUtility`, instantiate an :code:`ObjectMetadata` object, set the encryption algorythm and key value in the object's header. The following code passes an :code:`objectMetadata` instance to a :code:`transferUtility` method, using upload as an the example. The same pattern applies to download and multi-part download.
+
+         .. code-block:: java
+
+             TransferObserver observer = transferUtility.upload(
+               MY_BUCKET,
+               OBJECT_KEY,
+               MY_FILE,
+               myObjectMetadata
+             );
+
+         In this example, :code:`MY_BUCKET` is the bucket that is the destination of the upload; :code:`OBJECT_KEY` is the key (destination file name) for the uploaded; :code:`MY_FILE` is the source of the data to be uploaded. For more information, see :ref:`Transfer with Object Metadata <native-object-metadta>`.
+
+         **To use AWS Key Management Service (KMS) to manage your encryption key:**
+
+         * Set the algorithm to :code:`KMS_SERVER_SIDE_ENCRYPTION`
+
+         * Use a KMS-generated key as the value of :code:`Headers.SERVER_SIDE_ENCRYPTION_KMS_KEY_ID`.
+
+         .. code-block:: java
+
+             AWSKMS kmsClient = new AWSKMSClient(AWSMobileClient.getInstance().getCredentialsProvider());
+             kmsClient.setRegion(Region.getRegion(Regions.US_EAST_1));
+             String kmsKey = kmsClient.createKey().getKeyMetadata().getKeyId();
+
+             final ObjectMetadata myObjectMetadata = new ObjectMetadata();
+             objectMetadata.setSSEAlgorithm(ObjectMetadata.KMS_SERVER_SIDE_ENCRYPTION);
+             objectMetadata.setHeader(Headers.SERVER_SIDE_ENCRYPTION_KMS_KEY_ID, kmsKey);
+
+         **To use your own encryption key:**
+
+         * Set the algorithm to :code:`SERVER_SIDE_ENCRYPTION_CUSTOMER_ALGORITHM`, which causes Amazon S3 to use AES 256 encryption with an MD5 hash key.
+
+         * Use your custom key as the value as the value of :code:`SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY`.
+
+         * Use your custom MD5 hash as the value as the value of :code:`SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY_MD5`.
+
+         .. code-block:: java`
+
+             final ObjectMetadata objectMetadata = new ObjectMetadata();
+             objectMetadata.setSSEAlgorithm(ObjectMetadata.SERVER_SIDE_ENCRYPTION_CUSTOMER_ALGORITHM);
+             objectMetadata.setHeader(Headers.SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY, "your_Key");
+             objectMetadata.setHeader(Headers.SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY_MD5, "your_md5");
+
+     Android - Kotlin
+         To request server-side encryption for objects you transfer using :code:`TransferUtility`, instantiate an :code:`ObjectMetadata` object, set the encryption algorythm and key value in the object's header. The following code passes an :code:`objectMetadata` instance to a :code:`transferUtility` method, using upload as an the example. The same pattern applies to download and multi-part download.
+
+         .. code-block:: kotlin
+
+             val observer = transferUtility.upload(
+                    MY_BUCKET,
+                      OBJECT_KEY,
+                      MY_FILE,
+                      myObjectMetadata
+              )
+
+         In this example, :code:`MY_BUCKET` is the bucket that is the destination of the upload; :code:`OBJECT_KEY` is the key (destination file name) for the uploaded; :code:`MY_FILE` is the source of the data to be uploaded. For more information, see :ref:`Transfer with Object Metadata <native-object-metadta>`.
+
+         **To use AWS Key Management Service (KMS) to manage your encryption key value:**
+
+         * Set the algorithm to :code:`KMS_SERVER_SIDE_ENCRYPTION`
+
+         * Use a KMS-generated key as the value of :code:`Headers.SERVER_SIDE_ENCRYPTION_KMS_KEY_ID`.
+
+         .. code-block:: kotlin
+
+            val kmsClient = AWSKMSClient(AWSMobileClient.getInstance().getCredentialsProvider())
+            kmsClient.setRegion(Region.getRegion(Regions.US_EAST_1))
+            val kmsKey = kmsClient.createKey().getKeyMetadata().getKeyId()
+
+            val myObjectMetadata = ObjectMetadata()
+            objectMetadata.setSSEAlgorithm(ObjectMetadata.KMS_SERVER_SIDE_ENCRYPTION)
+            objectMetadata.setHeader(Headers.SERVER_SIDE_ENCRYPTION_KMS_KEY_ID, kmsKey)
+
+         **To use your own encryption key:**
+
+         * Set the algorithm to :code:`SERVER_SIDE_ENCRYPTION_CUSTOMER_ALGORITHM`, which causes Amazon S3 to use AES 256 encryption with an MD5 hash key.
+
+         * Use your custom key as the value as the value of :code:`SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY`.
+
+         * Use your custom MD5 hash as the value as the value of :code:`SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY_MD5`.
+
+         .. code-block:: kotlin`
+
+            val objectMetadata = ObjectMetadata()
+            objectMetadata.setSSEAlgorithm(ObjectMetadata.SERVER_SIDE_ENCRYPTION_CUSTOMER_ALGORITHM)
+            objectMetadata.setHeader(Headers.SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY, "your_Key")
+            objectMetadata.setHeader(Headers.SERVER_SIDE_ENCRYPTION_CUSTOMER_KEY_MD5, "your_md5")
+
+
+     iOS - Swift
+        To request server-side encryption for objects you transfer using :code:`AWSS3TransferUtility`, pass an :code:`uploadExpression` instance to the :code:`AWSS3TransferUtility` transfer method. The following example uses a simple upload as its example. The pattern is the same for simple multi-part upload and download transfers.
+
+        .. code-block:: swift
+
+           let transferUtility = AWSS3TransferUtility.default()
+
+           transferUtility.upload(data: data,
+              bucket: "S3BucketName",
+              key: "S3UploadKeyName",
+              contentType: "text/plain",
+              expression: uploadExpression,
+              completionHandler: nil).continueWith { (task) -> AnyObject! in
+               if let error = task.error {
+                      print("Error: \(error.localizedDescription)")
+               }
+
+                 return nil;
+              }
+
+        For more information on how to use an transfer expression with :code:`AWSS3TransferUtility`, see :ref:`Upload files <how-to-transfer-utility-add-aws-user-data-storage-upload>` and :ref:`Download files <how-to-transfer-utility-add-aws-user-data-storage-download>` sections.
+
+        **To configure an upload expression using Amazon Key Management System (KMS) to manage encryption key:**
+
+        * Set the value of the expression :code:`x-amz-server-side-encryption` header to :code:`aws:kms`
+
+        * Use your KMS key to set the value for the :code:`x-amz-server-side-encryption-aws-kms-key-id` header.
+
+        .. code-block:: swift
+
+            var createRequest = AWSKMSCreateKeyRequest()
+            createRequest.detail = "Test Key"
+            createRequest.keyUsage = AWSKMSKeyUsageTypeEncryptDecrypt
+            createRequest.origin = AWSKMSOriginTypeAwsKms
+
+            var keyMetadata: AWSKMSKeyMetadata? = nil
+
+            (kms.createKey(createRequest).continue(withBlock: {{ t in
+
+                var response: AWSKMSCreateKeyResponse? = t.result
+                keyMetadata = response?.keyMetadata
+
+                return nil
+            }})).waitUntilFinished()
+
+            let kmsKey = keyMetadata.keyId
+                let uploadExpression = AWSS3TransferUtilityUploadExpression()
+                uploadExpression.setValue("aws:kms", forRequestHeader: "x-amz-server-side-encryption")
+                uploadExpression.setValue(kmsKey, forRequestHeader: "x-amz-server-side-encryption-aws-kms-key-id")
+                uploadExpression.progressBlock = {(task, progress) in
+                    print("Upload progress: ", progress.fractionCompleted)
+                }
+
+        **To configure an upload expression using a custom encryption key**
+
+        * Set the value of the expression :code:`x-amz-server-side-encryption-customer-algorithm` header to :code:`AES256`
+
+        * Use your custom key to set the value for the :code:`x-amz-server-side-encryption-customer-key` header.
+
+        * Use your MD5 hash  to set the value for the :code:`x-amz-server-side-encryption-aws-kms-key-MD5` header.
+
+        .. code-block:: swift
+
+           let uploadExpression = AWSS3TransferUtilityUploadExpression()
+                uploadExpression.setValue("AES256", forRequestHeader: "x-amz-server-side-encryption-customer-algorithm")
+                uploadExpression.setValue("your_key", forRequestHeader: "x-amz-server-side-encryption-customer-key")
+                uploadExpression.setValue("your_md5", forRequestHeader: "x-amz-server-side-encryption-customer-key-MD5")
+                uploadExpression.progressBlock = {(task, progress) in
+                    print("Upload progress: ", progress.fractionCompleted)
+                }
 
 .. _transfer-utility-limitations:
 
@@ -1524,6 +1655,11 @@ Long Running Transfers with Cognito Credentials
         :code:`TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using |COG| Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. Generated |S3| pre-signed URLs cannot last longer than that time. Because of this limitation, the Amazon S3 Transfer Utility enforces 50 minute transfer timeouts, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After **50 minutes**, you receive a transfer failure.
 
     iOS - Swift
-        If you expect your app to perform transfers that take longer than 50 minutes, use `AWSS3 <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSS3.html>`__ instead of `AWSS3TransferUtility <https://docs.aws.amazon.com/AWSiOSSDK/latest/Classes/AWSS3TransferUtility.html>`__.
+        When you use Amazon Cognito identity, transfers performed using the transfer utility are impacted by two different time limits:
 
-        :code:`AWSS3TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer. Using Amazon Cognito Identity, you receive AWS temporary credentials. The credentials are valid for up to 60 minutes. At the same time, generated S3 pre-signed URLs cannot last longer than that time. Because of this limitation, the AWSS3TransferUtility enforces **50 minutes** transfer timeout, leaving a 10 minute buffer before AWS temporary credentials are regenerated. After 50 minutes, you receive a transfer failure.
+        :code:`AWSS3TransferUtility` generates Amazon S3 pre-signed URLs to use for background data transfer that are valid for the span of time you set in the value of :code:`timeoutIntervalForResource`.
+
+        Using Amazon Cognito, you receive AWS temporary credentials that are valid for up to 60 minutes.
+
+        If the generated pre-signed URLs cannot last longer than the credentials, then transfers will run into errors. The default value of :code:`timeoutIntervalForResource` is set to 50 minutes to work well with Amazon Cognito Identity. For transfers that need to run longer than 50 minutes, you can setup static credentials using :code:`AWSStaticCredentialsProvider` and increase :code:`timeoutIntervalForResource` ( up to a maximum value of 7 days).
+

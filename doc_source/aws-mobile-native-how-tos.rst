@@ -41,7 +41,7 @@ This section provides information on the steps for achieving specific tasks for 
    NoSQL Database (Amazon DynamoDB)<how-to-nosql>
    Serverless Code (AWS Lambda) <how-to-lambda>
    Natural Language (Amazon Lex) <how-to-lex>
-   Speech to Text (Amazon Polly) <how-to-polly>
+   Text to Speech (Amazon Polly) <how-to-polly>
    Data Streaming (Amazon Kinesis) <how-to-kinesis-data-stream>
    Machine Learning (Amazon Machine Learning) <how-to-machine-learning>
    Miscellaneous <how-to-miscellaneous>

@@ -44,12 +44,15 @@ Add a Data Access API to the Backend
 
       $ amplify add api
 
-#. When prompted by the CLI, do the following:
+   When you run this command the CLI prompts you to make API configuration choices, and stores the configuration in local metadata using an Amazon CloudFormation template.
+
+   When prompted by the CLI, do the following:
 
    * Select a service type: :userinput:`GraphQL`.
    * Choose an authorization type: :userinput:`Amazon Cognito User Pool`.
    * Do you have an annotated GraphQL schema: :userinput:`Y`.
    * Provide your schema file path: :userinput:`./server/schema.graphql`.
+
 
 #. To deploy the new service, enter the following:
 
@@ -57,11 +60,16 @@ Add a Data Access API to the Backend
 
       $ amplify push
 
-#. To download the generated GraphQL schema, enter the following:
+   When you run this command, the CLI uses your configuration choices to create or update the AWS resources that make up your cloud API backend. Once the services are configured, the CLI creates or updates configuration files in your app to connect it to your services.
 
-   .. code-block:: bash
+   When prompted by the CLI, do the following:
 
-      $ amplify add codegen
+   * Do you want to generate code for your newly created GraphQL API: :userinput:`Yes`
+   * Enter the file name pattern of graphql queries, mutations and subscriptions: *(enter return to use default)*
+   * Do you want to generate/update all possible GraphQL operations - queries, mutations and subscriptions (Y/n): :userinput:`Yes`
+
+
+
 
 The AWS CloudFormation template that is generated creates an Amazon DynamoDB table that is protected by Amazon Cognito user pool authentication.  Access is provided by AWS AppSync.  AWS AppSync tags each record that is inserted into the database with the user ID of the authenticated user.  The authenticated user can read only the records that they own.
 
@@ -77,7 +85,7 @@ to the dependencies as follows:
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
-        classpath "com.amazonaws:aws-android-sdk-appsync-gradle-plugin:2.7.+"
+        classpath "com.amazonaws:aws-android-sdk-appsync-gradle-plugin:2.6.+"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -108,10 +116,14 @@ Add the AWS AppSync dependencies with the other SDKs.
         implementation "com.amazonaws:aws-android-sdk-pinpoint:$aws_version"
 
         // AWS AppSync SDK
-        implementation "com.amazonaws:aws-android-sdk-appsync:2.7.+"
+        implementation "com.amazonaws:aws-android-sdk-appsync:2.6.+"
     }
 
 On the upper-right side, choose :guilabel:`Sync Now` to incorporate the dependencies you just declared.
+
+Finally, choose :guilabel:`Build > Make project` from the top menu.
+
+Why is it important to build at this point? To enable your mobile app to send GraphQL commands (mutations and queries) to the AWS AppSync service, it needs classes that represent your APIs. Building your project causes gradle to activate the appsync gradle plugin to generate Java classes from the CLI-generated configuration files.
 
 Add Permissions to the AndroidManifest.xml
 ------------------------------------------
@@ -147,70 +159,6 @@ Add Permissions to the AndroidManifest.xml
         </application>
     </manifest>
 
-Configure Sample Queries and Mutations for Code Generation
-----------------------------------------------------------
-
-To interact with AWS AppSync, your client needs to define GraphQL queries and mutations.  These are created as individual files within your application.
-
-#. In Android Studio, switch to the :guilabel:`Project` view.
-#. Expand the :file:`app/src/main/graphql` folder.
-#. Right-click the :file:`graphql` folder and choose :guilabel:`New > Directory`.
-#. For directory name, enter :userinput:`com/amazonaws/mobile/samples/mynotes`, and then choose :guilabel:`OK`.
-#. Right-click the newly created :file:`mynotes` folder and choose :guilabel:`New > File`.
-#. For file name, enter :file:`operations.graphql`, and then choose :guilabel:`OK`.
-#. Copy the following contents into the file you just created:
-
-   .. code-block:: graphql
-
-        query GetNote($id:ID!) {
-            getNote(id:$id) {
-                id
-                title
-                content
-            }
-        }
-
-        query ListNotes($limit:Int,$nextToken:String) {
-            listNotes(limit:$limit,nextToken:$nextToken) {
-                items {
-                    id
-                    title
-                    content
-                }
-                nextToken
-            }
-        }
-
-        mutation CreateNote($input:CreateNoteInput!) {
-            createNote(input:$input) {
-                id
-                title
-                content
-            }
-        }
-
-        mutation UpdateNote($input:UpdateNoteInput!) {
-            updateNote(input:$input) {
-                id
-                title
-                content
-            }
-        }
-
-        mutation DeleteNote($id:ID!) {
-            deleteNote(input: { id: $id }) {
-                id
-            }
-        }
-
-.. list-table::
-   :widths: 1 6
-
-   * - What is in this file?
-
-     - Your mobile app sends GraphQL commands (mutations and queries) to the AWS AppSync service.  These are template commands that are then converted (using a code generation plugin that we added to the :file:`build.gradle` file) to Java classes that you can use in your application.
-
-Before continuing, perform a build to generate the appropriate classes through code generation.  You can do this by using the :guilabel:`Build > Make project` option.
 
 Create an AWSDataService Class
 ------------------------------
@@ -229,11 +177,11 @@ Data access is proxied through a class that implements the :code:`DataService` i
         import android.util.Log;
 
         import com.amazonaws.mobile.config.AWSConfiguration;
-        import com.amazonaws.mobile.samples.mynotes.CreateNoteMutation;
-        import com.amazonaws.mobile.samples.mynotes.DeleteNoteMutation;
-        import com.amazonaws.mobile.samples.mynotes.GetNoteQuery;
-        import com.amazonaws.mobile.samples.mynotes.ListNotesQuery;
-        import com.amazonaws.mobile.samples.mynotes.UpdateNoteMutation;
+        import com.amazonaws.amplify.generated.graphql.CreateNoteMutation;
+        import com.amazonaws.amplify.generated.graphql.DeleteNoteMutation;
+        import com.amazonaws.amplify.generated.graphql.GetNoteQuery;
+        import com.amazonaws.amplify.generated.graphql.ListNotesQuery;
+        import com.amazonaws.amplify.generated.graphql.UpdateNoteMutation;
         import com.amazonaws.mobile.samples.mynotes.models.Note;
         import com.amazonaws.mobile.samples.mynotes.models.PagedListConnectionResponse;
         import com.amazonaws.mobile.samples.mynotes.models.ResultCallback;
@@ -255,6 +203,7 @@ Data access is proxied through a class that implements the :code:`DataService` i
 
         import type.CreateNoteInput;
         import type.UpdateNoteInput;
+        import type.DeleteNoteInput
 
         import static com.amazonaws.mobile.auth.core.internal.util.ThreadUtils.runOnUiThread;
 
@@ -421,7 +370,8 @@ The code for the :code:`deleteNote()` method is similar to the :code:`createNote
 
     @Override
     public void deleteNote(String noteId, ResultCallback<Boolean> callback) {
-        DeleteNoteMutation mutation = DeleteNoteMutation.builder().id(noteId).build();
+        DeleteNoteInput input = DeleteNoteInput.builder().id(noteId).build();
+        DeleteNoteMutation mutation = DeleteNoteMutation.builder().input(input).build();
 
         client.mutate(mutation)
             .enqueue(new GraphQLCall.Callback<DeleteNoteMutation.Data>() {
@@ -512,14 +462,19 @@ You need to convert the return value to the internal representation prior to ret
 Run the Application
 -------------------
 
-You must be online in order to run this application. Run the application in the emulator. Note that the initial startup after logging in is slightly longer. This is happens because it's reading the data from the remote database.
+You must be online in order to run this application. Run the application in the emulator. Note that the initial startup after logging in is slightly longer. This happens because the app is reading the data from the remote database.
 
 Data is available immediately in the mobile backend. Create a few notes, and then view the records in the AWS Console:
 
-#. Open the `DynamoDB console <https://console.aws.amazon.com/dynamodb/home>`__.
-#. In the left navigation, choose :guilabel:`Tables`.
-#. Choose the table for your project. It will be based on the API name you set.
-#. Choose the :guilabel:`Items` tab.
+#. Open the `AWS AppSync console <https://console.aws.amazon.com/appsync/home>`__.
+
+#. Choose the API that you created for your app, the name should match the one you provided to the CLI.
+
+#. In the left navigation, choose :guilabel:`Data Sources`.
+
+#. Choose the resource of the table with the name you provided to the CLI. This will open table that the CLI created for you in the Amazon DynamoDB console.
+
+
 
 When you  insert, edit, or delete notes in the app, you should be able to see that the data on the server reflect your actions immediately.
 
