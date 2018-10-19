@@ -20,21 +20,14 @@ Tutorials
         Learn how to use |AMHlong| (|AMH|) to create, build, test, and monitor mobile apps that are
         integrated with AWS services using Android or iOS.
 
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-   Android Notes App <tutorial-android-aws-mobile-notes-setup>
-   iOS Notes App <tutorial-ios-aws-mobile-notes-setup>
 
 
-Notes App Tutorial
-==================
+Looking for the Notes App Tutorial?
+===================================
 
-Build a simple note-taking application. Start with an offline version of our data-driven app. Cloud-enable the app by adding app analytics, authentication, and cloud data storage through AWS services.
+The Notes app tutorial content for iOS and Android has moved to the AWS Samples repo on GitHub.
 
-   * :ref:`Android Notes Tutorial <tutorial-android-aws-mobile-notes-setup>`
-   * :ref:`iOS Notes Tutorial <tutorial-ios-aws-mobile-notes-setup>`
+   * `Android Notes Tutorial <https://github.com/aws-samples/aws-mobile-android-notes-tutorial/blob/master/tutorial/index.md>`__
+   * `iOS Notes Tutorial <https://github.com/aws-samples/aws-mobile-ios-notes-tutorial/blob/master/tutorial/index.md>`__
 
 
