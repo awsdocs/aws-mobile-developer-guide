@@ -37,7 +37,7 @@ Set Up Your Backend
 
 #. Complete the :ref:`Get Started <getting-started>` steps before you proceed.
 
-#. Use the CLI to add storage to your cloud-enabled backend and app.
+#. Use the CLI to add push notifications to your cloud-enabled backend and app.
 
       .. container:: option
 
@@ -365,10 +365,9 @@ Use the following steps to connect add push notification backend services to you
             }
 
    iOS - Swift
-      #. Set up AWS Mobile SDK components with the following
-         :ref:`add-aws-mobile-sdk-basic-setup` steps.
+       #. Set up AWS Mobile SDK components as follows.
 
-         #. :file:`Podfile` that you configure to install the AWS Mobile SDK must contain:
+         #. The :file:`Podfile` that you configure to install the AWS Mobile SDK must contain:
 
             .. code-block:: none
 
@@ -378,7 +377,8 @@ Use the following steps to connect add push notification backend services to you
                   use_frameworks!
 
                     pod  'AWSPinpoint', '~> 2.6.13'
-                    # other pods
+
+                    # other pods . . .
 
                 end
 
@@ -622,57 +622,80 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
                 }
 
    iOS - Swift
-      #. In your :code:`AppDelegate` with :code:`PinpointManager` instantiated, make sure the push
-         listening code exists in the following functions.
+      #. To receive Amazon Pinpoint push notification to your app, instantiate :code:`pinpoint!.notificationManager` to intercept the registration of the app for notifications in the :code:`didRegisterForRemoteNotificationsWithDeviceToken` application call back in :code:`AppDelegate`.
+
+         Then add and call a function like :code:`registerForPushNotifications()` to prompt permission from the user for the app to use notifications. The following example uses the :code:`UNUserNotification` framework, which is available in iOS 10.0+. Choose the right location in your app to prompt the user for permissions. In the following example the call is implemented in the :code:`application(_:didFinishLaunchingWithOptions:)` event in :code:`AppDelegate`. This causes the prompt to appear when the app launches. .
 
          .. code-block:: swift
 
-             // . . . other app delegate methods
+            import UserNotifications
+            import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationClient
+            import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationDetails
+            // Other imports . . .
 
-                 func application(
-                     _ application: UIApplication,
-                                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+            class AppDelegate: UIResponder, UIApplicationDelegate {
 
-                         pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(
-                                 withDeviceToken: deviceToken)
-                 }
+               // Other app delegate methods . . .
 
-                 func application(
-                     _ application: UIApplication,
-                                    didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                                    fetchCompletionHandler completionHandler:
-                                         @escaping (UIBackgroundFetchResult) -> Void) {
+               func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-                         pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(
-                                 userInfo, fetchCompletionHandler: completionHandler)
+                     // Other didFinishLaunching code . . .
 
-                     if (application.applicationState == .active) {
-                         let alert = UIAlertController(title: "Notification Received",
-                                                       message: userInfo.description,
-                                                       preferredStyle: .alert)
-                         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                     registerForPushNotifications()
+                      return true
+               }
 
-                         UIApplication.shared.keyWindow?.rootViewController?.present(
-                             alert, animated: true, completion:nil)
-                     }
-                 }
+               func application(
+                       _ application: UIApplication,
+                                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 
-             // . . . other app delegate methods
-             }
+                           pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(
+                                   withDeviceToken: deviceToken)
+               }
+
+               func application(
+                   _ application: UIApplication,
+                                  didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                                  fetchCompletionHandler completionHandler:
+                                       @escaping (UIBackgroundFetchResult) -> Void) {
+
+                       pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(
+                               userInfo, fetchCompletionHandler: completionHandler)
+
+                   if (application.applicationState == .active) {
+                       let alert = UIAlertController(title: "Notification Received",
+                                                     message: userInfo.description,
+                                                     preferredStyle: .alert)
+                       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+
+                       UIApplication.shared.keyWindow?.rootViewController?.present(
+                           alert, animated: true, completion:nil)
+                   }
+               }
+
+               // Resquest for user to grant permissions for the app to use notifications
+               func registerForPushNotifications() {
+                    UNUserNotificationCenter.current().delegate = self
+                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+                        (granted, error) in
+                        print("Permission granted: \(granted)")
+                        // 1. Check if permission granted
+                        guard granted else { return }
+                        // 2. Attempt registration for remote notifications on the main thread
+                        DispatchQueue.main.async {
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+               }
+
+               // Other app delegate methods . . .
+
+            }
 
          .. note::
 
             If you already have push notification delegate methods, you can just add the :code:`interceptDidRegisterForRemoteNotifications` and :code:`interceptDidReceiveRemoteNotification` callbacks to Pinpoint client.
 
-      #. Add the following code in the :code:`ViewController` where you want to request notification permissions. Adding this code will prompt the end user to give permissions for receiving push notifications.
-
-         .. code-block:: swift
-
-             var userNotificationTypes : UIUserNotificationType
-             userNotificationTypes = [.alert , .badge , .sound]
-             let notificationSettings = UIUserNotificationSettings.init(types: userNotificationTypes, categories: nil)
-             UIApplication.shared.registerUserNotificationSettings(notificationSettings)
-             UIApplication.shared.registerForRemoteNotifications()
 
       #. In Xcode Project Navigator, choose your app name at the top, choose your app name under :guilabel:`Targets`, choose the :guilabel:`Capabilities` tab, and then turn on :guilabel:`Push Notifications`.
 
