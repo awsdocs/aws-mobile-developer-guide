@@ -109,6 +109,9 @@ After the project is created you will get a success message which also includes 
 
 Your project is now initialized.
 
+.. note::
+
+   To add the AWS backend resources you create for this project to another exisiting app using :code:`awsmobile init YOUR_MOBILE_HUB_PROJECT_ID`. Use :code:`awsmobile console` to open your Mobile Hub project in a browser. The project ID is the GUID in the URL path to your project.
 
  .. _mobile-hub-web-getting-started-configure-aws-amplify:
 

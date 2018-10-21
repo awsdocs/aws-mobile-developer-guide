@@ -624,7 +624,7 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
    iOS - Swift
       #. To receive Amazon Pinpoint push notification to your app, instantiate :code:`pinpoint!.notificationManager` to intercept the registration of the app for notifications in the :code:`didRegisterForRemoteNotificationsWithDeviceToken` application call back in :code:`AppDelegate`.
 
-         Then add and call a function like :code:`registerForPushNotifications()` to prompt permission from the user for the app to use notifications. The following example uses the :code:`UNUserNotification` framework, which is available in iOS 10.0+. Choose the right location in your app to prompt the user for permissions. In the following example the call is implemented in the :code:`application(_:didFinishLaunchingWithOptions:)` event in :code:`AppDelegate`. This causes the prompt to appear when the app launches. .
+         Then add and call a function like :code:`registerForPushNotifications()` to prompt permission from the user for the app to use notifications. The following example uses the :code:`UNUserNotification` framework, which is available in iOS 10.0+. Choose the right location in your app to prompt the user for permissions. In the following example the call is implemented in the :code:`application(_:didFinishLaunchingWithOptions:)` event in :code:`AppDelegate`. This causes the prompt to appear when the app launches.
 
          .. code-block:: swift
 
@@ -635,46 +635,46 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
 
             class AppDelegate: UIResponder, UIApplicationDelegate {
 
-               // Other app delegate methods . . .
+                // Other app delegate methods . . .
 
-               func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-                     // Other didFinishLaunching code . . .
+                    // Other didFinishLaunching code . . .
 
-                     registerForPushNotifications()
-                      return true
-               }
+                    registerForPushNotifications()
+                    return true
+                }
 
-               func application(
-                       _ application: UIApplication,
-                                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+                func application(
+                    _ application: UIApplication,
+                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
 
-                           pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(
-                                   withDeviceToken: deviceToken)
-               }
+                    pinpoint!.notificationManager.interceptDidRegisterForRemoteNotifications(
+                        withDeviceToken: deviceToken)
+                }
 
-               func application(
-                   _ application: UIApplication,
-                                  didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                                  fetchCompletionHandler completionHandler:
-                                       @escaping (UIBackgroundFetchResult) -> Void) {
+                func application(
+                    _ application: UIApplication,
+                      didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                                                   fetchCompletionHandler completionHandler:
+                    @escaping (UIBackgroundFetchResult) -> Void) {
 
-                       pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(
-                               userInfo, fetchCompletionHandler: completionHandler)
+                    pinpoint!.notificationManager.interceptDidReceiveRemoteNotification(
+                        userInfo, fetchCompletionHandler: completionHandler)
 
-                   if (application.applicationState == .active) {
-                       let alert = UIAlertController(title: "Notification Received",
-                                                     message: userInfo.description,
-                                                     preferredStyle: .alert)
-                       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    if (application.applicationState == .active) {
+                        let alert = UIAlertController(title: "Notification Received",
+                                                      message: userInfo.description,
+                                                      preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
 
-                       UIApplication.shared.keyWindow?.rootViewController?.present(
-                           alert, animated: true, completion:nil)
-                   }
-               }
+                        UIApplication.shared.keyWindow?.rootViewController?.present(
+                            alert, animated: true, completion:nil)
+                    }
+                }
 
-               // Resquest for user to grant permissions for the app to use notifications
-               func registerForPushNotifications() {
+                // Resquest for user to grant permissions for the app to use notifications
+                func registerForPushNotifications() {
                     UNUserNotificationCenter.current().delegate = self
                     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
                         (granted, error) in
@@ -686,9 +686,9 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
                             UIApplication.shared.registerForRemoteNotifications()
                         }
                     }
-               }
+                }
 
-               // Other app delegate methods . . .
+                // Other app delegate methods . . .
 
             }
 
