@@ -10,9 +10,9 @@
 
 .. _how-to-cognito-integrate-an-existing-identity-pool:
 
-########################################
+############################################
 How to Integrate Your Existing Identity Pool
-########################################
+############################################
 
 .. _native-integrate-exisitng-identity-pool:
 

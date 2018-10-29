@@ -30,7 +30,7 @@ Set Up Your Backend
 ===================
 
 
-#. Complete the :ref:`Get Started <mobile-hub-add-aws-mobile-sdk-basic-setup>` steps before you proceed.
+#. Complete the :ref:`Get Started <mobile-hub-add-aws-mobile-sdk-basic-setup>` steps before you proceed. If you already have an Amazon DynamoDB table, see :ref:`How to integrate Integrate Your Existing NoSQL Table <how-to-nosql-integrate-an-existing-table>`.
 
 #. Enable :guilabel:`NoSQL Database`: Open your project in `Mobile Hub <https://console.aws.amazon.com/mobilehub>`__ and choose the :guilabel:`NoSQL Database` tile to enable the feature.
 

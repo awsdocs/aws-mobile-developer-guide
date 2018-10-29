@@ -23,5 +23,6 @@ The following pages contain reference material for the AWS Mobile CLI for Web (J
 
    AWS Mobile CLI Reference <aws-mobile-cli-reference>
    AWS Mobile CLI Credentials <aws-mobile-cli-credentials>
+   AWS Mobile CLI Logging with AWS CloudTrail <aws-mobile-cli-cloudtrail-logging>
 
 

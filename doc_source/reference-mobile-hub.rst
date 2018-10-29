@@ -31,10 +31,10 @@ This following reference content is for existing apps configured using the AWS M
    IAM Usage <reference-mobile-hub-iam>
    Project Service Region Hosting <reference-mobile-hub-region-overrides>
    Troubleshooting Projects <project-import-export-troubleshooting>
+   Exporting and Importing Projects <project-import-export>
 
 ..   Mobile App Features <mobile-hub-features>
 ..   Use the Console to Add Features <reference-mobile-hub-backend-setup>
-..   Exporting and Importing Projects <project-import-export>
 
 
 

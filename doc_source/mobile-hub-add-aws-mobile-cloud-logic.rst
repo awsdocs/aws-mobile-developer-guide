@@ -57,7 +57,70 @@ Set Up Your Backend
 
    If you have created apps for more than one platform, the :guilabel:`Integrate` button of each that is affected by your project changes will flash, indicating that there is an updated configuration file available for each of those versions.
 
-#. Choose :guilabel:`Download Cloud Config` and replace the old the version of :code:`awsconfiguration.json` with the new download. Your app now references the latest version of your backend.
+#. Choose :guilabel:`Download Cloud Config` and replace the old the version of :code:`awsconfiguration.json` with the new download.
+
+    .. container:: option
+
+        Android - Java
+             In the Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+                .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                   :scale: 100
+                   :alt: Image of creating a raw directory in Android Studio.
+
+                .. only:: pdf
+
+                   .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                      :scale: 50
+
+                .. only:: kindle
+
+                   .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                      :scale: 75
+
+             From the location where configuration file, :file:`awsconfiguration.json`, was downloaded in a previous step, drag it into the :file:`res/raw` folder.  Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
+
+             .. list-table::
+                :widths: 1 6
+
+                * - **Remember**
+
+                  - Every time you create or update a feature in your |AMH| project, download and integrate a new version of your :file:`awsconfiguration.json` into each app in the project that will use the update.
+
+        Android - Kotlin
+             In the Project Navigator, right-click your app's :file:`res` folder, and then choose :guilabel:`New > Directory`. Type :userinput:`raw` as the directory name and then choose :guilabel:`OK`.
+
+                .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                   :scale: 100
+                   :alt: Image of creating a raw directory in Android Studio.
+
+                .. only:: pdf
+
+                   .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                      :scale: 50
+
+                .. only:: kindle
+
+                   .. image:: images/add-aws-mobile-sdk-android-studio-res-raw.png
+                      :scale: 75
+
+             From the location where configuration file, :file:`awsconfiguration.json`, was downloaded in a previous step, drag it into the :file:`res/raw` folder.  Android gives a resource ID to any arbitrary file placed in this folder, making it easy to reference in the app.
+
+             .. list-table::
+                :widths: 1 6
+
+        iOS - Swift
+             From your download location, place :file:`awsconfiguration.json` into the folder containing your :file:`info.plist` file in your Xcode project. Select :guilabel:`Copy items if needed` and :guilabel:`Create groups` in the options dialog. Choose :guilabel:`Next`.
+
+        .. list-table::
+           :widths: 1 6
+
+           * - **Remember**
+
+             - Every time you create or update a feature in your |AMH| project, download and integrate a new version of your :file:`awsconfiguration.json` into each app in the project that will use the update.
+
+
+   Your app now references the latest version of your backend.
 
 #. Choose  :guilabel:`Swift Models` to download API models that were generated for your app. These files provide access to the request surface for the API Gateway API you just created. Choose :guilabel:`Next` and follow the Cloud API documentation below to connect to your backend.
 
