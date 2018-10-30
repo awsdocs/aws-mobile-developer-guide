@@ -417,15 +417,6 @@ The AWS Mobile SDK for iOS includes sample apps that demonstrate common use case
     - `Amazon Cognito Pools <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`__
     - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
-**Amazon DynamoDB Object Mapper Sample**
-(`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/DynamoDBObjectMapper-Sample/Swift>`__, `Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/DynamoDBObjectMapper-Sample/Objective-C/>`__)
-
-    This sample demonstrates how to insert, update, delete, query items using DynamoDBObjectMapper.
-
-    AWS services demonstrated:
-
-    - `Amazon DynamoDB <http://aws.amazon.com/dynamodb/>`__
-    - `Amazon Cognito Identity <http://aws.amazon.com/cognito/>`__
 
 **Amazon S3 Transfer Utility Sample**
 (`Swift <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample/Swift/>`__, `Objective-C <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample/Objective-C/>`__)

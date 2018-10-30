@@ -86,7 +86,7 @@ Set Up Your Backend
 
          .. code-block:: none
 
-            $ amplify push
+            $ amplify status
               | Category | Resource name   | Operation | Provider plugin   |
               | -------- | --------------- | --------- | ----------------- |
               | Auth     | cognitoabcd0123 | Create    | awscloudformation |

@@ -629,8 +629,6 @@ The `Amazon Pinpoint console <https://console.aws.amazon.com/pinpoint/>`__ enabl
          .. code-block:: swift
 
             import UserNotifications
-            import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationClient
-            import com.amazonaws.mobileconnectors.pinpoint.targeting.notification.NotificationDetails
             // Other imports . . .
 
             class AppDelegate: UIResponder, UIApplicationDelegate {
