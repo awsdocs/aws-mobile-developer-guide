@@ -3,7 +3,7 @@
 
 ##################
 |AMHlong| Features
-##################
+################## 
 
 
 
@@ -11,9 +11,13 @@
    :description: Getting Started with |AMHlong|.
 
 
-.. important::
+.. list-table::
+   :widths: 1
 
-   The following content applies if you are already using the AWS Mobile Hub to configure your backend. If you are building a new mobile or web app, or you're adding cloud capabilities to your existing app, use the new `AWS Amplify CLI <http://aws-amplify.github.io/>`__ instead. With the new Amplify CLI, you can use all of the features described in `Announcing the AWS Amplify CLI toolchain <https://aws.amazon.com/blogs/mobile/announcing-the-aws-amplify-cli-toolchain/>`__, including AWS CloudFormation functionality that provides additional workflows.
+   * - **Looking for the AWS SDKs for iOS and Android?** These SDKs and their docs are now part of `AWS Amplify <https://amzn.to/am-amplify-docs>`__.
+
+       The content on this page applies only to apps that were configured using AWS Mobile Hub or awsmobile CLI. For existing apps that use AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use `AWS Amplify <https://amzn.to/am-amplify-docs>`__ and the latest SDK.
+
 
 |AMHlong| is a service that enables even a novice to easily deploy and configure mobile app backend
 features using a range of powerful AWS services.
