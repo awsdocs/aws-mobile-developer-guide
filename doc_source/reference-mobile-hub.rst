@@ -10,15 +10,13 @@
 
 .. _reference:
 
-####################
-AWS Mobile Reference
-####################
+########################
+AWS Mobile Hub Reference
+########################
 
 
 .. meta::
    :description: Learn about |AMH| in more detail.
-
-This following reference content is for existing apps configured using the AWS Mobile Hub console or the AWS Mobile CLI. If you are building a new mobile or web app, or you're adding cloud capabilities to your existing app, use the new `AWS Amplify CLI <http://aws-amplify.github.io/>`__ instead. With the new Amplify CLI, you can use all of the features described in `Announcing the AWS Amplify CLI toolchain <https://aws.amazon.com/blogs/mobile/announcing-the-aws-amplify-cli-toolchain/>`__, including AWS CloudFormation functionality that provides additional workflows.
 
 .. toctree::
    :titlesonly:
@@ -32,9 +30,5 @@ This following reference content is for existing apps configured using the AWS M
    Project Service Region Hosting <reference-mobile-hub-region-overrides>
    Troubleshooting Projects <project-import-export-troubleshooting>
    Exporting and Importing Projects <project-import-export>
-
-..   Mobile App Features <mobile-hub-features>
-..   Use the Console to Add Features <reference-mobile-hub-backend-setup>
-
-
-
+   Amazon CloudFront Security <reference-cloudfront-security>
+   Amazon S3 Security <reference-s3-security>

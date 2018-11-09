@@ -17,14 +17,9 @@ Android: Execute Code On Demand with AWS Lambda
 ###############################################
 
 .. list-table::
-   :widths: 1 6
+   :widths: 1
 
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <add-aws-mobile-cloud-logic>` to install the SDK and integrate features.
-
-*Or, use the contents of this page if your app will integrate existing AWS services.*
-
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
 
 
 Overview
@@ -44,7 +39,7 @@ Setup
 Prerequisites
 -------------
 
-You must complete all of the instructions on the :doc:`how-to-android-sdk-setup` page before beginning
+Add the AWS Mobile SDK for Android to your app before beginning
 this tutorial.
 
 
@@ -357,6 +352,6 @@ The following code shows how to initialize the Cognito Caching Credentials Provi
 
 Now whenever the Lambda function is invoked, you should see an application toast with the text "Hello John using <device>".
 
-To get started using streamlined steps for setting up and using lambda functions to handle cloud API calls, see :ref:`Add AWS Mobile Cloud Logic <add-aws-mobile-cloud-logic>`.
+To get started using streamlined steps for setting up and using lambda functions to handle cloud API calls, see :ref:`Add AWS Mobile Cloud Logic <mobile-hub-add-aws-mobile-cloud-logic>`.
 
 .. _Cognito Console: https://console.aws.amazon.com/cognito/home

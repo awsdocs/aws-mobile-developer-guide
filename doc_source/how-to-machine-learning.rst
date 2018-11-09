@@ -19,6 +19,11 @@ How To Add Machine Learning with Amazon Machine Learning
     :description:
         Learn how to integrate data storage offered by Amazon Lex to your mobile app.
 
+.. list-table::
+   :widths: 1
+
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
+
 This section provides procedures for integrating Amazon Machine Learning into your Android and iOS apps.
 
 .. toctree::

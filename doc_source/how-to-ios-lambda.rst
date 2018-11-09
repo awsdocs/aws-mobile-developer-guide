@@ -15,11 +15,9 @@ iOS: Execute Code On Demand with AWS Lambda
 ###########################################
 
 .. list-table::
-   :widths: 1 6
+   :widths: 1
 
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <add-aws-mobile-cloud-logic>` to install the SDK and integrate AWS Lambda functions. *Use the contents of this page if your app will integrate existing AWS services.*
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
 
 
 .. contents::
@@ -42,8 +40,7 @@ This section provides a step-by-step guide for getting started with AWS Lambda u
 
 #. Install the SDK
 
-   Add the AWS SDK for iOS to your project and import the APIs you need, by following the steps described
-   in :ref:`Set Up the AWS SDK for iOS <how-to-ios-sdk-setup>`.
+   Add the AWS SDK for iOS to your project and import the APIs you need.
 
 #. Configure Credentials
 

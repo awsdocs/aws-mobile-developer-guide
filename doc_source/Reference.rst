@@ -18,7 +18,6 @@ AWS Mobile Reference
 .. meta::
    :description: Learn about |AMH| in more detail.
 
-
 .. toctree::
    :titlesonly:
    :maxdepth: 1
@@ -28,7 +27,3 @@ AWS Mobile Reference
 
 ..   Amazon S3 Security Considerations <reference-s3-security>
 ..   Amazon CloudFront Security Considerations <reference-cloudfront-security>
-
-
-
-

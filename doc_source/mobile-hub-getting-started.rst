@@ -9,9 +9,11 @@ Get Started
    :description: Integrate |AMHlong| features into your existing mobile app. Quickly add a powerful
       cloud backend that scales in capacity and cost.
 
-.. important::
+.. list-table::
+   :widths: 1
 
-   The following content applies if you are already using the AWS Mobile Hub to configure your backend. If you are building a new mobile or web app, or you're adding cloud capabilities to your existing app, use the new `AWS Amplify CLI <http://aws-amplify.github.io/>`__ instead. With the new Amplify CLI, you can use all of the features described in `Announcing the AWS Amplify CLI toolchain <https://aws.amazon.com/blogs/mobile/announcing-the-aws-amplify-cli-toolchain/>`__, including AWS CloudFormation functionality that provides additional workflows.
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
+
 
 .. toctree::
     :titlesonly:
@@ -42,8 +44,6 @@ Set Up Your Backend
 #. `Sign up for the AWS Free Tier. <https://aws.amazon.com/free/>`__
 
 #. `Create a Mobile Hub project <https://console.aws.amazon.com/mobilehub/>`__ by signing into the console. The Mobile Hub console provides a single location for managing and monitoring your app's cloud resources.
-
-   To integrate existing AWS resources using the SDK directly, without Mobile Hub, see :doc:`Setup  Options for Android <how-to-android-sdk-setup>` or :doc:`Setup  Options for iOS <how-to-ios-sdk-setup>`.
 
 #. Name your project, check the box to allow Mobile Hub to administer resources for you and then choose :guilabel:`Add`.
 
@@ -519,4 +519,3 @@ Next Steps
   * :ref:`Add Messaging <mobile-hub-add-aws-mobile-messaging>`
 
   * :ref:`Add Conversational Bots <mobile-hub-add-aws-mobile-conversational-bots>`
-

@@ -8,11 +8,13 @@ Add User Sign-in to Your Mobile App with Amazon Cognito
 .. meta::
    :description: Integrating user sign-in
 
-.. important::
+.. list-table::
+   :widths: 1
 
-   The following content applies if you are already using the AWS Mobile Hub to configure your backend. If you are building a new mobile or web app, or you're adding cloud capabilities to your existing app, use the new `AWS Amplify CLI <http://aws-amplify.github.io/>`__ instead. With the new Amplify CLI, you can use all of the features described in `Announcing the AWS Amplify CLI toolchain <https://aws.amazon.com/blogs/mobile/announcing-the-aws-amplify-cli-toolchain/>`__, including AWS CloudFormation functionality that provides additional workflows.
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
 
-Enable your users to sign-in using credentials from Facebook, Google, or your own custom user directory. The AWS Mobile Hub :ref:`User Sign-in <user-sign-in>` feature is powered by `Amazon Cognito <http://docs.aws.amazon.com/cognito/latest/developerguide/>`__, and the SDK provides a pre-built, :ref:`configurable <add-aws-mobile-user-sign-in-customize>` Sign-in UI based on the identity provider(s) you configure.
+
+Enable your users to sign-in using credentials from Facebook, Google, or your own custom user directory. The AWS Mobile Hub :ref:`User Sign-in <user-sign-in>` feature is powered by `Amazon Cognito <http://docs.aws.amazon.com/cognito/latest/developerguide/>`__, and the SDK provides a pre-built, :ref:`configurable <mobile-hub-add-aws-mobile-user-sign-in-customize>` Sign-in UI based on the identity provider(s) you configure.
 
 
 .. _mobile-hub-auth-setup:
@@ -190,7 +192,7 @@ Setup Email & Password Login in your Mobile App
                   }
               }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. To learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. To learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -286,7 +288,7 @@ Setup Email & Password Login in your Mobile App
                 }.execute()
               }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -401,7 +403,7 @@ Setup Email & Password Login in your Mobile App
                  }
              }
 
-        Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -533,7 +535,7 @@ Setup Facebook Login in your Mobile App
                 }
             }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -655,7 +657,7 @@ Setup Facebook Login in your Mobile App
                 }.execute()
               }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -801,7 +803,7 @@ Setup Facebook Login in your Mobile App
                  }
              }
 
-      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -907,7 +909,7 @@ Setup Google Login in your Mobile App
                 }
             }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -1002,7 +1004,7 @@ Setup Google Login in your Mobile App
                 }.execute()
             }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -1134,7 +1136,7 @@ Setup Google Login in your Mobile App
              }
 
 
-      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -1224,17 +1226,12 @@ Enable Sign-out
               })
           }
 
-For a fuller example, see :ref:`Sign-out a Signed-in User <how-to-user-sign-in-sign-out>` in the How To section.
 
 .. _mobile-hub-auth-next-steps:
 
 Next Steps
 ==========
 
-  * :ref:`Customize the UI <add-aws-mobile-user-sign-in-customize>`
-
-  * :ref:`Import Your Exisiting Amazon Cognito Identity Pool <how-to-cognito-integrate-an-existing-identity-pool>`
+  * :ref:`Customize the UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`
 
   * `Amazon Cognito Developer Guide <http://docs.aws.amazon.com/cognito/latest/developerguide/>`__
-
-

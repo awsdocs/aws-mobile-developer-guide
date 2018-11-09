@@ -19,15 +19,9 @@ How To: Serverless Code with AWS Lambda
         Learn how to integrate data storage offered by AWS Lambda to your mobile app.
 
 .. list-table::
-   :widths: 1 6
+   :widths: 1
 
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <add-aws-mobile-cloud-logic>` to install the SDK and integrate AWS Lambda.
-
-*Or, use the contents of this page if your app will integrate existing AWS services.*
-
-
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
 
 
 This section provides procedures for integrating your AWS Lambda functions into your Android and iOS apps.

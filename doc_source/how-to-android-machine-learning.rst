@@ -16,6 +16,11 @@
 Android: Amazon Machine Learning
 ################################
 
+.. list-table::
+   :widths: 1
+
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
+
 Amazon Machine Learning (ML) is a service that makes it easy for developers of all skill levels to
 use machine learning technology. The SDK for Android provides a simple, high-level client designed
 to help you interface with Amazon Machine Learning service. The client enables you to call Amazon

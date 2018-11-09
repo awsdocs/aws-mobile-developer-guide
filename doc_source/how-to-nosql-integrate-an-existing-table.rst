@@ -15,14 +15,10 @@ Integrate Your Existing NoSQL Table
 ###################################
 
 
-.. .. list-table::
-..    :widths: 1 6
+.. list-table::
+   :widths: 1
 
-..    * - **Just Getting Started?**
-
-..      - :ref:`Use streamlined steps <add-aws-mobile-nosql-database>` to install the SDK and integrate features.
-
-.. The :ref:`Get Started <add-aws-mobile-nosql-database>` section of this guide allows you to create new resources and complete the steps described on this page in minutes. If you want to import existing resources or create them from scratch, the contents of this page will walk you through the steps you need.
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
 
 The following steps and examples are based on a simple bookstore app. The app tracks the books that are available in the bookstore using an Amazon DynamoDB table.
 
@@ -64,7 +60,7 @@ Set Up an Identity Pool
 
 To give your users permissions to access your table you need an `identity pool <https://docs.aws.amazon.com/cognito/latest/developerguide/identity-pools.html>`__ from Amazon Cognito. That pool has two default IAM roles, one for guest (unauthenticated), and one for signed-in (authenticated) users. The policies you design and attach to the IAM roles determine what each type of user can and cannot do.
 
-:ref:`Import an existing pool <import-an-existing-identity-pool>` or :ref:`create a new pool <create-a-new-identity-pool>` for your app.
+:ref:`Import an existing pool <import-an-existing-identity-pool>` for your app.
 
 Set Permissions
 ---------------
@@ -244,7 +240,7 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
 
    Android - Java
       #. Set up AWS Mobile SDK components with the following
-         :ref:`add-aws-mobile-sdk-basic-setup` steps.
+         :ref:`mobile-hub-add-aws-mobile-sdk-basic-setup` steps.
 
          #. :file:`app/build.gradle` must contain:
 
@@ -332,7 +328,7 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
 
    Android - Kotlin
       #. Set up AWS Mobile SDK components with the following
-         :ref:`add-aws-mobile-sdk-basic-setup` steps.
+         :ref:`mobile-hub-add-aws-mobile-sdk-basic-setup` steps.
 
          #. :file:`app/build.gradle` must contain:
 
@@ -406,7 +402,7 @@ Use the following steps to add AWS Mobile NoSQL Database to your app.
 
    iOS - Swift
       #. Set up AWS Mobile SDK components with the following
-         :ref:`add-aws-mobile-sdk-basic-setup` steps.
+         :ref:`mobile-hub-add-aws-mobile-sdk-basic-setup` steps.
 
 
          #. Add the :code:`AWSDynamoDB` pod to your :file:`Podfile` to install the AWS Mobile SDK.
@@ -875,7 +871,7 @@ Perform a Query
 
 A query operation enables you to find items in a table. You must define a query using both the hash key
 (partition key) and range key (sort key) attributes of a table. You can filter the results by
-specifying the attributes you are looking for. For more information about :code:`DynamoDBQueryExpression`, see the `AWS Mobile SDK for Android API reference <`https://aws.github.io/aws-sdk-android/docs/reference//com/amazonaws/mobileconnectors/dynamodbv2/dynamodbmapper/DynamoDBQueryExpression.html>`__.
+specifying the attributes you are looking for. For more information about :code:`DynamoDBQueryExpression`, see the `AWS Mobile SDK for Android API reference <https://aws.github.io/aws-sdk-android/docs/reference//com/amazonaws/mobileconnectors/dynamodbv2/dynamodbmapper/DynamoDBQueryExpression.html>`__.
 
 The following example code shows querying for books with partition key (hash key) :code:`ISBN` and sort key (range key) Category beginning with :code:`History`.
 

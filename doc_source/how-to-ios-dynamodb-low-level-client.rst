@@ -14,6 +14,11 @@
 iOS: Amazon DynamoDB Low-Level Client
 #####################################
 
+.. list-table::
+   :widths: 1
+
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
+
 .. contents::
    :local:
    :depth: 1
@@ -40,10 +45,7 @@ To set up your project to use the AWS SDK for iOS TransferUtility, perform the f
 1. Set Up the SDK, Credentials, and Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To use the low-level DynamoDB mobile client in a new app, follow the steps described in `Get Started <http://docs.aws.amazon.com/aws-mobile/latest/developerguide/getting-started.html>`__ to install the AWS Mobile SDK for iOS.
-
-For apps that use an SDK version prior to 2.6.0, follow the steps on :doc:`setup-options-for-aws-sdk-for-ios` to install the AWS Mobile SDK for iOS. Then use the steps on :doc:`cognito-auth-identity-for-ios-legacy` to configure user credentials, and permissions.
-
+To use the low-level DynamoDB mobile client in a new app, follow the steps described in :ref:`Get Started <mobile-hub-getting-started>` to install the AWS Mobile SDK for iOS.
 
 2. Create or Use an Existing Amazon DynamoDB Table
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,4 +260,3 @@ Additional Resources
 
 * `Amazon DynamoDB Developer Guide <http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/>`__
 * `Amazon DynamoDB API Reference <http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/>`__
-

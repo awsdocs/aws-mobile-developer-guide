@@ -10,9 +10,11 @@ Add Analytics to your Mobile App with Amazon Pinpoint
     :description:
         Use |AMH| Messaging and Analytics to Add Analytics to your Mobile App
 
-.. important::
+.. list-table::
+   :widths: 1
 
-   The following content applies if you are already using the AWS Mobile Hub to configure your backend. If you are building a new mobile or web app, or you're adding cloud capabilities to your existing app, use the new `AWS Amplify CLI <http://aws-amplify.github.io/>`__ instead. With the new Amplify CLI, you can use all of the features described in `Announcing the AWS Amplify CLI toolchain <https://aws.amazon.com/blogs/mobile/announcing-the-aws-amplify-cli-toolchain/>`__, including AWS CloudFormation functionality that provides additional workflows.
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
+
 
 .. _overview:
 
@@ -392,6 +394,3 @@ and design analytics related to purchases through your app.
                        pinpointAnalyticsClient.record(event)
                        pinpointAnalyticsClient.submitEvents()
                    }
-
-
-

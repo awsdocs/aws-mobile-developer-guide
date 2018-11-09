@@ -20,13 +20,9 @@ How To: User Sign-in with Amazon Cognito
         Learn how to integrate User Sign-in into your mobile app.
 
 .. list-table::
-   :widths: 1 6
+   :widths: 1
 
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <add-aws-mobile-user-sign-in>` to install the SDK and integrate Amazon Cognito.
-
-       `Or, use the contents of this page if your app will integrate existing AWS services.`
+   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
 
 
 This section provides procedures for integrating user sign-in features into your Android and iOS apps.
@@ -35,9 +31,12 @@ This section provides procedures for integrating user sign-in features into your
    :titlesonly:
    :maxdepth: 1
 
-   Integrate an Existing Identity Pool <how-to-cognito-integrate-an-existing-identity-pool>
+
+   Customize the SDK Sign-in UI <mobile-hub-add-aws-mobile-user-sign-in-customize>
+
+
+.. Integrate an Existing Identity Pool <how-to-cognito-integrate-an-existing-identity-pool>
    Sign-out a Signed-in User <how-to-user-sign-in-sign-out>
    Set Up Facebook Sign-in <auth-facebook-setup>
    Set Up Google Sign-in <auth-google-setup>
    Set Up Your Custom Sign-in <auth-custom-setup>
-   Customize the SDK Sign-in UI <add-aws-mobile-user-sign-in-customize>
