@@ -22,18 +22,4 @@ How To: NoSQL Database with Amazon DynamoDB
 .. list-table::
    :widths: 1
 
-   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
-
-
-
-This section provides procedures for integrating Amazon DynamoDB into your Android and iOS apps.
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-
-   how-to-nosql-integrate-an-existing-table
-   how-to-ios-dynamodb-objectmapper
-   how-to-ios-dynamodb-low-level-client
-
-..   add-aws-mobile-nosql-database
+   * - **This documentation has moved** Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework. Visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead.
