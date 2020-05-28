@@ -9,6 +9,13 @@ User Sign-in
    :description: Use the User Sign-in mobile backend as a service feature to add AWS user
       authentication and identity access management to your mobile app.
 
+.. list-table::
+   :widths: 1
+
+   * - **Looking for the AWS SDKs for iOS and Android?** These SDKs and their docs are now part of `AWS Amplify <https://amzn.to/am-amplify-docs>`__.
+
+       The content on this page applies only to apps that were configured using AWS Mobile Hub or awsmobile CLI. For existing apps that use AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use `AWS Amplify <https://amzn.to/am-amplify-docs>`__ and the latest SDK.
+
 Choose the |AMHlong| User Sign-in mobile backend feature to:
 
 * Add AWS user authentication and secure identity access management to your mobile app.
@@ -79,7 +86,7 @@ User Sign-in Feature At a Glance
 
          - :guilabel:`Amazon Cognito Your User Pools`
 
-           (see `Creating and Managing User Pools <http://docs.aws.amazon.com/cognito/latest/developerguide//cognito-user-identity-pools.html>`__)
+           (see `Creating and Managing User Pools <http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html>`__)
 
          - :guilabel:`Amazon Cognito SAML Federation`
 
@@ -97,9 +104,9 @@ User Sign-in Feature At a Glance
 
        :guilabel:`Sign-in Providers` (users gain greater access when they sign in)
 
-       - via :guilabel:`Google` authentication (see :ref:`auth-setup`)
+- via :guilabel:`Google` authentication (see `Using Amazon Cognito Hosted UI <https://docs.amplify.aws/sdk/auth/hosted-ui/q/platform/ios#using-amazon-cognito-hosted-ui>`__)
 
-       - via :guilabel:`Facebook` authentication (see :ref:`auth-setup`)
+       - via :guilabel:`Facebook` authentication (see :ref:`mobile-auth-setup`)
 
        - via :guilabel:`Email and Password` authentication (see :ref:`user-sign-in-provider`)
 
@@ -133,7 +140,6 @@ The following options are available for configuring your users' sign-in experien
 User Sign-in Providers
 ----------------------
 
-
 Facebook
 
   - To enable Facebook user authentication, register your application with Facebook.
@@ -142,9 +148,7 @@ Facebook
 
     If you do not have a Facebook App ID yet, you'll need to create one before you can integrate Facebook in your mobile app. The Facebook Developers portal takes you through the process of setting up your Facebook application.
 
-    For full instructions on integrating your application with Facebook, see :ref:`Setting Up Facebook Authentication <auth-setup>`.
-
-
+    For full instructions on integrating your application with Facebook, see `Setting Up Facebook Authentication <https://developers.facebook.com/docs/facebook-login>`__.
 
 Google
 
@@ -160,9 +164,7 @@ Google
 
         - An iOS and/or Android client ID, depending on which platform you are supporting
 
-    For full instructions on integrating your application with Google+, see :ref:`Setting Up Google Authentication <auth-google-setup>`.
-
-
+    For full instructions on integrating your application with Google+, see :`Setting Up Google Authentication <https://developers.google.com/+/web/signin/>`__.
 
 Email and Password
 

@@ -20,6 +20,13 @@
       then imported to create a new project with a configuration that matches the original.
 
 
+.. list-table::
+   :widths: 1
+
+   * - **Looking for the AWS SDKs for iOS and Android?** These SDKs and their docs are now part of `AWS Amplify <https://amzn.to/am-amplify-docs>`__.
+
+       The content on this page applies only to apps that were configured using AWS Mobile Hub or awsmobile CLI. For existing apps that use AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use `AWS Amplify <https://amzn.to/am-amplify-docs>`__ and the latest SDK.
+
 |AMHlong| provides the ability to export a YAML file containing the configuration of your project.
 The YAML file itself can be imported or it can be included in a :file:`.zip` file with other project
 components that get deployed during project import. This section describes the anatomy of the YAML

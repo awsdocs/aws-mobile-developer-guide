@@ -22,12 +22,7 @@ How To: AWS Mobile SDK Setup Options
 .. list-table::
    :widths: 1 6
 
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <getting-started>` to install the SDK and integrate AWS services.
-
-        *Or, use the contents of this page if your app will integrate existing AWS services.*
-
+   * - |amplify-banner|
 
 
 This section provides information about how to manually install the AWS Mobile SDK for your Android and iOS apps.

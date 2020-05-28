@@ -20,14 +20,11 @@ How To: File Storage with Amazon S3
         Learn how to integrate data storage offered by Amazon S3 to your mobile app.
 
 .. list-table::
-   :widths: 1 6
+   :widths: 1
 
-   * - **Just Getting Started?**
+   * - **Looking for the AWS SDKs for iOS and Android?** These SDKs and their docs are now part of `AWS Amplify <https://amzn.to/am-amplify-docs>`__.
 
-     - :ref:`Use streamlined steps <add-aws-mobile-user-data-storage>` to install the SDK and integrate Amazon S3.
-
-*Or, use the contents of this page if your app will integrate existing AWS services.*
-
+       The content on this page applies only to apps that were configured using AWS Mobile Hub or awsmobile CLI. For existing apps that use AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use `AWS Amplify <https://amzn.to/am-amplify-docs>`__ and the latest SDK.
 
 
 

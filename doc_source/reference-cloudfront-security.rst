@@ -19,6 +19,13 @@
    :description: Describes |CFlong| security considerations for |AMHlong| users.
 
 
+.. list-table::
+   :widths: 1
+
+   * - **Looking for the AWS SDKs for iOS and Android?** These SDKs and their docs are now part of `AWS Amplify <https://amzn.to/am-amplify-docs>`__.
+
+       The content on this page applies only to apps that were configured using AWS Mobile Hub or awsmobile CLI. For existing apps that use AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use `AWS Amplify <https://amzn.to/am-amplify-docs>`__ and the latest SDK.
+
 When you enable the AWS Mobile Hub :ref:`hosting-and-streaming` feature, an `Amazon CloudFront <http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/>`__
 distribution is created in your account. The distribution caches the web assets you store within an
 associated Amazon S3 bucket throughout a global network of Amazon edge servers. This provides your

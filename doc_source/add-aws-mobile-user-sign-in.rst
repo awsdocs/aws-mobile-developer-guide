@@ -294,7 +294,7 @@ Set Up Email and Password Login in Your Mobile App
                   }
               }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -392,7 +392,7 @@ Set Up Email and Password Login in Your Mobile App
 
               }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -518,7 +518,7 @@ Set Up Email and Password Login in Your Mobile App
                  }
              }
 
-        Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+        Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -651,7 +651,7 @@ Set Up Facebook Login in Your Mobile App
                   }
               }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -771,7 +771,7 @@ Set Up Facebook Login in Your Mobile App
                   }.execute()
                 }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready-made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see the ready-made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -938,7 +938,7 @@ Set Up Facebook Login in Your Mobile App
                  }
              }
 
-      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -1044,7 +1044,7 @@ Set Up Google Login in Your Mobile App
                 }
             }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       Note: If you get an exception which mentions :code:`Developer Error`, it is likely due to missing SHA1 value from the Google configuration console. Create an Android client app from the Google console and add your machine's SHA1 keys there. `Reference Link <https://stackoverflow.com/questions/37273145/error-statusstatuscode-developer-error-resolution-null>`_
 
@@ -1141,7 +1141,7 @@ Set Up Google Login in Your Mobile App
                 }.execute()
             }
 
-      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in Android Studio to build your app and run it on your device/emulator. You should see our ready made sign-in UI for your app. Check out the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       Note: If you get an exception which mentions :code:`Developer Error`, it is likely due to missing SHA1 value from the Google configuration console. Create an Android client app from the Google console and add your machine's SHA1 keys there. `Reference Link <https://stackoverflow.com/questions/37273145/error-statusstatuscode-developer-error-resolution-null>`_
 
@@ -1291,7 +1291,7 @@ Set Up Google Login in Your Mobile App
              }
 
 
-      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <add-aws-mobile-user-sign-in-customize>`.
+      Choose the run icon (|play|) in the top left of the Xcode window or type |Acommand|-R to build and run your app. You should see our pre-built sign-in UI for your app. Checkout the next steps to learn how to :ref:`customize your UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`.
 
       .. list-table::
          :widths: 1 6
@@ -1385,7 +1385,7 @@ For a fuller example, see :ref:`Sign-out a Signed-in User <how-to-user-sign-in-s
 Next Steps
 ==========
 
-  * :ref:`Customize the UI <add-aws-mobile-user-sign-in-customize>`
+  * :ref:`Customize the UI <mobile-hub-add-aws-mobile-user-sign-in-customize>`
 
   * :ref:`Import Your Existing Amazon Cognito Identity Pool <how-to-cognito-integrate-an-existing-identity-pool>`
 

@@ -19,6 +19,13 @@
    :description: Describes |S3long| (|S3|) security considerations for |AMHlong| users.
 
 
+.. list-table::
+   :widths: 1
+
+   * - **Looking for the AWS SDKs for iOS and Android?** These SDKs and their docs are now part of `AWS Amplify <https://amzn.to/am-amplify-docs>`__.
+
+       The content on this page applies only to apps that were configured using AWS Mobile Hub or awsmobile CLI. For existing apps that use AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use `AWS Amplify <https://amzn.to/am-amplify-docs>`__ and the latest SDK.
+
 When you enable the |AMH| User File Storage or Hosting and Streaming features, it creates an |S3|
 bucket in your account. This topic describes the key |S3| security-related features that you might
 want to use for this bucket. Hosting and Streaming also configures a |CF| distribution that caches

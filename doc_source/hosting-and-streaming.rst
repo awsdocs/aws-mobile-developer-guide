@@ -215,7 +215,7 @@ As an example, the sync command enables transfer of files to and from your local
 The following command syncs all files from your current local folder to the folder in your web app's
 bucket defined by :code:`path`.
 
-:code:`$ aws s3 sync . s3://my-web-app-bucket/path`
+:code:`$ aws s3 sync . s3://AWSDOC-EXAMPLE-BUCKET/path`
 
 To learn more about using AWS CLI to manage Amazon S3, see `Using Amazon S3 with the AWS Command
 Line Interface <https://docs.aws.amazon.com/cli/latest/userguide/cli-s3.html>`__

@@ -10,12 +10,7 @@ How to Integrate Your Existing Bucket
 .. list-table::
    :widths: 1 6
 
-   * - **Just Getting Started?**
-
-     - :ref:`Use streamlined steps <add-aws-mobile-user-data-storage>` to install the SDK and integrate Amazon S3.
-
-*Or, use the contents of this page if your app will integrate existing AWS services.*
-
+   * - |amplify-banner|
 
 
 The following steps  include:
@@ -750,7 +745,5 @@ Download a File
 
 Next Steps
 ==========
-
-* For further information about TransferUtility capabilities, see :ref:`how-to-transfer-files-with-transfer-utility`.
 
 * For sample apps that demonstrate TransferUtility capabilities, see `Android S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-android-samples/tree/master/S3TransferUtilitySample>`__ and `iOS S3 TransferUtility Sample <https://github.com/awslabs/aws-sdk-ios-samples/tree/master/S3TransferUtility-Sample>`__.

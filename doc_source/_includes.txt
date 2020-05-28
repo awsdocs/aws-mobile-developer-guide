@@ -5,6 +5,11 @@
 .. |POLong| replace:: Amazon Polly
 .. |Acommand| unicode:: U+2318
 .. |play| unicode:: U+25B6
+.. |amplify-banner1| replace:: **This page applies only to existing apps that were configured using AWS Mobile Hub or awsmobile CLI.**
+
+.. |amplify-banner2| replace:: Use `AWS Amplify <https://aws.github.io/aws-amplify/>__ libraries and toolchain to create and integrate your mobile or web app backend. Amplify also helps you develop, build, deploy, test and monitor your app.
+
+.. |amplify-banner3| replace:: If your existing app uses an AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use AWS Amplify and the latest SDK.
 
 .. _PPT: :doc:`polly`
 .. _LEX: http://docs.aws.amazon.com/lex

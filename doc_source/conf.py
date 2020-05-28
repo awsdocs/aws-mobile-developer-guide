@@ -28,6 +28,7 @@ service_name_long = u'AWS Mobile'
 
 # The landing page for the service documentation.
 service_docs_home = u'https://aws.amazon.com/documentation/aws-mobile/'
+# service_docs_home = u'https://docs.aws.amazon.com/mobile-hub/'
 
 # The project type, such as "Developer Guide", "API Reference", "User Guide",
 # or whatever.
@@ -62,7 +63,8 @@ github_doc_url = 'https://github.com/awsdocs/aws-mobile-developer-guide/tree/mas
 # This allows the "Feedback" button to create a new issue on GitHub.
 #doc_feedback_url = 'https://github.com/awsdocs/aws-java-developer-guide/issues/new'
 feedback_name = u'AWS Mobile'
-feedback_folder_id = 'b8effc8e-3e23-4650-bf44-51b6b56ebce3'
+#feedback_folder_id = 'b8effc8e-3e23-4650-bf44-51b6b56ebce3'
+feedback_folder_id = 'e2dc4143-f728-4878-a1b6-cab44164e948'
 
 #
 # Version Information
@@ -126,6 +128,7 @@ build_mobi = False # Or the Kindle ASIN if you need a Kindle build
 feedback_name = 'Mobile SDK Docs'
 
 # For the url docs.aws.amazon.com/docset-root/version/guide-name
+# docset_altpath_slug = 'mobile hub'
 docset_path_slug = 'aws-mobile'
 version_path_slug = 'latest'
 guide_path_slug = 'developerguide'

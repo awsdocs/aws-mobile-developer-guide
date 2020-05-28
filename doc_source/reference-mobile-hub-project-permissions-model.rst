@@ -20,13 +20,19 @@ Mobile Hub Project Permissions Model
 
 
 .. list-table::
-   :widths: 1 6
+   :widths: 1
 
-   * - **Important**
+   * - **Looking for the AWS SDKs for iOS and Android?** These SDKs and their docs are now part of `AWS Amplify <https://amzn.to/am-amplify-docs>`__.
 
-     - To modify |AMH| projects in an account, a user must be :ref:`granted administrative permissions <reference-mobile-hub-iam-managed-policies-how-to>` by an account Administrator. Read this section for more information.
+       The content on this page applies only to apps that were configured using AWS Mobile Hub or awsmobile CLI. For existing apps that use AWS Mobile SDK prior to v2.8.0, we highly recommend you migrate your app to use `AWS Amplify <https://amzn.to/am-amplify-docs>`__ and the latest SDK.
 
-       If you are a user who needs additional permissions for a project, contact an administrator for the AWS account. For help with any issues related to the new permissions model, contact `aws-mobilehub-customer@amazon.com <mailto:aws-mobilehub-customer@amazon.com?subject=Mobile%20Hub%20project%20permissions>`__.
+
+
+**Important**
+
+To modify |AMH| projects in an account, a user must be :ref:`granted administrative permissions <reference-mobile-hub-iam-managed-policies-how-to>` by an account Administrator. Read this section for more information.
+
+If you are a user who needs additional permissions for a project, contact an administrator for the AWS account. For help with any issues related to the new permissions model, contact `aws-mobilehub-customer@amazon.com <mailto:aws-mobilehub-customer@amazon.com?subject=Mobile%20Hub%20project%20permissions>`__.
 
 
 .. contents::

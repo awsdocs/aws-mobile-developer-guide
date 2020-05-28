@@ -10,25 +10,19 @@
 
 .. _index:
 
-##########
-AWS Mobile
-##########
+##########################
+AWS Mobile Developer Guide
+##########################
 
 
 .. meta::
     :description:
-        Learn how to use |AMHlong| (|AMH|) to create, build, test and monitor mobile apps that are
-        integrated with AWS services.
+        Provides libraries, developer tools, and cloud services that enable you to develop, build, test, deploy, and monitor mobile and web applications.
 
 .. toctree::
     :titlesonly:
     :maxdepth: 1
-    :includehidden:
-
-
+    :hidden:
 
     Mobile and Web App Development <what-is-aws-mobile>
-    Android and iOS <aws-mobile-android-and-iOS>
     Reference <Reference>
-..    Web (AWS Amplify)<aws-mobile-web>
-..    React Native (AWS Amplify) <aws-mobile-react-native>

@@ -5,22 +5,10 @@
 AWS Mobile for Android and iOS
 ##############################
 
+The AWS Mobile SDKs for Android and iOS are now part of the Amplify Framework documentation. For more information, see the following links:
 
-.. meta::
-    :description:
-        Use JavaScript to create, build, test and monitor mobile apps that are
-        integrated with AWS services.
+* `Amplify Android <https://docs.amplify.aws/lib/q/platform/android>`__ - Recommended for developing new cloud-connected Android apps.
+* `Amplify iOS <https://docs.amplify.aws/lib/q/platform/ios>`__ - Recommended for developing new cloud-connected iOS apps.
+* `AWS Mobile SDK for Android <https://docs.amplify.aws/sdk/q/platform/android>`__ - Low-level AWS service-specific APIs for cloud-connected Android apps.
+* `AWS Mobile SDK for iOS <https://docs.amplify.aws/sdk/q/platform/ios>`__ - Low-level AWS service-specific APIs for cloud-connected iOS apps.
 
-.. list-table::
-   :widths: 1
-
-   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
-
-The AWS Mobile SDKs for Android and iOS enable you to quickly and easily integrate robust cloud backends into your existing mobile apps.
-
-.. toctree::
-    :titlesonly:
-    :maxdepth: 1
-
-    Get Started <mobile-hub-getting-started>
-    How To <aws-mobile-native-how-tos>
