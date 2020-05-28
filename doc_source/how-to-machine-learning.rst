@@ -22,13 +22,4 @@ How To Add Machine Learning with Amazon Machine Learning
 .. list-table::
    :widths: 1
 
-   * - The following reference content only applies to existing apps that were built using the AWS Mobile SDKs for iOS and Android. If you’re building a new mobile or web app, or you're adding cloud capabilities to an existing app, visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead. Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework.
-
-This section provides procedures for integrating Amazon Machine Learning into your Android and iOS apps.
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-
-   how-to-android-machine-learning
-   how-to-ios-machine-learning
+   * - **This documentation has moved** Documentation for the AWS Mobile SDKs for iOS and Android is now part of the Amplify Framework. Visit the `Amplify Framework <https://amzn.to/am-amplify-docs>`__ website instead.
